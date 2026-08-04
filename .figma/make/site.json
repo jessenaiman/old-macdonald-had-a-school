@@ -1,0 +1,11 @@
+{
+  "title": "Old MacDonald Had a School",
+  "description": "This resource webpage offers teachers a visually engaging platform with felt and stitched design elements, providing easy access to educational materials and tools.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

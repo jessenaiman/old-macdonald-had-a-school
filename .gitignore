@@ -1,0 +1,23 @@
+node_modules/
+.next/
+out/
+dist/
+build/
+.cache/
+.env*
+.vite/
+vite.config.*.timestamp-*
+*.tsbuildinfo
+*-debug.log*
+logs/
+*.log
+data/*.db
+data/*.db-shm
+data/*.db-wal
+playwright-report/
+test-results/
+.claude-replay.*
+.tmp-*
+
+# Local research corpus; agents curate selected publishable assets into public/.
+src/assets/early-years-music-resources/

@@ -1,0 +1,42 @@
+{
+  "name": "old-macdonald-had-a-school",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.25.0",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "content:validate": "node scripts/content/validate.mjs",
+    "test": "pnpm run build && node --test tests/rendered-html.test.mjs"
+  },
+  "dependencies": {
+    "@radix-ui/react-toggle-group": "^1.1.19",
+    "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
+    "next": "16.3.0",
+    "next-themes": "^0.4.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-icons": "^5.5.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3"
+  },
+  "type": "module"
+}
