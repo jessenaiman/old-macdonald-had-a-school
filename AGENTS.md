@@ -33,15 +33,18 @@ Figma Make prototype.
 
 ## Source hierarchy
 
-1. The canonical brand, name, cast, roles, character identities, signature
-   colours, curriculum content, navy hero, and video-first lesson structure
-   come from `C:\Users\jesse\OneDrive\Documents\New project`.
-2. `public/CAST_AND_ROLES.md` and
+1. **Visual design:** the preserved Figma implementation in this repository,
+   including `src/`, `src/assets/`, Figma assets, and the approved screenshots.
+   The shared header, page chrome, top spacing, hero, palette, typography,
+   icons, and page rhythm must be derived from these sources.
+2. **Content only:** the canonical brand facts, cast, roles, character
+   identities, biography, curriculum wording, and project information from
+   `C:\Users\jesse\OneDrive\Documents\New project`.
+3. The other website is an archive/content source. Do not copy its header,
+   navigation, top spacing, visual styling, or page templates into this site.
+4. `public/CAST_AND_ROLES.md` and
    `public/Old_MacDonalds_Farm_School_Character_Deck_v2.pdf` in that project
-   are the character source of truth.
-3. This repository's legacy `src/App.tsx`, `src/index.css`, and
-   `src/assets/` supply the preferred Figma visual treatment and the
-   music-led lesson presentation.
+   are the character content source of truth.
 
 ## Product rules
 
