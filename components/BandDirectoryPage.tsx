@@ -3,21 +3,15 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { BandLessonGrid, type BandLesson } from "./BandLessonGrid";
-import { CharacterBadge } from "./CharacterBadge";
 import { CLUSTERS, clusterFor } from "./SubjectDiscovery";
-import { STAFF } from "../lib/cast";
-import { BAND_META, leadNames } from "../lib/bands";
+import { BAND_META } from "../lib/bands";
 import type { StaffMember } from "../lib/cast";
 import type { BandMeta } from "../lib/bands";
-
-function staffColor(key: string): string {
-  return STAFF.find((s) => s.key === key)?.color ?? "var(--navy)";
-}
 
 export function BandDirectoryPage({
   meta,
   lessons,
-  cast,
+  cast: _cast,
 }: {
   meta: BandMeta;
   lessons: BandLesson[];
@@ -27,8 +21,6 @@ export function BandDirectoryPage({
 
   const readyCount = lessons.filter((l) => l.ready).length;
   const printableCount = lessons.filter((l) => l.hasPrintables).length;
-  const names = leadNames(meta.leads, cast);
-
   const filtered = useMemo(
     () => (activeCluster ? lessons.filter((l) => clusterFor(l.subject) === activeCluster) : lessons),
     [lessons, activeCluster]
@@ -41,15 +33,6 @@ export function BandDirectoryPage({
           <span className="gb-hero-eyebrow">{meta.eyebrow}</span>
           <h1>{meta.label}</h1>
           <p className="gb-hero-tagline">{meta.tagline}</p>
-          <div className="gb-hero-leads">
-            <span className="gb-hero-patches">
-              {meta.leads.map((key) => {
-                const staff = STAFF.find((s) => s.key === key);
-                return <CharacterBadge key={key} charKey={key} color={staffColor(key)} name={staff?.name ?? key} size={44} />;
-              })}
-            </span>
-            <span className="gb-hero-led">Led by {names}</span>
-          </div>
         </div>
         <div className="gb-hero-pills">
           {Object.values(BAND_META).map((b) => (
@@ -71,16 +54,7 @@ export function BandDirectoryPage({
         <div className="gb-info">
           <div className="gb-about paper-panel stitch">
             <h2>About {meta.label}</h2>
-            <div className="gb-about-patches">
-              {meta.leads.map((key) => {
-                const staff = STAFF.find((s) => s.key === key);
-                return <CharacterBadge key={key} charKey={key} color={staffColor(key)} name={staff?.name ?? key} size={36} />;
-              })}
-            </div>
-            <div className="gb-about-names">
-              <strong>{names}</strong>
-              <small>CLASS LEAD</small>
-            </div>
+            <p className="gb-about-note">A focused set of starting points for this stage of the school day, with clear next steps for planning.</p>
             <dl className="gb-stats">
               <div><dt>Age range</dt><dd>{meta.ageRange}</dd></div>
               <div><dt>Lessons</dt><dd>{lessons.length}</dd></div>

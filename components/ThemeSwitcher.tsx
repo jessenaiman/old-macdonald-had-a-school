@@ -1,33 +1,36 @@
 "use client";
 
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useTheme } from "next-themes";
+import { LuMoonStar, LuPalette, LuSunMedium } from "react-icons/lu";
 import { useSyncExternalStore } from "react";
 
 const THEMES = [
-  { value: "farm-day", label: "Farm day", short: "Day" },
-  { value: "lullaby-dusk", label: "Lullaby dusk", short: "Dusk" },
-  { value: "storybook-focus", label: "Storybook focus", short: "Story" },
+  { value: "farm-day", label: "Farm day", Icon: LuSunMedium },
+  { value: "lullaby-dusk", label: "Lullaby dusk", Icon: LuMoonStar },
+  { value: "storybook-focus", label: "Storybook focus", Icon: LuPalette },
 ] as const;
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
-  const activeTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "farm-day";
+  const currentIndex = Math.max(0, THEMES.findIndex((item) => item.value === theme));
+  const current = mounted ? THEMES[currentIndex] : THEMES[0];
+  const Icon = current.Icon;
+
+  function cycleTheme() {
+    setTheme(THEMES[(currentIndex + 1) % THEMES.length].value);
+  }
 
   return (
-    <ToggleGroup.Root
-      className="theme-switcher"
-      type="single"
-      value={activeTheme}
-      onValueChange={(value) => value && setTheme(value)}
-      aria-label="Choose the site theme"
+    <button
+      type="button"
+      className="theme-button"
+      onClick={cycleTheme}
+      aria-label={`Colour theme: ${current.label}. Activate to change theme.`}
+      title={`Colour theme: ${current.label}`}
     >
-      {THEMES.map((item) => (
-        <ToggleGroup.Item key={item.value} className="theme-switcher-item" value={item.value} aria-label={item.label}>
-          {item.short}
-        </ToggleGroup.Item>
-      ))}
-    </ToggleGroup.Root>
+      <Icon aria-hidden="true" />
+      <span className="sr-only">{current.label}</span>
+    </button>
   );
 }
