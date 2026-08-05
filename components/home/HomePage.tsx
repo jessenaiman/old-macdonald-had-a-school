@@ -28,25 +28,25 @@ const BANDS = [
 
 const SUBJECTS = [
   { key: "language", filterKey: "words", label: "Language & Communication", icon: "📖", tone: "words", rows: [
-    { title: "Story Time: Board Books", grade: "Daycare", href: "/daycare", icon: "🦆" },
-    { title: "Show & Tell Story Circle", grade: "Preschool", href: "/preschool", icon: "🦆" },
-    { title: "Phonics: Long & Short Vowel Sounds", grade: "Gr 1", href: "/band/grade-one", icon: "👩", ready: true },
-    { title: "Rhyming & Sound Play", grade: "Gr 1", href: "/band/grade-one", icon: "👩" },
+    { title: "Story Time: Board Books", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
+    { title: "Show & Tell Story Circle", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
+    { title: "Phonics: Long & Short Vowel Sounds", grade: "Gr 1", href: "/band/grade-one", staffAsset: "/staff_and_students/miss-hayley-transparent-circle.png", ready: true },
+    { title: "Rhyming & Sound Play", grade: "Gr 1", href: "/band/grade-one", staffAsset: "/staff_and_students/miss-hayley-transparent-circle.png" },
   ], more: 1 },
   { key: "math", filterKey: "numbers", label: "Math & Inquiry", icon: "🔢", tone: "numbers", rows: [
-    { title: "Sensory Tray Exploration", grade: "Daycare", href: "/daycare", icon: "🦆" },
-    { title: "Shape Hunt Outdoors", grade: "Preschool", href: "/preschool", icon: "🐄" },
-    { title: "Nature Observation Journal", grade: "Gr 1", href: "/band/grade-one", icon: "🦆" },
-    { title: "Adding with Equal Groups", grade: "Gr 2", href: "/band/grade-two", icon: "🐷" },
+    { title: "Sensory Tray Exploration", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
+    { title: "Shape Hunt Outdoors", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/mr-maisy-transparent-circle.png" },
+    { title: "Nature Observation Journal", grade: "Gr 1", href: "/band/grade-one", staffAsset: "/staff_and_students/mr-puddles-transparent-circle.png" },
+    { title: "Adding with Equal Groups", grade: "Gr 2", href: "/band/grade-two", staffAsset: "/staff_and_students/mr-sam-transparent-circle.png" },
   ], more: 1 },
   { key: "music", filterKey: "music", label: "Music, Movement & Community", icon: "🎵", tone: "music", rows: [
-    { title: "Barnyard Animal Sounds & Action Imitation", grade: "Daycare", href: "/daycare", icon: "🦆", ready: true },
-    { title: "Circle Time Songs", grade: "Daycare", href: "/daycare", icon: "🦆" },
-    { title: "Fingerplay & Movement", grade: "Daycare", href: "/daycare", icon: "🦆" },
-    { title: "Follow the Music Trail", grade: "Preschool", href: "/preschool", icon: "🐴" },
+    { title: "Barnyard Animal Sounds & Action Imitation", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png", ready: true },
+    { title: "Circle Time Songs", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
+    { title: "Fingerplay & Movement", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
+    { title: "Follow the Music Trail", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/mr-rusty-transparent-circle.png" },
   ], more: 2 },
   { key: "routines", filterKey: "heart", label: "Routines & Regulation", icon: "🌿", tone: "heart", rows: [
-    { title: "Mix, Measure & Munch", grade: "Preschool", href: "/preschool", icon: "🐄", ready: true },
+    { title: "Mix, Measure & Munch", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/miss-maisy-transparent-circle.png", ready: true },
   ], more: 0 },
 ];
 
@@ -111,7 +111,9 @@ export function HomePage({}: HomePageProps) {
                   {group.rows.map((lesson) => (
                     <li key={lesson.title}>
                       <Link href={lesson.href}>
-                        <span className="subject-row-icon" aria-hidden="true">{lesson.icon}</span>
+                        <span className="subject-row-icon" aria-hidden="true">
+                          <Image src={lesson.staffAsset} alt="" width={28} height={28} sizes="28px" />
+                        </span>
                         <span className="subject-lesson-title">{lesson.title}</span>
                         <span className="subject-lesson-meta"><span>{lesson.grade}</span>{lesson.ready && <b>Ready</b>}</span>
                       </Link>

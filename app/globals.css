@@ -1230,25 +1230,26 @@ a { color: inherit; }
 .home-page > section { width:100%; }
 .band-ribbon { padding:18px max(20px,calc((100vw - 1370px) / 2)); background-color:var(--navy); background-image:linear-gradient(180deg,rgba(255,255,255,.025),transparent 45%),var(--grain-coarse); background-size:auto,180px 180px; background-blend-mode:normal,soft-light; border-bottom:3px solid var(--gold); }
 .band-grid { width:1370px; max-width:calc(100vw - 64px); grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:0 auto; }
-.band-card { --band-shadow:#32177b; min-height:134px; align-items:center; padding:11px 12px 10px 88px; border:0; border-radius:17px; background-image:linear-gradient(180deg,rgba(255,255,255,.045),transparent 42%),var(--grain-coarse); background-size:auto,150px 150px; background-blend-mode:normal,soft-light; box-shadow:0 6px 0 var(--band-shadow),0 12px 22px rgba(3,12,24,.28),inset 0 1px 0 rgba(255,255,255,.18); }
-.band-card::after { inset:7px; border:1.5px dashed rgba(255,255,255,.78); border-radius:10px; filter:drop-shadow(0 1px 1px rgba(0,0,0,.48)); }
-.band-card:hover { box-shadow:0 9px 0 var(--band-shadow),0 15px 24px rgba(3,12,24,.28),inset 0 1px 0 rgba(255,255,255,.18); }
-.band-card-early-years { --band-shadow:#4a22aa; background-color:#7744cc; }
-.band-card-kindergarten { --band-shadow:#a84e08; background-color:#e07820; }
-.band-card-grade-one { --band-shadow:#881818; background-color:#cc3333; }
-.band-card-grade-two { --band-shadow:#113388; background-color:#2255aa; }
+.band-card { --band-shadow:#07182b; min-height:134px; align-items:center; padding:11px 12px 10px 88px; border:0; border-radius:17px; background-image:linear-gradient(180deg,rgba(255,255,255,.045),transparent 42%),var(--grain-coarse); background-size:auto,150px 150px; background-blend-mode:normal,soft-light; box-shadow:5px 6px 0 var(--band-shadow),0 12px 22px rgba(3,12,24,.28),inset 0 1px 0 rgba(255,255,255,.2); }
+.band-card::before { content:""; position:absolute; inset:2px; border:1px solid rgba(255,249,232,.7); border-radius:14px; box-shadow:inset 0 0 0 1px rgba(30,18,10,.2),0 1px 0 rgba(255,255,255,.22); pointer-events:none; }
+.band-card::after { inset:8px; border:0; border-radius:9px; background:repeating-linear-gradient(115deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) top left 6px / calc(100% - 12px) 3px no-repeat,repeating-linear-gradient(65deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) bottom left 6px / calc(100% - 12px) 3px no-repeat,repeating-linear-gradient(25deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) top 6px left / 3px calc(100% - 12px) no-repeat,repeating-linear-gradient(155deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) top 6px right / 3px calc(100% - 12px) no-repeat; filter:drop-shadow(0 1px 0 rgba(0,0,0,.62)); opacity:.94; }
+.band-card:hover { box-shadow:5px 9px 0 var(--band-shadow),0 15px 24px rgba(3,12,24,.28),inset 0 1px 0 rgba(255,255,255,.2); }
+.band-card-early-years { background-color:#7744cc; }
+.band-card-kindergarten { background-color:#e07820; }
+.band-card-grade-one { background-color:#cc3333; }
+.band-card-grade-two { background-color:#2255aa; }
 .band-card-leads { left:14px; top:50%; transform:translateY(-50%); }
 .band-card-avatar { position:relative; display:block; width:68px; height:68px; overflow:hidden; border-radius:50%; background-color:#1a3a5c; background-image:var(--grain-coarse); background-size:90px 90px; box-shadow:0 4px 0 rgba(0,0,0,.42),0 8px 20px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.22); }
 .band-card-avatar::before { content:""; position:absolute; z-index:2; inset:4px; border-radius:50%; box-shadow:inset 0 2px 6px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.18); pointer-events:none; }
-.band-card-avatar::after { content:""; position:absolute; z-index:3; inset:7px; border:2px dashed rgba(255,255,255,.8); border-radius:50%; filter:drop-shadow(0 1.5px 2px rgba(0,0,0,.55)); pointer-events:none; }
+.band-card-avatar::after { display:none; }
 .band-card-avatar-image { position:absolute; z-index:1; inset:5%; width:90% !important; height:90% !important; object-fit:contain; object-position:center bottom; }
 .band-card-copy { padding-top:0; }
 .band-card-copy p { margin-bottom:2px; font-size:9px; letter-spacing:.1em; opacity:.78; }
 .band-card-copy h3 { font-family:var(--font-display); font-size:24px; line-height:.95; }
 .band-card-copy span { margin-top:3px; font-family:var(--font-hand); font-size:15px; font-style:italic; line-height:1; }
 .band-card-copy small { margin-top:4px; font-size:9px; line-height:1.1; opacity:.76; }
-.band-card-copy b { position:relative; margin-top:7px; padding:7px 12px; border:0; border-radius:8px; background:rgba(8,23,45,.27); box-shadow:inset 0 1px 2px rgba(0,0,0,.3); font-size:10px; }
-.band-card-copy b::after { content:""; position:absolute; inset:3px; border:1px dashed rgba(255,255,255,.74); border-radius:5px; pointer-events:none; }
+.band-card-copy b { position:relative; margin-top:7px; padding:7px 12px; border:0; border-radius:8px; background:rgba(8,23,45,.27); box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset 0 2px 3px rgba(0,0,0,.28),1px 2px 0 rgba(4,15,28,.24); font-size:10px; }
+.band-card-copy b::after { content:""; position:absolute; inset:3px; border:0; border-radius:5px; background:repeating-linear-gradient(115deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) top left 4px / calc(100% - 8px) 2px no-repeat,repeating-linear-gradient(65deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) bottom left 4px / calc(100% - 8px) 2px no-repeat,repeating-linear-gradient(25deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) top 4px left / 2px calc(100% - 8px) no-repeat,repeating-linear-gradient(155deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) top 4px right / 2px calc(100% - 8px) no-repeat; filter:drop-shadow(0 1px 0 rgba(0,0,0,.64)); pointer-events:none; }
 .band-card-copy b span { margin:0; font-family:var(--font-body); font-size:12px; font-style:normal; }
 .home-hero-board { position:relative; display:grid; grid-template-columns:minmax(0,1fr) 350px; align-items:center; gap:clamp(34px,5vw,68px); min-height:267px; margin:0; padding:24px max(35px,calc((100vw - 1370px) / 2)); overflow:hidden; border:0; border-radius:0 0 14px 14px; color:#fff; background-color:#123352; background-image:linear-gradient(120deg,#0d2846 0%,#143b60 66%,#28668d 100%),var(--grain-coarse); background-size:cover,160px 160px; background-blend-mode:normal,soft-light; box-shadow:inset 0 0 0 7px rgba(5,22,42,.3),0 9px 0 rgba(8,27,47,.28),0 18px 30px rgba(30,22,13,.14); }
 .home-hero-board::before { display:block; content:""; position:absolute; width:310px; height:310px; left:-26px; top:-170px; border:27px solid rgba(185,211,230,.16); border-radius:50%; box-shadow:0 0 0 27px rgba(233,198,91,.09); pointer-events:none; }
@@ -1273,8 +1274,9 @@ a { color: inherit; }
 .subject-icon { width:48px; height:48px; border-radius:16px; font-size:24px; }
 .subject-card h3 { font-family:var(--font-heading); font-size:18px; font-weight:900; line-height:1; }
 .subject-lesson-list { gap:6px; }
-.subject-card li a { min-height:38px; border-color:rgba(105,74,29,.12); border-radius:11px; background:rgba(197,163,100,.16); color:#352516; }
-.subject-row-icon { font-size:15px; line-height:1; }
+.subject-card li a { min-height:38px; grid-template-columns:28px minmax(0,1fr) auto; border-color:rgba(105,74,29,.12); border-radius:11px; background:rgba(197,163,100,.16); color:#352516; }
+.subject-row-icon { display:grid; place-items:center; width:28px; height:28px; overflow:hidden; font-size:0; line-height:1; }
+.subject-row-icon img { width:100%; height:100%; object-fit:contain; }
 .subject-lesson-title { overflow:visible; text-overflow:clip; white-space:normal; color:#24170d; font-size:12px; font-weight:800; }
 .subject-card li a, .subject-card li a:hover { color:var(--farm-ink); }
 .subject-card li a .subject-lesson-title,
@@ -1288,15 +1290,19 @@ a { color: inherit; }
 .farm-button-arrow { font-family:var(--font-body); font-size:16px; font-weight:900; line-height:1; }
 .site-footer { margin-top:0; }
 @media (max-width:760px) {
-  .band-ribbon { padding:11px 14px; }
-  .band-grid { width:100%; max-width:none; grid-template-columns:1fr; gap:10px; }
-  .band-card { min-height:106px; padding:8px 12px 8px 76px; }
-  .band-card-leads { left:12px; }
-  .band-card-avatar { width:56px; height:56px; }
-  .band-card-copy h3 { font-size:23px; }
-  .band-card-copy span { font-size:14px; }
-  .band-card-copy small { font-size:8px; }
-  .band-card-copy b { margin-top:6px; padding:6px 11px; font-size:9px; }
+  .band-ribbon { padding:8px; }
+  .band-grid { width:100%; max-width:none; grid-template-columns:1fr; gap:8px; }
+  .band-card { height:109px; min-height:109px; padding:6px 9px 6px 69px; border-radius:14px; }
+  .band-card::before { inset:2px; border-radius:11px; }
+  .band-card::after { inset:7px; border-radius:7px; }
+  .band-card-leads { left:13px; }
+  .band-card-avatar { width:48px; height:48px; }
+  .band-card-copy p { margin-bottom:1px; font-size:7px; }
+  .band-card-copy h3 { font-size:20px; line-height:.9; }
+  .band-card-copy span { margin-top:2px; font-size:12px; }
+  .band-card-copy small { margin-top:3px; font-size:7px; }
+  .band-card-copy b { margin-top:4px; padding:5px 9px; font-size:8px; }
+  .band-card-copy b span { font-size:10px; }
   .home-hero-board { grid-template-columns:1fr; gap:22px; min-height:0; padding:30px 22px 28px; border-radius:0; }
   .home-hero-copy h1 { font-size:clamp(40px,11vw,50px); }
   .home-hero-art { justify-self:start; width:min(330px,100%); }

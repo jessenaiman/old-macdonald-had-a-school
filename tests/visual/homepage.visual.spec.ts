@@ -26,7 +26,7 @@ async function openHomepage(page: Page) {
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(page).toHaveTitle(/Teacher Resources/i);
   const homepageHeading = page.getByRole("heading", {
-    name: "Old MacDonald Had a School",
+    name: "A better place to begin tomorrow’s lesson.",
     exact: true,
   });
   await expect(homepageHeading).toBeVisible({ timeout: APP_READY_TIMEOUT });
