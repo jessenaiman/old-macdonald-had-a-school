@@ -8,6 +8,7 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/visual",
   testMatch: "**/*.visual.spec.ts",
+  timeout: 30_000,
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
@@ -19,7 +20,7 @@ export default defineConfig({
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:8443",
     actionTimeout: 10_000,
-    navigationTimeout: 30_000,
+    navigationTimeout: 15_000,
     locale: "en-US",
     timezoneId: "America/Toronto",
     trace: "retain-on-failure",

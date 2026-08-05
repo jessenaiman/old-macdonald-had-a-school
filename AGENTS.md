@@ -72,4 +72,12 @@ evidence, or an approved visual reference.
 - Do not overwrite another worker's changes or perform broad rewrites.
 - Report changed files, checks run, risks, and unfinished work.
 - Do not approve your own visual or code batch.
+- Read `docs/requests/INBOX.md` before starting a lane. An open request pauses
+  only the task named in `blocks`; continue all unrelated work using the stated
+  default. At review milestones, report newly answered requests to the team
+  lead and mark them `applied` only after the answer is implemented.
+- After a major visual review, runtime recovery, or content milestone, update
+  `docs/PROCESS_IMPROVEMENTS.md`. The team lead's chat assessment should be one
+  short paragraph plus three to five bullets covering what worked and what to
+  simplify next.
 - Shared-checkout workers do not commit or push. The Git steward checks in only independently reviewed batches following `docs/TEAM_WORKFLOW.md`.

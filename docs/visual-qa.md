@@ -19,6 +19,12 @@ errors, and the protected `A Barn Band Day` feature plus footer. Screenshot
 comparison uses conservative thresholds (`0.1` colour threshold, `250` max
 changed pixels, and `0.05%` max changed-pixel ratio).
 
+Homepage readiness is app-owned and bounded: navigation waits only for
+`domcontentloaded`, followed by the stable homepage heading, loaded document
+fonts, loaded images visible in the approved viewport, and two animation
+frames for layout to settle. The suite never waits for `networkidle`, because
+the Next.js development runtime may keep background connections active.
+
 ## Baseline policy
 
 Raw Figma screenshots are human comparison specifications. They are not copied

@@ -12,6 +12,17 @@ Labels should distinguish `user-confirmed`, `evidence-verified`,
 
 Restore the Figma design as the visible system while preserving a simple Next.js teacher blog underneath: Markdown/MDX content, reusable music-led and video-led lesson templates, fast preview/print/video discovery, and a Markdown-driven About/portfolio hub.
 
+**Evidence-verified, 2026-08-05 (current lead):** the live homepage is
+available at `http://localhost:8443/`; Next.js MCP reports no compilation or
+session errors; and the existing top-of-home still requires repair. The
+highest-priority batch is limited to the four selector cards and the blue hero
+directly beneath them. The exact card portrait sources are
+`src/imports/miss-puddles.png`, `src/imports/miss-maisy.png`,
+`src/imports/mr-rusty.png`, and `src/imports/mr-sam.png`; the exact group-hero
+source is `public/scenes/old-mac-and-barnyard-music-circle.png`. No visual
+baseline, commit, or push is authorized until an independent matching-viewport
+review returns `APPROVED` and runtime QA passes.
+
 The user rejected the three-card implementation after seeing it live and
 supplied newer exact Figma screenshots. The immediate lead task is to restore
 the Figma top-of-home order: compact header, dark four-card selector band, then
@@ -25,7 +36,8 @@ matching-viewport comparison before check-in.
 - Root: `C:\Users\jesse\OneDrive\Documents\Endless Measures\Curriculum\old-macdonald-had-a-school`
 - Remote: `https://github.com/jessenaiman/old-macdonald-had-a-school`
 - Branch at last verification: `main`, tracking `origin/main`
-- Last verified remote checkpoint: `234cb15` — `agent working on putting the figma design into a nextjs website`
+- Current local checkpoint: `5cf6e51` — `wip: checkpoint homepage visual QA in progress` (not an approval milestone).
+- Last verified remote checkpoint remains `234cb15` — `agent working on putting the figma design into a nextjs website`.
 - Declared Next.js version: `16.3.0`
 - Package manager: pnpm
 
@@ -35,11 +47,12 @@ Always re-run the skill snapshot script; these facts can change.
 
 | Worker | Agent ID | Model | Responsibility / write set | Status | Evidence / next handoff |
 |---|---|---|---|---|---|
-| Parfit | `019fcec6-4ea8-7b91-8b20-d6d013fdc6e1` | Luna | Dependencies/runtime and Playwright visual-QA infrastructure only | active; verify | Added the dedicated visual config, QA docs, test suite, and Playwright dependency changes. No application components edited. Baselines intentionally absent until the visual batch is approved. |
+| Parfit | `019fcec6-4ea8-7b91-8b20-d6d013fdc6e1` | Luna | Dependencies/runtime and Playwright visual-QA infrastructure only | stopped after runtime failure | Replaced `networkidle` with deterministic page readiness, but an in-place OneDrive recovery left `node_modules` incomplete and port 8443 offline. No application code edited. Escalated to Herschel/Terra. |
 | Carson | `019fced8-7838-72f2-804b-673af8200bbd` | Luna | Shared header/top-of-page and homepage batch | stopped after completed batch | Agent reported multiple application changes, but no approval. Baseline review returned `CHANGES REQUIRED`; timing relative to the final edits must be reverified. |
-| Epicurus | `019fcedc-0aa5-7921-93b4-75b844bbb61d` | Luna | Independent Figma reviewer; may write only `docs/reviews/` | active review | Reviewing the repaired homepage at matching desktop/mobile viewports. Current lead evidence shows a severe mobile collapse plus desktop header/hero/Browse-by-Subject mismatches. |
+| Epicurus | `019fcedc-0aa5-7921-93b4-75b844bbb61d` | Luna | Independent Figma reviewer; may write only `docs/reviews/` | completed iteration 2; `CHANGES REQUIRED` | Iteration 2 substantially improved the Figma match. Remaining blockers: stale red Next overlay in final capture, Browse typography/color mismatch, and no fresh full protected feature/footer capture. The earlier mobile-collapse hypothesis was disproved. |
 | Faraday | `019fd20e-9d16-7c62-982d-49deb2ee36b3` | Terra | Created the approved grouped Early Years prototype | stopped after prototype | Production implementation stalled without editing files; replaced with a narrower worker. |
-| Mencius | `019fd222-7407-7ad2-8580-993fa8f652e1` | Terra | Restore Figma header → four-card selector band → hero order, stitched controls, and Figma Browse by Subject structure | completed; unapproved | Changed `HomePage.tsx`, `SiteShell.tsx`, and `globals.css`. Desktop renders, but lead mobile QA found a severe narrow-strip collapse and desktop mismatches. No approval or push. |
+| Mencius | `019fd222-7407-7ad2-8580-993fa8f652e1` | Terra | Restore Figma header → four-card selector band → hero order, stitched controls, and Figma Browse by Subject structure | completed iteration 2; unapproved | Changed `HomePage.tsx`, `SiteShell.tsx`, and `globals.css`. Header/card/hero structure and Figma row content are much closer. Await clean runtime recapture and remaining visual fixes. No push. |
+| Herschel | `019fd26c-e1d6-7773-a01b-b49d50222590` | Terra | Recover dependencies/runtime and run the repaired Playwright QA suite; no app edits | active | Must preserve the broken dependency tree recoverably, restore a complete Next/React/Playwright install without an in-place OneDrive reorganization, then certify port 8443 and the 8-check QA result. |
 | Descartes | `019fcec8-1ba9-7301-8870-05070ae0ff20` | Luna | About/portfolio Markdown collection and reusable About template | completed without implementation | Reported no About files changed. This lane must be reassigned. |
 | Git steward | not assigned | Luna default | Stage only approved files, create scoped milestone commit, push integration branch, open/update draft PR | queued | Assign after design and runtime approval. |
 
@@ -65,15 +78,9 @@ The current visual files appeared during Carson's active lane and are not yet re
 
 ## Current blockers and risks
 
-- `agent-browser` is not available on the lead shell PATH, so `/next-dev-loop` cannot yet approve runtime behavior.
-- OneDrive placeholders/permissions have caused `EPERM` reads inside `node_modules`.
-- The live site at port 8443 is now responding with Next 16.3/Turbopack. The visual batch remains unapproved: mobile collapses into a narrow strip, and desktop still differs in header lockup, hero imagery/byline, and Browse by Subject typography/content.
-- The current shared header was confirmed to inherit the wrong archive-site visual direction; top-of-page layout remains outstanding until Carson supplies evidence.
-- The latest independent review verdict is `CHANGES REQUIRED`: header, mobile
-  hero, subject-grid structure, and bottom feature/footer differed visibly from
-  approved references. Because Carson's final edits may have overlapped the
-  baseline capture, a fresh comparison is required rather than assuming either
-  report is current.
+- OneDrive/SWC locks left `node_modules` incomplete during a Luna recovery; port 8443 is offline pending Herschel's recoverable Terra repair.
+- Iteration 2 remains `CHANGES REQUIRED`: the saved desktop capture contains a stale red Next issue overlay, Browse by Subject still differs in heading/row typography and color, and the protected feature/footer needs a clean full capture.
+- The 390px capture is responsive and has no horizontal overflow; the earlier narrow-strip hypothesis was a capture artifact and is closed.
 - The About/portfolio lane has not begun and needs a new implementation worker.
 - Multiple agents share one checkout, so workers must not branch, stage, commit, or push independently. A lead-owned local `wip:` checkpoint may preserve active QA state; it is not an approval or push gate.
 
@@ -130,12 +137,11 @@ See `docs/PROJECT_CHECKLIST.md` for the supplied screenshot paths and `src/` for
 
 ## Next lead actions
 
-1. Receive Epicurus's independent Figma verdict and evidence.
-2. Return concrete visual/runtime findings to a Terra implementation lane; do not create a baseline while the batch fails.
-3. Re-run Playwright visual QA at desktop/mobile after the repair.
+1. Receive Herschel's clean dependency/runtime recovery and repaired 8-check Playwright result.
+2. Re-capture desktop, mobile, and the full protected feature/footer without a Next overlay.
+3. Return only any remaining evidence-backed visual mismatch to the Terra implementation lane; do not create baselines while the batch fails.
 4. If `APPROVED`, promote the rendered captures to baselines and assign the Git steward for the reviewed integration commit.
-4. Reassign the About/portfolio lane with a disjoint write set.
-5. After `APPROVED` plus runtime QA, assign the Git steward for the scoped milestone commit and draft PR.
+5. Reassign the About/portfolio lane with a disjoint write set.
 
 ## Decision log
 

@@ -23,6 +23,23 @@ Every worker reads `AGENTS.md`, `docs/PROJECT_CHECKLIST.md`, and this file befor
 5. The reviewer places the reference and implementation together, then records visible differences in hierarchy, spacing, type, palette, icons, imagery, borders, cropping, responsiveness, and interaction states.
 6. The reviewer returns one verdict: `APPROVED` or `CHANGES REQUIRED`.
 7. `CHANGES REQUIRED` returns to the implementation worker. Repeat until approved.
+
+## Asynchronous decisions
+
+- Put user questions and change requests in `docs/requests/INBOX.md`.
+- Every entry names whether it blocks work and the exact task it blocks.
+- Non-blocking entries include a safe default so other lanes continue.
+- The team lead checks the inbox at each review milestone and reports newly
+  answered items in chat.
+- Use GitHub issues when work needs external assignment, public discussion, or
+  release tracking. Use the Markdown inbox for fast private project decisions.
+
+## Periodic process assessment
+
+After a major visual review, runtime recovery, or content milestone, the team
+lead posts one short paragraph and three to five bullets: what worked best,
+where time was wasted, and the smallest workflow change for the next cycle.
+Record the durable version in `docs/PROCESS_IMPROVEMENTS.md`.
 8. Screenshot review does not replace keyboard, link, print, accessibility, or runtime checks.
 
 ## Check-in and review gate

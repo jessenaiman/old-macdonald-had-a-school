@@ -18,8 +18,8 @@ const PRIMARY_GRADES = [
 ] as const;
 
 const FOOTER_BANDS = [
-  { label: "Daycare", href: "/daycare" },
-  { label: "Preschool", href: "/preschool" },
+  { label: "Early Years", href: "/daycare" },
+  { label: "Kindergarten", href: "/kindergarten" },
   { label: "Grade 1", href: "/band/grade-one" },
   { label: "Grade 2", href: "/band/grade-two" },
 ] as const;
@@ -75,7 +75,7 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
           <Link className="site-brand" href="/" aria-label="Old MacDonald Had a School home">
             <Image src="/brand-emblem.png" alt="" width={44} height={44} priority />
             <span>
-              <strong>Old MacDonald<br />Had a School</strong>
+              <strong>Old MacDonald Had a School</strong>
               <small>Teacher lesson resources</small>
             </span>
           </Link>

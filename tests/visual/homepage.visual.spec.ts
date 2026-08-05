@@ -5,6 +5,8 @@ type RuntimeErrors = {
   page: string[];
 };
 
+const APP_READY_TIMEOUT = 10_000;
+
 function watchRuntimeErrors(page: Page): RuntimeErrors {
   const errors: RuntimeErrors = { console: [], page: [] };
 
@@ -21,11 +23,50 @@ function watchRuntimeErrors(page: Page): RuntimeErrors {
 async function openHomepage(page: Page) {
   const errors = watchRuntimeErrors(page);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/", { waitUntil: "networkidle" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(page).toHaveTitle(/Teacher Resources/i);
-  await expect(
-    page.getByRole("heading", { name: /A better place to begin tomorrow’s lesson/i }),
-  ).toBeVisible();
+  const homepageHeading = page.getByRole("heading", {
+    name: "Old MacDonald Had a School",
+    exact: true,
+  });
+  await expect(homepageHeading).toBeVisible({ timeout: APP_READY_TIMEOUT });
+
+  await page.waitForFunction(
+    () => {
+      const fontsReady = document.fonts.status === "loaded";
+      const visibleImages = Array.from(document.images).filter((image) => {
+        const rect = image.getBoundingClientRect();
+        const style = window.getComputedStyle(image);
+
+        return (
+          style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          rect.width > 0 &&
+          rect.height > 0 &&
+          rect.bottom > 0 &&
+          rect.right > 0 &&
+          rect.top < window.innerHeight &&
+          rect.left < window.innerWidth
+        );
+      });
+
+      return (
+        fontsReady &&
+        visibleImages.every((image) => image.complete && image.naturalWidth > 0)
+      );
+    },
+    undefined,
+    { timeout: APP_READY_TIMEOUT },
+  );
+
+  // Let layout and image decoding settle without depending on background
+  // requests made by the Next.js development runtime.
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      }),
+  );
 
   return errors;
 }

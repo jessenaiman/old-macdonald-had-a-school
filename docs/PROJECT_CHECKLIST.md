@@ -87,6 +87,23 @@ This is the durable handoff record for the project. Every agent should read this
   existing homepage color-contrast findings; visual remediation belongs to the
   independent Figma/QA lanes and was not changed here.
 
+## QA infrastructure lane evidence — Luna (2026-08-05)
+
+- Added `@playwright/test` `^1.62.1` with pnpm and hydrated the workspace-local
+  dependency tree successfully.
+- Added `playwright.visual.config.ts`,
+  `tests/visual/homepage.visual.spec.ts`, and `docs/visual-qa.md`; no
+  application components, visual CSS, or content files were changed.
+- `pnpm run typecheck` passed and `pnpm run build` passed on Next.js 16.3.0
+  with Turbopack.
+- `pnpm qa:visual`: 6 of 8 checks passed across desktop `1543x900` and mobile
+  `390x844`. The two screenshot checks failed only because approved automated
+  baselines do not exist yet; Playwright wrote actuals to ignored
+  `test-results/visual` and did not update baselines.
+- Baseline policy is documented: raw Figma screenshots remain human specs;
+  only an explicitly user/team-lead-approved rendered page may become a
+  committed baseline, and CI never updates snapshots automatically.
+
 ## Protected visual references
 
 - Compact hero scope: `C:\Users\jesse\AppData\Local\Temp\codex-clipboard-af870afc-d26a-4839-aa0e-c6b5a8182e81.png`
