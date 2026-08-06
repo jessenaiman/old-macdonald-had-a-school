@@ -1,9 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import missPuddles from "../../src/imports/miss-puddles.png";
-import missMaisy from "../../src/imports/miss-maisy.png";
-import mrRusty from "../../src/imports/mr-rusty.png";
-import mrSam from "../../src/imports/mr-sam.png";
+import { LuBookOpen, LuListOrdered, LuMusic2, LuSprout } from "react-icons/lu";
 
 type SlimLesson = {
   slug: string;
@@ -20,32 +17,32 @@ type HomePageProps = {
 };
 
 const BANDS = [
-  { label: "Early Years", age: "0–4 yrs", href: "/daycare", staff: "Miss Puddles", avatar: missPuddles, tone: "early-years", subtitle: "Daycare & Preschool", lessons: "9 lessons" },
-  { label: "Kindergarten", age: "4–5 yrs", href: "/kindergarten", staff: "Miss Maisy", avatar: missMaisy, tone: "kindergarten", subtitle: "Music and movement", lessons: "4 lessons" },
-  { label: "Grade 1", age: "5–6 yrs", href: "/band/grade-one", staff: "Mr Rusty", avatar: mrRusty, tone: "grade-one", subtitle: "Reading and rhythm", lessons: "4 lessons" },
-  { label: "Grade 2", age: "6–7 yrs", href: "/band/grade-two", staff: "Mr Sam", avatar: mrSam, tone: "grade-two", subtitle: "Thinking and making", lessons: "4 lessons" },
+  { label: "Daycare & Preschool", href: "/daycare", avatar: "/staff_and_students/miss-puddles-transparent-circle.png", tone: "early-years" },
+  { label: "Kindergarten", href: "/kindergarten", avatar: "/staff_and_students/mr-rusty-transparent-circle.png", tone: "kindergarten" },
+  { label: "Grade 1", href: "/band/grade-one", avatar: "/staff_and_students/miss-hayley-transparent-circle.png", tone: "grade-one" },
+  { label: "Grade 2", href: "/band/grade-two", avatar: "/staff_and_students/mr-sam-transparent-circle.png", tone: "grade-two" },
 ] as const;
 
 const SUBJECTS = [
-  { key: "language", filterKey: "words", label: "Language & Communication", icon: "📖", tone: "words", rows: [
+  { key: "language", filterKey: "words", label: "Language & Communication", Icon: LuBookOpen, tone: "words", rows: [
     { title: "Story Time: Board Books", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
     { title: "Show & Tell Story Circle", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
     { title: "Phonics: Long & Short Vowel Sounds", grade: "Gr 1", href: "/band/grade-one", staffAsset: "/staff_and_students/miss-hayley-transparent-circle.png", ready: true },
     { title: "Rhyming & Sound Play", grade: "Gr 1", href: "/band/grade-one", staffAsset: "/staff_and_students/miss-hayley-transparent-circle.png" },
   ], more: 1 },
-  { key: "math", filterKey: "numbers", label: "Math & Inquiry", icon: "🔢", tone: "numbers", rows: [
+  { key: "math", filterKey: "numbers", label: "Math & Inquiry", Icon: LuListOrdered, tone: "numbers", rows: [
     { title: "Sensory Tray Exploration", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
     { title: "Shape Hunt Outdoors", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/mr-maisy-transparent-circle.png" },
     { title: "Nature Observation Journal", grade: "Gr 1", href: "/band/grade-one", staffAsset: "/staff_and_students/mr-puddles-transparent-circle.png" },
     { title: "Adding with Equal Groups", grade: "Gr 2", href: "/band/grade-two", staffAsset: "/staff_and_students/mr-sam-transparent-circle.png" },
   ], more: 1 },
-  { key: "music", filterKey: "music", label: "Music, Movement & Community", icon: "🎵", tone: "music", rows: [
+  { key: "music", filterKey: "music", label: "Music, Movement & Community", Icon: LuMusic2, tone: "music", rows: [
     { title: "Barnyard Animal Sounds & Action Imitation", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png", ready: true },
     { title: "Circle Time Songs", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
     { title: "Fingerplay & Movement", grade: "Daycare", href: "/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
     { title: "Follow the Music Trail", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/mr-rusty-transparent-circle.png" },
   ], more: 2 },
-  { key: "routines", filterKey: "heart", label: "Routines & Regulation", icon: "🌿", tone: "heart", rows: [
+  { key: "routines", filterKey: "heart", label: "Routines & Regulation", Icon: LuSprout, tone: "heart", rows: [
     { title: "Mix, Measure & Munch", grade: "Preschool", href: "/preschool", staffAsset: "/staff_and_students/miss-maisy-transparent-circle.png", ready: true },
   ], more: 0 },
 ];
@@ -54,21 +51,17 @@ export function HomePage({}: HomePageProps) {
   return (
     <div className="home-page">
       <section className="band-ribbon" aria-label="Choose a grade">
-        <div className="band-grid">
+        <div className="band-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {BANDS.map((band) => {
             return (
-              <Link className={`band-card band-card-${band.tone}`} href={band.href} key={band.label} aria-label={`${band.label}: ${band.lessons}`}>
+              <Link className={`band-card band-card-${band.tone}`} href={band.href} key={band.label} aria-label={band.label}>
                 <div className="band-card-leads">
                   <span className="band-card-avatar">
-                    <Image className="band-card-avatar-image" src={band.avatar} alt={band.staff} sizes="68px" />
+                    <Image className="band-card-avatar-image" src={band.avatar} alt="" width={52} height={52} sizes="52px" />
                   </span>
                 </div>
                 <div className="band-card-copy">
-                  <p>{band.age}</p>
                   <h3>{band.label}</h3>
-                  <span>{band.subtitle}</span>
-                  <small>Led by {band.staff}</small>
-                  <b>{band.lessons} <span aria-hidden="true">→</span></b>
                 </div>
               </Link>
             );
@@ -101,10 +94,11 @@ export function HomePage({}: HomePageProps) {
         </div>
         <div className="subject-grid">
           {SUBJECTS.map((group) => {
+            const SubjectIcon = group.Icon;
             return (
               <article className={`subject-card subject-${group.tone}`} key={group.key}>
                 <header className="subject-card-head">
-                  <span className="subject-icon" aria-hidden="true">{group.icon}</span>
+                  <span className="subject-icon" aria-hidden="true"><SubjectIcon /></span>
                   <h3>{group.label}</h3>
                 </header>
                 <ul className="subject-lesson-list">

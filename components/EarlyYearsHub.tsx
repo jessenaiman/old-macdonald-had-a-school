@@ -1,19 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import type { EarlyYearsTopic } from "../lib/early-years";
+import type { EarlyYearsBandKey, EarlyYearsTopic } from "../lib/early-years";
 
 const CloseIcon = () => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>);
 const ZoomIcon = () => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>);
 const DownloadIcon = () => (<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>);
 
-export type EarlyYearsBand = "daycare" | "preschool" | "kindergarten";
 export type EarlyYearsTier = "list" | "detailed" | "bridge";
 
 export function EarlyYearsHub({
   band, title, tagline, lead: _lead, tier, topics,
 }: {
-  band: EarlyYearsBand;
+  band: EarlyYearsBandKey;
   title: string;
   tagline: string;
   lead: { patch: string; name: string };
@@ -31,7 +30,7 @@ export function EarlyYearsHub({
         <h1>{title}</h1>
         <p className="ey-tagline">{tagline}</p>
         {tier === "bridge" && (
-          <p className="ey-bridge-note stitch">This band's format is still being finalized — song/topic content below is a placeholder shell, not a finished lesson set.</p>
+          <p className="ey-bridge-note stitch">This band’s format is still being finalized — song/topic content below is a placeholder shell, not a finished lesson set.</p>
         )}
       </header>
 

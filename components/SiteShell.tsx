@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LuChevronDown, LuMenu } from "react-icons/lu";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export type ActivePage =
   | "home" | "topics" | "lessons" | "about" | "cast-guide"
@@ -87,9 +88,11 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
             <Link className={`site-nav-link${active === "grade-one" ? " is-active" : ""}`} href="/band/grade-one">Grade 1</Link>
             <Link className={`site-nav-link${active === "grade-two" ? " is-active" : ""}`} href="/band/grade-two">Grade 2</Link>
             <Link className={`site-nav-link site-nav-link-subtle${active === "cast-guide" ? " is-active" : ""}`} href="/cast" aria-current={active === "cast-guide" ? "page" : undefined}>Cast Guide</Link>
+            <ThemeSwitcher />
           </nav>
 
           <div className="site-mobile-actions">
+            <ThemeSwitcher />
             <details className="site-mobile-menu">
               <summary aria-label="Open navigation menu"><LuMenu aria-hidden="true" /><span>Menu</span></summary>
               <nav aria-label="Mobile navigation">

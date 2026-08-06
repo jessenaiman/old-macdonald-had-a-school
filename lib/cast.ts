@@ -1,7 +1,6 @@
 // Cast data for the Cast Guide page. Sourced from content/staff/*.md,
 // public/CAST_AND_ROLES.md and the working-canon character guide PDF —
-// consolidated here as a typed array, the same lightweight pattern the old
-// CREW array in HomeExplorer.tsx used, rather than parsing markdown at build time.
+// consolidated here as a typed array rather than parsing markdown at build time.
 
 export type StaffMember = {
   key: string; // patch filename, without extension
@@ -47,7 +46,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "mr-rusty", name: "Mr Rusty", species: "Horse adult", role: "Music & dance teacher",
-    gradeBand: "Kindergarten – Grade 1/2", color: "#2C6C9B",
+    gradeBand: "Preschool & Kindergarten", color: "#2C6C9B",
     personality: ["Warm, rhythmic and encouraging", "Grounded energy rather than showmanship", "Helps shy students join in"],
     worksheetLens: "Rhythm & movement — music, patterns, sequencing, syllables, fluency.",
     guides: ["Music, singing and fiddle", "Movement and dance sequences", "Patterns, rhythm, syllables and fluency"],
@@ -63,7 +62,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "mr-sam", name: "Mr Sam", species: "Pig adult", role: "Math & building",
-    gradeBand: "Grade 1/2", color: "#1F6B6B",
+    gradeBand: "Grade 2", color: "#1F6B6B",
     personality: ["Inventive, patient and hands-on", "Makes room for “I don’t know yet”", "Builds to understand how things work"],
     worksheetLens: "Math & STEM — number sense, measurement, geometry, science, building.",
     guides: ["Number sense and operations", "Measurement and geometry", "Science, engineering and practical problem-solving"],

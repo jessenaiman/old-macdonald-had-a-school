@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SiteShell } from "../../components/SiteShell";
 import { getPageContent } from "../../lib/mdx-content";
 
@@ -11,7 +12,7 @@ export default function AboutPage() {
           <h1>{page.meta.title}</h1>
           <p className="hero-summary">{page.meta.summary}</p>
         </div>
-        <div className="about-mark"><img src="/brand-emblem.png" alt="Old MacDonald Had a School tree and music-note emblem" /></div>
+        <div className="about-mark"><Image src="/brand-emblem.png" alt="Old MacDonald Had a School tree and music-note emblem" width={220} height={220} style={{ height: "auto" }} /></div>
       </section>
       <section className="about-layout">
         <div className="about-story">

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Craft Material System — Texture Demo</title>
+  <style>
+    :root {
+      --ink: #2e291f;
+      --muted: #746956;
+      --paper: #efe4ce;
+      --paper-deep: #d8bd92;
+      --tomato: #d94b3d;
+      --denim: #1d5682;
+      --mustard: #d79a27;
+      --thread-color: #d94b3d;
+      --line: rgba(46, 41, 31, .16);
+      --shadow: 0 16px 30px rgba(64, 46, 23, .15);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: #c99655; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Trebuchet MS", system-ui, sans-serif;
+      background: url("texture-assets/kraft-light-tile.png") repeat;
+      background-size: 520px 520px;
+      min-height: 100vh;
+    }
+
+    .wrap { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
+    .eyebrow, .micro { text-transform: uppercase; letter-spacing: .16em; font-size: .69rem; font-weight: 800; }
+    .eyebrow { color: var(--denim); }
+    .micro { color: var(--muted); }
+    .mark { display: flex; align-items: center; gap: 10px; font-weight: 900; }
+    .mark-dot { width: 19px; height: 19px; border-radius: 50%; background: url("texture-assets/felt-tomato-tile.png") repeat; background-size: 180px; box-shadow: inset 0 0 0 2px rgba(255,255,255,.3); }
+
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: stretch; padding: 52px 0 68px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 700px; margin-bottom: 22px; font: 900 clamp(3.2rem, 7vw, 6.3rem)/.9 Georgia, serif; letter-spacing: -.065em; }
+    .hero p { max-width: 570px; margin-bottom: 26px; color: #514638; font-size: 1.1rem; line-height: 1.6; }
+    .button { display: inline-flex; align-items: center; gap: 9px; color: white; background: var(--denim); padding: 13px 17px; border-radius: 7px 9px 6px 8px; text-decoration: none; font-weight: 900; box-shadow: 4px 5px 0 rgba(46,41,31,.15); }
+    .hero-art { min-height: 360px; position: relative; background: url("texture-assets/kraft-warm-tile.png") repeat; background-size: 430px; border: 2px solid rgba(46,41,31,.2); box-shadow: var(--shadow); overflow: hidden; transform: rotate(1.4deg); }
+    .hero-art::after { content: ""; position: absolute; inset: 15px; border: 2px dashed rgba(46,41,31,.33); pointer-events: none; }
+    .patch { position: absolute; width: 180px; filter: drop-shadow(4px 7px 0 rgba(46,41,31,.18)); z-index: 1; }
+    .patch.cow { left: 12%; top: 26%; transform: rotate(-8deg); }
+    .patch.horse { right: 8%; bottom: 8%; width: 170px; transform: rotate(10deg); }
+    .label { position: absolute; left: 28px; top: 25px; padding: 8px 11px; background: url("texture-assets/felt-denim-tile.png") repeat; background-size: 250px; color: white; font-size: .76rem; font-weight: 900; transform: rotate(-3deg); z-index: 2; }
+
+    section { padding: 58px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 22px; }
+    h2 { font: 900 clamp(2rem, 4vw, 3.6rem)/.95 Georgia, serif; letter-spacing: -.045em; margin-bottom: 0; }
+    .section-head p { max-width: 430px; color: var(--muted); line-height: 1.5; margin-bottom: 0; }
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .swatch { min-height: 190px; padding: 15px; display: flex; align-items: end; border: 2px solid rgba(46,41,31,.18); box-shadow: 6px 7px 0 rgba(46,41,31,.1); }
+    .swatch strong { display: inline-block; padding: 7px 9px; background: rgba(255,248,235,.86); font-size: .78rem; }
+    .kraft-warm { background: url("texture-assets/kraft-warm-tile.png") repeat; background-size: 280px; }
+    .kraft-light { background: url("texture-assets/kraft-light-tile.png") repeat; background-size: 280px; }
+    .felt-denim { background: url("texture-assets/felt-denim-tile.png") repeat; background-size: 280px; }
+    .felt-tomato { background: url("texture-assets/felt-tomato-tile.png") repeat; background-size: 280px; }
+
+    .border-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 20px 0 22px; }
+    .color-button, .color-picker { border: 2px solid rgba(46,41,31,.2); background: rgba(255,248,235,.7); color: var(--ink); min-height: 38px; cursor: pointer; font: 800 .78rem "Trebuchet MS", sans-serif; }
+    .color-button { padding: 8px 12px; }
+    .color-button[aria-pressed="true"] { box-shadow: inset 0 0 0 3px var(--paper), 0 0 0 2px var(--ink); }
+    .color-picker { width: 48px; padding: 4px; }
+    .thread-readout { color: var(--muted); font-size: .78rem; }
+    .board { position: relative; width: min(100%, 720px); min-height: 330px; margin: 14px auto 0; padding: 68px 68px 56px; background: url("texture-assets/kraft-warm-tile.png") repeat; background-size: 420px; border: 2px solid rgba(46,41,31,.2); box-shadow: var(--shadow); }
+    .board-note { position: relative; min-height: 190px; display: grid; place-items: center; text-align: center; padding: 30px; background: url("texture-assets/kraft-light-tile.png") repeat; background-size: 300px; border: 1px solid rgba(46,41,31,.2); transform: rotate(-1deg); }
+    .board-note h3 { margin-bottom: 8px; font: 900 2rem Georgia, serif; }
+    .board-note p { margin: 0; max-width: 330px; color: var(--muted); line-height: 1.5; }
+    .stitch-mask { position: absolute; z-index: 2; pointer-events: none; background: var(--thread-color); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-mode: alpha; mask-mode: alpha; }
+    .stitch-top, .stitch-bottom { left: 25px; right: 25px; height: 28px; -webkit-mask-image: url("texture-assets/stitch-horizontal.png"); mask-image: url("texture-assets/stitch-horizontal.png"); -webkit-mask-size: 150px 56px; mask-size: 150px 56px; -webkit-mask-repeat: repeat-x; mask-repeat: repeat-x; }
+    .stitch-top { top: 23px; }
+    .stitch-bottom { bottom: 20px; transform: rotate(180deg); }
+    .stitch-left, .stitch-right { top: 25px; bottom: 25px; width: 28px; -webkit-mask-image: url("texture-assets/stitch-vertical.png"); mask-image: url("texture-assets/stitch-vertical.png"); -webkit-mask-size: 56px 150px; mask-size: 56px 150px; -webkit-mask-repeat: repeat-y; mask-repeat: repeat-y; }
+    .stitch-left { left: 23px; }
+    .stitch-right { right: 23px; transform: rotate(180deg); }
+    .stitch-corner { width: 58px; height: 58px; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+    .corner-tl { top: 10px; left: 10px; -webkit-mask-image: url("texture-assets/stitch-corner-top-left.png"); mask-image: url("texture-assets/stitch-corner-top-left.png"); }
+    .corner-tr { top: 10px; right: 10px; -webkit-mask-image: url("texture-assets/stitch-corner-top-right.png"); mask-image: url("texture-assets/stitch-corner-top-right.png"); }
+    .corner-br { right: 10px; bottom: 7px; -webkit-mask-image: url("texture-assets/stitch-corner-bottom-right.png"); mask-image: url("texture-assets/stitch-corner-bottom-right.png"); }
+    .corner-bl { left: 10px; bottom: 7px; -webkit-mask-image: url("texture-assets/stitch-corner-bottom-left.png"); mask-image: url("texture-assets/stitch-corner-bottom-left.png"); }
+
+    .component-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card { padding: 26px; border: 2px solid rgba(46,41,31,.17); box-shadow: var(--shadow); }
+    .card h3 { margin-bottom: 9px; font: 900 1.65rem Georgia, serif; }
+    .card p { color: var(--muted); line-height: 1.55; }
+    .card.kraft { background: url("texture-assets/kraft-warm-tile.png") repeat; background-size: 360px; }
+    .card.felt { background: url("texture-assets/felt-denim-tile.png") repeat; background-size: 360px; color: white; }
+    .card.felt p { color: rgba(255,255,255,.8); }
+    .tag { display: inline-block; margin-bottom: 22px; padding: 7px 9px; background: url("texture-assets/felt-tomato-tile.png") repeat; background-size: 210px; color: white; font-size: .72rem; font-weight: 900; transform: rotate(-2deg); }
+    .footer-note { padding: 22px 0 46px; color: var(--muted); font-size: .82rem; }
+    code { font-family: Consolas, monospace; font-size: .78rem; }
+    @media (max-width: 760px) { .hero, .component-grid { grid-template-columns: 1fr; } .swatches { grid-template-columns: repeat(2, 1fr); } .hero-art { min-height: 300px; } .section-head { display: block; } .section-head p { margin-top: 14px; } }
+    @media (prefers-reduced-motion: no-preference) { .hero-art { animation: settle .8s ease both; } .patch { animation: float 5s ease-in-out infinite; } .patch.horse { animation-delay: -.8s; } @keyframes settle { from { opacity: 0; transform: translateY(12px) rotate(1.4deg); } to { opacity: 1; transform: translateY(0) rotate(1.4deg); } } @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="mark"><span class="mark-dot"></span> Old MacDonald's Farm School</div>
+      <div class="micro">material study / v1</div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div>
+          <div class="eyebrow">A tactile visual direction</div>
+          <h1>Made for little hands and big imaginations.</h1>
+          <p>A first-pass material system for the site: warm recycled paper in the background, wool felt for stitched UI elements, and a restrained palette that lets the characters do the charming work.</p>
+          <a class="button" href="#components">Review the components <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-art" aria-label="Felt patches on kraft cardboard">
+          <div class="label">stitched storytime</div>
+          <img class="patch cow" src="texture-assets/patch-cow.png" alt="Cow patch illustration">
+          <img class="patch horse" src="texture-assets/patch-horse.png" alt="Horse patch illustration">
+        </div>
+      </div>
+
+      <section id="materials">
+        <div class="section-head"><h2>Surface language</h2><p>These are the base materials. The kraft tiles create a quiet field; the felt tiles are reserved for interactive or stitched moments.</p></div>
+        <div class="swatches">
+          <div class="swatch kraft-warm"><strong>Kraft / warm</strong></div>
+          <div class="swatch kraft-light"><strong>Kraft / light</strong></div>
+          <div class="swatch felt-denim"><strong>Felt / denim</strong></div>
+          <div class="swatch felt-tomato"><strong>Felt / tomato</strong></div>
+        </div>
+      </section>
+
+      <section id="components">
+        <div class="section-head"><h2>Applied components</h2><p>Use texture as a material cue, not as decoration everywhere. Contrast, hierarchy, and readable text still lead.</p></div>
+        <div class="component-grid">
+          <article class="card kraft"><span class="tag">lesson card</span><h3>Sing, move, discover.</h3><p>A kraft surface gives this content block the feeling of a handmade activity card without competing with the lesson title.</p><a class="button" href="#materials">Open lesson</a></article>
+          <article class="card felt"><span class="tag">felt button</span><h3>Choose a farm friend.</h3><p>A denser felt surface makes this call to action feel like a stitched patch—useful for playful, high-intent actions.</p><a class="button" style="background: var(--tomato)" href="#materials">Meet the animals</a></article>
+        </div>
+      </section>
+
+      <section id="border-system">
+        <div class="section-head"><h2>Stitched trim</h2><p>A border asset kit built from repeatable edge segments and mitered corner pieces. Try a new thread color to test the system.</p></div>
+        <div class="border-tools" aria-label="Thread color controls">
+          <span class="micro">Thread color</span>
+          <button class="color-button" type="button" data-thread="#d94b3d" aria-pressed="true">Tomato</button>
+          <button class="color-button" type="button" data-thread="#1d5682" aria-pressed="false">Denim</button>
+          <button class="color-button" type="button" data-thread="#5c7f45" aria-pressed="false">Sage</button>
+          <button class="color-button" type="button" data-thread="#d79a27" aria-pressed="false">Mustard</button>
+          <input class="color-picker" type="color" value="#d94b3d" aria-label="Choose a custom thread color">
+          <span class="thread-readout">Current: <code>#d94b3d</code></span>
+        </div>
+        <div class="board" aria-label="Kraft board with stitched felt border">
+          <span class="stitch-mask stitch-top"></span><span class="stitch-mask stitch-right"></span><span class="stitch-mask stitch-bottom"></span><span class="stitch-mask stitch-left"></span>
+          <span class="stitch-mask stitch-corner corner-tl"></span><span class="stitch-mask stitch-corner corner-tr"></span><span class="stitch-mask stitch-corner corner-br"></span><span class="stitch-mask stitch-corner corner-bl"></span>
+          <div class="board-note"><div><div class="eyebrow">felt trim / live color</div><h3>A little handmade signal.</h3><p>Use this treatment around featured lessons, story cards, or seasonal collections.</p></div></div>
+        </div>
+      </section>
+
+      <div class="footer-note">Texture atlas: <code>texture-assets/craft-material-atlas.png</code> · Border kit: <code>texture-assets/stitched-border-atlas.png</code> plus individual edge and corner assets.</div>
+    </main>
+  </div>
+  <script>
+    const root = document.documentElement;
+    const readout = document.querySelector('.thread-readout code');
+    const picker = document.querySelector('.color-picker');
+    const buttons = document.querySelectorAll('[data-thread]');
+    function setThreadColor(color, activeButton) {
+      root.style.setProperty('--thread-color', color);
+      picker.value = color;
+      readout.textContent = color;
+      buttons.forEach(button => button.setAttribute('aria-pressed', button === activeButton ? 'true' : 'false'));
+    }
+    buttons.forEach(button => button.addEventListener('click', () => setThreadColor(button.dataset.thread, button)));
+    picker.addEventListener('input', event => setThreadColor(event.target.value, null));
+  </script>
+</body>
+</html>

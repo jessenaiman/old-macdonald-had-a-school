@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Old MacDonald's Farm School — Animal Brand Kit</title>
+  <style>
+    @font-face { font-family: Bricolage; src: url("brand-kit-demo-assets/BricolageGrotesque-Bold.ttf"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: Instrument; src: url("brand-kit-demo-assets/InstrumentSans-Regular.ttf"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: Instrument; src: url("brand-kit-demo-assets/InstrumentSans-Bold.ttf"); font-weight: 700; font-display: swap; }
+    :root {
+      --ink: #30291f; --muted: #756956; --paper: #f3e6cb; --cream: #fff8e9;
+      --denim: #1f4e5f; --tomato: #b5272c; --mustard: #d99a22; --sage: #55705a;
+      --accent: #b5272c; --thread: #f7e8c8; --line: rgba(55,44,31,.18);
+      --shadow: 0 18px 45px rgba(66,45,20,.15);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: #d8bd92; }
+    body { margin: 0; color: var(--ink); font-family: Instrument, sans-serif; background: url("brand-kit-demo-assets/kraft-light-tile.png") repeat; background-size: 520px; }
+    button, input { font: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible { outline: 4px solid #2c6c9b; outline-offset: 4px; }
+    .shell { width: min(1240px, calc(100% - 40px)); margin: auto; }
+    .micro { font: 700 .7rem Instrument, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 700; }
+    .brand-mark { width: 28px; height: 28px; border-radius: 50%; background: url("brand-kit-demo-assets/felt-tomato-tile.png") center/120px; box-shadow: inset 0 0 0 3px rgba(255,255,255,.32); }
+    nav { display: flex; gap: 18px; }
+    nav a { color: var(--ink); text-decoration: none; font-size: .85rem; font-weight: 700; }
+    .hero { min-height: 700px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 54px; align-items: center; padding: 72px 0 90px; }
+    .hero h1 { max-width: 760px; margin: 10px 0 25px; font: 700 clamp(4rem, 8vw, 7.4rem)/.82 Bricolage, sans-serif; letter-spacing: -.075em; }
+    .hero p { max-width: 590px; margin: 0 0 28px; color: #594c3c; font-size: 1.12rem; line-height: 1.62; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .plain-button { padding: 13px 17px; color: #fff; background: var(--denim); border: 0; border-radius: 8px 10px 7px 9px; box-shadow: 4px 5px 0 rgba(48,41,31,.18); text-decoration: none; font-weight: 700; }
+    .hero-board { position: relative; min-height: 500px; background: url("brand-kit-demo-assets/kraft-warm-tile.png") repeat; background-size: 430px; border: 2px solid rgba(48,41,31,.2); box-shadow: var(--shadow); transform: rotate(1.2deg); overflow: hidden; }
+    .hero-board::before { content: ""; position: absolute; inset: 20px; border: 3px dashed rgba(48,41,31,.28); }
+    .hero-note { position: absolute; left: 40px; top: 42px; z-index: 2; padding: 9px 12px; color: white; background: var(--denim); font-weight: 700; transform: rotate(-4deg); }
+    .portrait { position: absolute; width: 195px; aspect-ratio: 1; object-fit: contain; filter: drop-shadow(8px 12px 0 rgba(48,41,31,.14)); }
+    .portrait.p1 { left: 35px; bottom: 45px; transform: rotate(-8deg); }
+    .portrait.p2 { left: 185px; bottom: 135px; transform: rotate(5deg); }
+    .portrait.p3 { right: 30px; bottom: 55px; transform: rotate(8deg); }
+    .portrait.p4 { right: 55px; top: 35px; width: 155px; transform: rotate(-5deg); }
+    .portrait.p5 { left: 48px; top: 55px; width: 150px; transform: rotate(6deg); }
+    .sewn-badge { position: absolute; width: 128px; right: 38px; bottom: 26px; z-index: 3; filter: drop-shadow(4px 6px 0 rgba(48,41,31,.15)); }
+    section { padding: 78px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 32px; }
+    h2 { margin: 0; max-width: 720px; font: 700 clamp(2.8rem, 5vw, 5rem)/.9 Bricolage, sans-serif; letter-spacing: -.055em; }
+    .section-head p { max-width: 440px; margin: 0; color: var(--muted); line-height: 1.55; }
+    .foundation-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 20px; }
+    .panel { padding: 26px; background: rgba(255,248,233,.74); border: 2px solid rgba(48,41,31,.15); box-shadow: 7px 8px 0 rgba(48,41,31,.08); }
+    .panel h3 { margin: 0 0 22px; font: 700 1.5rem Bricolage, sans-serif; }
+    .palette { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .swatch { min-height: 142px; display: flex; align-items: end; padding: 12px; color: white; font-weight: 700; border-radius: 7px 10px 6px 9px; }
+    .swatch small { display: block; opacity: .78; font-family: ui-monospace, monospace; }
+    .type-specimen .display { margin: 0 0 20px; font: 700 4.4rem/.84 Bricolage, sans-serif; letter-spacing: -.06em; }
+    .type-specimen .body { max-width: 500px; color: var(--muted); line-height: 1.62; }
+    .material-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .material { min-height: 220px; display: flex; align-items: end; padding: 16px; border: 2px solid rgba(48,41,31,.15); box-shadow: 7px 8px 0 rgba(48,41,31,.08); background-size: 310px; }
+    .material span { padding: 7px 9px; background: rgba(255,248,233,.9); font-weight: 700; font-size: .8rem; }
+    .material.kraft-light { background-image: url("brand-kit-demo-assets/kraft-light-tile.png"); }
+    .material.kraft-warm { background-image: url("brand-kit-demo-assets/kraft-warm-tile.png"); }
+    .material.felt-blue { background-image: url("brand-kit-demo-assets/felt-denim-tile.png"); }
+    .material.felt-red { background-image: url("brand-kit-demo-assets/felt-tomato-tile.png"); }
+    .lab { display: grid; grid-template-columns: .85fr 1.15fr; gap: 28px; align-items: center; }
+    .controls { padding: 28px; background: rgba(255,248,233,.76); border: 2px solid rgba(48,41,31,.15); }
+    .controls h3 { margin: 0 0 10px; font: 700 2rem Bricolage, sans-serif; }
+    .controls p { margin: 0 0 22px; color: var(--muted); line-height: 1.55; }
+    .color-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .color-choice { min-width: 94px; padding: 10px 12px; border: 2px solid rgba(48,41,31,.18); background: var(--cream); cursor: pointer; font-weight: 700; }
+    .color-choice[aria-pressed="true"] { box-shadow: inset 0 0 0 3px var(--cream), 0 0 0 2px var(--ink); }
+    .custom-color { width: 48px; height: 42px; border: 2px solid rgba(48,41,31,.18); background: var(--cream); }
+    .component-stage { min-height: 390px; display: grid; place-items: center; position: relative; background: url("brand-kit-demo-assets/kraft-warm-tile.png") repeat; background-size: 410px; border: 2px solid rgba(48,41,31,.18); overflow: hidden; }
+    .patch-button { width: min(440px, 80%); height: 180px; position: relative; display: grid; place-items: center; border: 0; background: transparent; cursor: pointer; }
+    .patch-button::before, .patch-button::after { content: ""; position: absolute; inset: 0; -webkit-mask: url("brand-kit-demo-assets/patch-wide.png") center/contain no-repeat; mask: url("brand-kit-demo-assets/patch-wide.png") center/contain no-repeat; }
+    .patch-button::before { background: url("brand-kit-demo-assets/felt-denim-tile.png") center/340px; }
+    .patch-button::after { background: var(--accent); opacity: .72; mix-blend-mode: color; }
+    .patch-button span { position: relative; z-index: 2; color: white; font: 700 1.35rem Bricolage, sans-serif; text-shadow: 0 2px 0 rgba(0,0,0,.2); }
+    .component-stage .mini-badge { position: absolute; width: 110px; filter: drop-shadow(4px 7px 0 rgba(48,41,31,.14)); }
+    .mini-badge.a { left: 26px; top: 22px; transform: rotate(-10deg); }
+    .mini-badge.b { right: 25px; bottom: 20px; transform: rotate(9deg); }
+    .filter-row { display: flex; gap: 10px; margin-bottom: 22px; }
+    .filter-button { padding: 10px 14px; border: 2px solid rgba(48,41,31,.18); background: rgba(255,248,233,.78); cursor: pointer; font-weight: 700; }
+    .filter-button[aria-pressed="true"] { background: var(--denim); color: white; }
+    .cast-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .cast-card { --character: var(--denim); position: relative; min-height: 350px; padding: 18px 18px 16px; display: flex; flex-direction: column; background: rgba(255,248,233,.83); border: 2px solid rgba(48,41,31,.15); box-shadow: 6px 7px 0 rgba(48,41,31,.08); overflow: hidden; }
+    .cast-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 9px; background: var(--character); }
+    .cast-card img { width: 100%; height: 250px; object-fit: contain; transition: transform .25s ease; }
+    .cast-card:hover img { transform: translateY(-5px) rotate(-1deg); }
+    .cast-card h3 { margin: 2px 0 2px; font: 700 1.35rem Bricolage, sans-serif; }
+    .cast-card p { margin: 0; color: var(--muted); font-size: .85rem; }
+    .cast-tag { position: absolute; top: 19px; right: 12px; padding: 5px 7px; color: white; background: var(--character); font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; }
+    .application { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .lesson-card { position: relative; min-height: 480px; padding: 52px; background: url("brand-kit-demo-assets/felt-denim-tile.png") repeat; background-size: 420px; color: white; box-shadow: var(--shadow); overflow: hidden; }
+    .thread-piece { position: absolute; z-index: 1; pointer-events: none; background: var(--thread); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+    .thread-top, .thread-bottom { left: 35px; right: 35px; height: 34px; -webkit-mask-image: url("brand-kit-demo-assets/stitch-horizontal.png"); mask-image: url("brand-kit-demo-assets/stitch-horizontal.png"); -webkit-mask-size: 150px 58px; mask-size: 150px 58px; -webkit-mask-repeat: repeat-x; mask-repeat: repeat-x; }
+    .thread-top { top: 18px; }
+    .thread-bottom { bottom: 18px; transform: rotate(180deg); }
+    .thread-left, .thread-right { top: 35px; bottom: 35px; width: 34px; -webkit-mask-image: url("brand-kit-demo-assets/stitch-vertical.png"); mask-image: url("brand-kit-demo-assets/stitch-vertical.png"); -webkit-mask-size: 58px 150px; mask-size: 58px 150px; -webkit-mask-repeat: repeat-y; mask-repeat: repeat-y; }
+    .thread-left { left: 18px; }
+    .thread-right { right: 18px; transform: rotate(180deg); }
+    .thread-corner { width: 68px; height: 68px; -webkit-mask-size: contain; mask-size: contain; }
+    .thread-tl { top: 5px; left: 5px; -webkit-mask-image: url("brand-kit-demo-assets/stitch-corner-top-left.png"); mask-image: url("brand-kit-demo-assets/stitch-corner-top-left.png"); }
+    .thread-tr { top: 5px; right: 5px; -webkit-mask-image: url("brand-kit-demo-assets/stitch-corner-top-right.png"); mask-image: url("brand-kit-demo-assets/stitch-corner-top-right.png"); }
+    .thread-br { right: 5px; bottom: 5px; -webkit-mask-image: url("brand-kit-demo-assets/stitch-corner-bottom-right.png"); mask-image: url("brand-kit-demo-assets/stitch-corner-bottom-right.png"); }
+    .thread-bl { left: 5px; bottom: 5px; -webkit-mask-image: url("brand-kit-demo-assets/stitch-corner-bottom-left.png"); mask-image: url("brand-kit-demo-assets/stitch-corner-bottom-left.png"); }
+    .lesson-card > * { position: relative; z-index: 1; }
+    .lesson-card h3 { max-width: 480px; margin: 65px 0 14px; font: 700 3.7rem/.9 Bricolage, sans-serif; letter-spacing: -.05em; }
+    .lesson-card p { max-width: 430px; line-height: 1.55; color: rgba(255,255,255,.78); }
+    .lesson-card img { position: absolute; right: 25px; bottom: 20px; width: 190px; filter: drop-shadow(5px 8px 0 rgba(0,0,0,.18)); }
+    .usage { padding: 32px; background: rgba(255,248,233,.78); border: 2px solid rgba(48,41,31,.15); }
+    .usage h3 { margin: 0 0 18px; font: 700 2rem Bricolage, sans-serif; }
+    .usage-list { display: grid; gap: 18px; }
+    .usage-item { display: grid; grid-template-columns: 46px 1fr; gap: 14px; align-items: start; }
+    .usage-icon { width: 42px; height: 42px; display: grid; place-items: center; color: white; background: var(--accent); border-radius: 50%; font-weight: 700; }
+    .usage-item strong { display: block; margin-bottom: 4px; }
+    .usage-item p { margin: 0; color: var(--muted); line-height: 1.45; }
+    .example-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 24px; }
+    .browser { overflow: hidden; background: rgba(255,248,233,.88); border: 2px solid rgba(48,41,31,.17); box-shadow: var(--shadow); }
+    .browser-bar { height: 42px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #ead8b8; border-bottom: 1px solid rgba(48,41,31,.14); }
+    .browser-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--tomato); }
+    .browser-dot:nth-child(2) { background: var(--mustard); } .browser-dot:nth-child(3) { background: var(--sage); }
+    .browser-content { padding: 26px; }
+    .browser-content h3 { margin: 5px 0 8px; font: 700 2.2rem/.95 Bricolage, sans-serif; letter-spacing: -.04em; }
+    .browser-content > p { margin: 0 0 22px; color: var(--muted); line-height: 1.5; }
+    .grade-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+    .grade-tab { padding: 10px 6px; border: 1px solid rgba(48,41,31,.16); background: var(--cream); text-align: center; font-size: .72rem; font-weight: 700; }
+    .grade-tab img { display: block; width: 62px; height: 62px; object-fit: contain; margin: 0 auto 4px; }
+    .subject-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .subject-link { min-height: 126px; padding: 10px; border: 1px solid rgba(48,41,31,.14); background: white; text-align: center; font-size: .7rem; font-weight: 700; }
+    .subject-link img { display: block; width: 74px; height: 74px; object-fit: contain; margin: auto; }
+    .teacher-hero { position: relative; min-height: 490px; padding: 34px; color: white; background: url("brand-kit-demo-assets/felt-tomato-tile.png") center/420px; overflow: hidden; }
+    .teacher-hero::after { content: ""; position: absolute; inset: 20px; border: 2px solid rgba(255,255,255,.25); pointer-events: none; }
+    .teacher-copy { position: relative; z-index: 2; max-width: 300px; }
+    .teacher-copy h3 { margin: 10px 0 12px; font: 700 3rem/.9 Bricolage, sans-serif; letter-spacing: -.05em; }
+    .teacher-copy p { color: rgba(255,255,255,.78); line-height: 1.5; }
+    .teacher-portrait { position: absolute; width: 220px; right: 18px; bottom: 18px; z-index: 1; filter: drop-shadow(7px 11px 0 rgba(48,41,31,.18)); }
+    .teacher-chip { position: absolute; width: 120px; right: 175px; bottom: 34px; z-index: 2; filter: drop-shadow(4px 7px 0 rgba(48,41,31,.15)); }
+    footer { padding: 30px 0 45px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; color: var(--muted); font-size: .78rem; }
+    [hidden] { display: none !important; }
+    @media (max-width: 900px) { .hero, .foundation-grid, .lab, .application, .example-grid { grid-template-columns: 1fr; } .hero { padding-top: 45px; } .material-grid, .cast-grid { grid-template-columns: repeat(2, 1fr); } .hero-board { min-height: 470px; } .section-head { display: block; } .section-head p { margin-top: 18px; } }
+    @media (max-width: 560px) { .shell { width: min(100% - 24px, 1240px); } nav { display: none; } .hero h1 { font-size: 4rem; } .hero-board { min-height: 390px; } .portrait { width: 145px; } .portrait.p2 { left: 110px; } .material-grid, .cast-grid, .palette { grid-template-columns: 1fr; } .cast-card { min-height: 320px; } .application { gap: 16px; } .lesson-card { padding: 38px; } .lesson-card h3 { font-size: 3rem; } footer { display: block; line-height: 1.8; } }
+    @media (prefers-reduced-motion: no-preference) { .hero-board { animation: settle .8s ease both; } @keyframes settle { from { opacity: 0; transform: translateY(16px) rotate(1.2deg); } to { opacity: 1; transform: translateY(0) rotate(1.2deg); } } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark"></span> Old MacDonald's Farm School</div>
+      <nav aria-label="Brand kit sections"><a href="#foundations">Foundations</a><a href="#materials">Materials</a><a href="#cast">Cast</a><a href="#examples">Examples</a><a href="#application">Application</a></nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="micro">Animal brand system / interactive study</div>
+          <h1>A school sewn together.</h1>
+          <p>A tactile brand language built from kraft paper, wool felt, visible stitches, and a cast whose signature colours make every character easy to recognize.</p>
+          <div class="hero-actions"><a class="plain-button" href="#cast">Meet the cast</a><span class="micro">8 staff · 8 students</span></div>
+        </div>
+        <div class="hero-board" aria-label="A collection of farm-school character patches">
+          <span class="hero-note">the whole school</span>
+          <img class="portrait p1" src="icons/early-years/face-patches/hopper-red.png" alt="Hopper">
+          <img class="portrait p2" src="icons/early-years/face-patches/miss-puddles-purple.png" alt="Miss Puddles">
+          <img class="portrait p3" src="icons/early-years/face-patches/mr-sam-blue.png" alt="Mr Sam">
+          <img class="portrait p4" src="icons/early-years/face-patches/miss-hayley-purple.png" alt="Miss Hayley">
+          <img class="portrait p5" src="icons/early-years/face-patches/old-macdonald-yellow.png" alt="Old MacDonald">
+          <img class="sewn-badge" src="brand-kit-demo-assets/badge-red-scalloped.png" alt="Red sewn-on button badge">
+        </div>
+      </section>
+
+      <section id="foundations">
+        <div class="section-head"><h2>Foundations that feel made, not manufactured.</h2><p>The system is warm and playful, but every material has a job: kraft creates the field, felt carries interaction, and signature colours identify the cast.</p></div>
+        <div class="foundation-grid">
+          <article class="panel"><h3>Core palette</h3><div class="palette">
+            <div class="swatch" style="background:#1f4e5f">Denim<small>#1F4E5F</small></div><div class="swatch" style="background:#b5272c">Tomato<small>#B5272C</small></div><div class="swatch" style="background:#d99a22">Mustard<small>#D99A22</small></div><div class="swatch" style="background:#55705a">Garden sage<small>#55705A</small></div><div class="swatch" style="background:#8b5e34">Kraft brown<small>#8B5E34</small></div><div class="swatch" style="background:#f5e8cf;color:#30291f">Warm cream<small>#F5E8CF</small></div>
+          </div></article>
+          <article class="panel type-specimen"><h3>Type pairing</h3><p class="display">Sing it.<br>Make it.<br>Share it.</p><p class="body">Bricolage Grotesque gives headings a hand-built rhythm. Instrument Sans keeps instructions and teaching content calm, readable, and direct.</p></article>
+        </div>
+      </section>
+
+      <section id="materials">
+        <div class="section-head"><h2>Material tokens</h2><p>These seamless tiles are the surface primitives—the visual equivalent of design tokens. Use them consistently enough that children learn what each material means.</p></div>
+        <div class="material-grid"><div class="material kraft-light"><span>Foundation / light kraft</span></div><div class="material kraft-warm"><span>Card / warm kraft</span></div><div class="material felt-blue"><span>Action / denim felt</span></div><div class="material felt-red"><span>Highlight / tomato felt</span></div></div>
+      </section>
+
+      <section>
+        <div class="section-head"><h2>Live component lab</h2><p>Change the appliqué colour to test how the same button construction behaves across campaigns, grade bands, and character themes.</p></div>
+        <div class="lab">
+          <div class="controls"><div class="micro">Themeable appliqué</div><h3>Choose a felt colour</h3><p>The patch silhouette stays consistent while colour carries context. This is a “themeable component,” not a new button each time.</p><div class="color-row"><button class="color-choice" data-color="#b5272c" aria-pressed="true">Tomato</button><button class="color-choice" data-color="#1f4e5f" aria-pressed="false">Denim</button><button class="color-choice" data-color="#55705a" aria-pressed="false">Sage</button><button class="color-choice" data-color="#d99a22" aria-pressed="false">Mustard</button><input class="custom-color" type="color" value="#b5272c" aria-label="Choose a custom appliqué colour"></div></div>
+          <div class="component-stage"><img class="mini-badge a" src="brand-kit-demo-assets/badge-denim-round.png" alt="Denim sewn badge"><button class="patch-button" type="button"><span>Start the lesson →</span></button><img class="mini-badge b" src="brand-kit-demo-assets/badge-canvas-oval.png" alt="Canvas sewn badge"></div>
+        </div>
+      </section>
+
+      <section id="cast">
+        <div class="section-head"><h2>One cast, two roles</h2><p>Staff and students share one visual family. Role labels, signature colours, wardrobe, and scale create the distinction.</p></div>
+        <div class="filter-row" aria-label="Filter character cast"><button class="filter-button" data-filter="all" aria-pressed="true">Everyone</button><button class="filter-button" data-filter="staff" aria-pressed="false">Animal staff</button><button class="filter-button" data-filter="student" aria-pressed="false">Students</button></div>
+        <div class="cast-grid" id="cast-grid"></div>
+      </section>
+
+      <section id="examples">
+        <div class="section-head"><h2>Web-page brand examples</h2><p>The icon sheets become navigation, wayfinding, and character-led page identity. These are component studies, not locked page designs.</p></div>
+        <div class="example-grid">
+          <article class="browser"><div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div><div class="browser-content"><div class="micro">Curriculum library</div><h3>What shall we learn today?</h3><p>Choose a stage, then follow the stitched subject badges into lessons and activities.</p><div class="grade-tabs"><div class="grade-tab"><img src="brand-kit-icon-sheets/individual-icons/grade-daycare.png" alt="Daycare">Daycare</div><div class="grade-tab"><img src="brand-kit-icon-sheets/individual-icons/grade-kindergarten.png" alt="Kindergarten">Kindergarten</div><div class="grade-tab"><img src="brand-kit-icon-sheets/individual-icons/grade-1.png" alt="Grade 1">Grade 1</div><div class="grade-tab"><img src="brand-kit-icon-sheets/individual-icons/grade-2.png" alt="Grade 2">Grade 2</div></div><div class="subject-nav"><div class="subject-link"><img src="brand-kit-icon-sheets/individual-icons/subject-music-dance.png" alt="Music and dance">Music & dance</div><div class="subject-link"><img src="brand-kit-icon-sheets/individual-icons/subject-math-building.png" alt="Math and building">Math & building</div><div class="subject-link"><img src="brand-kit-icon-sheets/individual-icons/subject-art-photography.png" alt="Art and photography">Art & photography</div><div class="subject-link"><img src="brand-kit-icon-sheets/individual-icons/subject-gardening-health.png" alt="Gardening and health">Gardening & health</div></div></div></article>
+          <article class="browser"><div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div><div class="teacher-hero"><div class="teacher-copy"><div class="micro" style="color:rgba(255,255,255,.72)">Grade 1/2 · Drama</div><h3>Stories take the stage.</h3><p>Join Miss Hayley for songs, imagination games, and classroom adventures.</p><a class="plain-button" href="#cast" style="display:inline-block;margin-top:12px;background:#1f4e5f">Meet the class</a></div><img class="teacher-portrait" src="icons/staff/miss-hayley.png" alt="Miss Hayley"><img class="teacher-chip" src="icons/early-years/face-patches/old-macdonald-yellow.png" alt="Old MacDonald"></div></article>
+        </div>
+      </section>
+
+      <section id="application">
+        <div class="section-head"><h2>From kit to classroom</h2><p>A brand kit proves itself when the pieces combine into a useful interface—not when they sit separately on a mood board.</p></div>
+        <div class="application">
+          <article class="lesson-card"><span class="thread-piece thread-top"></span><span class="thread-piece thread-right"></span><span class="thread-piece thread-bottom"></span><span class="thread-piece thread-left"></span><span class="thread-piece thread-corner thread-tl"></span><span class="thread-piece thread-corner thread-tr"></span><span class="thread-piece thread-corner thread-br"></span><span class="thread-piece thread-corner thread-bl"></span><div class="micro" style="color:rgba(255,255,255,.7)">Music & movement · Kindergarten</div><h3>Find the steady beat.</h3><p>Clap, step, and play along with Mr Rusty as the class discovers patterns in sound.</p><a class="plain-button" href="#cast" style="display:inline-block;margin-top:14px;background:var(--accent)">Open lesson</a><img src="icons/staff/mr-rusty.png" alt="Mr Rusty"></article>
+          <aside class="usage"><div class="micro">System rules</div><h3>Keep the craft legible.</h3><div class="usage-list"><div class="usage-item"><span class="usage-icon">1</span><div><strong>Texture signals purpose</strong><p>Kraft holds content. Felt marks an action, category, or special moment.</p></div></div><div class="usage-item"><span class="usage-icon">2</span><div><strong>Colour identifies character</strong><p>Use the canonical signature colour before introducing campaign colours.</p></div></div><div class="usage-item"><span class="usage-icon">3</span><div><strong>Stitching is structural</strong><p>Place stitches at seams, edges, and attachment points—not as scattered decoration.</p></div></div></div></aside>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>Animal cast source: CAST_AND_ROLES.md</span><span>Interactive brand-kit study · craft material system</span></footer>
+  </div>
+
+  <script>
+    const cast = [
+      {name:'Old MacDonald', detail:'Human · Headmaster & band leader', group:'staff', color:'#8B5E34', image:'icons/early-years/face-patches/old-macdonald-yellow.png'},
+      {name:'Miss Hayley', detail:'Human · Grade 1/2 & drama', group:'staff', color:'#C9527A', image:'icons/early-years/face-patches/miss-hayley-purple.png'},
+      {name:'Miss Puddles', detail:'Duck · Daycare teacher', group:'staff', color:'#E8A227', image:'icons/early-years/face-patches/miss-puddles-purple.png'},
+      {name:'Mr Rusty', detail:'Horse · Music & dance', group:'staff', color:'#2C6C9B', image:'icons/early-years/face-patches/mr-rusty-blue.png'},
+      {name:'Mr Sam', detail:'Pig · Math & building', group:'staff', color:'#1F6B6B', image:'icons/early-years/face-patches/mr-sam-blue.png'},
+      {name:'Mr Maisy', detail:'Cow · Physical education', group:'staff', color:'#B5272C', image:'icons/early-years/face-patches/mr-maisy-orange.png'},
+      {name:'Mr Puddles', detail:'Duck · Art & photography', group:'staff', color:'#4F5FA0', image:'icons/early-years/face-patches/mr-puddles-green.png'},
+      {name:'Miss Maisy', detail:'Cow · Secretary & gardening', group:'staff', color:'#55705A', image:'icons/early-years/face-patches/miss-maisy-purple.png'},
+      {name:'Hopper', detail:'Rabbit · Energetic', group:'student', color:'#D9713C', image:'icons/early-years/face-patches/hopper-red.png'},
+      {name:'Whiskers', detail:'Cat · Curious', group:'student', color:'#7B4FA8', image:'icons/early-years/face-patches/whiskers-orange.png'},
+      {name:'Scout', detail:'Dog · Adventurous', group:'student', color:'#4A7A3A', image:'icons/early-years/face-patches/scout-green.png'},
+      {name:'Penny', detail:'Chick · Earnest', group:'student', color:'#C9962E', image:'icons/early-years/face-patches/penny-orange.png'},
+      {name:'Maisy', detail:'Cow · Encouraging', group:'student', color:'#1F4E5F', image:'icons/early-years/face-patches/maisy-yellow.png'},
+      {name:'Puddles', detail:'Duck · Expressive', group:'student', color:'#4FA0C9', image:'icons/early-years/face-patches/puddles-blue.png'},
+      {name:'Sam', detail:'Pig · Inventive', group:'student', color:'#7A9A3D', image:'icons/early-years/face-patches/sam-red.png'},
+      {name:'Rusty', detail:'Horse · Reliable', group:'student', color:'#8B5030', image:'icons/early-years/face-patches/rusty-blue.png'}
+    ];
+    const grid = document.querySelector('#cast-grid');
+    cast.forEach(person => {
+      const card = document.createElement('article');
+      card.className = 'cast-card'; card.dataset.group = person.group; card.style.setProperty('--character', person.color);
+      card.innerHTML = `<span class="cast-tag">${person.group}</span><img src="${person.image}" alt="${person.name}"><h3>${person.name}</h3><p>${person.detail}</p>`;
+      grid.appendChild(card);
+    });
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    filterButtons.forEach(button => button.addEventListener('click', () => {
+      const selected = button.dataset.filter;
+      filterButtons.forEach(item => item.setAttribute('aria-pressed', item === button ? 'true' : 'false'));
+      document.querySelectorAll('.cast-card').forEach(card => card.hidden = selected !== 'all' && card.dataset.group !== selected);
+    }));
+    const colorButtons = document.querySelectorAll('[data-color]');
+    const picker = document.querySelector('.custom-color');
+    function setAccent(color, active) {
+      document.documentElement.style.setProperty('--accent', color);
+      picker.value = color;
+      colorButtons.forEach(item => item.setAttribute('aria-pressed', item === active ? 'true' : 'false'));
+    }
+    colorButtons.forEach(button => button.addEventListener('click', () => setAccent(button.dataset.color, button)));
+    picker.addEventListener('input', event => setAccent(event.target.value, null));
+  </script>
+</body>
+</html>

@@ -12,7 +12,7 @@ This map covers the two requested corpora plus the project guidance and analysis
 
 ### Educational model
 
-Old MacDonald Had a School is a participatory, play-based music-and-learning model for birth through Grade 3. A song is an entry point into movement, language, early mathematics, science/nature, social-emotional learning, routines, and creative expression. The early-years material emphasizes lap/bounce songs, fingerplays, call-and-response, singing games, imitation, sensory play, instruments, stories, and observation rather than worksheets or tests. The school-age layer adds Ontario/US expectations, pacing, standards codes, lesson sequences, assessment prompts, and printable supports.
+Old MacDonald Had a School is a participatory, play-based music-and-learning model for birth through Grade 3. A resource gathering website for teachers; The early-years material emphasizes lap/bounce songs, fingerplays, call-and-response, singing games, imitation, sensory play, instruments, stories, and observation rather than worksheets or tests. The school-age layer adds Ontario/US expectations, pacing, standards codes, lesson sequences, assessment prompts, and printable supports.
 
 ### Users and teacher jobs-to-be-done
 
@@ -100,17 +100,4 @@ For each workbook/sheet/row, first retain `import_batch_id`, workbook name/versi
 6. **Provenance, QA, and rights:** source document/locator, evidence excerpt, extraction method (text/OCR/manual), review status, reviewer/date, conflicts, duplicate candidate, rights status, license, and permitted use.
 
 Recommended identifiers include `song_work_id`, `version_id`, `recording_id`, `source_id`, `source_claim_id`, `expectation_id`, `skill_id`, `action_id`, `lesson_id`, `lesson_step_id`, `resource_id`, `character_id`, `rights_id`, and `import_batch_id`. Keep legacy `DB_ID`, `Catalog_ID`, `source_id` slugs, filenames, and row numbers as external/source keys, never as the only canonical key.
-
-## Provenance and quality rules
-
-1. Preserve an immutable raw layer and a normalized layer; never overwrite a source row to “fix” it.
-2. Attach provenance and verification to each material assertion: title, creator, album, lyrics, action, age, domain, standard alignment, URL, and rights are separate claims.
-3. Separate work, recording, performance/arrangement, classroom adaptation, and lesson. This resolves most title/artist/album collisions.
-4. Use controlled vocabularies for content type, age/grade, developmental domains, action types, resource states, and access/rights; retain the original free text beside normalized values.
-5. Use `verified` only with a method, date, evidence, and scope. Replace bare confidence scores with reviewable statuses; keep workflow fields internal.
-6. Treat duplicates as merge candidates, not deletions. Preserve source occurrences, rejected records, and conflict notes.
-7. Do not publish a resource as `ready` until title, destination, instructional fit, access, and rights/linking mode have been checked. Use `missing` or `none` honestly.
-8. Publish only rights-cleared lyrics, images, scans, audio, and printables; otherwise link to the authorized source and show access restrictions.
-9. Label editorial and generated lesson content in storage and UI. Record author/editor, generation date, prompt/model/template version, and review decision.
-10. Block automatic publication when creator/album attribution conflicts, evidence is OCR-only and incomplete, source is unresolved, age/standard scope is unclear, or a URL/rights status is stale.
 

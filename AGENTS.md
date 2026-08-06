@@ -6,24 +6,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
-<!-- END:nextjs-agent-rules -->
-
-<!-- BEGIN:next-dev-loop-agent-rules -->
-
-# Next.js: use the installed next-dev-loop for every web code change
-
-Before changing Next.js or web application code, load and follow the
-repository skill at `.agents/skills/next-dev-loop/SKILL.md`. It requires
-Next.js 16.3+ with Turbopack and `agent-browser` 0.31.1+; run its preflight
-against the running dev server and verify both `/_next/mcp` and the browser
-after each focused change. Keep the session scoped to this worktree.
-
-<!-- END:next-dev-loop-agent-rules -->
-
 # Old MacDonald Had a School
 
-This repository is a Next.js App Router website for teachers, migrated from a
-Figma Make prototype.
+This repository is a Next.js App Router website for teachers to print and find resources for their lessons. It is not a website or app to be used in the classroom directly.
 
 Before working, read `docs/PROJECT_CHECKLIST.md` and `docs/TEAM_WORKFLOW.md`.
 The project-lead handoff skill and `docs/PROJECT_STATE.md` are optional recovery
@@ -81,3 +66,13 @@ evidence, or an approved visual reference.
   short paragraph plus three to five bullets covering what worked and what to
   simplify next.
 - Shared-checkout workers do not commit or push. The Git steward checks in only independently reviewed batches following `docs/TEAM_WORKFLOW.md`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
