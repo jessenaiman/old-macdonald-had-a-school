@@ -15,7 +15,7 @@
 .hero {
   position: relative;
   display: flex;
-  min-height: clamp(560px, 47vw, 690px);
+  min-height: clamp(430px, 38vw, 550px);
   align-items: center;
   overflow: hidden;
   border-bottom: 7px solid #6e4726;
@@ -40,7 +40,7 @@
   z-index: 2;
   width: min(43%, 600px);
   margin-left: clamp(28px, 5vw, 84px);
-  padding: clamp(38px, 4.6vw, 66px) clamp(30px, 4vw, 56px) clamp(42px, 4.7vw, 68px);
+  padding: clamp(30px, 3.5vw, 48px) clamp(28px, 3.5vw, 48px) clamp(34px, 3.7vw, 52px);
   border: 2px solid rgba(238, 210, 138, 0.58);
   border-radius: 4px 4px 50% 5px / 4px 4px 44px 5px;
   color: #fff8e7;
@@ -76,7 +76,7 @@
 .heroEyebrow {
   position: relative;
   z-index: 1;
-  margin: 0 0 18px;
+  margin: 0 0 13px;
   color: #e8c65c;
   font-size: 10px;
   font-weight: 900;
@@ -91,7 +91,7 @@
   margin: 0;
   color: #fff9e9;
   font-family: var(--font-serif-italic), Georgia, serif;
-  font-size: clamp(44px, 4.2vw, 70px);
+  font-size: clamp(40px, 3.7vw, 60px);
   font-style: normal;
   font-weight: 700;
   line-height: 0.97;
@@ -106,7 +106,7 @@
   position: relative;
   z-index: 1;
   max-width: 470px;
-  margin: 24px 0 0;
+  margin: 17px 0 0;
   color: rgba(255, 248, 231, 0.9);
   font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.6;
@@ -116,11 +116,11 @@
   position: relative;
   z-index: 1;
   display: inline-flex;
-  min-height: 58px;
+  min-height: 52px;
   align-items: center;
   justify-content: center;
   gap: 18px;
-  margin-top: 30px;
+  margin-top: 22px;
   padding: 0 30px;
   border: 2px solid #f4ca63;
   border-radius: 14px;
@@ -306,7 +306,7 @@
 .journey {
   width: min(1420px, calc(100% - 28px));
   margin: 36px auto;
-  padding: 42px clamp(22px, 4vw, 62px) 54px;
+  padding: 34px clamp(22px, 4vw, 62px) 40px;
   border: 1px solid #c9af80;
   color: var(--home-ink);
   background-color: #f4ead0;
@@ -337,7 +337,7 @@
 
 .journeyCard {
   position: relative;
-  min-height: 405px;
+  min-height: 350px;
   padding: 17px 17px 22px;
   border: 1px solid #d6c19b;
   color: var(--home-ink);
@@ -426,20 +426,20 @@
 .storyArt {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.42 / 1;
+  height: clamp(300px, 33vw, 470px);
   overflow: hidden;
 }
 
 .storyArt img {
   object-fit: cover;
-  object-position: top center;
+  object-position: center 28%;
 }
 
 .storyCopy {
   display: grid;
-  min-height: 520px;
+  min-height: 360px;
   align-content: center;
-  padding: 68px clamp(32px, 7vw, 112px) 58px;
+  padding: 46px clamp(32px, 7vw, 112px) 40px;
   color: #0b2b59;
   background-color: #f2dfae;
   background-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
@@ -447,7 +447,7 @@
 }
 
 .storyCopy > p {
-  margin: 0 0 27px;
+  margin: 0 0 20px;
   color: #786143;
   font-size: 12px;
   font-weight: 900;
@@ -460,16 +460,16 @@
   margin: 0;
   color: #08265a;
   font-family: var(--font-serif-italic), Georgia, serif;
-  font-size: clamp(48px, 6vw, 88px);
+  font-size: clamp(44px, 5vw, 72px);
   line-height: 0.9;
   letter-spacing: -0.045em;
 }
 
 .storyCopy > span {
   max-width: 900px;
-  margin-top: 28px;
+  margin-top: 20px;
   color: #104784;
-  font-size: clamp(18px, 2vw, 28px);
+  font-size: clamp(17px, 1.7vw, 24px);
   line-height: 1.35;
 }
 
@@ -479,7 +479,7 @@
   min-height: 56px;
   align-items: center;
   gap: 8px;
-  margin-top: 34px;
+  margin-top: 26px;
   padding: 0 26px;
   border-radius: 999px;
   color: #fff8e3;
@@ -493,15 +493,15 @@
 
 .storyCopy > small {
   justify-self: end;
-  margin-top: 65px;
+  margin-top: 34px;
   color: #856c4a;
   font-family: var(--font-hand), cursive;
   font-size: 20px;
   font-style: italic;
 }
 
-@media (max-width: 1120px) {
-  .hero { min-height: 590px; }
+@media (max-width: 900px) {
+  .hero { min-height: 500px; }
   .heroPanel { width: min(52%, 560px); }
   .subjectGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; }
   .homePage .subjectCard { min-height: 390px; }
@@ -511,7 +511,7 @@
 
 @media (max-width: 760px) {
   .hero {
-    min-height: 760px;
+    min-height: 610px;
     align-items: end;
   }
 
@@ -555,8 +555,9 @@
   .journeyCard { min-height: 0; transform: none !important; }
   .journeyNote { grid-column: auto; width: min(280px, 90%); }
   .story { margin-top: 24px; }
-  .storyArt { aspect-ratio: 1.42 / 1; }
-  .storyCopy { min-height: 480px; padding: 50px 24px 38px; }
+  .storyArt { height: 235px; }
+  .storyArt img { object-position: center 24%; }
+  .storyCopy { min-height: 390px; padding: 42px 24px 32px; }
   .storyCopy h2 { font-size: clamp(45px, 14vw, 62px); }
   .storyCopy > span { font-size: 18px; }
   .storyCopy > small { margin-top: 50px; }

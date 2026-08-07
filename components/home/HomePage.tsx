@@ -211,7 +211,7 @@ export function HomePage({ hero }: HomePageProps) {
 
       <section className={styles.story} aria-labelledby="story-title">
         <div className={styles.storyArt}>
-          <Image src="/pressed-flowers.png" alt="Children holding hands in a circle among pressed flowers" fill sizes="100vw" />
+          <Image src="/pressed-flowers.png" alt="Children holding hands in a circle among pressed flowers" fill loading="eager" sizes="100vw" />
         </div>
         <div className={styles.storyCopy}>
           <p>Welcome to Old MacDonald Had a School</p>
