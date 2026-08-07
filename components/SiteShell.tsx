@@ -44,7 +44,7 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
             </span>
           </Link>
 
-          <nav className="site-nav site-nav-desktop" aria-label="Primary navigation">
+          <nav className="site-nav site-nav-desktop" id="grade-navigation" aria-label="Primary navigation">
             <Link className={`site-nav-link${active === "home" ? " is-active" : ""}`} href="/" aria-current={active === "home" ? "page" : undefined}>Home</Link>
             {GRADE_NAV_ITEMS.map((grade) => (
               <Link className={`site-nav-link site-nav-grade site-nav-grade-${grade.key}${active === grade.key ? " is-active" : ""}`} href={grade.href} aria-current={active === grade.key ? "page" : undefined} key={grade.key}>
