@@ -1,0 +1,78 @@
+/*
+ * Typography for the approved curriculum working-wall templates.
+ *
+ * This family name is intentionally distinct from the legacy "Caveat"
+ * declaration in globals.css. It prevents the remote Google Fonts import and
+ * older cascade rules from deciding which Caveat face the templates receive.
+ */
+@font-face {
+  font-family: "Curriculum Caveat";
+  src: url("/brand-kit-demo-assets/Caveat-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Curriculum Caveat";
+  src: url("/brand-kit-demo-assets/Caveat-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/*
+ * The planning rail is the stable semantic boundary shared by the grade,
+ * topic, and lesson templates. Scoping through it keeps the editorial body
+ * face, global navigation, and all non-curriculum pages unchanged.
+ */
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"]) {
+  --curriculum-display-font: "Curriculum Caveat", "Segoe Print", cursive;
+}
+
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  :is(h1, h2, h3, blockquote) {
+  font-family: var(--curriculum-display-font);
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+}
+
+/* Grade identity and the pinned planning reminder are display copy, not body. */
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  > aside[aria-label$=" planning sections"]
+  > div:first-child strong,
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  > aside[aria-label$=" planning sections"]
+  > div:last-child strong {
+  font-family: var(--curriculum-display-font);
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+}
+
+/* Lesson-flow titles and the teaching-team message use the same written hand. */
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  button strong,
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  > div
+  > aside:not([aria-label]) strong {
+  font-family: var(--curriculum-display-font);
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+}
+
+/* The approved Grade 1 board uses an editorial display face for hierarchy;
+ * handwriting is reserved for Miss Hayley's note and the pinned reminder. */
+.site-shell .site-page > :is([data-grade-family="grade-one"], [data-grade-family="grade-two"], [data-grade-family="kindergarten"])
+  :is(h1, h2, h3) {
+  font-family: Georgia, "Times New Roman", serif;
+  font-synthesis: none;
+  letter-spacing: -0.025em;
+}
+
+.site-shell .site-page > :is([data-grade-family="grade-one"], [data-grade-family="grade-two"], [data-grade-family="kindergarten"])
+  :is(blockquote, textarea),
+.site-shell .site-page > :is([data-grade-family="grade-one"], [data-grade-family="grade-two"], [data-grade-family="kindergarten"])
+  > aside[aria-label$=" planning sections"]
+  > div:last-child strong {
+  font-family: var(--curriculum-display-font);
+}

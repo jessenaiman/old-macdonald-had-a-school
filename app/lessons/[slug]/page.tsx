@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MusicLesson } from "../../../components/lessons/MusicLesson";
 import { VideoLesson } from "../../../components/lessons/VideoLesson";
-import { LessonWorkspace } from "../../../components/LessonWorkspace";
-import { SingleLessonPage } from "../../../components/SingleLessonPage";
+import { LessonTemplate, TopicTemplate } from "../../../components/builder/CurriculumTemplates";
 import { SiteShell } from "../../../components/SiteShell";
 import { getAllLessons, getLesson } from "../../../lib/content/lessons";
 import {
@@ -47,11 +46,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     if (canonicalLesson) {
       return (
         <SiteShell active="topics">
-          {isSingleLesson(canonicalLesson) ? (
-            <SingleLessonPage lesson={canonicalLesson} />
-          ) : (
-            <LessonWorkspace lesson={canonicalLesson} />
-          )}
+          {isSingleLesson(canonicalLesson) ? <LessonTemplate lesson={canonicalLesson} /> : <TopicTemplate lesson={canonicalLesson} />}
         </SiteShell>
       );
     }

@@ -120,6 +120,24 @@ function stepDescription(step: TryStep | PracticeStep | CheckStep) {
   return (step as { description?: string }).description || "";
 }
 
+function LessonPlanningRail({ grade }: { grade: string }) {
+  const cue = /2/.test(grade)
+    ? "Ask deeper, solve bigger, and learn together."
+    : "Think, create, and share with purpose.";
+  return (
+    <aside className="lp-grade-rail" aria-label="Lesson planning sections">
+      <p>Teacher planning</p>
+      <strong>{grade}</strong>
+      <nav>
+        <a href="#lesson-start"><b>01</b> Today</a>
+        <a href="#lesson-sequence"><b>02</b> Sequence</a>
+        <a href="#lesson-planning"><b>03</b> Planner</a>
+      </nav>
+      <div><span>Planning reminder</span><em>{cue}</em></div>
+    </aside>
+  );
+}
+
 export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
   const [active, setActive] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -178,7 +196,8 @@ export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
 
   return (
     <div className="lp-page lesson-page" data-char={charKey(lead.name)} data-print-preview={previewDoc ? "true" : undefined}>
-      <section className="lp-hero stitch">
+      <LessonPlanningRail grade={meta.grade} />
+      <section className="lp-hero stitch" id="lesson-start">
         <div className="lp-topbar lp-screen-only">
           <nav className="lp-breadcrumb" aria-label="Breadcrumb">
             <Link href="/" className="lp-bc-home" aria-label="Home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></Link>
@@ -214,7 +233,7 @@ export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
       </section>
 
       <div className="lp-split">
-        <section className="lp-interact" aria-label="Lesson sequence">
+        <section className="lp-interact" id="lesson-sequence" aria-label="Lesson sequence">
           <div className="lp-map" role="tablist" aria-label="Lesson steps">
             {STEPS.map((s, i) => (
               <button key={s.key} role="tab" aria-selected={i === active} className={`stitch${i === active ? " active" : ""}`} onClick={() => setActive(i)}>
@@ -319,7 +338,7 @@ export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
           </div>
         </section>
 
-        <aside className="lp-plan" aria-label="Lesson planning and documents">
+        <aside className="lp-plan" id="lesson-planning" aria-label="Lesson planning and documents">
           <div className="lp-plan-card lp-panel stitch">
             <div className="lp-plan-head">
               <span className="eyebrow">Lesson documents</span>

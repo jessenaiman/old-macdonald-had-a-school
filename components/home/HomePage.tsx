@@ -17,10 +17,10 @@ type HomePageProps = {
 };
 
 const BANDS = [
-  { label: "Daycare & Preschool", href: "/daycare", avatar: "/staff_and_students/miss-puddles-transparent-circle.png", tone: "early-years" },
-  { label: "Kindergarten", href: "/kindergarten", avatar: "/staff_and_students/mr-rusty-transparent-circle.png", tone: "kindergarten" },
-  { label: "Grade 1", href: "/band/grade-one", avatar: "/staff_and_students/miss-hayley-transparent-circle.png", tone: "grade-one" },
-  { label: "Grade 2", href: "/band/grade-two", avatar: "/staff_and_students/mr-sam-transparent-circle.png", tone: "grade-two" },
+  { label: "Daycare & Preschool", href: "/daycare", avatar: "/staff_and_students/miss-puddles-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.png", tone: "early-years" },
+  { label: "Kindergarten", href: "/kindergarten", avatar: "/staff_and_students/mr-rusty-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/03-mr-rusty-circle.png", tone: "kindergarten" },
+  { label: "Grade 1", href: "/band/grade-one", avatar: "/staff_and_students/miss-hayley-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-circle.png", tone: "grade-one" },
+  { label: "Grade 2", href: "/band/grade-two", avatar: "/staff_and_students/mr-sam-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/05-mr-sam-circle.png", tone: "grade-two" },
 ] as const;
 
 const SUBJECTS = [
@@ -57,6 +57,7 @@ export function HomePage({}: HomePageProps) {
               <Link className={`band-card band-card-${band.tone}`} href={band.href} key={band.label} aria-label={band.label}>
                 <div className="band-card-leads">
                   <span className="band-card-avatar">
+                    <Image className="band-card-avatar-patch" src={band.patch} alt="" width={64} height={64} sizes="64px" />
                     <Image className="band-card-avatar-image" src={band.avatar} alt="" width={52} height={52} sizes="52px" />
                   </span>
                 </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "../components/ThemeProvider";
 import "./globals.css";
+import "./curriculum-fonts.css";
 
 export const metadata: Metadata = {
   title: "Teacher Resources | Old MacDonald Had a School",

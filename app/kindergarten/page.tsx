@@ -8,7 +8,7 @@ export default function KindergartenPage() {
       <EarlyYearsHub
         band="kindergarten"
         title="Kindergarten"
-        tagline="The bridge between song-and-trail and a full lesson: picture-led, with a printable the child can actually mark."
+        tagline="Choose a goal, gather what helps, and shape the lesson around the learners who will meet it."
         lead={{ patch: "mr-rusty", name: "Mr Rusty" }}
         tier="bridge"
         topics={EARLY_YEARS.kindergarten}

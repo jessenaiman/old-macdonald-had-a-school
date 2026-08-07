@@ -9,7 +9,7 @@ export default function PreschoolPage() {
         band="preschool"
         title="Preschool"
         tagline="The same songs Daycare uses, with more choice and a little more to notice — pick one, walk through the four steps together."
-        lead={{ patch: "miss-puddles", name: "Miss Puddles" }}
+        lead={{ patch: "miss-maisy", name: "Miss Maisy" }}
         tier="detailed"
         topics={EARLY_YEARS.preschool}
       />
