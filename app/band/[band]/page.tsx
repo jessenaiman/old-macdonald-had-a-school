@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteShell } from "../../../components/SiteShell";
 import { GradeTemplate } from "../../../components/builder/CurriculumTemplates";
-import { getAllLessons, isSingleLesson } from "../../../lib/mdx-content";
+import { getAllLessons, isSingleLesson } from "../../../lib/content";
 import { BAND_META, matchesBand, bandMatchesStaff } from "../../../lib/bands";
 import { STAFF } from "../../../lib/cast";
 

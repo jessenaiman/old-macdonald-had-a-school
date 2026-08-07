@@ -500,37 +500,188 @@
 }
 
 .gradeWall .planningReference {
-  position: relative;
   margin-top: 17px;
-  overflow: hidden;
+  padding: 16px;
+  border: 1px solid #c89f4f;
+  border-radius: 14px;
+  background: #f8e8c1 url("/design-assets/web-material-library-v1/construction-paper/construction-paper-02-miss-puddles-tile.png") repeat;
+  background-size: 220px;
+  background-blend-mode: multiply;
+  box-shadow: 2px 3px 0 rgba(82, 57, 24, .25);
+}
+
+.gradeWall .planningGoal {
+  margin-bottom: 11px;
+}
+
+.gradeWall .planningGoal h2 {
+  margin: 5px 0 6px;
+  color: #1e3a5d;
+  font-family: "Caveat", "Boogaloo", "Farm Display", sans-serif;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: .98;
+}
+
+.gradeWall .planningGoal .planningKicker,
+.gradeWall .planningGoal .planningSummary {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.gradeWall .planningKicker {
+  color: #4f1f00;
+  font-size: 9px !important;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.gradeWall .planningSummary {
+  margin-top: 4px !important;
+  color: #5e4a35;
+}
+
+.gradeWall .planningActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 13px 0 15px;
+}
+
+.gradeWall .planningAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #fff9ea;
+  font: 900 10px "Nunito", sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.gradeWall .planningPrimary {
+  background: #385944;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png");
+  background-size: 190px;
+  border-color: rgba(28, 62, 42, .72);
+  box-shadow: inset 0 0 0 1px rgba(244, 225, 182, .15), 0 3px 0 #304c38;
+}
+
+.gradeWall .planningSecondary {
+  color: #3f4f41;
+  background: #f5ddb0;
+  border-color: #b18a4b;
+  box-shadow: 0 2px 0 #c1a06b;
+}
+
+.gradeWall .planningResourceStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gradeWall .planningResourceCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  grid-template-rows: 20px auto auto auto;
+  row-gap: 4px;
+  min-height: 118px;
+  padding: 11px 10px 12px 12px;
+  border: 1px solid #2e553f;
   border-radius: 12px;
+  color: #142f24;
+  text-align: left;
+  text-decoration: none;
+  background: #f4e4b9;
+  background-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
+  background-size: 250px;
+  box-shadow: 2px 3px 0 rgba(64, 45, 24, .22);
 }
 
-.gradeWall .planningReference > img {
-  display: block;
-  width: 100%;
-  height: auto;
+.gradeWall .planningResourceCard > h3,
+.gradeWall .planningResourceCard > p,
+.gradeWall .planningResourceCard > b {
+  grid-column: 1 / -1;
 }
 
-.gradeWall .referenceHotspot {
+.gradeWall .planningResourceCard:hover,
+.gradeWall .planningResourceCard:focus-visible {
+  border-color: #163f2e;
+  box-shadow: 2px 4px 0 rgba(64, 45, 24, .28);
+}
+
+.gradeWall .planningResourcePin {
   position: absolute;
-  z-index: 2;
-  overflow: hidden;
-  color: transparent;
-  text-indent: -9999px;
+  top: 10px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 1px rgba(34, 26, 17, .24));
 }
 
-.gradeWall .referenceHotspot:focus-visible {
-  outline: 3px solid #173c59;
-  outline-offset: -3px;
-  border-radius: 9px;
+.gradeWall .planningResourcePersona {
+  grid-row: 2 / 4;
+  grid-column: 1;
+  align-self: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 0 rgba(83, 54, 24, .28);
 }
 
-.gradeWall .editGoalHotspot { left: 3.2%; top: 62%; width: 13.2%; height: 18%; }
-.gradeWall .saveWeekHotspot { left: 17.4%; top: 62%; width: 13.2%; height: 18%; }
-.gradeWall .resourceHotspot1 { left: 37.2%; top: 29%; width: 17.2%; height: 49%; }
-.gradeWall .resourceHotspot2 { left: 55.7%; top: 29%; width: 17.2%; height: 49%; }
-.gradeWall .resourceHotspot3 { left: 74.2%; top: 29%; width: 17.2%; height: 49%; }
+.gradeWall .planningResourceIcon {
+  grid-row: 2 / 3;
+  grid-column: 2;
+  width: 33px;
+  height: 33px;
+  margin: 2px 0 0;
+  align-self: center;
+  justify-self: start;
+  object-fit: contain;
+}
+
+.gradeWall .planningResourceCard h3 {
+  margin: 2px 0 0;
+  font-family: "Boogaloo", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: .98;
+}
+
+.gradeWall .planningResourceCard p {
+  margin: 0;
+  color: #60543f;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.gradeWall .planningResourceCard b {
+  margin-top: auto;
+  color: #8c5f1b;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.gradeWall .planningResourceCard > b::after {
+  content: " →";
+}
+
+.gradeWall .planningResourcePersona,
+.gradeWall .planningResourceIcon {
+  background: #fff;
+  background-clip: padding-box;
+}
 
 .gradeWall a:focus-visible,
 .gradeWall button:focus-visible,
@@ -593,12 +744,27 @@
   .gradeWall .pathCard {
     min-height: 220px;
   }
+
+  .gradeWall .planningResourceStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .gradeWall .planningActions {
+    margin-bottom: 12px;
+  }
+
+  .gradeWall .planningAction {
+    flex: 1;
+    min-height: 36px;
+  }
 }
 
 @media print {
   .gradeWall {
     width: 100%;
     border: 0;
+    background-image: none;
+    background-color: #fff;
   }
 
   .gradeWall .pathCard {
@@ -607,6 +773,10 @@
 
   .gradeWall .noteSheet textarea {
     min-height: 80px;
+  }
+
+  .gradeWall .planningResourceStrip {
+    grid-template-columns: 1fr;
   }
 }
 

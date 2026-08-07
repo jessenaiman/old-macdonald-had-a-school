@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteShell } from "../../components/SiteShell";
 import { CLUSTERS, clusterFor } from "../../components/SubjectDiscovery";
-import { getAllLessons } from "../../lib/mdx-content";
+import { getAllLessons } from "../../lib/content";
 
 function matchesBand(gradeBand: string, band: string) {
   if (band === "grade-one") return /1/.test(gradeBand);

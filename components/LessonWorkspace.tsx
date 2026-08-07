@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { GatherChecklist } from "./GatherChecklist";
 import { StepIcon } from "./icons";
-import type { GradeLesson, LessonTopic, Step } from "../lib/mdx-content";
+import type { GradeLesson, LessonTopic, Step } from "../lib/content";
 
 function ResourceState({ step }: { step: Step }) {
   if (step.resourceState === "missing") return <div className="resource-state missing"><span className="state-icon">○</span><div><strong>No verified resource yet</strong><p>{step.resourceNote}</p></div></div>;

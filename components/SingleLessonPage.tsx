@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import type { CheckStep, PrintableDoc, PracticeStep, SingleLessonTopic, TryStep } from "../lib/mdx-content";
+import { useCallback, useEffect, useState } from "react";
+import type { CheckStep, PrintableDoc, PracticeStep, SingleLessonTopic, TryStep } from "../lib/content";
 import { charKey } from "../lib/char-key";
 import { CharacterBadge } from "./CharacterBadge";
 import { STAFF } from "../lib/cast";
@@ -178,8 +178,11 @@ export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
     }
   }
   function openPreview(i: number) { setPreview(i); }
-  function closePreview() { setPreview(null); }
-  function movePreview(d: number) { setPreview((p) => (p === null ? p : (p + d + docs.length) % docs.length)); }
+  const closePreview = useCallback(() => setPreview(null), []);
+  const movePreview = useCallback(
+    (d: number) => setPreview((p) => (p === null ? p : (p + d + docs.length) % docs.length)),
+    [docs.length],
+  );
 
   useEffect(() => {
     if (preview === null) return;
@@ -190,7 +193,7 @@ export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [preview, docs.length]);
+  }, [preview, closePreview, movePreview]);
 
   const previewDoc = preview !== null ? docs[preview] : null;
 
@@ -450,6 +453,7 @@ export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
         <section className="lp-print-preview" aria-label={`Printable preview: ${previewDoc.title}`}>
           <p>Old MacDonald Had a School · Printable preview</p>
           <h1>{previewDoc.title}</h1>
+          {/* eslint-disable-next-line @next/next/no-img-element -- preserve the source sheet in print output */}
           {previewDoc.image ? <img src={previewDoc.image} alt={previewDoc.title} /> : null}
           {previewDoc.url ? <p>Open or download the original resource: {previewDoc.url}</p> : <p>No downloadable file is recorded for this preview.</p>}
         </section>
@@ -460,6 +464,7 @@ export function SingleLessonPage({ lesson }: { lesson: SingleLessonTopic }) {
           <button className="lp-lightbox-close" onClick={closePreview} aria-label="Close preview"><CloseIcon /></button>
           <button className="lp-lightbox-nav lp-prev" onClick={(e) => { e.stopPropagation(); movePreview(-1); }} aria-label="Previous sheet">‹</button>
           <div className="lp-lightbox-card" onClick={(e) => e.stopPropagation()}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- printable dimensions are not fixed */}
             {previewDoc.image ? <img className="lp-lightbox-img" src={previewDoc.image} alt={previewDoc.title} /> : <div className="lp-lightbox-none"><DocIcon /><p>No preview available yet.</p></div>}
             <div className="lp-lightbox-bar">
               <div className="lp-lightbox-cap"><strong>{previewDoc.title}</strong><small>{previewDoc.format}{preview !== null ? ` · ${preview + 1} of ${docs.length}` : ""}</small></div>

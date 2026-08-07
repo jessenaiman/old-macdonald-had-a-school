@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { GradeLesson } from "../lib/mdx-content";
+import type { GradeLesson } from "../lib/content";
 
 function storageKey(lessonSlug: string, grade: string) {
   return `gather:${lessonSlug}:${grade}`;

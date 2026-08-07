@@ -1,7 +1,6 @@
 import { expect, test, type Page, type TestInfo } from "@playwright/test";
 
 const HOME_ROUTE = "/";
-const LESSON_INDEX_ROUTE = "/lessons";
 const MUSIC_ROUTE = "/lessons/clap-your-hands";
 const VIDEO_ROUTE = "/lessons/properties-of-operations";
 

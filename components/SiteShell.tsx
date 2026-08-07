@@ -1,22 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LuChevronDown, LuMenu } from "react-icons/lu";
+import { LuMenu } from "react-icons/lu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export type ActivePage =
   | "home" | "topics" | "lessons" | "about" | "cast-guide"
   | "daycare" | "preschool" | "kindergarten" | "grade-one" | "grade-two";
-
-const EARLY_YEARS = [
-  { key: "daycare", label: "Daycare", href: "/daycare", age: "0–2 yrs" },
-  { key: "preschool", label: "Preschool", href: "/preschool", age: "3–4 yrs" },
-  { key: "kindergarten", label: "Kindergarten", href: "/kindergarten", age: "4–5 yrs" },
-] as const;
-
-const PRIMARY_GRADES = [
-  { key: "grade-one", label: "Grade 1", href: "/band/grade-one", age: "5–6 yrs" },
-  { key: "grade-two", label: "Grade 2", href: "/band/grade-two", age: "6–7 yrs" },
-] as const;
 
 const FOOTER_BANDS = [
   { label: "Early Years", href: "/daycare" },
@@ -24,49 +13,6 @@ const FOOTER_BANDS = [
   { label: "Grade 1", href: "/band/grade-one" },
   { label: "Grade 2", href: "/band/grade-two" },
 ] as const;
-
-function CurriculumMenu({
-  label,
-  items,
-  active,
-}: {
-  label: string;
-  items: readonly { key: ActivePage; label: string; href: string; age: string }[];
-  active?: ActivePage;
-}) {
-  const groupIsActive = items.some((item) => item.key === active);
-
-  return (
-    <details className={`site-menu${groupIsActive ? " is-active" : ""}`}>
-      <summary className="site-menu-summary">
-        <span>{label}</span>
-        <LuChevronDown aria-hidden="true" />
-      </summary>
-      <div className="site-menu-panel">
-        {items.map((item) => (
-          <Link
-            key={item.key}
-            href={item.href}
-            className={active === item.key ? "is-active" : undefined}
-            aria-current={active === item.key ? "page" : undefined}
-          >
-            <span>{item.label}</span>
-            <small>{item.age}</small>
-          </Link>
-        ))}
-      </div>
-    </details>
-  );
-}
-
-function CurriculumLinks({ active }: { active?: ActivePage }) {
-  return (
-    <>
-      <CurriculumMenu label="Early Years" items={EARLY_YEARS} active={active} />
-      <CurriculumMenu label="Primary Grades" items={PRIMARY_GRADES} active={active} />
-    </>
-  );
-}
 
 export function SiteShell({ children, active }: { children: React.ReactNode; active?: ActivePage }) {
   return (

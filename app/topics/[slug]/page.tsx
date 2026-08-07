@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { LessonTemplate, TopicTemplate } from "../../../components/builder/CurriculumTemplates";
 import { SiteShell } from "../../../components/SiteShell";
-import { getAllLessons, getLesson, isSingleLesson } from "../../../lib/mdx-content";
+import { getAllLessons, getLesson, isSingleLesson } from "../../../lib/content";
 
 export function generateStaticParams() {
   return getAllLessons().map((lesson) => ({ slug: lesson.meta.slug }));

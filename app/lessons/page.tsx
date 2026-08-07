@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "../../components/SiteShell";
-import { getAllLessons } from "../../lib/content/lessons";
+import { getAllLessons } from "../../lib/content";
 
 export const metadata: Metadata = {
   title: "Lessons | Old MacDonald Had a School",
@@ -21,15 +21,15 @@ export default function LessonsIndexPage() {
         </header>
         <section className="lessons-index-grid" aria-label="Available lessons">
           {lessons.map((lesson) => (
-            <article className="lesson-index-card" data-template={lesson.metadata.template} key={lesson.metadata.slug}>
-              <p className="lesson-card-template">{lesson.metadata.template} lesson</p>
-              <h2><Link href={`/lessons/${lesson.metadata.slug}`}>{lesson.metadata.title}</Link></h2>
-              <p>{lesson.metadata.summary}</p>
+            <article className="lesson-index-card" data-template={lesson.meta.template} key={lesson.meta.slug}>
+              <p className="lesson-card-template">{lesson.meta.template} lesson</p>
+              <h2><Link href={`/lessons/${lesson.meta.slug}`}>{lesson.meta.title}</Link></h2>
+              <p>{lesson.meta.summary}</p>
               <dl className="lesson-card-meta">
-                <div><dt>Subject</dt><dd>{lesson.metadata.subject}</dd></div>
-                <div><dt>Band</dt><dd>{lesson.metadata.gradeBand}</dd></div>
+                <div><dt>Subject</dt><dd>{lesson.meta.subject}</dd></div>
+                <div><dt>Band</dt><dd>{lesson.meta.gradeBand}</dd></div>
               </dl>
-              <Link className="lesson-card-link" href={`/lessons/${lesson.metadata.slug}`}>Open lesson <span aria-hidden="true">→</span></Link>
+              <Link className="lesson-card-link" href={`/lessons/${lesson.meta.slug}`}>Open lesson <span aria-hidden="true">→</span></Link>
             </article>
           ))}
         </section>

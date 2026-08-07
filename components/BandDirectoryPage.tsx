@@ -10,7 +10,6 @@ import type { BandMeta } from "../lib/bands";
 export function BandDirectoryPage({
   meta,
   lessons,
-  cast: _cast,
 }: {
   meta: BandMeta;
   lessons: BandLesson[];

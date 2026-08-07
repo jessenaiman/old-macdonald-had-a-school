@@ -1,6 +1,6 @@
 import { SiteShell } from "../components/SiteShell";
 import { HomePage } from "../components/home/HomePage";
-import { getAllLessons, getPageContent } from "../lib/mdx-content";
+import { getAllLessons, getPageContent } from "../lib/content";
 
 export default function Home() {
   const page = getPageContent("home");

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { SiteShell } from "../../components/SiteShell";
-import { getPageContent } from "../../lib/mdx-content";
+import { getPageContent } from "../../lib/content";
 
 export default function AboutPage() {
   const page = getPageContent("about");
