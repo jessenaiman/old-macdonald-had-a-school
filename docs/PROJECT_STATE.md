@@ -38,6 +38,8 @@ User-confirmed: reproduce the approved Relational Craft designs with separate Ca
 
 ## Handoff references
 
+- GitHub issue: `#2` — https://github.com/jessenaiman/old-macdonald-had-a-school/issues/2
+- WIP handoff commit: `8a0722e`
 - `docs/HANDOFF_COMPONENT_ASSET_PIPELINE.md`
 - `design-qa.md`
 - `docs/PROCESS_IMPROVEMENTS.md`
