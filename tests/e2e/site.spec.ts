@@ -1,8 +1,8 @@
 import { expect, test, type Page, type TestInfo } from "@playwright/test";
 
 const HOME_ROUTE = "/";
-const MUSIC_ROUTE = "/lessons/clap-your-hands";
-const VIDEO_ROUTE = "/lessons/properties-of-operations";
+const MUSIC_ROUTE = "/grade/daycare/clap-your-hands";
+const VIDEO_ROUTE = "/grade/grade-one/properties-of-operations";
 
 const RESPONSIVE_ROUTES = [HOME_ROUTE, VIDEO_ROUTE] as const;
 const RESPONSIVE_WIDTHS = [1440, 1024, 768, 390] as const;
@@ -67,7 +67,7 @@ test.describe("navigation", () => {
     await expect(page.getByText("video lesson", { exact: true }).first()).toBeVisible();
 
     await page.getByRole("link", { name: "Clap Your Hands", exact: true }).click();
-    await expect(page).toHaveURL(/\/lessons\/clap-your-hands\/?$/);
+    await expect(page).toHaveURL(/\/grade\/daycare\/clap-your-hands\/?$/);
     await expect(page.getByRole("heading", { name: "Clap Your Hands", exact: true })).toBeVisible();
   });
 });

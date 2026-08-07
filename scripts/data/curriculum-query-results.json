@@ -1,0 +1,1543 @@
+[
+  {
+    "category": "Science",
+    "query": "Science: electricity",
+    "description": "Find lessons about electricity",
+    "latency": 373,
+    "count": 1,
+    "results": [
+      {
+        "id": "0cfb288f-0019-4dfa-a501-2712ec76fbff",
+        "kind": "song",
+        "title": "thinking games the learning station brain boosting music",
+        "source_path": "docs/early-years-music-resources/song_versions/thinking-games-the-learning-station-brain-boosting-music.md",
+        "snippet": "t-handout.pdf\r\n---\r\n\r\n# Thinking Games\r\n\r\nLudwig van Beethoven expressed it best,\r\n“Music is the electrical soil in which the spirit lives, thinks and invents.”\r\nWhile research has proven that during ",
+        "keyword_score": 8.881784e-16,
+        "semantic_score": 0.16075962197179505,
+        "combined_score": 0.0964557731830774
+      }
+    ]
+  },
+  {
+    "category": "Science",
+    "query": "weather seasons rain snow",
+    "description": "Find lessons about weather and seasons",
+    "latency": 51,
+    "count": 5,
+    "results": [
+      {
+        "id": "44decf0b-893a-4261-b010-caf390464f6e",
+        "kind": "song",
+        "title": "rain on grass des plaines public library baby storytime",
+        "source_path": "docs/early-years-music-resources/song_versions/rain-on-grass-des-plaines-public-library-baby-storytime.md",
+        "snippet": "3 brochure)\r\n---\r\n\r\n# RAIN ON GRASS\r\n\r\nuse scarf\r\nRain on the grass\r\nRain on the tree\r\nRain on the roof\r\nBut not on me\r\n*Verses with sun, snow, and leaves\r\n\r\n\r\n**Printed actions:**\r\nsway on ground\r\nsh",
+        "keyword_score": 0.1562457,
+        "semantic_score": 0.4072169010172493,
+        "combined_score": 0.30682841803611555
+      },
+      {
+        "id": "b13ae8c7-13f7-44b9-8a86-c7f0496a6a00",
+        "kind": "song",
+        "title": "a winter song nancy kopman senses lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/a-winter-song-nancy-kopman-senses-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# A Winter Song\r\n\r\nWinter is a time of year when we\r\ncan sing about the changes we might\r\nsee.\r\nIt’s different from the Spring, Summer\r\nand Fall.\r\nWinter’s the last season of them",
+        "keyword_score": 0.00014661,
+        "semantic_score": 0.504432857565032,
+        "combined_score": 0.3027183585362004
+      },
+      {
+        "id": "1c1075d7-2b0b-45ff-bbc7-66f8c150a100",
+        "kind": "song",
+        "title": "the seasons nancy kopman the seasons lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/the-seasons-nancy-kopman-the-seasons-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# The Seasons\r\n\r\nSpring begins March 21, mud and sunshine, Winter’s done\r\nApril, May and June bring grass and flowers....\r\nJuly comes by with summer skies, August bees and butterf",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.48950639242010374,
+        "combined_score": 0.29370383545206225
+      },
+      {
+        "id": "206c453a-43e1-4a76-b77f-0e11304199da",
+        "kind": "song",
+        "title": "its raining its blowing mid north coast library baby bounce",
+        "source_path": "docs/early-years-music-resources/song_versions/its-raining-its-blowing-mid-north-coast-library-baby-bounce.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# It’s Raining, It’s Blowing\r\n\r\nIt’s raining, it’s raining\r\nIt’s raining all around\r\nIt splashing in puddles\r\nWith circles going round\r\nIt’s blowing, it’s blowing\r\nIt’s blowing all",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.32255041406460117,
+        "combined_score": 0.19353024843876068
+      },
+      {
+        "id": "cb80deec-b1df-4ea8-8044-cae6c3f9f9b0",
+        "kind": "song",
+        "title": "pitter patter pitter patter mid north coast library baby",
+        "source_path": "docs/early-years-music-resources/song_versions/pitter-patter-pitter-patter-mid-north-coast-library-baby.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Pitter Patter, Pitter Patter\r\n\r\nRain is falling down.\r\nThe sun is peeking out\r\nThe sun is peeking out\r\nPeeking here, Peeking there\r\nThe sun is peeking out",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3084331224481035,
+        "combined_score": 0.1850598734688621
+      }
+    ]
+  },
+  {
+    "category": "Science",
+    "query": "plants growing seeds garden",
+    "description": "Find lessons about plant life cycles",
+    "latency": 43,
+    "count": 4,
+    "results": [
+      {
+        "id": "2a534038-6ca1-44a7-b9e3-2009dee12777",
+        "kind": "song",
+        "title": "my garden uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/my-garden-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# My Garden\r\n\r\nHere is my garden\r\nI’ll rake it with care\r\nAnd then some seeds we’ll plant in there\r\nThe sun will shine\r\nAnd then my garden will grow big and tall\r\n\r\n\r\n**Printed ac",
+        "keyword_score": 0.815646,
+        "semantic_score": 0.38450450162629957,
+        "combined_score": 0.5569610980781357
+      },
+      {
+        "id": "976d37f0-24d0-4c29-b671-aacd748a0a05",
+        "kind": "song",
+        "title": "character traits nancy kopman senses lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/character-traits-nancy-kopman-senses-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# Character Traits\r\n\r\nCourage, honesty,\r\nresponsibility, respect and empathy.\r\nInitiative, fairness,\r\noptimism, perseverance, integrity.\r\nWhen we learn and when we practise\r\nchara",
+        "keyword_score": 0.9506355,
+        "semantic_score": 0.2687740588610892,
+        "combined_score": 0.54151863243732
+      },
+      {
+        "id": "f90912fc-3b06-4d15-b22b-6ce61c9d5433",
+        "kind": "song",
+        "title": "five fat peas abc jesus loves me fingerplays action",
+        "source_path": "docs/early-years-music-resources/song_versions/five-fat-peas-abc-jesus-loves-me-fingerplays-action.md",
+        "snippet": "and actions)\r\n---\r\n\r\n# Five Fat Peas\r\n\r\nFive fat peas in a pea pod pressed\r\nOne grew, two grew, so did all the rest\r\nThey grew and grew\r\nAnd did not stop, Until one day\r\nThe pod went POP!\r\n\r\n\r\n**Print",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.34270311590796165,
+        "combined_score": 0.205621869544777
+      },
+      {
+        "id": "eb3a877c-bef8-44ce-a57a-906b3d360079",
+        "kind": "song",
+        "title": "careful gardener walker songs games little ones 1911pdf",
+        "source_path": "docs/early-years-music-resources/song_versions/careful-gardener-walker-songs-games-little-ones-1911pdf.md",
+        "snippet": "thousand)\r\n---\r\n\r\n# Careful Gardener\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3112068322197996,
+        "combined_score": 0.18672409933187975
+      }
+    ]
+  },
+  {
+    "category": "Animals",
+    "query": "Animals: horses",
+    "description": "Find lessons featuring horses",
+    "latency": 47,
+    "count": 5,
+    "results": [
+      {
+        "id": "9ebb4967-6094-408d-a112-979956d93c3b",
+        "kind": "song",
+        "title": "cows and horses mid north coast library baby bounce booklet",
+        "source_path": "docs/early-years-music-resources/song_versions/cows-and-horses-mid-north-coast-library-baby-bounce-booklet.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Cows And Horses\r\n\r\nCows and horses,\r\ncows and horses\r\nQuacking ducks,\r\nquacking ducks\r\nWoolly, woolly sheep,\r\nWoolly, woolly sheep,\r\nChickens too, chickens too.\r\n61\r\n\r\n\r\n**Printe",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.5470634265859017,
+        "combined_score": 0.328238055951541
+      },
+      {
+        "id": "a4e5035b-df50-4afe-9715-4fb2704e6730",
+        "kind": "song",
+        "title": "horsey horsey mid north coast library baby bounce booklet",
+        "source_path": "docs/early-years-music-resources/song_versions/horsey-horsey-mid-north-coast-library-baby-bounce-booklet.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Horsey Horsey\r\n\r\nHorsey horsey don’t you stop\r\nJust let your feet go clippety clop\r\nThe tail goes swish and wheels go round\r\nGiddy up, we’re homeward bound.\r\nHere is a Baby\r\nHere",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.46248210631151143,
+        "combined_score": 0.27748926378690686
+      },
+      {
+        "id": "6d4f3cf4-694e-430a-9a3d-7cdaaaa313fe",
+        "kind": "song",
+        "title": "ten galloping horses winnipeg public library rhymes and",
+        "source_path": "docs/early-years-music-resources/song_versions/ten-galloping-horses-winnipeg-public-library-rhymes-and.md",
+        "snippet": "booklet)\r\n---\r\n\r\n# Ten Galloping Horses\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4270501518592391,
+        "combined_score": 0.25623009111554346
+      },
+      {
+        "id": "c5ca6269-39ba-43a5-919f-af9f75bc3658",
+        "kind": "song",
+        "title": "rickety rickety rocking horse lit for life bouncy rhymes",
+        "source_path": "docs/early-years-music-resources/song_versions/rickety-rickety-rocking-horse-lit-for-life-bouncy-rhymes.md",
+        "snippet": "uncy Rhymes\r\n---\r\n\r\n# Rickety, Rickety Rocking Horse\r\n\r\nRickety, rickety rocking horse\r\nOver the fields we go,\r\nRickety, rickety rocking horse,",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4193349317119842,
+        "combined_score": 0.25160095902719054
+      },
+      {
+        "id": "02e08597-ea8c-4422-98f3-538f2271379d",
+        "kind": "song",
+        "title": "ten galloping horses lit for life bouncy rhymes",
+        "source_path": "docs/early-years-music-resources/song_versions/ten-galloping-horses-lit-for-life-bouncy-rhymes.md",
+        "snippet": "uncy Rhymes\r\n---\r\n\r\n# Ten Galloping Horses\r\n\r\nTen galloping horses\r\nCame through town\r\n5 were white and 5 were brown\r\nThey galloped up they galloped down\r\nTen galloping horse came through town.",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.41723747798093636,
+        "combined_score": 0.2503424867885618
+      }
+    ]
+  },
+  {
+    "category": "Animals",
+    "query": "farm animals cow pig chicken",
+    "description": "Find farm animal lessons",
+    "latency": 43,
+    "count": 5,
+    "results": [
+      {
+        "id": "16791532-cba9-470a-8be8-1cae42cd2c36",
+        "kind": "song",
+        "title": "down on grandpas farm uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/down-on-grandpas-farm-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Down on Grandpa’s Farm\r\n\r\nWe’re on our way\r\nWe’re on our way, on our way to Grandpa’s farm\r\nWe’re on our way\r\nWe’re on our way, on our way to Grandpa’s farm\r\nDown on Grandpa’s f",
+        "keyword_score": 0.83009356,
+        "semantic_score": 0.4896068085696852,
+        "combined_score": 0.6258015101830099
+      },
+      {
+        "id": "35a3bf64-9c47-4c28-a8bb-b74adc6f956f",
+        "kind": "song",
+        "title": "old macdonald had a farm mid north coast library baby",
+        "source_path": "docs/early-years-music-resources/song_versions/old-macdonald-had-a-farm-mid-north-coast-library-baby.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Old MacDonald Had A Farm\r\n\r\nOld MacDonald had a farm, E-I-E-I-O\r\nAnd on his farm he had a cow, E-I-E-I-O\r\nWith a moo-moo here and a moo-moo there,\r\nHere a moo,\r\nThere a moo,\r\nEve",
+        "keyword_score": 0.7094847,
+        "semantic_score": 0.433085059089238,
+        "combined_score": 0.5436449140088406
+      },
+      {
+        "id": "b74b2cf1-941b-43d1-8833-58036aa97778",
+        "kind": "song",
+        "title": "old mcdonald uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/old-mcdonald-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "inger Plays\r\n---\r\n\r\n# Old McDonald\r\n\r\nOld MacDonald had a farm, ee, ii, ee, ii, oo.\r\nAnd on his farm he had a cow , ee, ii, ee, ii, oo.\r\nWith a “moo moo” here,\r\nand a “moo moo” there\r\nHere a “moo”\r\nTh",
+        "keyword_score": 0.6179753,
+        "semantic_score": 0.43688056046260126,
+        "combined_score": 0.5093184541135594
+      },
+      {
+        "id": "ba08c12c-518b-438f-9ca9-d30930508cc2",
+        "kind": "song",
+        "title": "scar ves going up good days with kids circle time songs",
+        "source_path": "docs/early-years-music-resources/song_versions/scar-ves-going-up-good-days-with-kids-circle-time-songs.md",
+        "snippet": "s (Toddlers)\r\n---\r\n\r\n# Scar ves Going Up\r\n\r\nScarves going up. Scarves going down.\r\nScarves are dancing all around town!\r\nDance them on your shoulder.\r\nDance them on your head.\r\nDance them on your toes",
+        "keyword_score": 0.6422704,
+        "semantic_score": 0.33273985987251553,
+        "combined_score": 0.4565520704111192
+      },
+      {
+        "id": "304bd0f5-5f56-4186-b915-386f44b8b06f",
+        "kind": "song",
+        "title": "old mcdonald wagga wagga library baby bounce songs rhymes",
+        "source_path": "docs/early-years-music-resources/song_versions/old-mcdonald-wagga-wagga-library-baby-bounce-songs-rhymes.md",
+        "snippet": "and Rhymes\r\n---\r\n\r\n# Old McDonald\r\n\r\nOld MacDonald had a farm,\r\nE, I, E, I, O,\r\nAnd on that farm he had a\r\nE, I, E, I, O,\r\nWith a  here and a  there,\r\nHere a , there a , everywhere a ,\r\nOld MacDonald ",
+        "keyword_score": 0.30545315,
+        "semantic_score": 0.44779600358621763,
+        "combined_score": 0.3908588627375155
+      }
+    ]
+  },
+  {
+    "category": "Animals",
+    "query": "ocean animals fish whale dolphin",
+    "description": "Find ocean/marine animal lessons",
+    "latency": 45,
+    "count": 5,
+    "results": [
+      {
+        "id": "300d731b-0bda-4afc-9532-36b99a414ab8",
+        "kind": "song",
+        "title": "octopus octopus uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/octopus-octopus-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "inger Plays\r\n---\r\n\r\n# Octopus, Octopus\r\n\r\nSquiggling in the water\r\nOctopus, octopus\r\nGulp, Gulp, Gulp!\r\nOh. No! It’s been eaten by a . . .\r\nTuna fish, tuna fish\r\nFlashing through the water\r\nTuna fish,",
+        "keyword_score": 0.18498467,
+        "semantic_score": 0.3824713186200317,
+        "combined_score": 0.30347665880774594
+      },
+      {
+        "id": "135167b8-0691-43c7-99fd-05e7f6654611",
+        "kind": "song",
+        "title": "the baby hokey pokey wagga wagga library baby bounce songs",
+        "source_path": "docs/early-years-music-resources/song_versions/the-baby-hokey-pokey-wagga-wagga-library-baby-bounce-songs.md",
+        "snippet": "and Rhymes\r\n---\r\n\r\n# The Baby Hokey Pokey\r\n\r\nYou put your arms up\r\n*Lift arms up*\r\nYou put your arms down\r\n*Arms down*\r\nYou put your arms up\r\nAnd you wave them all around\r\n*Wave arms in air*\r\nYou tick",
+        "keyword_score": 0.088036075,
+        "semantic_score": 0.39345148840836386,
+        "combined_score": 0.27128532313878356
+      },
+      {
+        "id": "46fd0196-1ffa-4f86-a470-b02862994533",
+        "kind": "song",
+        "title": "fish are swimming mid north coast library baby bounce",
+        "source_path": "docs/early-years-music-resources/song_versions/fish-are-swimming-mid-north-coast-library-baby-bounce.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Fish Are Swimming\r\n\r\nFish are swimming,\r\nFish are swimming,\r\nIn the sea, in the sea\r\nSplishing and splashing\r\nSplishing and splashing,\r\nLook and see, look and see.\r\n64\r\n\r\n\r\n**Pri",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.42175386288716343,
+        "combined_score": 0.253052317732298
+      },
+      {
+        "id": "9179bc58-d96e-47dd-ab5b-995ae4657ae2",
+        "kind": "song",
+        "title": "the sea tompkins county library virtual baby storytime",
+        "source_path": "docs/early-years-music-resources/song_versions/the-sea-tompkins-county-library-virtual-baby-storytime.md",
+        "snippet": "am outline)\r\n---\r\n\r\n# The Sea\r\n\r\nTune: Wheels on the Bus\r\nfrom Storytime Katie\r\nch/\r\nThe waves on the sea go up and down, up\r\nand down, up and down\r\nThe waves on the sea go up and down all day\r\nlong.\r",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.42044191469146863,
+        "combined_score": 0.25226514881488116
+      },
+      {
+        "id": "6aac18a4-0d9e-48bb-8ad0-28100eca1228",
+        "kind": "song",
+        "title": "did you ever see tompkins county library virtual baby",
+        "source_path": "docs/early-years-music-resources/song_versions/did-you-ever-see-tompkins-county-library-virtual-baby.md",
+        "snippet": "am outline)\r\n---\r\n\r\n# Did You Ever See?\r\n\r\nDid you ever see a whale, a whale, a whale?\r\nDid you ever see a whale swim this way and\r\nthat?\r\nSwim this way and that way and this way and\r\nthat way.\r\nDid y",
+        "keyword_score": 0.15916932,
+        "semantic_score": 0.3011281131353265,
+        "combined_score": 0.2443445943979195
+      }
+    ]
+  },
+  {
+    "category": "Animals",
+    "query": "birds flying nest eggs",
+    "description": "Find bird-themed lessons",
+    "latency": 44,
+    "count": 5,
+    "results": [
+      {
+        "id": "bf422fbc-7040-43b2-898f-0bb406391712",
+        "kind": "song",
+        "title": "the birds nest froebel mother play nursery songs 1906pdf",
+        "source_path": "docs/early-years-music-resources/song_versions/the-birds-nest-froebel-mother-play-nursery-songs-1906pdf.md",
+        "snippet": "o Mothers'\r\n---\r\n\r\n# The Bird's Nest\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.9963378,
+        "semantic_score": 0.5104606632908884,
+        "combined_score": 0.7048115065408171
+      },
+      {
+        "id": "802cf828-7543-49e5-802c-65fd5b42259c",
+        "kind": "song",
+        "title": "cradlelullaby verses incl all the little birds are sleeping",
+        "source_path": "docs/early-years-music-resources/song_versions/cradlelullaby-verses-incl-all-the-little-birds-are-sleeping.md",
+        "snippet": "at Home\r\n---\r\n\r\n# cradle/lullaby verses incl. \"All the little birds are sleeping\"\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4296952737467624,
+        "combined_score": 0.25781716424805745
+      },
+      {
+        "id": "6c5e2f30-1550-442b-a379-cff1a0085cbf",
+        "kind": "song",
+        "title": "vintery mintery cutery corn mid north coast library baby",
+        "source_path": "docs/early-years-music-resources/song_versions/vintery-mintery-cutery-corn-mid-north-coast-library-baby.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Vintery, Mintery, Cutery, Corn\r\n\r\nVintery, mintery, cutery, corn,\r\nApple seed and apple thorn;\r\nWire, briar, limber lock,\r\nThree geese in a flock.\r\nOne flew east,\r\nAnd one flew w",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.429341529050975,
+        "combined_score": 0.257604917430585
+      },
+      {
+        "id": "63e9a301-9add-40b7-86bf-b73d4421f5a1",
+        "kind": "song",
+        "title": "two little blackbirds mid north coast library baby bounce",
+        "source_path": "docs/early-years-music-resources/song_versions/two-little-blackbirds-mid-north-coast-library-baby-bounce.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Two Little Blackbirds\r\n\r\nThere were two blackbirds, sitting on a hill\r\nOne named Jack, the other named Jill\r\nFly away Jack! Fly away Jill!\r\nCome back Jack! Come back Jill!",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4247904256360969,
+        "combined_score": 0.25487425538165814
+      },
+      {
+        "id": "d1d87469-ff9d-4153-be95-2b0c345eb638",
+        "kind": "song",
+        "title": "two little blackbirds pierce county library wiggles tickles",
+        "source_path": "docs/early-years-music-resources/song_versions/two-little-blackbirds-pierce-county-library-wiggles-tickles.md",
+        "snippet": "ame Booklet)\r\n---\r\n\r\n# Two Little Blackbirds\r\n\r\nTwo little blackbirds\r\nSitting on a hill,\r\nOne named Jack and\r\nOne named Jill,\r\nFly away Jack,\r\nFly away Jill,\r\n\r\n\r\n**Printed actions:**\r\nCrook index fi",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.42210590375101664,
+        "combined_score": 0.25326354225061
+      }
+    ]
+  },
+  {
+    "category": "Fingerplays",
+    "query": "Fingerplays with ponies",
+    "description": "Find pony/horse fingerplays",
+    "latency": 47,
+    "count": 5,
+    "results": [
+      {
+        "id": "9158414e-8239-4c18-8000-3adeb7afe141",
+        "kind": "song",
+        "title": "ears so funny uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/ears-so-funny-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Ears So Funny\r\n\r\nHere is a bunny with ears so funny.\r\nAnd here is his home in the ground.\r\nWhen a noise he hears, he pricks up his ears.\r\nAnd he jumps to his home in the ground.",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.5713856901390183,
+        "combined_score": 0.34283141408341095
+      },
+      {
+        "id": "e1471765-714d-4f02-8c70-e7d80866ef50",
+        "kind": "song",
+        "title": "little green frog uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/little-green-frog-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Little Green Frog\r\n\r\nGlug, glug went the little green frog one day\r\nGlug glug went the little green frog\r\nGlug, glug went the little green frog one day and\r\nHis eyes went blink,",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.5309389402525843,
+        "combined_score": 0.31856336415155057
+      },
+      {
+        "id": "823f3171-418c-4b21-8897-411ce065cec8",
+        "kind": "song",
+        "title": "where is thumbkin uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/where-is-thumbkin-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Where is Thumbkin\r\n\r\nWhere is thumb-kin? Where is Thumb-kin?\r\nHere I am, here I am.\r\nHow are you this morning\r\nVer-y well, I thank you.\r\nRun and play, run and play.\r\n1. Where is",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4796616076414685,
+        "combined_score": 0.2877969645848811
+      },
+      {
+        "id": "64172c5f-cbc4-45fd-ac3b-77a7a4e3e886",
+        "kind": "song",
+        "title": "five little speckled frogs uark ecep favorite songs",
+        "source_path": "docs/early-years-music-resources/song_versions/five-little-speckled-frogs-uark-ecep-favorite-songs.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Five Little Speckled Frogs\r\n\r\nFive little speckled frogs\r\nSat on a speckled log\r\neating a most delicious bug\r\nYum, yum, yum\r\nOne jumped into the pool\r\nwhere it was nice and cool",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4627821539017789,
+        "combined_score": 0.27766929234106735
+      },
+      {
+        "id": "2d777788-d161-44b3-a847-9d0767820672",
+        "kind": "song",
+        "title": "tune the mockingbird song uark ecep favorite songs",
+        "source_path": "docs/early-years-music-resources/song_versions/tune-the-mockingbird-song-uark-ecep-favorite-songs.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# (Tune: The Mockingbird Song)\r\n\r\nI have a dog and his name is Rags\r\nWhen he eats too much his tummy drags\r\nHis ears flip flop\r\nand his tail wig-wags\r\nAnd when he walks\r\nhe zigs a",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4584106206893954,
+        "combined_score": 0.2750463724136372
+      }
+    ]
+  },
+  {
+    "category": "Fingerplays",
+    "query": "fingerplays counting numbers",
+    "description": "Find counting fingerplays",
+    "latency": 53,
+    "count": 5,
+    "results": [
+      {
+        "id": "41bacb66-110d-4ac7-ad40-d1b9e2f1ec30",
+        "kind": "song",
+        "title": "tune london bridge uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/tune-london-bridge-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# (Tune: London Bridge)\r\n\r\nHead and shoulders, knees and toes,\r\nKnees and toes, knees and toes.\r\nHead and shoulders, knees and toes,\r\nClap your hands and around we go.",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.5026219184478676,
+        "combined_score": 0.30157315106872057
+      },
+      {
+        "id": "06c9336a-63c1-48af-b1b3-ea927609f193",
+        "kind": "song",
+        "title": "t en little fingers pierce county library wiggles tickles",
+        "source_path": "docs/early-years-music-resources/song_versions/t-en-little-fingers-pierce-county-library-wiggles-tickles.md",
+        "snippet": "ame Booklet)\r\n---\r\n\r\n# T en Little Fingers\r\n\r\n(Sing to the tune of “Bumpin’ Downtown\r\nin my Little Red Wagon”)\r\nT wo little hands, ten little fingers,\r\nT wo little hands, ten little fingers,\r\nT wo lit",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4861621591658213,
+        "combined_score": 0.29169729549949275
+      },
+      {
+        "id": "823f3171-418c-4b21-8897-411ce065cec8",
+        "kind": "song",
+        "title": "where is thumbkin uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/where-is-thumbkin-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Where is Thumbkin\r\n\r\nWhere is thumb-kin? Where is Thumb-kin?\r\nHere I am, here I am.\r\nHow are you this morning\r\nVer-y well, I thank you.\r\nRun and play, run and play.\r\n1. Where is",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4854831678251539,
+        "combined_score": 0.2912899006950923
+      },
+      {
+        "id": "217b656f-ac37-4926-b428-3bc0fb8d2311",
+        "kind": "song",
+        "title": "head and shoulders uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/head-and-shoulders-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Head and Shoulders\r\n\r\nHead and shoulders, knees and toes, knees and toes.\r\nHead and shoulder, knees and toes, knees and toes.\r\nEyes and ears and mouth and nose.\r\nHead and should",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.48505661069672323,
+        "combined_score": 0.2910339664180339
+      },
+      {
+        "id": "d76113a3-a9c6-45e1-8bc8-a1f5a0677e66",
+        "kind": "song",
+        "title": "one two three four five pierce county library wiggles",
+        "source_path": "docs/early-years-music-resources/song_versions/one-two-three-four-five-pierce-county-library-wiggles.md",
+        "snippet": "ame Booklet)\r\n---\r\n\r\n# One, Two, Three, Four, Five\r\n\r\nOne, two, three, four, five,\r\nI caught a fish alive.\r\nSix, seven, eight, nine, ten.\r\nThen I let it go again.\r\nWhy did you let it go?\r\nBecause it b",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4598141408409737,
+        "combined_score": 0.2758884845045842
+      }
+    ]
+  },
+  {
+    "category": "Fingerplays",
+    "query": "fingerplays body parts hands feet",
+    "description": "Find body awareness fingerplays",
+    "latency": 45,
+    "count": 5,
+    "results": [
+      {
+        "id": "24416300-d33c-4078-a492-f975e4e0180b",
+        "kind": "song",
+        "title": "pitter patter uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/pitter-patter-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Pitter Patter\r\n\r\nWhen rain starts falling, it comes down softly and slowly . . .\r\nThe rain is falling down\r\nSplash!\r\nThe rain is falling down\r\nSplash!\r\nPitter, patter, pitter, p",
+        "keyword_score": 0.8441475,
+        "semantic_score": 0.3910509477793068,
+        "combined_score": 0.5722895700179869
+      },
+      {
+        "id": "8ce17bf9-38e5-485a-a119-e45737647ec1",
+        "kind": "song",
+        "title": "teddy bear teddy bear uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/teddy-bear-teddy-bear-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Teddy Bear, Teddy Bear\r\n\r\nTeddy Bear, Teddy Bear, turn around\r\nTeddy Bear, Teddy Bear, touch the ground\r\nTeddy Bear, Tedfdy Bear, show your shoes\r\nTeddy Bear, Teddy Bear, I love",
+        "keyword_score": 0.63276815,
+        "semantic_score": 0.4942658536751131,
+        "combined_score": 0.5496667738627827
+      },
+      {
+        "id": "3a1e4065-aaa5-49fe-88f2-649b969f40a9",
+        "kind": "song",
+        "title": "dingle dangle scarecrow isabella plains ecs 50 songs rhymes",
+        "source_path": "docs/early-years-music-resources/song_versions/dingle-dangle-scarecrow-isabella-plains-ecs-50-songs-rhymes.md",
+        "snippet": "or Preschool\r\n---\r\n\r\n# Dingle, Dangle Scarecrow\r\n\r\nWhen all the cows were sleeping and the sun had gone to bed\r\nUp jumped the scarecrow and this is what he said\r\n“I’m a dingle dangle scarecrow\r\nwith a",
+        "keyword_score": 0.84491855,
+        "semantic_score": 0.31682148575782776,
+        "combined_score": 0.5280603110790253
+      },
+      {
+        "id": "d9665051-4d5e-40dd-a8b5-1e3473d129bd",
+        "kind": "song",
+        "title": "ocr the learning station tony chestnut activity handout",
+        "source_path": "docs/early-years-music-resources/song_versions/ocr-the-learning-station-tony-chestnut-activity-handout.md",
+        "snippet": "ords: 450\r\n---\r\n\r\n# The Learning Station - Tony Chestnut Activity Handout\r\n\r\nThe Learning Station\r\nTRAININGHANDOUT\r\nDo you\r\nthe song Tony Chestnut?\r\nTony Chestnut has become an international\r\nHIT, SEN",
+        "keyword_score": 0.8024385,
+        "semantic_score": 0.31434117641098414,
+        "combined_score": 0.5095801048639245
+      },
+      {
+        "id": "132901d6-8225-4b97-a267-2b470b320a24",
+        "kind": "knowledge",
+        "title": "Crossing the midline and bilateral coordination",
+        "source_path": "02-educators-publishers/pdf/naeyc-beyond-twinkle-twinkle.pdf",
+        "snippet": "Crossing the midline—when a child uses one part of the body in the space of the other part—is an activity that requires good bilateral communication. Picture a child playing a drum with both hands, pa",
+        "keyword_score": 0.58458585,
+        "semantic_score": 0.45804302154691423,
+        "combined_score": 0.5086601511163199
+      }
+    ]
+  },
+  {
+    "category": "Social-Emotional",
+    "query": "feelings emotions happy sad angry",
+    "description": "Find emotional literacy content",
+    "latency": 46,
+    "count": 5,
+    "results": [
+      {
+        "id": "c67e9000-a779-4961-bd6a-242468e128bf",
+        "kind": "song",
+        "title": "its okay to feel sad sometimes pbs daniel tiger strategy",
+        "source_path": "docs/early-years-music-resources/song_versions/its-okay-to-feel-sad-sometimes-pbs-daniel-tiger-strategy.md",
+        "snippet": "Feelings'\r\n---\r\n\r\n# \"It's okay to feel sad sometimes…\"\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.9987988,
+        "semantic_score": 0.5697283148765726,
+        "combined_score": 0.7413565039634802
+      },
+      {
+        "id": "d718358c-6e2e-42df-b25c-7558b2221073",
+        "kind": "song",
+        "title": "stop its okay to feel angry pbs daniel tiger strategy songs",
+        "source_path": "docs/early-years-music-resources/song_versions/stop-its-okay-to-feel-angry-pbs-daniel-tiger-strategy-songs.md",
+        "snippet": "Feelings'\r\n---\r\n\r\n# stop. It's okay to feel angry\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.99861217,
+        "semantic_score": 0.5568253465683037,
+        "combined_score": 0.7335400741214022
+      },
+      {
+        "id": "88b6dd29-f3fc-4e31-a1ff-a10ed1ab9bcf",
+        "kind": "song",
+        "title": "when someone smiles at me mid north coast library baby",
+        "source_path": "docs/early-years-music-resources/song_versions/when-someone-smiles-at-me-mid-north-coast-library-baby.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# When Someone Smiles At Me\r\n\r\nWhen someone smiles at me\r\nI feel like smiling too\r\nWhen I see someone who is happy\r\nI feel happy too\r\nHappy, happy me\r\nHappy, happy you\r\nWhen I see ",
+        "keyword_score": 0.98965025,
+        "semantic_score": 0.4996015578627231,
+        "combined_score": 0.6956210345101144
+      },
+      {
+        "id": "ed7e70b9-0f72-46d3-9d12-308276f9dfb9",
+        "kind": "song",
+        "title": "i feel happy nancy kopman senses lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/i-feel-happy-nancy-kopman-senses-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# I Feel Happy\r\n\r\nI feel happy,\r\nI feel free.\r\nI have big bright feelings inside me.\r\nMy heart’s jumping\r\nwith energy.\r\nFeeling happy is so good for me!\r\nWhat makes me happy?\r\nWha",
+        "keyword_score": 0.99999994,
+        "semantic_score": 0.4239358250923232,
+        "combined_score": 0.6543614712135359
+      },
+      {
+        "id": "e118651f-ea7f-49d8-906e-6b091edeaf26",
+        "kind": "knowledge",
+        "title": "Infants discriminate happy vs sad music at 5 months",
+        "source_path": "02-educators-publishers/pdf/naeyc-beyond-twinkle-twinkle.pdf",
+        "snippet": "One recent study found that babies as young as 5 months old are able, under some conditions, to discriminate between happy and sad musical excerpts (Flom, Gentile, & Pick 2008). This demonstrates that",
+        "keyword_score": 0.99304116,
+        "semantic_score": 0.34218379696897383,
+        "combined_score": 0.6025267412703735
+      }
+    ]
+  },
+  {
+    "category": "Social-Emotional",
+    "query": "sharing taking turns cooperation",
+    "description": "Find social skills content",
+    "latency": 73,
+    "count": 5,
+    "results": [
+      {
+        "id": "6dbfc9f3-ebda-4eb9-a637-93875f4a3f1d",
+        "kind": "song",
+        "title": "beyond twinkle twinkle naeyc beyond twinkle twinkle",
+        "source_path": "docs/early-years-music-resources/song_versions/beyond-twinkle-twinkle-naeyc-beyond-twinkle-twinkle.md",
+        "snippet": "Early Years)'\r\n---\r\n\r\n# Beyond Twinkle, Twinkle\r\n\r\n✪ ✪\r\nReprinted from Young Children  •  March 2010 15\r\nThe Performing Arts: Music, Dance, and Theater in the Early Years\r\nThe Performing Arts: Music, ",
+        "keyword_score": 0.99142075,
+        "semantic_score": 0.21207887612363274,
+        "combined_score": 0.5238156240140234
+      },
+      {
+        "id": "95303e64-33fa-4365-8577-7554a3709ebb",
+        "kind": "song",
+        "title": "ocr sc school kindergarten music movement activities",
+        "source_path": "docs/early-years-music-resources/song_versions/ocr-sc-school-kindergarten-music-movement-activities.md",
+        "snippet": "rds: 1540\r\n---\r\n\r\n# Kindergarten Music & Movement Activities\r\n\r\nA Staff Training Aid\r\nMusic & Movement Activities\r\nA Publication of the Environments Professional Group\r\nWhy Are Children Playing?\r\nFor ",
+        "keyword_score": 0.771879,
+        "semantic_score": 0.09380865935760707,
+        "combined_score": 0.3650368025557874
+      },
+      {
+        "id": "d18109ce-1199-4f29-9fba-407972070119",
+        "kind": "song",
+        "title": "dialogic reading using peercrowd earlylit saroj ghoting",
+        "source_path": "docs/early-years-music-resources/song_versions/dialogic-reading-using-peercrowd-earlylit-saroj-ghoting.md",
+        "snippet": "es hub)\r\n---\r\n\r\n# Dialogic Reading using PEER/CROWD\r\n\r\nSHARE STEP—Sharing Books with Infants and Toddlers",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.35498521209116696,
+        "combined_score": 0.21299112725470018
+      },
+      {
+        "id": "132901d6-8225-4b97-a267-2b470b320a24",
+        "kind": "knowledge",
+        "title": "Crossing the midline and bilateral coordination",
+        "source_path": "02-educators-publishers/pdf/naeyc-beyond-twinkle-twinkle.pdf",
+        "snippet": "Crossing the midline—when a child uses one part of the body in the space of the other part—is an activity that requires good bilateral communication. Picture a child playing a drum with both hands, pa",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3464226584367136,
+        "combined_score": 0.20785359506202816
+      },
+      {
+        "id": "11d149ec-7339-4cc8-bbb5-97964adfe151",
+        "kind": "song",
+        "title": "everybody clap nancy kopman the seasons lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/everybody-clap-nancy-kopman-the-seasons-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# Everybody Clap\r\n\r\nEverybody Clap\r\nEverybody clap your hands, clap your hands, clap your hands\r\nEverybody stomp your feet....\r\nEverybody go peek a boo....\r\nEverybody go side to s",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3028576970100403,
+        "combined_score": 0.18171461820602416
+      }
+    ]
+  },
+  {
+    "category": "Social-Emotional",
+    "query": "self-regulation calm breathing",
+    "description": "Find self-regulation strategies",
+    "latency": 47,
+    "count": 5,
+    "results": [
+      {
+        "id": "954fa6d3-2bb8-426c-a00c-9af142e2d585",
+        "kind": "song",
+        "title": "itsy ditsy spider the learning station brain boosting music",
+        "source_path": "docs/early-years-music-resources/song_versions/itsy-ditsy-spider-the-learning-station-brain-boosting-music.md",
+        "snippet": "handout.pdf\r\n---\r\n\r\n# ITSY DITSY SPIDER\r\n\r\n“Working together with a partner adds\r\nsocial complexity, which primes new\r\nlearning and enhances the rate that the\r\nbrain adds new cells. Two spiders are\r\nb",
+        "keyword_score": 0.83483267,
+        "semantic_score": 0.47798492080019206,
+        "combined_score": 0.6207240198018926
+      },
+      {
+        "id": "7d73e381-950c-49e1-8619-4f0d9fe6d8b9",
+        "kind": "song",
+        "title": "safe and calm the learning station brain boosting music",
+        "source_path": "docs/early-years-music-resources/song_versions/safe-and-calm-the-learning-station-brain-boosting-music.md",
+        "snippet": "handout.pdf\r\n---\r\n\r\n# Safe and Calm\r\n\r\n“Being at peace, breathing, and feeling calm\r\nand relaxed requires the CEO of the brain\r\nto quiet the rest of the brain.\r\nStrengthening the frontal lobes improve",
+        "keyword_score": 0.6491907,
+        "semantic_score": 0.5595215417095323,
+        "combined_score": 0.59538921458413
+      },
+      {
+        "id": "c2f430b5-d905-47c0-8a4d-134c352bdda4",
+        "kind": "song",
+        "title": "interactive songs the learning station brain boosting music",
+        "source_path": "docs/early-years-music-resources/song_versions/interactive-songs-the-learning-station-brain-boosting-music.md",
+        "snippet": "-handout.pdf\r\n---\r\n\r\n# Interactive Songs\r\n\r\nand Music\r\nBreathe out, have your belly go in.\r\nI'm calm and full of love.\r\nRelax your feet. Feel them melt.\r\nRelax your legs. Feel them melt.\r\nThank your l",
+        "keyword_score": 0.20878138,
+        "semantic_score": 0.3241837041049538,
+        "combined_score": 0.27802277305539475
+      },
+      {
+        "id": "6b2334eb-b3c5-44c2-8de6-92b21cdba637",
+        "kind": "song",
+        "title": "im sleepy very sleepy la county library storytime rhymes",
+        "source_path": "docs/early-years-music-resources/song_versions/im-sleepy-very-sleepy-la-county-library-storytime-rhymes.md",
+        "snippet": "hyme sheet)\r\n---\r\n\r\n# I'm Sleepy, Very Sleepy\r\n\r\nI'm sleepy, very s leepy\r\nI want to stretch and yawn\r\nI'll close my eyes and just pretend\r\nthat dayl ight time has gone.\r\nI'll breathe so softly, be so",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3144508021070871,
+        "combined_score": 0.18867048126425226
+      },
+      {
+        "id": "6f80a477-4595-49b6-a5ac-20b5daa345f9",
+        "kind": "song",
+        "title": "take a deep breath pbs daniel tiger strategy songs",
+        "source_path": "docs/early-years-music-resources/song_versions/take-a-deep-breath-pbs-daniel-tiger-strategy-songs.md",
+        "snippet": "Feelings'\r\n---\r\n\r\n# take a deep breath\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3090851420709455,
+        "combined_score": 0.1854510852425673
+      }
+    ]
+  },
+  {
+    "category": "Literacy",
+    "query": "alphabet letters ABC",
+    "description": "Find alphabet/letter content",
+    "latency": 100,
+    "count": 5,
+    "results": [
+      {
+        "id": "0d52578c-12ac-49ec-a26b-210f6b2e49dd",
+        "kind": "song",
+        "title": "abc rock greg and steve alphabetical song list 2020pdf",
+        "source_path": "docs/early-years-music-resources/song_versions/abc-rock-greg-and-steve-alphabetical-song-list-2020pdf.md",
+        "snippet": "edition)\r\n---\r\n\r\n# ABC Rock\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.96414167,
+        "semantic_score": 0.3010419222527163,
+        "combined_score": 0.5662818201073061
+      },
+      {
+        "id": "97e35488-bc46-4261-bd77-19a508d1ce4a",
+        "kind": "song",
+        "title": "letter knowledge wyoming state library sing practicehtml",
+        "source_path": "docs/early-years-music-resources/song_versions/letter-knowledge-wyoming-state-library-sing-practicehtml.md",
+        "snippet": "Practices: Sing'\r\n---\r\n\r\n# Letter Knowledge\r\n\r\nLetter knowledge is, at its base, a shape recognition skill, so any rhyme or song that talks about how things are the same and different can help build s",
+        "keyword_score": 0.83761334,
+        "semantic_score": 0.38123311028085827,
+        "combined_score": 0.5637852038455169
+      },
+      {
+        "id": "ec0798f2-6fc3-49be-b3e8-cedcce4c234b",
+        "kind": "song",
+        "title": "acka backa soda cracker pierce county library wiggles",
+        "source_path": "docs/early-years-music-resources/song_versions/acka-backa-soda-cracker-pierce-county-library-wiggles.md",
+        "snippet": "me Booklet)\r\n---\r\n\r\n# Acka Backa Soda Cracker\r\n\r\nAcka backa soda cracker\r\nAcka backa boo\r\nAcka backa soda cracker\r\nUp goes you!\r\nAcka backa soda cracker\r\nAcka backa boo\r\nAcka backa soda cracker\r\nI lov",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3308252898379349,
+        "combined_score": 0.19849517390276095
+      },
+      {
+        "id": "33a3bd96-942c-4b06-8d84-388820abfff8",
+        "kind": "song",
+        "title": "ocr jack hartmann a to z flash cards",
+        "source_path": "docs/early-years-music-resources/song_versions/ocr-jack-hartmann-a-to-z-flash-cards.md",
+        "snippet": "words: 27\r\n---\r\n\r\n# Jack Hartmann - A to Z Flash Cards\r\n\r\na\r\n\r\nBb\r\na\r\nbaby\r\n\r\nc\r\ncaterpillar\r\n\r\nd\r\ndinosaur\r\n\r\nE\r\ne\r\nelephant\r\n\r\nfamily\r\n\r\nG\r\na\r\ngorilla\r\n\r\nHh\r\nhippopotamus\r\n\r\nT\r\ninsect\r\n\r\n丁\r\njet\r\n\r\nK",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3235975197193859,
+        "combined_score": 0.19415851183163152
+      },
+      {
+        "id": "c7a12e18-d18b-4b19-a1a3-b05f7d5680b8",
+        "kind": "song",
+        "title": "ride baby ride pawling free library wiggle rhymeshtml",
+        "source_path": "docs/early-years-music-resources/song_versions/ride-baby-ride-pawling-free-library-wiggle-rhymeshtml.md",
+        "snippet": "hymes page)\r\n---\r\n\r\n# Ride, Baby, Ride\r\n\r\nRide baby ride, ch ch ch ch ch\r\nRide that horsey ride\r\nRide baby ride, ch ch ch ch ch\r\nRide that horsey ride\r\nWhooooaaaa!",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3153178345519694,
+        "combined_score": 0.18919070073118163
+      }
+    ]
+  },
+  {
+    "category": "Literacy",
+    "query": "rhyming words phonological awareness",
+    "description": "Find rhyming/phonological content",
+    "latency": 56,
+    "count": 5,
+    "results": [
+      {
+        "id": "58f05d7e-e4d0-40c2-bb51-539fefbc766c",
+        "kind": "knowledge",
+        "title": "Lesson 2 — Singing is secretly reading instruction",
+        "source_path": "docs/early-years-music-resources/knowledge/core-lessons.md",
+        "snippet": "## Lesson 2 — Singing is secretly reading instruction\n\n**Claim.** The entire public-library wing of early-years music programming is\nbuilt on one finding: singing develops the pre-reading skills of ph",
+        "keyword_score": 0.9991356,
+        "semantic_score": 0.5749063491821452,
+        "combined_score": 0.744598054885874
+      },
+      {
+        "id": "b489e981-1dbf-4d98-a2cd-a04bf6598eb4",
+        "kind": "song",
+        "title": "phonological awareness wyoming state library sing",
+        "source_path": "docs/early-years-music-resources/song_versions/phonological-awareness-wyoming-state-library-sing.md",
+        "snippet": "ces: Sing'\r\n---\r\n\r\n# Phonological Awareness\r\n\r\nListening to and singing songs is one of the best ways for children to build their phonological awareness because often each syllable of a word connects ",
+        "keyword_score": 0.99986684,
+        "semantic_score": 0.5500872254579605,
+        "combined_score": 0.729999072564205
+      },
+      {
+        "id": "59ffc1e4-2658-4a45-a5f7-1c44950817fc",
+        "kind": "song",
+        "title": "why rhyme ohio ready to read rhyme with me",
+        "source_path": "docs/early-years-music-resources/song_versions/why-rhyme-ohio-ready-to-read-rhyme-with-me.md",
+        "snippet": "me (slides)'\r\n---\r\n\r\n# Why Rhyme?\r\n\r\n• Phonological & phonemic awareness\r\n• Vocabulary skills\r\n• Build upon outside knowledge/make\r\nreal-world connections\r\n• Want to introduce a new language?",
+        "keyword_score": 0.9685058,
+        "semantic_score": 0.5492136385736237,
+        "combined_score": 0.7169305030523163
+      },
+      {
+        "id": "bf8ecdf0-294e-4aad-b0ff-d1ecd2b79aca",
+        "kind": "song",
+        "title": "learning songs richland library fingerplays songshtml",
+        "source_path": "docs/early-years-music-resources/song_versions/learning-songs-richland-library-fingerplays-songshtml.md",
+        "snippet": "r Storytime\r\n---\r\n\r\n# Learning Songs:\r\n\r\nChocolate performed by Sonia De Los Santos\r\nCurious by Pears4Bears\r\n___________________________________\r\n\r\n\r\n**Printed actions:**\r\nLearn some Spanish while sin",
+        "keyword_score": 0.76309896,
+        "semantic_score": 0.43964896325484193,
+        "combined_score": 0.5690289600146727
+      },
+      {
+        "id": "a08b6c97-59e5-46fd-9b8f-4544b2c5ed64",
+        "kind": "song",
+        "title": "early literacy skills library toolshed early literacy",
+        "source_path": "docs/early-years-music-resources/song_versions/early-literacy-skills-library-toolshed-early-literacy.md",
+        "snippet": "tual Storytimes\r\n---\r\n\r\n# Early Literacy Skills\r\n\r\nThese six skills were identified through research as being important for setting kids up for reading\r\nsuccess. They are outlined in the first edition",
+        "keyword_score": 0.91605616,
+        "semantic_score": 0.30796971226101555,
+        "combined_score": 0.5512042898199883
+      }
+    ]
+  },
+  {
+    "category": "Literacy",
+    "query": "storytelling narrative sequence",
+    "description": "Find storytelling content",
+    "latency": 55,
+    "count": 5,
+    "results": [
+      {
+        "id": "b1149932-9f86-4a35-a0e1-d9b35efd7aad",
+        "kind": "song",
+        "title": "create a routine wagga wagga library baby bounce songs",
+        "source_path": "docs/early-years-music-resources/song_versions/create-a-routine-wagga-wagga-library-baby-bounce-songs.md",
+        "snippet": "s and Rhymes\r\n---\r\n\r\n# Create a Routine\r\n\r\nMake reading a calm, inviting activity.\r\nRead at the same time each day to build a routine.\r\nA place where magical stories live. Story Box Library provides\r\n",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.44781237037858523,
+        "combined_score": 0.26868742222715114
+      },
+      {
+        "id": "3207c6e1-1891-47da-9db3-261b7430b2bb",
+        "kind": "song",
+        "title": "preparation will help you avoid some mistakes lvccld",
+        "source_path": "docs/early-years-music-resources/song_versions/preparation-will-help-you-avoid-some-mistakes-lvccld.md",
+        "snippet": "ng outline)\r\n---\r\n\r\n# Preparation Will Help You Avoid Some Mistakes\r\n\r\n• Plan early\r\n• Practice the material\r\n• Create an outline\r\n• Choose an opening and closing routine\r\n• Know your space\r\n• Know yo",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4029401763402477,
+        "combined_score": 0.24176410580414862
+      },
+      {
+        "id": "5ff8a373-2784-43f4-9457-1d3115cea8f7",
+        "kind": "song",
+        "title": "reading to your baby wagga wagga library baby bounce songs",
+        "source_path": "docs/early-years-music-resources/song_versions/reading-to-your-baby-wagga-wagga-library-baby-bounce-songs.md",
+        "snippet": "and Rhymes\r\n---\r\n\r\n# Reading to Your Baby\r\n\r\nReading board books to your baby is a great way to introduce\r\nthem to language, stories, and bonding. Here are some tips to\r\nmake it fun and beneficial:\r\n3",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.37976226097055454,
+        "combined_score": 0.22785735658233272
+      },
+      {
+        "id": "e61b9ca6-23b5-4a01-ad55-5eba27b25ff7",
+        "kind": "song",
+        "title": "about this storytime demco lets make music dance",
+        "source_path": "docs/early-years-music-resources/song_versions/about-this-storytime-demco-lets-make-music-dance.md",
+        "snippet": "r Tip Sheet\r\n---\r\n\r\n# About This Storytime\r\n\r\nBabies are fascinated by music from birth. One of the first\r\nmusical concepts a baby learns is rhythm, which is essential to\r\nlanguage and literacy, as we",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3646140421357287,
+        "combined_score": 0.2187684252814372
+      },
+      {
+        "id": "52caf1d7-9c71-4a38-8fae-02a4ae265030",
+        "kind": "song",
+        "title": "make it interactive wagga wagga library baby bounce songs",
+        "source_path": "docs/early-years-music-resources/song_versions/make-it-interactive-wagga-wagga-library-baby-bounce-songs.md",
+        "snippet": "and Rhymes\r\n---\r\n\r\n# Make It Interactive\r\n\r\nPoint and name things in the pictures.\r\nAsk simple questions like, “Where’s the dog?”\r\nUse your baby’s name to personalise the story.",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.360176472590255,
+        "combined_score": 0.21610588355415297
+      }
+    ]
+  },
+  {
+    "category": "Math",
+    "query": "counting numbers 1-10",
+    "description": "Find counting content",
+    "latency": 51,
+    "count": 4,
+    "results": [
+      {
+        "id": "d76113a3-a9c6-45e1-8bc8-a1f5a0677e66",
+        "kind": "song",
+        "title": "one two three four five pierce county library wiggles",
+        "source_path": "docs/early-years-music-resources/song_versions/one-two-three-four-five-pierce-county-library-wiggles.md",
+        "snippet": "ame Booklet)\r\n---\r\n\r\n# One, Two, Three, Four, Five\r\n\r\nOne, two, three, four, five,\r\nI caught a fish alive.\r\nSix, seven, eight, nine, ten.\r\nThen I let it go again.\r\nWhy did you let it go?\r\nBecause it b",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3289490734278262,
+        "combined_score": 0.1973694440566957
+      },
+      {
+        "id": "a8dc1ca9-0211-4a83-97c8-ae269869c6ee",
+        "kind": "song",
+        "title": "ten little teddy bears mid north coast library baby bounce",
+        "source_path": "docs/early-years-music-resources/song_versions/ten-little-teddy-bears-mid-north-coast-library-baby-bounce.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Ten Little Teddy Bears\r\n\r\nOne little, two little,\r\nthree little teddy bears\r\nFour little, five little,\r\nsix little teddy bears\r\nSeven little, eight little,\r\nnine little teddy bea",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.32095857166257136,
+        "combined_score": 0.1925751429975428
+      },
+      {
+        "id": "1468e934-62ea-4098-81d7-dbda5de82552",
+        "kind": "song",
+        "title": "ten little monsters la county library storytime rhymes",
+        "source_path": "docs/early-years-music-resources/song_versions/ten-little-monsters-la-county-library-storytime-rhymes.md",
+        "snippet": "hyme sheet)\r\n---\r\n\r\n# Ten Little Monsters\r\n\r\nOne little, two little, three little, monsters\r\nFour little, five little, six little, monste rs\r\nSeven little, eight little, nine little, monsters\r\nTen mon",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3045507683011248,
+        "combined_score": 0.18273046098067489
+      },
+      {
+        "id": "d3b5de3e-0a2d-43ff-8759-349565d69d5e",
+        "kind": "song",
+        "title": "12345 once i caught a fish alive wagga wagga library baby",
+        "source_path": "docs/early-years-music-resources/song_versions/12345-once-i-caught-a-fish-alive-wagga-wagga-library-baby.md",
+        "snippet": "s and Rhymes\r\n---\r\n\r\n# 1,2,3,4,5 Once I Caught A Fish Alive\r\n\r\n1, 2, 3, 4, 5 *Bounce*\r\nOnce I caught a fish alive! *Hug*\r\n6, 7, 8, 9, 10 *Bounce*\r\nThen I let him go again! *Tummy Tickle*",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.30362603550084255,
+        "combined_score": 0.18217562130050552
+      }
+    ]
+  },
+  {
+    "category": "Math",
+    "query": "shapes circle square triangle",
+    "description": "Find shape content",
+    "latency": 52,
+    "count": 1,
+    "results": [
+      {
+        "id": "803cd13e-0f3a-4200-85ba-1f3cca7d6136",
+        "kind": "song",
+        "title": "flannel board fun alaeditions essential lapsit guide web",
+        "source_path": "docs/early-years-music-resources/song_versions/flannel-board-fun-alaeditions-essential-lapsit-guide-web.md",
+        "snippet": "ras (Handouts)\r\n---\r\n\r\n# Flannel-Board Fun\r\n\r\nFlannel boards or felt boards are interactive, and children love to play with them. Children can prac-\r\ntice their fine motor skills by putting the pieces",
+        "keyword_score": 0.77922493,
+        "semantic_score": 0.1808079278228344,
+        "combined_score": 0.42017472957120305
+      }
+    ]
+  },
+  {
+    "category": "Math",
+    "query": "patterns sorting categorizing",
+    "description": "Find pattern/sorting content",
+    "latency": 52,
+    "count": 1,
+    "results": [
+      {
+        "id": "53d015aa-8b5c-4651-a3da-10056b8aacb6",
+        "kind": "song",
+        "title": "creating an alphabetized song repertoire list oxford kodaly",
+        "source_path": "docs/early-years-music-resources/song_versions/creating-an-alphabetized-song-repertoire-list-oxford-kodaly.md",
+        "snippet": "isher preview)'\r\n---\r\n\r\n# Creating an Alphabetized Song Repertoire List\r\n\r\nOn the basis of the criteria given above, we can compile a list of suitable and appropriate\r\nrepertoire. Arrange the songs in",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.34164328252626075,
+        "combined_score": 0.20498596951575646
+      }
+    ]
+  },
+  {
+    "category": "Transitions",
+    "query": "hello welcome greeting songs",
+    "description": "Find greeting/opening content",
+    "latency": 55,
+    "count": 5,
+    "results": [
+      {
+        "id": "65baedd6-3b30-4e46-acc0-2601e73b03d4",
+        "kind": "song",
+        "title": "welcome or hello songs richland library fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/welcome-or-hello-songs-richland-library-fingerplays.md",
+        "snippet": "Storytime\r\n---\r\n\r\n# Welcome or Hello Songs:\r\n\r\nAfter you read your first book, you may want to share a welcome or hello song :\r\nThe More We Get Together performed by Raffi\r\n\r\n\r\n**Printed actions:**\r\ni",
+        "keyword_score": 1,
+        "semantic_score": 0.669780791641176,
+        "combined_score": 0.8018684749847056
+      },
+      {
+        "id": "156841b2-f66c-45b7-abcf-238873deb960",
+        "kind": "song",
+        "title": "a welcome song nancy kopman senses lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/a-welcome-song-nancy-kopman-senses-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# A Welcome Song\r\n\r\nLet’s all sing a welcome song,\r\na song for you and me.\r\nHear the words and sing along,\r\nit’s all about how we belong.\r\nLet’s all sing a welcome song\r\nabout a g",
+        "keyword_score": 0.9999461,
+        "semantic_score": 0.5243313526804576,
+        "combined_score": 0.7145772585687238
+      },
+      {
+        "id": "b4278be5-5392-4c67-a56f-2eca8d5a3363",
+        "kind": "song",
+        "title": "hello how are you 2care2teach4kids hello how are you",
+        "source_path": "docs/early-years-music-resources/song_versions/hello-how-are-you-2care2teach4kids-hello-how-are-you.md",
+        "snippet": "eting song)\r\n---\r\n\r\n# Hello How Are You?\r\n\r\nHello, how are you?\r\nHello, how are you?\r\nHello, how are you?\r\nHow are you today?\r\nIt’s good to see ____________ here.\r\nIt’s good to see ____________ here.\r",
+        "keyword_score": 0.9444209,
+        "semantic_score": 0.5439040274162664,
+        "combined_score": 0.7041107660972818
+      },
+      {
+        "id": "9c962ffc-5cf1-4729-8398-f685a9f12cf6",
+        "kind": "song",
+        "title": "clap everybody and say hello jbrary welcome and hello",
+        "source_path": "docs/early-years-music-resources/song_versions/clap-everybody-and-say-hello-jbrary-welcome-and-hello.md",
+        "snippet": "endations\r\n---\r\n\r\n# Clap Everybody and Say Hello\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.99986684,
+        "semantic_score": 0.4690328306346385,
+        "combined_score": 0.6813664356702118
+      },
+      {
+        "id": "2e7b8610-f8dd-4b5c-9717-14e39b10d357",
+        "kind": "song",
+        "title": "hello jbrary welcome and hello songshtml",
+        "source_path": "docs/early-years-music-resources/song_versions/hello-jbrary-welcome-and-hello-songshtml.md",
+        "snippet": "endations\r\n---\r\n\r\n# Hello\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.9999053,
+        "semantic_score": 0.45401867658737205,
+        "combined_score": 0.6723733212402041
+      }
+    ]
+  },
+  {
+    "category": "Transitions",
+    "query": "goodbye farewell closing songs",
+    "description": "Find closing content",
+    "latency": 59,
+    "count": 5,
+    "results": [
+      {
+        "id": "aa837ac0-0c8a-4272-a825-5e48f9518ab8",
+        "kind": "song",
+        "title": "goodbye songs richland library fingerplays songshtml",
+        "source_path": "docs/early-years-music-resources/song_versions/goodbye-songs-richland-library-fingerplays-songshtml.md",
+        "snippet": "for Storytime\r\n---\r\n\r\n# Goodbye Songs:\r\n\r\nEnding your storytime with a goodbye song reinforces routine and ends the ritual of storytime.\r\nGoodbye, Friends\r\nSkinnamarink by Sharon, Lois and Bram\r\nRemem",
+        "keyword_score": 0.9996221,
+        "semantic_score": 0.5216292091299989,
+        "combined_score": 0.7128263680988489
+      },
+      {
+        "id": "172f0689-8315-49a5-be9d-16f09f89f776",
+        "kind": "song",
+        "title": "up down turn around goodbye song wagga wagga library baby",
+        "source_path": "docs/early-years-music-resources/song_versions/up-down-turn-around-goodbye-song-wagga-wagga-library-baby.md",
+        "snippet": "and Rhymes\r\n---\r\n\r\n# Up, Down, Turn Around (Goodbye Song)\r\n\r\nUp, down\r\nTurn around\r\nTouch the sky\r\nAnd touch the ground\r\nJiggle tummy\r\nBlink your eyes\r\nBlow a kiss\r\nAnd say goodbye!\r\n35\r\n36",
+        "keyword_score": 0.9960539,
+        "semantic_score": 0.4787505319713278,
+        "combined_score": 0.6856718689798548
+      },
+      {
+        "id": "543bdaba-6e14-45c5-b2a7-0d2a18c70d43",
+        "kind": "song",
+        "title": "can a cherry pie wave goodbye hap palmer lyrics and",
+        "source_path": "docs/early-years-music-resources/song_versions/can-a-cherry-pie-wave-goodbye-hap-palmer-lyrics-and.md",
+        "snippet": "mer Songs\r\n---\r\n\r\n# Can A Cherry Pie Wave Goodbye?\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.7223992,
+        "semantic_score": 0.5182411627194493,
+        "combined_score": 0.5999043676985031
+      },
+      {
+        "id": "782dcab8-b8f8-4356-bab5-c232c5dd62e9",
+        "kind": "song",
+        "title": "zoom zoom zoom 35 wagga wagga library baby bounce songs",
+        "source_path": "docs/early-years-music-resources/song_versions/zoom-zoom-zoom-35-wagga-wagga-library-baby-bounce-songs.md",
+        "snippet": "nd Rhymes\r\n---\r\n\r\n# Zoom Zoom Zoom 35\r\n\r\nUp, Down, Turn Around  35\r\nHelpful Tips and Tricks 36\r\n\r\n\r\n**Printed actions:**\r\nGoodbye Song",
+        "keyword_score": 0.40465322,
+        "semantic_score": 0.3641506161330661,
+        "combined_score": 0.3803516582273555
+      },
+      {
+        "id": "48ed7ad4-d623-4d8e-aa36-a6ebce484605",
+        "kind": "song",
+        "title": "with my little hands tompkins county library virtual baby",
+        "source_path": "docs/early-years-music-resources/song_versions/with-my-little-hands-tompkins-county-library-virtual-baby.md",
+        "snippet": "ram outline)\r\n---\r\n\r\n# With My Little Hands\r\n\r\nrhymes/openingclosing-songs/\r\nWith my little hands I go clap, clap, clap\r\nWith my little feet I go tap, tap, tap\r\nWith my little arms I wave bye, bye, by",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.5504165767630156,
+        "combined_score": 0.33024994605780933
+      }
+    ]
+  },
+  {
+    "category": "Transitions",
+    "query": "cleanup transition songs",
+    "description": "Find transition content",
+    "latency": 62,
+    "count": 5,
+    "results": [
+      {
+        "id": "a2324710-23c7-4306-9094-1c9fa8a16e7d",
+        "kind": "song",
+        "title": "diaper change and transition songs headstart music in child",
+        "source_path": "docs/early-years-music-resources/song_versions/diaper-change-and-transition-songs-headstart-music-in-child.md",
+        "snippet": "e series)\r\n---\r\n\r\n# diaper-change and transition songs\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.99604094,
+        "semantic_score": 0.5591109254095891,
+        "combined_score": 0.7338829313596451
+      },
+      {
+        "id": "63061658-fca2-479f-bfd4-bc78126a37f5",
+        "kind": "knowledge",
+        "title": "Lesson 4 — Repetition and ritual are the curriculum; the adult is the real student",
+        "source_path": "docs/early-years-music-resources/knowledge/core-lessons.md",
+        "snippet": "## Lesson 4 — Repetition and ritual are the curriculum; the adult is the real student\n\n**Claim (repetition).** Session structures are ritualized (Hello/Goodbye\nsongs), repertoires are small and repeat",
+        "keyword_score": 0.72038925,
+        "semantic_score": 0.3415068184431309,
+        "combined_score": 0.4930597898421237
+      },
+      {
+        "id": "3207c6e1-1891-47da-9db3-261b7430b2bb",
+        "kind": "song",
+        "title": "preparation will help you avoid some mistakes lvccld",
+        "source_path": "docs/early-years-music-resources/song_versions/preparation-will-help-you-avoid-some-mistakes-lvccld.md",
+        "snippet": "ng outline)\r\n---\r\n\r\n# Preparation Will Help You Avoid Some Mistakes\r\n\r\n• Plan early\r\n• Practice the material\r\n• Create an outline\r\n• Choose an opening and closing routine\r\n• Know your space\r\n• Know yo",
+        "keyword_score": 0.35662925,
+        "semantic_score": 0.3686490968110435,
+        "combined_score": 0.3638411590601368
+      },
+      {
+        "id": "48ed7ad4-d623-4d8e-aa36-a6ebce484605",
+        "kind": "song",
+        "title": "with my little hands tompkins county library virtual baby",
+        "source_path": "docs/early-years-music-resources/song_versions/with-my-little-hands-tompkins-county-library-virtual-baby.md",
+        "snippet": "ram outline)\r\n---\r\n\r\n# With My Little Hands\r\n\r\nrhymes/openingclosing-songs/\r\nWith my little hands I go clap, clap, clap\r\nWith my little feet I go tap, tap, tap\r\nWith my little arms I wave bye, bye, by",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4872663334290619,
+        "combined_score": 0.2923598000574371
+      },
+      {
+        "id": "ea95095f-9dd2-4976-9484-f90cd554d911",
+        "kind": "song",
+        "title": "transition chant open headstart 1 2 3 dance with mehtml",
+        "source_path": "docs/early-years-music-resources/song_versions/transition-chant-open-headstart-1-2-3-dance-with-mehtml.md",
+        "snippet": "tart Way)\r\n---\r\n\r\n# transition chant \"Open\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4691820181391251,
+        "combined_score": 0.281509210883475
+      }
+    ]
+  },
+  {
+    "category": "Cultural",
+    "query": "multicultural diverse traditions",
+    "description": "Find multicultural content",
+    "latency": 136,
+    "count": 2,
+    "results": [
+      {
+        "id": "c0e3c359-38a4-46c5-976b-69e49848dd49",
+        "kind": "song",
+        "title": "cambridge university press 2008 oxford kodaly in",
+        "source_path": "docs/early-years-music-resources/song_versions/cambridge-university-press-2008-oxford-kodaly-in.md",
+        "snippet": "sher preview)'\r\n---\r\n\r\n# Cambridge University Press, 2008.\r\n\r\nLum, Chee-Hoo, and Kathryn Marsh. “Multiple Worlds of Childhood: Culture and\r\nthe Classroom.” In Gary E. McPherson and Graham F. Welch , T",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.35948826557537983,
+        "combined_score": 0.2156929593452279
+      },
+      {
+        "id": "e04528a4-e30c-489f-98c5-34b8800218e7",
+        "kind": "song",
+        "title": "storytime resources lvccld storytime resources outline",
+        "source_path": "docs/early-years-music-resources/song_versions/storytime-resources-lvccld-storytime-resources-outline.md",
+        "snippet": "ng outline)\r\n---\r\n\r\n# Storytime Resources\r\n\r\nWhat does successful programming look like?\r\n• Promotes the library’s collection and resources\r\n• Develop early literacy and family literacy skills\r\n• Cele",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.30035338406009027,
+        "combined_score": 0.18021203043605416
+      }
+    ]
+  },
+  {
+    "category": "Seasonal",
+    "query": "autumn fall leaves harvest",
+    "description": "Find autumn content",
+    "latency": 46,
+    "count": 5,
+    "results": [
+      {
+        "id": "913cc113-e8ae-40d5-815f-34a3c3d7472d",
+        "kind": "song",
+        "title": "all the leaves are falling down jbrary toddler storytime",
+        "source_path": "docs/early-years-music-resources/song_versions/all-the-leaves-are-falling-down-jbrary-toddler-storytime.md",
+        "snippet": "les Out'\r\n---\r\n\r\n# All the Leaves are Falling Down\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.99449724,
+        "semantic_score": 0.3525936989430375,
+        "combined_score": 0.6093551152016989
+      },
+      {
+        "id": "1c1075d7-2b0b-45ff-bbc7-66f8c150a100",
+        "kind": "song",
+        "title": "the seasons nancy kopman the seasons lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/the-seasons-nancy-kopman-the-seasons-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# The Seasons\r\n\r\nSpring begins March 21, mud and sunshine, Winter’s done\r\nApril, May and June bring grass and flowers....\r\nJuly comes by with summer skies, August bees and butterf",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4624847792098066,
+        "combined_score": 0.2774908675258839
+      },
+      {
+        "id": "44decf0b-893a-4261-b010-caf390464f6e",
+        "kind": "song",
+        "title": "rain on grass des plaines public library baby storytime",
+        "source_path": "docs/early-years-music-resources/song_versions/rain-on-grass-des-plaines-public-library-baby-storytime.md",
+        "snippet": "3 brochure)\r\n---\r\n\r\n# RAIN ON GRASS\r\n\r\nuse scarf\r\nRain on the grass\r\nRain on the tree\r\nRain on the roof\r\nBut not on me\r\n*Verses with sun, snow, and leaves\r\n\r\n\r\n**Printed actions:**\r\nsway on ground\r\nsh",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4171014526961503,
+        "combined_score": 0.2502608716176902
+      },
+      {
+        "id": "c0f203ef-c176-4278-ab1a-1ffad6d711c5",
+        "kind": "song",
+        "title": "ring around the rosie good days with kids circle time songs",
+        "source_path": "docs/early-years-music-resources/song_versions/ring-around-the-rosie-good-days-with-kids-circle-time-songs.md",
+        "snippet": "(Toddlers)\r\n---\r\n\r\n# Ring Around the Rosie\r\n\r\nRing around the rosie, A pocket full of posies, Ashes, ashes, We all fall down!\r\nThe cows are in the meadow, Eating buttercups. Thunder! Lightning! We all",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3789828604762908,
+        "combined_score": 0.22738971628577448
+      },
+      {
+        "id": "8b54e271-6977-4b18-ac6e-ab0f0ef57c9d",
+        "kind": "song",
+        "title": "five little farmers storytime standouts five little farmers",
+        "source_path": "docs/early-years-music-resources/song_versions/five-little-farmers-storytime-standouts-five-little-farmers.md",
+        "snippet": "fingerplay)\r\n---\r\n\r\n# Five Little Farmers\r\n\r\nFive little farmers,\r\nWoke up with the sun.\r\nFor it was early morning\r\nAnd chores must be done.\r\nThe first little farmer\r\nWent to milk the cow.\r\nThe second",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.36464003008366697,
+        "combined_score": 0.21878401805020017
+      }
+    ]
+  },
+  {
+    "category": "Seasonal",
+    "query": "winter snow cold holidays",
+    "description": "Find winter content",
+    "latency": 48,
+    "count": 5,
+    "results": [
+      {
+        "id": "b13ae8c7-13f7-44b9-8a86-c7f0496a6a00",
+        "kind": "song",
+        "title": "a winter song nancy kopman senses lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/a-winter-song-nancy-kopman-senses-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# A Winter Song\r\n\r\nWinter is a time of year when we\r\ncan sing about the changes we might\r\nsee.\r\nIt’s different from the Spring, Summer\r\nand Fall.\r\nWinter’s the last season of them",
+        "keyword_score": 0.89513534,
+        "semantic_score": 0.5267248686016069,
+        "combined_score": 0.6740890583908836
+      },
+      {
+        "id": "1c1075d7-2b0b-45ff-bbc7-66f8c150a100",
+        "kind": "song",
+        "title": "the seasons nancy kopman the seasons lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/the-seasons-nancy-kopman-the-seasons-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# The Seasons\r\n\r\nSpring begins March 21, mud and sunshine, Winter’s done\r\nApril, May and June bring grass and flowers....\r\nJuly comes by with summer skies, August bees and butterf",
+        "keyword_score": 0.34913144,
+        "semantic_score": 0.47474429613489155,
+        "combined_score": 0.42449915174328234
+      },
+      {
+        "id": "767b25f5-e9dc-4c0e-93ca-b68d1e451f9f",
+        "kind": "song",
+        "title": "no more monkeys jumping on the bed uark ecep favorite songs",
+        "source_path": "docs/early-years-music-resources/song_versions/no-more-monkeys-jumping-on-the-bed-uark-ecep-favorite-songs.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# NO MORE MONKEYS JUMPING ON THE BED!\r\n\r\nHere is a Hill\r\nHere is a hill all covered with snow.\r\nWe’ll take our sleds up.\r\nand ZOOM down we’ll go\r\n\r\n\r\n**Printed actions:**\r\nPut one",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3468811256785471,
+        "combined_score": 0.20812867540712826
+      },
+      {
+        "id": "c82171a3-f6d0-4f67-9f50-dafd5ad22919",
+        "kind": "song",
+        "title": "select month wyoming state library sing practicehtml",
+        "source_path": "docs/early-years-music-resources/song_versions/select-month-wyoming-state-library-sing-practicehtml.md",
+        "snippet": "ices: Sing'\r\n---\r\n\r\n# Select Month\r\n\r\nAugust 2026\r\nJuly 2026\r\nJune 2026\r\nMay 2026\r\nApril 2026\r\nMarch 2026\r\nFebruary 2026\r\nJanuary 2026\r\nDecember 2025\r\nNovember 2025\r\nOctober 2025\r\nSeptember 2025\r\nAugu",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3413255403846076,
+        "combined_score": 0.20479532423076455
+      },
+      {
+        "id": "820c6b03-40c8-4836-af96-853fae5241d7",
+        "kind": "song",
+        "title": "veterans day parade deposit csd kindergarten music",
+        "source_path": "docs/early-years-music-resources/song_versions/veterans-day-parade-deposit-csd-kindergarten-music.md",
+        "snippet": "iculum map)\r\n---\r\n\r\n# -Veteran’s Day Parade\r\n\r\n-Turkey Songs\r\n-Character Ed\r\nPitch\r\n Same vs. different\r\nPitch\r\n High , medium and\r\nLow pitch\r\n Changing pitch\r\n Vocal pitch\r\n Instrumental pitch\r\n",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3332018852469082,
+        "combined_score": 0.19992113114814491
+      }
+    ]
+  },
+  {
+    "category": "Seasonal",
+    "query": "spring flowers butterflies",
+    "description": "Find spring content",
+    "latency": 59,
+    "count": 5,
+    "results": [
+      {
+        "id": "1c1075d7-2b0b-45ff-bbc7-66f8c150a100",
+        "kind": "song",
+        "title": "the seasons nancy kopman the seasons lyrics",
+        "source_path": "docs/early-years-music-resources/song_versions/the-seasons-nancy-kopman-the-seasons-lyrics.md",
+        "snippet": "s-lyrics.pdf\r\n---\r\n\r\n# The Seasons\r\n\r\nSpring begins March 21, mud and sunshine, Winter’s done\r\nApril, May and June bring grass and flowers....\r\nJuly comes by with summer skies, August bees and butterf",
+        "keyword_score": 0.17371374,
+        "semantic_score": 0.4164348840713501,
+        "combined_score": 0.31934642791748047
+      },
+      {
+        "id": "d2b3dce0-7fc9-4bdb-8ae0-472e0608eaa9",
+        "kind": "song",
+        "title": "the birth of the butterfly gaynor songs child world 1897pdf",
+        "source_path": "docs/early-years-music-resources/song_versions/the-birth-of-the-butterfly-gaynor-songs-child-world-1897pdf.md",
+        "snippet": "(No. 1)\r\n---\r\n\r\n# The Birth of the Butterfly\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.4132277123196304,
+        "combined_score": 0.24793662739177824
+      },
+      {
+        "id": "cd5ec696-a474-4512-a95e-b08fcf1557f5",
+        "kind": "song",
+        "title": "roly poly caterpillar uark ecep favorite songs fingerplays",
+        "source_path": "docs/early-years-music-resources/song_versions/roly-poly-caterpillar-uark-ecep-favorite-songs-fingerplays.md",
+        "snippet": "Finger Plays\r\n---\r\n\r\n# Roly Poly Caterpillar\r\n\r\nRoly Poly caterpillar\r\nInto a corner crept\r\nSpun around himself a blanket\r\nthen for a long time slept\r\nRoly poly caterpillar\r\nwakening by and by\r\nfound ",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.36623907677634526,
+        "combined_score": 0.21974344606580715
+      },
+      {
+        "id": "6c5e2f30-1550-442b-a379-cff1a0085cbf",
+        "kind": "song",
+        "title": "vintery mintery cutery corn mid north coast library baby",
+        "source_path": "docs/early-years-music-resources/song_versions/vintery-mintery-cutery-corn-mid-north-coast-library-baby.md",
+        "snippet": "s (booklet)\r\n---\r\n\r\n# Vintery, Mintery, Cutery, Corn\r\n\r\nVintery, mintery, cutery, corn,\r\nApple seed and apple thorn;\r\nWire, briar, limber lock,\r\nThree geese in a flock.\r\nOne flew east,\r\nAnd one flew w",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.34193068742752075,
+        "combined_score": 0.20515841245651245
+      },
+      {
+        "id": "c0f203ef-c176-4278-ab1a-1ffad6d711c5",
+        "kind": "song",
+        "title": "ring around the rosie good days with kids circle time songs",
+        "source_path": "docs/early-years-music-resources/song_versions/ring-around-the-rosie-good-days-with-kids-circle-time-songs.md",
+        "snippet": "(Toddlers)\r\n---\r\n\r\n# Ring Around the Rosie\r\n\r\nRing around the rosie, A pocket full of posies, Ashes, ashes, We all fall down!\r\nThe cows are in the meadow, Eating buttercups. Thunder! Lightning! We all",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.3399245840288576,
+        "combined_score": 0.20395475041731456
+      }
+    ]
+  },
+  {
+    "category": "Age-Specific",
+    "query": "infant baby lullaby soothing",
+    "description": "Find infant-appropriate content",
+    "latency": 47,
+    "count": 5,
+    "results": [
+      {
+        "id": "8ad2f24e-0bd3-47f4-a15e-6d944667d504",
+        "kind": "song",
+        "title": "benjamin its ms sharlene who loves benjamin its miss naeyc",
+        "source_path": "docs/early-years-music-resources/song_versions/benjamin-its-ms-sharlene-who-loves-benjamin-its-miss-naeyc.md",
+        "snippet": "Early Years)'\r\n---\r\n\r\n# Benjamin? It’s Ms. Sharlene. Who loves Benjamin? It’s Miss\r\n\r\nCallie.” His teacher sings the names of many of the people\r\nin Benjamin’s life who love him. She watches Benjamin ",
+        "keyword_score": 0.9351699,
+        "semantic_score": 0.5159812704341525,
+        "combined_score": 0.6836567125092099
+      },
+      {
+        "id": "343f08e8-24b6-49bf-b1ce-4365b2cc223f",
+        "kind": "song",
+        "title": "ocr swanton public library bounce rhymes",
+        "source_path": "docs/early-years-music-resources/song_versions/ocr-swanton-public-library-bounce-rhymes.md",
+        "snippet": "ords: 876\r\n---\r\n\r\n# Baby Bounce Nursery Rhymes\r\n\r\n\"Bounce\" Rhymes for Babies/Toddlers with Caregiver\r\nHippity Hop\r\nThis is a fun song that can be done sitting with baby in parent and caregiver's lap\r\n",
+        "keyword_score": 0.52471113,
+        "semantic_score": 0.3773884508925087,
+        "combined_score": 0.4363175233553295
+      },
+      {
+        "id": "a6de7129-b8d1-44d3-aa8e-1826d521f1df",
+        "kind": "song",
+        "title": "babytime ideas lvccld storytime resources outline",
+        "source_path": "docs/early-years-music-resources/song_versions/babytime-ideas-lvccld-storytime-resources-outline.md",
+        "snippet": "mming outline)\r\n---\r\n\r\n# Babytime Ideas\r\n\r\n• Keep it simple! Babytime is a much lower key program that runs for approximately 20 minutes.\r\n• Repetition is important, so try to use a lot of the same so",
+        "keyword_score": 0.28292018,
+        "semantic_score": 0.5376938421221444,
+        "combined_score": 0.43578437797378716
+      },
+      {
+        "id": "6dbfc9f3-ebda-4eb9-a637-93875f4a3f1d",
+        "kind": "song",
+        "title": "beyond twinkle twinkle naeyc beyond twinkle twinkle",
+        "source_path": "docs/early-years-music-resources/song_versions/beyond-twinkle-twinkle-naeyc-beyond-twinkle-twinkle.md",
+        "snippet": "Early Years)'\r\n---\r\n\r\n# Beyond Twinkle, Twinkle\r\n\r\n✪ ✪\r\nReprinted from Young Children  •  March 2010 15\r\nThe Performing Arts: Music, Dance, and Theater in the Early Years\r\nThe Performing Arts: Music, ",
+        "keyword_score": 0.4544327,
+        "semantic_score": 0.41790634126867654,
+        "combined_score": 0.4325168832028258
+      },
+      {
+        "id": "eaae5061-6171-4a3e-827d-b562f221812e",
+        "kind": "song",
+        "title": "to 24 months state library victoria lets read toolkit",
+        "source_path": "docs/early-years-music-resources/song_versions/to-24-months-state-library-victoria-lets-read-toolkit.md",
+        "snippet": "ic Libraries\r\n---\r\n\r\n# TO 24 MONTHS\r\n\r\nOlder babies will be developing their motor skills\r\nand will spend time exploring cause and effect\r\nby dropping or throwing objects such as books,\r\nfood and toys",
+        "keyword_score": 0.36845422,
+        "semantic_score": 0.37034965003287845,
+        "combined_score": 0.36959147718403373
+      }
+    ]
+  },
+  {
+    "category": "Age-Specific",
+    "query": "toddler movement active energetic",
+    "description": "Find toddler-appropriate content",
+    "latency": 52,
+    "count": 5,
+    "results": [
+      {
+        "id": "95303e64-33fa-4365-8577-7554a3709ebb",
+        "kind": "song",
+        "title": "ocr sc school kindergarten music movement activities",
+        "source_path": "docs/early-years-music-resources/song_versions/ocr-sc-school-kindergarten-music-movement-activities.md",
+        "snippet": "rds: 1540\r\n---\r\n\r\n# Kindergarten Music & Movement Activities\r\n\r\nA Staff Training Aid\r\nMusic & Movement Activities\r\nA Publication of the Environments Professional Group\r\nWhy Are Children Playing?\r\nFor ",
+        "keyword_score": 0.9999999,
+        "semantic_score": 0.4773548726208954,
+        "combined_score": 0.6864128758888215
+      },
+      {
+        "id": "eaae5061-6171-4a3e-827d-b562f221812e",
+        "kind": "song",
+        "title": "to 24 months state library victoria lets read toolkit",
+        "source_path": "docs/early-years-music-resources/song_versions/to-24-months-state-library-victoria-lets-read-toolkit.md",
+        "snippet": "ic Libraries\r\n---\r\n\r\n# TO 24 MONTHS\r\n\r\nOlder babies will be developing their motor skills\r\nand will spend time exploring cause and effect\r\nby dropping or throwing objects such as books,\r\nfood and toys",
+        "keyword_score": 0.96459454,
+        "semantic_score": 0.3310634304616449,
+        "combined_score": 0.5844758754690645
+      },
+      {
+        "id": "1e8292d9-4297-4b47-b225-31235874b8f7",
+        "kind": "song",
+        "title": "support and nurture childrens developmental skills naeyc",
+        "source_path": "docs/early-years-music-resources/song_versions/support-and-nurture-childrens-developmental-skills-naeyc.md",
+        "snippet": "Early Years)'\r\n---\r\n\r\n# Support and Nurture Children’s Developmental Skills\r\n\r\n18 Young Children  •  March 2010\r\nBooks available from NAEYC\r\nAvailable at www.naeyc.org/store\r\nor call 1-800-424-2460\r\nF",
+        "keyword_score": 0.71837336,
+        "semantic_score": 0.4533488917295161,
+        "combined_score": 0.5593586783375754
+      },
+      {
+        "id": "404816f1-12e5-4a94-ad22-93c8ab85b976",
+        "kind": "song",
+        "title": "human services forthcoming naeyc beyond twinkle twinkle",
+        "source_path": "docs/early-years-music-resources/song_versions/human-services-forthcoming-naeyc-beyond-twinkle-twinkle.md",
+        "snippet": "Early Years)'\r\n---\r\n\r\n# Human Services, forthcoming).\r\n\r\nFor example, in the song “I’m a\r\nLittle Teapot,” the words stout,\r\nspout, shout, and out all rhyme.\r\nSinging from the same songbook:\r\nIdeas to ",
+        "keyword_score": 0.71837336,
+        "semantic_score": 0.4300733119030926,
+        "combined_score": 0.5453933304417213
+      },
+      {
+        "id": "ae8602dd-fe4f-4851-a4d1-e01219a06bbb",
+        "kind": "song",
+        "title": "rhythm and teaching activities referencing songsmovement",
+        "source_path": "docs/early-years-music-resources/song_versions/rhythm-and-teaching-activities-referencing-songsmovement.md",
+        "snippet": "nd Movement\r\n---\r\n\r\n# rhythm) and teaching activities referencing songs/movement\r\n\r\n*Lyrics not available in source*",
+        "keyword_score": 0.7538556,
+        "semantic_score": 0.306239990520485,
+        "combined_score": 0.48528622873306737
+      }
+    ]
+  },
+  {
+    "category": "Age-Specific",
+    "query": "preschool complex narrative",
+    "description": "Find preschool-appropriate content",
+    "latency": 59,
+    "count": 5,
+    "results": [
+      {
+        "id": "d43aec22-8574-4de3-939f-45955a1dab93",
+        "kind": "song",
+        "title": "simple concepts lvccld storytime resources outline",
+        "source_path": "docs/early-years-music-resources/song_versions/simple-concepts-lvccld-storytime-resources-outline.md",
+        "snippet": "ing outline)\r\n---\r\n\r\n# • Simple Concepts\r\n\r\nPreschool – Ages 3 to 5\r\n• More interaction with the kids and less with the caregivers is normal in this age group\r\n• Longer stories are great for practicin",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.6845780971036597,
+        "combined_score": 0.4107468582621958
+      },
+      {
+        "id": "76df7640-e0ea-4934-9b58-f6af2875d7e3",
+        "kind": "song",
+        "title": "reading aloud to little ones alaeditions essential lapsit",
+        "source_path": "docs/early-years-music-resources/song_versions/reading-aloud-to-little-ones-alaeditions-essential-lapsit.md",
+        "snippet": "s (Handouts)\r\n---\r\n\r\n# Reading Aloud to Little Ones\r\n\r\nThings to remember:\r\n• It starts with YOU!\r\n• Let your child see you reading at home.\r\n• Have reading materials around the house.\r\n• Make the tim",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.6058851589170083,
+        "combined_score": 0.363531095350205
+      },
+      {
+        "id": "886dd032-3b26-4ae5-b282-45899c323f4c",
+        "kind": "song",
+        "title": "closing routines lvccld storytime resources outline",
+        "source_path": "docs/early-years-music-resources/song_versions/closing-routines-lvccld-storytime-resources-outline.md",
+        "snippet": "ming outline)\r\n---\r\n\r\n# Closing Routines\r\n\r\n• Compliment or thank your participants\r\n• Wrap up with a goodbye rhyme or song\r\n• Provide a hand stamp or stickers and/or takeaways such as a coloring shee",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.5649818700573961,
+        "combined_score": 0.33898912203443765
+      },
+      {
+        "id": "e3321788-9833-4a15-aa43-8c122bc2fab2",
+        "kind": "song",
+        "title": "interactive learning richland library fingerplays songshtml",
+        "source_path": "docs/early-years-music-resources/song_versions/interactive-learning-richland-library-fingerplays-songshtml.md",
+        "snippet": "r Storytime\r\n---\r\n\r\n# Interactive Learning\r\n\r\nParenting\r\nAudience\r\nParents\r\nFamilies\r\nYoung children\r\nBabies\r\nToddlers\r\nPreschoolers\r\nLike this\r\n786\r\n\r\n\r\n**Printed actions:**\r\n0-5 years\r\n0-18 months\r\n",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.561140470368842,
+        "combined_score": 0.33668428222130514
+      },
+      {
+        "id": "e93ca2ef-1f1e-4834-9471-d6aeca16410a",
+        "kind": "song",
+        "title": "preschool ideas lvccld storytime resources outline",
+        "source_path": "docs/early-years-music-resources/song_versions/preschool-ideas-lvccld-storytime-resources-outline.md",
+        "snippet": "ming outline)\r\n---\r\n\r\n# Preschool Ideas:\r\n\r\n• Using flannel to retell a story offer a different visual component. Counting rhymes are great as\r\nflannels because you can make them as interactive as you",
+        "keyword_score": 1e-20,
+        "semantic_score": 0.55406177768514,
+        "combined_score": 0.33243706661108396
+      }
+    ]
+  }
+]

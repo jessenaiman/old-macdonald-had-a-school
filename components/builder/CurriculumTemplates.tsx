@@ -12,7 +12,7 @@ export type GradePathItem = {
   href?: string;
 };
 
-type GradeTemplateProps = {
+export type GradeTemplateProps = {
   grade: string;
   age: string;
   leadName: string;
@@ -25,6 +25,8 @@ type GradeTemplateProps = {
   activeIndex?: number;
   onSelect?: (index: number) => void;
   onPreview?: () => void;
+  className?: string;
+  badgeImage?: string;
 };
 
 const activityIcons = [
@@ -34,41 +36,6 @@ const activityIcons = [
   "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png",
 ];
 
-type PlannerCrew = readonly string[];
-
-const plannerCrewByGrade: Record<string, PlannerCrew> = {
-  daycare: ["/staff_and_students/miss-puddles-transparent-circle.png", "/staff_and_students/puddles-transparent-circle.png", "/staff_and_students/penny-transparent-circle.png"],
-  preschool: ["/staff_and_students/miss-maisy-transparent-circle.png", "/staff_and_students/mr-rusty-transparent-circle.png", "/staff_and_students/maisy-transparent-circle.png"],
-  kindergarten: ["/staff_and_students/mr-rusty-transparent-circle.png", "/staff_and_students/puddles-transparent-circle.png", "/staff_and_students/mr-puddles-transparent-circle.png"],
-  "grade-1": ["/staff_and_students/miss-hayley-transparent-circle.png", "/staff_and_students/rusty-transparent-circle.png", "/staff_and_students/maisy-transparent-circle.png"],
-  "grade-2": ["/staff_and_students/mr-sam-transparent-circle.png", "/staff_and_students/sam-transparent-circle.png", "/staff_and_students/rusty-transparent-circle.png"],
-};
-
-const plannerCrewByLeadName: Record<string, PlannerCrew> = {
-  "Miss Puddles": ["/staff_and_students/miss-puddles-transparent-circle.png", "/staff_and_students/puddles-transparent-circle.png", "/staff_and_students/mr-puddles-transparent-circle.png"],
-  "Mr Rusty": ["/staff_and_students/mr-rusty-transparent-circle.png", "/staff_and_students/mr-maisy-transparent-circle.png", "/staff_and_students/puddles-transparent-circle.png"],
-  "Miss Hayley": ["/staff_and_students/miss-hayley-transparent-circle.png", "/staff_and_students/whiskers-transparent-circle.png", "/staff_and_students/penny-transparent-circle.png"],
-  "Mr Sam": ["/staff_and_students/mr-sam-transparent-circle.png", "/staff_and_students/sam-transparent-circle.png", "/staff_and_students/whiskers-transparent-circle.png"],
-  "Mr Maisy": ["/staff_and_students/mr-maisy-transparent-circle.png", "/staff_and_students/maisy-transparent-circle.png", "/staff_and_students/rusty-transparent-circle.png"],
-  "Miss Maisy": ["/staff_and_students/miss-maisy-transparent-circle.png", "/staff_and_students/penny-transparent-circle.png", "/staff_and_students/hopper-transparent-circle.png"],
-};
-
-const defaultPlannerCrew = ["/staff_and_students/miss-puddles-transparent-circle.png", "/staff_and_students/mr-maisy-transparent-circle.png", "/staff_and_students/maisy-transparent-circle.png"];
-
-function plannerGradeKey(grade: string) {
-  const slug = grade.toLowerCase();
-  if (slug.includes("daycare")) return "daycare";
-  if (slug.includes("preschool")) return "preschool";
-  if (slug.includes("kindergarten")) return "kindergarten";
-  if (slug.includes("grade 1")) return "grade-1";
-  if (slug.includes("grade 2")) return "grade-2";
-  return "kindergarten";
-}
-
-function plannerCrewForGrade(grade: string, leadName: string) {
-  return plannerCrewByLeadName[leadName] ?? plannerCrewByGrade[plannerGradeKey(grade)] ?? defaultPlannerCrew;
-}
-
 function makeGoalSummary(item: GradePathItem | undefined) {
   if (!item) return { title: "Pick a lesson to begin", kicker: "Choose a path", summary: "Open one path above to load the current goal and resources." };
   return {
@@ -76,17 +43,6 @@ function makeGoalSummary(item: GradePathItem | undefined) {
     kicker: item.kicker,
     summary: item.summary || "Open this planning entry to begin a teacher-focused sequence.",
   };
-}
-
-function curriculumIcon(subject = "", category = "") {
-  const label = `${subject} ${category}`;
-  if (/math|number|stem/i.test(label)) return "/brand-kit-icon-sheets/individual-icons/subject-math-building.png";
-  if (/literacy|phonic|reading|writing|language|story/i.test(label)) return "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png";
-  if (/music|movement|dance/i.test(label)) return "/brand-kit-icon-sheets/individual-icons/subject-music-dance.png";
-  if (/art|photo|visual/i.test(label)) return "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png";
-  if (/garden|health|nature/i.test(label)) return "/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png";
-  if (/physical|sport/i.test(label)) return "/brand-kit-icon-sheets/individual-icons/subject-physical-education.png";
-  return "/brand-kit-icon-sheets/individual-icons/subject-early-learning.png";
 }
 
 function Rail({
@@ -138,25 +94,27 @@ export function GradeTemplate({
   activeIndex = 0,
   onSelect,
   onPreview,
+  className,
+  badgeImage,
 }: GradeTemplateProps) {
   const isUpperGrade = grade === "Grade 1" || grade === "Grade 2" || grade === "Kindergarten";
-  const badge = grade === "Grade 1"
+  const badge = badgeImage ?? (grade === "Grade 1"
     ? "/brand-kit-icon-sheets/individual-icons/grade-1.png"
     : grade === "Grade 2"
       ? "/brand-kit-icon-sheets/individual-icons/grade-2.png"
       : grade === "Kindergarten"
         ? "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png"
-        : grade === "Preschool"
+        : grade === "Pre-School"
           ? "/icons/early-years/face-patches/miss-maisy-purple.png"
-        : "/brand-kit-icon-sheets/individual-icons/grade-daycare.png";
+        : "/brand-kit-icon-sheets/individual-icons/grade-daycare.png");
 
   const planningGoal = makeGoalSummary(items[activeIndex] ?? items[0]);
-  const planningCrew = plannerCrewForGrade(grade, leadName);
   const planningResources = items.slice(0, 3);
 
   return (
     <div
-      className={`${styles.wall} ${styles.gradeWall} ${isUpperGrade ? styles.gradeOneWall : ""} ${grade === "Grade 2" ? styles.gradeTwoWall : ""} ${grade === "Kindergarten" ? styles.kindergartenWall : ""}`}
+      className={`${styles.wall} ${styles.gradeWall} ${grade === "Daycare" ? styles.daycareWall : ""} ${isUpperGrade ? styles.gradeOneWall : ""} ${grade === "Grade 2" ? styles.gradeTwoWall : ""} ${grade === "Kindergarten" ? styles.kindergartenWall : ""} ${className ?? ""}`}
+      data-grade-template={grade === "Grade 1" ? "grade-one" : grade === "Grade 2" ? "grade-two" : grade === "Kindergarten" ? "kindergarten" : grade === "Pre-School" ? "pre-school" : "daycare"}
       data-grade-family={grade === "Grade 1" ? "grade-one" : grade === "Grade 2" ? "grade-two" : grade === "Kindergarten" ? "kindergarten" : undefined}
     >
       <Rail grade={grade} age={age} badge={badge} reminder="Invite a choice. Notice the story." />
@@ -168,10 +126,12 @@ export function GradeTemplate({
             <h1>{headline}<em>{accentHeadline}</em></h1>
             <p>{summary}</p>
             <div className={styles.heroActions}>
-              {onPreview ? (
+              {items[activeIndex]?.href ? (
+                <Link href={items[activeIndex]?.href ?? "#curriculum"} className={styles.feltButton}>Build this lesson</Link>
+              ) : onPreview ? (
                 <button type="button" className={styles.feltButton} onClick={onPreview}>Build this lesson</button>
               ) : (
-                <Link href={items[activeIndex]?.href ?? "#curriculum"} className={styles.feltButton}>Build this lesson</Link>
+                <a href="#curriculum" className={styles.feltButton}>Build this lesson</a>
               )}
               <a href="#curriculum" className={styles.paperButton}>Browse learning paths</a>
             </div>
@@ -190,7 +150,7 @@ export function GradeTemplate({
             <a href="#resources">See planning resources</a>
           </header>
           <div className={styles.pathGrid}>
-            {items.slice(0, 4).map((item, index) => {
+            {items.map((item, index) => {
               const body = (
                 <>
                   <Image src="/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png" width={22} height={22} alt="" className={styles.pathPin} />
@@ -218,11 +178,11 @@ export function GradeTemplate({
             <p className={styles.planningSummary}>{planningGoal.summary}</p>
           </header>
           <div className={styles.planningActions}>
-            <Link className={`${styles.planningAction} ${styles.planningPrimary}`} href={items[activeIndex]?.href ?? "#curriculum"}>Edit goal</Link>
-            <a className={`${styles.planningAction} ${styles.planningSecondary}`} href="#today">Save to week</a>
+            <Link className={`${styles.planningAction} ${styles.planningPrimary}`} href={items[activeIndex]?.href ?? "#curriculum"}>Open lesson</Link>
+            <a className={`${styles.planningAction} ${styles.planningSecondary}`} href="#today">Back to overview</a>
           </div>
           <div className={styles.planningResourceStrip}>
-            {planningResources.map((item, index) => (
+            {planningResources.map((item) => (
               <Link
                 className={styles.planningResourceCard}
                 href={item.href ?? "#curriculum"}
@@ -230,8 +190,6 @@ export function GradeTemplate({
                 aria-label={`Open planning resource ${item.title}`}
               >
                 <Image src="/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png" width={26} height={26} alt="" className={styles.planningResourcePin} />
-                <Image src={planningCrew[index] ?? planningCrew[0]} width={48} height={48} alt="" className={styles.planningResourcePersona} />
-                <Image src={item.icon || curriculumIcon(item.kicker, item.summary)} width={34} height={34} alt="" className={styles.planningResourceIcon} />
                 <h3>{item.title}</h3>
                 <p>{item.summary}</p>
                 <b>Open resource</b>

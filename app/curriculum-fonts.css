@@ -7,7 +7,7 @@
  */
 @font-face {
   font-family: "Curriculum Caveat";
-  src: url("/brand-kit-demo-assets/Caveat-Regular.ttf") format("truetype");
+  src: url("/background-textures/Caveat-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: "Curriculum Caveat";
-  src: url("/brand-kit-demo-assets/Caveat-Bold.ttf") format("truetype");
+  src: url("/background-textures/Caveat-Bold.ttf") format("truetype");
   font-style: normal;
   font-weight: 700;
   font-display: swap;

@@ -5,14 +5,15 @@
 Staff signature colour is subject-coded (matches the role they teach), not species- or outfit-based — see `lib/cast.ts` `STAFF[].color`, the single source of truth these hex values are copied from.
 
 | Name | Species | Role | Grade/Level | Colour | Activities |
+| --- | --- | --- | --- | --- | --- |
 | **Old MacDonald** | Human adult | principle, music teacher | Kindergarten | Brown `#8B5E34` | gatherings, processions, assembly, storytime, whole-school singing, banjo or guitar |
 | **Miss Puddles** | Duck adult | Daycare teacher, swim instructor | Daycare | Yellow `#E8A227` | Circle time, fingerplay songs, art table, simple movement games, sharing and turn-taking, swim instructor |
-| **Mr Rusty** | Horse adult | dance teacher | Kindergarten | Blue `#2C6C9B` | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions |
+| **Mr Rusty** | Horse adult | dance teacher | Kindergarten & Grade 1 | Blue `#2C6C9B` | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions |
 | **Miss Hayley** | Human adult | , drama | Grade 1/2 | Pink `#C9527A` | Storytime, songs, imagination games, drama, class adventures, creative movement |
-| **Mr Sam** | Pig adult | Math, science, building | Grade 2 | Teal `#1F6B6B` | Counting, measuring, sorting, patterns, simple engineering, build table |
-| **Mr Maisy** | Cow adult | Physical education teacher | Preschool | Red `#B5272C` | Outdoor games, movement warm-ups, gross-motor play |
+| **Mr Sam** | Pig adult | Math, science, building | Whole school | Teal `#1F6B6B` | Counting, measuring, sorting, patterns, simple engineering, build table |
+| **Mr Maisy** | Cow adult | Physical education teacher | Grade 2 | Red `#B5272C` | Outdoor games, movement warm-ups, gross-motor play |
 | **Mr Puddles** | Duck adult | Art & photography teacher | Whole school | Indigo `#4F5FA0` | Bird studies, painting, photography, exhibitions |
-| **Miss Maisy** | Cow adult | School secretary & gardening lead; cooking and health support | Whole school | Sage green `#55705A` | Family welcome, office support, gardening, simple food preparation, healthy habits and seasonal displays |
+| **Miss Maisy** | Cow adult | School secretary & gardening lead; cooking and health support | Preschool | Sage green `#55705A` | Family welcome, office support, gardening, simple food preparation, healthy habits and seasonal displays |
 
 ### Staff rule
 

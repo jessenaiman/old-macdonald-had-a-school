@@ -3,13 +3,14 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import type { ComponentType } from "react";
+import { gradeKeysForLabel, type GradeKey } from "./grade-routes";
 
 export type LessonMetadata = Record<string, string> & {
   slug: string;
   title: string;
   subject: string;
   category: string;
-  gradeBand: string;
+  grade: string;
   summary: string;
   focus: string;
   template: string;
@@ -49,7 +50,7 @@ function titleFromSlug(slug: string) {
 
 function gradeFromFolder(sourcePath: string) {
   const folder = path.basename(path.dirname(sourcePath));
-  return /^(daycare|preschool|kindergarten|grade-one|grade-two)$/i.test(folder)
+  return /^(daycare|pre-school|preschool|kindergarten|grade-one|grade-two)$/i.test(folder)
     ? titleFromSlug(folder)
     : "";
 }
@@ -67,7 +68,7 @@ function normalizeMetadata(file: LessonFile, metadata: Record<string, unknown> =
     title: values.title || titleFromSlug(file.slug),
     subject: values.subject || "Curriculum",
     category: values.category || "Lesson plan",
-    gradeBand: values.gradeBand || values.grade || gradeFromFolder(file.sourcePath) || "All learners",
+    grade: values.grade || gradeFromFolder(file.sourcePath) || "All learners",
     summary: values.summary || "Open this lesson plan and adapt it for your learners.",
     focus: values.focus || values.goal || "Use the lesson plan below to guide the learning experience.",
     template: values.template || "lesson",
@@ -94,6 +95,11 @@ async function importLesson(relativePath: string): Promise<LessonModule> {
 
 export function getLessonSlugs() {
   return lessonFiles.map((file) => file.slug);
+}
+
+export async function getLessonSlugsForGrade(grade: GradeKey) {
+  const lessons = await getAllLessons();
+  return lessons.filter((lesson) => gradeKeysForLabel(lesson.metadata.grade).includes(grade)).map((lesson) => lesson.metadata.slug);
 }
 
 export async function getLesson(slug: string): Promise<Lesson | undefined> {

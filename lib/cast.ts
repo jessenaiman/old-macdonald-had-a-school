@@ -7,7 +7,7 @@ export type StaffMember = {
   name: string;
   species: string;
   role: string;
-  gradeBand: string;
+  grade: string;
   color: string; // subject-coded signature color, bold/bright — see color-coding review
   personality: string[];
   worksheetLens: string;
@@ -30,7 +30,7 @@ export type Student = {
 export const STAFF: StaffMember[] = [
   {
     key: "old-macdonald", name: "Old MacDonald", species: "Human adult", role: "Headmaster & band leader",
-    gradeBand: "Whole school", color: "#8B5E34",
+    grade: "Whole school", color: "#8B5E34",
     personality: ["Welcoming, attentive and playful", "Anchors whole-school gatherings", "Invites participation without taking over"],
     worksheetLens: "Whole-school review — community, review, cross-curricular checks, shared challenges.",
     guides: ["Morning meetings and assemblies", "Reading and shared stories", "Band leadership and community events"],
@@ -38,7 +38,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "miss-puddles", name: "Miss Puddles", species: "Duck adult", role: "Daycare teacher",
-    gradeBand: "Daycare (0–2) & Preschool (3–4)", color: "#E8A227",
+    grade: "Daycare (0–2) & Preschool (3–4)", color: "#E8A227",
     personality: ["Nurturing, patient and practical", "Meets younger learners at their level", "Turns routines into calm participation"],
     worksheetLens: "Early learning & SEL — routines, sharing, simple instructions, art, calm participation.",
     guides: ["Play-based early learning", "Classroom routines and sharing", "Fingerplays, art and simple movement"],
@@ -46,7 +46,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "mr-rusty", name: "Mr Rusty", species: "Horse adult", role: "Music & dance teacher",
-    gradeBand: "Preschool & Kindergarten", color: "#2C6C9B",
+    grade: "Preschool & Kindergarten", color: "#2C6C9B",
     personality: ["Warm, rhythmic and encouraging", "Grounded energy rather than showmanship", "Helps shy students join in"],
     worksheetLens: "Rhythm & movement — music, patterns, sequencing, syllables, fluency.",
     guides: ["Music, singing and fiddle", "Movement and dance sequences", "Patterns, rhythm, syllables and fluency"],
@@ -54,7 +54,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "miss-hayley", name: "Miss Hayley", species: "Human adult", role: "Grade 1/2 & drama",
-    gradeBand: "Grade 1/2", color: "#C9527A",
+    grade: "Grade 1/2", color: "#C9527A",
     personality: ["Expressive, encouraging and imaginative", "Gets the class singing", "Uses imagination, drama and class plays"],
     worksheetLens: "Language & communication — phonics, reading, writing, vocabulary, drama.",
     guides: ["Phonics, reading and vocabulary", "Writing and oral communication", "Drama, storytelling and performance"],
@@ -62,7 +62,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "mr-sam", name: "Mr Sam", species: "Pig adult", role: "Math & building",
-    gradeBand: "Grade 2", color: "#1F6B6B",
+    grade: "Whole school", color: "#1F6B6B",
     personality: ["Inventive, patient and hands-on", "Makes room for “I don’t know yet”", "Builds to understand how things work"],
     worksheetLens: "Math & STEM — number sense, measurement, geometry, science, building.",
     guides: ["Number sense and operations", "Measurement and geometry", "Science, engineering and practical problem-solving"],
@@ -70,7 +70,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "mr-maisy", name: "Mr Maisy", species: "Cow adult", role: "Physical education teacher",
-    gradeBand: "Whole school", color: "#B5272C",
+    grade: "Grade 2", color: "#B5272C",
     personality: ["Energetic, encouraging and team-minded", "Models safe movement", "Celebrates effort and participation"],
     worksheetLens: "Physical education — movement, health, teamwork, safety, games.",
     guides: ["Physical education and gross motor skills", "Games, teamwork and outdoor activity", "Health, safety and body awareness"],
@@ -78,7 +78,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "mr-puddles", name: "Mr Puddles", species: "Duck adult", role: "Art & photography teacher",
-    gradeBand: "Whole school", color: "#4F5FA0",
+    grade: "Whole school", color: "#4F5FA0",
     personality: ["Observant, curious and gently funny", "A devoted birdwatcher", "Notices small visual details"],
     worksheetLens: "Visual observation — art, photography, senses, classification, nature.",
     guides: ["Drawing, colour, texture and composition", "Photography and careful observation", "Nature study through looking closely"],
@@ -86,7 +86,7 @@ export const STAFF: StaffMember[] = [
   },
   {
     key: "miss-maisy", name: "Miss Maisy", species: "Cow adult", role: "School secretary & gardening lead",
-    gradeBand: "Whole school", color: "#55705A",
+    grade: "Preschool", color: "#55705A",
     personality: ["Organized, welcoming and observant", "Helps the school day run smoothly", "Makes information easy to follow"],
     worksheetLens: "Practical organization — calendar, time, lists, sequencing, clear messages.",
     guides: ["Schedules, calendars and time", "Sequencing and organizing information", "Clear messages and practical communication"],

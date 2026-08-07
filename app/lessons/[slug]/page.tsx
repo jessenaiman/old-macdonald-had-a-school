@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { LessonDocument } from "../../../components/LessonDocument";
 import { SiteShell } from "../../../components/SiteShell";
 import { getLesson, getLessonSlugs } from "../../../lib/content";
+import { lessonHref } from "../../../lib/grade-routes";
 
 type LessonPageProps = {
   params: Promise<{ slug: string }>;
@@ -34,6 +35,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const { slug } = await params;
   const lesson = await getLesson(slug);
   if (!lesson) notFound();
+
+  const canonicalHref = lessonHref(lesson.metadata);
+  if (canonicalHref.startsWith("/grade/")) redirect(canonicalHref);
 
   return (
     <SiteShell active="topics">

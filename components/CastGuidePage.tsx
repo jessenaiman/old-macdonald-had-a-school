@@ -28,7 +28,7 @@ export function CastGuidePage() {
             <article className="cast-profile cast-staff-profile" key={staff.key} style={{ borderTopColor: staff.color }}>
               <header className="cast-profile-head">
                 <CharacterBadge charKey={staff.key} color={staff.color} name={staff.name} size={76} shape="square" />
-                <div><h3>{staff.name}</h3><p>{staff.role}</p><small>{staff.gradeBand}</small></div>
+                <div><h3>{staff.name}</h3><p>{staff.role}</p><small>{staff.grade}</small></div>
               </header>
               <p className="cast-profile-summary">{staff.worksheetLens}</p>
               <ul className="cast-guide-list" aria-label={`${staff.name} guides`}>

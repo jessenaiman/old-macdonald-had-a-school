@@ -2,7 +2,7 @@
 -- Runs once on first container start (docker-entrypoint-initdb.d).
 
 -- Required extensions
-CREATE EXTENSION IF NOT EXISTS vector;     -- pgvector for semantic search
+-- CREATE EXTENSION IF NOT EXISTS vector;     -- pgvector for semantic search (requires pgvector/pgvector image)
 CREATE EXTENSION IF NOT EXISTS pg_trgm;    -- trigram similarity for fuzzy text
 
 -- Main search chunks table.

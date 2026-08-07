@@ -1,6 +1,8 @@
 services:
   db:
-    image: pgvector/pgvector:pg16
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
     container_name: omhas-db
     restart: unless-stopped
     environment:

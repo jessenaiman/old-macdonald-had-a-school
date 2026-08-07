@@ -1,13 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useTheme } from "next-themes";
-import { LuMoonStar, LuPalette, LuSunMedium } from "react-icons/lu";
 import { useSyncExternalStore } from "react";
 
 const THEMES = [
-  { value: "farm-day", label: "Farm day", Icon: LuSunMedium },
-  { value: "lullaby-dusk", label: "Lullaby dusk", Icon: LuMoonStar },
-  { value: "storybook-focus", label: "Storybook focus", Icon: LuPalette },
+  { value: "farm-day", label: "Farm day", icon: "/design-assets/theme-toggle-patches-v1/sun-patch.png" },
+  { value: "lullaby-dusk", label: "Lullaby dusk", icon: "/design-assets/theme-toggle-patches-v1/moon-patch.png" },
 ] as const;
 
 export function ThemeSwitcher() {
@@ -15,7 +14,6 @@ export function ThemeSwitcher() {
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
   const currentIndex = Math.max(0, THEMES.findIndex((item) => item.value === theme));
   const current = mounted ? THEMES[currentIndex] : THEMES[0];
-  const Icon = current.Icon;
 
   function cycleTheme() {
     setTheme(THEMES[(currentIndex + 1) % THEMES.length].value);
@@ -29,7 +27,7 @@ export function ThemeSwitcher() {
       aria-label={`Colour theme: ${current.label}. Activate to change theme.`}
       title={`Colour theme: ${current.label}`}
     >
-      <Icon aria-hidden="true" />
+      <Image src={current.icon} alt="" width={28} height={28} aria-hidden="true" />
       <span className="sr-only">{current.label}</span>
     </button>
   );

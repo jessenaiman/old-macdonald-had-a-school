@@ -1,0 +1,7 @@
+.template.template {
+  --green: #55705a;
+  --green-dark: #304c38;
+  --grade-accent: #75519b;
+  --grade-dark: #51366f;
+  --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png");
+}

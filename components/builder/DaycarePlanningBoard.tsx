@@ -7,10 +7,10 @@ import styles from "./DaycarePlanningBoard.module.css";
 
 const planItems = ["Morning Circle", "Story & Songs", "Explore & Play", "Snack & Chat", "Rest & Reflect", "Goodbye Circle"];
 const pathItems = [
-  ["Story & songs", "Books, songs, and rhymes", "/icons/early-years/face-patches/puddles-blue.png"],
-  ["Explore & discover", "Hands-on play, sensory fun", "/icons/early-years/face-patches/penny-orange.png"],
-  ["Create & express", "Art, movement, and pretend play", "/icons/early-years/face-patches/hopper-red.png"],
-  ["Care & connect", "Feelings, friends, and routines", "/icons/early-years/face-patches/maisy-yellow.png"],
+  ["Story & songs", "Books, songs, and rhymes", "/icons/early-years/face-patches/puddles-blue.png", "/grade/daycare/open-circle-gathering"],
+  ["Explore & discover", "Hands-on play, sensory fun", "/icons/early-years/face-patches/penny-orange.png", "/grade/daycare/follow-the-duckling"],
+  ["Create & express", "Art, movement, and pretend play", "/icons/early-years/face-patches/hopper-red.png", "/grade/daycare/clap-your-hands"],
+  ["Care & connect", "Feelings, friends, and routines", "/icons/early-years/face-patches/maisy-yellow.png", "/grade/daycare/plant-your-seeds"],
 ] as const;
 const noteCards = [
   ["Goal & opener", "Today’s focus and how we’ll begin.", "/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png", "gold"],
@@ -33,7 +33,7 @@ export function DaycarePlanningBoard() {
         {planItems.map((item, index) => <label key={item} className={styles.planCheck}><input type="checkbox" checked={checked[index]} onChange={() => setChecked(values => values.map((value, i) => i === index ? !value : value))} /><span>{item}</span></label>)}
       </section>
       <nav className={styles.planningTools} aria-label="Planning tools"><h2>Planning tools</h2>
-        <Link href="/lessons">Lesson Library</Link><Link href="/topics">Printable Resources</Link><span>Picture Cards</span><span>Classroom Helpers</span><a href="#planning-notes">Assessment Notes</a>
+        <Link href="/lessons">Lesson Library</Link><Link href="/grade/daycare/seven-jumps">Seven Jumps</Link><Link href="/grade/daycare/singing-together">Singing Together</Link><Link href="/topics">Printable Resources</Link><span>Picture Cards</span><span>Classroom Helpers</span><a href="#planning-notes">Assessment Notes</a>
       </nav>
       <section className={styles.quickLinks}><h2>Quick links</h2><a href="#today-plan">Daily Schedule</a><span>Routine Cards</span><span>Behavior Supports</span><Link href="/about">Family Connection</Link></section>
       <aside className={styles.selfCare}><Image src="/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png" width={30} height={30} alt="" /><span>Teacher self-care</span><strong>I will take one small<br />break today.</strong></aside>
@@ -45,7 +45,7 @@ export function DaycarePlanningBoard() {
         <div className={styles.teacherPortrait}><Image src="/icons/staff/miss-puddles.png" width={340} height={340} alt="Miss Puddles, the Daycare teacher" priority /><span><b>Miss Puddles</b>Daycare Teacher</span></div>
       </header>
       <nav className={styles.learningPaths} aria-label="Today’s learning paths"><h2>Today’s<br />learning paths</h2>
-        {pathItems.map(([title, summary, icon], index) => <Link href="/topics" key={title} className={selectedPath === index ? styles.pathSelected : undefined} onClick={() => setSelectedPath(index)}><Image src={icon} width={62} height={62} alt="" /><span><b>{title}</b>{summary}</span></Link>)}
+        {pathItems.map(([title, summary, icon, href], index) => <Link href={href} key={title} className={selectedPath === index ? styles.pathSelected : undefined} onClick={() => setSelectedPath(index)}><Image src={icon} width={62} height={62} alt="" /><span><b>{title}</b>{summary}</span></Link>)}
       </nav>
       <section className={styles.corkArea} id="planning-notes" aria-label="Planning notes"><div className={styles.noteGrid}>
         {noteCards.map(([title, description, fastener, accent], index) => <article className={styles.planningCard} key={title}>

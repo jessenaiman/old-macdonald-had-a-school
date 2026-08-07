@@ -1,10 +1,5 @@
-import { DaycarePlanningBoard } from "../../components/builder/DaycarePlanningBoard";
-import { SiteShell } from "../../components/SiteShell";
+import { redirect } from "next/navigation";
 
 export default function DaycarePage() {
-  return (
-    <SiteShell active="daycare">
-      <DaycarePlanningBoard />
-    </SiteShell>
-  );
+  redirect("/grade/daycare");
 }

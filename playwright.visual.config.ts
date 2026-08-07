@@ -1,10 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-/**
- * Visual QA runs against the already-running Next.js dev server.
- * Keep server startup outside this config so reviewers test the exact live
- * checkout at port 8443 and never compare against a different process.
- */
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || "http://localhost:3000";
+
 export default defineConfig({
   testDir: "./tests/visual",
   testMatch: "**/*.visual.spec.ts",
@@ -12,13 +9,21 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   outputDir: "./test-results/visual",
   reporter: [["list"], ["html", { open: "never", outputFolder: "./playwright-report/visual" }]],
+  webServer: {
+    command: "npm run start",
+    url: baseURL,
+    reuseExistingServer: false,
+    timeout: 120_000,
+    stdout: "ignore",
+    stderr: "pipe",
+  },
   snapshotDir: "./tests/visual/__screenshots__",
   snapshotPathTemplate: "{snapshotDir}/{testFilePath}/{projectName}/{arg}{ext}",
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:8443",
+    baseURL,
     actionTimeout: 10_000,
     navigationTimeout: 15_000,
     locale: "en-US",

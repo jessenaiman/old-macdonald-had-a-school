@@ -1,7 +1,6 @@
-import { notFound } from "next/navigation";
-import { LessonDocument } from "../../../components/LessonDocument";
-import { SiteShell } from "../../../components/SiteShell";
+import { notFound, redirect } from "next/navigation";
 import { getLesson, getLessonSlugs } from "../../../lib/content";
+import { lessonHref } from "../../../lib/grade-routes";
 
 export function generateStaticParams() {
   return getLessonSlugs().map((slug) => ({ slug }));
@@ -11,5 +10,5 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   const { slug } = await params;
   const lesson = await getLesson(slug);
   if (!lesson) notFound();
-  return <SiteShell active="topics"><LessonDocument Content={lesson.Content} metadata={lesson.metadata} /></SiteShell>;
+  redirect(lessonHref(lesson.metadata));
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { lessonHref } from "../lib/grade-routes";
 
 type SlimLesson = {
   slug: string;
@@ -7,7 +8,7 @@ type SlimLesson = {
   subject: string;
   category: string;
   summary: string;
-  gradeBand: string;
+  grade: string;
 };
 
 const SubjectIcon = ({ src, alt }: { src: string; alt: string }) => (
@@ -39,7 +40,7 @@ export function SubjectDiscovery({ lessons }: { lessons: SlimLesson[] }) {
       <div className="section-intro">
         <span className="eyebrow">Start with a subject</span>
         <h2>Discover by subject.</h2>
-        <p>Four clusters, every grade band inside each one — the same theme grows from Daycare through Grade 2.</p>
+        <p>Four clusters, every grade inside each one — the same theme grows from Daycare through Grade 2.</p>
       </div>
       <div className="cluster-grid">
         {buckets.map((c) => (
@@ -52,10 +53,10 @@ export function SubjectDiscovery({ lessons }: { lessons: SlimLesson[] }) {
               <ul className="cluster-list">
                 {c.lessons.slice(0, 4).map((l) => (
                   <li key={l.slug}>
-                    <Link href={`/topics/${l.slug}`}>
+                    <Link href={lessonHref(l)}>
                       <span className="cluster-list-body">
                         <span className="cluster-list-title">{l.title}</span>
-                        <span className="cluster-list-meta"><span className="cluster-band">{l.gradeBand}</span><span className="cluster-ready">Ready</span></span>
+                        <span className="cluster-list-meta"><span className="cluster-grade">{l.grade}</span><span className="cluster-ready">Ready</span></span>
                       </span>
                     </Link>
                   </li>

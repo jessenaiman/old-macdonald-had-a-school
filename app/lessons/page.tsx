@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "../../components/SiteShell";
 import { getAllLessons } from "../../lib/content";
+import { lessonHref } from "../../lib/grade-routes";
 
 export const metadata: Metadata = {
   title: "Lessons | Old MacDonald Had a School",
@@ -23,13 +24,13 @@ export default async function LessonsIndexPage() {
           {lessons.map((lesson) => (
             <article className="lesson-index-card" data-template={lesson.metadata.template} key={lesson.metadata.slug}>
               <p className="lesson-card-template">{lesson.metadata.template} lesson</p>
-              <h2><Link href={`/lessons/${lesson.metadata.slug}`}>{lesson.metadata.title}</Link></h2>
+              <h2><Link href={lessonHref(lesson.metadata)}>{lesson.metadata.title}</Link></h2>
               <p>{lesson.metadata.summary}</p>
               <dl className="lesson-card-meta">
                 <div><dt>Subject</dt><dd>{lesson.metadata.subject}</dd></div>
-                <div><dt>Band</dt><dd>{lesson.metadata.gradeBand}</dd></div>
+                <div><dt>Band</dt><dd>{lesson.metadata.grade}</dd></div>
               </dl>
-              <Link className="lesson-card-link" href={`/lessons/${lesson.metadata.slug}`}>Open lesson <span aria-hidden="true">→</span></Link>
+              <Link className="lesson-card-link" href={lessonHref(lesson.metadata)}>Open lesson <span aria-hidden="true">→</span></Link>
             </article>
           ))}
         </section>

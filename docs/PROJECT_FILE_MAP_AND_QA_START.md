@@ -55,3 +55,35 @@ The exhaustive per-file asset handoff is `docs/DESIGN_ASSET_MASTER_LIST.md`; CSV
 2. Replace non-canonical icons with the indexed authored assets.
 3. Run fresh desktop, mobile, and print comparisons against matched references.
 4. Fix typography, spacing, cropping, and texture/border details without changing locked composition or assets.
+
+## Consolidated agent reports — 2026-08-07
+
+Both review agents completed and were shut down. Their reporting is consolidated here so development agents do not need the original agent threads.
+
+### Visual and responsive QA
+
+- [ ] **P1 — Mobile topic clipping:** `/topics/addition-subtraction-word-problems?band=grade-one` clips its title and summary at the right edge. The workroom hides overflow while the heading keeps a large minimum size. Review `CurriculumTemplates.module.css` around the workroom, heading, and mobile rules.
+- [ ] **P1 — Grade resource-card overlap:** `/band/grade-one` has overlapping card titles, portraits, and subject icons on desktop, becoming substantially worse on mobile. Review the resource-card markup in `CurriculumTemplates.tsx` and its card layout rules.
+- [ ] **P1 — Homepage composition mismatch:** `/` remains a conventional header, oversized grade strip, blue hero, and subject grid rather than the locked cream planning surface, left rail, felt pathways, and classroom-planning panel in `public/design-concepts/relational-craft-homepage-concept.png`.
+- [ ] **P2 — Typography conflict:** Grade 1 forces Georgia with `!important`, overriding the intended display face, while the homepage uses Aptos. Establish the approved Figma typography tokens before visual polishing.
+- [ ] **P2 — Printable-notepad mismatch:** the individual lesson uses a live textarea where `public/design-explorations-v5/option-1-working-wall/03-individual-lesson-magic-layers.png` shows printable physical stationery. The reference's print, download, and add-to-plan actions are also absent.
+- [ ] **P2 — Mobile header accessibility:** opening the mobile menu truncates the brand; theme and menu controls render at about 34 px rather than a robust touch target.
+- [ ] **P3 — Seam fidelity:** homepage felt-button seams are CSS-generated marks rather than the locked authored patch/thread assets.
+- [x] The main cardboard, felt, and cork textures are present and referenced from `public/design-assets`; missing textures are not the primary defect.
+- [x] No route crash or unusable primary navigation was observed in the captured homepage, Grade 1, topic, and individual-lesson flow.
+
+The visual agent inspected an effective 1600x1066 desktop viewport and 433x937 mobile viewport. Full-page capture, print preview, screen-reader behavior, computed contrast, and exhaustive intrinsic image-edge inspection remain unverified.
+
+### Early-years teaching and planning QA
+
+- [ ] **P0 — Preschool destination:** restore Preschool as a first-class destination. The combined homepage selector and the shared Early Years navigation currently open Daycare despite a separate Preschool route.
+- [ ] **P0 — Inclusive participation:** render the teaching information already present in the early-years records: step sequence, seated/standing/gesture/watch choices, and observable notice prompts. Watching, gesturing, humming, adapted movement, and full participation must all be represented as valid ways to join.
+- [ ] **P0 — Honest resource actions:** early-years pathways currently lead to generic topic results, some planning tools are labels rather than controls, Save to week is only an anchor, and Build this lesson can open an image preview. Labels must describe their real behavior, and lesson rendering must expose its starting resource, printables, and extensions.
+- [ ] **P1 — Repetition and ritual:** make the stable hello–activity–goodbye structure and weekly repeated repertoire visible; add a small Songs we are repeating this week planning area.
+- [ ] **P1 — Caregiver transfer and child agency:** replace the Family Connection link to About with a concise adult explanation and take-home action. Let children invent a sound, movement, name substitution, or short sung response.
+- [ ] **P1 — Unified printable planning:** provide one predictable Print teacher plan action and preserve goals, sequence, adaptations, resources, observation prompts, and generous handwriting space.
+- [x] Preserve the teacher-first planning-board concept, movement-first lessons, accessible participation alternatives, concise Today → Curriculum → Planner → Resources hierarchy, and calm invitational prompts.
+
+### Immediate development gate
+
+Fix mobile topic clipping and grade resource-card overlap before visual polish. Then resolve Preschool routing, canonical cast identity, print-versus-input semantics, and misleading actions before applying authored icons or final typography.

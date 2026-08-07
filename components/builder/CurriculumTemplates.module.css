@@ -188,12 +188,74 @@
   .pathCard, .noteSheet, .sequenceCard, .planningCards article, .topicNotes article { break-inside: avoid; box-shadow: none; }
 }
 
+/* Daycare grade family: matches the separated Canva navigation, hero,
+   Miss Puddles panel, four-colour pathways, and textured planning tray. */
+.daycareWall.daycareWall .rail {
+  background-color: #55705a;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png");
+}
+
+.daycareWall.daycareWall .railNav a:nth-child(2),
+.daycareWall.daycareWall .railNav a:hover {
+  color: #4b614f;
+  background: #f5e6bc;
+}
+
+.daycareWall.daycareWall .heroCopy h1 em {
+  color: #e8a227;
+}
+
+.daycareWall.daycareWall .feltButton {
+  background-color: #d9713c;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 240, 208, .14), 0 4px 0 #984421;
+}
+
+.daycareWall.daycareWall .teacherCard {
+  border-color: #b47412;
+  background-color: #e8a227;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 244, 211, .18), 3px 5px 0 rgba(121, 76, 12, .3);
+}
+
+.daycareWall.daycareWall .teacherCard::after {
+  border-color: rgba(106, 66, 10, .38);
+}
+
+.daycareWall.daycareWall .pathCard:nth-child(1) {
+  border-color: #b47412;
+  background-color: #e8a227;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 239, 202, .14), 2px 3px 0 #9c6810;
+}
+
+.daycareWall.daycareWall .pathCard:nth-child(2) {
+  border-color: #3c5845;
+  background-color: #55705a;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 239, 202, .12), 2px 3px 0 #304c38;
+}
+
+.daycareWall.daycareWall .pathCard:nth-child(3) {
+  border-color: #a74c28;
+  background-color: #d9713c;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 239, 202, .12), 2px 3px 0 #984421;
+}
+
+.daycareWall.daycareWall .pathCard:nth-child(4) {
+  border-color: #39477f;
+  background-color: #4f5fa0;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 239, 202, .12), 2px 3px 0 #303b6c;
+}
+
 /* Grade landing fidelity pass -------------------------------------------------
    Matches the approved working-wall composition while keeping topic and lesson
    templates stable. Felt seams are pressed inset edges, not CSS stitch marks. */
 .gradeWall {
-  grid-template-columns: 270px minmax(0, 1fr);
-  width: min(860px, calc(100% - 32px));
+  grid-template-columns: 220px minmax(0, 1fr);
+  width: min(1280px, calc(100% - 32px));
   min-height: 900px;
   margin: 12px auto 48px;
   border-width: 2px;
@@ -348,13 +410,14 @@
 }
 
 .gradeWall .pathGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 15px 18px;
 }
 
 .gradeWall .pathCard {
   display: flex;
   flex-direction: column;
-  min-height: 290px;
+  min-height: 205px;
   padding: 17px 19px 16px;
   border: 1px solid #294735;
   border-radius: 14px;
@@ -589,8 +652,8 @@
 .gradeWall .planningResourceCard {
   position: relative;
   display: grid;
-  grid-template-columns: 62px minmax(0, 1fr);
-  grid-template-rows: 20px auto auto auto;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr auto;
   row-gap: 4px;
   min-height: 118px;
   padding: 11px 10px 12px 12px;
@@ -627,28 +690,6 @@
   filter: drop-shadow(0 2px 1px rgba(34, 26, 17, .24));
 }
 
-.gradeWall .planningResourcePersona {
-  grid-row: 2 / 4;
-  grid-column: 1;
-  align-self: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: contain;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 0 rgba(83, 54, 24, .28);
-}
-
-.gradeWall .planningResourceIcon {
-  grid-row: 2 / 3;
-  grid-column: 2;
-  width: 33px;
-  height: 33px;
-  margin: 2px 0 0;
-  align-self: center;
-  justify-self: start;
-  object-fit: contain;
-}
 
 .gradeWall .planningResourceCard h3 {
   margin: 2px 0 0;
@@ -677,11 +718,6 @@
   content: " →";
 }
 
-.gradeWall .planningResourcePersona,
-.gradeWall .planningResourceIcon {
-  background: #fff;
-  background-clip: padding-box;
-}
 
 .gradeWall a:focus-visible,
 .gradeWall button:focus-visible,
@@ -693,7 +729,7 @@
 
 @media (max-width: 960px) {
   .gradeWall {
-    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-columns: 200px minmax(0, 1fr);
   }
 
   .gradeWall .stage {
@@ -723,6 +759,10 @@
     min-height: 41px;
     padding-inline: 13px;
     font-size: 10px;
+  }
+
+  .gradeWall .pathGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1025,8 +1065,8 @@
   min-height: 35px;
 }
 
-/* Grade 2 keeps the same approved composition, with its own blue/red identity
-   and Mr Maisy's canonical felt red used for the primary teaching action. */
+/* Grade 2 keeps the same approved composition, with Mr Sam's locked teal
+   identity used for the primary teaching action. */
 .gradeTwoWall .rail {
   background-color: #4f5fa0;
   background-image: url("/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png");
@@ -1048,9 +1088,9 @@
 }
 
 .gradeTwoWall .feltButton {
-  background-color: #b5272c;
-  background-image: url("/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png");
-  box-shadow: inset 0 0 0 1px rgba(255, 240, 208, .14), 0 4px 0 #7e1c21;
+  background-color: #1f6b6b;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png");
+  box-shadow: inset 0 0 0 1px rgba(255, 240, 208, .14), 0 4px 0 #124949;
 }
 
 .gradeTwoWall .paperButton {

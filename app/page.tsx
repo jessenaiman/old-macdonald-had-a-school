@@ -11,7 +11,7 @@ export default async function Home() {
     subject: lesson.metadata.subject,
     category: lesson.metadata.category,
     summary: lesson.metadata.summary,
-    gradeBand: lesson.metadata.gradeBand,
+    grade: lesson.metadata.grade,
   }));
   return <SiteShell active="home"><HomePage hero={homeMetadata} lessons={lessons} /></SiteShell>;
 }

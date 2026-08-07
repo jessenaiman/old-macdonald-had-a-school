@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
+const projectRoot = process.cwd();
+
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: projectRoot,
+  turbopack: {
+    root: projectRoot,
+  },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     // WebP is the Next.js default; prefer AVIF (20% smaller) with WebP fallback

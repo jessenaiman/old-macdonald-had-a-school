@@ -1,0 +1,7 @@
+.template.template {
+  --green: #2c6c9b;
+  --green-dark: #1d4c70;
+  --grade-accent: #2c6c9b;
+  --grade-dark: #1d4c70;
+  --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+}
