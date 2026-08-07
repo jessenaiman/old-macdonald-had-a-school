@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteShell } from "../../../components/SiteShell";
 import { GradeTemplate } from "../../../components/builder/CurriculumTemplates";
-import { getAllLessons, isSingleLesson } from "../../../lib/content";
+import { getAllLessons } from "../../../lib/content";
 import { BAND_META, matchesBand, bandMatchesStaff } from "../../../lib/bands";
 import { STAFF } from "../../../lib/cast";
 
@@ -25,19 +25,19 @@ export default async function BandPage({ params }: { params: Promise<{ band: str
   const meta = BAND_META[band];
   if (!meta) notFound();
 
-  const allLessons = getAllLessons();
+  const allLessons = await getAllLessons();
   const lessons = allLessons
-    .filter((l) => matchesBand(l.meta.gradeBand, band))
+    .filter((l) => matchesBand(l.metadata.gradeBand, band))
     .map((l) => ({
-      slug: l.meta.slug,
-      title: l.meta.title,
-      subject: l.meta.subject,
-      category: l.meta.category,
-      summary: l.meta.summary,
-      gradeBand: l.meta.gradeBand,
-      ready: isSingleLesson(l),
-      hasPrintables: isSingleLesson(l) && l.printables.length > 0,
-      hasVideo: isSingleLesson(l) && !!l.watch?.url,
+      slug: l.metadata.slug,
+      title: l.metadata.title,
+      subject: l.metadata.subject,
+      category: l.metadata.category,
+      summary: l.metadata.summary,
+      gradeBand: l.metadata.gradeBand,
+      ready: true,
+      hasPrintables: false,
+      hasVideo: Boolean(l.metadata.videoUrl || l.metadata.externalResource),
     }));
 
   const cast = STAFF.filter((s) => bandMatchesStaff(band, s));

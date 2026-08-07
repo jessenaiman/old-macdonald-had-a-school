@@ -1,17 +1,17 @@
 import { SiteShell } from "../components/SiteShell";
 import { HomePage } from "../components/home/HomePage";
-import { getAllLessons, getPageContent } from "../lib/content";
+import { getAllLessons } from "../lib/content";
+import { metadata as homeMetadata } from "../content/pages/home.mdx";
 
-export default function Home() {
-  const page = getPageContent("home");
-  const allLessons = getAllLessons();
+export default async function Home() {
+  const allLessons = await getAllLessons();
   const lessons = allLessons.map((lesson) => ({
-    slug: lesson.meta.slug,
-    title: lesson.meta.title,
-    subject: lesson.meta.subject,
-    category: lesson.meta.category,
-    summary: lesson.meta.summary,
-    gradeBand: lesson.meta.gradeBand,
+    slug: lesson.metadata.slug,
+    title: lesson.metadata.title,
+    subject: lesson.metadata.subject,
+    category: lesson.metadata.category,
+    summary: lesson.metadata.summary,
+    gradeBand: lesson.metadata.gradeBand,
   }));
-  return <SiteShell active="home"><HomePage hero={page.meta} lessons={lessons} /></SiteShell>;
+  return <SiteShell active="home"><HomePage hero={homeMetadata} lessons={lessons} /></SiteShell>;
 }

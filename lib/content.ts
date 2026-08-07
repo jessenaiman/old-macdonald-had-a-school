@@ -99,10 +99,10 @@ export function getLessonSlugs() {
 export async function getLesson(slug: string): Promise<Lesson | undefined> {
   const file = lessonFiles.find((entry) => entry.slug === slug);
   if (!file) return undefined;
-  const module = await importLesson(file.relativePath);
+  const lessonModule = await importLesson(file.relativePath);
   return {
-    Content: module.default,
-    metadata: normalizeMetadata(file, module.metadata),
+    Content: lessonModule.default,
+    metadata: normalizeMetadata(file, lessonModule.metadata),
     sourcePath: file.sourcePath,
   };
 }
@@ -111,30 +111,3 @@ export async function getAllLessons(): Promise<Lesson[]> {
   const lessons = await Promise.all(lessonFiles.map((file) => getLesson(file.slug)));
   return lessons.filter((lesson): lesson is Lesson => Boolean(lesson)).sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
 }
-
-// Existing visual prototypes still import these shapes. They are UI-only types,
-// not content parsing or MDX infrastructure.
-export type Step = { label: string; title: string; teacher: string; students: string; lookFor: string; resourceState: "ready" | "missing" | "none"; resourceTitle: string; resourceSource: string; resourceUrl: string; resourceRole: string; resourceNote: string };
-export type SearchPrompt = { short: string; label: string; prompt: string };
-export type GradeLesson = { grade: string; lesson: string; mode: string; standards: string; goal: string; materials: string; accent: string; steps: Step[]; searches: SearchPrompt[] };
-export type LessonTopic = { meta: Record<string, string>; grades: GradeLesson[]; planningNote: string };
-export type PrintableDoc = { title: string; image: string; format: string; url: string };
-export type TryStep = Step & { key: "try"; subtitle: string; description: string; tip: string };
-export type PracticeStep = Step & { key: "practice"; subtitle: string; description: string; printable: boolean; printableLabel: string; printableURL: string; printableSource: string; printableFormat: string; icons: string[] };
-export type CheckStep = { key: "check"; label: string; subtitle: string; title: string; description: string; teacher: string; students: string; lookFor: string; tip: string };
-export type SingleLessonTopic = {
-  format: "single";
-  meta: Record<string, string>;
-  goal: string;
-  materials: string[];
-  printables: PrintableDoc[];
-  steps: Array<{ key: string; label: string; subtitle: string; title?: string; description?: string }>;
-  watch: { key: "watch"; label: string; subtitle: string; title: string; description: string; url: string; source: string; viewLabel: string; openLabel: string; thumbnailNote: string };
-  try: TryStep;
-  practice: PracticeStep;
-  check: CheckStep;
-  extend: { key: "extend"; label: string; subtitle: string; searchPrompt: string; categories: Array<{ label: string; icon: string }> };
-  searches: SearchPrompt[];
-  planningNote: string;
-  curriculumPath: string[];
-};

@@ -11,9 +11,9 @@ function matchesBand(gradeBand: string, band: string) {
 
 export default async function TopicsPage({ searchParams }: { searchParams: Promise<{ band?: string; cluster?: string }> }) {
   const { band, cluster } = await searchParams;
-  const lessons = getAllLessons()
-    .filter((l) => !band || matchesBand(l.meta.gradeBand, band))
-    .filter((l) => !cluster || clusterFor(l.meta.subject) === cluster);
+  const lessons = (await getAllLessons())
+    .filter((l) => !band || matchesBand(l.metadata.gradeBand, band))
+    .filter((l) => !cluster || clusterFor(l.metadata.subject) === cluster);
   const clusterInfo = cluster ? CLUSTERS.find((c) => c.key === cluster) : undefined;
 
   return (
@@ -31,11 +31,11 @@ export default async function TopicsPage({ searchParams }: { searchParams: Promi
       </header>
       <section className="topic-list">
         {lessons.map((lesson) => (
-          <Link href={`/topics/${lesson.meta.slug}`} className="topic-list-card stitch" key={lesson.meta.slug}>
-            <div><span>{lesson.meta.subject}</span><strong>{lesson.meta.category}</strong></div>
-            <h2>{lesson.meta.title}</h2>
-            <p>{lesson.meta.summary}</p>
-            <div className="topic-list-action">{lesson.meta.gradeBand}<strong>Open lesson →</strong></div>
+          <Link href={`/topics/${lesson.metadata.slug}`} className="topic-list-card stitch" key={lesson.metadata.slug}>
+            <div><span>{lesson.metadata.subject}</span><strong>{lesson.metadata.category}</strong></div>
+            <h2>{lesson.metadata.title}</h2>
+            <p>{lesson.metadata.summary}</p>
+            <div className="topic-list-action">{lesson.metadata.gradeBand}<strong>Open lesson →</strong></div>
           </Link>
         ))}
         {lessons.length === 0 && (

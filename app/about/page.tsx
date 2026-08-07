@@ -1,36 +1,28 @@
 import Image from "next/image";
 import { SiteShell } from "../../components/SiteShell";
-import { getPageContent } from "../../lib/content";
+import AboutContent, { metadata as aboutMetadata } from "../../content/pages/about.mdx";
 
 export default function AboutPage() {
-  const page = getPageContent("about");
   return (
     <SiteShell active="about">
       <section className="about-hero paper-panel">
         <div>
-          <div className="breadcrumb">{page.meta.eyebrow}</div>
-          <h1>{page.meta.title}</h1>
-          <p className="hero-summary">{page.meta.summary}</p>
+          <div className="breadcrumb">{aboutMetadata.eyebrow}</div>
+          <h1>{aboutMetadata.title}</h1>
+          <p className="hero-summary">{aboutMetadata.summary}</p>
         </div>
         <div className="about-mark"><Image src="/brand-emblem.png" alt="Old MacDonald Had a School tree and music-note emblem" width={220} height={220} style={{ height: "auto" }} /></div>
       </section>
       <section className="about-layout">
         <div className="about-story">
-          {page.sections.map((section) => (
-            <article className="stitch" key={section.title}>
-              <span className="eyebrow">{section.kicker}</span>
-              <h2>{section.title}</h2>
-              {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              {section.bullets.length > 0 && <ul>{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}
-            </article>
-          ))}
+          <AboutContent />
         </div>
         <aside className="hire-card stitch">
           <span className="eyebrow">Work with me</span>
-          <h2>{page.meta.hireTitle}</h2>
-          <p>{page.meta.hireSummary}</p>
+          <h2>{aboutMetadata.hireTitle}</h2>
+          <p>{aboutMetadata.hireSummary}</p>
           <ul><li>Curriculum-organized content systems</li><li>Teacher-resource research and curation</li><li>Educational product and visual design</li></ul>
-          {page.meta.contactUrl && <a className="hire-button" href={page.meta.contactUrl}>{page.meta.contactLabel || "Get in touch"}</a>}
+          {aboutMetadata.contactUrl && <a className="hire-button" href={aboutMetadata.contactUrl}>{aboutMetadata.contactLabel || "Get in touch"}</a>}
         </aside>
       </section>
     </SiteShell>
