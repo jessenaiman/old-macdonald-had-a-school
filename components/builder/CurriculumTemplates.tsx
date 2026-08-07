@@ -97,7 +97,6 @@ export function GradeTemplate({
   onSelect,
   onPreview,
 }: GradeTemplateProps) {
-  const [checks, setChecks] = useState([false, false, false]);
   const isUpperGrade = grade === "Grade 1" || grade === "Grade 2" || grade === "Kindergarten";
   const badge = grade === "Grade 1"
     ? "/brand-kit-icon-sheets/individual-icons/grade-1.png"
@@ -109,23 +108,13 @@ export function GradeTemplate({
           ? "/icons/early-years/face-patches/miss-maisy-purple.png"
         : "/brand-kit-icon-sheets/individual-icons/grade-daycare.png";
 
-  const planningSteps = [
-    {
-      label: "Set a goal",
-      title: "Follow a simple sequence and make one meaningful choice",
-      action: "Edit goal",
-    },
-    {
-      label: "Gather what helps",
-      title: "Pick resources, prompts, and supports",
-      action: "Open resources",
-    },
-    {
-      label: "Prepare your plan",
-      title: "Map the lesson steps and learner needs",
-      action: "Open planner",
-    },
-  ];
+  const planningReference = grade === "Grade 2"
+    ? "/design-concepts/grade-family/canva-parts/grade-2/grade-2-lesson-planning-resources.png"
+    : grade === "Grade 1"
+      ? "/design-concepts/grade-family/canva-parts/grade-1/grade-1-lesson-planning-resources.png"
+      : grade === "Kindergarten"
+        ? "/design-concepts/grade-family/canva-parts/kindergarten/kindergarten-lesson-planning-resources.png"
+        : "/design-concepts/grade-family/canva-parts/preschool/preschool-lesson-planning-resources.png";
 
   return (
     <div
@@ -183,24 +172,19 @@ export function GradeTemplate({
           </div>
         </section>
 
-        <section className={styles.corkBoard} id="planner">
-          <header>
-            <div><span className={styles.eyebrow}>Today&apos;s planning board</span><h2>Plan ahead with a few helpful moves.</h2></div>
-          </header>
-          <div className={styles.noteGrid} id="resources">
-            {planningSteps.map((step, index) => (
-              <article className={styles.noteSheet} key={step.label}>
-                <Image src={`/design-assets/classroom-fasteners-v1/individual-icons/${index === 0 ? "03-paperclip-double-loop" : index === 1 ? "05-masking-tape" : "01-push-pin-rounded"}.png`} width={34} height={34} alt="" />
-                <span>{step.label}</span>
-                <h3>{step.title}</h3>
-                <label className={styles.checkRow}>
-                  <input type="checkbox" checked={checks[index]} onChange={() => setChecks((current) => current.map((value, i) => i === index ? !value : value))} />
-                  <b>{checks[index] ? "Ready" : step.action}</b>
-                </label>
-                <textarea aria-label={`Notes for ${step.label}`} placeholder="Teacher notes" />
-              </article>
-            ))}
-          </div>
+        <section className={styles.planningReference} id="planner" aria-label={`${grade} lesson planning resources`}>
+          <Image src={planningReference} width={1955} height={450} alt={`${grade} current lesson goal and linked printable resources`} sizes="(max-width: 760px) calc(100vw - 18px), 560px" />
+          <Link className={`${styles.referenceHotspot} ${styles.editGoalHotspot}`} href={items[activeIndex]?.href ?? "#curriculum"}>Edit the goal</Link>
+          <a className={`${styles.referenceHotspot} ${styles.saveWeekHotspot}`} href="#today">Save to week</a>
+          {items.slice(0, 3).map((item, index) => (
+            <Link
+              className={`${styles.referenceHotspot} ${styles[`resourceHotspot${index + 1}`]}`}
+              href={item.href ?? "#curriculum"}
+              key={`planning-resource-${item.title}`}
+            >
+              Open {item.title}
+            </Link>
+          ))}
         </section>
       </div>
     </div>

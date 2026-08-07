@@ -89,3 +89,14 @@ The visual mismatch was not primarily color selection; several opaque texture fi
 - Keep large reading surfaces quiet by layering a translucent paper wash over the authored tile instead of removing texture.
 - Scan every CSS `url()` against `public/` after asset-folder changes so deleted legacy paths cannot silently flatten a board.
 - Maintain authored kraft and felt files as the global material tokens; do not reintroduce generated noise as a substitute.
+
+## 2026-08-07 — Locked asset provenance and printable stationery
+
+The asset-creation thread was useful as provenance, but replacing a component group with a single reference image created a new failure: the interface looked closer while its authored buttons, typography, and layout ceased to be real components.
+
+- Treat current project, Figma, and Canva assets as authoritative; historical conversations are a map to them, not a replacement source.
+- Reject any transparent export whose alpha bounds touch the canvas edge when the authored object is visibly clipped.
+- Render genuinely printable paper or felt stationery as static artwork when appropriate, while keeping all labels, buttons, links, and layout structure as semantic components.
+- Never use invisible hotspots over a flattened UI screenshot as the production implementation.
+- Use Canva for authored textures and button assets, Figma for typography/layout, and HTML/React as the proof that those separate assets can reproduce the design.
+- Run package operations serially on Windows; parallel dependency checks can collide with active Next.js native modules.

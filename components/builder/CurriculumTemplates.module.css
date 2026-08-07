@@ -499,6 +499,39 @@
   line-height: 21px;
 }
 
+.gradeWall .planningReference {
+  position: relative;
+  margin-top: 17px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.gradeWall .planningReference > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gradeWall .referenceHotspot {
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+  color: transparent;
+  text-indent: -9999px;
+}
+
+.gradeWall .referenceHotspot:focus-visible {
+  outline: 3px solid #173c59;
+  outline-offset: -3px;
+  border-radius: 9px;
+}
+
+.gradeWall .editGoalHotspot { left: 3.2%; top: 62%; width: 13.2%; height: 18%; }
+.gradeWall .saveWeekHotspot { left: 17.4%; top: 62%; width: 13.2%; height: 18%; }
+.gradeWall .resourceHotspot1 { left: 37.2%; top: 29%; width: 17.2%; height: 49%; }
+.gradeWall .resourceHotspot2 { left: 55.7%; top: 29%; width: 17.2%; height: 49%; }
+.gradeWall .resourceHotspot3 { left: 74.2%; top: 29%; width: 17.2%; height: 49%; }
+
 .gradeWall a:focus-visible,
 .gradeWall button:focus-visible,
 .gradeWall input:focus-visible,

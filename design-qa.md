@@ -60,6 +60,44 @@ final result: passed
 
 ---
 
+# Locked Asset and Printable Planning Correction — CHANGES REQUIRED
+
+## Comparison targets
+
+- Grade references: `public/design-concepts/grade-family/relational-craft-{preschool,kindergarten,grade-1,grade-2}.png`
+- Exact planning sections: `public/design-concepts/grade-family/canva-parts/<grade>/<grade>-lesson-planning-resources.png`
+- Homepage character facts and colors: `public/CAST_AND_ROLES.md`
+- Material sources: `public/design-assets/web-material-library-v1/`
+
+## Asset fidelity
+
+- [x] Homepage grade selectors layer the canonical transparent staff portraits over the corresponding official felt-circle assets.
+- [x] Miss Puddles, Mr Rusty, Miss Hayley, and Mr Sam use their exact authored patch colors; no CSS recoloring is used.
+- [x] The clipped blank rectangle exports are excluded from the implementation.
+- [x] Grade planning artwork is rendered at its authored 1955 x 450 aspect ratio.
+- [ ] The current implementation incorrectly flattens the planning tray, its buttons, its labels, and its resource cards into one image.
+- [ ] Invisible absolute-positioned hotspots are not an acceptable replacement for authored button, link, typography, and layout components.
+- [ ] Rebuild the tray from separate Canva/Figma/project assets. Raster artwork is permitted only for the physical paper/felt/fastener pieces that are genuinely images.
+
+## Runtime and behavior
+
+- [x] Grade 1 planning artwork loaded successfully, but the hotspot implementation is rejected as an architectural shortcut.
+- [x] Grade landing pages contain no textarea or checkbox controls in the printable planning section.
+- [x] Homepage selector assets loaded with no missing images.
+- [x] Next.js `get_compilation_issues`: no issues.
+- [x] Next.js browser session reported no console warnings or errors before the dependency-server restart.
+- [x] TypeScript: passed.
+- [x] ESLint on `CurriculumTemplates.tsx`: passed.
+
+## Remaining review item
+
+- [ ] Replace the composite-image/hotspot implementation before requesting another visual review.
+- [ ] A fresh combined screenshot comparison is still required after componentization because the in-app browser screenshot backend timed out during this pass.
+
+final result: CHANGES REQUIRED — runtime passed, component architecture rejected
+
+---
+
 # Authored Material Texture Audit
 
 ## Captures
