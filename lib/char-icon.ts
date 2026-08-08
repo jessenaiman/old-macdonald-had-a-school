@@ -22,7 +22,7 @@ const BUST_FILE: Record<string, string> = {
 
 export function bustPath(key: string): string | null {
   const file = BUST_FILE[key];
-  return file ? `/icons/canva-sheet-02/${file}.png` : null;
+  return file ? `/icons/staff/${file}.png` : null;
 }
 
 export function iconPath(key: string): string | null {

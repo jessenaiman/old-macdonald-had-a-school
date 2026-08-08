@@ -87,7 +87,7 @@ body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index
 .theme-switcher-item[data-state="on"] { color:var(--navy); background:var(--sunlit); }
 .theme-switcher-item:focus-visible { outline:2px solid var(--sunlit); outline-offset:2px; }
 
-/* Character badge — bust (public/icons/canva-sheet-02) on a color-coded
+/* Character badge — bust (public/icons/staff) on a color-coded
    circle. Bright/bold by design: staff coded by subject, students by their
    canonical signature color (see lib/cast.ts). Felt-stitched ring matches
    the site's sewn-patch language. */
@@ -398,8 +398,15 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
   .hero-frame { transform:rotate(0deg); max-width:420px; }
   .about-mark { display:none; }
   .about-story,.cluster-grid { grid-template-columns:1fr; }
-  .topic-list-card { grid-template-columns:1fr; }
-  .topic-list-action { grid-column:auto; text-align:left; }
+  .listing-header { padding:16px 0 22px; }
+  .listing-header p { font-size:14px; line-height:1.55; }
+  .topic-list { gap:14px; }
+  .topic-list-card { grid-template-columns:1fr; gap:10px; padding:18px; }
+  .topic-list-card>div:first-child span,.topic-list-card>div:first-child strong { font-size:11px; }
+  .topic-list-card h2 { font-size:22px; line-height:1.15; }
+  .topic-list-card p { font-size:13.5px; line-height:1.55; }
+  .topic-list-action { grid-column:auto; display:flex; min-height:44px; align-items:center; justify-content:space-between; gap:12px; border-top:1px dashed rgba(11,40,85,.2); padding-top:10px; text-align:left; font-size:11px; }
+  .topic-list-action strong { margin-top:0; font-size:13px; }
   .gather-groups { grid-template-columns:1fr; }
 }
 
@@ -1087,6 +1094,7 @@ html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-t
 .cast-section-heading { display:flex; align-items:end; justify-content:space-between; gap:30px; margin-bottom:20px; }
 .cast-section-heading h2 { margin:0; color:var(--farm-navy); font-family:var(--font-heading); font-size:clamp(32px,4vw,46px); font-weight:400; line-height:1; }
 .cast-section-heading > p { max-width:430px; margin:0; color:var(--farm-muted); font-family:var(--font-body); font-size:13px; line-height:1.5; }
+.cast-section-heading:not(.cast-section-heading-light) .eyebrow { color:#60460b; }
 .cast-profile-grid { display:grid; gap:15px; }
 .cast-staff-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
 .cast-student-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
@@ -1109,7 +1117,29 @@ html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-t
 .cast-student-profile { background:#F0E4C5; }
 .cast-student-profile .cast-profile-head p { text-transform:uppercase; letter-spacing:.05em; }
 @media (max-width:1100px) { .cast-staff-grid,.cast-student-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media (max-width:650px) { .cast-page-header { align-items:flex-start; padding:28px 22px; } .cast-page-header > .char-badge { width:82px !important; height:82px !important; } .cast-use-note { grid-template-columns:1fr; gap:6px; } .cast-section-heading { display:block; } .cast-section-heading > p { margin-top:10px; } .cast-staff-grid,.cast-student-grid { grid-template-columns:1fr; } .cast-details-grid { grid-template-columns:1fr; } }
+@media (max-width:650px) {
+  .cast-page { padding-top:10px; }
+  .cast-page-header { align-items:flex-start; gap:16px; padding:22px 18px; }
+  .cast-page-title h1 { font-size:clamp(34px,10vw,42px); }
+  .cast-page-title > p:last-child { margin-top:10px; font-size:14px; line-height:1.55; }
+  .cast-page-header > .char-badge { width:68px !important; height:68px !important; }
+  .cast-use-note { grid-template-columns:1fr; gap:6px; margin:20px 0 34px; padding:15px 16px; }
+  .cast-use-note strong,.cast-use-note span { font-size:14px; }
+  .cast-section-heading { display:block; }
+  .cast-section-heading > p { margin-top:10px; font-size:14px; }
+  .cast-staff-grid,.cast-student-grid { grid-template-columns:1fr; }
+  .cast-profile { padding:18px; }
+  .cast-profile-head h3 { font-size:27px; }
+  .cast-profile-head p { font-size:13px; }
+  .cast-profile-head small { font-size:10px; }
+  .cast-profile-summary { min-height:0; font-size:14px; line-height:1.55; }
+  .cast-guide-list li,.cast-strength-list li { font-size:11px; }
+  .cast-details summary { display:flex; min-height:44px; align-items:center; font-size:13px; }
+  .cast-details-grid { grid-template-columns:1fr; }
+  .cast-details-grid strong { font-size:10px; }
+  .cast-details-grid ul { font-size:12px; }
+  .cast-student-board { margin-inline:-12px; padding:34px 12px; }
+}
 
 /* ══════════════════════════════════════════════════════════════
    GRADE DIRECTORY — Grade overview pages (/grade/grade-one, etc.)

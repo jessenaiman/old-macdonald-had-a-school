@@ -22,6 +22,7 @@ test("desktop navigation uses locked grade patches and the grade lesson uses its
   await expect(page.locator(".grade-ribbon")).toHaveCount(0);
   await expect(page.locator(".subject-bulletin")).toBeVisible();
   await expect(page.locator(".subject-bulletin .subject-fastener")).toHaveCount(4);
+  await expect(page.getByRole("heading", { name: "Language & Communication" })).toBeInViewport({ ratio: 0.15 });
   for (const patch of await desktopNav.locator(".site-nav-grade").all()) {
     const box = await patch.boundingBox();
     expect(box?.width).toBeGreaterThan(85);
@@ -92,4 +93,16 @@ test("every grade lesson renders its own workroom identity", async ({ page }) =>
     railColours.add(await rail.evaluate((element) => getComputedStyle(element).backgroundColor));
   }
   expect(railColours.size).toBe(gradeLessons.length);
+});
+
+test("Cast Guide uses the approved staff artwork without broken images", async ({ page }) => {
+  await page.goto("/cast", { waitUntil: "networkidle" });
+
+  const castImages = page.locator(".cast-page img");
+  await expect(castImages).toHaveCount(17);
+
+  for (const image of await castImages.all()) {
+    await expect(image).toHaveAttribute("src", /icons%2Fstaff|icons\/staff/);
+    await expect.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  }
 });

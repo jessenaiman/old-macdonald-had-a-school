@@ -27,7 +27,7 @@ export function ThemeSwitcher() {
       aria-label={`Colour theme: ${current.label}. Activate to change theme.`}
       title={`Colour theme: ${current.label}`}
     >
-      <Image src={current.icon} alt="" width={28} height={28} aria-hidden="true" />
+      <Image src={current.icon} alt="" width={28} height={28} loading="eager" aria-hidden="true" />
       <span className="sr-only">{current.label}</span>
     </button>
   );

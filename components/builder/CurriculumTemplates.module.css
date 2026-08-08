@@ -1290,6 +1290,189 @@
   .gradeOneWall .pathGrid {
     grid-template-columns: 1fr;
   }
+
+  /* Keep each grade visually distinct while moving its actual curriculum
+     choices into the first mobile viewport. */
+  .gradeWall .rail {
+    padding: 12px 14px 13px;
+  }
+
+  .gradeWall .railIdentity {
+    grid-template-columns: 48px 1fr;
+    gap: 9px;
+  }
+
+  .gradeWall .gradeBadge {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .gradeWall .railIdentity strong {
+    font-size: 22px;
+  }
+
+  .gradeWall .railIdentity span,
+  .gradeWall .railIdentity small {
+    font-size: 8px;
+  }
+
+  .gradeWall .railNav {
+    gap: 4px;
+    margin-top: 10px;
+  }
+
+  .gradeWall .railNav a {
+    min-height: 44px;
+    padding: 4px;
+  }
+
+  .gradeWall .railNav b {
+    width: 23px;
+    height: 23px;
+  }
+
+  .gradeWall .railNav span {
+    font-size: 10px;
+  }
+
+  .gradeWall .stage,
+  .gradeOneWall .stage {
+    padding: 17px 15px 28px;
+  }
+
+  .gradeWall .pageGreeting {
+    margin-bottom: 7px;
+    font-size: 9px;
+  }
+
+  .gradeWall .hero,
+  .gradeOneWall .hero {
+    gap: 13px;
+    min-height: 0;
+  }
+
+  .gradeWall.gradeWall .heroCopy h1,
+  .gradeOneWall.gradeOneWall .heroCopy h1 {
+    max-width: none;
+    margin: 6px 0 9px;
+    font-size: clamp(34px, 10vw, 39px);
+    line-height: .94;
+  }
+
+  .gradeOneWall.gradeOneWall .heroCopy h1 {
+    font-size: clamp(33px, 9.2vw, 36px);
+  }
+
+  .gradeWall .heroCopy p,
+  .gradeOneWall .heroCopy p {
+    margin-block: 0;
+    font-size: 13px;
+    line-height: 1.42;
+  }
+
+  .gradeWall .heroActions {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .gradeWall .feltButton,
+  .gradeWall .paperButton {
+    flex: 1 1 145px;
+    min-height: 44px;
+    font-size: 11px;
+  }
+
+  .gradeWall .teacherCard,
+  .gradeOneWall .teacherCard {
+    min-height: 150px;
+    padding: 18px 16px;
+  }
+
+  .gradeWall .teacherCard blockquote {
+    width: 67%;
+    margin-top: 8px;
+    font-size: 20px;
+    line-height: 1.02;
+  }
+
+  .gradeWall .teacherImage {
+    width: 112px;
+    height: 112px;
+  }
+
+  .gradeOneWall .teacherCard {
+    padding-left: 122px;
+  }
+
+  .gradeOneWall .teacherCard > span {
+    position: absolute;
+    top: 82px;
+    right: 14px;
+    margin-top: 0;
+  }
+
+  .gradeOneWall .teacherCard blockquote {
+    top: 18px;
+    right: 14px;
+    width: 57%;
+    font-size: 19px;
+  }
+
+  .gradeOneWall .teacherImage {
+    left: 8px;
+    width: 118px;
+    height: 118px;
+  }
+
+  .gradeOneWall .teacherNotesLink {
+    right: 12px;
+    bottom: 10px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 9px;
+  }
+
+  .gradeWall .paths,
+  .gradeOneWall .paths {
+    padding-top: 13px;
+  }
+
+  .gradeWall .sectionHeader {
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+
+  .gradeWall .sectionHeader h2,
+  .gradeOneWall .sectionHeader h2 {
+    font-size: 28px;
+  }
+
+  .gradeWall .sectionHeader a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .gradeWall .pathCard,
+  .gradeOneWall .pathCard {
+    min-height: 174px;
+  }
+
+  .gradeWall .pathCard p {
+    font-size: 12px;
+    line-height: 1.42;
+  }
+
+  .gradeWall .pathCard b {
+    font-size: 11px;
+  }
+
+  .gradeWall .planningAction {
+    min-height: 44px;
+    font-size: 11px;
+  }
 }
 
 @media print {

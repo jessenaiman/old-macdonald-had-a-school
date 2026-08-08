@@ -20,11 +20,13 @@ playwright-report/
 # Caches and local data
 .mypy_cache/
 data/
+.env*
 .tmp-*
 *.tsbuildinfo
 
 # Agent and tooling internals
 .agents/
+.codex-notes/
 .qwen/
 .claude-replay.*
 

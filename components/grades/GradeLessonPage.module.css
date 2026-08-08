@@ -119,11 +119,20 @@
   .railNav a { grid-template-columns: 1fr; justify-items: center; gap: 3px; min-height: 58px; padding: 5px 2px; text-align: center; }
   .railNav a span { font-size: 8px; }
   .teacherPatch { display: none; }
-  .lessonStage { padding: 24px 17px 28px; }
+  .lessonStage { padding: 20px 17px 28px; }
+  .lessonCrumb { margin-bottom: 13px; font-size: 10px; line-height: 1.45; }
   .lessonPage :global(.lesson-header h1) { overflow-wrap: break-word; font-size: clamp(30px, 9vw, 38px); line-height: .98; text-wrap: pretty; }
-  .lessonPage :global(.lesson-summary) { font-size: 13px; }
+  .lessonPage :global(.lesson-summary) { font-size: 14px; line-height: 1.6; }
+  .lessonPage :global(.lesson-breadcrumb) { font-size: 12px; line-height: 1.45; }
+  .lessonPage :global(.lesson-meta dd) { font-size: 13px; line-height: 1.45; }
   .lessonPage :global(.lesson-meta) { grid-template-columns: 1fr; }
   .lessonPage :global(.lesson-document-content) { column-count: 1; }
+  .lessonPage :global(.lesson-document-content h2) { font-size: 26px; }
+  .lessonPage :global(.lesson-document-content ul),
+  .lessonPage :global(.lesson-document-content > p) { font-size: 14px; line-height: 1.6; }
+  .lessonPage :global(.lp-btn-ghost),
+  .lessonPage :global(.lesson-resource-link),
+  .bottomAction a { font-size: 12px; }
   .lessonPage :global(.lesson-primary-actions), .lessonPage :global(.lesson-print-actions), .lessonPage :global(.lp-btn-ghost), .lessonPage :global(.lesson-resource-link), .bottomAction, .bottomAction a { width: 100%; }
 }
 
