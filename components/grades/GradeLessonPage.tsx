@@ -61,12 +61,26 @@ export async function GradeLessonPage({
           <div id="lesson-overview">
             <LessonDocument Content={lesson.Content} metadata={lesson.metadata} />
           </div>
-          <section className={styles.teacherNote} id="lesson-notes" aria-label="Teacher planning notes">
-            <Image src="/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png" alt="" width={42} height={42} />
-            <p>Use this space to plan, jot ideas, or reflect.</p>
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
+          <section className={styles.teacherNotes} id="lesson-notes" aria-label="Teacher planning notes">
+            <header>
+              <p>Three quiet places to make the lesson your own.</p>
+            </header>
+            <div className={styles.teacherNoteGrid}>
+              {[
+                ["Before learners arrive", "Materials, room setup, or one reassuring reminder.", "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png"],
+                ["As we learn", "A child idea, an adaptation, or a question worth following.", "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png"],
+                ["For next time", "What to repeat, extend, or offer in another way.", "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png"],
+              ].map(([title, prompt, fastener]) => (
+                <article className={styles.teacherNote} key={title}>
+                  <Image src={fastener} alt="" width={38} height={38} />
+                  <h2>{title}</h2>
+                  <p>{prompt}</p>
+                  <span aria-hidden="true" />
+                  <span aria-hidden="true" />
+                  <span aria-hidden="true" />
+                </article>
+              ))}
+            </div>
           </section>
           <div className={styles.bottomAction}>
             <Link href={`/grade/${grade}`}>← Back to {details.label} lessons</Link>

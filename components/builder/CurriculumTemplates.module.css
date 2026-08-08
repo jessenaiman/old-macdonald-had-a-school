@@ -41,15 +41,15 @@
   pointer-events: none;
 }
 
-.railIdentity { position: relative; z-index: 1; display: grid; grid-template-columns: 72px 1fr; align-items: center; gap: 12px; }
+.railIdentity { position: relative; z-index: 1; display: grid; grid-template-columns: 72px minmax(0, 1fr); align-items: center; gap: 12px; }
 .gradeBadge { overflow: hidden; border-radius: 50%; filter: drop-shadow(0 4px 2px rgba(9, 26, 17, .35)); object-fit: contain; }
 .railIdentity span, .railIdentity small { display: block; font-size: 9px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
-.railIdentity strong { display: block; margin: 2px 0; color: #fff; font-family: "Boogaloo", sans-serif; font-size: 28px; font-weight: 400; line-height: .95; }
+.railIdentity strong { display: block; margin: 2px 0; overflow-wrap: anywhere; color: #fff; font-family: "Boogaloo", sans-serif; font-size: 28px; font-weight: 400; line-height: .95; }
 .railNav { position: relative; z-index: 1; display: grid; gap: 9px; margin-top: 44px; }
 .railNav a { display: grid; grid-template-columns: 36px 1fr; align-items: center; min-height: 47px; padding: 0 12px; border-radius: 15px; color: #fff; text-decoration: none; }
 .railNav a:first-child, .railNav a:hover { background: rgba(18, 45, 32, .42); }
 .railNav b { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 50%; background: rgba(255, 255, 255, .12); font-size: 10px; }
-.railNav span { font-size: 14px; font-weight: 900; }
+.railNav span { min-width: 0; overflow-wrap: anywhere; font-size: 14px; font-weight: 900; }
 .reminder { position: relative; z-index: 1; margin-top: auto; padding: 30px 17px 18px; color: #5a431f; background: #f3dda0; box-shadow: 4px 5px 0 #ac8b4a; transform: rotate(-1.6deg); }
 .reminder img { position: absolute; top: -15px; left: calc(50% - 15px); object-fit: contain; }
 .reminder span { display: block; color: #8a672a; font-size: 8px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
@@ -323,7 +323,7 @@
 }
 
 .gradeWall .hero {
-  grid-template-columns: minmax(0, 1fr) 205px;
+  grid-template-columns: minmax(0, 1fr) 300px;
   gap: 16px;
   min-height: 262px;
 }
@@ -719,6 +719,78 @@
 }
 
 
+.gradeWall .planningNoteGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gradeWall .planningNote {
+  position: relative;
+  min-height: 168px;
+  padding: 31px 14px 13px;
+  border: 1px solid #c6b38b;
+  border-radius: 7px;
+  color: #142f24;
+  background: #fffaf0 url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background-size: 250px;
+  box-shadow: 2px 3px 0 rgba(64, 45, 24, .18);
+}
+
+.gradeWall .planningNote:nth-child(2) { transform: rotate(-.7deg); }
+.gradeWall .planningNote:nth-child(3) { transform: rotate(.7deg); }
+
+.gradeWall .planningNoteFastener {
+  position: absolute;
+  top: -15px;
+  left: 18px;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 1px rgba(34, 26, 17, .24));
+}
+
+.gradeWall .planningNote:nth-child(2) .planningNoteFastener {
+  top: -12px;
+  left: calc(50% - 23px);
+  width: 46px;
+  height: 30px;
+}
+
+.gradeWall .planningNote:nth-child(3) .planningNoteFastener {
+  right: 18px;
+  left: auto;
+}
+
+.gradeWall .planningNote > span {
+  display: block;
+  color: #8c5f1b;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.gradeWall .planningNote p {
+  min-height: 34px;
+  margin: 8px 0 9px;
+  color: #60543f;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.gradeWall .planningLines {
+  display: grid;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.gradeWall .planningLines i {
+  display: block;
+  height: 1px;
+  background: #bbcfda;
+}
+
 .gradeWall a:focus-visible,
 .gradeWall button:focus-visible,
 .gradeWall input:focus-visible,
@@ -737,7 +809,7 @@
   }
 
   .gradeWall .hero {
-    grid-template-columns: minmax(0, 1fr) 210px;
+    grid-template-columns: minmax(0, 1fr) 280px;
     gap: 18px;
   }
 
@@ -787,6 +859,11 @@
 
   .gradeWall .planningResourceStrip {
     grid-template-columns: 1fr;
+  }
+
+  .gradeWall .planningNoteGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .gradeWall .planningActions {
@@ -935,9 +1012,9 @@
 .gradeOneWall .teacherImage {
   right: auto;
   left: 14px;
-  bottom: -2px;
-  width: 174px;
-  height: 174px;
+  bottom: 6px;
+  width: 164px;
+  height: 164px;
 }
 
 .gradeOneWall .teacherNotesLink {

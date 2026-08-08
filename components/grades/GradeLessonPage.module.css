@@ -96,10 +96,19 @@
 .lessonPage :global(.lesson-document-content li) { margin: 4px 0; overflow-wrap: anywhere; }
 .lessonPage :global(.lesson-document-content a) { color: var(--grade-dark); font-weight: 900; text-decoration: underline; text-underline-offset: 3px; }
 
-.teacherNote { position: relative; min-height: 210px; margin-top: 24px; padding: 28px 32px; border: 1px solid #dcc9a8; border-radius: 13px; background: #fffaf0 url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat; background-size: 280px; box-shadow: 3px 4px 0 #c9b28d; }
-.teacherNote img { position: absolute; top: -18px; left: 18px; object-fit: contain; transform: rotate(-8deg); }
-.teacherNote p { margin: 0 0 20px 30px; color: #5e5446; font-size: 11px; text-align: center; }
-.teacherNote span { display: block; height: 34px; border-bottom: 1px solid #afc7cf; }
+.teacherNotes { margin-top: 28px; padding: 24px 22px 22px; border: 8px solid #9a632f; border-radius: 16px; background: #bd8751 url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png") repeat; background-size: 512px; box-shadow: 3px 4px 0 rgba(88, 52, 25, .28); }
+.teacherNotes > header { margin-bottom: 18px; color: #fff9eb; text-align: center; }
+.teacherNotes > header p { margin: 0; font-family: var(--font-hand), var(--font-display), cursive; font-size: 24px; line-height: 1; }
+.teacherNoteGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.teacherNote { position: relative; min-height: 206px; padding: 31px 18px 16px; border: 1px solid #dcc9a8; border-radius: 8px; background: #fffaf0 url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat; background-size: 280px; box-shadow: 3px 4px 0 #8d5c30; }
+.teacherNote:nth-child(2) { transform: rotate(-.7deg); }
+.teacherNote:nth-child(3) { transform: rotate(.7deg); }
+.teacherNote img { position: absolute; top: -18px; left: 16px; object-fit: contain; transform: rotate(-8deg); }
+.teacherNote:nth-child(2) img { left: calc(50% - 24px); width: 48px; transform: none; }
+.teacherNote:nth-child(3) img { right: 16px; left: auto; }
+.teacherNote h2 { margin: 0; color: var(--grade-dark); font-family: var(--font-hand), var(--font-display), cursive; font-size: 24px; line-height: .95; }
+.teacherNote p { min-height: 34px; margin: 9px 0 13px; color: #5e5446; font-size: 11px; line-height: 1.4; }
+.teacherNote span { display: block; height: 28px; border-bottom: 1px solid #afc7cf; }
 .bottomAction { display: flex; justify-content: flex-end; margin-top: 22px; }
 .bottomAction a { min-height: 44px; padding: 13px 16px; border-radius: 9px; color: #fff; background-color: var(--grade-accent); background-image: var(--grade-felt); background-size: 180px; box-shadow: 0 3px 0 var(--grade-dark); font-size: 11px; font-weight: 900; }
 .lessonPage a:focus-visible, .lessonPage button:focus-visible { outline: 3px solid #f4c84a; outline-offset: 3px; }
@@ -134,6 +143,9 @@
   .lessonPage :global(.lesson-resource-link),
   .bottomAction a { font-size: 12px; }
   .lessonPage :global(.lesson-primary-actions), .lessonPage :global(.lesson-print-actions), .lessonPage :global(.lp-btn-ghost), .lessonPage :global(.lesson-resource-link), .bottomAction, .bottomAction a { width: 100%; }
+  .teacherNotes { margin-inline: -3px; padding: 22px 14px 18px; border-width: 6px; }
+  .teacherNoteGrid { grid-template-columns: 1fr; gap: 22px; }
+  .teacherNote { min-height: 184px; }
 }
 
 @media print {

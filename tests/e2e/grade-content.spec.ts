@@ -13,7 +13,11 @@ const crawlSeeds = ["/", "/lessons", "/topics", "/cast", "/about", ...gradePages
 test("every grade landing uses its own template and exposes lesson content", async ({ page }) => {
   for (const [grade, minimumLessonLinks] of gradePages) {
     await page.goto(`/grade/${grade}`, { waitUntil: "networkidle" });
-    await expect(page.locator(`[data-grade-template="${grade}"]`).first()).toBeVisible();
+    const template = page.locator(`[data-grade-template="${grade}"]`);
+    await expect(template).toHaveCount(1);
+    await expect(template.first()).toBeVisible();
+    await expect(template.getByLabel("Printable planning notes")).toBeVisible();
+    await expect(template.getByLabel("Printable planning notes").locator("article")).toHaveCount(3);
 
     const lessonLinks = await page.locator(`a[href^="/grade/${grade}/"]`).evaluateAll((links) =>
       [...new Set(links.map((link) => (link as HTMLAnchorElement).pathname))],
