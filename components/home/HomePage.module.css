@@ -511,7 +511,7 @@
 
 @media (max-width: 760px) {
   .hero {
-    min-height: 440px;
+    min-height: clamp(330px, 44svh, 370px);
     align-items: end;
   }
 
@@ -519,15 +519,15 @@
   .heroShade { display: none; }
   .heroPanel {
     width: calc(100% - 28px);
-    margin: 0 auto 14px;
-    padding: 22px 20px 24px;
-    border-radius: 5px 5px 34px 5px;
+    margin: 0 auto 10px;
+    padding: 17px 18px 19px;
+    border-radius: 5px 5px 28px 5px;
   }
 
-  .heroEyebrow { margin-bottom: 8px; font-size: 9px; }
-  .heroPanel h1 { max-width: 520px; font-size: clamp(34px, 10.5vw, 44px); line-height: .98; }
-  .heroPanel > p:not(.heroEyebrow) { margin-top: 12px; font-size: 13px; line-height: 1.45; }
-  .heroButton { width: 100%; min-height: 46px; margin-top: 15px; padding-inline: 20px; }
+  .heroEyebrow { margin-bottom: 6px; font-size: 8px; }
+  .heroPanel h1 { max-width: 520px; font-size: clamp(30px, 8.7vw, 36px); line-height: .98; }
+  .heroPanel > p:not(.heroEyebrow) { margin-top: 9px; font-size: 12.5px; line-height: 1.4; }
+  .heroButton { width: 100%; min-height: 44px; margin-top: 11px; padding-inline: 18px; }
   .heroPinRight { display: none; }
 
   .homePage .subjectBoard {
@@ -565,10 +565,10 @@
 }
 
 @media (max-width: 360px) {
-  .hero { min-height: 425px; }
+  .hero { min-height: 330px; }
   .heroPanel { width: calc(100% - 20px); padding-inline: 17px; }
-  .heroPanel h1 { font-size: 32px; }
-  .heroPanel > p:not(.heroEyebrow) { font-size: 12.5px; }
+  .heroPanel h1 { font-size: 29px; }
+  .heroPanel > p:not(.heroEyebrow) { font-size: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

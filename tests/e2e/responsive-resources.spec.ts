@@ -44,11 +44,14 @@ test.describe("teacher resources stay usable across responsive widths", () => {
   }
 
   test("homepage presents subject resources in the first phone viewport", async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
+    // Mobile browser chrome can leave substantially less page height than the
+    // device's physical screen, so use the shorter usable viewport here.
+    await page.setViewportSize({ width: 390, height: 730 });
     await page.goto("/", { waitUntil: "networkidle" });
 
     await expect(page.getByRole("heading", { name: "Browse by Subject" })).toBeInViewport();
     await expect(page.getByRole("link", { name: /Story Time: Board Books/i })).toBeInViewport();
+    await expect(page.getByRole("link", { name: /Show & Tell Story Circle/i })).toBeInViewport();
   });
 
   for (const [route, heading] of gradePages) {
