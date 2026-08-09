@@ -1,10 +1,12 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LessonDocument } from "../LessonDocument";
 import { SiteShell, type ActivePage } from "../SiteShell";
 import { getLesson } from "../../lib/content";
+import { getCurriculumTopic } from "../../lib/curriculum-db";
 import { gradeKeysForLabel, type GradeKey } from "../../lib/grade-routes";
+import { DatabaseLessonDocument } from "./DatabaseLessonDocument";
 import styles from "./GradeLessonPage.module.css";
 
 const GRADE_LESSON_DETAILS: Record<GradeKey, {
@@ -14,11 +16,11 @@ const GRADE_LESSON_DETAILS: Record<GradeKey, {
   teacher: string;
   teacherName: string;
 }> = {
-  daycare: { label: "Daycare", age: "Ages 2–3", badge: "/brand-kit-icon-sheets/individual-icons/grade-daycare.png", teacher: "/staff_and_students/miss-puddles-transparent-circle.png", teacherName: "Miss Puddles" },
-  "pre-school": { label: "Pre-School", age: "Ages 3–4", badge: "/design-assets/blank-felt-patches-v1/individual-patches/08-miss-maisy-circle.png", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
-  kindergarten: { label: "Kindergarten", age: "Ages 4–6", badge: "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png", teacher: "/staff_and_students/mr-rusty-transparent-circle.png", teacherName: "Mr Rusty" },
-  "grade-one": { label: "Grade 1", age: "5–6 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-1.png", teacher: "/staff_and_students/miss-hayley-transparent-circle.png", teacherName: "Miss Hayley" },
-  "grade-two": { label: "Grade 2", age: "6–7 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-2.png", teacher: "/staff_and_students/mr-sam-transparent-circle.png", teacherName: "Mr Sam" },
+  daycare: { label: "Daycare", age: "Ages 2â€“3", badge: "/brand-kit-icon-sheets/individual-icons/grade-daycare.png", teacher: "/staff_and_students/miss-puddles-transparent-circle.png", teacherName: "Miss Puddles" },
+  "pre-school": { label: "Pre-School", age: "Ages 3â€“4", badge: "/design-assets/blank-felt-patches-v1/individual-patches/08-miss-maisy-circle.png", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
+  kindergarten: { label: "Kindergarten", age: "Ages 4â€“6", badge: "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png", teacher: "/staff_and_students/mr-rusty-transparent-circle.png", teacherName: "Mr Rusty" },
+  "grade-one": { label: "Grade 1", age: "5â€“6 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-1.png", teacher: "/staff_and_students/miss-hayley-transparent-circle.png", teacherName: "Miss Hayley" },
+  "grade-two": { label: "Grade 2", age: "6â€“7 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-2.png", teacher: "/staff_and_students/mr-maisy-transparent-circle.png", teacherName: "Mr Maisy" },
 };
 
 export async function GradeLessonPage({
@@ -33,12 +35,16 @@ export async function GradeLessonPage({
   className: string;
 }) {
   const lesson = await getLesson(slug);
-  if (!lesson || !gradeKeysForLabel(lesson.metadata.grade).includes(grade)) notFound();
+  if (lesson && !gradeKeysForLabel(lesson.metadata.grade).includes(grade)) notFound();
+  const databaseTopic = lesson ? undefined : getCurriculumTopic(slug, grade);
+  if (!lesson && !databaseTopic) notFound();
   const details = GRADE_LESSON_DETAILS[grade];
+  const subject = lesson?.metadata.subject ?? databaseTopic?.subject ?? "Curriculum";
+  const title = lesson?.metadata.title ?? databaseTopic?.title ?? "Lesson";
 
   return (
     <SiteShell active={active}>
-      <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson.metadata.template}>
+      <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson?.metadata.template ?? "database-draft"}>
         <aside className={styles.rail} aria-label={`${details.label} lesson sections`}>
           <div className={styles.railIdentity}>
             <Image src={details.badge} alt="" width={68} height={68} className={styles.gradeBadge} priority />
@@ -57,9 +63,11 @@ export async function GradeLessonPage({
           </div>
         </aside>
         <div className={styles.lessonStage}>
-          <div className={styles.lessonCrumb}><Link href={`/grade/${grade}`}>{details.label}</Link><span aria-hidden="true">›</span><span>{lesson.metadata.subject}</span><span aria-hidden="true">›</span><span>Individual lesson</span></div>
+          <div className={styles.lessonCrumb}><Link href={`/grade/${grade}`}>{details.label}</Link><span aria-hidden="true">â€º</span><span>{subject}</span><span aria-hidden="true">â€º</span><span>{title}</span></div>
           <div id="lesson-overview">
-            <LessonDocument Content={lesson.Content} metadata={lesson.metadata} />
+            {lesson
+              ? <LessonDocument Content={lesson.Content} metadata={lesson.metadata} />
+              : <DatabaseLessonDocument topic={databaseTopic!} />}
           </div>
           <section className={styles.teacherNotes} id="lesson-notes" aria-label="Teacher planning notes">
             <header>
@@ -83,7 +91,7 @@ export async function GradeLessonPage({
             </div>
           </section>
           <div className={styles.bottomAction}>
-            <Link href={`/grade/${grade}`}>← Back to {details.label} lessons</Link>
+            <Link href={`/grade/${grade}`}>â† Back to {details.label} lessons</Link>
           </div>
         </div>
       </div>

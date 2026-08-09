@@ -4,10 +4,10 @@
 
 ## Role
 
-- **Role:** Physical education teacher
+- **Role:** Grade 2 teacher and physical education lead
 - **Family:** Maisy's dad
 - **Species:** Cow adult
-- **Setting:** Whole school outdoor games, movement warm-ups and gross-motor play
+- **Setting:** Grade 2 outdoor games, movement warm-ups and gross-motor play
 
 ## Quick read
 
@@ -49,4 +49,3 @@
 ## Production reference
 
 Maisy's Dad is a handcrafted felt-and-fabric puppet character in the Old MacDonald's Farm School style. Adult black-and-white cow with cream forelock and short horns, large pink muzzle, friendly expressive eyes. He wears a red bandana, red plaid shirt, blue denim overalls and sturdy brown shoes/boots. Puppet construction features felt texture and stitching. Keep all facial features, markings, hair, horns and outfit consistent. Pose, gesture and props may change to suit different scenes.
-

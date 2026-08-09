@@ -1,26 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Lilita+One&family=Caveat:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,800;1,400;1,700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Fredoka+One&display=swap');
-@import "tailwindcss";
+﻿@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Figma "Old MacDonald Had a School" Make prototype's real font stack — ported
+/* Figma "Old MacDonald Had a School" Make prototype's real font stack â€” ported
    verbatim from src/index.css/App.tsx, not invented substitutes. Applied via
    these tokens on the new figma-matched pages (.gb-*, .lp-*, .cast-page); the
    home hero keeps its original Aptos/Aptos Display stack untouched below. */
-:root {
-  --font-display:'Boogaloo',cursive; --font-heading:'Lilita One',cursive; --font-serif-italic:'Playfair Display',serif; --font-body:'Nunito',sans-serif; --font-hand:'Caveat',cursive; --font-button:'Fredoka One',cursive;
+@theme inline {
+  --font-display: var(--font-farm-display);
+  --font-heading: var(--font-farm-display);
+  --font-body: var(--font-farm-body);
+  --font-hand: var(--font-farm-hand);
+  --font-button: var(--font-farm-display);
+  --font-serif-italic: Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-farm-body);
 }
 
 :root {
   --navy:#0b1a33; --blue:#3f78a4; --sky:#b9d3e6; --cool-white:#f2e8d0; --sunlit:#e9c65b; --gold:#e1b84b; --red:#c33f3f; --coral:#d45d6d; --pink:#d98291; --plum:#8d7aa8; --orange:#d97a2b; --brown:#4b5563; --green:#3f78a4; --ink:#172238; --heading:#0b1a33; --muted:#3d4650; --surface-soft:#f8fbfd; --hero-text:#e7f0f7; --paper:#fbfcf8; --line:#cdd9e6;
   /* Real value gap between the craft-paper page and the felt patches sewn onto
-     it — cards must be visibly lighter/warmer than the page, not the same
+     it â€” cards must be visibly lighter/warmer than the page, not the same
      near-white as it (see icon-repair-philosophy-adjacent card-contrast fix). */
   --page-bg:#e3cf9f; --card-bg:#fdf8ec;
   /* Authored material textures, reused at two scales: kraft for paper and
      denim felt for textile surfaces across the current brand system. */
   --grain-fine: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
   --grain-coarse: url("/design-assets/web-material-library-v1/woven-fabric/woven-fabric-13-maisy-tile.png");
-  /* Same felt pattern at much lower opacity — for panels carrying paragraphs
+  /* Same felt pattern at much lower opacity â€” for panels carrying paragraphs
      of body text, where the full-strength grain above reads as noise behind
      the type instead of fabric. */
   --grain-soft: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
@@ -32,22 +38,10 @@
 /* The site already has a brand language: the navy embroidered emblem, gold
    thread, cool blue structure, and character-patch accents. Themes change the
    atmosphere while keeping that language recognisable. */
-html[data-theme="farm-day"] { --navy:#0b1a33; --blue:#3f78a4; --sky:#b9d3e6; --cool-white:#f2e8d0; --sunlit:#e9c65b; --gold:#e1b84b; --red:#c33f3f; --coral:#d45d6d; --pink:#d98291; --plum:#8d7aa8; --orange:#d97a2b; --brown:#4b5563; --green:#3f78a4; --ink:#172238; --heading:#0b1a33; --muted:#3d4650; --surface-soft:#f8fbfd; --hero-text:#e7f0f7; --paper:#fbfcf8; --line:#cdd9e6; --page-bg:#e3cf9f; --card-bg:#fdf8ec; }
-html[data-theme="lullaby-dusk"] { --navy:#101b3a; --blue:#6887b7; --sky:#c8d0e5; --cool-white:#221c2c; --sunlit:#f4c968; --gold:#e8b65b; --red:#b86d82; --coral:#c684a0; --pink:#ba93b5; --plum:#8e83b8; --orange:#c4866b; --brown:#b8c1d3; --green:#6887b7; --ink:#f2f3f7; --heading:#f2f3f7; --muted:#b6bfd1; --surface-soft:#222847; --hero-text:#dfe5f3; --paper:#1d2544; --line:#404b6d; --page-bg:#100b19; --card-bg:#302949; }
-html[data-theme="storybook-focus"] { --navy:#1a2345; --blue:#4169a1; --sky:#dfe5f2; --cool-white:#f4f6fb; --sunlit:#f2c14e; --gold:#f0b44a; --red:#b84c57; --coral:#e37776; --pink:#d89bb1; --plum:#735a90; --orange:#de7b42; --brown:#5f6574; --green:#557c97; --ink:#202a43; --heading:#1a2345; --muted:#3c4657; --surface-soft:#e9eef7; --hero-text:#eef3fb; --paper:#fbfcff; --line:#cfd8e8; --page-bg:#c3ceea; --card-bg:#ffffff; }
+html.light { --navy:#0b1a33; --blue:#3f78a4; --sky:#b9d3e6; --cool-white:#f2e8d0; --sunlit:#e9c65b; --gold:#e1b84b; --red:#c33f3f; --coral:#d45d6d; --pink:#d98291; --plum:#8d7aa8; --orange:#d97a2b; --brown:#4b5563; --green:#3f78a4; --ink:#172238; --heading:#0b1a33; --muted:#3d4650; --surface-soft:#f8fbfd; --hero-text:#e7f0f7; --paper:#fbfcf8; --line:#cdd9e6; --page-bg:#e3cf9f; --card-bg:#fdf8ec; }
+html.dark { --navy:#101b3a; --blue:#6887b7; --sky:#c8d0e5; --cool-white:#221c2c; --sunlit:#f4c968; --gold:#e8b65b; --red:#b86d82; --coral:#c684a0; --pink:#ba93b5; --plum:#8e83b8; --orange:#c4866b; --brown:#b8c1d3; --green:#6887b7; --ink:#f2f3f7; --heading:#f2f3f7; --muted:#b6bfd1; --surface-soft:#222847; --hero-text:#dfe5f3; --paper:#1d2544; --line:#404b6d; --page-bg:#100b19; --card-bg:#302949; }
 
-/* Grade color system — a true primary/secondary spectrum in age order, so
-   the grade an activity belongs to is itself a color-naming lesson: red (youngest)
-   through blue (oldest). Fixed inks so every grade reads correctly on paper and felt
-   in every theme. Five grades: Daycare, Preschool, Kindergarten, Grade 1, Grade 2. */
-:root {
-  --grade-daycare:#C23B33; --grade-daycare-ink:#ffffff;
-  --grade-pre-school:#DB7F1F; --grade-pre-school-ink:#ffffff;
-  --grade-kindergarten:#E7B824; --grade-kindergarten-ink:#3a2c0b;
-  --grade-g1:#2F8F5B; --grade-g1-ink:#ffffff;
-  --grade-g2:#2E63A6; --grade-g2-ink:#ffffff;
-}
-/* Subject-discovery clusters (homepage) — a separate small palette that never
+/* Subject-discovery clusters (homepage) â€” a separate small palette that never
    reuses a grade hue, so grade color and subject color never compete on one card. */
 :root {
   --cluster-words:#6B4E9E; --cluster-numbers:#1D8A7A; --cluster-music:#C23B79; --cluster-heart:#B5562A;
@@ -87,7 +81,7 @@ body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index
 .theme-switcher-item[data-state="on"] { color:var(--navy); background:var(--sunlit); }
 .theme-switcher-item:focus-visible { outline:2px solid var(--sunlit); outline-offset:2px; }
 
-/* Character badge — bust (public/icons/staff) on a color-coded
+/* Character badge â€” bust (public/icons/staff) on a color-coded
    circle. Bright/bold by design: staff coded by subject, students by their
    canonical signature color (see lib/cast.ts). Felt-stitched ring matches
    the site's sewn-patch language. */
@@ -116,7 +110,7 @@ footer { display:flex; align-items:center; justify-content:space-between; flex-w
 
 .paper-panel { background:color-mix(in srgb,var(--paper) 96%,transparent); border:1px solid var(--line); box-shadow:0 12px 32px #0b1a3310; }
 
-/* Cardstock texture — a fine paper grain, reserved for surfaces that are
+/* Cardstock texture â€” a fine paper grain, reserved for surfaces that are
    literally paper (the hero photo mount, curriculum path strip) rather than
    a sewn content box. */
 .paper-panel, .curriculum-path,
@@ -126,7 +120,7 @@ footer { display:flex; align-items:center; justify-content:space-between; flex-w
   background-size: 150px 150px;
   background-blend-mode: multiply;
 }
-/* Sewn-felt texture — every content box a teacher reads as a "card": felt
+/* Sewn-felt texture â€” every content box a teacher reads as a "card": felt
    grain + a running-stitch border, so it reads as a patch sewn onto the
    construction-paper background rather than a paper cutout. */
 .topic-list-card, .about-story article, .cast-card, .ey-shelf-tile, .ey-detail-panel {
@@ -142,7 +136,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .primary-button:hover { background:var(--blue); }
 .text-link { color:var(--navy); font-size:12px; font-weight:900; }
 
-/* Sewn-felt-patch effect — a crisp "step" shadow (no blur, reads as a raised
+/* Sewn-felt-patch effect â€” a crisp "step" shadow (no blur, reads as a raised
    sticker) plus a pressed groove (::before, inset shadow channel) with a
    raised dashed thread sitting in it (::after, its own drop-shadow so it
    looks physically above the groove). Tune per element with --st (thread
@@ -154,7 +148,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 @keyframes spin { to { transform:rotate(360deg); } }
 @keyframes rise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 
-/* ── Grade picker — first section on the homepage, one card per grade ── */
+/* â”€â”€ Grade picker â€” first section on the homepage, one card per grade â”€â”€ */
 .grade-picker { padding:20px clamp(16px,3vw,42px); background:var(--navy); border-bottom:4px solid var(--gold); }
 .grade-picker-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:14px; max-width:1600px; margin:0 auto; }
 .grade-picker-card { display:flex; align-items:center; gap:14px; padding:16px; border-radius:16px; text-decoration:none; transition:transform .15s ease, filter .15s ease; --st:#ffffff55; --st-h:#ffffffcc; --st-inset:5px; }
@@ -189,7 +183,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .section-intro.compact { margin-bottom:16px; }
 .secondary-button { align-self:flex-start; padding:10px 14px; border:1px solid var(--navy); border-radius:9px; color:var(--navy); font-size:11px; font-weight:900; }
 
-/* Subject-discovery cluster cards — sewn felt patches on the paper section
+/* Subject-discovery cluster cards â€” sewn felt patches on the paper section
    background, one of the four cluster colors, independent of grade colors. */
 .cluster-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
 .cluster-card { display:flex; flex-direction:column; padding:20px; border-radius:12px; color:#fff; background-color:var(--cluster-color); background-image:var(--grain-coarse); background-size:130px 130px; background-blend-mode:multiply; box-shadow:0 8px 20px #0b1a3322; transition:transform .18s ease,box-shadow .18s ease; animation:rise .4s ease both; --st:#ffffff55; --st-h:#ffffffcc; --st-inset:5px; }
@@ -216,7 +210,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .cluster-empty { margin:0; padding:8px 9px; font-size:12px; line-height:1.45; opacity:.92; font-style:italic; }
 .cluster-more { align-self:flex-start; margin-top:auto; padding-top:10px; font-size:11px; font-weight:900; opacity:.92; }
 .cluster-more:hover { opacity:1; text-decoration:underline; }
-/* Resource preview — homepage version of the lesson page's step-tab bar,
+/* Resource preview â€” homepage version of the lesson page's step-tab bar,
    reused verbatim (.lp-map/.lp-video/.lp-docs/.lp-lightbox) so a teacher
    sees the exact preview/print interaction before ever opening a lesson. */
 .resource-preview { padding:30px; border-radius:12px; animation:rise .5s ease .26s both; background:var(--card-bg); }
@@ -240,7 +234,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 
 /* Section entrance animations are declared on each section rule above. */
 
-/* ── Featured printable — closing two-column banner on the homepage ── */
+/* â”€â”€ Featured printable â€” closing two-column banner on the homepage â”€â”€ */
 .featured-printable { display:grid; grid-template-columns:1fr 1fr; overflow:hidden; border-radius:24px; margin-top:38px; background:var(--navy); background-image:linear-gradient(135deg,var(--navy) 0%,#17365a 68%,#2a587d 100%),var(--grain-coarse); background-size:cover,140px 140px; background-blend-mode:normal,soft-light; --st:#e9c65b70; --st-h:#e9c65b; }
 .featured-printable-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(24px,3vw,40px); }
 .featured-printable-eyebrow { color:var(--sunlit); margin-bottom:8px; }
@@ -442,17 +436,17 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 }
 @font-face {
   font-family:"Farm Display";
-  src:url("/brand-kit-demo-assets/BricolageGrotesque-Bold.ttf") format("truetype");
+  src:url("/background-textures/BricolageGrotesque-Bold.ttf") format("truetype");
   font-display:swap;
 }
 @font-face {
   font-family:"Farm Sans";
-  src:url("/brand-kit-demo-assets/InstrumentSans-Regular.ttf") format("truetype");
+  src:url("/background-textures/InstrumentSans-Regular.ttf") format("truetype");
   font-display:swap;
 }
 @font-face {
   font-family:"Farm Sans";
-  src:url("/brand-kit-demo-assets/InstrumentSans-Bold.ttf") format("truetype");
+  src:url("/background-textures/InstrumentSans-Bold.ttf") format("truetype");
   font-weight:700 900;
   font-display:swap;
 }
@@ -528,7 +522,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .ey-kindergarten .ey-shelf-index { width:35px; height:35px; border:2px solid #fff5d4; color:#fff; background:#cc9b27; font-family:"Farm Display",sans-serif; font-size:17px; }
 .ey-kindergarten .ey-shelf-title { color:#fff8e9; font-family:"Farm Display",sans-serif; font-size:20px; line-height:1; }
 .ey-kindergarten .ey-detail-panel { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr); column-gap:30px; padding:clamp(26px,4vw,48px); border:0; border-radius:8px; color:#2c241b; background-color:#a86e38; background-image:var(--worktable-kraft); background-size:320px; box-shadow:8px 10px 0 #70451f, 0 22px 42px #43271538; --st:none; }
-.ey-kindergarten .ey-detail-panel::before { content:"Today’s planning card"; position:absolute; top:14px; left:26px; color:#fff0d4; font-size:9px; font-weight:900; letter-spacing:.15em; text-transform:uppercase; }
+.ey-kindergarten .ey-detail-panel::before { content:"Todayâ€™s planning card"; position:absolute; top:14px; left:26px; color:#fff0d4; font-size:9px; font-weight:900; letter-spacing:.15em; text-transform:uppercase; }
 .ey-kindergarten .ey-detail-panel::after { content:""; position:absolute; top:-24px; right:24px; width:48px; height:48px; background:var(--worktable-clip) center/contain no-repeat; transform:rotate(8deg); pointer-events:none; }
 .ey-kindergarten .ey-detail-head { grid-column:1; display:block; margin:22px 0 18px; padding:22px 24px; border-radius:3px; background:#fff9e9; box-shadow:3px 4px 0 #70451f; }
 .ey-kindergarten .ey-detail-head h2 { color:var(--worktable-ink); font-family:"Farm Display",sans-serif; font-size:clamp(29px,3.3vw,42px); }
@@ -719,7 +713,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .ey-kindergarten .ey-tagline { max-width:620px; margin:0; font-size:15px; }
 .ey-kindergarten .ey-bridge-note { max-width:610px; margin:14px 0 0; padding:10px 14px; background-color:#315e48; background-image:url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png"); background-size:220px; background-position:center; background-repeat:repeat; box-shadow:none; }
 .ey-kindergarten .ey-shelf { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:10px 0 17px; padding:0; overflow:visible; }
-.ey-kindergarten .ey-shelf::before { position:static; grid-column:1/-1; content:"Choose today’s learning path"; margin-bottom:2px; }
+.ey-kindergarten .ey-shelf::before { position:static; grid-column:1/-1; content:"Choose todayâ€™s learning path"; margin-bottom:2px; }
 .ey-kindergarten .ey-shelf-tile { width:auto; min-height:116px; padding:18px 15px; background-size:100% 100%; }
 .ey-kindergarten .ey-shelf-tile:nth-child(even) { background-image:url("/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png"); }
 .ey-kindergarten .ey-shelf-tile.is-active { outline:3px solid #e4c66c; box-shadow:0 8px 16px #442c1928; }
@@ -785,14 +779,14 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
   .theme-switcher { order:-1; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SINGLE-LESSON PAGE v2 — two-panel swap + planning/preview.
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SINGLE-LESSON PAGE v2 â€” two-panel swap + planning/preview.
    Every color is token-driven, so light and dark both render
    correctly with no per-theme overrides.
-   ═══════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .lp-panel { background-color:var(--card-bg); background-image:var(--grain-soft); background-size:130px 130px; background-blend-mode:multiply; }
 .lp-page { padding-top:0; --accent:#cf9a24; --accent-ink:#172238; --accent-text:#8a6510; --blue:var(--accent-text); --gold:var(--accent); }
-/* Lesson page hero — compact navy gradient band wrapping breadcrumb + title */
+/* Lesson page hero â€” compact navy gradient band wrapping breadcrumb + title */
 .lp-hero { padding:clamp(20px,2.5vw,36px) clamp(18px,2.5vw,32px); background:linear-gradient(135deg,var(--navy) 0%,#17365a 68%,#2a587d 100%); background-image:linear-gradient(135deg,var(--navy) 0%,#17365a 68%,#2a587d 100%),var(--grain-coarse); background-size:cover,140px 140px; background-blend-mode:normal,soft-light; border-radius:0 0 14px 14px; margin-bottom:18px; --st:#e9c65b50; --st-h:#e9c65b; --st-inset:6px; --st-r:10px; animation:rise .5s ease both; }
 .lp-hero .lp-breadcrumb { color:#ffffffaa; }
 .lp-hero .lp-bc-sep { color:#ffffff66; }
@@ -805,7 +799,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .lp-hero .lp-lead-badge { background-color:#0b1a3340; background-image:none; --st:#e9c65b44; --st-h:#e9c65b; }
 .lp-hero .lp-lead-meta strong { color:#fff; }
 .lp-hero .lp-lead-meta small { color:#ffffffaa; }
-html[data-theme="lullaby-dusk"] .lp-page { --accent-text:#f0cf7a; }
+html.dark .lp-page { --accent-text:#f0cf7a; }
 /* Per-character accent (fill / ink-on-fill / readable-text), light theme. Keys match the patch filenames. */
 .lp-page[data-char="mr-sam"] { --accent:#d2701f; --accent-ink:#ffffff; --accent-text:#9c4f12; }
 .lp-page[data-char="miss-hayley"] { --accent:#a8438c; --accent-ink:#ffffff; --accent-text:#7e2f68; }
@@ -816,14 +810,14 @@ html[data-theme="lullaby-dusk"] .lp-page { --accent-text:#f0cf7a; }
 .lp-page[data-char="miss-maisy"] { --accent:#b85f7c; --accent-ink:#ffffff; --accent-text:#8c4259; }
 .lp-page[data-char="old-macdonald"] { --accent:#cf9a24; --accent-ink:#172238; --accent-text:#8a6510; }
 /* Dark theme only retunes the readable-text value so it stays legible on navy. */
-html[data-theme="lullaby-dusk"] .lp-page[data-char="mr-sam"] { --accent-text:#f2ab6a; }
-html[data-theme="lullaby-dusk"] .lp-page[data-char="miss-hayley"] { --accent-text:#e6a4d2; }
-html[data-theme="lullaby-dusk"] .lp-page[data-char="mr-rusty"] { --accent-text:#f0a0a8; }
-html[data-theme="lullaby-dusk"] .lp-page[data-char="miss-puddles"] { --accent-text:#8fc6e8; }
-html[data-theme="lullaby-dusk"] .lp-page[data-char="mr-maisy"] { --accent-text:#8fd6a6; }
-html[data-theme="lullaby-dusk"] .lp-page[data-char="mr-puddles"] { --accent-text:#7fd6dd; }
-html[data-theme="lullaby-dusk"] .lp-page[data-char="miss-maisy"] { --accent-text:#ecb0c4; }
-html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-text:#f0cf7a; }
+html.dark .lp-page[data-char="mr-sam"] { --accent-text:#f2ab6a; }
+html.dark .lp-page[data-char="miss-hayley"] { --accent-text:#e6a4d2; }
+html.dark .lp-page[data-char="mr-rusty"] { --accent-text:#f0a0a8; }
+html.dark .lp-page[data-char="miss-puddles"] { --accent-text:#8fc6e8; }
+html.dark .lp-page[data-char="mr-maisy"] { --accent-text:#8fd6a6; }
+html.dark .lp-page[data-char="mr-puddles"] { --accent-text:#7fd6dd; }
+html.dark .lp-page[data-char="miss-maisy"] { --accent-text:#ecb0c4; }
+html.dark .lp-page[data-char="old-macdonald"] { --accent-text:#f0cf7a; }
 .lp-topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
 .lp-breadcrumb { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); }
 .lp-bc-home { display:grid; place-items:center; color:var(--heading); }
@@ -1040,11 +1034,11 @@ html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-t
 }
 @media (prefers-reduced-motion:reduce) { .lp-map button,.lp-doc-thumb,.lp-doc-thumb img,.lp-btn,.lp-explore-item { transition:none; } .lp-lightbox { animation:none; } }
 
-/* ═══════════════════════════════════════════════════════════
-   EARLY-YEARS HUB — Daycare / Preschool / Kindergarten. Three
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   EARLY-YEARS HUB â€” Daycare / Preschool / Kindergarten. Three
    complexity tiers sharing one shelf + detail-panel shape; the
    .lp-btn/.lp-lightbox rules above are reused as-is for preview.
-   ═══════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .ey-page { --accent:var(--grade-color); --accent-ink:var(--grade-ink); padding-top:2px; }
 .ey-daycare { --grade-color:var(--grade-daycare); --grade-ink:var(--grade-daycare-ink); }
 .ey-pre-school { --grade-color:var(--grade-pre-school); --grade-ink:var(--grade-pre-school-ink); }
@@ -1078,9 +1072,9 @@ html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-t
 .ey-lead-badge small { color:var(--muted); font-size:11px; }
 @media (max-width:650px) { .ey-shelf-tile { width:78px; } }
 
-/* ═══════════════════════════════════════════════════════════
-   CAST GUIDE — staff + student roster, moved off the homepage.
-   ═══════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CAST GUIDE â€” staff + student roster, moved off the homepage.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .cast-page { max-width:1280px; margin:0 auto; padding:22px 0 12px; }
 .cast-page-header { display:flex; align-items:center; justify-content:space-between; gap:40px; padding:32px clamp(24px,5vw,58px); border:2px solid #C0941E; border-radius:18px; color:#F0E4C5; background-color:#1A3A5C; background-image:var(--grain-coarse); background-size:140px 140px; box-shadow:0 7px 0 rgba(13,32,53,.3); }
 .cast-page-title { max-width:760px; }
@@ -1141,9 +1135,9 @@ html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-t
   .cast-student-board { margin-inline:-12px; padding:34px 12px; }
 }
 
-/* ══════════════════════════════════════════════════════════════
-   GRADE DIRECTORY — Grade overview pages (/grade/grade-one, etc.)
-   ══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   GRADE DIRECTORY â€” Grade overview pages (/grade/grade-one, etc.)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .gb-hero {
   display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
@@ -1171,7 +1165,7 @@ html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-t
 
 .gb-body { display: grid; grid-template-columns: 1fr 300px; gap: 24px; padding: 28px 0 0; align-items: start; }
 
-/* Sidebar subject filter — replaces the old horizontal pill row above the
+/* Sidebar subject filter â€” replaces the old horizontal pill row above the
    grid (it wrapped to two lines and pushed content down). Same filtering job,
    as a compact vertical list beside the grid instead. */
 .gb-subjects-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
@@ -1251,10 +1245,10 @@ html[data-theme="lullaby-dusk"] .lp-page[data-char="old-macdonald"] { --accent-t
   --farm-line: color-mix(in srgb, var(--ink) 22%, transparent);
 }
 
-html[data-theme="lullaby-dusk"] .subject-words { --subject-color:var(--sky); }
-html[data-theme="lullaby-dusk"] .subject-numbers { --subject-color:var(--blue); }
-html[data-theme="lullaby-dusk"] .subject-music { --subject-color:var(--pink); }
-html[data-theme="lullaby-dusk"] .subject-heart { --subject-color:var(--orange); }
+html.dark .subject-words { --subject-color:var(--sky); }
+html.dark .subject-numbers { --subject-color:var(--blue); }
+html.dark .subject-music { --subject-color:var(--pink); }
+html.dark .subject-heart { --subject-color:var(--orange); }
 
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--farm-paper); color: var(--farm-ink); }
@@ -1668,6 +1662,13 @@ a { color: inherit; }
 .farm-button > * { position:relative; z-index:1; }
 .farm-button-arrow { font-family:var(--font-body); font-size:16px; font-weight:900; line-height:1; }
 .site-footer { margin-top:0; }
+.grade-two-template {
+  --green: #b5272c;
+  --green-dark: #7d1f23;
+  --grade-accent: #b5272c;
+  --grade-dark: #7d1f23;
+  --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png");
+}
 @media (max-width:760px) {
   .grade-ribbon { padding:8px; }
   .grade-grid { width:100%; max-width:none; gap:8px; }
@@ -1868,4 +1869,379 @@ a { color: inherit; }
   .about-page .about-story { padding:24px 20px; }
   .about-page .about-story h2 { font-size:27px; }
   .about-page .hire-card { padding:24px 20px; }
+}
+
+.grade-daycare-template { --green: #e8a227; --green-dark: #9c6810; --grade-accent: #55705a; --grade-dark: #304c38; --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png"); }
+.grade-preschool-template { --green: #55705a; --green-dark: #304c38; --grade-accent: #75519b; --grade-dark: #51366f; --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png"); }
+.grade-one-template { --green: #c9527a; --green-dark: #8c304e; --grade-accent: #c9527a; --grade-dark: #8c304e; --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png"); }
+.grade-kindergarten-template { --green: #2c6c9b; --green-dark: #1d4c70; --grade-accent: #2c6c9b; --grade-dark: #1d4c70; --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png"); }
+
+
+/* Shared curriculum typography */
+/*
+ * The planning rail is the stable semantic boundary shared by the grade,
+ * topic, and lesson templates. Scoping through it keeps the editorial body
+ * face, global navigation, and all non-curriculum pages unchanged.
+ */
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"]) {
+  --curriculum-display-font: var(--font-farm-hand), "Segoe Print", cursive;
+}
+
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  :is(h1, h2, h3, blockquote) {
+  font-family: var(--curriculum-display-font);
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+}
+
+/* Grade identity and the pinned planning reminder are display copy, not body. */
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  > aside[aria-label$=" planning sections"]
+  > div:first-child strong,
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  > aside[aria-label$=" planning sections"]
+  > div:last-child strong {
+  font-family: var(--curriculum-display-font);
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+}
+
+/* Lesson-flow titles and the teaching-team message use the same written hand. */
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  button strong,
+.site-shell .site-page > div:has(> aside[aria-label$=" planning sections"])
+  > div
+  > aside:not([aria-label]) strong {
+  font-family: var(--curriculum-display-font);
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+}
+
+/* The approved Grade 1 board uses an editorial display face for hierarchy;
+ * handwriting is reserved for Miss Hayley's note and the pinned reminder. */
+.site-shell .site-page > :is([data-grade-family="grade-one"], [data-grade-family="grade-two"], [data-grade-family="kindergarten"])
+  :is(h1, h2, h3) {
+  font-family: Georgia, "Times New Roman", serif;
+  font-synthesis: none;
+  letter-spacing: -0.025em;
+}
+
+.site-shell .site-page > :is([data-grade-family="grade-one"], [data-grade-family="grade-two"], [data-grade-family="kindergarten"])
+  :is(blockquote, textarea),
+.site-shell .site-page > :is([data-grade-family="grade-one"], [data-grade-family="grade-two"], [data-grade-family="kindergarten"])
+  > aside[aria-label$=" planning sections"]
+  > div:last-child strong {
+  font-family: var(--curriculum-display-font);
+}
+
+
+/* Shared site review refinements */
+/*
+ * Reversible visual comparison layer.
+ *
+ * Every rule is scoped to `.site-review`, so removing that one class restores
+ * the current site without deleting or rewriting the existing stylesheets.
+ * The approved version can later be folded into the single Tailwind-enabled
+ * globals.css after visual review.
+ */
+
+.site-review {
+  --review-canvas: #ead7aa;
+  --review-paper: #fbf2df;
+  --review-paper-soft: #fff9eb;
+  --review-ink: #102b47;
+  --review-muted: #625846;
+  --review-line: color-mix(in srgb, var(--review-ink) 14%, transparent);
+  --review-shadow: 0 18px 44px rgba(73, 49, 24, 0.18);
+  min-height: 100vh;
+  background-color: var(--review-canvas);
+  color: var(--review-ink);
+}
+
+html.dark .site-review {
+  --review-canvas: #15182a;
+  --review-paper: #262b43;
+  --review-paper-soft: #30364e;
+  --review-ink: #f5edda;
+  --review-muted: #d6cbb6;
+  --review-line: rgba(245, 237, 218, 0.18);
+  --review-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+}
+
+
+
+/* One shared site frame owns navigation, width, rhythm, and footer behavior. */
+.site-review .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--navy) 96%, transparent);
+  box-shadow: 0 4px 18px rgba(11, 26, 51, 0.16);
+  backdrop-filter: blur(12px);
+}
+
+.site-review .site-header-inner {
+  width: min(1440px, calc(100% - 32px));
+  min-height: 68px;
+  gap: clamp(16px, 2vw, 32px);
+}
+
+.site-review .site-brand {
+  flex: 0 1 auto;
+  min-width: 220px;
+}
+
+.site-review .site-nav-desktop {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.site-review .site-nav-desktop .site-nav-link {
+  min-height: 38px;
+}
+
+.site-review .site-nav-desktop .site-nav-grade {
+  min-width: 104px;
+  padding-inline: 9px;
+}
+
+.site-review .site-page {
+  width: 100%;
+  max-width: none;
+  min-height: calc(100vh - 68px);
+  padding: 18px clamp(14px, 3vw, 42px) 38px;
+}
+
+.site-review .site-page:has(> .home-page) {
+  padding: 0;
+}
+
+.site-review .site-footer-inner {
+  width: min(1440px, calc(100% - 32px));
+}
+
+/* Home remains the visual authority: improve fit without changing its artwork. */
+.site-review .home-page {
+  color: var(--review-ink);
+}
+
+.site-review .home-page > section {
+  scroll-margin-top: 84px;
+}
+
+.site-review .subject-bulletin {
+  box-shadow: var(--review-shadow);
+}
+
+/* Grade TSX templates remain independent inside one shared page frame. */
+.site-review [data-grade-template]:not([data-lesson-template]) {
+  width: min(1240px, calc(100% - 24px));
+  min-height: 0;
+  margin: 22px auto 54px;
+  border-color: color-mix(in srgb, var(--review-paper-soft) 88%, transparent);
+  background-color: var(--review-paper);
+  box-shadow: var(--review-shadow);
+  color: var(--review-ink);
+}
+
+.site-review [data-grade-template]:not([data-lesson-template]) > aside[aria-label$=" planning sections"] {
+  width: auto;
+}
+
+.site-review [data-grade-template]:not([data-lesson-template]) > main {
+  min-width: 0;
+}
+
+.site-review [data-grade-template] :is(h1, h2, h3, p, blockquote) {
+  overflow-wrap: anywhere;
+}
+
+.site-review [data-grade-template] section {
+  scroll-margin-top: 88px;
+}
+
+.site-review [data-grade-template] aside[aria-label^="A note from"] {
+  isolation: isolate;
+}
+
+.site-review [data-grade-template] #curriculum > header {
+  align-items: end;
+}
+
+.site-review [data-grade-template] #curriculum > div > :is(a, button) {
+  min-width: 0;
+}
+
+.site-review [data-grade-template] #planner {
+  border-radius: 18px;
+}
+
+.site-review [data-grade-template] #planner [aria-label="Printable planning notes"] > article {
+  min-height: 190px;
+  background-color: #fffaf0;
+  background-image:
+    linear-gradient(rgba(255, 250, 240, 0.76), rgba(255, 250, 240, 0.76)),
+    repeating-linear-gradient(to bottom, transparent 0 30px, #b9cfd5 31px 32px),
+    var(--grain-fine);
+  background-size: auto, auto, 260px;
+}
+
+/* Let site themes reach neutral lesson surfaces while preserving grade colors. */
+html.dark .site-review [data-grade-template]:not([data-lesson-template]),
+html.dark .site-review [data-lesson-template] {
+  background-color: var(--review-paper);
+  background-image: linear-gradient(rgba(38, 43, 67, 0.94), rgba(38, 43, 67, 0.94)), var(--grain-fine);
+  color: var(--review-ink);
+}
+
+html.dark .site-review [data-grade-template] > main,
+html.dark .site-review [data-lesson-template] > div {
+  color: var(--review-ink);
+}
+
+html.dark .site-review [data-grade-template] :is(h1, h2, h3),
+html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
+  color: var(--review-ink);
+}
+
+/* Tablet: switch to the compact menu before the labelled grade patches crowd. */
+@media (max-width: 1280px) {
+  .site-review .site-nav-desktop {
+    display: none;
+  }
+
+  .site-review .site-mobile-actions {
+    display: flex;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-review .site-page {
+    padding-inline: 12px;
+  }
+
+  .site-review [data-grade-template]:not([data-lesson-template]) {
+    width: min(100%, 760px);
+    margin-top: 10px;
+  }
+}
+
+/* Phone: keep the grade identity visible, then move quickly into choices. */
+@media (max-width: 760px) {
+  .site-review .site-header {
+    position: sticky;
+  }
+
+  .site-review .site-header-inner {
+    width: calc(100% - 20px);
+    min-height: 64px;
+  }
+
+  .site-review .site-brand {
+    min-width: 0;
+  }
+
+  .site-review .site-page {
+    padding: 8px 8px 24px;
+  }
+
+  .site-review .site-page:has(> .home-page) {
+    padding: 0;
+  }
+
+  .site-review [data-grade-template]:not([data-lesson-template]) {
+    width: 100%;
+    margin: 0 auto 30px;
+    border-width: 3px;
+    border-radius: 17px;
+  }
+
+  .site-review [data-grade-template]:not([data-lesson-template]) > aside[aria-label$=" planning sections"] {
+    padding: 14px;
+  }
+
+  .site-review [data-grade-template] aside[aria-label$=" planning sections"] nav {
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .site-review [data-grade-template] aside[aria-label$=" planning sections"] nav a {
+    min-height: 50px;
+    padding-inline: 4px;
+  }
+
+  .site-review [data-grade-template]:not([data-lesson-template]) > main {
+    padding: 20px 16px 30px;
+  }
+
+  .site-review [data-grade-template] #today {
+    min-height: 0;
+    gap: 18px;
+  }
+
+  .site-review [data-grade-template] #today h1 {
+    margin-top: 6px;
+    font-size: clamp(39px, 12vw, 52px);
+    line-height: 0.94;
+  }
+
+  .site-review [data-grade-template] #today aside[aria-label^="A note from"] {
+    min-height: 250px;
+  }
+
+  .site-review [data-grade-template] #curriculum {
+    padding-top: 26px;
+  }
+
+  .site-review [data-grade-template] #curriculum > header {
+    align-items: flex-start;
+  }
+
+  .site-review [data-grade-template] #curriculum > div {
+    gap: 14px;
+  }
+
+  .site-review [data-grade-template] #planner {
+    margin-top: 22px;
+  }
+
+  .site-review [data-lesson-template] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-review .site-brand img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .site-review [data-grade-template] aside[aria-label$=" planning sections"] nav span {
+    font-size: 8px;
+  }
+
+  .site-review [data-grade-template]:not([data-lesson-template]) > main {
+    padding-inline: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-review *,
+  .site-review *::before,
+  .site-review *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media print {
+  .site-review [data-grade-template] #planner [aria-label="Printable planning notes"] > article {
+    min-height: 260px;
+    break-inside: avoid;
+    box-shadow: none;
+  }
 }

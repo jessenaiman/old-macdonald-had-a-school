@@ -5,10 +5,10 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
-      attribute="data-theme"
-      defaultTheme="farm-day"
+      attribute="class"
+      defaultTheme="light"
       enableSystem={false}
-      themes={["farm-day", "lullaby-dusk", "storybook-focus"]}
+      themes={["light", "dark"]}
       disableTransitionOnChange
     >
       {children}

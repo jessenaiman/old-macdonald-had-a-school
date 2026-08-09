@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { GradeLessonGrid, type GradeLesson } from "./GradeLessonGrid";
 import { CLUSTERS, clusterFor } from "./SubjectDiscovery";
-import type { StaffMember } from "../lib/cast";
 import type { GradeMeta } from "../lib/grades";
 
 export function GradeDirectoryPage({
@@ -13,7 +12,6 @@ export function GradeDirectoryPage({
 }: {
   meta: GradeMeta;
   lessons: GradeLesson[];
-  cast: StaffMember[];
 }) {
   const [activeCluster, setActiveCluster] = useState<string | null>(null);
 

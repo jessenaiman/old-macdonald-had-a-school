@@ -6,7 +6,7 @@
 
 - **Role:** Music and dance teacher
 - **Species:** Brown horse adult
-- **Setting:** Kindergarten-Grade 1/2 rhythm, fiddle, barn-dance and movement scenes
+- **Setting:** Kindergarten rhythm, fiddle, barn-dance and movement scenes
 
 ## Personality and strengths
 
@@ -62,4 +62,3 @@
 ## Production reference
 
 Create Mr Rusty as a handcrafted needle-felt and fabric puppet in the style of Old MacDonald's Farm School. Brown horse with dark brown yarn mane and tail, warm smile, black button eyes and felt muzzle. Blue bandana tied at the neck, dark brown felt vest, cream felt shirt and brown felt pants with rolled cuffs; dark felt hoof mitts or boots. Violin/fiddle and bow are wooden/felt props sized for puppet hands. Textures should show visible stitching and soft felt fibers. Pose: playing fiddle with bow, with one leg slightly lifted in a dance step. Handcrafted, sewn, textile details, soft wool fibers, children's television puppet aesthetic.
-

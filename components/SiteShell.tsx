@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { MobileNavigation } from "./MobileNavigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
@@ -28,12 +28,12 @@ const GRADE_NAV_ITEMS: readonly GradeNavigationItem[] = [
   { key: "pre-school", label: "Pre-School", href: "/grade/pre-school", avatar: "/staff_and_students/miss-maisy-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/08-miss-maisy-circle.png" },
   { key: "kindergarten", label: "Kindergarten", href: "/grade/kindergarten", avatar: "/staff_and_students/mr-rusty-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/03-mr-rusty-circle.png" },
   { key: "grade-one", label: "Grade 1", href: "/grade/grade-one", avatar: "/staff_and_students/miss-hayley-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-circle.png" },
-  { key: "grade-two", label: "Grade 2", href: "/grade/grade-two", avatar: "/staff_and_students/mr-sam-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/05-mr-sam-circle.png" },
+  { key: "grade-two", label: "Grade 2", href: "/grade/grade-two", avatar: "/staff_and_students/mr-maisy-transparent-circle.png", patch: "/design-assets/blank-felt-patches-v1/individual-patches/06-mr-maisy-circle.png" },
 ] as const;
 
 export function SiteShell({ children, active }: { children: React.ReactNode; active?: ActivePage }) {
   return (
-    <div className="site-shell">
+    <div className="site-shell site-review">
       <header className="site-header">
         <div className="site-header-inner">
           <Link className="site-brand" href="/" aria-label="Old MacDonald Had a School home">

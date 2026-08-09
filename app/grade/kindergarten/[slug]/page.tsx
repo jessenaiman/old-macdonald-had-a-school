@@ -1,5 +1,5 @@
-import { GradeLessonPage } from "../../../../components/grades/GradeLessonPage";
-import styles from "../../../../components/grades/kindergarten/KindergartenTemplate.module.css";
+﻿import { GradeLessonPage } from "../../../../components/grades/GradeLessonPage";
+
 import { getLessonSlugsForGrade } from "../../../../lib/content";
 
 export async function generateStaticParams() {
@@ -8,5 +8,5 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  return <GradeLessonPage slug={slug} grade="kindergarten" active="kindergarten" className={styles.template} />;
+  return <GradeLessonPage slug={slug} grade="kindergarten" active="kindergarten" className="grade-kindergarten-template" />;
 }

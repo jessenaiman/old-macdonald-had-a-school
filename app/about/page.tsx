@@ -15,7 +15,7 @@ export default function AboutPage() {
           <div className="about-mark"><Image src="/brand-emblem.png" alt="Old MacDonald Had a School tree and music-note emblem" width={220} height={220} style={{ height: "auto" }} /></div>
         </section>
         <section className="about-layout">
-          <div className="about-story">
+          <div className="about-story prose prose-slate max-w-none dark:prose-invert prose-headings:font-display prose-headings:text-[var(--heading)] prose-p:text-[var(--muted)] prose-li:text-[var(--muted)] prose-strong:text-[var(--heading)] prose-a:text-[var(--blue)]">
             <AboutContent />
           </div>
           <aside className="hire-card stitch">

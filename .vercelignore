@@ -19,7 +19,8 @@ playwright-report/
 
 # Caches and local data
 .mypy_cache/
-data/
+data/*
+!data/omhas.db
 .env*
 .tmp-*
 *.tsbuildinfo

@@ -4,10 +4,10 @@
 
 ## Role
 
-- **Role:** School secretary and gardening lead
+- **Role:** Pre-School lead, school secretary and gardening lead
 - **Canonical support:** Cooking and health support
 - **Species:** Cow adult
-- **Setting:** Office, welcome, garden, kitchen and healthy-routine scenes
+- **Setting:** Pre-School, office, welcome, garden, kitchen and healthy-routine scenes
 
 ## Quick read
 
@@ -49,4 +49,3 @@
 ## Production reference
 
 Handcrafted felt-and-fabric puppet of Miss Maisy, a black-and-white cow adult with large pink muzzle, cream forelock and short horns. She wears a blue dress, cream floral apron and red neck scarf. Maintain the Old MacDonald's Farm School handmade puppet style, warm color palette and friendly expression. Preserve all core identity features while allowing pose, gesture and props to change for different scenes. She is Maisy's mom.
-

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { CLUSTERS, clusterFor } from "./SubjectDiscovery";
 import { CharacterBadge } from "./CharacterBadge";
-import { STAFF } from "../lib/cast";
 import { lessonHref } from "../lib/grade-routes";
 
 export type GradeLesson = {
@@ -14,30 +13,16 @@ export type GradeLesson = {
   ready: boolean;
   hasPrintables: boolean;
   hasVideo: boolean;
+  lead?: {
+    key: string;
+    name: string;
+  };
 };
-
-function leadForSubject(subject: string): string {
-  if (/math/i.test(subject)) return "mr-sam";
-  if (/literacy|phonics|language|reading/i.test(subject)) return "miss-hayley";
-  if (/music|movement|science|nature/i.test(subject)) return "mr-rusty";
-  return "old-macdonald";
-}
 
 function ClusterIcon({ clusterKey }: { clusterKey: string }) {
   const cluster = CLUSTERS.find((c) => c.key === clusterKey);
   return cluster?.icon ?? null;
 }
-
-const STAFF_NAME: Record<string, string> = {
-  "mr-sam": "Mr Sam",
-  "miss-hayley": "Miss Hayley",
-  "mr-rusty": "Mr Rusty",
-  "old-macdonald": "Old MacDonald",
-  "miss-puddles": "Miss Puddles",
-  "mr-maisy": "Mr Maisy",
-  "mr-puddles": "Mr Puddles",
-  "miss-maisy": "Miss Maisy",
-};
 
 // Presentational only — the active-subject filter state lives in
 // GradeDirectoryPage (shared with the sidebar Subjects list), so this just
@@ -48,7 +33,6 @@ export function GradeLessonGrid({ lessons }: { lessons: GradeLesson[] }) {
       {lessons.map((lesson) => {
         const clusterKey = clusterFor(lesson.subject);
         const cluster = CLUSTERS.find((c) => c.key === clusterKey);
-        const lead = leadForSubject(lesson.subject);
         const tags: string[] = [];
         if (lesson.hasVideo) tags.push("Video");
         if (lesson.hasPrintables) tags.push("Printable");
@@ -63,10 +47,12 @@ export function GradeLessonGrid({ lessons }: { lessons: GradeLesson[] }) {
             <div className="gb-card-body">
               <span className="gb-card-subject">{cluster?.title ?? lesson.subject}</span>
               <h3 className="gb-card-title">{lesson.title}</h3>
-              <div className="gb-card-teacher">
-                <CharacterBadge charKey={lead} color={STAFF.find((s) => s.key === lead)?.color ?? "var(--navy)"} name={STAFF_NAME[lead] ?? lead} size={24} />
-                <span>{STAFF_NAME[lead] ?? lead}</span>
-              </div>
+              {lesson.lead ? (
+                <div className="gb-card-teacher">
+                  <CharacterBadge charKey={lesson.lead.key} color="var(--navy)" name={lesson.lead.name} size={24} />
+                  <span>{lesson.lead.name}</span>
+                </div>
+              ) : null}
               {tags.length > 0 && (
                 <div className="gb-card-tags">
                   {tags.map((t) => <span key={t} className="gb-tag">{t}</span>)}

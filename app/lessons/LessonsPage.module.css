@@ -1,0 +1,117 @@
+.page {
+  width: min(1180px, calc(100% - 28px));
+  margin: 30px auto 70px;
+  color: #173552;
+}
+
+.header {
+  padding: 30px;
+  border: 1px solid rgba(83, 54, 24, .22);
+  border-radius: 18px;
+  background: #fbf2df url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background-size: 340px;
+  box-shadow: 0 8px 0 rgba(83, 54, 24, .12);
+}
+
+.header h1 {
+  margin: 5px 0 12px;
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: .92;
+}
+
+.header > p:last-of-type {
+  max-width: 760px;
+  color: #655846;
+  line-height: 1.55;
+}
+
+.search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px auto;
+  align-items: end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.search label {
+  display: grid;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.search input,
+.search select,
+.search button {
+  min-height: 48px;
+  border: 1px solid rgba(43, 64, 55, .38);
+  border-radius: 9px;
+  font: inherit;
+}
+
+.search input,
+.search select {
+  padding: 0 13px;
+  color: #173552;
+  background: #fffaf0;
+}
+
+.search button {
+  padding: 0 18px;
+  color: #fffaf0;
+  background: #365d49 url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png") repeat;
+  background-size: 180px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.resultSummary {
+  margin: 24px 4px 14px;
+  color: #655846;
+  font-size: 13px;
+}
+
+.warning { color: #8a3e25; font-weight: 800; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+.card {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid rgba(83, 54, 24, .22);
+  border-radius: 13px;
+  background: #fffaf0 url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background-size: 300px;
+  box-shadow: 3px 5px 0 rgba(83, 54, 24, .14);
+}
+
+.card[data-source="database"] { border-left: 7px solid #e8a227; }
+.card[data-source="markdown"] { border-left: 7px solid #55705a; }
+.cardTop { display: flex; justify-content: space-between; gap: 12px; color: #8a672a; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.card h2 { margin: 0; font-family: var(--font-farm-display), Georgia, serif; font-size: 28px; line-height: 1; }
+.card h2 a { color: #173552; }
+.card > p { margin: 0; color: #655846; font-size: 12px; line-height: 1.5; }
+.card dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0; }
+.card dl div { padding: 10px; background: rgba(255, 255, 255, .5); }
+.card dt { color: #8a672a; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+.card dd { margin: 4px 0 0; font-size: 12px; font-weight: 800; }
+.cardLink { justify-self: start; min-height: 44px; padding-top: 13px; color: #365d49; font-size: 12px; font-weight: 900; }
+.empty { grid-column: 1 / -1; padding: 24px; text-align: center; }
+.search :is(input, select, button):focus-visible, .card a:focus-visible { outline: 3px solid #f4c84a; outline-offset: 3px; }
+
+@media (max-width: 720px) {
+  .page { width: calc(100% - 12px); margin-top: 12px; }
+  .header { padding: 22px 16px; }
+  .search { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .header, .resultSummary { display: none; }
+  .page { width: 100%; margin: 0; }
+  .grid { grid-template-columns: 1fr; }
+}

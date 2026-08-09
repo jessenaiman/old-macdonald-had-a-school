@@ -1,12 +1,10 @@
 import { GradeTwoTemplate } from "../../../components/grades/grade-two/GradeTwoTemplate";
 import { SiteShell } from "../../../components/SiteShell";
 import { getAllLessons } from "../../../lib/content";
-import { lessonHref, lessonIcon } from "../../../lib/grade-routes";
-import { GRADE_META, matchesGrade } from "../../../lib/grades";
+import { gradeKeysForLabel, lessonHref, lessonIcon } from "../../../lib/grade-routes";
 
 export default async function GradeTwoPage() {
-  const meta = GRADE_META["grade-two"];
-  const lessons = (await getAllLessons()).filter((lesson) => matchesGrade(lesson.metadata.grade, "grade-two"));
+  const lessons = (await getAllLessons()).filter((lesson) => gradeKeysForLabel(lesson.metadata.grade).includes("grade-two"));
   const items = lessons.slice(0, 4).map((lesson) => ({
     title: lesson.metadata.title,
     kicker: lesson.metadata.subject,
@@ -14,5 +12,5 @@ export default async function GradeTwoPage() {
     href: lessonHref(lesson.metadata),
     icon: lessonIcon(lesson.metadata.subject, lesson.metadata.category),
   }));
-  return <SiteShell active="grade-two"><GradeTwoTemplate summary={meta.tagline} items={items} /></SiteShell>;
+  return <SiteShell active="grade-two"><GradeTwoTemplate summary="Building fluency and proof" items={items} /></SiteShell>;
 }

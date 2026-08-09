@@ -6,7 +6,7 @@
 
 - **Role:** Math and building teacher
 - **Species:** Pink pig adult
-- **Setting:** Grade 1/2 counting, measuring, making and simple engineering
+- **Setting:** Whole-school counting, measuring, making and simple engineering
 
 ## Personality and strengths
 
@@ -65,4 +65,3 @@
 ## Production reference
 
 Create Mr Sam as a handcrafted needle-felt and fabric puppet in the style of Old MacDonald's Farm School. Math and Building Teacher. Pink felt pig with round snout, soft ears and gentle black eyes. Round black glasses. Red polka-dot bow tie. Green quilted vest with gold buttons, pocket watch and pencils in pocket. Cream felt shirt with stitched texture. Brown felt trousers and brown hooves. Holds a blue book. Felt texture with stitched strands and soft sculpting. Gentle, thoughtful pose with one hand to chin. Science and building teacher aesthetic with tools and learning props.
-

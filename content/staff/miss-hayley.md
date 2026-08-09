@@ -4,9 +4,9 @@
 
 ## Role
 
-- **Role:** Classroom teacher; movement, music and storytelling
+- **Role:** Grade 1 classroom teacher; movement, music and storytelling
 - **Species:** Human adult female puppet
-- **Setting:** Grade 1/2 classroom, stories, drama and creative movement
+- **Setting:** Grade 1 classroom, stories, drama and creative movement
 
 ## Personality and strengths
 
@@ -54,4 +54,3 @@
 ## Production reference
 
 Create Miss Hayley as a handcrafted felt-and-fabric puppet in the style of Old MacDonald's Farm School. Female human adult with friendly face, big eyes, warm smile and medium-brown wavy hair under a brown cowboy hat with dark band. She wears a red plaid shirt, blue denim overalls with front pocket and rolled cuffs, plus brown lace-up boots. Felt texture with visible stitching throughout. Warm, approachable teacher presence. Full body, neutral standing pose with one hand raised. Use for singing, storytelling, circle time, pretend play, class performances, reading aloud and art/music/drama activities.
-

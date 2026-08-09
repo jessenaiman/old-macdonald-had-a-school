@@ -5,8 +5,8 @@ import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
 const THEMES = [
-  { value: "farm-day", label: "Farm day", icon: "/design-assets/theme-toggle-patches-v1/sun-patch.png" },
-  { value: "lullaby-dusk", label: "Lullaby dusk", icon: "/design-assets/theme-toggle-patches-v1/moon-patch.png" },
+  { value: "light", label: "Farm day", icon: "/design-assets/theme-toggle-patches-v1/sun-patch.png" },
+  { value: "dark", label: "Lullaby dusk", icon: "/design-assets/theme-toggle-patches-v1/moon-patch.png" },
 ] as const;
 
 export function ThemeSwitcher() {

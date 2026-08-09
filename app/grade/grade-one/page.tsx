@@ -1,12 +1,10 @@
 import { GradeOneTemplate } from "../../../components/grades/grade-one/GradeOneTemplate";
 import { SiteShell } from "../../../components/SiteShell";
 import { getAllLessons } from "../../../lib/content";
-import { lessonHref, lessonIcon } from "../../../lib/grade-routes";
-import { GRADE_META, matchesGrade } from "../../../lib/grades";
+import { gradeKeysForLabel, lessonHref, lessonIcon } from "../../../lib/grade-routes";
 
 export default async function GradeOnePage() {
-  const meta = GRADE_META["grade-one"];
-  const lessons = (await getAllLessons()).filter((lesson) => matchesGrade(lesson.metadata.grade, "grade-one"));
+  const lessons = (await getAllLessons()).filter((lesson) => gradeKeysForLabel(lesson.metadata.grade).includes("grade-one"));
   const items = lessons.slice(0, 4).map((lesson) => ({
     title: lesson.metadata.title,
     kicker: lesson.metadata.subject,
@@ -14,5 +12,5 @@ export default async function GradeOnePage() {
     href: lessonHref(lesson.metadata),
     icon: lessonIcon(lesson.metadata.subject, lesson.metadata.category),
   }));
-  return <SiteShell active="grade-one"><GradeOneTemplate summary={meta.tagline} items={items} /></SiteShell>;
+  return <SiteShell active="grade-one"><GradeOneTemplate summary="Reading and rhythm" items={items} /></SiteShell>;
 }
