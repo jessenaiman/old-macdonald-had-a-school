@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker exec *)",
+      "Bash(findstr *)",
+      "Bash(docker restart *)",
+      "Bash(timeout *)",
+      "Bash(node *)",
+      "Bash(docker logs *)"
+    ]
+  },
+  "$version": 4
+}

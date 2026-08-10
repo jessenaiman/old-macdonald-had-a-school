@@ -4,16 +4,16 @@
 
 Staff signature colour is subject-coded (matches the role they teach), not species- or outfit-based — see `lib/cast.ts` `STAFF[].color`, the single source of truth these hex values are copied from.
 
-| Staff             | Species     | Teaches                                                       | Grade band               | Signature colour        | Shown doing                                                                                              |
-| ----------------- | ----------- | ------------------------------------------------------------- | ------------------------ | ------------------------ | -------------------------------------------------------------------------------------------------------- |
-| **Old MacDonald** | Human adult | Headmaster & band leader                                      | Whole school             | Brown `#8B5E34`           | Morning gathering, assembly, storytime, whole-school singing, banjo or guitar                            |
-| **Miss Puddles**  | Duck adult  | Daycare teacher                                               | Daycare (2–3)            | Yellow `#E8A227`          | Circle time, fingerplay songs, art table, simple movement games, sharing and turn-taking, swim instructor                 |
-| **Mr Rusty**      | Horse adult | Music & dance teacher                                         | Kindergarten – Grade 1/2 | Blue `#2C6C9B`            | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions                               |
-| **Miss Hayley**   | Human adult | Grade 1/2 & drama                                             | Grade 1/2                | Pink `#C9527A`            | Storytime, songs, imagination games, drama, class adventures, creative movement                            |
-| **Mr Sam**        | Pig adult   | Math & building                                               | Grade 1/2                | Teal `#1F6B6B`            | Counting, measuring, sorting, patterns, simple engineering, build table                                  |
-| **Mr Maisy**      | Cow adult   | Physical education teacher                                    | Whole school             | Red `#B5272C`             | Outdoor games, movement warm-ups, gross-motor play                                                       |
-| **Mr Puddles**    | Duck adult  | Art & photography teacher                                     | Whole school             | Indigo `#4F5FA0`          | Bird studies, painting, photography, exhibitions                                                         |
-| **Miss Maisy**    | Cow adult   | School secretary & gardening lead; cooking and health support | Whole school             | Sage green `#55705A`      | Family welcome, office support, gardening, simple food preparation, healthy habits and seasonal displays |
+| Name | Species | Role | Grade/Level | Colour | Activities |
+| --- | --- | --- | --- | --- | --- |
+| **Old MacDonald** | Human adult | principle, music teacher | Kindergarten | Brown `#8B5E34` | gatherings, processions, assembly, storytime, whole-school singing, banjo or guitar |
+| **Miss Puddles** | Duck adult | Daycare teacher, swim instructor | Daycare | Yellow `#E8A227` | Circle time, fingerplay songs, art table, simple movement games, sharing and turn-taking, swim instructor |
+| **Mr Rusty** | Horse adult | dance teacher | Kindergarten & Grade 1 | Blue `#2C6C9B` | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions |
+| **Miss Hayley** | Human adult | , drama | Grade 1/2 | Pink `#C9527A` | Storytime, songs, imagination games, drama, class adventures, creative movement |
+| **Mr Sam** | Pig adult | Math, science, building | Whole school | Teal `#1F6B6B` | Counting, measuring, sorting, patterns, simple engineering, build table |
+| **Mr Maisy** | Cow adult | Physical education teacher | Grade 2 | Red `#B5272C` | Outdoor games, movement warm-ups, gross-motor play |
+| **Mr Puddles** | Duck adult | Art & photography teacher | Whole school | Indigo `#4F5FA0` | Bird studies, painting, photography, exhibitions |
+| **Miss Maisy** | Cow adult | School secretary & gardening lead; cooking and health support | Preschool | Sage green `#55705A` | Family welcome, office support, gardening, simple food preparation, healthy habits and seasonal displays |
 
 ### Staff rule
 
@@ -22,8 +22,6 @@ The staff roster is **eight**. Mr Puddles, Mr Maisy and Miss Maisy are staff. Mr
 ---
 
 ## Students: 8 Total
-
-Each child is used **once** across the four music units so the cast rotates rather than repeating.
 
 Signature colour hex values are copied from `lib/cast.ts` `STUDENTS[].color`, the single source of truth. Scout and Sam share the "Green" family in the original character deck; the site differentiates them by shade (Scout = forest green, Sam = olive green) so both read distinctly on screen.
 

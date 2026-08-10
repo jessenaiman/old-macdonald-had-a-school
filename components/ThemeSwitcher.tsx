@@ -1,33 +1,34 @@
 "use client";
 
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
 const THEMES = [
-  { value: "farm-day", label: "Farm day", short: "Day" },
-  { value: "lullaby-dusk", label: "Lullaby dusk", short: "Dusk" },
-  { value: "storybook-focus", label: "Storybook focus", short: "Story" },
+  { value: "light", label: "Farm day", icon: "/design-assets/theme-toggle-patches-v1/sun-patch.png" },
+  { value: "dark", label: "Lullaby dusk", icon: "/design-assets/theme-toggle-patches-v1/moon-patch.png" },
 ] as const;
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
-  const activeTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "farm-day";
+  const currentTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "light";
 
   return (
-    <ToggleGroup.Root
-      className="theme-switcher"
-      type="single"
-      value={activeTheme}
-      onValueChange={(value) => value && setTheme(value)}
-      aria-label="Choose the site theme"
-    >
+    <div className="theme-switcher" role="group" aria-label="Colour theme">
       {THEMES.map((item) => (
-        <ToggleGroup.Item key={item.value} className="theme-switcher-item" value={item.value} aria-label={item.label}>
-          {item.short}
-        </ToggleGroup.Item>
+        <button
+          type="button"
+          className="theme-choice"
+          onClick={() => setTheme(item.value)}
+          aria-pressed={currentTheme === item.value}
+          title={item.label}
+          key={item.value}
+        >
+          <Image src={item.icon} alt="" width={34} height={34} loading="eager" aria-hidden="true" />
+          <span className="sr-only">{item.label}</span>
+        </button>
       ))}
-    </ToggleGroup.Root>
+    </div>
   );
 }

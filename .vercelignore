@@ -1,0 +1,36 @@
+# Build artifacts (Vercel builds on its own)
+node_modules/
+.next/
+out/
+dist/
+build/
+.cache/
+
+# Research, design references, and QA artifacts (not needed at runtime)
+docs/
+qa/
+figma-copy-design/
+archive/
+src/assets/early-years-music-resources/
+
+# Test artifacts
+test-results/
+playwright-report/
+
+# Caches and local data
+.mypy_cache/
+data/*
+!data/omhas.db
+.env*
+.tmp-*
+*.tsbuildinfo
+
+# Agent and tooling internals
+.agents/
+.codex-notes/
+.qwen/
+.claude-replay.*
+
+# Logs
+*.log
+*-debug.log*

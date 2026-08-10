@@ -18,6 +18,10 @@ playwright-report/
 test-results/
 .claude-replay.*
 .tmp-*
+.codex-notes/
+.codex-remote-attachments/
 
 # Local research corpus; agents curate selected publishable assets into public/.
 src/assets/early-years-music-resources/
+
+.vercel

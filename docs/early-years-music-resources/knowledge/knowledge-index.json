@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "updated": "2026-08-07",
+  "path_convention": "source paths are relative to docs/early-years-music-resources/",
+  "usage": "Grep entries by topic to find the exact file and locator for a fact; read the file to verify before citing. Narrative syntheses live in core-lessons.md and history-fingerplays.md; the topic->source workflow lives in retrieval-guide.md.",
+  "entries": [
+    {
+      "id": "movement-body-first-instrument",
+      "topics": ["movement", "body", "motor development", "pedagogy"],
+      "fact": "The body is the first instrument; movement is the pedagogy, not an add-on. Songs are scores for physical action.",
+      "source": "06-educators-performers-deep/web/headstart-music-in-child-development.md",
+      "locator": "section 'Music and Movement'",
+      "quote": "movement is a natural response to music",
+      "see": "core-lessons.md#lesson-1"
+    },
+    {
+      "id": "feierabend-8-part-curriculum",
+      "topics": ["movement", "steady beat", "curriculum design", "feierabend"],
+      "fact": "First Steps in Music is an 8-part music-readiness curriculum (3-8 yrs); four of eight parts are movement, including Beat Motion Activities for maintaining the beat in groups of 2 and 3.",
+      "source": "09-educators-performers-more/pdf/feierabend-music-movement-early-years-handout.pdf",
+      "locator": "pp. 1-2",
+      "see": "retrieval-guide.md#movement-body-steady-beat"
+    },
+    {
+      "id": "fine-motor-thumbkin",
+      "topics": ["fine motor", "fingerplay", "movement"],
+      "fact": "Fingerplay songs are fine-motor training for the hand muscles that later hold a pencil.",
+      "source": "06-educators-performers-deep/web/headstart-music-in-child-development.md",
+      "locator": "section 'Music and Movement' (Hannah & Joseph, Where Is Thumbkin vignette)"
+    },
+    {
+      "id": "kodaly-game-analysis",
+      "topics": ["kodaly", "analysis", "games", "music theory"],
+      "fact": "Kodaly kindergarten analysis sheets classify songs by tone set, rhythm, melodic form, and game type - the game is part of how the music is learned.",
+      "source": "song_versions/analysis-and-pedagogical-use-oxford-kodaly-in-kindergarten.md",
+      "locator": "body",
+      "quote": "Game. Describe the type of game (circle, double circle, partner, double line, follow the leader, etc.)"
+    },
+    {
+      "id": "singing-slows-language",
+      "topics": ["literacy", "phonological awareness", "singing", "why sing"],
+      "fact": "Singing builds phonological awareness because adults sing to children slower than they speak, letting children hear the smaller parts of words.",
+      "source": "01-libraries-agencies/web/evanston-public-library-ecrr-singing.html",
+      "locator": "article body, ~line 812",
+      "quote": "we generally sing to children at a slower rate than we speak to them",
+      "see": "core-lessons.md#lesson-2"
+    },
+    {
+      "id": "rhyme-supports-reading",
+      "topics": ["literacy", "rhyme", "phonological awareness"],
+      "fact": "Rhyming songs let children hear that word-endings can swap; knowing how to rhyme supports later reading success.",
+      "source": "06-educators-performers-deep/web/headstart-music-in-child-development.md",
+      "locator": "section 'Music, Language, and Literacy' (I'm a Little Teapot: stout/spout/shout/out)",
+      "quote": "Knowing how to rhyme will support later reading success."
+    },
+    {
+      "id": "ecrr-five-practices",
+      "topics": ["literacy", "libraries", "framework", "caregivers"],
+      "fact": "Every Child Ready to Read (ALA) names five daily practices for caregivers: Read, Talk, Sing, Write, Play; libraries operationalize Singing through rhymes and songs.",
+      "source": "01-libraries-agencies/pdf/multnomah-county-library-read-talk-sing-write-play.pdf",
+      "locator": "practice pages"
+    },
+    {
+      "id": "songs-are-versions",
+      "topics": ["folk process", "song history", "variation", "methodology"],
+      "fact": "Every saved document is a version of how a song was taught; year/era/region/pedagogy context per file is what shows change over time.",
+      "source": "RESEARCH_RULES_v2.md",
+      "locator": "Mission ('The historical goal')",
+      "quote": "every saved document is a *version* of how a song was taught",
+      "see": "core-lessons.md#lesson-3"
+    },
+    {
+      "id": "itsy-ditsy-meditation",
+      "topics": ["folk process", "self-regulation", "variation"],
+      "fact": "The Learning Station repurposed the Itsy Bitsy Spider concept as 'Itsy Ditsy Spider', a breathing/self-regulation meditation - same melody lineage, new purpose.",
+      "source": "song_versions/itsy-ditsy-spider-the-learning-station-brain-boosting-music.md",
+      "locator": "body",
+      "quote": "Each breath says, I am safe and I am calm."
+    },
+    {
+      "id": "itsy-size-variants",
+      "topics": ["folk process", "variation", "fingerplay"],
+      "fact": "Traditional Itsy Bitsy Spider handouts print size-variation verses (great big giant spider / teeny weeny spider) - built-in mutation.",
+      "source": "song_versions/the-itsy-bitsy-spider-pierce-county-library-wiggles-tickles.md",
+      "locator": "lyrics"
+    },
+    {
+      "id": "pat-a-cake-letter-swap-1843",
+      "topics": ["folk process", "pat-a-cake", "fingerplay history", "variation"],
+      "fact": "In the 1843 American Mother Goose chapbook, Pat-a-cake is marked with T 'For Tommy and me' - the letter-swap teaching trick existed 180 years ago.",
+      "source": "04-historical-public-domain/doc/gutenberg-only-true-mother-goose-melodies-1843.txt",
+      "locator": "~lines 1006-1016",
+      "quote": "And mark it with T. / And then it will serve / For Tommy and me."
+    },
+    {
+      "id": "pat-a-cake-letter-swap-2022",
+      "topics": ["folk process", "pat-a-cake", "variation", "teaching tips"],
+      "fact": "A 2022 handout teaches the same letter swap: change 'Baby' to 'Mama' and mark it with an M.",
+      "source": "09-educators-performers-more/pdf/teachmommyteach-steady-beat-ideas.pdf",
+      "locator": "p. 1, Pat-A-Cake teaching tip"
+    },
+    {
+      "id": "repetition-ritual-curriculum",
+      "topics": ["repetition", "routine", "ritual", "program design"],
+      "fact": "Programs are ritualized (Hello/Goodbye songs) and repeat a small repertoire deeply (12 weeks, one Song of the Week); children remember gestures before words.",
+      "source": "01-libraries-agencies/pdf/great-scott-county-lle-booklet-0-24mo.pdf",
+      "locator": "weekly structure",
+      "see": "core-lessons.md#lesson-4"
+    },
+    {
+      "id": "caregiver-as-student",
+      "topics": ["caregivers", "adult education", "storytime", "asides"],
+      "fact": "Storytimes train caregivers via research-based 'early literacy asides'; the adult is the real student so songs reach the home daily.",
+      "source": "01-libraries-agencies/pdf/ala-alsc-sample-storytime-asides.pdf",
+      "locator": "sample script"
+    },
+    {
+      "id": "froebel-notes-to-mothers",
+      "topics": ["caregivers", "adult education", "fingerplay history", "froebel"],
+      "fact": "Froebel's 1844 Mother-Play book ends with 'Notes to Mothers' - the historical original of the modern 'aside to the adult'.",
+      "source": "04-historical-public-domain/pdf/froebel-mother-play-nursery-songs-1906.pdf",
+      "locator": "book p. 159+"
+    },
+    {
+      "id": "inclusion-every-child",
+      "topics": ["inclusion", "accessibility", "participation"],
+      "fact": "Music is the most adaptable early-years subject: a non-verbal child joins via gesture and humming; a child in a wheelchair leads the parade with a tambourine.",
+      "source": "06-educators-performers-deep/web/headstart-music-in-child-development.md",
+      "locator": "section 'Music Includes Everyone'",
+      "see": "core-lessons.md#lesson-5"
+    },
+    {
+      "id": "regulation-lullaby",
+      "topics": ["self-regulation", "emotions", "lullaby"],
+      "fact": "Lullabies and soft singing co-regulate babies and teach emotional self-regulation; strategy songs give toddlers scripts for big feelings.",
+      "source": "06-educators-performers-deep/web/headstart-music-in-child-development.md",
+      "locator": "section 'Music and Emotional Development'"
+    },
+    {
+      "id": "child-as-composer",
+      "topics": ["creativity", "arioso", "development"],
+      "fact": "The highest milestone is the child inventing songs (Anita's doll song, Diego's garbage-truck song); Feierabend names this stage arioso.",
+      "source": "09-educators-performers-more/pdf/feierabend-music-movement-early-years-handout.pdf",
+      "locator": "p. 1, category 4 'Arioso'",
+      "quote": "Spontaneous created songs by the child"
+    },
+    {
+      "id": "fingerplay-ancient-claim",
+      "topics": ["fingerplay history", "folk origins"],
+      "fact": "Poulsson (1893) opens by claiming fingerplays are universal and ancient, citing Pat-a-cake and 'Here is the church, here's the steeple' as already-old plays.",
+      "source": "04-historical-public-domain/pdf/poulsson-finger-plays-nursery-kindergarten-1893.pdf",
+      "locator": "Preface",
+      "quote": "In all times and among all nations, finger-plays have been a delight of childhood",
+      "see": "history-fingerplays.md"
+    },
+    {
+      "id": "froebel-1844-finger-exercises",
+      "topics": ["fingerplay history", "froebel", "pedagogy origins"],
+      "fact": "Froebel's Mutter- und Kose-Lieder (1844) made folk hand-play intentional pedagogy: finger exercises incl. Pat-a-cake (No.12), This Little Thumb (No.16), The Finger Game, Brothers and Sisters; each play = engraving + song + motto + notes to mothers.",
+      "source": "04-historical-public-domain/pdf/froebel-mother-play-nursery-songs-1906.pdf",
+      "locator": "TOC book pp. 5-6; finger pages 49-77",
+      "quote": "Counting is a noble art, / That man is wont to underrate"
+    },
+    {
+      "id": "imitation-understanding",
+      "topics": ["froebel", "pedagogy origins", "fingerplay history"],
+      "fact": "The defining Froebelian epigraph: 'What the child imitates, he begins to understand' - imitation of birds, fish, bakers is how the child enters the life of the world.",
+      "source": "04-historical-public-domain/pdf/poulsson-finger-plays-nursery-kindergarten-1893.pdf",
+      "locator": "epigraph + Preface (quoting Froebel)"
+    },
+    {
+      "id": "jenks-1887-fingerplays-section",
+      "topics": ["fingerplay history", "kindergarten movement", "canon"],
+      "fact": "By 1887 American kindergarten songbooks already had a section titled FINGER PLAYS (Eight white Sheep; Thumbkin says, 'I'll dance.'; The Family; The Little Mice are creeping...) - six years before Poulsson's dedicated book.",
+      "source": "04-historical-public-domain/pdf/jenks-songs-games-little-ones-1887.pdf",
+      "locator": "contents page, FINGER PLAYS section"
+    },
+    {
+      "id": "poulsson-1893-trademark",
+      "topics": ["fingerplay history", "genre formation"],
+      "fact": "Poulsson's 1893 Finger Plays for Nursery and Kindergarten is the first book devoted to the form; its title page registers 'FINGER PLAYS' as a U.S. trademark - the term was a coined commercial category.",
+      "source": "04-historical-public-domain/pdf/poulsson-finger-plays-nursery-kindergarten-1893.pdf",
+      "locator": "title page + Preface"
+    },
+    {
+      "id": "poulsson-developmental-rationale",
+      "topics": ["fingerplay history", "motor development", "rationale"],
+      "fact": "Poulsson's preface gives the first plain developmental rationale: strength and flexibility of 'the tiny lax fingers', and motions that awaken dormant thought.",
+      "source": "04-historical-public-domain/pdf/poulsson-finger-plays-nursery-kindergarten-1893.pdf",
+      "locator": "Preface",
+      "quote": "the development of strength and flexibility in the tiny lax fingers"
+    },
+    {
+      "id": "quigley-1914-canon",
+      "topics": ["canon", "fingerplay history", "pat-a-cake"],
+      "fact": "Quigley's 1914 Index to Kindergarten Songs lists Pat-a-cake across Froebel, Gaynor, Hubbard, Smith and Brewster - the canon hardened across five independent songbooks.",
+      "source": "04-historical-public-domain/doc/gutenberg-quigley-index-kindergarten-songs-1914.txt",
+      "locator": "~lines 8999-9005"
+    },
+    {
+      "id": "gomme-survivalist-school",
+      "topics": ["folklore", "hand games", "fingerplay history"],
+      "fact": "Victorian folklorists (Gomme 1894/98, Newell 1883/1903, Green 1899) collected children's hand-games (Handy Dandy, Chickidy Hand) as survivals of ancient custom - treating clapping games as historical sources.",
+      "source": "04-historical-public-domain/doc/gutenberg-gomme-traditional-games-england-scotland-ireland-vol1-1894.txt",
+      "locator": "game index (Chickidy Hand, Handy Dandy, Hand in and Hand out)"
+    },
+    {
+      "id": "thumbkin-lineage",
+      "topics": ["lineage", "fingerplay history", "thumbkin"],
+      "fact": "Traceable lineage: Froebel 'This Little Thumb' (No.16) -> Jenks 'Thumbkin says, I'll dance.' (1887) -> modern 'Where Is Thumbkin?' in library booklets and Head Start.",
+      "source": "song_versions/",
+      "locator": "glob song_versions/*thumbkin*; see history-fingerplays.md lineages table"
+    },
+    {
+      "id": "rationale-shift-theology-to-neuroscience",
+      "topics": ["history of ideas", "fingerplay history", "rationale"],
+      "fact": "The stated why of fingerplays shifts over time while the form stays constant: 1844 cosmic/theological unity -> 1893 finger strength and awakened thought -> 1990s-2020s fine-motor skills, phonological awareness, self-regulation.",
+      "source": "knowledge/history-fingerplays.md",
+      "locator": "section '20th-21st c.'"
+    },
+    {
+      "id": "steady-beat-activities",
+      "topics": ["steady beat", "activities", "ages 2-7"],
+      "fact": "Steady-beat teaching for ages 2-7 uses clapping patterns (Pat-a-cake), marching songs (Ants Go Marching), tempo play (Polly Wolly Doodle), and DIY rain sticks.",
+      "source": "09-educators-performers-more/pdf/teachmommyteach-steady-beat-ideas.pdf",
+      "locator": "whole handout"
+    },
+    {
+      "id": "adult-voice-over-recordings",
+      "topics": ["caregivers", "practice", "singing voice"],
+      "fact": "Head Start recommends the adult's live voice over recordings: the adult sings slower and clearer and can adapt tone, speed, and volume to the child.",
+      "source": "06-educators-performers-deep/web/headstart-music-in-child-development.md",
+      "locator": "section 'Using Music with Infants and Toddlers' (Janet vignette)"
+    },
+    {
+      "id": "song-version-provenance",
+      "topics": ["methodology", "provenance", "metadata"],
+      "fact": "To find where a song version came from: glob song_versions/<slug>*.md, read frontmatter (source_file, source_title, confidence, review_status), then cross-reference MASTER_LIST.md and metadata/<folder>.md for url/year/era/region.",
+      "source": "knowledge/retrieval-guide.md",
+      "locator": "section 'Provenance of a specific song'"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { bustPath } from "../lib/char-icon";
 
 export { bustPath } from "../lib/char-icon";
@@ -27,7 +28,7 @@ export function CharacterBadge({
       style={{ width: size, height: size, backgroundColor: color }}
       aria-label={src ? undefined : name}
     >
-      {src ? <img src={src} alt={name} /> : null}
+      {src ? <Image src={src} alt={name} fill sizes="(max-width:650px) 82px, 112px" /> : null}
     </span>
   );
 }

@@ -1,28 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import type { EarlyYearsTopic } from "../lib/early-years";
-import { CharacterBadge } from "./CharacterBadge";
-import { STAFF, STUDENTS } from "../lib/cast";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import type { EarlyYearsGradeKey, EarlyYearsTopic } from "../lib/early-years";
+import { DaycareTemplate } from "./grades/daycare/DaycareTemplate";
+import { KindergartenTemplate } from "./grades/kindergarten/KindergartenTemplate";
+import { PreschoolTemplate } from "./grades/pre-school/PreschoolTemplate";
 
-function charColor(key: string): string {
-  return STAFF.find((s) => s.key === key)?.color ?? STUDENTS.find((s) => s.key === key)?.color ?? "var(--gold)";
-}
-function charName(key: string): string {
-  return STAFF.find((s) => s.key === key)?.name ?? STUDENTS.find((s) => s.key === key)?.name ?? key;
-}
-
-const CloseIcon = () => (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>);
-const ZoomIcon = () => (<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>);
-const DownloadIcon = () => (<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>);
-
-export type EarlyYearsBand = "daycare" | "preschool" | "kindergarten";
 export type EarlyYearsTier = "list" | "detailed" | "bridge";
 
 export function EarlyYearsHub({
-  band, title, tagline, lead, tier, topics,
+  grade,
+  title,
+  tagline,
+  lead,
+  topics,
 }: {
-  band: EarlyYearsBand;
+  grade: EarlyYearsGradeKey;
   title: string;
   tagline: string;
   lead: { patch: string; name: string };
@@ -32,72 +26,59 @@ export function EarlyYearsHub({
   const [active, setActive] = useState(0);
   const [preview, setPreview] = useState(false);
   const topic = topics[active];
+  const leadImage = lead.patch === "old-macdonald" ? "/icons/staff/old-mac.png" : `/icons/staff/${lead.patch}.png`;
+  const headline = grade === "daycare" ? "Plan for little hands," : grade === "pre-school" ? "Grow confidence through" : "Turn curiosity into";
+  const accentHeadline = grade === "daycare" ? "big feelings." : grade === "pre-school" ? "story and sensation." : "a day of discovery.";
+  const leadQuote = grade === "daycare" ? "What will make joining in feel safe today?" : grade === "pre-school" ? "What can they choose, try, and tell us about?" : "Where can one good question take us?";
+  const GradePageTemplate = grade === "daycare" ? DaycareTemplate : grade === "pre-school" ? PreschoolTemplate : KindergartenTemplate;
+
+  useEffect(() => {
+    if (!preview) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPreview(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [preview]);
 
   return (
-    <div className={`ey-page ey-${band}`}>
-      <header className="ey-header">
-        <span className="eyebrow">{tier === "bridge" ? "Kindergarten · bridge format" : "Adult-led · no worksheet"}</span>
-        <h1>{title}</h1>
-        <p className="ey-tagline">{tagline}</p>
-        {tier === "bridge" && (
-          <p className="ey-bridge-note stitch">This band's format is still being finalized — song/topic content below is a placeholder shell, not a finished lesson set.</p>
-        )}
-      </header>
-
-      <div className="ey-shelf" role="tablist" aria-label="Choose a song or topic for today">
-        {topics.map((t, i) => (
-          <button key={t.slug} role="tab" aria-selected={i === active} className={`ey-shelf-tile stitch${i === active ? " is-active" : ""}`} onClick={() => setActive(i)}>
-            <span className="ey-shelf-patch"><CharacterBadge charKey={t.patch} color={charColor(t.patch)} name={charName(t.patch)} size={40} /></span>
-            <span className="ey-shelf-title">{t.title}</span>
-          </button>
-        ))}
-      </div>
-
-      <section className={`ey-detail-panel stitch ey-tier-${tier}`} aria-live="polite">
-        <div className="ey-detail-head">
-          <h2>{topic.title}</h2>
-          <span className="ey-detail-focus">{topic.focus}</span>
-        </div>
-
-        <div className="ey-steps">
-          {topic.steps.map((s, i) => (
-            <span className="ey-step" key={s}><span className="ey-step-num">{i + 1}</span>{s}{i < topic.steps.length - 1 && <span className="ey-step-arrow">→</span>}</span>
-          ))}
-        </div>
-
-        {tier === "detailed" && topic.choice && (
-          <div className="ey-choice">
-            <span className="ey-block-label">Movement choices</span>
-            <div className="ey-choice-list">{topic.choice.map((c) => <span key={c}>{c}</span>)}</div>
-          </div>
-        )}
-        {tier === "detailed" && topic.noticeFor && (
-          <div className="ey-notice">
-            <span className="ey-block-label">What to notice</span>
-            <div className="ey-choice-list">{topic.noticeFor.map((c) => <span key={c}>{c}</span>)}</div>
-          </div>
-        )}
-
-        <div className="ey-detail-actions">
-          <button className="lp-btn" onClick={() => setPreview(true)}>Preview activity page <ZoomIcon /></button>
-        </div>
-
-        <div className="ey-lead-badge">
-          <CharacterBadge charKey={lead.patch} color={charColor(lead.patch)} name={lead.name} size={40} />
-          <div><strong>Led by {lead.name}</strong><small>{tier === "bridge" ? "Picture-led, with a printable the child can mark." : "Practice is the activity itself — no printable for this band."}</small></div>
-        </div>
-      </section>
+    <div className={`ey-page ey-${grade}`}>
+      <GradePageTemplate
+        grade={title}
+        age={grade === "daycare" ? "Ages 0–2" : grade === "pre-school" ? "Ages 3–4" : "Ages 4–6"}
+        leadName={lead.name}
+        leadImage={leadImage}
+        leadQuote={leadQuote}
+        headline={headline}
+        accentHeadline={accentHeadline}
+        summary={tagline}
+        activeIndex={active}
+        onSelect={setActive}
+        onPreview={() => setPreview(true)}
+        items={topics.map((item, index) => ({
+          title: item.title,
+          kicker: index === 0 ? "Story circle" : index === 1 ? "Mix & measure" : index === 2 ? "Explore together" : "Make & explain",
+          summary: item.focus,
+          href: `/grade/${item.grade}/${item.slug}`,
+          icon: [
+            "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png",
+            "/brand-kit-icon-sheets/individual-icons/subject-math-building.png",
+            "/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png",
+            "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png",
+          ][index % 4],
+        }))}
+      />
 
       {preview && (
         <div className="lp-lightbox" role="dialog" aria-modal="true" aria-label={`Preview: ${topic.title}`} onClick={() => setPreview(false)}>
-          <button className="lp-lightbox-close" onClick={() => setPreview(false)} aria-label="Close preview"><CloseIcon /></button>
-          <div className="lp-lightbox-card" onClick={(e) => e.stopPropagation()}>
-            <img className="lp-lightbox-img" src={topic.image} alt={topic.title} />
+          <button className="lp-lightbox-close" type="button" onClick={() => setPreview(false)} aria-label="Close preview">Close</button>
+          <div className="lp-lightbox-card" onClick={(event) => event.stopPropagation()}>
+            <Image className="lp-lightbox-img" src={topic.image} alt={topic.title} width={1200} height={800} />
             <div className="lp-lightbox-bar">
               <div className="lp-lightbox-cap"><strong>{topic.title}</strong><small>{topic.focus}</small></div>
               <div className="lp-lightbox-actions">
-                <a className="lp-btn-ghost" href={topic.image} download><DownloadIcon /> Download</a>
-                <a className="lp-btn" href={topic.image} target="_blank" rel="noreferrer">Open / Print ↗</a>
+                <a className="lp-btn-ghost" href={topic.image} download>Download</a>
+                <a className="lp-btn" href={topic.image} target="_blank" rel="noreferrer">Open for printing</a>
               </div>
             </div>
           </div>

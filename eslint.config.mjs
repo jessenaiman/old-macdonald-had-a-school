@@ -9,8 +9,22 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
+    ".agents/**",
+    ".figma/**",
+    "archive/**",
+    "data/**",
+    "docker/**",
+    "docs/**",
     "out/**",
     "build/**",
+    "figma-copy-design/**",
+    "playwright-report/**",
+    "public/**",
+    "qa/**",
+    "scripts/**",
+    "test-results/**",
+    "texture-assets/**",
+    "vite.config.ts",
     "next-env.d.ts",
   ]),
 ]);

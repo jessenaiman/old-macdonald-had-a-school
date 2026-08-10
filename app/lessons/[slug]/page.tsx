@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { MusicLesson } from "../../../components/lessons/MusicLesson";
-import { VideoLesson } from "../../../components/lessons/VideoLesson";
-import { LessonWorkspace } from "../../../components/LessonWorkspace";
-import { SingleLessonPage } from "../../../components/SingleLessonPage";
+import { notFound, redirect } from "next/navigation";
+import { LessonDocument } from "../../../components/LessonDocument";
 import { SiteShell } from "../../../components/SiteShell";
-import { getAllLessons, getLesson } from "../../../lib/content/lessons";
-import {
-  getLesson as getCanonicalLesson,
-  isSingleLesson,
-} from "../../../lib/mdx-content";
+import { getLesson, getLessonSlugs } from "../../../lib/content";
+import { lessonHref } from "../../../lib/grade-routes";
 
 type LessonPageProps = {
   params: Promise<{ slug: string }>;
@@ -18,12 +12,12 @@ type LessonPageProps = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getAllLessons().map((lesson) => ({ slug: lesson.metadata.slug }));
+  return getLessonSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: LessonPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const lesson = getLesson(slug);
+  const lesson = await getLesson(slug);
   if (!lesson) return { title: "Lesson not found | Old MacDonald Had a School" };
 
   return {
@@ -39,27 +33,15 @@ export async function generateMetadata({ params }: LessonPageProps): Promise<Met
 
 export default async function LessonPage({ params }: LessonPageProps) {
   const { slug } = await params;
-  const lesson = getLesson(slug);
+  const lesson = await getLesson(slug);
   if (!lesson) notFound();
 
-  if (lesson.metadata.template === "video") {
-    const canonicalLesson = getCanonicalLesson(slug);
-    if (canonicalLesson) {
-      return (
-        <SiteShell active="topics">
-          {isSingleLesson(canonicalLesson) ? (
-            <SingleLessonPage lesson={canonicalLesson} />
-          ) : (
-            <LessonWorkspace lesson={canonicalLesson} />
-          )}
-        </SiteShell>
-      );
-    }
-  }
+  const canonicalHref = lessonHref(lesson.metadata);
+  if (canonicalHref.startsWith("/grade/")) redirect(canonicalHref);
 
   return (
     <SiteShell active="topics">
-      {lesson.metadata.template === "music" ? <MusicLesson lesson={lesson} /> : <VideoLesson lesson={lesson} />}
+      <LessonDocument Content={lesson.Content} metadata={lesson.metadata} />
     </SiteShell>
   );
 }

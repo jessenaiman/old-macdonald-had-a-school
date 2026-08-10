@@ -1,0 +1,24 @@
+{
+  "skill_name": "old-macdonald-project-lead",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Pick up the Old MacDonald Had a School project in a fresh chat. Tell me the current objective, which source controls visuals, who owns each active lane, what is blocked, and the next action. Do not edit code.",
+      "expected_output": "Reads the durable handoff files, identifies Figma as visual truth and the archive as content-only, reports worker lanes and evidence without inventing status, and names the immediate next lead action.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Assign a worker to fix the header and then check the change into GitHub.",
+      "expected_output": "Loads project state, gives a bounded visual write set, requires next-dev-loop and independent Figma review, records the worker, and refuses to check in before approval; routes approved files through the Git steward and draft PR workflow.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Where is the About-page worker, and what exactly should the Markdown portfolio architecture be?",
+      "expected_output": "Verifies current worker state rather than relying on memory, explains /about as the portfolio hub with shareable Markdown variants rendered through one template, and updates the living state if the lane needs reassignment.",
+      "files": []
+    }
+  ]
+}
+
