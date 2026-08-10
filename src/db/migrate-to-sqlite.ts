@@ -2,7 +2,6 @@ import Database from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import * as schema from './schema-sqlite.js';
 import pg from 'pg';
-import fs from 'fs';
 
 // Connect to Neon (source)
 const NEON_URL = 'postgresql://neondb_owner:npg_crtE6i8yCzJh@ep-soft-butterfly-ax1441oa-pooler.c-4.us-east-2.aws.neon.tech/neondb?sslmode=require';

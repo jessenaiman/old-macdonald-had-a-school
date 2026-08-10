@@ -3,8 +3,6 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
-// better-sqlite3 v13 is present at runtime but does not ship declarations in this checkout.
-// @ts-expect-error The package is intentionally used as the server-only database boundary.
 import Database from "better-sqlite3";
 
 import {
