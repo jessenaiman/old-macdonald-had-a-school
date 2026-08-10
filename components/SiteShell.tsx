@@ -7,12 +7,12 @@ export type ActivePage =
   | "home" | "topics" | "lessons" | "about" | "search" | "cast-guide"
   | "daycare" | "pre-school" | "kindergarten" | "grade-one" | "grade-two";
 
-const FOOTER_GRADES = [
-  { label: "Daycare", href: "/grade/daycare" },
-  { label: "Pre-School", href: "/grade/pre-school" },
-  { label: "Kindergarten", href: "/grade/kindergarten" },
-  { label: "Grade 1", href: "/grade/grade-one" },
-  { label: "Grade 2", href: "/grade/grade-two" },
+const FOOTER_TOPICS = [
+  { label: "Language & stories", href: "/topics?cluster=words" },
+  { label: "Numbers & making", href: "/topics?cluster=numbers" },
+  { label: "Music & movement", href: "/topics?cluster=music" },
+  { label: "Art & nature", href: "/topics?cluster=art" },
+  { label: "Routines & wellbeing", href: "/topics?cluster=heart" },
 ] as const;
 
 export type GradeNavigationItem = {
@@ -73,11 +73,11 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
             </div>
             <p className="footer-brand-note">Familiar songs, practical planning, and room for every learner.</p>
           </section>
-          <nav className="footer-card footer-grade-card" aria-label="Plan by grade">
+          <nav className="footer-card footer-grade-card" aria-label="Plan by topic">
             <Image className="footer-fastener footer-pin" src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={38} height={38} />
-            <strong className="footer-card-title">Plan by grade</strong>
+            <strong className="footer-card-title">Plan by topic</strong>
             <div className="footer-links footer-grade-links">
-              {FOOTER_GRADES.map((grade) => <Link key={grade.href} href={grade.href}>{grade.label}</Link>)}
+              {FOOTER_TOPICS.map((topic) => <Link key={topic.href} href={topic.href}>{topic.label}</Link>)}
             </div>
           </nav>
           <nav className="footer-card footer-tool-card" aria-label="Teacher toolbox">
@@ -88,7 +88,6 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
               <Link href="/search">Search lessons</Link>
               <Link href="/topics">All lesson topics</Link>
               <Link href="/about">About</Link>
-              <Link href="/cast">Cast guide</Link>
             </div>
           </nav>
           <div className="footer-tagline footer-felt-strip">

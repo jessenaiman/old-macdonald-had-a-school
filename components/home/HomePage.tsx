@@ -1,226 +1,66 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HomeCarousel } from "./HomeCarousel";
+import { HOME_TOPICS, NEW_SLUGS, SONG_SLUGS, type HomeLesson } from "./home-data";
+import { WeeklyLessonList } from "./WeeklyLessonList";
 import styles from "./HomePage.module.css";
-
-type SlimLesson = {
-  slug: string;
-  title: string;
-  subject: string;
-  category: string;
-  summary: string;
-  grade: string;
-};
 
 type HomePageProps = {
   hero: { eyebrow?: string; title?: string; summary?: string };
-  lessons: SlimLesson[];
+  lessons: (HomeLesson & { subject: string; category: string })[];
 };
 
-type SubjectLesson = {
-  title: string;
-  grade: string;
-  href: string;
-  staffAsset: string;
-  ready?: boolean;
-};
+function pickLessons(lessons: HomeLesson[], slugs: readonly string[]) {
+  return slugs.map((slug) => lessons.find((lesson) => lesson.slug === slug)).filter((lesson): lesson is HomeLesson => Boolean(lesson));
+}
 
-type SubjectGroup = {
-  key: string;
-  filterKey: string;
-  label: string;
-  icon: string;
-  tone: "words" | "numbers" | "music" | "heart";
-  fastener: string;
-  fastenerStyle: "paperclip" | "pushpin" | "tape" | "clip";
-  rows: readonly SubjectLesson[];
-  more: number;
-};
-
-const SUBJECTS: readonly SubjectGroup[] = [
-  {
-    key: "language",
-    filterKey: "words",
-    label: "Language & Communication",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png",
-    tone: "words",
-    fastener: "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png",
-    fastenerStyle: "paperclip",
-    rows: [
-      { title: "Story Time: Board Books", grade: "Daycare", href: "/grade/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
-      { title: "Show & Tell Story Circle", grade: "Pre-School", href: "/grade/pre-school", staffAsset: "/staff_and_students/miss-maisy-transparent-circle.png" },
-      { title: "Phonics: Long & Short Vowel Sounds", grade: "Gr 1", href: "/grade/grade-one", staffAsset: "/staff_and_students/miss-hayley-transparent-circle.png", ready: true },
-      { title: "Rhyming & Sound Play", grade: "Gr 1", href: "/grade/grade-one", staffAsset: "/staff_and_students/miss-hayley-transparent-circle.png" },
-    ],
-    more: 1,
-  },
-  {
-    key: "math",
-    filterKey: "numbers",
-    label: "Math & Inquiry",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-math-building.png",
-    tone: "numbers",
-    fastener: "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png",
-    fastenerStyle: "pushpin",
-    rows: [
-      { title: "Sensory Tray Exploration", grade: "Daycare", href: "/grade/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
-      { title: "Shape Hunt Outdoors", grade: "Pre-School", href: "/grade/pre-school", staffAsset: "/staff_and_students/miss-maisy-transparent-circle.png" },
-      { title: "Nature Observation Journal", grade: "Gr 1", href: "/grade/grade-one", staffAsset: "/staff_and_students/mr-puddles-transparent-circle.png" },
-      { title: "Adding with Equal Groups", grade: "Gr 2", href: "/grade/grade-two", staffAsset: "/staff_and_students/mr-sam-transparent-circle.png" },
-    ],
-    more: 1,
-  },
-  {
-    key: "music",
-    filterKey: "music",
-    label: "Music, Movement & Community",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-music-dance.png",
-    tone: "music",
-    fastener: "/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png",
-    fastenerStyle: "tape",
-    rows: [
-      { title: "Barnyard Animal Sounds & Action Imitation", grade: "Daycare", href: "/grade/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png", ready: true },
-      { title: "Circle Time Songs", grade: "Daycare", href: "/grade/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
-      { title: "Fingerplay & Movement", grade: "Daycare", href: "/grade/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
-      { title: "Follow the Music Trail", grade: "Pre-School", href: "/grade/pre-school", staffAsset: "/staff_and_students/mr-rusty-transparent-circle.png" },
-    ],
-    more: 2,
-  },
-  {
-    key: "routines",
-    filterKey: "heart",
-    label: "Routines & Regulation",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-community-leadership.png",
-    tone: "heart",
-    fastener: "/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.png",
-    fastenerStyle: "clip",
-    rows: [
-      { title: "Mix, Measure & Munch", grade: "Pre-School", href: "/grade/pre-school", staffAsset: "/staff_and_students/miss-maisy-transparent-circle.png", ready: true },
-      { title: "Feelings Check-In", grade: "Daycare", href: "/grade/daycare", staffAsset: "/staff_and_students/miss-puddles-transparent-circle.png" },
-      { title: "Clean Up Song Sequence", grade: "Pre-School", href: "/grade/pre-school", staffAsset: "/staff_and_students/miss-maisy-transparent-circle.png" },
-      { title: "Kind Hands, Kind Words", grade: "Gr 1", href: "/grade/grade-one", staffAsset: "/staff_and_students/miss-hayley-transparent-circle.png" },
-    ],
-    more: 1,
-  },
-] as const;
-
-const JOURNEY = [
-  {
-    number: "1",
-    title: "Sing & Spark Interest",
-    copy: "Start with a song or story that captures attention and builds background.",
-    image: "/scenes/home-journey-spark-v1.png",
-    alt: "A pig and a sheep reading a picture book together",
-    patch: "/design-assets/blank-felt-patches-v1/individual-patches/10-whiskers-circle.png",
-  },
-  {
-    number: "2",
-    title: "Explore & Practice",
-    copy: "Hands-on activities and playful practice help children try, explore, and make connections.",
-    image: "/scenes/home-journey-explore-v1.png",
-    alt: "A cow, donkey, and chick exploring shapes together",
-    patch: "/design-assets/blank-felt-patches-v1/individual-patches/11-scout-circle.png",
-  },
-  {
-    number: "3",
-    title: "Reflect & Apply",
-    copy: "Children share, reflect, and use what they have learned in meaningful ways.",
-    image: "/scenes/home-journey-reflect-v1.png",
-    alt: "A chicken, pig, sheep, and chick observing a garden plant",
-    patch: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-circle.png",
-  },
-] as const;
-
-export function HomePage({ hero }: HomePageProps) {
+function TopicBadge({ topic }: { topic: (typeof HOME_TOPICS)[number] }) {
   return (
-    <div className={`home-page ${styles.homePage}`}>
+    <span className={styles.topicBadge} style={{ "--topic-color": topic.color } as React.CSSProperties} aria-hidden="true">
+      <Image className={styles.topicPatch} src={topic.patch} alt="" fill sizes="70px" />
+      <Image className={styles.topicPortrait} src={topic.portrait} alt="" fill sizes="66px" />
+    </span>
+  );
+}
+
+export function HomePage({ lessons }: HomePageProps) {
+  const songs = pickLessons(lessons, SONG_SLUGS);
+  const newLessons = pickLessons(lessons, NEW_SLUGS);
+
+  return (
+    <div className={styles.homePage}>
       <section className={styles.hero} aria-labelledby="home-title">
-        <Image
-          className={styles.heroImage}
-          src="/scenes/home-schoolhouse-classroom-hero-v1.png"
-          alt="Old MacDonald teaching the farm-school children in a warm classroom"
-          fill
-          priority
-          sizes="100vw"
-        />
-        <div className={styles.heroShade} aria-hidden="true" />
-        <div className={styles.heroPanel}>
-          <Image className={styles.heroPinLeft} src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={52} height={52} aria-hidden="true" />
-          <Image className={styles.heroPinRight} src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={52} height={52} aria-hidden="true" />
-          {hero.eyebrow && <p className={styles.heroEyebrow}>{hero.eyebrow}</p>}
-          <h1 id="home-title">{hero.title ?? "Where familiar songs become new places to learn."}</h1>
-          <p>{hero.summary ?? "One clear teaching sequence, carefully selected resources, and better searches when you need another option."}</p>
-          <Link className={styles.heroButton} href="#grade-navigation">Start with your grade <span aria-hidden="true">→</span></Link>
+        <div className={styles.heroCopy}>
+          <p>Old MacDonald Had a School · Teacher resources</p>
+          <h1 id="home-title">Where familiar songs become <em>new places</em> to learn.</h1>
+          <span>Choose a topic, find one useful starting point, and make room for every child to listen, move, hum, sing, or invent.</span>
+          <div className={styles.heroActions}><Link href="#browse-by-topic">Browse topics</Link><Link href="/search">Search lessons</Link></div>
         </div>
+        <HomeCarousel />
       </section>
 
-      <section className={`${styles.subjectBoard} subject-bulletin`} id="browse-by-subject" aria-labelledby="discover-title">
-        <header className={styles.subjectHeading}>
-          <h2 id="discover-title">Browse by Subject</h2>
-          <p>Topics are organized into four subject clusters. Each cluster grows with your students.</p>
-        </header>
-        <div className={styles.subjectGrid}>
-          {SUBJECTS.map((group) => (
-            <article className={`${styles.subjectCard} ${styles[group.tone]}`} key={group.key}>
-              <Image className={`${styles.fastener} ${styles[group.fastenerStyle]} subject-fastener`} src={group.fastener} alt="" width={76} height={76} aria-hidden="true" />
-              <header className={styles.subjectCardHead}>
-                <Image src={group.icon} alt="" width={46} height={46} aria-hidden="true" />
-                <h3>{group.label}</h3>
-              </header>
-              <ul className={styles.lessonList}>
-                {group.rows.map((lesson) => (
-                  <li key={lesson.title}>
-                    <Link href={lesson.href}>
-                      <Image src={lesson.staffAsset} alt="" width={24} height={24} sizes="24px" aria-hidden="true" />
-                      <span>{lesson.title}</span>
-                      <small>{lesson.grade}{lesson.ready && <b>Ready</b>}</small>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              {group.more > 0 && <Link className={styles.moreLink} href={`/topics?cluster=${group.filterKey}`}>+ {group.more} more...</Link>}
+      <section className={styles.topicBoard} id="browse-by-topic" aria-labelledby="topics-title">
+        <header className={styles.sectionHeading}><p>Plan from what children will do</p><h2 id="topics-title">What would you like to explore?</h2></header>
+        <div className={styles.topicGrid}>
+          {HOME_TOPICS.map((topic, index) => (
+            <article className={styles.topicCard} style={{ "--topic-color": topic.color } as React.CSSProperties} key={topic.key}>
+              <Image className={styles.topicFastener} src={index % 2 ? "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" : "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png"} alt="" width={46} height={46} aria-hidden="true" />
+              <header><TopicBadge topic={topic} /><div><Image src={topic.icon} alt="" width={36} height={36} aria-hidden="true" /><h3>{topic.title}</h3></div></header>
+              <p>{topic.prompt}</p>
+              <ul>{topic.lessonTitles.map((title) => <li key={title}><Link href={`/topics?cluster=${topic.filter}`}>{title}<span aria-hidden="true">→</span></Link></li>)}</ul>
+              <Link className={styles.topicMore} href={`/topics?cluster=${topic.filter}`}>Explore this topic</Link>
             </article>
           ))}
         </div>
       </section>
 
-      <section className={styles.journey} aria-labelledby="journey-title">
-        <header>
-          <h2 id="journey-title">Your lesson journey</h2>
-          <p>Every topic follows a simple path from first song to real understanding.</p>
-        </header>
-        <div className={styles.journeyGrid}>
-          {JOURNEY.map((step) => (
-            <article className={styles.journeyCard} key={step.number}>
-              <span className={styles.stepNumber} aria-hidden="true">
-                <Image src={step.patch} alt="" fill sizes="52px" />
-                <b>{step.number}</b>
-              </span>
-              <div className={styles.journeyImage}>
-                <Image src={step.image} alt={step.alt} fill sizes="(max-width: 760px) 86vw, 280px" />
-              </div>
-              <h3>{step.title}</h3>
-              <p>{step.copy}</p>
-            </article>
-          ))}
-          <aside className={styles.journeyNote}>
-            <Image src="/design-assets/classroom-fasteners-v1/individual-icons/12-reinforcement-ring.png" alt="" width={54} height={54} aria-hidden="true" />
-            <p>Again.<br />Another way.<br />Another day.</p>
-          </aside>
-        </div>
-      </section>
-
-      <section className={styles.story} aria-labelledby="story-title">
-        <div className={styles.storyArt}>
-          <Image src="/pressed-flowers.png" alt="Children holding hands in a circle among pressed flowers" fill loading="eager" sizes="100vw" />
-        </div>
-        <div className={styles.storyCopy}>
-          <p>Welcome to Old MacDonald Had a School</p>
-          <h2 id="story-title">Familiar songs.<br />New places to learn.</h2>
-          <span>We turn music children already know into visual worlds they can move through, notice and join.</span>
-          <Link href="/grade/daycare/singing-together">Follow the first story <b aria-hidden="true">→</b></Link>
-          <small>by Jesse Naiman</small>
-        </div>
+      <section className={styles.discovery} aria-label="Songs and new lessons">
+        <div className={styles.discoveryIntro}><p>Repeat what works</p><h2>Songs for bodies, voices, and belonging</h2><span>A small repertoire, revisited often, gives children more ways to join.</span><div className={styles.joinWays}><b>Listen</b><b>Move</b><b>Gesture</b><b>Hum</b><b>Sing</b><b>Invent</b></div></div>
+        <WeeklyLessonList lessons={songs} title="Songs to repeat this week" />
+        <WeeklyLessonList lessons={newLessons} title="New this week" compact />
       </section>
     </div>
   );
 }
+
+export { TopicBadge, pickLessons, type HomePageProps };

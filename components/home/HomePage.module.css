@@ -575,3 +575,202 @@
   .heroButton { transition: none; }
   .heroButton:hover { transform: none; }
 }
+
+/* Compact farm-school welcome header. The older hero selectors above are
+   intentionally left scoped to their retired class names while this design is reviewed. */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(390px, .92fr) 88px minmax(500px, 1.18fr);
+  gap: clamp(16px, 1.8vw, 30px);
+  min-height: 0;
+  align-items: center;
+  width: min(1480px, calc(100% - 28px));
+  margin: 14px auto 24px;
+  padding: clamp(24px, 2.5vw, 38px);
+  overflow: visible;
+  border: 1px solid #d8c39d;
+  border-radius: 26px;
+  background-color: #fbf3df;
+  background-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
+  background-size: 320px;
+  box-shadow: 0 8px 0 rgba(95, 61, 30, .24), inset 0 0 0 8px rgba(255, 255, 255, .24);
+}
+
+.hero::after {
+  position: absolute;
+  inset: 11px;
+  border: 1px dashed rgba(144, 104, 61, .35);
+  border-radius: 19px;
+  content: "";
+  pointer-events: none;
+}
+
+.heroCopy,
+.heroRibbon,
+.carousel { position: relative; z-index: 1; }
+
+.heroCopy { align-self: stretch; display: grid; align-content: center; gap: 18px; }
+
+.heroCopy h1 {
+  max-width: 580px;
+  margin: 0;
+  color: #173e36;
+  font-family: var(--font-serif-italic), Georgia, serif;
+  font-size: clamp(35px, 3.35vw, 54px);
+  font-weight: 700;
+  line-height: .91;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.heroCopy h1 em { color: #c54870; font-style: normal; }
+
+.weeklyList {
+  overflow: hidden;
+  border: 1px solid #d8c7a7;
+  border-radius: 11px;
+  background-color: #fffaf0;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 37px, rgba(101, 151, 176, .26) 37px 38px), url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
+  background-size: auto, 260px;
+  box-shadow: 3px 5px 0 rgba(91, 62, 34, .2);
+  transform: rotate(-.25deg);
+}
+
+.weeklyList > header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  min-height: 38px;
+  padding: 8px 14px 5px 42px;
+  color: #355b58;
+}
+
+.weeklyList h2 { margin: 0; color: #bd496c; font-family: var(--font-hand), cursive; font-size: 19px; font-weight: 500; line-height: 1; }
+.weeklyList > header span { font-family: var(--font-hand), cursive; font-size: 14px; }
+.weeklyList ul { margin: 0; padding: 0; list-style: none; }
+
+.weeklyList li {
+  display: grid;
+  grid-template-columns: 21px minmax(100px, .8fr) minmax(120px, 1.15fr) auto;
+  gap: 7px;
+  min-height: 38px;
+  align-items: center;
+  padding: 5px 12px;
+  border-top: 1px solid rgba(111, 140, 151, .23);
+}
+
+.noteIcon { color: #0b4c76; font-size: 19px; font-weight: 900; }
+.weeklyList li > a { color: #18364f; font-size: 11px; font-weight: 900; line-height: 1.15; }
+.weeklyList li > p { overflow: hidden; margin: 0; color: #615847; font-size: 8px; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+.gradeChips { display: flex; gap: 3px; }
+.gradeChips b { display: grid; min-width: 22px; height: 22px; place-items: center; padding: 0 4px; border: 1px solid #e3a11b; border-radius: 5px; color: #9b6912; background: #fff6d8; font-size: 8px; }
+.weeklyMore { display: flex; min-height: 34px; align-items: center; justify-content: center; gap: 6px; border-top: 1px solid rgba(111, 140, 151, .23); color: #173d5c; font-size: 9px; font-weight: 900; }
+
+.heroRibbon {
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 26px 12px 42px;
+  clip-path: polygon(0 0, 100% 0, 100% 91%, 50% 100%, 0 91%);
+  color: #fff6dd;
+  background-color: #1f665f;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png");
+  background-size: 180px;
+  box-shadow: inset 0 0 0 4px rgba(242, 219, 158, .28);
+  font-family: var(--font-hand), cursive;
+  font-size: clamp(18px, 1.65vw, 27px);
+  transform: rotate(.8deg);
+}
+
+.heroRibbon i { color: #f1d37b; font-family: serif; font-size: 10px; font-style: normal; }
+.carousel { min-width: 0; }
+
+.carouselPhoto {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 8px solid #fffaf0;
+  background: #7b5a35;
+  box-shadow: 0 7px 0 rgba(76, 49, 26, .2), 0 13px 24px rgba(64, 42, 23, .2);
+  transform: rotate(1.15deg);
+}
+
+.carouselPhoto > img:first-child { object-fit: cover; }
+.photoPinLeft,
+.photoPinRight { position: absolute; z-index: 3; top: -22px; width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .3)); }
+.photoPinLeft { left: -21px; }
+.photoPinRight { right: -21px; }
+
+.carouselArrow {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid #d5c6a7;
+  border-radius: 50%;
+  color: #173d3b;
+  background: #fff8e8;
+  box-shadow: 0 3px 0 rgba(68, 45, 26, .2);
+  font-family: Georgia, serif;
+  font-size: 28px;
+  line-height: 1;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.carouselPrevious { left: -22px; }
+.carouselNext { right: -22px; }
+.carouselNav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; text-align: center; }
+.carouselNav a { display: grid; justify-items: center; gap: 4px; color: #41504a; font-size: 10px; font-weight: 800; }
+.carouselNav a span { width: 32px; height: 5px; border-radius: 4px; background: #ddcdae; }
+.carouselNav .carouselLinkActive span { background: #27746c; }
+.carouselArrow:focus-visible,
+.carouselNav a:focus-visible,
+.weeklyList a:focus-visible { outline: 3px solid #0b4c76; outline-offset: 3px; }
+
+@media (max-width: 1120px) {
+  .hero { grid-template-columns: minmax(340px, .85fr) 72px minmax(420px, 1.15fr); padding: 28px 26px; }
+  .heroRibbon { min-height: 285px; font-size: 20px; }
+  .weeklyList li { grid-template-columns: 20px minmax(100px, 1fr) auto; }
+  .weeklyList li > p { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr) 66px; align-items: end; }
+  .heroCopy { grid-column: 1 / -1; }
+  .heroRibbon { min-height: 260px; }
+  .carousel { grid-column: 1; grid-row: 2; }
+}
+
+@media (max-width: 760px) {
+  .hero { display: grid; width: calc(100% - 16px); margin-top: 8px; padding: 25px 17px 21px; border-radius: 18px; }
+  .heroCopy { gap: 14px; }
+  .heroCopy h1 { max-width: 520px; font-size: clamp(34px, 10.7vw, 48px); }
+  .weeklyList li { grid-template-columns: 19px minmax(0, 1fr) auto; padding-inline: 9px; }
+  .weeklyList li > a { font-size: 10px; }
+  .heroRibbon { grid-column: 1 / -1; grid-row: 2; min-height: 0; flex-direction: row; gap: 7px; padding: 11px 18px; clip-path: none; font-size: 18px; transform: rotate(-.4deg); }
+  .carousel { grid-column: 1 / -1; grid-row: 3; margin: 2px 8px 0; }
+  .carouselPhoto { border-width: 6px; }
+  .carouselArrow { width: 38px; height: 38px; }
+  .carouselPrevious { left: -18px; }
+  .carouselNext { right: -18px; }
+}
+
+@media (max-width: 390px) {
+  .hero { padding-inline: 13px; }
+  .weeklyList > header { padding-left: 36px; }
+  .gradeChips b { min-width: 20px; }
+  .carouselNav a { font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carouselPhoto,
+  .weeklyList,
+  .heroRibbon { transform: none; }
+}
