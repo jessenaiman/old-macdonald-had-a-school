@@ -522,7 +522,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .ey-kindergarten .ey-shelf-index { width:35px; height:35px; border:2px solid #fff5d4; color:#fff; background:#cc9b27; font-family:"Farm Display",sans-serif; font-size:17px; }
 .ey-kindergarten .ey-shelf-title { color:#fff8e9; font-family:"Farm Display",sans-serif; font-size:20px; line-height:1; }
 .ey-kindergarten .ey-detail-panel { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr); column-gap:30px; padding:clamp(26px,4vw,48px); border:0; border-radius:8px; color:#2c241b; background-color:#a86e38; background-image:var(--worktable-kraft); background-size:320px; box-shadow:8px 10px 0 #70451f, 0 22px 42px #43271538; --st:none; }
-.ey-kindergarten .ey-detail-panel::before { content:"Todayâ€™s planning card"; position:absolute; top:14px; left:26px; color:#fff0d4; font-size:9px; font-weight:900; letter-spacing:.15em; text-transform:uppercase; }
+.ey-kindergarten .ey-detail-panel::before { content:"Today’s planning card"; position:absolute; top:14px; left:26px; color:#fff0d4; font-size:9px; font-weight:900; letter-spacing:.15em; text-transform:uppercase; }
 .ey-kindergarten .ey-detail-panel::after { content:""; position:absolute; top:-24px; right:24px; width:48px; height:48px; background:var(--worktable-clip) center/contain no-repeat; transform:rotate(8deg); pointer-events:none; }
 .ey-kindergarten .ey-detail-head { grid-column:1; display:block; margin:22px 0 18px; padding:22px 24px; border-radius:3px; background:#fff9e9; box-shadow:3px 4px 0 #70451f; }
 .ey-kindergarten .ey-detail-head h2 { color:var(--worktable-ink); font-family:"Farm Display",sans-serif; font-size:clamp(29px,3.3vw,42px); }
@@ -713,7 +713,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
 .ey-kindergarten .ey-tagline { max-width:620px; margin:0; font-size:15px; }
 .ey-kindergarten .ey-bridge-note { max-width:610px; margin:14px 0 0; padding:10px 14px; background-color:#315e48; background-image:url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png"); background-size:220px; background-position:center; background-repeat:repeat; box-shadow:none; }
 .ey-kindergarten .ey-shelf { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:10px 0 17px; padding:0; overflow:visible; }
-.ey-kindergarten .ey-shelf::before { position:static; grid-column:1/-1; content:"Choose todayâ€™s learning path"; margin-bottom:2px; }
+.ey-kindergarten .ey-shelf::before { position:static; grid-column:1/-1; content:"Choose today’s learning path"; margin-bottom:2px; }
 .ey-kindergarten .ey-shelf-tile { width:auto; min-height:116px; padding:18px 15px; background-size:100% 100%; }
 .ey-kindergarten .ey-shelf-tile:nth-child(even) { background-image:url("/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png"); }
 .ey-kindergarten .ey-shelf-tile.is-active { outline:3px solid #e4c66c; box-shadow:0 8px 16px #442c1928; }
