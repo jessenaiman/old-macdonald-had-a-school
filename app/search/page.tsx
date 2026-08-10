@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import Image from "next/image";
+import { FormEvent, useCallback, useMemo, useState } from "react";
 import { SiteShell } from "../../components/SiteShell";
+import styles from "./SearchPage.module.css";
 
 interface SearchResult {
   id: string;
   kind: string;
   title: string;
-  excerpt: string;
+  excerpt: string | null;
   lyrics: string | null;
   instructions: string | null;
   sourcePath: string;
@@ -22,6 +24,9 @@ interface CurriculumResult {
   lesson_topic: string;
   skill_statement: string | null;
   standards: string | null;
+  tags?: string | null;
+  matched_terms?: string[];
+  why_match?: string;
 }
 
 interface LessonResult {
@@ -41,28 +46,76 @@ interface LessonResult {
 }
 
 interface SearchResponse {
-  results: SearchResult[];
-  curriculum: CurriculumResult[];
-  lessons: LessonResult[];
-  total: number;
+  results?: SearchResult[];
+  curriculum?: CurriculumResult[];
+  lessons?: LessonResult[];
   error?: string;
 }
 
-const KIND_LABELS: Record<string, string> = {
-  song: "🎵 Song",
-  knowledge: "📚 Knowledge",
-  lesson: "📖 Lesson",
-  source: "📄 Source",
-  grade_level: "🏫 Grade",
-};
+type ResourceTab = "video" | "songs" | "printouts";
 
-const KIND_COLORS: Record<string, string> = {
-  song: "#e8f5e9",
-  knowledge: "#e3f2fd",
-  lesson: "#fff3e0",
-  source: "#f3e5f5",
-  grade_level: "#fce4ec",
-};
+const GRADE_OPTIONS = [
+  { value: "", label: "All grades" },
+  { value: "daycare", label: "Daycare" },
+  { value: "preschool", label: "Preschool" },
+  { value: "kindergarten", label: "Kindergarten" },
+  { value: "grade-1", label: "Grade 1" },
+  { value: "grade-2", label: "Grade 2" },
+  { value: "grade-3", label: "Grade 3" },
+] as const;
+
+function plainText(value: string | null | undefined) {
+  return value?.replace(/<[^>]+>/g, "").replace(/&hellip;/g, "…") ?? "";
+}
+
+function readableStatus(value: string | undefined) {
+  return value ? value.replaceAll("_", " ") : "Not available";
+}
+
+function readableResourceTitle(value: string) {
+  const cleaned = value
+    .replace(/html$/i, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return cleaned.replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function readableMetadata(value: string | undefined) {
+  return value
+    ?.replace(/^"+|"+$/g, "")
+    .replaceAll("â", "–")
+    .replaceAll("â", "—")
+    .trim();
+}
+
+function topicGuide(topic: CurriculumResult | undefined, lesson: LessonResult | undefined) {
+  const title = `${topic?.lesson_topic ?? lesson?.title ?? ""} ${topic?.subject ?? lesson?.subject ?? ""}`.toLowerCase();
+  const grades = (topic?.grade ?? lesson?.grade_band ?? "").toLowerCase();
+  if (/pony|horse|dance|movement|music|rhythm|beat/.test(title)) {
+    return { src: "/icons/staff/mr-rusty.png", alt: "Mr Rusty, the dance and rhythm teacher" };
+  }
+  if (/math|count|measure|pattern|science|build/.test(title)) {
+    return { src: "/icons/staff/mr-sam.png", alt: "Mr Sam, the math, science, and building teacher" };
+  }
+  if (/story|drama|language|literacy|rhyme|imagination/.test(title)) {
+    return { src: "/icons/staff/miss-hayley.png", alt: "Miss Hayley, the story, song, and drama teacher" };
+  }
+  if (/daycare|preschool/.test(grades)) {
+    return { src: "/icons/staff/miss-puddles.png", alt: "Miss Puddles, the early-years teacher" };
+  }
+  return null;
+}
+
+function isVideo(result: SearchResult) {
+  const haystack = `${result.meta.contentKind ?? ""} ${result.sourcePath}`.toLowerCase();
+  return /video|youtube|vimeo|\.mp4|\.mov/.test(haystack);
+}
+
+function isPrintout(result: SearchResult) {
+  const haystack = `${result.meta.contentKind ?? ""} ${result.sourcePath}`.toLowerCase();
+  return /printable|worksheet|printout|\.pdf/.test(haystack);
+}
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -71,260 +124,310 @@ export default function SearchPage() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [curriculum, setCurriculum] = useState<CurriculumResult[]>([]);
   const [lessons, setLessons] = useState<LessonResult[]>([]);
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<ResourceTab>("songs");
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const search = useCallback(async () => {
-    if (query.trim().length < 2) return;
+    const cleanedQuery = query.trim();
+    if (cleanedQuery.length < 2) return;
+
     setLoading(true);
     setSearched(true);
+    setError(null);
 
     try {
-      const params = new URLSearchParams({ q: query });
+      const params = new URLSearchParams({ q: cleanedQuery });
       if (kindFilter) params.set("kind", kindFilter);
       if (gradeFilter) params.set("grade", gradeFilter);
-
-      const res = await fetch(`/api/search?${params}`);
-      const data: SearchResponse = await res.json();
-
-      setResults(data.results || []);
-      setCurriculum(data.curriculum || []);
-      setLessons(data.lessons || []);
-    } catch (err) {
-      console.error("Search failed:", err);
+      const response = await fetch(`/api/search?${params}`);
+      if (!response.ok) throw new Error("Search service did not return a usable response.");
+      const baseResponse = await response.json() as SearchResponse;
+      const nextCurriculum = baseResponse.curriculum ?? [];
+      const nextLessons = baseResponse.lessons ?? [];
+      setResults(baseResponse.results ?? []);
+      setCurriculum(nextCurriculum);
+      setLessons(nextLessons);
+      setSelectedKey(
+        nextCurriculum[0]
+          ? `topic:${nextCurriculum[0].id}:${nextCurriculum[0].grade_key}`
+          : nextLessons[0]
+            ? `lesson:${nextLessons[0].id}`
+            : null,
+      );
+      setActiveTab("songs");
+    } catch (searchError) {
+      setResults([]);
+      setCurriculum([]);
+      setLessons([]);
+      setSelectedKey(null);
+      setError(searchError instanceof Error ? searchError.message : "Search failed.");
     } finally {
       setLoading(false);
     }
-  }, [query, kindFilter, gradeFilter]);
+  }, [gradeFilter, kindFilter, query]);
+
+  function submitSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void search();
+  }
+
+  const selectedTopic = curriculum.find(
+    (topic) => selectedKey === `topic:${topic.id}:${topic.grade_key}`,
+  );
+  const selectedLesson = lessons.find((lesson) => selectedKey === `lesson:${lesson.id}`);
+  const selectedTitle = selectedTopic?.lesson_topic ?? selectedLesson?.title ?? "";
+  const topicFigure = topicGuide(selectedTopic, selectedLesson);
+
+  const songs = useMemo(() => results.filter((result) => result.kind === "song"), [results]);
+  const videos = useMemo(() => results.filter(isVideo), [results]);
+  const printouts = useMemo(() => results.filter(isPrintout), [results]);
+  const totalCurriculum = curriculum.length + lessons.length;
+
+  const activeResources = activeTab === "video" ? videos : activeTab === "printouts" ? printouts : songs;
 
   return (
-    <SiteShell active="home">
-      <div className="search-page" style={{ maxWidth: 900, margin: "0 auto", padding: "2rem 1rem" }}>
-        <header style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <h1 style={{ fontFamily: "var(--font-farm-display)", fontSize: "2.5rem", marginBottom: "0.5rem" }}>
-            Search the Music &amp; Curriculum Database
-          </h1>
-          <p style={{ color: "var(--text-muted, #666)", fontSize: "1.1rem" }}>
-            Find songs, lyrics, teaching instructions, and curriculum topics across all grade levels.
-          </p>
-        </header>
+    <SiteShell active="search">
+      <div className={styles.page}>
+        <section className={styles.searchSheet} aria-labelledby="search-title">
+          <Image className={styles.emblem} src="/brand-emblem.png" alt="" width={86} height={86} priority />
+          <div className={styles.headingCopy}>
+            <p>Old MacDonald Had a School</p>
+            <h1 id="search-title">Curriculum workroom</h1>
+          </div>
+          <form className={styles.searchForm} onSubmit={submitSearch} role="search">
+            <label className={styles.srOnly} htmlFor="curriculum-search">Search curriculum and teaching resources</label>
+            <input
+              id="curriculum-search"
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Try ponies, counting, or a lesson goal"
+              minLength={2}
+            />
+            <button type="submit" disabled={loading || query.trim().length < 2}>
+              {loading ? "Searching…" : "Search"}
+            </button>
+          </form>
+          <div className={styles.filters} aria-label="Search filters">
+            <label>
+              <span>Grade</span>
+              <select value={gradeFilter} onChange={(event) => setGradeFilter(event.target.value)}>
+                {GRADE_OPTIONS.map((grade) => <option key={grade.value} value={grade.value}>{grade.label}</option>)}
+              </select>
+            </label>
+            <label>
+              <span>Resource type</span>
+              <select value={kindFilter} onChange={(event) => setKindFilter(event.target.value)}>
+                <option value="">All resources</option>
+                <option value="song">Songs</option>
+                <option value="knowledge">Knowledge</option>
+              </select>
+            </label>
+          </div>
+        </section>
 
-        {/* Search bar */}
-        <div className="search-bar" style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && search()}
-            placeholder="Search for songs, topics, lyrics, instructions…"
-            style={{
-              flex: 1,
-              padding: "0.75rem 1rem",
-              fontSize: "1.1rem",
-              border: "2px solid var(--border-color, #ddd)",
-              borderRadius: "0.5rem",
-              fontFamily: "var(--font-farm-body)",
-            }}
-          />
-          <button
-            onClick={search}
-            disabled={loading}
-            style={{
-              padding: "0.75rem 1.5rem",
-              fontSize: "1rem",
-              fontWeight: 700,
-              background: "var(--brand-primary, #2d5a1f)",
-              color: "white",
-              border: "none",
-              borderRadius: "0.5rem",
-              cursor: "pointer",
-              fontFamily: "var(--font-farm-body)",
-            }}
-          >
-            {loading ? "Searching…" : "Search"}
-          </button>
-        </div>
+        {!searched ? (
+          <section className={styles.welcomeState}>
+            <Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={42} height={42} />
+            <h2>Start with what you want to teach.</h2>
+            <p>Search a topic, goal, song, rhyme, activity, story, or classroom resource.</p>
+            <p className={styles.suggestions}>Try “ponies lap rhymes”, “fingerplay”, or “word problems”.</p>
+          </section>
+        ) : loading ? (
+          <div className={styles.loadingState} role="status">Searching the curriculum collection…</div>
+        ) : error ? (
+          <section className={styles.errorState} role="alert">
+            <h2>The search could not be completed.</h2>
+            <p>{error}</p>
+            <button type="button" onClick={() => void search()}>Try again</button>
+          </section>
+        ) : totalCurriculum === 0 && results.length === 0 ? (
+          <section className={styles.emptyState}>
+            <h2>No matching curriculum or resources were found.</h2>
+            <p>Try a shorter phrase, another grade, or a broader resource type.</p>
+          </section>
+        ) : (
+          <div className={styles.workspace}>
+            <aside className={styles.resultsPanel} aria-label="Curriculum search results">
+              <div className={styles.resultsHeading}>
+                <div>
+                  <p>Curriculum first</p>
+                  <h2>{totalCurriculum} curriculum {totalCurriculum === 1 ? "result" : "results"}</h2>
+                </div>
+                <span>{results.length} related {results.length === 1 ? "resource" : "resources"}</span>
+              </div>
 
-        {/* Filters */}
-        <div className="search-filters" style={{ display: "flex", gap: "1rem", marginBottom: "2rem", flexWrap: "wrap" }}>
-          <select
-            value={kindFilter}
-            onChange={(e) => setKindFilter(e.target.value)}
-            style={{ padding: "0.5rem", borderRadius: "0.375rem", border: "1px solid #ccc" }}
-          >
-            <option value="">All types</option>
-            <option value="song">Songs</option>
-            <option value="knowledge">Knowledge</option>
-          </select>
+              {totalCurriculum > 0 ? (
+                <ol className={styles.resultList}>
+                  {curriculum.map((topic) => {
+                    const key = `topic:${topic.id}:${topic.grade_key}`;
+                    return (
+                      <li key={key}>
+                        <button
+                          type="button"
+                          className={selectedKey === key ? styles.selectedResult : styles.resultButton}
+                          onClick={() => setSelectedKey(key)}
+                          aria-pressed={selectedKey === key}
+                        >
+                          <span className={styles.resultType}>Topic</span>
+                          <span className={styles.resultBody}>
+                            <strong>{topic.lesson_topic}</strong>
+                            <span>{topic.skill_statement || "No topic summary has been reviewed yet."}</span>
+                            {topic.why_match ? <small>{topic.why_match}</small> : null}
+                          </span>
+                          <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                  {lessons.map((lesson) => {
+                    const key = `lesson:${lesson.id}`;
+                    return (
+                      <li key={key}>
+                        <button
+                          type="button"
+                          className={selectedKey === key ? styles.selectedResult : styles.resultButton}
+                          onClick={() => setSelectedKey(key)}
+                          aria-pressed={selectedKey === key}
+                        >
+                          <span className={styles.resultType}>Lesson draft</span>
+                          <span className={styles.resultBody}>
+                            <strong>{lesson.title}</strong>
+                            <span>{lesson.summary || "No lesson summary is available."}</span>
+                          </span>
+                          <span className={styles.resultMeta}>{lesson.grade_band}<br />{lesson.subject}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ) : (
+                <div className={styles.noCurriculum}>
+                  <strong>No curriculum topic matched this phrase.</strong>
+                  <span>The related resource matches below may still help you refine the search.</span>
+                </div>
+              )}
+            </aside>
 
-          <select
-            value={gradeFilter}
-            onChange={(e) => setGradeFilter(e.target.value)}
-            style={{ padding: "0.5rem", borderRadius: "0.375rem", border: "1px solid #ccc" }}
-          >
-            <option value="">All grades</option>
-            <option value="daycare">Daycare</option>
-            <option value="preschool">Preschool</option>
-            <option value="kindergarten">Kindergarten</option>
-            <option value="grade-1">Grade 1</option>
-            <option value="grade-2">Grade 2</option>
-            <option value="grade-3">Grade 3</option>
-          </select>
-        </div>
+            <aside className={styles.learningCrew} aria-label="Puddles and Rusty are excited to explore the curriculum">
+              <Image className={styles.crewTape} src="/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" alt="" width={68} height={68} />
+              <Image src="/icons/staff/puddles.png" alt="Puddles" width={118} height={118} />
+              <Image src="/icons/staff/rusty.png" alt="Rusty" width={118} height={118} />
+            </aside>
 
-        {/* Results */}
-        {searched && !loading && (
-          <div className="search-results">
-            {results.length === 0 && curriculum.length === 0 && lessons.length === 0 ? (
-              <p style={{ textAlign: "center", padding: "2rem", color: "#999" }}>
-                No results found. Try different keywords.
-              </p>
-            ) : (
-              <>
-                {results.length > 0 && (
-                  <p style={{ marginBottom: "1rem", color: "#666" }}>
-                    Found {results.length} song/knowledge results
-                  </p>
-                )}
+            <main className={styles.detailColumn}>
+              {selectedTopic || selectedLesson ? (
+                <>
+                  <article className={styles.detailSheet}>
+                    <Image className={styles.tape} src="/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" alt="" width={92} height={92} />
+                    <Image className={styles.paperclip} src="/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png" alt="" width={54} height={54} />
+                    <header className={styles.detailHeader}>
+                      <div>
+                        <p>{selectedTopic ? "Selected curriculum topic" : "Selected database lesson draft"}</p>
+                        <h2>{selectedTitle}</h2>
+                        <div className={styles.detailTags}>
+                          <span>{selectedTopic?.grade ?? selectedLesson?.grade_band}</span>
+                          <span>{selectedTopic?.subject ?? selectedLesson?.subject}</span>
+                          {selectedLesson ? <span>{selectedLesson.duration_minutes} minutes</span> : null}
+                        </div>
+                      </div>
+                      {topicFigure ? (
+                        <Image className={styles.topicFigure} src={topicFigure.src} alt={topicFigure.alt} width={154} height={154} />
+                      ) : null}
+                    </header>
 
-                {results.map((r) => (
-                  <div
-                    key={r.id}
-                    className="search-result-card"
-                    style={{
-                      border: "1px solid #e0e0e0",
-                      borderRadius: "0.5rem",
-                      padding: "1rem",
-                      marginBottom: "1rem",
-                      background: KIND_COLORS[r.kind] || "#fff",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.5rem" }}>
-                      <h3 style={{ fontFamily: "var(--font-farm-display)", fontSize: "1.2rem", margin: 0 }}>
-                        {KIND_LABELS[r.kind] || r.kind} {r.title}
-                      </h3>
-                      {r.meta?.ageRange && (
-                        <span style={{ fontSize: "0.85rem", color: "#666" }}>{r.meta.ageRange}</span>
+                    <div className={styles.factGrid}>
+                      <section>
+                        <h3>{selectedTopic ? "Topic overview" : "Lesson summary"}</h3>
+                        <p>{selectedTopic?.skill_statement || selectedLesson?.summary || "No reviewed overview is available for this record."}</p>
+                      </section>
+                      <section>
+                        <h3>{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
+                        <p>{selectedTopic ? `${selectedTopic.grade} · ${selectedTopic.subject}` : selectedLesson?.purpose || "No purpose is available."}</p>
+                      </section>
+                      <section>
+                        <h3>Related standards</h3>
+                        <p>{selectedTopic?.standards || "No standard is attached to this result."}</p>
+                      </section>
+                      <section>
+                        <h3>Search-related materials</h3>
+                        <ul>
+                          <li>{videos.length} video {videos.length === 1 ? "match" : "matches"}</li>
+                          <li>{songs.length} song or rhyme {songs.length === 1 ? "match" : "matches"}</li>
+                          <li>{printouts.length} printable {printouts.length === 1 ? "match" : "matches"}</li>
+                        </ul>
+                      </section>
+                    </div>
+
+                    <section className={styles.reviewStatus}>
+                      <h3>Source and review status</h3>
+                      {selectedLesson ? (
+                        <p>Editorial status: {readableStatus(selectedLesson.editorial_status)}. Review state: {readableStatus(selectedLesson.review_state)}.</p>
+                      ) : (
+                        <p>Review status is not stored on this curriculum topic record. Confirm the source and standard before classroom use.</p>
+                      )}
+                    </section>
+                  </article>
+
+                  <section className={styles.resourceShelf} aria-labelledby="resources-title">
+                    <div className={styles.tabList} role="tablist" aria-label="Teaching material previews">
+                      {(["video", "songs", "printouts"] as const).map((tab) => (
+                        <button
+                          key={tab}
+                          type="button"
+                          role="tab"
+                          aria-selected={activeTab === tab}
+                          className={activeTab === tab ? styles.activeTab : styles.tab}
+                          onClick={() => setActiveTab(tab)}
+                        >
+                          {tab === "songs" ? "Songs & Spotify" : tab[0].toUpperCase() + tab.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+                    <div className={styles.resourceContent} role="tabpanel">
+                      <h2 id="resources-title" className={styles.srOnly}>Search-related teaching materials</h2>
+                      {activeResources.length > 0 ? (
+                        <div className={styles.resourceGrid}>
+                          {activeResources.slice(0, 6).map((resource) => (
+                            <article key={resource.id} className={styles.resourceCard}>
+                              <p>{resource.kind}</p>
+                              <h3>{readableResourceTitle(resource.title)}</h3>
+                              <span>{plainText(resource.excerpt) || "No preview is available."}</span>
+                              {resource.meta.ageRange || resource.meta.domain ? (
+                                <span>{[readableMetadata(resource.meta.ageRange), readableMetadata(resource.meta.domain)].filter(Boolean).join(" · ")}</span>
+                              ) : null}
+                              {activeTab === "songs" && resource.lyrics ? (
+                                <details>
+                                  <summary>Preview lyrics</summary>
+                                  <pre>{resource.lyrics}</pre>
+                                </details>
+                              ) : null}
+                              {activeTab === "songs" && resource.meta.spotifyUrl?.startsWith("https://") ? (
+                                <a href={resource.meta.spotifyUrl} target="_blank" rel="noreferrer">Open Spotify source</a>
+                              ) : null}
+                            </article>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className={styles.resourceEmpty}>
+                          <strong>No {activeTab === "songs" ? "song or Spotify" : activeTab} preview is attached.</strong>
+                          <span>The database record is preserved, but this material type has not been linked or reviewed yet.</span>
+                        </div>
                       )}
                     </div>
-
-                    <p
-                      className="search-excerpt"
-                      dangerouslySetInnerHTML={{ __html: r.excerpt }}
-                      style={{ fontSize: "0.95rem", color: "#444", marginBottom: "0.5rem" }}
-                    />
-
-                    {r.lyrics && (
-                      <details style={{ marginBottom: "0.5rem" }}>
-                        <summary style={{ cursor: "pointer", fontWeight: 600, fontSize: "0.9rem" }}>
-                          🎵 Lyrics
-                        </summary>
-                        <pre style={{ whiteSpace: "pre-wrap", fontSize: "0.9rem", padding: "0.5rem", background: "rgba(255,255,255,0.6)", borderRadius: "0.25rem" }}>
-                          {r.lyrics}
-                        </pre>
-                      </details>
-                    )}
-
-                    {r.instructions && (
-                      <details style={{ marginBottom: "0.5rem" }}>
-                        <summary style={{ cursor: "pointer", fontWeight: 600, fontSize: "0.9rem" }}>
-                          ✋ Teaching Instructions
-                        </summary>
-                        <pre style={{ whiteSpace: "pre-wrap", fontSize: "0.9rem", padding: "0.5rem", background: "rgba(255,255,255,0.6)", borderRadius: "0.25rem" }}>
-                          {r.instructions}
-                        </pre>
-                      </details>
-                    )}
-
-                    <div style={{ fontSize: "0.8rem", color: "#999", marginTop: "0.5rem" }}>
-                      Source: {r.sourcePath}
-                    </div>
-                  </div>
-                ))}
-
-                {lessons.length > 0 && (
-                  <>
-                    <h2 style={{ fontFamily: "var(--font-farm-display)", marginTop: "2rem", marginBottom: "1rem" }}>
-                      Lesson drafts from the curriculum database
-                    </h2>
-                    {lessons.map((lesson) => (
-                      <article
-                        key={lesson.id}
-                        style={{
-                          border: "2px solid var(--brand-primary, #2d5a1f)",
-                          borderRadius: "0.75rem",
-                          padding: "1rem",
-                          marginBottom: "1rem",
-                          background: "#fffdf6",
-                        }}
-                      >
-                        <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
-                          <h3 style={{ margin: 0, fontFamily: "var(--font-farm-display)" }}>{lesson.title}</h3>
-                          <span style={{ color: "#666", fontSize: "0.9rem" }}>
-                            {lesson.grade_band} · {lesson.subject}
-                          </span>
-                        </div>
-                        <p style={{ margin: "0.75rem 0 0.5rem" }}>{lesson.summary}</p>
-                        <p style={{ margin: "0 0 0.75rem", color: "#555", fontSize: "0.92rem" }}>
-                          <strong>Teaching purpose:</strong> {lesson.purpose}
-                        </p>
-                        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", fontSize: "0.85rem", color: "#666" }}>
-                          <span>{lesson.duration_minutes} minutes</span>
-                          <span>{lesson.song_count} song links</span>
-                          <span>{lesson.resource_count} other resource links</span>
-                          <span>{lesson.review_state.replaceAll("_", " ")}</span>
-                        </div>
-                      </article>
-                    ))}
-                  </>
-                )}
-
-                {/* Curriculum topic results */}
-                {curriculum.length > 0 && (
-                  <>
-                    <h2 style={{ fontFamily: "var(--font-farm-display)", marginTop: "2rem", marginBottom: "1rem" }}>
-                      📋 Curriculum Topics
-                    </h2>
-                    {curriculum.map((t) => (
-                      <div
-                        key={t.id}
-                        style={{
-                          border: "1px solid #e0e0e0",
-                          borderRadius: "0.5rem",
-                          padding: "1rem",
-                          marginBottom: "0.5rem",
-                          background: "#fafafa",
-                        }}
-                      >
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                          <strong>{t.lesson_topic}</strong>
-                          <span style={{ fontSize: "0.85rem", color: "#666" }}>
-                            {t.grade} · {t.subject}
-                          </span>
-                        </div>
-                        {t.skill_statement && (
-                          <p style={{ fontSize: "0.9rem", color: "#555", margin: "0.25rem 0" }}>
-                            {t.skill_statement}
-                          </p>
-                        )}
-                        {t.standards && (
-                          <p style={{ fontSize: "0.8rem", color: "#999" }}>Standards: {t.standards}</p>
-                        )}
-                      </div>
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-          </div>
-        )}
-
-        {!searched && (
-          <div style={{ textAlign: "center", padding: "3rem", color: "#999" }}>
-            <p style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>Start typing to search</p>
-            <p style={{ fontSize: "0.9rem" }}>
-              Try: &quot;Humpty Dumpty&quot;, &quot;counting&quot;, &quot;baby bounce&quot;, &quot;fingerplay&quot;, &quot;circle game&quot;
-            </p>
+                  </section>
+                </>
+              ) : (
+                <section className={styles.resourceOnlyState}>
+                  <Image src="/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.png" alt="" width={64} height={64} />
+                  <h2>Related resources were found, but no curriculum topic matched.</h2>
+                  <p>Use a grade filter or a broader teaching goal to find a curriculum starting point.</p>
+                </section>
+              )}
+            </main>
           </div>
         )}
       </div>
