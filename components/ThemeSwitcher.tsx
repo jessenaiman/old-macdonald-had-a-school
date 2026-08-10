@@ -12,23 +12,23 @@ const THEMES = [
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
-  const currentIndex = Math.max(0, THEMES.findIndex((item) => item.value === theme));
-  const current = mounted ? THEMES[currentIndex] : THEMES[0];
-
-  function cycleTheme() {
-    setTheme(THEMES[(currentIndex + 1) % THEMES.length].value);
-  }
+  const currentTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "light";
 
   return (
-    <button
-      type="button"
-      className="theme-button"
-      onClick={cycleTheme}
-      aria-label={`Colour theme: ${current.label}. Activate to change theme.`}
-      title={`Colour theme: ${current.label}`}
-    >
-      <Image src={current.icon} alt="" width={28} height={28} loading="eager" aria-hidden="true" />
-      <span className="sr-only">{current.label}</span>
-    </button>
+    <div className="theme-switcher" role="group" aria-label="Colour theme">
+      {THEMES.map((item) => (
+        <button
+          type="button"
+          className="theme-choice"
+          onClick={() => setTheme(item.value)}
+          aria-pressed={currentTheme === item.value}
+          title={item.label}
+          key={item.value}
+        >
+          <Image src={item.icon} alt="" width={34} height={34} loading="eager" aria-hidden="true" />
+          <span className="sr-only">{item.label}</span>
+        </button>
+      ))}
+    </div>
   );
 }

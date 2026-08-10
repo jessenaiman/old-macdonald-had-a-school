@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${handFont.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${handFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body><ThemeProvider>{children}</ThemeProvider></body>
     </html>
   );

@@ -86,6 +86,10 @@ export async function GradeLessonPage({
                   <span aria-hidden="true" />
                   <span aria-hidden="true" />
                   <span aria-hidden="true" />
+                  <span aria-hidden="true" />
+                  <span aria-hidden="true" />
+                  <span aria-hidden="true" />
+                  <span aria-hidden="true" />
                 </article>
               ))}
             </div>

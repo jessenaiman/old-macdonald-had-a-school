@@ -100,7 +100,7 @@
 .teacherNotes > header { margin-bottom: 18px; color: #fff9eb; text-align: center; }
 .teacherNotes > header p { margin: 0; font-family: var(--font-hand), var(--font-display), cursive; font-size: 24px; line-height: 1; }
 .teacherNoteGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.teacherNote { position: relative; min-height: 206px; padding: 31px 18px 16px; border: 1px solid #dcc9a8; border-radius: 8px; background: #fffaf0 url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat; background-size: 280px; box-shadow: 3px 4px 0 #8d5c30; }
+.teacherNote { position: relative; min-height: 300px; padding: 31px 18px 16px; border: 1px solid #dcc9a8; border-radius: 8px; background: #fffaf0 url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat; background-size: 280px; box-shadow: 3px 4px 0 #8d5c30; }
 .teacherNote:nth-child(2) { transform: rotate(-.7deg); }
 .teacherNote:nth-child(3) { transform: rotate(.7deg); }
 .teacherNote img { position: absolute; top: -18px; left: 16px; object-fit: contain; transform: rotate(-8deg); }
@@ -152,4 +152,8 @@
   .lessonPage { display: block; width: 100%; margin: 0; border: 0; box-shadow: none; }
   .rail, .bottomAction { display: none; }
   .lessonStage { padding: 0; }
+  .teacherNotes { break-before: page; min-height: 8in; margin-top: 0; box-shadow: none; }
+  .teacherNoteGrid { align-items: stretch; }
+  .teacherNote { min-height: 5.8in; break-inside: avoid; box-shadow: none; transform: none; }
+  .teacherNote span { height: .58in; }
 }
