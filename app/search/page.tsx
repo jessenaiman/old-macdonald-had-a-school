@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useCallback, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { SiteShell } from "../../components/SiteShell";
 import styles from "./SearchPage.module.css";
 
@@ -118,6 +118,7 @@ function isPrintout(result: SearchResult) {
 }
 
 export default function SearchPage() {
+  const initialSearchApplied = useRef(false);
   const [query, setQuery] = useState("");
   const [kindFilter, setKindFilter] = useState("");
   const [gradeFilter, setGradeFilter] = useState("");
@@ -130,8 +131,8 @@ export default function SearchPage() {
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const search = useCallback(async () => {
-    const cleanedQuery = query.trim();
+  const search = useCallback(async (requestedQuery?: string) => {
+    const cleanedQuery = (requestedQuery ?? query).trim();
     if (cleanedQuery.length < 2) return;
 
     setLoading(true);
@@ -168,6 +169,28 @@ export default function SearchPage() {
       setLoading(false);
     }
   }, [gradeFilter, kindFilter, query]);
+
+  useEffect(() => {
+    if (initialSearchApplied.current) return;
+
+    const initialQuery = new URLSearchParams(window.location.search).get("q")?.trim() ?? "";
+    if (initialQuery.length < 2) {
+      initialSearchApplied.current = true;
+      return;
+    }
+
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (cancelled) return;
+      initialSearchApplied.current = true;
+      setQuery(initialQuery);
+      void search(initialQuery);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [search]);
 
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

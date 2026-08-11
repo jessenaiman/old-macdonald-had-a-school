@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { lessonHref } from "@/lib/grade-routes";
 import styles from "./HomePage.module.css";
 
 export type WeeklyLesson = { slug: string; title: string; summary: string; grade: string };
@@ -21,13 +22,13 @@ export function WeeklyLessonList({ lessons, title, compact = false }: { lessons:
         {lessons.slice(0, 3).map((lesson) => (
           <li key={lesson.slug}>
             <span className={styles.noteIcon} aria-hidden="true">♪</span>
-            <Link href={`/lessons/${lesson.slug}`}>{lesson.title}</Link>
+            <Link href={lessonHref(lesson)}>{lesson.title}</Link>
             <p>{lesson.summary}</p>
             <span className={styles.gradeChips} aria-label={`Best for ${lesson.grade}`}>{gradeChips(lesson.grade).map((grade) => <b key={grade}>{grade}</b>)}</span>
           </li>
         ))}
       </ul>
-      <Link className={styles.weeklyMore} href="/lessons">See all new lessons <span aria-hidden="true">→</span></Link>
+      <Link className={styles.weeklyMore} href="/lessons">See all lessons <span aria-hidden="true">→</span></Link>
     </section>
   );
 }

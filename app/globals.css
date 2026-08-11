@@ -2082,6 +2082,8 @@ html.dark .site-review {
   padding: 0;
 }
 
+.site-review .site-grade-rail { display: none; }
+
 .site-review .site-footer-inner {
   width: min(1680px, calc(100% - 32px));
 }
@@ -2315,6 +2317,44 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   .site-review .site-mobile-actions {
     display: flex;
   }
+
+  .site-review .site-grade-rail {
+    position: sticky;
+    top: 76px;
+    z-index: 45;
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 8px 12px 11px;
+    background: #0b2342;
+    scrollbar-width: thin;
+  }
+
+  .site-review .site-grade-rail a {
+    flex: 1 0 112px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border: 2px solid rgba(255,248,226,.78);
+    border-radius: 9px;
+    color: #fff9e8;
+    background-color: var(--nav-grade-color);
+    background-image: var(--nav-grade-texture);
+    background-size: 140px;
+    background-blend-mode: soft-light;
+    box-shadow: inset 0 0 0 2px rgba(19,31,24,.24), 0 3px 0 var(--nav-grade-edge);
+    font-family: var(--font-farm-display), Georgia, serif;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .site-review .site-grade-rail a.is-active {
+    border-color: #f5d46f;
+    filter: brightness(1.08);
+  }
 }
 
 @media (max-width: 900px) {
@@ -2341,6 +2381,9 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
     width: calc(100% - 20px);
     min-height: 64px;
   }
+
+  .site-review .site-grade-rail { top: 64px; gap: 4px; padding-inline: 6px; }
+  .site-review .site-grade-rail a { min-width: 0; flex: 1 1 0; min-height: 34px; padding-inline: 3px; font-size: 8px; }
 
   .site-review .site-brand {
     min-width: 0;

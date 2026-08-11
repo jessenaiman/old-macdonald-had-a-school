@@ -8,11 +8,12 @@ export type ActivePage =
   | "daycare" | "pre-school" | "kindergarten" | "grade-one" | "grade-two";
 
 const FOOTER_TOPICS = [
-  { label: "Language & stories", href: "/topics?cluster=words" },
-  { label: "Numbers & making", href: "/topics?cluster=numbers" },
-  { label: "Music & movement", href: "/topics?cluster=music" },
-  { label: "Art & nature", href: "/topics?cluster=art" },
-  { label: "Routines & wellbeing", href: "/topics?cluster=heart" },
+  { label: "Language & literacy", href: "/search?q=language+literacy" },
+  { label: "Math", href: "/search?q=math+numeracy" },
+  { label: "Nature & science", href: "/search?q=science+nature" },
+  { label: "Music", href: "/search?q=music" },
+  { label: "The arts", href: "/search?q=arts+drama+creativity" },
+  { label: "Health & physical education", href: "/search?q=health+physical+education+movement" },
 ] as const;
 
 export type GradeNavigationItem = {
@@ -61,6 +62,14 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
         </div>
       </header>
 
+      <nav className="site-grade-rail" aria-label="Choose a grade">
+        {GRADE_NAV_ITEMS.map((grade) => (
+          <Link className={`site-nav-grade site-nav-grade-${grade.key}${active === grade.key ? " is-active" : ""}`} href={grade.href} aria-current={active === grade.key ? "page" : undefined} key={grade.key}>
+            {grade.label}
+          </Link>
+        ))}
+      </nav>
+
       <main className="site-page">{children}</main>
 
       <footer className="site-footer">
@@ -92,7 +101,7 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
           </nav>
           <div className="footer-tagline footer-felt-strip">
             <Image src="/design-assets/classroom-fasteners-v1/individual-icons/09-wooden-clothespin.png" alt="" width={38} height={38} />
-            <p>Rooted in play. Growing confident learners.</p>
+            <p>Sing together. Move together. Grow together.</p>
           </div>
         </div>
       </footer>
