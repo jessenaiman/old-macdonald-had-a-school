@@ -35,6 +35,8 @@ const TEACHER_GRADE_ITEMS = [
 ] as const;
 
 export function SiteShell({ children, active }: { children: React.ReactNode; active?: ActivePage }) {
+  const teacherMenuIsActive = TEACHER_GRADE_ITEMS.some((grade) => grade.key === active);
+
   return (
     <div className={`site-shell site-review site-chrome-home site-shell-${active ?? "page"}`}>
       <header className="site-header">
@@ -48,19 +50,19 @@ export function SiteShell({ children, active }: { children: React.ReactNode; act
           </Link>
 
           <nav className="site-nav-desktop" aria-label="Primary navigation">
-            <Link className={`site-nav-link${active === "lessons" ? " is-active" : ""}`} href="/lessons">Lessons</Link>
-            <Link className="site-nav-link" href="/#browse-by-subject">Subjects</Link>
+            <Link className={`site-nav-link${active === "lessons" ? " is-active" : ""}`} href="/lessons" aria-current={active === "lessons" ? "page" : undefined}>Lessons</Link>
+            <Link className={`site-nav-link${active === "topics" ? " is-active" : ""}`} href="/#browse-by-subject" aria-current={active === "topics" ? "page" : undefined}>Subjects</Link>
             <details className="site-teacher-menu">
-              <summary className="site-nav-link" role="button" aria-haspopup="menu">For Teachers</summary>
+              <summary className={`site-nav-link${teacherMenuIsActive ? " is-active" : ""}`} role="button" aria-haspopup="menu">For Teachers</summary>
               <nav aria-label="Grade destinations">
                 {TEACHER_GRADE_ITEMS.map((grade) => (
-                  <Link href={grade.href} key={grade.key}>{grade.label}</Link>
+                  <Link href={grade.href} key={grade.key} aria-current={active === grade.key ? "page" : undefined}>{grade.label}</Link>
                 ))}
               </nav>
             </details>
-            <Link className={`site-nav-link${active === "cast-guide" ? " is-active" : ""}`} href="/branding">Brand guide</Link>
-            <Link className={`site-nav-link${active === "about" ? " is-active" : ""}`} href="/about">About</Link>
-            <Link className={`site-nav-search${active === "search" ? " is-active" : ""}`} href="/search" aria-label="Search lessons"><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link>
+            <Link className={`site-nav-link${active === "cast-guide" ? " is-active" : ""}`} href="/branding" aria-current={active === "cast-guide" ? "page" : undefined}>Brand guide</Link>
+            <Link className={`site-nav-link${active === "about" ? " is-active" : ""}`} href="/about" aria-current={active === "about" ? "page" : undefined}>About</Link>
+            <Link className={`site-nav-search${active === "search" ? " is-active" : ""}`} href="/search" aria-label="Search lessons" aria-current={active === "search" ? "page" : undefined}><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link>
           </nav>
 
           <div className="site-desktop-theme"><ThemeSwitcher /></div>

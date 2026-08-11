@@ -2692,7 +2692,7 @@ html.dark .site-review {
   width: 100%;
   max-width: none;
   min-height: calc(100vh - 68px);
-  padding: 18px clamp(14px, 3vw, 42px) 38px;
+  padding: 18px clamp(14px, 3vw, 42px) 0;
 }
 
 .site-review .site-page:has(> .home-page) {
@@ -2774,7 +2774,7 @@ html.dark .site-review {
 .site-review [data-grade-template]:not([data-lesson-template]) {
   width: min(1680px, calc(100% - 24px));
   min-height: 0;
-  margin: 22px auto 54px;
+  margin: 22px auto 0;
   border-color: color-mix(in srgb, var(--review-paper-soft) 88%, transparent);
   background-color: var(--review-paper);
   box-shadow: var(--review-shadow);
@@ -2991,7 +2991,7 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   }
 
   .site-review .site-page {
-    padding: 8px 8px 24px;
+    padding: 8px 8px 0;
   }
 
   .site-review .site-page:has(> .home-page) {
@@ -3032,7 +3032,7 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 
   .site-review [data-grade-template]:not([data-lesson-template]) {
     width: 100%;
-    margin: 0 auto 30px;
+    margin: 0 auto;
     border-width: 3px;
     border-radius: 17px;
   }
@@ -3340,7 +3340,10 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 .site-review.site-chrome-home .site-nav-desktop .site-nav-link,
 .site-review.site-chrome-home .site-teacher-menu>summary { display:inline-flex;width:auto;min-height:40px;align-items:center;padding:3px 0;border:0;border-bottom:1px solid transparent;border-radius:0;color:#fff0d0;background:transparent;box-shadow:none;font:700 11px/1 Georgia,"Times New Roman",serif;text-shadow:none }
 .site-review.site-chrome-home .site-nav-desktop .site-nav-link:hover,
-.site-review.site-chrome-home .site-teacher-menu>summary:hover { color:#f1c95d;border-bottom-color:#f1c95d }
+.site-review.site-chrome-home .site-nav-desktop .site-nav-link.is-active,
+.site-review.site-chrome-home .site-teacher-menu>summary:hover,
+.site-review.site-chrome-home .site-teacher-menu>summary.is-active { color:#f1c95d;border-bottom-color:#f1c95d }
+.site-review.site-chrome-home .site-teacher-menu>nav a[aria-current="page"] { color:#7d243e;background:rgba(241,193,76,.2);font-weight:900 }
 .site-review.site-chrome-home .site-nav-search { display:inline-flex;width:auto;height:38px;align-items:center;gap:6px;padding-inline:7px;border-radius:999px;color:#fff0d0;font:700 11px/1 Georgia,serif;text-decoration:none }
 .site-review.site-chrome-home .site-nav-search svg { width:16px;height:16px;flex:0 0 auto }
 .site-review.site-chrome-home .site-desktop-theme { display:block }
