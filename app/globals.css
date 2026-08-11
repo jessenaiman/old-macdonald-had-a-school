@@ -1400,6 +1400,7 @@ a { color: inherit; }
   .footer-links { margin-top: 22px; }
   .footer-tagline { margin-top: 24px; }
 }
+
 @media (max-width: 430px) {
   .grade-card { min-height: 126px; }
   .subject-grid { gap: 10px; }
@@ -1433,6 +1434,471 @@ a { color: inherit; }
   a { color: inherit !important; text-decoration: none !important; }
   a[href]::after { content: " (" attr(href) ")"; font-size: 8px; overflow-wrap: anywhere; }
   .lp-print-url a::after { content: none; }
+}
+
+/* The grade rail is the lower edge of the held-page header at every viewport. */
+.site-review .site-grade-rail {
+  position: relative;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  width: min(1480px, calc(100% - 24px));
+  margin: 0 auto 12px;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 8px 12px 11px;
+  border: 2px solid #b58b4a;
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+  background: #0b2342 url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-size: 180px;
+  box-shadow: 0 5px 0 rgba(4, 15, 30, .46);
+}
+
+.site-review .site-grade-rail a {
+  flex: 1 0 112px;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border: 2px solid rgba(255,248,226,.78);
+  border-radius: 9px;
+  color: #fff9e8;
+  background-color: var(--nav-grade-color);
+  background-image: var(--nav-grade-texture);
+  background-size: 140px;
+  background-blend-mode: soft-light;
+  box-shadow: inset 0 0 0 2px rgba(19,31,24,.24), 0 3px 0 var(--nav-grade-edge);
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .site-review .site-grade-rail {
+    width: calc(100% - 10px);
+    margin-bottom: 8px;
+    padding: 6px;
+  }
+
+  .site-review .site-grade-rail a {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 34px;
+    padding-inline: 3px;
+    font-size: 8px;
+  }
+}
+
+/* Locked slim footer paired with the compact homepage cast strip. Keep this
+   final so the older shell explorations cannot enlarge it again. */
+.site-review .site-footer {
+  margin-top: 0;
+  min-height: 50px;
+  padding: 0;
+  border-top: 2px solid #d7aa36;
+  background: #082746 url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-size: 220px;
+}
+.site-review .footer-reference {
+  display: grid;
+  grid-template-columns: minmax(220px,1fr) auto minmax(90px,1fr);
+  width: min(1450px, calc(100% - 42px));
+  min-height: 50px;
+  align-items: center;
+  gap: 24px;
+  margin: 0 auto;
+  padding: 7px 0;
+}
+.site-review .footer-reference p { margin: 0; color: rgba(255,248,232,.9); font-size: 9px; }
+.site-review .footer-reference-links { display: flex; align-items: center; justify-content: center; gap: clamp(22px,4vw,54px); color: rgba(255,248,232,.9); font-size: 8px; }
+.site-review .footer-reference-links a { color: inherit; text-decoration: none; }
+.site-review .footer-reference-social { display: flex; justify-content: flex-end; gap: 18px; color: #fff8e8; }
+.site-review .footer-reference-social svg { width: 20px; height: 20px; }
+
+@media (max-width: 620px) {
+  .site-review .footer-reference { grid-template-columns: 1fr auto; width: calc(100% - 24px); gap: 8px 16px; padding-block: 9px; }
+  .site-review .footer-reference p { font-size: 8px; }
+  .site-review .footer-reference-links { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; gap: 18px; }
+  .site-review .footer-reference-social { grid-column: 2; grid-row: 1; }
+}
+
+/* Selected homepage shell: one compact stitched navy edge shared with the
+   homepage hero. Scoped to home so grade and lesson templates remain intact. */
+.site-review.site-shell-home {
+  background: #b98653 url("/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png") repeat;
+  background-size: 320px;
+}
+
+.site-review.site-shell-home .site-header {
+  position: relative;
+  top: auto;
+  z-index: 80;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: #082746;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 230px;
+  box-shadow: none;
+}
+
+.site-review.site-shell-home .site-header::after {
+  content: "";
+  position: absolute;
+  inset: 5px 8px;
+  border: 1px dashed rgba(224, 172, 70, .62);
+  pointer-events: none;
+}
+
+.site-review.site-shell-home .site-header-inner {
+  position: relative;
+  z-index: 1;
+  width: min(1390px, calc(100% - 40px));
+  min-height: 48px;
+  gap: 20px;
+}
+
+.site-review.site-shell-home .site-brand {
+  min-width: 300px;
+  gap: 9px;
+}
+
+.site-review.site-shell-home .site-brand img {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #e5bd55;
+  border-radius: 50%;
+}
+
+.site-review.site-shell-home .site-brand strong {
+  color: #fff0d0;
+  font: 700 16px/1 Georgia, "Times New Roman", serif;
+  letter-spacing: .015em;
+}
+
+.site-review.site-shell-home .site-brand small,
+.site-review.site-shell-home .site-brand-short { display: none; }
+
+.site-review.site-shell-home .site-nav-desktop {
+  display: flex !important;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(22px, 3vw, 50px);
+}
+
+.site-review.site-shell-home .site-nav-desktop .site-nav-link,
+.site-review.site-shell-home .site-teacher-menu > summary {
+  display: inline-flex;
+  width: auto;
+  min-height: 40px;
+  align-items: center;
+  padding: 3px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  color: #fff0d0;
+  background: transparent;
+  box-shadow: none;
+  font: 700 11px/1 Georgia, "Times New Roman", serif;
+  text-shadow: none;
+}
+
+.site-review.site-shell-home .site-nav-desktop .site-nav-link:hover,
+.site-review.site-shell-home .site-teacher-menu > summary:hover { color: #f1c95d; border-bottom-color: #f1c95d; }
+.site-review.site-shell-home .site-nav-search { display: grid; width: 38px; height: 38px; place-items: center; color: #fff0d0; }
+.site-review.site-shell-home .site-nav-search svg { width: 16px; height: 16px; }
+.site-review.site-shell-home .site-desktop-theme { display: block; }
+.site-review.site-shell-home .site-mobile-actions { display: none; }
+.site-review.site-shell-home .theme-switcher { width: 36px; min-width: 36px; height: 36px; min-height: 36px; padding: 2px; border: 0; border-radius: 50%; background: transparent; box-shadow: none; }
+.site-review.site-shell-home .theme-switcher img { width: 31px; height: 31px; }
+.site-review.site-shell-home .site-grade-rail { display: none !important; }
+.site-review.site-shell-home .site-page { width: 100%; max-width: none; padding: 0; }
+
+.site-review.site-shell-home .site-footer {
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid rgba(224, 172, 70, .7);
+  background-color: #082746;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 230px;
+}
+
+.site-review.site-shell-home .footer-reference {
+  grid-template-columns: minmax(210px,1fr) auto minmax(80px,1fr);
+  width: min(1390px, calc(100% - 48px));
+  min-height: 44px;
+  gap: 20px;
+  padding: 6px 0;
+}
+.site-review.site-shell-home .footer-reference p,
+.site-review.site-shell-home .footer-reference-links { color: #fff0d0; font: 400 9px/1.2 Georgia, serif; }
+.site-review.site-shell-home .footer-reference-social svg { width: 17px; height: 17px; }
+
+.site-review.site-shell-home .site-mobile-search {
+  display: grid;
+  min-width: 44px;
+  min-height: 44px;
+  place-items: center;
+  color: #fff0d0;
+  font: 700 8px/1 Georgia, serif;
+  text-decoration: none;
+}
+.site-review.site-shell-home .site-mobile-search svg { width: 18px; height: 18px; }
+.site-review.site-shell-home .site-mobile-search span { margin-top: -7px; }
+
+@media (max-width: 1000px) {
+  .site-review.site-shell-home .site-header-inner { min-height: 64px; }
+  .site-review.site-shell-home .site-nav-desktop,
+  .site-review.site-shell-home .site-desktop-theme { display: none !important; }
+  .site-review.site-shell-home .site-mobile-actions { display: flex; align-items: center; gap: 7px; margin-left: auto; }
+  .site-review.site-shell-home .site-mobile-menu-trigger { min-width: 76px; min-height: 44px; padding: 4px 10px; border: 0; border-radius: 0; color: #fff0d0; background: transparent; box-shadow: none; font: 700 11px/1 Georgia, serif; }
+  .site-review.site-shell-home .site-mobile-menu-trigger svg { color: #fff0d0; }
+  .site-review.site-shell-home .site-mobile-menu > nav { top: 66px; }
+}
+
+@media (max-width: 620px) {
+  .site-review.site-shell-home .site-header-inner { width: calc(100% - 18px); min-height: 62px; gap: 5px; }
+  .site-review.site-shell-home .site-brand { min-width: 0; gap: 6px; }
+  .site-review.site-shell-home .site-brand img { width: 38px; height: 38px; }
+  .site-review.site-shell-home .site-brand strong { display: block; max-width: 142px; font-size: 13px; line-height: 1.05; }
+  .site-review.site-shell-home .site-mobile-actions { gap: 1px; }
+  .site-review.site-shell-home .site-mobile-search { min-width: 40px; }
+  .site-review.site-shell-home .site-mobile-menu-trigger { min-width: 58px; padding-inline: 5px; }
+  .site-review.site-shell-home .site-mobile-menu-trigger span { font-size: 9px; }
+  .site-review.site-shell-home .theme-switcher { width: 40px; min-width: 40px; height: 44px; min-height: 44px; }
+  .site-review.site-shell-home .footer-reference { grid-template-columns: 1fr auto; width: calc(100% - 24px); gap: 7px 12px; padding-block: 8px; }
+  .site-review.site-shell-home .footer-reference p { font-size: 8px; }
+  .site-review.site-shell-home .footer-reference-links { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; gap: 15px; font-size: 8px; }
+  .site-review.site-shell-home .footer-reference-social { grid-column: 2; grid-row: 1; }
+}
+
+/* Final cascade lock for the selected stitched frame. */
+.site-review .site-header {
+  position: relative;
+  top: auto;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-bottom: 2px solid rgba(234,174,44,.62);
+  border-radius: 0 0 10px 10px;
+  background-color: #082746;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 230px;
+  box-shadow: 0 6px 0 rgba(55,36,20,.27);
+  backdrop-filter: none;
+}
+.site-review .site-header-inner { width: min(1450px,calc(100% - 42px)); min-height: 88px; gap: 20px; }
+.site-review .site-brand { min-width: 360px; gap: 12px; }
+.site-review .site-brand img { width: 54px; height: 54px; border: 1px solid #f4d37b; }
+.site-review .site-brand strong { color:#fff8e9; font-family:var(--font-farm-display),Georgia,serif; font-size:22px; letter-spacing:.035em; }
+.site-review .site-brand small { margin-top:5px; color:#e4aa29; font-size:10px; letter-spacing:.24em; }
+.site-review .site-brand-short { display:none; }
+.site-review .site-nav-desktop { display:flex !important; flex:1 1 auto; align-items:center; justify-content:flex-end; gap:clamp(22px,3.5vw,56px); }
+.site-review .site-nav-desktop .site-nav-link,
+.site-review .site-teacher-menu > summary { display:inline-flex; width:auto; min-height:44px; align-items:center; justify-content:center; padding:5px 0; border:0; border-bottom:2px solid transparent; border-radius:0; color:#fff8e9; background:transparent; box-shadow:none; font-family:var(--font-body),sans-serif; font-size:13px; font-weight:650; text-shadow:none; }
+.site-review .site-nav-desktop .site-nav-link:hover,
+.site-review .site-nav-desktop .site-nav-link.is-active,
+.site-review .site-teacher-menu > summary:hover { color:#f1c95d; border-bottom-color:#f1c95d; filter:none; transform:none; }
+.site-review .site-desktop-theme { display:block; }
+.site-review .site-mobile-actions { display:none; }
+.site-review .site-grade-rail { display:none !important; }
+.site-review .theme-switcher { display:grid; width:42px; min-width:42px; height:42px; min-height:42px; place-items:center; padding:3px; border:0; border-radius:50%; background:transparent; box-shadow:none; }
+.site-review .theme-switcher img { width:35px; height:35px; }
+.site-review .site-footer { padding-top:8px; border-top:2px solid rgba(234,174,44,.58); background-color:#082746; background-image:url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png"); background-size:230px; }
+.site-review .footer-compact { position:relative; z-index:1; grid-template-columns:1fr 2fr; width:min(1450px,calc(100% - 42px)); gap:22px; padding:14px 0 8px; }
+.site-review .footer-compact-links { justify-content:flex-end; }
+
+@media (max-width: 980px) {
+  .site-review .site-header-inner { min-height:76px; }
+  .site-review .site-brand { min-width:300px; }
+  .site-review .site-brand strong { font-size:18px; }
+  .site-review .site-nav-desktop { gap:18px; }
+  .site-review .site-nav-desktop .site-nav-link,
+  .site-review .site-teacher-menu > summary { font-size:11px; }
+}
+
+@media (max-width: 820px) {
+  .site-review .site-nav-desktop,
+  .site-review .site-desktop-theme { display:none !important; }
+  .site-review .site-mobile-actions { display:flex; align-items:center; gap:7px; }
+  .site-review .site-header { width:100%; margin:0; border-radius:0 0 8px 8px; }
+  .site-review .site-header-inner { width:calc(100% - 24px); min-height:72px; }
+  .site-review .site-brand { min-width:0; }
+  .site-review .site-mobile-menu > nav { top:76px; }
+}
+
+@media (max-width: 520px) {
+  .site-review .site-brand img { width:44px; height:44px; }
+  .site-review .site-brand strong { font-size:15px; }
+  .site-review .site-brand small { font-size:7px; }
+  .site-review .footer-compact { grid-template-columns:1fr; width:calc(100% - 24px); }
+  .site-review .footer-compact-links { justify-content:flex-start; }
+}
+
+/* Homepage shell corrections: one grouped menu, one theme patch, and the
+   compact stitched footer shown in the supplied responsive references. */
+.site-review .site-nav-dropdown {
+  position: relative;
+  display: block;
+}
+.site-review .site-nav-dropdown > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.site-review .site-nav-dropdown > summary::-webkit-details-marker { display: none; }
+.site-review .site-nav-dropdown > summary span:last-child { margin-left: 5px; font-size: 11px; }
+.site-review .site-nav-dropdown-panel {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 10px);
+  left: 50%;
+  display: grid;
+  min-width: 174px;
+  gap: 6px;
+  padding: 8px;
+  border: 3px solid #8b572d;
+  border-radius: 11px;
+  background: #8f633d url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png") repeat;
+  background-size: 240px;
+  box-shadow: 0 8px 18px rgba(3,13,28,.35);
+  transform: translateX(-50%);
+}
+.site-review .site-nav-dropdown-panel a {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,248,226,.7);
+  border-radius: 8px;
+  color: #fff8e8;
+  background: #55705a url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png") repeat;
+  background-size: 120px;
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 11px;
+  font-weight: 800;
+}
+.site-review .site-nav-dropdown-panel a:hover,
+.site-review .site-nav-dropdown-panel a:focus-visible { border-color: #f5d46f; filter: brightness(1.08); }
+.site-review .site-nav-grade-early-years { --nav-grade-color: #26746c !important; --nav-grade-edge: #164a4a !important; --nav-grade-texture: url("/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png") !important; }
+
+/* The shell is one held page frame: header row, attached grade rail, content,
+   then a dark stitched footer edge. */
+.site-review .site-header {
+  position: relative;
+  width: min(1480px, calc(100% - 24px));
+  margin: 6px auto 0;
+  border: 2px solid #d8ab37;
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+  background: #0b1a33 url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png") repeat;
+  background-size: 220px;
+  box-shadow: 0 5px 0 rgba(4,14,30,.4);
+}
+.site-review .site-header-inner { width: calc(100% - 20px); min-height: 62px; }
+.site-review .site-nav-desktop { display: none !important; }
+.site-review .site-mobile-actions { display: flex; margin-left: auto; }
+.site-review .site-grade-rail {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  width: min(1480px, calc(100% - 24px));
+  gap: 7px;
+  margin: 0 auto;
+  padding: 8px 12px 11px;
+  border: 2px solid #0d3153;
+  border-top: 0;
+  border-radius: 0 0 7px 7px;
+  background: #0b294a url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-size: 180px;
+  box-shadow: 0 5px 0 rgba(4,14,30,.4);
+}
+.site-review .site-grade-rail a { flex: 1 1 0; min-height: 38px; }
+
+.site-review .footer-compact {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px 24px;
+  padding: 11px 14px 0;
+}
+.site-review .footer-compact-brand { display: flex; align-items: center; gap: 8px; color: #fff7df; }
+.site-review .footer-compact-brand img { width: 34px; height: 34px; border: 1px solid #f0d37b; border-radius: 50%; }
+.site-review .footer-compact-brand strong { display: block; font-family: var(--font-farm-display), Georgia, serif; font-size: 13px; }
+.site-review .footer-compact-brand small { display: block; margin-top: 2px; color: #e7bd45; font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; }
+.site-review .footer-compact-links { display: flex; align-items: center; justify-content: flex-end; gap: 16px; flex-wrap: wrap; }
+.site-review .footer-compact-links a { color: #fff7df; font-size: 9px; font-weight: 800; }
+.site-review .footer-compact-links a:hover { color: #f0c95c; }
+.site-review .footer-compact .footer-bottom { grid-column: 1 / -1; display: flex; justify-content: space-between; padding: 8px 0 9px; border-top: 1px dashed rgba(255,255,255,.22); color: rgba(255,247,229,.78); font-size: 8px; }
+.site-review .footer-compact .footer-bottom span:last-child { color: #f0c95c; font-family: var(--font-farm-hand), "Segoe Print", cursive; font-size: 11px; }
+
+.site-review .theme-switcher {
+  display: grid;
+  width: 46px;
+  min-width: 46px;
+  height: 44px;
+  min-height: 44px;
+  padding: 3px;
+  place-items: center;
+  border: 2px solid rgba(255,248,226,.72);
+  border-radius: 14px;
+  color: transparent;
+  background: #68462f url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png") repeat;
+  background-size: 150px;
+  box-shadow: inset 0 0 0 2px rgba(35,22,12,.24), 0 3px 0 #4a301f;
+  cursor: pointer;
+}
+.site-review .theme-switcher img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 2px 1px rgba(0,0,0,.32)); }
+.site-review .theme-switcher:hover { transform: translateY(-1px) rotate(-3deg); }
+.site-review .theme-switcher:focus-visible { outline: 3px solid #fff4b6; outline-offset: 3px; }
+
+.site-review .site-mobile-menu-group { display: block; }
+.site-review .site-mobile-menu-group > summary {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  cursor: pointer;
+}
+.site-review .site-mobile-menu-group > summary::-webkit-details-marker { display: none; }
+.site-review .site-mobile-menu-group > summary span { margin-left: 7px; }
+.site-review .site-mobile-menu-group > div { display: grid; gap: 7px; padding: 7px 0 0 14px; }
+
+.site-review .site-footer {
+  margin-top: 0;
+  border-top: 3px solid #d7aa36;
+  background: #071f3b url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png") repeat;
+  background-size: 220px;
+}
+.site-review .site-footer-inner { padding-top: 13px; padding-bottom: 0; }
+.site-review .footer-cast-footer { gap: 10px; }
+.site-review .footer-cast { padding-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,.24); }
+.site-review .footer-cast-member { grid-template-columns: 48px minmax(0,1fr); gap: 8px; padding: 0 11px; }
+.site-review .footer-cast-member:first-child { padding-left: 0; }
+.site-review .footer-cast-badge { width: 48px; height: 48px; border-width: 2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.16), 0 3px 0 rgba(0,0,0,.28); }
+.site-review .footer-cast-member strong { font-size: 12px; }
+.site-review .footer-cast-member small { margin-top: 3px; font-size: 8px; }
+.site-review .footer-desktop-links { gap: 18px; }
+.site-review .footer-link-group { gap: 6px 13px; }
+.site-review .footer-link-group strong { font-size: 14px; }
+.site-review .footer-link-group a { font-size: 9px; }
+.site-review .footer-bottom { padding: 9px 0 10px; font-size: 8px; }
+.site-review .footer-bottom span:last-child { font-size: 11px; }
+
+@media (max-width: 760px) {
+  .site-review .site-nav-dropdown-panel { display: none; }
+  .site-review .site-footer-inner { padding-top: 10px; }
+  .site-review .footer-cast { row-gap: 9px; padding-bottom: 10px; }
+  .site-review .footer-cast-member { grid-template-columns: 42px minmax(0,1fr); gap: 6px; padding-inline: 6px; }
+  .site-review .footer-cast-badge { width: 42px; height: 42px; }
+  .site-review .footer-cast-member strong { font-size: 10px; }
+  .site-review .footer-cast-member small { font-size: 7px; }
+  .site-review .footer-bottom { padding: 8px 0 9px; }
 }
 
 /* Shared Figma chrome and homepage alignment. Keep this block together so the
@@ -1876,6 +2342,153 @@ a { color: inherit; }
 .grade-one-template { --green: #c9527a; --green-dark: #8c304e; --grade-accent: #c9527a; --grade-dark: #8c304e; --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png"); }
 .grade-kindergarten-template { --green: #2c6c9b; --green-dark: #1d4c70; --grade-accent: #2c6c9b; --grade-dark: #1d4c70; --grade-felt: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png"); }
 
+/* Selected homepage frame: one stitched navy header and footer, with plain
+   editorial navigation instead of the earlier floating felt-button rail. */
+.site-review .site-header {
+  position: relative;
+  top: auto;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-bottom: 2px solid rgba(234, 174, 44, .62);
+  border-radius: 0 0 10px 10px;
+  background-color: #082746;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 230px;
+  box-shadow: 0 6px 0 rgba(55, 36, 20, .27);
+  backdrop-filter: none;
+}
+
+.site-review .site-header::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px dashed rgba(231, 173, 52, .52);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.site-review .site-header-inner {
+  position: relative;
+  z-index: 1;
+  width: min(1450px, calc(100% - 42px));
+  min-height: 88px;
+  gap: 20px;
+}
+
+.site-review .site-brand { min-width: 360px; gap: 12px; }
+.site-review .site-brand img { width: 54px; height: 54px; border: 1px solid #f4d37b; }
+.site-review .site-brand strong { color: #fff8e9; font-family: var(--font-farm-display), Georgia, serif; font-size: 22px; letter-spacing: .035em; }
+.site-review .site-brand small { margin-top: 5px; color: #e4aa29; font-size: 10px; letter-spacing: .24em; }
+.site-review .site-brand-short { display: none; }
+
+.site-review .site-nav-desktop { display: flex !important; flex: 1 1 auto; align-items: center; justify-content: flex-end; gap: clamp(22px, 3.5vw, 56px); }
+.site-review .site-nav-desktop .site-nav-link,
+.site-review .site-teacher-menu > summary {
+  display: inline-flex;
+  width: auto;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: #fff8e9;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  font-weight: 650;
+  text-shadow: none;
+}
+.site-review .site-nav-desktop .site-nav-link:hover,
+.site-review .site-nav-desktop .site-nav-link.is-active,
+.site-review .site-teacher-menu > summary:hover { color: #f1c95d; border-bottom-color: #f1c95d; filter: none; transform: none; }
+.site-review .site-teacher-menu { position: relative; }
+.site-review .site-teacher-menu > summary { list-style: none; cursor: pointer; }
+.site-review .site-teacher-menu > summary::-webkit-details-marker { display: none; }
+.site-review .site-teacher-menu > nav {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 8px);
+  left: 50%;
+  display: grid;
+  width: 210px;
+  padding: 11px;
+  border: 5px solid #8e5b31;
+  border-radius: 12px;
+  background: #b57a42 url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png") center/380px;
+  box-shadow: 0 10px 24px rgba(4,14,30,.34);
+  transform: translateX(-50%);
+}
+.site-review .site-teacher-menu:not([open]) > nav { display: none; }
+.site-review .site-teacher-menu > nav a { min-height: 38px; padding: 10px 12px; border-bottom: 1px solid rgba(87,52,23,.22); color: #143a38; background: rgba(255,248,231,.85); font-size: 11px; font-weight: 850; }
+.site-review .site-teacher-menu > nav a:last-child { border-bottom: 0; }
+.site-review .site-nav-search { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; color: #fff8e9; }
+.site-review .site-nav-search svg { width: 19px; height: 19px; }
+.site-review .site-nav-search:hover,
+.site-review .site-nav-search.is-active { color: #f1c95d; background: rgba(255,255,255,.08); }
+
+.site-review .site-desktop-theme { display: block; }
+.site-review .site-mobile-actions { display: none; margin-left: auto; }
+.site-review .theme-switcher {
+  display: grid;
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  min-height: 42px;
+  place-items: center;
+  padding: 3px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+.site-review .theme-switcher img { width: 35px; height: 35px; }
+
+.site-review .site-grade-rail { display: none !important; }
+.site-review .site-footer {
+  padding-top: 8px;
+  border-top: 2px solid rgba(234,174,44,.58);
+  background-color: #082746;
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 230px;
+}
+.site-review .site-footer::after { content: ""; position: absolute; inset: 7px; border: 1px dashed rgba(231,173,52,.42); border-radius: 8px; pointer-events: none; }
+.site-review .footer-compact { position: relative; z-index: 1; grid-template-columns: 1fr 2fr; width: min(1450px, calc(100% - 42px)); gap: 22px; padding: 14px 0 8px; }
+.site-review .footer-compact-links { justify-content: flex-end; }
+
+@media (max-width: 980px) {
+  .site-review .site-header-inner { min-height: 76px; }
+  .site-review .site-brand { min-width: 300px; }
+  .site-review .site-brand strong { font-size: 18px; }
+  .site-review .site-nav-desktop { gap: 18px; }
+  .site-review .site-nav-desktop .site-nav-link,
+  .site-review .site-teacher-menu > summary { font-size: 11px; }
+}
+
+@media (max-width: 820px) {
+  .site-review .site-nav-desktop,
+  .site-review .site-desktop-theme { display: none !important; }
+  .site-review .site-mobile-actions { display: flex; align-items: center; gap: 7px; }
+  .site-review .site-header { width: 100%; margin: 0; border-radius: 0 0 8px 8px; }
+  .site-review .site-header-inner { width: calc(100% - 24px); min-height: 72px; }
+  .site-review .site-brand { min-width: 0; }
+  .site-review .site-mobile-menu > nav { top: 76px; }
+}
+
+@media (max-width: 520px) {
+  .site-review .site-brand img { width: 44px; height: 44px; }
+  .site-review .site-brand strong { font-size: 15px; }
+  .site-review .site-brand small { font-size: 7px; }
+  .site-review .site-mobile-menu-trigger { min-width: 74px; padding-inline: 10px; }
+  .site-review .theme-switcher { width: 38px; min-width: 38px; height: 38px; min-height: 38px; }
+  .site-review .theme-switcher img { width: 31px; height: 31px; }
+  .site-review .footer-compact { grid-template-columns: 1fr; width: calc(100% - 24px); }
+  .site-review .footer-compact-links { justify-content: flex-start; }
+}
+
 
 /* Shared curriculum typography */
 /*
@@ -1973,46 +2586,50 @@ html.dark .site-review {
 /* One shared site frame owns navigation, width, rhythm, and footer behavior. */
 .site-review .site-header {
   position: sticky;
-  top: 0;
+  top: 8px;
   z-index: 50;
+  width: min(1480px, calc(100% - 20px));
+  margin: 8px auto 0;
+  border: 1px solid rgba(245, 212, 111, .72);
+  border-radius: 15px;
   background: color-mix(in srgb, var(--navy) 96%, transparent);
-  box-shadow: 0 4px 18px rgba(11, 26, 51, 0.16);
+  box-shadow: 0 7px 0 rgba(4, 14, 30, .3), 0 12px 28px rgba(11, 26, 51, .2);
   backdrop-filter: blur(12px);
 }
 
 .site-review .site-header-inner {
-  width: min(1760px, calc(100% - 32px));
-  min-height: 76px;
-  gap: clamp(14px, 1.5vw, 26px);
+  width: calc(100% - 20px);
+  min-height: 64px;
+  gap: clamp(10px, 1vw, 18px);
 }
 
 .site-review .site-brand {
   flex: 0 1 auto;
-  min-width: 248px;
+  min-width: 228px;
 }
 
 .site-review .site-nav-desktop {
   flex: 1 1 auto;
   justify-content: flex-end;
-  gap: 7px;
+  gap: 5px;
 }
 
 .site-review .site-nav-desktop .site-nav-link {
-  width: 106px;
-  min-height: 46px;
+  width: clamp(76px, 6.6vw, 94px);
+  min-height: 42px;
   justify-content: center;
   padding: 5px 8px;
   border: 2px solid rgba(255, 248, 226, .78);
   border-radius: 11px;
   font-family: var(--font-farm-display), Georgia, serif;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .01em;
   text-align: center;
 }
 
 .site-review .site-nav-desktop .site-nav-grade {
-  min-width: 106px;
+  min-width: 76px;
   background-color: var(--nav-grade-color);
   background-image: var(--nav-grade-texture);
   background-size: 150px;
@@ -2045,8 +2662,8 @@ html.dark .site-review {
   display: flex;
   align-items: center;
   gap: 3px;
-  min-height: 48px;
-  padding: 4px;
+  min-height: 44px;
+  padding: 3px;
   border: 2px solid rgba(255, 248, 226, .72);
   border-radius: 14px;
   background: #68462f url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png") repeat;
@@ -2057,8 +2674,8 @@ html.dark .site-review {
 .site-review .theme-choice {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   padding: 2px;
   border: 1px solid transparent;
   border-radius: 10px;
@@ -2066,7 +2683,7 @@ html.dark .site-review {
   cursor: pointer;
 }
 
-.site-review .theme-choice img { width: 31px; height: 31px; object-fit: contain; filter: drop-shadow(0 2px 1px rgba(0,0,0,.32)); }
+.site-review .theme-choice img { width: 29px; height: 29px; object-fit: contain; filter: drop-shadow(0 2px 1px rgba(0,0,0,.32)); }
 .site-review .theme-choice[aria-pressed="true"] { border-color: #fff4b6; background: rgba(255,255,255,.16); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
 .site-review .theme-choice:hover { transform: translateY(-1px) rotate(-3deg); }
 .site-review .theme-choice:focus-visible { outline: 3px solid #fff4b6; outline-offset: 3px; }
@@ -2082,81 +2699,63 @@ html.dark .site-review {
   padding: 0;
 }
 
+.site-review.site-shell-home .site-page {
+  min-height: 0;
+  padding: 0;
+  background: #071f3b url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-size: 240px;
+}
+
+/* Final selected-home material and compact mobile-header lock. */
+.site-review.site-shell-home :is(.site-header, .site-footer) {
+  background-color: #05192d;
+  background-blend-mode: multiply;
+}
+
+@media (max-width: 620px) {
+  .site-review.site-shell-home .site-brand { flex: 0 1 190px; }
+  .site-review.site-shell-home .site-brand > span { display: block !important; width: 140px; }
+  .site-review.site-shell-home .site-brand-full { display: block !important; }
+  .site-review.site-shell-home .site-brand strong { display: block !important; max-width: 140px; font-size: 12px; line-height: 1.05; white-space: normal; }
+  .site-review.site-shell-home .site-mobile-search { order: 1; }
+  .site-review.site-shell-home .site-mobile-menu { order: 2; }
+  .site-review.site-shell-home .theme-switcher { order: 3; }
+}
+
 .site-review .site-grade-rail { display: none; }
 
-.site-review .site-footer-inner {
-  width: min(1680px, calc(100% - 32px));
-}
+.site-review .site-footer-inner { width: min(1420px, calc(100% - 32px)); }
 
 .site-review .site-footer {
   position: relative;
-  margin-top: 36px;
-  padding: 34px 0 28px;
-  border-top: 9px solid #8b572d;
-  background: #b77b43 url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png") repeat;
-  background-size: 512px;
-  box-shadow: inset 0 4px 0 rgba(255, 226, 169, .32), 0 -8px 24px rgba(72, 43, 19, .15);
+  margin-top: 0;
+  padding: 22px 0 0;
+  border-top: 1px solid rgba(238, 174, 35, .48);
+  color: #fff7df;
+  background: #071f3b url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-size: 240px;
+  box-shadow: inset 0 4px 0 rgba(255,255,255,.03);
 }
 
-.site-review .footer-planning-tray {
-  display: grid;
-  grid-template-columns: minmax(260px, .9fr) minmax(360px, 1.35fr) minmax(300px, 1fr);
-  align-items: stretch;
-  gap: 24px;
-  padding: 0;
-}
+.site-review .footer-cast-footer { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.site-review .footer-cast { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-bottom: 1px solid rgba(255,255,255,.14); padding-bottom: 18px; }
+.site-review .footer-cast-member { display: grid; grid-template-columns: 68px minmax(0,1fr); gap: 11px; align-items: center; min-width: 0; padding: 0 18px; border-right: 1px solid rgba(255,255,255,.18); color: #fff5df; }
+.site-review .footer-cast-member:first-child { padding-left: 0; }
+.site-review .footer-cast-member:last-child { border-right: 0; }
+.site-review .footer-cast-badge { position: relative; display: block; overflow: hidden; width: 68px; height: 68px; border: 3px solid rgba(255,248,226,.78); border-radius: 50%; background-color: var(--staff-color); background-image: var(--staff-texture); background-size: 120px; background-blend-mode: soft-light; box-shadow: inset 0 0 0 2px rgba(0,0,0,.16), 0 4px 0 rgba(0,0,0,.28); }
+.site-review .footer-cast-badge img { object-fit: contain; transform: scale(.86); }
+.site-review .footer-cast-member strong { display: block; color: var(--sunlit); font-family: var(--font-farm-display), Georgia, serif; font-size: 15px; }
+.site-review .footer-cast-member small { display: block; margin-top: 5px; color: #fff7e5; font-size: 10px; line-height: 1.35; }
 
-.site-review .footer-card {
-  position: relative;
-  min-width: 0;
-  padding: 25px 24px 22px;
-  border: 1px solid rgba(86, 56, 27, .25);
-  border-radius: 10px;
-  color: #173552;
-  background: #fff9eb url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
-  background-size: 280px;
-  box-shadow: 4px 6px 0 rgba(95, 57, 24, .34), 0 12px 18px rgba(76, 44, 18, .14);
-}
-
-.site-review .footer-brand-card { transform: rotate(-.35deg); }
-.site-review .footer-grade-card { transform: rotate(.25deg); }
-.site-review .footer-tool-card { transform: rotate(-.2deg); }
-.site-review .footer-card-title { display: block; margin-bottom: 15px; color: #173552; font-family: var(--font-farm-hand), "Segoe Print", cursive; font-size: 21px; line-height: 1; }
-.site-review .footer-fastener { position: absolute; z-index: 2; object-fit: contain; filter: drop-shadow(0 2px 1px rgba(60,35,15,.28)); pointer-events: none; }
-.site-review .footer-paperclip { top: -18px; right: 18px; transform: rotate(12deg); }
-.site-review .footer-pin { top: -20px; left: calc(50% - 19px); }
-.site-review .footer-tape { top: -18px; right: 22px; transform: rotate(4deg); }
-.site-review .footer-brand { gap: 14px; }
-.site-review .footer-brand > img { width: 48px; height: 48px; }
-.site-review .footer-brand strong { color: #173552; font-family: var(--font-farm-display), Georgia, serif; font-size: 21px; font-style: normal; line-height: .9; }
-.site-review .footer-brand small { margin-top: 7px; color: #72583d; font-size: 9px; }
-.site-review .footer-brand-note { max-width: 320px; margin: 20px 0 0; color: #67543f; font-family: var(--font-farm-body), sans-serif; font-size: 12px; line-height: 1.5; }
-.site-review .footer-links { display: flex; flex-wrap: wrap; gap: 9px; margin: 0; }
-.site-review .footer-links a { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 7px 12px; border: 1px solid rgba(65,48,27,.2); border-radius: 8px; color: #173552; background: rgba(255,255,255,.48); font-family: var(--font-farm-body), sans-serif; font-size: 11px; font-weight: 850; text-decoration: none; }
-.site-review .footer-links a:hover { color: #173552; border-color: #b6882e; background: #fff3be; transform: translateY(-1px); }
-.site-review .footer-links a:focus-visible { outline: 3px solid #173552; outline-offset: 3px; }
-.site-review .footer-grade-links a { flex: 1 1 112px; }
-.site-review .footer-tool-links a { flex: 1 1 128px; }
-.site-review .footer-felt-strip {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: min(720px, calc(100% - 32px));
-  min-height: 62px;
-  margin: 4px auto 0;
-  padding: 10px 24px;
-  border: 2px solid rgba(255,248,226,.72);
-  border-radius: 12px;
-  color: #fff8e7;
-  background: #55705a url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png") repeat;
-  background-size: 190px;
-  box-shadow: inset 0 0 0 2px rgba(27,49,36,.3), 0 5px 0 #304c38;
-  transform: rotate(.2deg);
-}
-.site-review .footer-felt-strip img { width: 38px; height: 38px; object-fit: contain; transform: rotate(-7deg); }
-.site-review .footer-felt-strip p { margin: 0; color: inherit; font-family: var(--font-farm-hand), "Segoe Print", cursive; font-size: clamp(18px, 2vw, 24px); line-height: 1.05; white-space: normal; }
+.site-review .footer-desktop-links { display: grid; grid-template-columns: 1.5fr .75fr; gap: 30px; }
+.site-review .footer-link-group { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.site-review .footer-link-group strong { flex: 0 0 100%; color: var(--sunlit); font-family: var(--font-farm-hand), "Segoe Print", cursive; font-size: 17px; font-weight: 500; }
+.site-review .footer-link-group a { color: #fff7e5; font-size: 10px; font-weight: 800; text-decoration: underline; text-decoration-color: rgba(255,255,255,.25); text-underline-offset: 4px; }
+.site-review .footer-link-group a:hover { color: var(--sunlit); }
+.site-review .footer-link-group a:focus-visible, .site-review .footer-cast-member:focus-visible, .site-review .footer-mobile-links summary:focus-visible { outline: 3px solid #fff4b6; outline-offset: 3px; }
+.site-review .footer-mobile-links { display: none; }
+.site-review .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0 16px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,247,229,.65); font-size: 9px; }
+.site-review .footer-bottom span:last-child { color: #fff7df; font-family: var(--font-farm-hand), "Segoe Print", cursive; font-size: 13px; }
 
 /* Home remains the visual authority: improve fit without changing its artwork. */
 .site-review .home-page {
@@ -2246,19 +2845,22 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 88px;
-  min-height: 48px;
-  padding: 6px 15px;
-  border: 2px solid rgba(255,248,226,.72);
-  border-radius: 12px;
+  gap: 8px;
+  min-width: 92px;
+  min-height: 44px;
+  padding: 5px 15px;
+  border: 2px solid #f0c95c;
+  border-radius: 13px 13px 16px 11px;
   color: #fff8e8;
-  background: #725033 url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png") repeat;
+  background: #6c472f url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png") repeat;
   background-size: 150px;
-  box-shadow: inset 0 0 0 2px rgba(35,22,12,.24), 0 3px 0 #4a301f;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.08), 0 4px 0 #3f281b;
   font-family: var(--font-farm-display), Georgia, serif;
   font-size: 13px;
   font-weight: 700;
 }
+.site-review .site-mobile-menu-trigger svg { width: 18px; height: 18px; color: #f6d36c; }
+.site-review .site-mobile-menu-trigger:hover { filter: brightness(1.08); transform: translateY(-1px) rotate(-1deg); }
 
 .site-review .site-mobile-menu > nav {
   top: calc(100% + 12px);
@@ -2309,7 +2911,7 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 }
 
 /* Tablet: switch to the compact menu before the labelled grade patches crowd. */
-@media (max-width: 1360px) {
+@media (max-width: 1180px) {
   .site-review .site-nav-desktop {
     display: none;
   }
@@ -2320,7 +2922,7 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 
   .site-review .site-grade-rail {
     position: sticky;
-    top: 76px;
+    top: 80px;
     z-index: 45;
     display: flex;
     gap: 7px;
@@ -2367,22 +2969,21 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
     margin-top: 10px;
   }
 
-  .site-review .footer-planning-tray { grid-template-columns: 1fr 1fr; }
-  .site-review .footer-brand-card { grid-column: 1 / -1; }
+  .site-review .footer-cast { grid-template-columns: repeat(2,minmax(0,1fr)); row-gap: 16px; }
+  .site-review .footer-cast-member:nth-child(2) { border-right: 0; }
+  .site-review .footer-desktop-links { grid-template-columns: 1fr 1fr; }
 }
 
 /* Phone: keep the grade identity visible, then move quickly into choices. */
 @media (max-width: 760px) {
-  .site-review .site-header {
-    position: sticky;
-  }
+  .site-review .site-header { width: calc(100% - 10px); margin-top: 5px; border-radius: 12px 12px 0 0; }
 
   .site-review .site-header-inner {
     width: calc(100% - 20px);
     min-height: 64px;
   }
 
-  .site-review .site-grade-rail { top: 64px; gap: 4px; padding-inline: 6px; }
+  .site-review .site-grade-rail { top: 0; gap: 4px; padding-inline: 6px; }
   .site-review .site-grade-rail a { min-width: 0; flex: 1 1 0; min-height: 34px; padding-inline: 3px; font-size: 8px; }
 
   .site-review .site-brand {
@@ -2407,10 +3008,27 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
     overflow-y: auto;
   }
 
-  .site-review .footer-planning-tray { display: grid; grid-template-columns: 1fr; gap: 22px; }
-  .site-review .footer-brand-card { grid-column: auto; }
-  .site-review .footer-card { transform: none; }
-  .site-review .footer-felt-strip { grid-column: auto; width: 100%; padding-inline: 16px; }
+  .site-review .site-footer { padding-top: 0; }
+  .site-review .footer-compact { grid-template-columns: 1fr; gap: 8px; padding-inline: 10px; }
+  .site-review .footer-compact-links { justify-content: flex-start; gap: 8px 13px; }
+  .site-review .footer-compact .footer-bottom { grid-column: auto; display: grid; justify-items: center; gap: 5px; text-align: center; }
+  .site-review .footer-cast { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px 0; padding-bottom: 16px; }
+  .site-review .footer-cast-member { grid-template-columns: 50px minmax(0,1fr); gap: 8px; padding: 0 9px; }
+  .site-review .footer-cast-member:nth-child(odd) { padding-left: 0; }
+  .site-review .footer-cast-member:nth-child(even) { border-right: 0; }
+  .site-review .footer-cast-badge { width: 50px; height: 50px; border-width: 2px; }
+  .site-review .footer-cast-member strong { font-size: 12px; }
+  .site-review .footer-cast-member small { margin-top: 3px; font-size: 8px; }
+  .site-review .footer-desktop-links { display: none; }
+  .site-review .footer-mobile-links { display: grid; }
+  .site-review .footer-mobile-links details { border-bottom: 1px solid rgba(255,255,255,.18); }
+  .site-review .footer-mobile-links summary { min-height: 48px; display: flex; align-items: center; justify-content: space-between; color: #fff7df; font-family: var(--font-farm-display), Georgia, serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .site-review .footer-mobile-links summary::marker { color: var(--sunlit); }
+  .site-review .footer-mobile-links summary svg { width: 15px; height: 15px; color: var(--sunlit); transition: transform .18s ease; }
+  .site-review .footer-mobile-links details[open] summary svg { transform: rotate(180deg); }
+  .site-review .footer-mobile-links nav { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; padding: 0 0 12px; }
+  .site-review .footer-mobile-links a { display: flex; min-height: 38px; align-items: center; padding: 7px 9px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; color: #fff7df; background: rgba(255,255,255,.05); font-size: 9px; font-weight: 800; }
+  .site-review .footer-bottom { display: grid; justify-items: center; gap: 6px; text-align: center; }
 
   .site-review [data-grade-template]:not([data-lesson-template]) {
     width: 100%;
@@ -2515,4 +3133,431 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
     break-inside: avoid;
     box-shadow: none;
   }
+}
+
+/* Keep the grade destinations attached to the held-page header on desktop too. */
+.site-review .site-grade-rail {
+  position: relative;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  width: min(1480px, calc(100% - 24px));
+  margin: 0 auto 12px;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 8px 12px 11px;
+  border: 2px solid #b58b4a;
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+  background: #0b2342 url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-size: 180px;
+  box-shadow: 0 5px 0 rgba(4, 15, 30, .46);
+}
+
+.site-review .site-grade-rail a {
+  flex: 1 0 112px;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border: 2px solid rgba(255,248,226,.78);
+  border-radius: 9px;
+  color: #fff9e8;
+  background-color: var(--nav-grade-color);
+  background-image: var(--nav-grade-texture);
+  background-size: 140px;
+  background-blend-mode: soft-light;
+  box-shadow: inset 0 0 0 2px rgba(19,31,24,.24), 0 3px 0 var(--nav-grade-edge);
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .site-review .site-grade-rail {
+    width: calc(100% - 10px);
+    margin-bottom: 8px;
+    padding: 6px;
+  }
+
+  .site-review .site-grade-rail a {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 34px;
+    padding-inline: 3px;
+    font-size: 8px;
+  }
+}
+
+/* Final compact-footer cascade lock. */
+.site-review .site-footer {
+  margin-top: 0;
+  min-height: 50px;
+  padding: 0;
+  border-top: 2px solid #d7aa36;
+  background: #082746 url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-size: 220px;
+}
+.site-review .footer-reference {
+  display: grid;
+  grid-template-columns: minmax(220px,1fr) auto minmax(90px,1fr);
+  width: min(1450px, calc(100% - 42px));
+  min-height: 50px;
+  align-items: center;
+  gap: 24px;
+  margin: 0 auto;
+  padding: 7px 0;
+}
+.site-review .footer-reference p { margin: 0; color: rgba(255,248,232,.9); font-size: 9px; }
+.site-review .footer-reference-links { display: flex; align-items: center; justify-content: center; gap: clamp(22px,4vw,54px); color: rgba(255,248,232,.9); font-size: 8px; }
+.site-review .footer-reference-links a { color: inherit; text-decoration: none; }
+.site-review .footer-reference-social { display: flex; justify-content: flex-end; gap: 18px; color: #fff8e8; }
+.site-review .footer-reference-social svg { width: 20px; height: 20px; }
+
+@media (max-width: 620px) {
+  .site-review .footer-reference { grid-template-columns: 1fr auto; width: calc(100% - 24px); gap: 8px 16px; padding-block: 9px; }
+  .site-review .footer-reference p { font-size: 8px; }
+  .site-review .footer-reference-links { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; gap: 18px; }
+  .site-review .footer-reference-social { grid-column: 2; grid-row: 1; }
+}
+
+/* Final homepage search treatment follows the selected labeled desktop control. */
+.site-review.site-shell-home .site-nav-search {
+  display: inline-flex;
+  width: auto;
+  height: 38px;
+  align-items: center;
+  gap: 6px;
+  padding-inline: 7px;
+  border-radius: 999px;
+  color: #fff0d0;
+  font-family: Georgia, serif;
+  font-size: 11px;
+  text-decoration: none;
+}
+.site-review.site-shell-home .site-nav-search svg { flex: 0 0 auto; }
+
+/* Teacher-first mobile navigation: quiet paper index over the authored cork surface. */
+.site-review .site-mobile-menu > nav {
+  top: calc(100% + 10px);
+  right: 0;
+  display: grid;
+  width: min(390px, calc(100vw - 24px));
+  min-width: 0;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 11px;
+  border: 4px solid #8b572d;
+  border-radius: 14px;
+  background: url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png") repeat;
+  background-size: 512px;
+  box-shadow: inset 0 0 0 2px rgba(255,226,169,.3), 0 16px 32px rgba(2,12,25,.48);
+}
+
+.site-review .site-mobile-menu-heading {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px 9px;
+  border: 1px solid rgba(102,72,36,.34);
+  border-radius: 8px;
+  color: #173f4c;
+  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background-size: 220px;
+  box-shadow: 0 3px 0 rgba(72,45,22,.2);
+}
+
+.site-review .site-mobile-menu-heading strong {
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 18px;
+  line-height: 1.05;
+}
+
+.site-review .site-mobile-menu-heading span {
+  color: #5d523f;
+  font-family: var(--font-farm-body), sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.site-review .site-mobile-menu-links {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgba(102,72,36,.34);
+  border-radius: 8px;
+  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background-size: 220px;
+  box-shadow: 0 3px 0 rgba(72,45,22,.2);
+}
+
+.site-review .site-mobile-menu-links .site-nav-utility {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  border: 0;
+  border-bottom: 1px solid rgba(74,82,70,.18);
+  border-radius: 0;
+  color: #153f4e;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-farm-body), sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: left;
+  text-shadow: none;
+}
+
+.site-review .site-mobile-menu-links .site-nav-utility::after {
+  content: "→";
+  color: #a33b50;
+  font-size: 17px;
+}
+
+.site-review .site-mobile-menu-links .site-nav-utility:last-child { border-bottom: 0; }
+.site-review .site-mobile-menu-links .site-nav-utility:hover,
+.site-review .site-mobile-menu-links .site-nav-utility[aria-current="page"] {
+  color: #7d243e;
+  background: rgba(241,193,76,.18);
+}
+
+.site-review .site-mobile-menu-grades {
+  padding: 2px 1px 1px;
+}
+
+.site-review .site-mobile-menu-grades h2 {
+  margin: 0 0 7px;
+  padding-left: 4px;
+  color: #fff5d8;
+  font-family: var(--font-farm-hand), cursive;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+
+.site-review .site-mobile-menu-grades > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.site-review .site-mobile-menu-grades .site-nav-grade {
+  display: flex;
+  min-width: 0;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 8px;
+  border: 2px solid rgba(255,248,226,.78);
+  border-radius: 8px;
+  color: #fff9e8;
+  background-color: var(--nav-grade-color);
+  background-image: var(--nav-grade-texture);
+  background-size: 150px;
+  background-blend-mode: soft-light;
+  box-shadow: inset 0 0 0 2px rgba(19,31,24,.24), 0 3px 0 var(--nav-grade-edge);
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.05;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 1px rgba(0,0,0,.34);
+}
+
+.site-review .site-mobile-menu-grades .site-nav-grade-kindergarten { grid-column: 1 / -1; }
+.site-review .site-mobile-menu-grades .site-nav-grade:hover,
+.site-review .site-mobile-menu-grades .site-nav-grade[aria-current="page"] {
+  border-color: #f5d46f;
+  filter: brightness(1.08);
+}
+
+@media (max-width: 760px) {
+  .site-review .site-mobile-menu > nav {
+    position: fixed;
+    top: 74px;
+    right: 8px;
+    left: 8px;
+    width: auto;
+    max-height: calc(100dvh - 84px);
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-review .site-mobile-menu > nav {
+    top: 68px;
+    padding: 9px;
+  }
+
+  .site-review .site-mobile-menu-heading { padding-block: 8px; }
+  .site-review .site-mobile-menu-heading strong { font-size: 17px; }
+  .site-review .site-mobile-menu-links .site-nav-utility { min-height: 46px; font-size: 13px; }
+  .site-review .site-mobile-menu-grades .site-nav-grade { min-height: 44px; }
+}
+
+/* Branded shadcn Sheet composition for the global mobile menu. */
+[data-slot="sheet-overlay"] {
+  z-index: 90;
+  background: rgba(2, 12, 25, .68);
+  backdrop-filter: blur(2px);
+}
+
+.site-menu-sheet {
+  z-index: 100;
+  width: min(390px, 92vw) !important;
+  max-width: 390px !important;
+  gap: 0;
+  overflow-y: auto;
+  padding: 0;
+  border-left: 4px solid #8b572d;
+  color: #173b3a;
+  background: url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png") repeat;
+  background-size: 512px;
+  box-shadow: inset 2px 0 0 rgba(255,226,169,.32), -14px 0 30px rgba(2,12,25,.36);
+}
+
+.site-menu-sheet-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin: 12px;
+  padding: 15px 14px;
+  border: 1px solid rgba(102,72,36,.34);
+  border-radius: 9px;
+  color: #173f4c;
+  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background-size: 220px;
+  box-shadow: 0 4px 0 rgba(72,45,22,.22);
+}
+
+.site-menu-sheet-header [data-slot="sheet-title"] {
+  color: #173f4c;
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 21px;
+  line-height: 1.05;
+}
+
+.site-menu-sheet-header [data-slot="sheet-description"] {
+  margin-top: 4px;
+  color: #645747;
+  font-family: var(--font-farm-body), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.site-menu-sheet-close {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(18,59,74,.28);
+  color: #173f4c;
+  background: rgba(255,252,241,.62);
+}
+
+.site-menu-sheet-close:hover { background: rgba(241,193,76,.2); }
+
+.site-menu-sheet-links {
+  display: grid;
+  margin: 0 12px;
+  overflow: hidden;
+  border: 1px solid rgba(102,72,36,.34);
+  border-radius: 9px;
+  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background-size: 220px;
+  box-shadow: 0 4px 0 rgba(72,45,22,.22);
+}
+
+.site-menu-sheet-links [data-slot="button"] {
+  min-height: 50px;
+  justify-content: flex-start;
+  padding: 10px 15px;
+  border-radius: 0;
+  color: #173f4c;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-farm-body), sans-serif;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.site-menu-sheet-links [data-slot="button"] + [data-slot="button"] {
+  border-top: 1px solid rgba(74,82,70,.18);
+}
+
+.site-menu-sheet-links [data-slot="button"]::after {
+  content: "→";
+  margin-left: auto;
+  color: #a33b50;
+  font-size: 17px;
+}
+
+.site-menu-sheet-links [data-slot="button"]:hover,
+.site-menu-sheet-links [data-slot="button"][aria-current="page"] {
+  color: #7d243e;
+  background: rgba(241,193,76,.18);
+}
+
+.site-menu-sheet-separator {
+  height: 1px;
+  margin: 16px 12px 13px;
+  background: rgba(255,244,203,.72);
+}
+
+.site-menu-sheet-grades {
+  padding: 0 12px 18px;
+}
+
+.site-menu-sheet-grades h2 {
+  margin: 0 0 9px;
+  color: #fff5d8;
+  font-family: var(--font-farm-hand), cursive;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+
+.site-menu-sheet-grades > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.site-menu-sheet-grades [data-slot="button"] {
+  min-width: 0;
+  min-height: 48px;
+  padding: 7px 8px;
+  border: 2px solid rgba(255,248,226,.78);
+  border-radius: 8px;
+  color: #fff9e8;
+  background-color: var(--nav-grade-color);
+  background-image: var(--nav-grade-texture);
+  background-size: 150px;
+  background-blend-mode: soft-light;
+  box-shadow: inset 0 0 0 2px rgba(19,31,24,.24), 0 3px 0 var(--nav-grade-edge);
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.05;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0,0,0,.34);
+}
+
+.site-menu-sheet-grades [data-slot="button"].site-nav-grade-kindergarten {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 420px) {
+  .site-menu-sheet { width: 94vw !important; }
+  .site-menu-sheet-header { margin: 9px; padding: 12px; }
+  .site-menu-sheet-header [data-slot="sheet-title"] { font-size: 19px; }
+  .site-menu-sheet-links { margin-inline: 9px; }
+  .site-menu-sheet-links [data-slot="button"] { min-height: 48px; }
+  .site-menu-sheet-separator { margin-inline: 9px; }
+  .site-menu-sheet-grades { padding-inline: 9px; }
+  .site-menu-sheet-grades [data-slot="button"] { min-height: 46px; }
 }

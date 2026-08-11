@@ -1,14 +1,11 @@
-import { notFound, redirect } from "next/navigation";
-import { getLesson, getLessonSlugs } from "../../../lib/content";
-import { lessonHref } from "../../../lib/grade-routes";
+import { CurriculumLessonPage } from "../../../components/curriculum/CurriculumLessonPage";
+import { getAllCurriculumLessons } from "../../../lib/curriculum-lesson";
 
-export function generateStaticParams() {
-  return getLessonSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  return getAllCurriculumLessons().map((lesson) => ({ slug: lesson.slug }));
 }
 
-export default async function TopicPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const lesson = await getLesson(slug);
-  if (!lesson) notFound();
-  redirect(lessonHref(lesson.metadata));
+  return <CurriculumLessonPage slug={slug} />;
 }

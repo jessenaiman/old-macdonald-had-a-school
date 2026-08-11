@@ -23,4 +23,8 @@ test-results/
 # Local research corpus; agents curate selected publishable assets into public/.
 src/assets/early-years-music-resources/
 
+# Windows reserved device names that appear as phantom untracked files
+NUL
+$null
+
 .vercel

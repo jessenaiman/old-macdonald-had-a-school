@@ -14,21 +14,19 @@ export function ThemeSwitcher() {
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
   const currentTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "light";
 
+  const current = THEMES.find((item) => item.value === currentTheme) ?? THEMES[0];
+  const next = THEMES.find((item) => item.value !== current.value) ?? THEMES[0];
+
   return (
-    <div className="theme-switcher" role="group" aria-label="Colour theme">
-      {THEMES.map((item) => (
-        <button
-          type="button"
-          className="theme-choice"
-          onClick={() => setTheme(item.value)}
-          aria-pressed={currentTheme === item.value}
-          title={item.label}
-          key={item.value}
-        >
-          <Image src={item.icon} alt="" width={34} height={34} loading="eager" aria-hidden="true" />
-          <span className="sr-only">{item.label}</span>
-        </button>
-      ))}
-    </div>
+    <button
+      type="button"
+      className="theme-switcher"
+      onClick={() => setTheme(next.value)}
+      aria-label={`Switch to ${next.label}`}
+      title={`Switch to ${next.label}`}
+    >
+      <Image src={current.icon} alt="" width={34} height={34} loading="eager" aria-hidden="true" />
+      <span className="sr-only">{current.label}</span>
+    </button>
   );
 }

@@ -6,7 +6,8 @@
       "Bash(docker restart *)",
       "Bash(timeout *)",
       "Bash(node *)",
-      "Bash(docker logs *)"
+      "Bash(docker logs *)",
+      "Bash(cd *)"
     ]
   },
   "$version": 4

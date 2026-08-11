@@ -60,6 +60,68 @@ final result: passed
 
 ---
 
+# Responsive Bulletin-Board Homepage QA — 2026-08-11
+
+## Comparison target
+
+- Source visual truth: `C:/Users/jesse/AppData/Local/Temp/codex-clipboard-20992ca1-dc26-4040-bff0-b03fc038c400.png`
+- Approved concept: `qa/homepage-concepts/simplified-bulletin-board-responsive-v2.png`
+- Desktop implementation: `qa/homepage-runtime-final/desktop-1440x900-final.png`
+- Tablet implementation: `qa/homepage-runtime-final/tablet-768x1024-final.png`
+- Mobile implementation: `qa/homepage-runtime-final/mobile-390x844-compact-final.png`
+- Narrow safety capture: `qa/homepage-runtime-final/mobile-320x800-final.png`
+- Same-input comparison: `qa/homepage-runtime-final/comparison-reference-vs-runtime.png`
+- Route and state: `/`, first carousel slide, default theme
+- Browser viewports: 1440 x 900, 768 x 1024, 390 x 844, and 320 x 800 CSS pixels
+- Device scale: browser default 1x CSS pixel density
+
+## Full-view comparison evidence
+
+- [x] The existing interactive classroom carousel remains the hero visual; no simulated screenshot or CSS substitute is used.
+- [x] The navy shell, compact hero, cork bulletin board, six paper subject cards, notebook lesson strip, grade guide, utility links, and shared legal footer preserve the reference hierarchy.
+- [x] Desktop renders six subject cards in one row; tablet renders a 2 x 3 board; mobile renders one compact card per row.
+- [x] Every subject uses its authored stitched icon as the primary image.
+- [x] Every subject card uses one different transparent learner image on a full-width authored construction-paper texture band.
+- [x] Grade 1 and Grade 2 are separate cards. The grade guide follows `public/CAST_AND_ROLES.md`: Early Years uses Miss Puddles and Miss Maisy; Kindergarten uses Old MacDonald and Mr Rusty; Grade 1 uses Miss Hayley; Grade 2 uses Mr Maisy.
+- [x] No plain-color substitute replaces the woven, cork, cardboard, construction-paper, or grade-felt surfaces.
+- [x] The final 390px and 320px captures contain no visible overlapping text, clipped controls, or horizontal scroll.
+
+## Focused-region evidence
+
+- Hero: heading wraps cleanly at all four widths; the two mobile actions retain 44px minimum target height; carousel arrows retain 44px targets.
+- Subjects: long Language and Health titles remain contained; subject icons stay primary while learner characters stay secondary; textured bands span the full card width.
+- Responsive states: 1440 uses 6 columns, 768 uses 2 columns, and 390/320 use normal-flow single columns with no horizontal overflow.
+- Grade guide: Grade 1 and Grade 2 are independently addressable links and no teacher identity is duplicated.
+
+## Comparison history
+
+1. Baseline implementation preserved the correct components but used an oversized hero; the subject board did not enter the first mobile viewport. Result: blocked.
+2. Density pass reduced the desktop hero and card heights; desktop matched the reference hierarchy, while tablet and mobile still over-prioritized the carousel. Result: blocked.
+3. Breakpoint pass introduced the compact tablet crop, compact horizontal subject cards, and full-width learner bands. All six subjects became visible in the tablet board and the mobile weekly section begins immediately after the board. Result: passed.
+4. Final accessibility pass restored 44px hero-action and carousel-arrow targets, then rechecked 390px and 320px widths. Result: passed.
+
+## Runtime and source checks
+
+- [x] `http://localhost:3000/` returned the current homepage.
+- [x] Browser document width at 390px: `390:390`.
+- [x] Browser document width at 320px: `320:320`.
+- [x] Six subject links are present.
+- [x] Carousel next control changed the active image to `The farm-school class singing together`.
+- [x] `npm.cmd run typecheck`: passed.
+- [x] Focused ESLint on `HomePage.tsx`, `HomeCarousel.tsx`, and `WeeklyLessonList.tsx`: passed.
+- [x] `git diff --check` on the homepage scope: passed.
+- [ ] Repository-wide `npm.cmd run lint`: blocked by five unrelated pre-existing `no-explicit-any` errors in `lib/curriculum-lesson.ts` and `src/db/schema-sqlite.ts`, plus one unrelated warning in `components/curriculum/CurriculumLessonPage.tsx`.
+
+## Remaining P3 differences
+
+- The shared production header uses the site's current navigation labels rather than the generated mockup's illustrative labels.
+- Grade and utility sections remain in normal document flow below the first mobile viewport instead of shrinking teacher-facing text below a readable size.
+- The runtime uses the bundled project typography system; the generated reference's exact raster lettering is not reproduced as an image.
+
+final result: passed
+
+---
+
 # Locked Asset and Printable Planning Correction — CHANGES REQUIRED
 
 ## Comparison targets

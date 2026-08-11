@@ -6,6 +6,40 @@ const DB_PATH = process.env.OMHAS_DB_PATH
   ? path.resolve(process.env.OMHAS_DB_PATH)
   : path.join(process.cwd(), "data", "omhas.db");
 
+// ── Semantic search (lazy-loaded MiniLM embedder) ──────────────────────────
+
+let embedderPromise: Promise<{ embed: (text: string) => Promise<number[]> }> | null = null;
+
+async function getEmbedder() {
+  if (!embedderPromise) {
+    embedderPromise = (async () => {
+      const { pipeline, env } = await import("@xenova/transformers");
+      env.allowLocalModels = true;
+      env.allowRemoteModels = false;
+      env.localModelPath = path.join(process.cwd(), "node_modules", "@xenova", "transformers", ".cache");
+      const embedder = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
+      return {
+        async embed(text: string): Promise<number[]> {
+          const output = await embedder(text, { pooling: "mean", normalize: true });
+          return Array.from(output.data) as number[];
+        },
+      };
+    })();
+  }
+  return embedderPromise;
+}
+
+function cosineSimilarity(a: number[], b: number[]): number {
+  let dot = 0, normA = 0, normB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+  const denom = Math.sqrt(normA) * Math.sqrt(normB);
+  return denom === 0 ? 0 : dot / denom;
+}
+
 const STOP_WORDS = new Set([
   "a", "an", "and", "for", "from", "in", "of", "on", "the", "to", "with",
 ]);
@@ -145,8 +179,10 @@ export async function GET(req: NextRequest) {
       }));
 
     const ftsTerms = expanded.filter((term) => term.length > 1).slice(0, 18);
-    const resultRows = ftsTerms.length ? db.prepare(`
-      SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta,
+
+    // ── Keyword search (FTS5) ─────────────────────────────────────────────
+    const keywordRows = ftsTerms.length ? db.prepare(`
+      SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta, sc.embedding,
         snippet(search_chunks_fts, 4, '<mark>', '</mark>', '…', 20) AS excerpt,
         rank
       FROM search_chunks_fts
@@ -155,6 +191,80 @@ export async function GET(req: NextRequest) {
       ORDER BY rank
       LIMIT 40
     `).all(...(kind ? [makeFtsQuery(ftsTerms), kind] : [makeFtsQuery(ftsTerms)])) as Array<Record<string, unknown>> : [];
+
+    // ── Semantic search (embedding cosine similarity) ─────────────────────
+    let semanticRows: Array<Record<string, unknown>> = [];
+    let searchMode = "structured-keyword";
+
+    try {
+      const model = await getEmbedder();
+      const queryEmbedding = await model.embed(q);
+
+      // Fetch chunks with embeddings (broader candidate set for semantic)
+      const candidateRows = db.prepare(`
+        SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta, sc.embedding
+        FROM search_chunks sc
+        WHERE sc.embedding IS NOT NULL
+          ${kind ? "AND sc.kind = ?" : ""}
+      `).all(...(kind ? [kind] : [])) as Array<Record<string, unknown>>;
+
+      // Score each candidate by cosine similarity
+      const scored = candidateRows
+        .map((row) => {
+          let stored: number[] = [];
+          try { stored = JSON.parse(row.embedding as string); } catch { return null; }
+          if (!Array.isArray(stored) || stored.length !== 384 || typeof stored[0] !== "number") return null;
+          const semanticScore = cosineSimilarity(queryEmbedding, stored);
+          return { row, semanticScore };
+        })
+        .filter((item): item is { row: Record<string, unknown>; semanticScore: number } => item !== null)
+        .filter(({ semanticScore }) => semanticScore > 0.35)
+        .sort((a, b) => b.semanticScore - a.semanticScore)
+        .slice(0, 40);
+
+      semanticRows = scored.map(({ row, semanticScore }) => ({ ...row, semantic_score: semanticScore }));
+      if (semanticRows.length > 0) searchMode = "hybrid-keyword-semantic";
+    } catch (embedError) {
+      // Semantic search is best-effort — fall back to keyword-only
+      console.warn("Semantic search unavailable:", embedError instanceof Error ? embedError.message : String(embedError));
+    }
+
+    // ── Merge keyword + semantic results (deduplicated, hybrid-ranked) ────
+    const mergedMap = new Map<string, { row: Record<string, unknown>; keywordRank: number; semanticScore: number }>();
+
+    keywordRows.forEach((row, idx) => {
+      const id = row.id as string;
+      const existing = mergedMap.get(id);
+      if (existing) {
+        existing.keywordRank = Math.min(existing.keywordRank, idx);
+      } else {
+        mergedMap.set(id, { row, keywordRank: idx, semanticScore: 0 });
+      }
+    });
+
+    semanticRows.forEach((row) => {
+      const id = row.id as string;
+      const semanticScore = row.semantic_score as number;
+      const existing = mergedMap.get(id);
+      if (existing) {
+        existing.semanticScore = Math.max(existing.semanticScore, semanticScore);
+      } else {
+        mergedMap.set(id, { row, keywordRank: 999, semanticScore });
+      }
+    });
+
+    // Hybrid score: 0.5 keyword rank score + 0.5 semantic score
+    const maxKeywordRank = keywordRows.length || 1;
+    const merged = [...mergedMap.values()]
+      .map(({ row, keywordRank, semanticScore }) => {
+        const keywordScore = 1 - (keywordRank / maxKeywordRank);
+        const combinedScore = 0.5 * keywordScore + 0.5 * semanticScore;
+        return { row, combinedScore, semanticScore };
+      })
+      .sort((a, b) => b.combinedScore - a.combinedScore)
+      .slice(0, 40);
+
+    const resultRows = merged.map(({ row }) => row);
 
     const lessonQuery = `%${primary[0] ?? q.toLowerCase()}%`;
     const lessonResults = db.prepare(`
@@ -188,7 +298,7 @@ export async function GET(req: NextRequest) {
       curriculum: curriculumResults,
       lessons: lessonResults,
       total: results.length + curriculumResults.length + lessonResults.length,
-      searchMode: "structured-keyword",
+      searchMode,
       database: path.basename(DB_PATH),
     });
   } catch (error) {

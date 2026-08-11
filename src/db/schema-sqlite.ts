@@ -1,9 +1,158 @@
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
 
-// Main search_chunks table (SQLite version)
+// ─── Core curriculum (normalized) ──────────────────────────────────────────
+
+export const subjects = sqliteTable('SUBJECTS', {
+  id: integer('id').primaryKey(),
+  key: text('key').notNull(),
+  label: text('label').notNull(),
+  sortOrder: integer('sort_order'),
+});
+
+export const grades = sqliteTable('GRADES', {
+  id: integer('id').primaryKey(),
+  key: text('key').notNull(),
+  label: text('label').notNull(),
+  ageRange: text('age_range'),
+  sortOrder: integer('sort_order'),
+});
+
+export const topics = sqliteTable('TOPICS', {
+  id: integer('id').primaryKey(),
+  subjectId: integer('subject_id').references(() => subjects.id),
+  category: text('category'),
+  lessonTopic: text('lesson_topic').notNull(),
+  skillStatement: text('skill_statement'),
+  seqNum: real('seq_num'),
+  taught: text('taught'),
+  mergedIntoTopicId: integer('merged_into_topic_id').references((): any => topics.id),
+  circleTimeSlot: text('circle_time_slot'),
+});
+
+export const topicGrades = sqliteTable('TOPIC_GRADES', {
+  id: integer('id').primaryKey(),
+  topicId: integer('topic_id').notNull().references(() => topics.id),
+  gradeId: integer('grade_id').notNull().references(() => grades.id),
+});
+
+export const topicStandards = sqliteTable('TOPIC_STANDARDS', {
+  id: integer('id').primaryKey(),
+  topicId: integer('topic_id').notNull().references(() => topics.id),
+  standardId: integer('standard_id').notNull().references(() => standards.id),
+  alignmentNotes: text('alignment_notes'),
+});
+
+export const topicTags = sqliteTable('TOPIC_TAGS', {
+  id: integer('id').primaryKey(),
+  topicId: integer('topic_id').notNull().references(() => topics.id),
+  tagId: integer('tag_id').notNull().references(() => tags.id),
+});
+
+export const topicMaterials = sqliteTable('TOPIC_MATERIALS', {
+  id: integer('id').primaryKey(),
+  topicId: integer('topic_id').notNull().references(() => topics.id),
+  materialKind: text('material_kind').notNull(),
+  materialId: integer('material_id').notNull(),
+  role: text('role'),
+  useInPhase: text('use_in_phase'),
+  routineSlot: text('routine_slot'),
+  teacherRationale: text('teacher_rationale'),
+});
+
+export const weeklyPacing = sqliteTable('WEEKLY_PACING', {
+  id: integer('id').primaryKey(),
+  topicGradeId: integer('topic_grade_id').notNull().references(() => topicGrades.id),
+  weekNumber: integer('week_number').notNull(),
+  month: text('month'),
+  notes: text('notes'),
+});
+
+// ─── Standards & Tags ──────────────────────────────────────────────────────
+
+export const standards = sqliteTable('STANDARDS', {
+  id: integer('id').primaryKey(),
+  parentStandardId: integer('parent_standard_id').references((): any => standards.id),
+  framework: text('framework'),
+  code: text('code'),
+  fullText: text('full_text'),
+  source: text('source'),
+  externalId: text('external_id'),
+});
+
+export const tags = sqliteTable('TAGS', {
+  id: integer('id').primaryKey(),
+  parentTagId: integer('parent_tag_id').references((): any => tags.id),
+  name: text('name').notNull(),
+  definition: text('definition'),
+});
+
+// ─── Songs & Resources ─────────────────────────────────────────────────────
+
+export const songs = sqliteTable('SONGS', {
+  id: integer('id').primaryKey(),
+  songName: text('song_name').notNull(),
+  artist: text('artist'),
+  catalog: text('catalog'),
+  lyrics: text('lyrics'),
+  url: text('url'),
+  instructions: text('instructions'),
+  actions: text('actions'),
+  ageRange: text('age_range'),
+  sourceId: integer('source_id'),
+  verified: integer('verified'),
+  type: text('type'),
+  educationalDomain: text('educational_domain'),
+  materialsNeeded: text('materials_needed'),
+  tags: text('tags'),
+  creatorArtist: text('creator_artist'),
+  sourceTitle: text('source_title'),
+  curriculumLinks: text('curriculum_links'),
+  earlyYearsLinks: text('early_years_links'),
+  markdownPath: text('markdown_path'),
+});
+
+export const resources = sqliteTable('RESOURCES', {
+  id: integer('id').primaryKey(),
+  name: text('name'),
+  type: text('type'),
+  description: text('description'),
+  url: text('url'),
+  free: integer('free'),
+  paywalled: integer('paywalled'),
+  verified: integer('verified'),
+  sourceId: integer('source_id'),
+});
+
+export const materialTags = sqliteTable('MATERIAL_TAGS', {
+  id: integer('id').primaryKey(),
+  materialKind: text('material_kind').notNull(),
+  materialId: integer('material_id').notNull(),
+  tagId: integer('tag_id').notNull().references(() => tags.id),
+});
+
+export const materialRelations = sqliteTable('MATERIAL_RELATIONS', {
+  id: integer('id').primaryKey(),
+  fromKind: text('from_kind'),
+  fromId: integer('from_id'),
+  relationType: text('relation_type'),
+  toKind: text('to_kind'),
+  toId: integer('to_id'),
+});
+
+export const songCurriculumLinks = sqliteTable('song_curriculum_links', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  songId: integer('song_id').notNull().references(() => songs.id),
+  subject: text('subject').notNull(),
+  description: text('description').notNull(),
+  relevance: text('relevance'),
+  linkType: text('link_type').notNull().default('curriculum'),
+});
+
+// ─── Search index ──────────────────────────────────────────────────────────
+
 export const searchChunks = sqliteTable('search_chunks', {
-  id: text('id').primaryKey(), // UUID as text
+  id: text('id').primaryKey(),
   kind: text('kind').notNull(),
   sourcePath: text('source_path').notNull(),
   url: text('url').notNull(),
@@ -11,13 +160,38 @@ export const searchChunks = sqliteTable('search_chunks', {
   chunkText: text('chunk_text').notNull(),
   lyrics: text('lyrics'),
   instructions: text('instructions'),
-  embedding: text('embedding'), // JSON string of vector
-  meta: text('meta').default('{}'), // JSON string
+  embedding: text('embedding'),
+  meta: text('meta').default('{}'),
   createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
-// Curriculum topics table
+export const searchChunkSources = sqliteTable('search_chunk_sources', {
+  searchChunkId: text('search_chunk_id').notNull().references(() => searchChunks.id),
+  sourceDocumentId: integer('source_document_id').notNull().references(() => sourceDocuments.id),
+});
+
+export const sourceDocuments = sqliteTable('source_documents', {
+  id: integer('id').primaryKey(),
+  sourcePath: text('source_path').notNull(),
+  sourceKind: text('source_kind'),
+  reviewState: text('review_state'),
+  checksum: text('checksum'),
+  importedAt: text('imported_at'),
+});
+
+// curriculum_topic_songs: relevance mapping between topics and search chunks
+export const curriculumTopicSongs = sqliteTable('curriculum_topic_songs', {
+  id: text('id').primaryKey(),
+  curriculumTopicId: text('curriculum_topic_id').notNull(),
+  searchChunkId: text('search_chunk_id').notNull().references(() => searchChunks.id, { onDelete: 'cascade' }),
+  linkType: text('link_type'),
+  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+  topicId: integer('topic_id').references(() => topics.id),
+});
+
+// ─── Legacy flat curriculum (to be deprecated) ─────────────────────────────
+
 export const curriculumTopics = sqliteTable('curriculum_topics', {
   id: text('id').primaryKey(),
   gradeKey: text('grade_key').notNull(),
@@ -38,7 +212,8 @@ export const curriculumTopics = sqliteTable('curriculum_topics', {
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
-// Song actions table
+// ─── Song actions research ─────────────────────────────────────────────────
+
 export const songActions = sqliteTable('song_actions', {
   id: text('id').primaryKey(),
   songTitle: text('song_title').notNull(),
@@ -63,7 +238,23 @@ export const songActions = sqliteTable('song_actions', {
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
-// Research sources table
+export const songActionChunks = sqliteTable('song_action_chunks', {
+  id: text('id').primaryKey(),
+  songActionId: text('song_action_id').notNull().references(() => songActions.id, { onDelete: 'cascade' }),
+  searchChunkId: text('search_chunk_id').notNull().references(() => searchChunks.id, { onDelete: 'cascade' }),
+  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const actionVocabulary = sqliteTable('action_vocabulary', {
+  id: text('id').primaryKey(),
+  normalizedActionFamily: text('normalized_action_family').notNull(),
+  examples: text('examples'),
+  doNotUseAsProof: text('do_not_use_as_proof'),
+  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+// ─── Research tracking ─────────────────────────────────────────────────────
+
 export const researchSources = sqliteTable('research_sources', {
   id: text('id').primaryKey(),
   educatorOrg: text('educator_org').notNull(),
@@ -79,24 +270,6 @@ export const researchSources = sqliteTable('research_sources', {
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
-// Junction table: curriculum_topics ↔ search_chunks
-export const curriculumTopicSongs = sqliteTable('curriculum_topic_songs', {
-  id: text('id').primaryKey(),
-  curriculumTopicId: text('curriculum_topic_id').notNull().references(() => curriculumTopics.id, { onDelete: 'cascade' }),
-  searchChunkId: text('search_chunk_id').notNull().references(() => searchChunks.id, { onDelete: 'cascade' }),
-  linkType: text('link_type'),
-  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
-});
-
-// Junction table: song_actions ↔ search_chunks
-export const songActionChunks = sqliteTable('song_action_chunks', {
-  id: text('id').primaryKey(),
-  songActionId: text('song_action_id').notNull().references(() => songActions.id, { onDelete: 'cascade' }),
-  searchChunkId: text('search_chunk_id').notNull().references(() => searchChunks.id, { onDelete: 'cascade' }),
-  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
-});
-
-// Research queue table
 export const researchQueue = sqliteTable('research_queue', {
   id: text('id').primaryKey(),
   priority: integer('priority').notNull(),
@@ -111,11 +284,68 @@ export const researchQueue = sqliteTable('research_queue', {
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
-// Action vocabulary table
-export const actionVocabulary = sqliteTable('action_vocabulary', {
-  id: text('id').primaryKey(),
-  normalizedActionFamily: text('normalized_action_family').notNull(),
-  examples: text('examples'),
-  doNotUseAsProof: text('do_not_use_as_proof'),
+// ─── Import tracking ───────────────────────────────────────────────────────
+
+export const schemaMigrations = sqliteTable('schema_migrations', {
+  migrationId: text('migration_id').primaryKey(),
+  appliedAt: text('applied_at'),
+  omhasSha256: text('omhas_sha256'),
+  curriculumSha256: text('curriculum_sha256'),
+  generatedSha256: text('generated_sha256'),
+});
+
+export const importBatches = sqliteTable('import_batches', {
+  id: integer('id').primaryKey(),
+  migrationId: text('migration_id').references(() => schemaMigrations.migrationId),
+  sourceName: text('source_name'),
+  sourcePath: text('source_path'),
+  sourceSha256: text('source_sha256'),
+  importedAt: text('imported_at'),
+});
+
+// ─── Lesson assets (linked to curriculum topics) ───────────────────────────
+
+export const lessonAssets = sqliteTable('lesson_assets', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  topicId: integer('topic_id').notNull().references(() => topics.id),
+  assetType: text('asset_type').notNull().default('worksheet'),
+  title: text('title').notNull(),
+  description: text('description'),
+  filePath: text('file_path'),
+  format: text('format'),
+  generationPrompt: text('generation_prompt'),
+  visualNotes: text('visual_notes'),
+  status: text('status').notNull().default('draft'),
   createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+// ─── Empty target tables (for data parsing) ────────────────────────────────
+
+export const activities = sqliteTable('ACTIVITIES', {
+  id: integer('id').primaryKey(),
+  name: text('name'),
+  type: text('type'),
+  instructions: text('instructions'),
+  materialsNeeded: text('materials_needed'),
+  ageRange: text('age_range'),
+  durationMinutes: integer('duration_minutes'),
+  sourceId: integer('source_id'),
+});
+
+export const bookSuggestions = sqliteTable('BOOK_SUGGESTIONS', {
+  id: integer('id').primaryKey(),
+  title: text('title'),
+  author: text('author'),
+  description: text('description'),
+  ageRange: text('age_range'),
+  isbn: text('isbn'),
+  url: text('url'),
+});
+
+export const sources = sqliteTable('SOURCES', {
+  id: integer('id').primaryKey(),
+  pathOrUrl: text('path_or_url'),
+  type: text('type'),
+  checksum: text('checksum'),
 });

@@ -1,28 +1,31 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import { MobileNavigation } from "./MobileNavigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export type ActivePage =
   | "home" | "topics" | "lessons" | "about" | "search" | "cast-guide"
-  | "daycare" | "pre-school" | "kindergarten" | "grade-one" | "grade-two";
-
-const FOOTER_TOPICS = [
-  { label: "Language & literacy", href: "/search?q=language+literacy" },
-  { label: "Math", href: "/search?q=math+numeracy" },
-  { label: "Nature & science", href: "/search?q=science+nature" },
-  { label: "Music", href: "/search?q=music" },
-  { label: "The arts", href: "/search?q=arts+drama+creativity" },
-  { label: "Health & physical education", href: "/search?q=health+physical+education+movement" },
-] as const;
+  | "early-years" | "daycare" | "pre-school" | "kindergarten" | "grade-one" | "grade-two";
 
 export type GradeNavigationItem = {
-  key: Extract<ActivePage, "daycare" | "pre-school" | "kindergarten" | "grade-one" | "grade-two">;
+  key: Extract<ActivePage, "early-years" | "kindergarten" | "grade-one" | "grade-two">;
   label: string;
   href: string;
+  children?: readonly { key: Extract<ActivePage, "daycare" | "pre-school">; label: string; href: string }[];
 };
 
 const GRADE_NAV_ITEMS: readonly GradeNavigationItem[] = [
+  { key: "early-years", label: "Early Years", href: "/grade/daycare", children: [
+    { key: "daycare", label: "Daycare", href: "/grade/daycare" },
+    { key: "pre-school", label: "Pre-School", href: "/grade/pre-school" },
+  ] },
+  { key: "kindergarten", label: "Kindergarten", href: "/grade/kindergarten" },
+  { key: "grade-one", label: "Grade 1", href: "/grade/grade-one" },
+  { key: "grade-two", label: "Grade 2", href: "/grade/grade-two" },
+] as const;
+
+const TEACHER_GRADE_ITEMS = [
   { key: "daycare", label: "Daycare", href: "/grade/daycare" },
   { key: "pre-school", label: "Pre-School", href: "/grade/pre-school" },
   { key: "kindergarten", label: "Kindergarten", href: "/grade/kindergarten" },
@@ -32,76 +35,50 @@ const GRADE_NAV_ITEMS: readonly GradeNavigationItem[] = [
 
 export function SiteShell({ children, active }: { children: React.ReactNode; active?: ActivePage }) {
   return (
-    <div className="site-shell site-review">
+    <div className={`site-shell site-review site-shell-${active ?? "page"}`}>
       <header className="site-header">
         <div className="site-header-inner">
           <Link className="site-brand" href="/" aria-label="Old MacDonald Had a School home">
             <Image src="/brand-emblem.png" alt="" width={44} height={44} priority />
             <span>
               <strong><span className="site-brand-full">Old MacDonald Had a School</span><span className="site-brand-short">Old MacDonald</span></strong>
-              <small>Teacher lesson resources</small>
+              <small>Had a School</small>
             </span>
           </Link>
 
-          <nav className="site-nav site-nav-desktop" id="grade-navigation" aria-label="Primary navigation">
-            <Link className={`site-nav-link site-nav-utility${active === "home" ? " is-active" : ""}`} href="/" aria-current={active === "home" ? "page" : undefined}>Home</Link>
-            {GRADE_NAV_ITEMS.map((grade) => (
-              <Link className={`site-nav-link site-nav-grade site-nav-grade-${grade.key}${active === grade.key ? " is-active" : ""}`} href={grade.href} aria-current={active === grade.key ? "page" : undefined} key={grade.key}>
-                <span>{grade.label}</span>
-              </Link>
-            ))}
-            <Link className={`site-nav-link site-nav-utility${active === "search" ? " is-active" : ""}`} href="/search" aria-current={active === "search" ? "page" : undefined}>Search</Link>
-            <Link className={`site-nav-link site-nav-utility${active === "about" ? " is-active" : ""}`} href="/about" aria-current={active === "about" ? "page" : undefined}>About</Link>
-            <ThemeSwitcher />
+          <nav className="site-nav-desktop" aria-label="Primary navigation">
+            <Link className={`site-nav-link${active === "lessons" ? " is-active" : ""}`} href="/lessons">Lessons</Link>
+            <Link className="site-nav-link" href="/#browse-by-subject">Subjects</Link>
+            <details className="site-teacher-menu">
+              <summary className="site-nav-link" role="button" aria-haspopup="menu">For Teachers</summary>
+              <nav aria-label="Grade destinations">
+                {TEACHER_GRADE_ITEMS.map((grade) => (
+                  <Link href={grade.href} key={grade.key}>{grade.label}</Link>
+                ))}
+              </nav>
+            </details>
+            <Link className={`site-nav-link${active === "about" ? " is-active" : ""}`} href="/about">About</Link>
+            <Link className={`site-nav-search${active === "search" ? " is-active" : ""}`} href="/search" aria-label="Search lessons"><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link>
           </nav>
 
+          <div className="site-desktop-theme"><ThemeSwitcher /></div>
           <div className="site-mobile-actions">
-            <ThemeSwitcher />
+            <Link className="site-mobile-search" href="/search" aria-label="Search lessons"><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link>
             <MobileNavigation active={active} grades={GRADE_NAV_ITEMS} />
+            <ThemeSwitcher />
           </div>
         </div>
       </header>
 
-      <nav className="site-grade-rail" aria-label="Choose a grade">
-        {GRADE_NAV_ITEMS.map((grade) => (
-          <Link className={`site-nav-grade site-nav-grade-${grade.key}${active === grade.key ? " is-active" : ""}`} href={grade.href} aria-current={active === grade.key ? "page" : undefined} key={grade.key}>
-            {grade.label}
-          </Link>
-        ))}
-      </nav>
-
       <main className="site-page">{children}</main>
 
       <footer className="site-footer">
-        <div className="site-footer-inner footer-planning-tray">
-          <section className="footer-card footer-brand-card" aria-label="Old MacDonald Had a School">
-            <Image className="footer-fastener footer-paperclip" src="/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png" alt="" width={42} height={42} />
-            <div className="footer-brand">
-              <Image src="/brand-emblem.png" alt="" width={48} height={48} />
-              <div><strong>Old MacDonald<br />Had a School</strong><small>Teacher lesson resources</small></div>
-            </div>
-            <p className="footer-brand-note">Familiar songs, practical planning, and room for every learner.</p>
-          </section>
-          <nav className="footer-card footer-grade-card" aria-label="Plan by topic">
-            <Image className="footer-fastener footer-pin" src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={38} height={38} />
-            <strong className="footer-card-title">Plan by topic</strong>
-            <div className="footer-links footer-grade-links">
-              {FOOTER_TOPICS.map((topic) => <Link key={topic.href} href={topic.href}>{topic.label}</Link>)}
-            </div>
-          </nav>
-          <nav className="footer-card footer-tool-card" aria-label="Teacher toolbox">
-            <Image className="footer-fastener footer-tape" src="/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" alt="" width={72} height={72} />
-            <strong className="footer-card-title">Teacher toolbox</strong>
-            <div className="footer-links footer-tool-links">
-              <Link href="/">Home</Link>
-              <Link href="/search">Search lessons</Link>
-              <Link href="/topics">All lesson topics</Link>
-              <Link href="/about">About</Link>
-            </div>
-          </nav>
-          <div className="footer-tagline footer-felt-strip">
-            <Image src="/design-assets/classroom-fasteners-v1/individual-icons/09-wooden-clothespin.png" alt="" width={38} height={38} />
-            <p>Sing together. Move together. Grow together.</p>
+        <div className="site-footer-inner footer-reference">
+          <p>© 2024 Old MacDonald Had a School</p>
+          <div className="footer-reference-links">
+            <Link href="/about#privacy-policy">Privacy Policy</Link>
+            <Link href="/about#terms-of-use">Terms of Use</Link>
+            <Link href="/about#contact">Contact</Link>
           </div>
         </div>
       </footer>
