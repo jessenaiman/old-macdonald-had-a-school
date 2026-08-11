@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, type CSSProperties } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { GradePathItem } from "../builder/CurriculumTemplates";
 import styles from "./GradeInteractionLane.module.css";
 
@@ -54,13 +55,28 @@ function TodayPanel({ config, summary, items, selectedIndex, onChoose, onSection
   return <>
     <div className={`${styles.welcome} ${config.variant === "daycare" ? styles.daycareWelcome : ""}`}>
       <div className={styles.welcomeCopy}><span className={styles.eyebrow}>{config.eyebrow}</span><h1>{config.headline} <em>{config.accentHeadline}</em></h1><p>{summary}</p><div className={styles.actions}>{selected?.href ? <Link href={selected.href} className={styles.primaryAction}>Build this lesson</Link> : onPreview ? <button type="button" className={styles.primaryAction} onClick={onPreview}>Preview the story</button> : null}<button type="button" className={styles.paperAction} onClick={() => onSection("curriculum")}>Browse learning paths</button></div></div>
-      <aside className={styles.teacherCard} style={{ backgroundImage: `url("${config.identityTexture}")` }} aria-label={`A note from ${config.leadName}`}><span>A note from {config.leadName}</span><blockquote>“{config.leadQuote}”</blockquote><Image src={config.leadImage} width={220} height={220} alt={config.leadName} className={styles.teacherImage} priority /></aside>
     </div>
     {config.variant === "daycare" ? <div className={styles.daycareRibbon} aria-label="Daycare pathways">{daycarePathways.map(([label, detail], index) => <button type="button" key={label} className={styles.daycarePathway} onClick={() => { onChoose(index % Math.max(items.length, 1)); onSection("curriculum"); }}><Image src={itemIcon(items[index], index)} alt="" width={48} height={48} /><span><strong>{label}</strong><small>{detail}</small></span></button>)}</div> : null}
     <div className={styles.sectionHeader}><PanelHeading eyebrow="Pick a starting point" title={`Learning paths for ${config.grade}`} /><button type="button" className={styles.textButton} onClick={() => onSection("resources")}>See all resources →</button></div>
     <div className={styles.lessonGrid}>{items.slice(0, 4).map((item, index) => <LessonCard key={`${item.title}-${index}`} item={item} index={index} active={index === selectedIndex} onChoose={onChoose} />)}</div>
     <div className={styles.planningStrip}><span className={styles.eyebrow}>Today&apos;s planning board</span><strong>Invite a choice and notice the story.</strong><button type="button" className={styles.textButton} onClick={() => onSection("planner")}>Open planner →</button></div>
   </>;
+}
+
+function PersistentTeacherQuote({ config }: { config: GradeInteractionConfig }) {
+  return (
+    <aside className={styles.teacherQuote} aria-label={`A note from ${config.leadName}`}>
+      <Card className={styles.teacherCard} style={{ backgroundImage: `url("${config.identityTexture}")` }}>
+        <CardHeader className={styles.teacherCardHeader}>
+          <CardTitle className={styles.teacherCardTitle}>A note from {config.leadName}</CardTitle>
+        </CardHeader>
+        <CardContent className={styles.teacherCardContent}>
+          <blockquote>“{config.leadQuote}”</blockquote>
+          <Image src={config.leadImage} width={220} height={220} alt={config.leadName} className={styles.teacherImage} priority />
+        </CardContent>
+      </Card>
+    </aside>
+  );
 }
 
 function CurriculumPanel({ config, items, selectedIndex, onChoose, onSection }: { config: GradeInteractionConfig; items: GradePathItem[]; selectedIndex: number; onChoose: (index: number) => void; onSection: (section: GradeInteractionSection) => void }) {
@@ -82,10 +98,11 @@ export function GradeInteractionLane({ config, summary, items, activeIndex = 0, 
   const [selectedIndex, setSelectedIndex] = useState(activeIndex);
   const panelId = `${config.gradeKey}-grade-panel`;
   const identityStyle = { "--identity-color": config.identityColor, "--identity-ink": config.identityInk ?? "#fffaf0" } as CSSProperties;
+  const identityThread = config.identityTexture.replace("/felt/felt-", "/thread-overlays/thread-overlay-");
   const chooseItem = (index: number) => { setSelectedIndex(index); onSelect?.(index); };
   const panel = section === "today" ? <TodayPanel config={config} summary={summary} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} onPreview={onPreview} /> : section === "curriculum" ? <CurriculumPanel config={config} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} /> : section === "planner" ? <PlannerPanel config={config} item={items[selectedIndex] ?? items[0]} onSection={setSection} /> : <ResourcesPanel config={config} items={items} onChoose={chooseItem} />;
   return <div className={`${styles.board} ${config.variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`} data-grade-template={config.gradeKey} style={identityStyle}>
-    <aside className={styles.rail} style={{ backgroundImage: `url("${config.identityTexture}")` }} aria-label={`${config.grade} planning sections`}><div className={styles.identity}><Image src={config.badge} width={64} height={64} alt={`${config.grade} badge`} /><div><span>Farm School</span><strong>{config.grade}</strong><small>{config.age}</small></div></div><nav className={styles.railNav} aria-label="Grade sections" role="tablist" aria-orientation="vertical">{sections.map((entry) => <button key={entry.id} type="button" role="tab" aria-selected={section === entry.id} aria-controls={panelId} id={`${config.gradeKey}-${entry.id}-tab`} className={`${styles.railButton} ${section === entry.id ? styles.railButtonActive : ""}`} onClick={() => setSection(entry.id)}><b>{entry.number}</b><span>{entry.label}</span></button>)}</nav><div className={styles.reminder}><Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" width={28} height={28} alt="" /><span>Planning reminder</span><strong>{config.reminder}</strong></div></aside>
-    <main className={styles.main}><div className={styles.panelFrame}><section key={section} id={panelId} role="tabpanel" aria-labelledby={`${config.gradeKey}-${section}-tab`} aria-label={`${config.grade} ${section} panel`} tabIndex={-1} className={styles.panel}>{panel}</section></div></main>
+    <aside className={styles.rail} style={{ backgroundImage: `url("${identityThread}"), url("${config.identityTexture}")` }} aria-label={`${config.grade} lesson workspace`}><div className={styles.identity}><span>Lesson workspace</span><strong>{config.grade}</strong><small>{config.age}</small></div><nav className={styles.railNav} aria-label={`${config.grade} lesson tools`} role="tablist" aria-orientation="vertical">{sections.map((entry) => <button key={entry.id} type="button" role="tab" aria-selected={section === entry.id} aria-controls={panelId} id={`${config.gradeKey}-${entry.id}-tab`} className={`${styles.railButton} ${section === entry.id ? styles.railButtonActive : ""}`} onClick={() => setSection(entry.id)}><b>{entry.number}</b><span>{entry.label}</span></button>)}</nav><div className={styles.reminder}><Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" width={28} height={28} alt="" /><span>Planning reminder</span><strong>{config.reminder}</strong></div></aside>
+    <main className={styles.main}><PersistentTeacherQuote config={config} /><div className={styles.panelFrame}><section key={section} id={panelId} role="tabpanel" aria-labelledby={`${config.gradeKey}-${section}-tab`} aria-label={`${config.grade} ${section} panel`} tabIndex={-1} className={styles.panel}>{panel}</section></div></main>
   </div>;
 }

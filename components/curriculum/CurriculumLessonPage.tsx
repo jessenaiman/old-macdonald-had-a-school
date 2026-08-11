@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteShell } from "../SiteShell";
 import { getCurriculumLessonBySlug } from "../../lib/curriculum-lesson";
 import styles from "./CurriculumLessonPage.module.css";
 
@@ -36,8 +35,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
   const firstGrade = lesson.grades[0];
 
   return (
-    <SiteShell active="topics">
-      <div className={styles.page}>
+    <div className={styles.page}>
         <article className={styles.lesson}>
           {/* ── Header ── */}
           <header className={styles.header}>
@@ -175,8 +173,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
             <Link href="/topics">← Back to curriculum</Link>
           </div>
         </article>
-      </div>
-    </SiteShell>
+    </div>
   );
 }
 

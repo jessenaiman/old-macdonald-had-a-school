@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import Database from "better-sqlite3";
 import path from "path";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const SEMANTIC_MODEL = "Xenova/all-MiniLM-L6-v2";
+
 const DB_PATH = process.env.OMHAS_DB_PATH
   ? path.resolve(process.env.OMHAS_DB_PATH)
   : path.join(process.cwd(), "data", "omhas.db");
@@ -17,7 +22,7 @@ async function getEmbedder() {
       env.allowLocalModels = true;
       env.allowRemoteModels = false;
       env.localModelPath = path.join(process.cwd(), "node_modules", "@xenova", "transformers", ".cache");
-      const embedder = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
+      const embedder = await pipeline("feature-extraction", SEMANTIC_MODEL);
       return {
         async embed(text: string): Promise<number[]> {
           const output = await embedder(text, { pooling: "mean", normalize: true });
@@ -323,6 +328,7 @@ export async function GET(req: NextRequest) {
       lessons: lessonResults,
       total: results.length + curriculumResults.length + lessonResults.length,
       searchMode,
+      semanticModel: searchMode === "hybrid-keyword-semantic" ? SEMANTIC_MODEL : null,
       database: path.basename(DB_PATH),
     });
   } catch (error) {

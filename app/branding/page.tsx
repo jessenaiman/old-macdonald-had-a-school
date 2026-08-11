@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CastShowcase } from "@/components/cast/CastShowcase";
-import { SiteShell } from "@/components/SiteShell";
 import { getCastRoster } from "@/lib/cast-roster";
 
 export const metadata: Metadata = {
@@ -10,5 +9,5 @@ export const metadata: Metadata = {
 
 export default async function BrandingPage() {
   const roster = await getCastRoster();
-  return <SiteShell active="cast-guide"><CastShowcase {...roster} /></SiteShell>;
+  return <CastShowcase {...roster} />;
 }

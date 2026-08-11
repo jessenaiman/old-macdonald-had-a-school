@@ -1,5 +1,4 @@
 import { GradeOneTemplate } from "../../../components/grades/grade-one/GradeOneTemplate";
-import { GradePageShell } from "../../../components/grades/GradePageShell";
 import { getAllLessons } from "../../../lib/content";
 import { gradeKeysForLabel, lessonHref, lessonIcon } from "../../../lib/grade-routes";
 
@@ -12,5 +11,5 @@ export default async function GradeOnePage() {
     href: lessonHref(lesson.metadata),
     icon: lessonIcon(lesson.metadata.subject, lesson.metadata.category),
   }));
-  return <GradePageShell active="grade-one"><GradeOneTemplate summary="Reading and rhythm" items={items} /></GradePageShell>;
+  return <GradeOneTemplate summary="Reading and rhythm" items={items} />;
 }

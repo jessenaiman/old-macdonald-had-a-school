@@ -14,7 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import type { ActivePage, GradeNavigationItem } from "./SiteShell";
+import type { ActivePage, GradeNavigationItem } from "./site-navigation";
 
 export function MobileNavigation({ active, grades }: { active?: ActivePage; grades: readonly GradeNavigationItem[] }) {
   const [open, setOpen] = useState(false);

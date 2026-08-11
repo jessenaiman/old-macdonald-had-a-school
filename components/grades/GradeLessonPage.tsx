@@ -7,7 +7,6 @@ import { getCurriculumTopic } from "../../lib/curriculum-db";
 import { gradeKeysForLabel, type GradeKey } from "../../lib/grade-routes";
 import { DatabaseLessonDocument } from "./DatabaseLessonDocument";
 import styles from "./GradeLessonPage.module.css";
-import { GradePageShell, type GradePage } from "./GradePageShell";
 
 const GRADE_LESSON_DETAILS: Record<GradeKey, {
   label: string;
@@ -26,12 +25,10 @@ const GRADE_LESSON_DETAILS: Record<GradeKey, {
 export async function GradeLessonPage({
   slug,
   grade,
-  active,
   className,
 }: {
   slug: string;
   grade: GradeKey;
-  active: GradePage;
   className: string;
 }) {
   const lesson = await getLesson(slug);
@@ -43,8 +40,7 @@ export async function GradeLessonPage({
   const title = lesson?.metadata.title ?? databaseTopic?.title ?? "Lesson";
 
   return (
-    <GradePageShell active={active}>
-      <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson?.metadata.template ?? "database-draft"}>
+    <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson?.metadata.template ?? "database-draft"}>
         <aside className={styles.rail} aria-label={`${details.label} lesson sections`}>
           <div className={styles.railIdentity}>
             <Image src={details.badge} alt="" width={68} height={68} className={styles.gradeBadge} priority />
@@ -98,7 +94,6 @@ export async function GradeLessonPage({
             <Link href={`/grade/${grade}`}>← Back to {details.label} lessons</Link>
           </div>
         </div>
-      </div>
-    </GradePageShell>
+    </div>
   );
 }

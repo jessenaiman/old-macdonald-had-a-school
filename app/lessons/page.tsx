@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SiteShell } from "../../components/SiteShell";
 import { getAllLessons } from "../../lib/content";
 import { searchCurriculumTopics } from "../../lib/curriculum-db";
 import { GRADE_KEYS, gradeKeysForLabel, lessonHref, type GradeKey } from "../../lib/grade-routes";
@@ -77,8 +76,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
   const resultCount = markdownLessons.length + databaseResults.length;
 
   return (
-    <SiteShell active="lessons">
-      <section className={styles.page} aria-labelledby="lessons-index-title">
+    <section className={styles.page} aria-labelledby="lessons-index-title">
         <header className={styles.header}>
           <div className={styles.headerCopy}>
             <p className={styles.eyebrow}>Teacher planning library</p>
@@ -128,7 +126,6 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
           ))}
           {resultCount === 0 ? <p className={styles.empty}>No matching lesson was found in this grade. Try a shorter teaching goal or another grade.</p> : null}
         </section>
-      </section>
-    </SiteShell>
+    </section>
   );
 }

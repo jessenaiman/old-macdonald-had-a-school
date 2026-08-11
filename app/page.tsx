@@ -1,4 +1,3 @@
-import { SiteShell } from "../components/SiteShell";
 import { HomePage } from "../components/home/HomePage";
 import { getAllLessons } from "../lib/content";
 import { metadata as homeMetadata } from "../content/pages/home.mdx";
@@ -13,5 +12,5 @@ export default async function Home() {
     summary: lesson.metadata.summary,
     grade: lesson.metadata.grade,
   }));
-  return <SiteShell active="home"><HomePage hero={homeMetadata} lessons={lessons} /></SiteShell>;
+  return <HomePage hero={homeMetadata} lessons={lessons} />;
 }

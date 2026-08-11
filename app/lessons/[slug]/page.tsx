@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { LessonDocument } from "../../../components/LessonDocument";
-import { SiteShell } from "../../../components/SiteShell";
 import { getLesson, getLessonSlugs } from "../../../lib/content";
 import { lessonHref } from "../../../lib/grade-routes";
 
@@ -39,9 +38,5 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const canonicalHref = lessonHref(lesson.metadata);
   if (canonicalHref.startsWith("/grade/")) redirect(canonicalHref);
 
-  return (
-    <SiteShell active="topics">
-      <LessonDocument Content={lesson.Content} metadata={lesson.metadata} />
-    </SiteShell>
-  );
+  return <LessonDocument Content={lesson.Content} metadata={lesson.metadata} />;
 }
