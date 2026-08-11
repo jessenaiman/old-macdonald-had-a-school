@@ -468,13 +468,6 @@
   box-shadow: 0 3px 0 rgba(82, 48, 21, .1);
 }
 
-.note h3 {
-  margin: 0 0 8px;
-  font-family: var(--font-farm-display), Georgia, serif;
-  font-size: 16px;
-  color: #172f4b;
-}
-
 .note p {
   margin: 0;
   color: #5f503f;
