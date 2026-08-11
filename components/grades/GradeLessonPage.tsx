@@ -17,7 +17,7 @@ const GRADE_LESSON_DETAILS: Record<GradeKey, {
   teacherName: string;
 }> = {
   daycare: { label: "Daycare", age: "Ages 2–3", badge: "/brand-kit-icon-sheets/individual-icons/grade-daycare.png", teacher: "/staff_and_students/miss-puddles-transparent-circle.png", teacherName: "Miss Puddles" },
-  "pre-school": { label: "Pre-School", age: "Ages 3–4", badge: "/design-assets/blank-felt-patches-v1/individual-patches/08-miss-maisy-circle.png", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
+  "pre-school": { label: "Pre-School", age: "Ages 3–4", badge: "/staff_and_students/miss-maisy-transparent-circle.png", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
   kindergarten: { label: "Kindergarten", age: "Ages 4–6", badge: "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png", teacher: "/staff_and_students/mr-rusty-transparent-circle.png", teacherName: "Mr Rusty" },
   "grade-one": { label: "Grade 1", age: "5–6 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-1.png", teacher: "/staff_and_students/miss-hayley-transparent-circle.png", teacherName: "Miss Hayley" },
   "grade-two": { label: "Grade 2", age: "6–7 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-2.png", teacher: "/staff_and_students/mr-maisy-transparent-circle.png", teacherName: "Mr Maisy" },

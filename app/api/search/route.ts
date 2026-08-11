@@ -59,9 +59,9 @@ const RELATED_TERMS: Record<string, string[]> = {
 
 type TopicRow = {
   id: number;
-  lesson_topic: string;
+  topic: string;
   category: string | null;
-  skill_statement: string | null;
+  skill: string | null;
   subject: string;
   grade_keys: string;
   grades: string;
@@ -70,20 +70,56 @@ type TopicRow = {
 };
 
 type LessonRow = {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   subject: string;
   grade_band: string;
   summary: string;
   purpose: string;
-  duration_minutes: number;
+  duration_minutes: number | null;
   editorial_status: string;
   review_state: string;
-  topic_id: number;
+  topic_id: number | null;
   song_count: number;
   resource_count: number;
 };
+
+async function searchLessonFiles(query: string): Promise<LessonRow[]> {
+  const { getAllLessons } = await import("../../../lib/content");
+  const lessons = await getAllLessons();
+  const terms = query.toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length > 1 && !STOP_WORDS.has(t));
+
+  const scored = lessons
+    .map((lesson) => {
+      const meta = lesson.metadata;
+      const haystack = `${meta.title} ${meta.subject} ${meta.grade} ${meta.summary} ${meta.focus} ${meta.category}`.toLowerCase();
+      const score = terms.reduce((acc, term) => acc + (haystack.includes(term) ? 1 : 0), 0);
+      return { lesson, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || a.lesson.metadata.title.localeCompare(b.lesson.metadata.title))
+    .slice(0, 20);
+
+  return scored.map(({ lesson }) => {
+    const meta = lesson.metadata;
+    return {
+      id: meta.slug,
+      slug: meta.slug,
+      title: meta.title,
+      subject: meta.subject,
+      grade_band: meta.grade,
+      summary: meta.summary,
+      purpose: meta.focus,
+      duration_minutes: meta.timeEstimate ? Number(meta.timeEstimate.replace(/\D/g, "")) || null : null,
+      editorial_status: "mdx-published",
+      review_state: "published",
+      topic_id: null,
+      song_count: 0,
+      resource_count: 0,
+    };
+  });
+}
 
 function normalizeToken(value: string) {
   const token = value.toLowerCase().replace(/[^a-z0-9-]/g, "");
@@ -107,9 +143,9 @@ function includesTerm(text: string, term: string) {
 }
 
 function scoreTopic(row: TopicRow, primary: string[], expanded: string[]) {
-  const title = row.lesson_topic.toLowerCase();
+  const title = row.topic.toLowerCase();
   const category = (row.category ?? "").toLowerCase();
-  const skill = (row.skill_statement ?? "").toLowerCase();
+  const skill = (row.skill ?? "").toLowerCase();
   const standards = (row.standards ?? "").toLowerCase();
   const tags = (row.tags ?? "").toLowerCase();
   let score = 0;
@@ -146,30 +182,30 @@ export async function GET(req: NextRequest) {
     const { primary, expanded } = queryTerms(q);
     const topicRows = db.prepare(`
       SELECT
-        t.id, t.lesson_topic, t.category, t.skill_statement,
+        t.id, t.topic, t.category, t.skill,
         s.label AS subject,
-        coalesce((SELECT group_concat(g.key, '|') FROM TOPIC_GRADES tg JOIN GRADES g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grade_keys,
-        coalesce((SELECT group_concat(g.label, ', ') FROM TOPIC_GRADES tg JOIN GRADES g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grades,
-        (SELECT group_concat(st.framework || ' ' || st.code || ': ' || st.full_text, ' | ') FROM TOPIC_STANDARDS ts JOIN STANDARDS st ON st.id = ts.standard_id WHERE ts.topic_id = t.id) AS standards,
-        (SELECT group_concat(ta.name, ', ') FROM TOPIC_TAGS tt JOIN TAGS ta ON ta.id = tt.tag_id WHERE tt.topic_id = t.id) AS tags
-      FROM TOPICS t
-      JOIN SUBJECTS s ON s.id = t.subject_id
-      WHERE t.merged_into_topic_id IS NULL
+        coalesce((SELECT group_concat(g.key, '|') FROM topic_grades tg JOIN grades g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grade_keys,
+        coalesce((SELECT group_concat(g.label, ', ') FROM topic_grades tg JOIN grades g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grades,
+        (SELECT group_concat(st.framework || ' ' || st.code || ': ' || st.full_text, ' | ') FROM topic_standards ts JOIN standards st ON st.id = ts.standard_id WHERE ts.topic_id = t.id AND st.code IS NOT NULL) AS standards,
+        (SELECT group_concat(ta.name, ', ') FROM topic_tags tt JOIN tags ta ON ta.id = tt.tag_id WHERE tt.topic_id = t.id) AS tags
+      FROM topics t
+      JOIN subjects s ON s.id = t.subject_id
+      WHERE t.merged_into IS NULL
     `).all() as TopicRow[];
 
     const curriculumResults = topicRows
       .filter((row) => !grade || row.grade_keys.split("|").includes(grade))
       .map((row) => ({ row, match: scoreTopic(row, primary, expanded) }))
       .filter(({ match }) => match.score >= 4)
-      .sort((a, b) => b.match.score - a.match.score || a.row.lesson_topic.localeCompare(b.row.lesson_topic))
+      .sort((a, b) => b.match.score - a.match.score || a.row.topic.localeCompare(b.row.topic))
       .slice(0, 30)
       .map(({ row, match }) => ({
         id: String(row.id),
         grade_key: row.grade_keys,
         grade: row.grades || "Grade placement not recorded",
         subject: row.subject,
-        lesson_topic: row.lesson_topic,
-        skill_statement: row.skill_statement,
+        lesson_topic: row.topic,
+        skill_statement: row.skill,
         standards: row.standards,
         tags: row.tags,
         matched_terms: match.matched.slice(0, 6),
@@ -266,20 +302,8 @@ export async function GET(req: NextRequest) {
 
     const resultRows = merged.map(({ row }) => row);
 
-    const lessonQuery = `%${primary[0] ?? q.toLowerCase()}%`;
-    const lessonResults = db.prepare(`
-      SELECT lb.id, lb.slug, lb.title, lb.subject, lb.grade_band, lb.summary, lb.purpose,
-        lb.duration_minutes, lb.editorial_status, lb.review_state,
-        lb.curriculum_topic_id AS topic_id,
-        SUM(CASE WHEN lm.material_kind = 'song' THEN 1 ELSE 0 END) AS song_count,
-        SUM(CASE WHEN lm.material_kind <> 'song' THEN 1 ELSE 0 END) AS resource_count
-      FROM lesson_blueprints lb
-      LEFT JOIN lesson_materials lm ON lm.lesson_id = lb.id
-      WHERE lower(lb.title || ' ' || coalesce(lb.subject, '') || ' ' || coalesce(lb.summary, '') || ' ' || coalesce(lb.purpose, '')) LIKE ?
-      GROUP BY lb.id
-      ORDER BY CASE WHEN lower(lb.title) = lower(?) THEN 0 ELSE 1 END, lb.title
-      LIMIT 20
-    `).all(lessonQuery, q) as LessonRow[];
+    // ── Lesson pages (MDX files in content/lessons/) ─────────────────────
+    const lessonResults = await searchLessonFiles(q) as LessonRow[];
 
     const results = resultRows.map((row) => ({
       id: row.id,
