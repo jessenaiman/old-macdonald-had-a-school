@@ -11,3 +11,16 @@
 .noteSheet{min-height:340px}
 @media(min-width:1400px){.noteSheet{min-height:420px}.noteLines{gap:30px}}
 @media print{.noteGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.noteSheet{min-height:4.5in;break-inside:avoid;box-shadow:none;transform:none}.noteLines{gap:.42in}}
+
+/* Shared grade-workspace scale: Grade 1 is the hierarchy reference. */
+.board{width:min(1360px,calc(100% - 24px))}
+.panelHeading h2,.sectionHeader h2{max-width:760px;font-family:var(--font-farm-hand),"Segoe Print",cursive;font-size:clamp(34px,4vw,52px);font-weight:600;line-height:1;letter-spacing:0}
+.welcomeCopy h1{max-width:720px;font-family:var(--font-farm-hand),"Segoe Print",cursive;font-size:clamp(46px,5.4vw,72px);font-weight:600;line-height:.94;letter-spacing:0}
+.teacherCard{min-height:270px;padding:24px 22px 18px}
+.teacherCard>span{max-width:180px;font-size:10px}
+.teacherCard blockquote{max-width:200px;font-size:24px}
+.teacherImage{width:220px;height:220px}
+
+@media(min-width:1200px){.welcome{grid-template-columns:minmax(0,1fr) 400px}.teacherCard{min-height:280px}.teacherCard>span{max-width:210px}.teacherCard blockquote{max-width:220px}.teacherImage{width:240px;height:240px}}
+@media(max-width:900px){.board{width:min(100% - 18px,900px)}.welcome{grid-template-columns:1fr}.welcomeCopy h1{max-width:620px}.teacherCard{min-height:230px}.teacherCard blockquote{max-width:52%}.teacherImage{width:210px;height:210px}}
+@media(max-width:640px){.board{width:calc(100% - 12px)}.teacherCard{min-height:250px}.teacherImage{width:205px;height:205px}}

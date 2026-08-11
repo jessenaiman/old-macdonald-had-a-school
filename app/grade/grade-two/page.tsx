@@ -1,5 +1,5 @@
 import { GradeTwoTemplate } from "../../../components/grades/grade-two/GradeTwoTemplate";
-import { SiteShell } from "../../../components/SiteShell";
+import { GradePageShell } from "../../../components/grades/GradePageShell";
 import { getAllLessons } from "../../../lib/content";
 import { gradeKeysForLabel, lessonHref, lessonIcon } from "../../../lib/grade-routes";
 
@@ -12,5 +12,5 @@ export default async function GradeTwoPage() {
     href: lessonHref(lesson.metadata),
     icon: lessonIcon(lesson.metadata.subject, lesson.metadata.category),
   }));
-  return <SiteShell active="grade-two"><GradeTwoTemplate summary="Building fluency and proof" items={items} /></SiteShell>;
+  return <GradePageShell active="grade-two"><GradeTwoTemplate summary="Building fluency and proof" items={items} /></GradePageShell>;
 }

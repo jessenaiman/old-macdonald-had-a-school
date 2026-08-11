@@ -3,14 +3,14 @@ import { sql } from 'drizzle-orm';
 
 // ─── Core curriculum (normalized) ──────────────────────────────────────────
 
-export const subjects = sqliteTable('SUBJECTS', {
+export const subjects = sqliteTable('subjects', {
   id: integer('id').primaryKey(),
   key: text('key').notNull(),
   label: text('label').notNull(),
   sortOrder: integer('sort_order'),
 });
 
-export const grades = sqliteTable('GRADES', {
+export const grades = sqliteTable('grades', {
   id: integer('id').primaryKey(),
   key: text('key').notNull(),
   label: text('label').notNull(),
@@ -18,38 +18,38 @@ export const grades = sqliteTable('GRADES', {
   sortOrder: integer('sort_order'),
 });
 
-export const topics = sqliteTable('TOPICS', {
+export const topics = sqliteTable('topics', {
   id: integer('id').primaryKey(),
   subjectId: integer('subject_id').references(() => subjects.id),
   category: text('category'),
-  lessonTopic: text('lesson_topic').notNull(),
-  skillStatement: text('skill_statement'),
-  seqNum: real('seq_num'),
-  taught: text('taught'),
-  mergedIntoTopicId: integer('merged_into_topic_id').references((): any => topics.id),
-  circleTimeSlot: text('circle_time_slot'),
+  topic: text('topic').notNull(),
+  skill: text('skill'),
+  sequence: real('sequence'),
+  taughtStatus: text('taught_status'),
+  mergedInto: integer('merged_into').references((): any => topics.id),
+  circleTime: text('circle_time'),
 });
 
-export const topicGrades = sqliteTable('TOPIC_GRADES', {
+export const topicGrades = sqliteTable('topic_grades', {
   id: integer('id').primaryKey(),
   topicId: integer('topic_id').notNull().references(() => topics.id),
   gradeId: integer('grade_id').notNull().references(() => grades.id),
 });
 
-export const topicStandards = sqliteTable('TOPIC_STANDARDS', {
+export const topicStandards = sqliteTable('topic_standards', {
   id: integer('id').primaryKey(),
   topicId: integer('topic_id').notNull().references(() => topics.id),
   standardId: integer('standard_id').notNull().references(() => standards.id),
   alignmentNotes: text('alignment_notes'),
 });
 
-export const topicTags = sqliteTable('TOPIC_TAGS', {
+export const topicTags = sqliteTable('topic_tags', {
   id: integer('id').primaryKey(),
   topicId: integer('topic_id').notNull().references(() => topics.id),
   tagId: integer('tag_id').notNull().references(() => tags.id),
 });
 
-export const topicMaterials = sqliteTable('TOPIC_MATERIALS', {
+export const topicMaterials = sqliteTable('topic_materials', {
   id: integer('id').primaryKey(),
   topicId: integer('topic_id').notNull().references(() => topics.id),
   materialKind: text('material_kind').notNull(),
@@ -60,7 +60,7 @@ export const topicMaterials = sqliteTable('TOPIC_MATERIALS', {
   teacherRationale: text('teacher_rationale'),
 });
 
-export const weeklyPacing = sqliteTable('WEEKLY_PACING', {
+export const weeklyPacing = sqliteTable('weekly_pacing', {
   id: integer('id').primaryKey(),
   topicGradeId: integer('topic_grade_id').notNull().references(() => topicGrades.id),
   weekNumber: integer('week_number').notNull(),
@@ -70,7 +70,7 @@ export const weeklyPacing = sqliteTable('WEEKLY_PACING', {
 
 // ─── Standards & Tags ──────────────────────────────────────────────────────
 
-export const standards = sqliteTable('STANDARDS', {
+export const standards = sqliteTable('standards', {
   id: integer('id').primaryKey(),
   parentStandardId: integer('parent_standard_id').references((): any => standards.id),
   framework: text('framework'),
@@ -78,9 +78,10 @@ export const standards = sqliteTable('STANDARDS', {
   fullText: text('full_text'),
   source: text('source'),
   externalId: text('external_id'),
+  frames: text('frames'),
 });
 
-export const tags = sqliteTable('TAGS', {
+export const tags = sqliteTable('tags', {
   id: integer('id').primaryKey(),
   parentTagId: integer('parent_tag_id').references((): any => tags.id),
   name: text('name').notNull(),
@@ -89,9 +90,9 @@ export const tags = sqliteTable('TAGS', {
 
 // ─── Songs & Resources ─────────────────────────────────────────────────────
 
-export const songs = sqliteTable('SONGS', {
+export const songs = sqliteTable('songs', {
   id: integer('id').primaryKey(),
-  songName: text('song_name').notNull(),
+  title: text('title').notNull(),
   artist: text('artist'),
   catalog: text('catalog'),
   lyrics: text('lyrics'),
@@ -112,7 +113,7 @@ export const songs = sqliteTable('SONGS', {
   markdownPath: text('markdown_path'),
 });
 
-export const resources = sqliteTable('RESOURCES', {
+export const resources = sqliteTable('resources', {
   id: integer('id').primaryKey(),
   name: text('name'),
   type: text('type'),
@@ -124,14 +125,14 @@ export const resources = sqliteTable('RESOURCES', {
   sourceId: integer('source_id'),
 });
 
-export const materialTags = sqliteTable('MATERIAL_TAGS', {
+export const materialTags = sqliteTable('material_tags', {
   id: integer('id').primaryKey(),
   materialKind: text('material_kind').notNull(),
   materialId: integer('material_id').notNull(),
   tagId: integer('tag_id').notNull().references(() => tags.id),
 });
 
-export const materialRelations = sqliteTable('MATERIAL_RELATIONS', {
+export const materialRelations = sqliteTable('material_relations', {
   id: integer('id').primaryKey(),
   fromKind: text('from_kind'),
   fromId: integer('from_id'),
@@ -322,7 +323,7 @@ export const lessonAssets = sqliteTable('lesson_assets', {
 
 // ─── Empty target tables (for data parsing) ────────────────────────────────
 
-export const activities = sqliteTable('ACTIVITIES', {
+export const activities = sqliteTable('activities', {
   id: integer('id').primaryKey(),
   name: text('name'),
   type: text('type'),
@@ -333,7 +334,7 @@ export const activities = sqliteTable('ACTIVITIES', {
   sourceId: integer('source_id'),
 });
 
-export const bookSuggestions = sqliteTable('BOOK_SUGGESTIONS', {
+export const bookSuggestions = sqliteTable('book_suggestions', {
   id: integer('id').primaryKey(),
   title: text('title'),
   author: text('author'),
@@ -343,7 +344,7 @@ export const bookSuggestions = sqliteTable('BOOK_SUGGESTIONS', {
   url: text('url'),
 });
 
-export const sources = sqliteTable('SOURCES', {
+export const sources = sqliteTable('sources', {
   id: integer('id').primaryKey(),
   pathOrUrl: text('path_or_url'),
   type: text('type'),

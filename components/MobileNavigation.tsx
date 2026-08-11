@@ -61,6 +61,9 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
             <Button asChild variant="ghost">
               <Link href="/about" aria-current={active === "about" ? "page" : undefined} onClick={() => setOpen(false)}>About the school</Link>
             </Button>
+            <Button asChild variant="ghost">
+              <Link href="/branding" aria-current={active === "cast-guide" ? "page" : undefined} onClick={() => setOpen(false)}>Brand &amp; cast guide</Link>
+            </Button>
           </nav>
 
           <Separator className="site-menu-sheet-separator" />

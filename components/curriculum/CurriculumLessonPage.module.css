@@ -22,9 +22,191 @@
 }
 
 .header {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   padding-bottom: 24px;
   border-bottom: 1px solid rgba(92, 68, 40, .2);
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 20px;
+}
+
+.titleBlock {
+  min-width: 0;
+}
+
+.badges {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
+.badge {
+  padding: 6px 12px;
+  border: 1px solid rgba(94, 67, 36, .18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .5);
+  font: 800 11px/1.2 var(--font-farm-body), sans-serif;
+  color: #5f503f;
+}
+
+.cycle {
+  padding: 6px 12px;
+  border: 1px dashed rgba(196, 150, 46, .5);
+  border-radius: 999px;
+  background: rgba(255, 246, 214, .6);
+  font: 800 10px/1.2 var(--font-farm-body), sans-serif;
+  color: #7a5b3b;
+}
+
+.pacingBadge {
+  padding: 6px 12px;
+  border: 1px solid rgba(44, 108, 155, .25);
+  border-radius: 999px;
+  background: rgba(44, 108, 155, .1);
+  font: 800 10px/1.2 var(--font-farm-body), sans-serif;
+  color: #1d567f;
+}
+
+/* Rapid glance strip */
+.glance {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.glanceItem {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  padding: 14px 8px;
+  background: rgba(44, 108, 155, .08);
+  border: 1px solid rgba(44, 108, 155, .18);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.glanceItem strong {
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 26px;
+  color: #173552;
+  line-height: 1;
+}
+
+.glanceItem span {
+  font: 700 9px/1.2 var(--font-farm-body), sans-serif;
+  color: #705f4c;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* Framework groups */
+.frameworkGroup {
+  margin-bottom: 20px;
+}
+
+.frameworkGroup:last-child {
+  margin-bottom: 0;
+}
+
+.frameworkGroup h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #1d567f;
+}
+
+.frameworkGroup h3 em {
+  font-style: italic;
+  font-weight: 600;
+  color: #705f4c;
+}
+
+.emphasis {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 700;
+  color: #b5272c;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.moreNote, .supportingNote {
+  color: #705f4c;
+  font: 600 12px/1.5 var(--font-farm-body), sans-serif;
+}
+
+.supportingNote {
+  margin: 0 0 14px;
+}
+
+/* Compact material variant */
+.materialCompact {
+  padding: 12px 14px;
+}
+
+.materialCompact .materialTitle {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.materialDetail {
+  margin-top: 8px;
+}
+
+.materialDetail summary {
+  cursor: pointer;
+  color: #1d567f;
+  font: 800 11px/1 var(--font-farm-body), sans-serif;
+}
+
+.external {
+  margin-left: auto;
+  color: #1d567f;
+  font: 700 10px/1 var(--font-farm-body), sans-serif;
+  text-decoration: none;
+}
+
+.external:hover {
+  text-decoration: underline;
+}
+
+.instructions {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, .7);
+  border-radius: 6px;
+  font: 600 12px/1.5 var(--font-farm-body), sans-serif;
+  color: #373f47;
+}
+
+/* Asset card tweaks */
+.assetIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(44, 108, 155, .1);
+  font-size: 22px;
+}
+
+.downloadCue {
+  margin-left: auto;
+  color: #1d567f;
+  font-weight: 800;
+}
+
+/* Teacher notes labels */
+.noteLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: 16px;
+  color: #172f4b;
 }
 
 .breadcrumb {
@@ -67,14 +249,7 @@
   gap: 10px;
 }
 
-.badge, .age, .category {
-  padding: 6px 12px;
-  border: 1px solid rgba(94, 67, 36, .18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .5);
-  font: 800 11px/1 var(--font-farm-body), sans-serif;
-  color: #5f503f;
-}
+/* (legacy badge/age/category rule replaced by .badge block above) */
 
 .section {
   margin-bottom: 32px;

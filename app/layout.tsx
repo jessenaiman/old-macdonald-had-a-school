@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
+import { Lilita_One, Nunito } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "../components/ThemeProvider";
 import "./globals.css";
 
-const bodyFont = localFont({
-  src: [
-    { path: "../public/background-textures/InstrumentSans-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../public/background-textures/InstrumentSans-Bold.ttf", weight: "700", style: "normal" },
-  ],
+const bodyFont = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
   variable: "--font-farm-body",
   display: "swap",
 });
 
-const displayFont = localFont({
-  src: "../public/background-textures/BricolageGrotesque-Bold.ttf",
-  weight: "700",
+const displayFont = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
   variable: "--font-farm-display",
   display: "swap",
 });

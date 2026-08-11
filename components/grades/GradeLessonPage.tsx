@@ -2,12 +2,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LessonDocument } from "../LessonDocument";
-import { SiteShell, type ActivePage } from "../SiteShell";
 import { getLesson } from "../../lib/content";
 import { getCurriculumTopic } from "../../lib/curriculum-db";
 import { gradeKeysForLabel, type GradeKey } from "../../lib/grade-routes";
 import { DatabaseLessonDocument } from "./DatabaseLessonDocument";
 import styles from "./GradeLessonPage.module.css";
+import { GradePageShell, type GradePage } from "./GradePageShell";
 
 const GRADE_LESSON_DETAILS: Record<GradeKey, {
   label: string;
@@ -31,7 +31,7 @@ export async function GradeLessonPage({
 }: {
   slug: string;
   grade: GradeKey;
-  active: ActivePage;
+  active: GradePage;
   className: string;
 }) {
   const lesson = await getLesson(slug);
@@ -43,7 +43,7 @@ export async function GradeLessonPage({
   const title = lesson?.metadata.title ?? databaseTopic?.title ?? "Lesson";
 
   return (
-    <SiteShell active={active}>
+    <GradePageShell active={active}>
       <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson?.metadata.template ?? "database-draft"}>
         <aside className={styles.rail} aria-label={`${details.label} lesson sections`}>
           <div className={styles.railIdentity}>
@@ -99,6 +99,6 @@ export async function GradeLessonPage({
           </div>
         </div>
       </div>
-    </SiteShell>
+    </GradePageShell>
   );
 }

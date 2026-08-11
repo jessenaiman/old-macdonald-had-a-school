@@ -1,15 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaBookOpen,
-  FaBriefcase,
-  FaCircleInfo,
-  FaEnvelope,
-  FaMagnifyingGlass,
-  FaTableCellsLarge,
-} from "react-icons/fa6";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { HomeCarousel } from "./HomeCarousel";
 import { HOME_SUBJECTS, HOME_VIDEO_SONGS, type HomeLesson } from "./home-data";
 import { WeeklyLessonList } from "./WeeklyLessonList";
@@ -92,14 +83,6 @@ const GRADE_GUIDES = [
   },
 ] as const;
 
-const UTILITY_LINKS = [
-  { label: "Plan by topic", href: "/topics", icon: FaBookOpen },
-  { label: "Teacher toolbox", href: "/lessons", icon: FaBriefcase },
-  { label: "Search lessons", href: "/search", icon: FaMagnifyingGlass },
-  { label: "About", href: "/about", icon: FaCircleInfo },
-  { label: "Contact", href: "/about#contact", icon: FaEnvelope },
-] as const;
-
 export function pickLessons(lessons: HomeLesson[], slugs: readonly string[]) {
   return slugs
     .map((slug) => lessons.find((lesson) => lesson.slug === slug))
@@ -107,22 +90,13 @@ export function pickLessons(lessons: HomeLesson[], slugs: readonly string[]) {
 }
 
 function HeroTitle({ title }: { title?: string }) {
-  const resolved = title ?? "Songs teachers know. Places children can grow.";
-  const [firstSentence, secondSentence = "Places children can grow."] = resolved.split(". ");
-  const secondLead = secondSentence.replace(/grow\.?$/i, "");
-
-  return (
-    <h1 id="home-title">
-      <span>{firstSentence}.</span>
-      <span>{secondLead}<em>grow.</em></span>
-    </h1>
-  );
+  return <h1 id="home-title">{title ?? "Songs teachers know. Places children can grow."}</h1>;
 }
 
 export function HomePage({ hero, lessons }: HomePageProps) {
   return (
     <div className={styles.homePage}>
-      <section className={styles.gradeGuide} id="grade-navigation" aria-labelledby="grade-guide-title">
+      <section className={`${styles.gradeGuide} mx-auto !w-[calc(100%_-_2rem)] !max-w-7xl sm:!w-[calc(100%_-_3rem)]`} id="grade-navigation" aria-labelledby="grade-guide-title">
         <h2 id="grade-guide-title">Choose a grade</h2>
         <div className={styles.gradeGuideGrid}>
           {GRADE_GUIDES.map((grade) => (
@@ -145,12 +119,10 @@ export function HomePage({ hero, lessons }: HomePageProps) {
         </div>
       </section>
 
-      <section className={styles.hero} aria-labelledby="home-title">
+      <section className={`${styles.hero} mx-auto !w-[calc(100%_-_2rem)] !max-w-7xl sm:!w-[calc(100%_-_3rem)]`} aria-labelledby="home-title">
         <Card className={styles.heroCopyCard}>
           <CardHeader className={styles.heroCopy}>
-            <p>{hero.eyebrow ?? "Old MacDonald Had a School · Teacher Resources"}</p>
             <HeroTitle title={hero.title} />
-            <span className={styles.heroSummary}>{hero.summary}</span>
           </CardHeader>
           <CardContent className={styles.heroFeatureGrid}>
             <div className={styles.heroWeeklyLessons}>
@@ -158,22 +130,10 @@ export function HomePage({ hero, lessons }: HomePageProps) {
             </div>
             <HomeCarousel selected />
           </CardContent>
-          <CardFooter className={styles.heroActions}>
-            <Button asChild size="lg">
-              <Link className={styles.primaryAction} href="#grade-navigation">
-                <FaTableCellsLarge aria-hidden="true" /> Browse by grade
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link className={styles.secondaryAction} href="/search">
-                <FaMagnifyingGlass aria-hidden="true" /> Search lessons
-              </Link>
-            </Button>
-          </CardFooter>
         </Card>
       </section>
 
-      <section className={styles.bulletinBoard} id="browse-by-subject" aria-labelledby="subjects-title">
+      <section className={`${styles.bulletinBoard} mx-auto !w-[calc(100%_-_2rem)] !max-w-7xl sm:!w-[calc(100%_-_3rem)]`} id="browse-by-subject" aria-labelledby="subjects-title">
         <header className={styles.subjectHeading}>
           <h2 id="subjects-title">Find a lesson by subject.</h2>
         </header>
@@ -223,12 +183,6 @@ export function HomePage({ hero, lessons }: HomePageProps) {
         </div>
       </section>
 
-      <nav className={styles.utilityFooter} aria-label="Teacher resources">
-        {UTILITY_LINKS.map((item) => {
-          const Icon = item.icon;
-          return <Link href={item.href} key={item.label}><Icon aria-hidden="true" /><span>{item.label}</span></Link>;
-        })}
-      </nav>
     </div>
   );
 }

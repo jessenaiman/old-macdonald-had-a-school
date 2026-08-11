@@ -15,12 +15,13 @@ export type WeeklyLesson = {
 function gradeChips(grade: string) {
   const normalized = grade.toLowerCase();
   if (normalized.includes("all")) return ["All"];
-  if (normalized.includes("daycare")) return ["D"];
-  if (normalized.includes("pre")) return ["Pre-K"];
-  if (normalized.includes("kindergarten")) return ["K"];
-  if (normalized.includes("one") || normalized.includes("1")) return ["1"];
-  if (normalized.includes("two") || normalized.includes("2")) return ["2"];
-  return ["All"];
+  const chips: string[] = [];
+  if (normalized.includes("daycare")) chips.push("D");
+  if (normalized.includes("pre")) chips.push("Pre-K");
+  if (normalized.includes("kindergarten")) chips.push("K");
+  if (normalized.includes("one") || normalized.includes("1")) chips.push("1");
+  if (normalized.includes("two") || normalized.includes("2")) chips.push("2");
+  return chips.length ? chips : ["All"];
 }
 
 export function WeeklyLessonList({

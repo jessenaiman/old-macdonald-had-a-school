@@ -1,10 +1,10 @@
 import { EarlyYearsHub } from "../../../components/EarlyYearsHub";
-import { SiteShell } from "../../../components/SiteShell";
+import { GradePageShell } from "../../../components/grades/GradePageShell";
 import { EARLY_YEARS } from "../../../lib/early-years";
 
 export default function PreSchoolPage() {
   return (
-    <SiteShell active="pre-school">
+    <GradePageShell active="pre-school">
       <EarlyYearsHub
         grade="pre-school"
         title="Pre-School"
@@ -13,6 +13,6 @@ export default function PreSchoolPage() {
         tier="detailed"
         topics={EARLY_YEARS["pre-school"]}
       />
-    </SiteShell>
+    </GradePageShell>
   );
 }
