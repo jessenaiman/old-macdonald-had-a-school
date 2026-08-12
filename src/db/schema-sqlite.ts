@@ -14,7 +14,6 @@ export const grades = sqliteTable('grades', {
   id: integer('id').primaryKey(),
   key: text('key').notNull(),
   label: text('label').notNull(),
-  ageRange: text('age_range'),
   sortOrder: integer('sort_order'),
 });
 

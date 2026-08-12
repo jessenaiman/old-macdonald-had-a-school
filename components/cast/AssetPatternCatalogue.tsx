@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { Check, Copy, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const PATCHES = [
   { name: "Old MacDonald circle", path: "/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-circle.png", shape: "circle" },
@@ -34,15 +36,15 @@ const COMPOSITIONS = [
 ] as const;
 
 const NAV_SPECIMENS = [
-  { label: "Asset toolkit", href: "#asset-toolkit", kind: "felt", path: "/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png" },
-  { label: "Asset patterns", href: "#asset-patterns", kind: "patch-brown", path: "/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.png" },
-  { label: "Badge recipe", href: "#badge-recipe", kind: "patch-pink", path: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-square.png" },
-  { label: "Palette", href: "#palette", kind: "woven", path: "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png" },
-  { label: "Staff roster", href: "#cast-staff", kind: "construction", path: "/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png" },
-  { label: "Student roster", href: "#cast-students", kind: "cork", path: "/design-assets/cork-board-kit-v1/seamless-cork-tile.png" },
-  { label: "Actual controls", href: "#site-controls", kind: "cardboard", path: "/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png" },
-  { label: "System gallery", href: "#controls", kind: "felt-blue", path: "/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png" },
-  { label: "Typography", href: "#typography", kind: "paper", path: "/design-assets/web-material-library-v1/construction-paper/construction-paper-09-hopper-tile.png" },
+  { label: "Asset toolkit", href: "#asset-toolkit", kind: "felt", path: "/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png" },
+  { label: "Asset patterns", href: "#asset-patterns", kind: "patch-brown", path: "/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/16-needle-and-thread.png" },
+  { label: "Badge recipe", href: "#badge-recipe", kind: "patch-pink", path: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-square.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/11-stitched-label-tab.png" },
+  { label: "Palette", href: "#palette", kind: "woven", path: "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png" },
+  { label: "Staff roster", href: "#cast-staff", kind: "construction", path: "/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.png" },
+  { label: "Student roster", href: "#cast-students", kind: "cork", path: "/design-assets/cork-board-kit-v1/seamless-cork-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" },
+  { label: "Actual controls", href: "#site-controls", kind: "cardboard", path: "/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png" },
+  { label: "System gallery", href: "#controls", kind: "felt-blue", path: "/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/13-brass-split-pin.png" },
+  { label: "Typography", href: "#typography", kind: "paper", path: "/design-assets/web-material-library-v1/construction-paper/construction-paper-09-hopper-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" },
 ] as const;
 
 const LINK_SPECIMENS = [
@@ -66,20 +68,49 @@ function CopyPath({ value }: { value: string }) {
   </div>;
 }
 
+function AssetRecipeDialog({ label, value }: { label: string; value: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1400);
+  };
+
+  return <Dialog>
+    <DialogTrigger asChild>
+      <Button type="button" variant="link" size="sm" className="brandRecipeTrigger"><Info aria-hidden="true" />Recipe</Button>
+    </DialogTrigger>
+    <DialogContent className="brandRecipeDialog">
+      <DialogHeader>
+        <span className="brandRecipeEyebrow">Reusable control recipe</span>
+        <DialogTitle>{label}</DialogTitle>
+        <DialogDescription>The button uses the shared <code>.brand-button</code> geometry. Its material modifier changes only the surface.</DialogDescription>
+      </DialogHeader>
+      <div className="brandRecipeCode"><code translate="no">{value}</code></div>
+      <DialogFooter>
+        <Button type="button" className="brand-button brand-button--navy" onClick={copy}>
+          {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}{copied ? "Copied" : "Copy recipe"}
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>;
+}
+
 export function BrandSpecimenNav() {
   return <section className="brandSpecimenShelf" aria-labelledby="brand-specimen-shelf-title">
     <header>
-      <div><span>Working button and background examples</span><h2 id="brand-specimen-shelf-title">Navigate through the materials</h2></div>
+      <div><span>Working controls · governed surfaces · exact sources</span><h2 id="brand-specimen-shelf-title">A classroom shelf of real interface pieces</h2><p>Each object is a functioning link. Hover, focus, or tap its small attachment tab to reveal the exact asset recipe.</p></div>
       <Button asChild variant="link"><a href="/BRAND_ASSET_RECIPES.md">Open all recipes</a></Button>
     </header>
-    <nav aria-label="Brand guide specimen sections">
+    <nav className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" aria-label="Brand guide specimen sections">
       {NAV_SPECIMENS.map((item) => <article className="brandSpecimen" data-specimen={item.kind} key={item.href}>
-        <Button asChild variant="ghost"><a href={item.href}>{item.label}</a></Button>
-        <CopyPath value={`public${item.path}`} />
+        <Button asChild className={`brand-button brand-button--${item.kind}`}><a href={item.href}>{item.label}</a></Button>
+        <AssetRecipeDialog label={item.label} value={`className="brand-button brand-button--${item.kind}"\nSurface: public${item.path}`} />
       </article>)}
     </nav>
+    <p className="brandSpacingRule"><strong>Spacing recipe</strong><code translate="no">grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5</code><span>One shared button height. A 1rem gap. Columns change only at documented Tailwind breakpoints.</span></p>
     <section className="brandLinkShelf" aria-labelledby="brand-link-shelf-title">
-      <div><span>Semantic hyperlink objects</span><h3 id="brand-link-shelf-title">Links do not have to masquerade as buttons</h3></div>
+      <div><span>Semantic hyperlink objects</span><h3 id="brand-link-shelf-title">A link can look like something you would find in a classroom</h3></div>
       <nav aria-label="Creative hyperlink examples">
         {LINK_SPECIMENS.map((item) => <article className="brandLinkSpecimen" data-link-specimen={item.kind} key={item.href}>
           <a href={item.href}>
@@ -87,7 +118,7 @@ export function BrandSpecimenNav() {
             {item.kind === "taped-note" || item.kind === "pinned-label" ? <Image src={item.path} alt="" width={70} height={38} /> : null}
             <span>{item.label}</span>
           </a>
-          <CopyPath value={`public${item.path}`} />
+          <AssetRecipeDialog label={item.label} value={`Asset: public${item.path}`} />
         </article>)}
       </nav>
     </section>

@@ -35,7 +35,6 @@ export interface CurriculumStandard {
 
 export interface CurriculumGrade {
   label: string;
-  ageRange: string | null;
 }
 
 export interface CurriculumAsset {
@@ -75,12 +74,12 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
   if (!topic) return null;
 
   const grades = db.prepare(`
-    SELECT g.label, g.age_range
+    SELECT g.label
     FROM topic_grades tg
     JOIN grades g ON g.id = tg.grade_id
     WHERE tg.topic_id = ?
     ORDER BY g.sort_order
-  `).all(topicId) as Array<{ label: string; age_range: string }>;
+  `).all(topicId) as Array<{ label: string }>;
 
   const standards = db.prepare(`
     SELECT s.framework, s.code, s.full_text, s.frames
@@ -151,7 +150,7 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
     skill: topic.skill,
     category: topic.category,
     subject: topic.subject,
-    grades: grades.map(g => ({ label: g.label, ageRange: g.age_range })),
+    grades,
     circleTime: topic.circle_time,
     standards: standards.map(s => ({
       framework: s.framework,

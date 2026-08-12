@@ -50,7 +50,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
               </div>
               <div className={styles.badges}>
                 {lesson.grades.map(g => (
-                  <span key={g.label} className={styles.badge}>{g.label}{g.ageRange ? ` - ${g.ageRange}` : ""}</span>
+                  <span key={g.label} className={styles.badge}>{g.label}</span>
                 ))}
                 {lesson.circleTime && <span className={styles.cycle}>Circle time: {lesson.circleTime}</span>}
                 {lesson.pacing.length > 0 && (

@@ -40,3 +40,5 @@ The live implementation is `components/cast/AssetPatternCatalogue.tsx`. Global s
 The horizontal shelf immediately below the `/branding` hero is navigation and a working control reference at the same time. Each shadcn `Button` uses a distinct approved background family and exposes its exact asset path beneath the control. On narrow screens the shelf scrolls horizontally; do not replace it with uniform pills or flatten the examples into one generic button style.
 
 The second shelf demonstrates semantic `<a>` elements that are deliberately not styled like buttons: a taped note, stitched tab, portrait-led link, and pinned label. They keep native link behavior and visible focus while using governed image assets as decorative layers.
+
+Every specimen also demonstrates an attachment rule. Push pins belong on cork, tape belongs across a paper edge, clips grip an edge, and thread or sewing details belong with felt. The hover/focus information panel lists both the surface path and attachment path.

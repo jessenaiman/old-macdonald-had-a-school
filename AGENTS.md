@@ -7,3 +7,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+- DO not create user intended markdown reports and assessment unless specifically requested. You are allowed one working markdown document. All information must be in that file with an easy to navigate table of contents
+- Do not invent design. All layout, and components on the website must have a working reference in the branding directory and route
