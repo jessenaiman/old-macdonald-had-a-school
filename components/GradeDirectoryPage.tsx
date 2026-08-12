@@ -5,6 +5,7 @@ import Image from "next/image";
 import { GradeLessonGrid, type GradeLesson } from "./GradeLessonGrid";
 import { CLUSTERS, clusterFor } from "./SubjectDiscovery";
 import type { GradeMeta } from "../lib/grades";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function GradeDirectoryPage({
   meta,
@@ -26,6 +27,7 @@ export function GradeDirectoryPage({
     : "Ask deeper, solve bigger, and learn together.";
 
   return (
+    <Tabs value={activeCluster ?? "all"} onValueChange={(value) => setActiveCluster(value === "all" ? null : value)} orientation="vertical" asChild>
     <section className={`gb-page gb-${meta.key}`}>
       <aside className="gb-rail" aria-label={`${meta.label} planning sections`}>
         <Image className="gb-rail-grade-badge" src={`/brand-kit-icon-sheets/individual-icons/grade-${meta.key === "grade-one" ? "1" : "2"}.png`} alt="" width={64} height={64} />
@@ -54,7 +56,9 @@ export function GradeDirectoryPage({
 
       <div className="gb-body" id="grade-curriculum">
         <div className="gb-main" id="grade-resources">
-          <GradeLessonGrid lessons={filtered} />
+          <TabsContent value={activeCluster ?? "all"}>
+            <GradeLessonGrid lessons={filtered} />
+          </TabsContent>
         </div>
         <div className="gb-info" id="grade-planner">
           <div className="gb-about paper-panel stitch">
@@ -69,36 +73,30 @@ export function GradeDirectoryPage({
           </div>
           <div className="gb-subjects paper-panel stitch">
             <h2>Subjects</h2>
-            <ul className="gb-subjects-list" role="tablist" aria-label="Filter by subject">
-              <li>
-                <button
+            <TabsList className="gb-subjects-list" aria-label="Filter by subject">
+                <TabsTrigger
+                  value="all"
                   className={`gb-subject-row${!activeCluster ? " active" : ""}`}
-                  onClick={() => setActiveCluster(null)}
-                  role="tab"
-                  aria-selected={!activeCluster}
                 >
                   <span className="gb-subject-icon gb-subject-icon-all">{"•"}</span>
                   <span>All subjects</span>
-                </button>
-              </li>
+                </TabsTrigger>
               {CLUSTERS.map((c) => (
-                <li key={c.key}>
-                  <button
+                  <TabsTrigger
+                    value={c.key}
                     className={`gb-subject-row tone-${c.tone}${activeCluster === c.key ? " active" : ""}`}
-                    onClick={() => setActiveCluster(c.key)}
-                    role="tab"
-                    aria-selected={activeCluster === c.key}
+                    key={c.key}
                   >
                     <span className="gb-subject-icon">{c.icon}</span>
                     <span>{c.title}</span>
-                  </button>
-                </li>
+                  </TabsTrigger>
               ))}
-            </ul>
+            </TabsList>
           </div>
         </div>
       </div>
       </div>
     </section>
+    </Tabs>
   );
 }

@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+
 type LessonPrintActionsProps = {
   label?: string;
   className?: string;
@@ -19,10 +21,10 @@ function PrintIcon() {
 export function LessonPrintActions({ label = "Print lesson", className = "" }: LessonPrintActionsProps) {
   return (
     <div className={`lesson-print-actions ${className}`.trim()}>
-      <button type="button" className="lp-btn-ghost" onClick={() => window.print()}>
+      <Button type="button" variant="ghost" className="lp-btn-ghost" onClick={() => window.print()}>
         <PrintIcon />
         {label}
-      </button>
+      </Button>
     </div>
   );
 }

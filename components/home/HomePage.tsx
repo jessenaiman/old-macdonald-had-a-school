@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomeCarousel } from "./HomeCarousel";
 import { HOME_SUBJECTS, HOME_VIDEO_SONGS, type HomeLesson } from "./home-data";
 import { WeeklyLessonList } from "./WeeklyLessonList";
 import styles from "./BulletinHomePage.module.css";
 
 type HomePageProps = {
-  hero: { eyebrow?: string; title?: string; summary?: string };
+  hero: { title?: string };
   lessons: HomeLesson[];
 };
 
@@ -20,68 +20,35 @@ type SubjectLearner = {
 const SUBJECT_LEARNERS: Record<string, SubjectLearner> = {
   language: {
     name: "Whiskers",
-    portrait: "/icons/staff/whiskers.png",
+    portrait: "/staff_and_students/whiskers-transparent-circle.png",
     texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-10-whiskers-tile.png",
   },
   math: {
     name: "Sam",
-    portrait: "/icons/staff/sam.png",
+    portrait: "/staff_and_students/sam-transparent-circle.png",
     texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-15-sam-tile.png",
   },
   science: {
     name: "Scout",
-    portrait: "/icons/staff/scout.png",
+    portrait: "/staff_and_students/scout-transparent-circle.png",
     texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-11-scout-tile.png",
   },
   music: {
     name: "Penny",
-    portrait: "/icons/staff/penny.png",
+    portrait: "/staff_and_students/penny-transparent-circle.png",
     texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-12-penny-tile.png",
   },
   arts: {
     name: "Puddles",
-    portrait: "/icons/staff/puddles.png",
+    portrait: "/staff_and_students/puddles-transparent-circle.png",
     texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-14-puddles-tile.png",
   },
   health: {
     name: "Hopper",
-    portrait: "/icons/staff/hopper.png",
+    portrait: "/staff_and_students/hopper-transparent-circle.png",
     texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-09-hopper-tile.png",
   },
 };
-
-const GRADE_GUIDES = [
-  {
-    label: "Early Years",
-    href: "/grade/daycare",
-    texture: "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-08-miss-maisy-tile.png",
-    guides: [
-      { name: "Miss Puddles", portrait: "/icons/staff/miss-puddles.png" },
-      { name: "Miss Maisy", portrait: "/icons/staff/miss-maisy.png" },
-    ],
-  },
-  {
-    label: "Kindergarten",
-    href: "/grade/kindergarten",
-    texture: "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-03-mr-rusty-tile.png",
-    guides: [
-      { name: "Old MacDonald", portrait: "/icons/staff/old-mac.png" },
-      { name: "Mr Rusty", portrait: "/icons/staff/mr-rusty.png" },
-    ],
-  },
-  {
-    label: "Grade 1",
-    href: "/grade/grade-one",
-    texture: "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-04-miss-hayley-tile.png",
-    guides: [{ name: "Miss Hayley", portrait: "/icons/staff/miss-hayley.png" }],
-  },
-  {
-    label: "Grade 2",
-    href: "/grade/grade-two",
-    texture: "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-06-mr-maisy-tile.png",
-    guides: [{ name: "Mr Maisy", portrait: "/icons/staff/mr-maisy.png" }],
-  },
-] as const;
 
 export function pickLessons(lessons: HomeLesson[], slugs: readonly string[]) {
   return slugs
@@ -90,43 +57,28 @@ export function pickLessons(lessons: HomeLesson[], slugs: readonly string[]) {
 }
 
 function HeroTitle({ title }: { title?: string }) {
-  return <h1 id="home-title">{title ?? "Songs teachers know. Places children can grow."}</h1>;
+  const resolvedTitle = title ?? "Where familiar songs become new places to learn.";
+
+  if (resolvedTitle === "Where familiar songs become new places to learn.") {
+    return <h1 id="home-title">Where familiar songs become <em>new places</em> to learn.</h1>;
+  }
+
+  return <h1 id="home-title">{resolvedTitle}</h1>;
 }
 
 export function HomePage({ hero, lessons }: HomePageProps) {
   return (
     <div className={styles.homePage}>
-      <section className={`${styles.gradeGuide} mx-auto !w-[calc(100%_-_2rem)] !max-w-7xl sm:!w-[calc(100%_-_3rem)]`} id="grade-navigation" aria-labelledby="grade-guide-title">
-        <h2 id="grade-guide-title">Choose a grade</h2>
-        <div className={styles.gradeGuideGrid}>
-          {GRADE_GUIDES.map((grade) => (
-            <Link
-              className={styles.gradeGuideCard}
-              href={grade.href}
-              style={{ "--grade-texture": `url(${grade.texture})` } as React.CSSProperties}
-              key={grade.label}
-            >
-              <span className={styles.gradeFaces} aria-hidden="true">
-                {grade.guides.map((guide) => <Image src={guide.portrait} alt="" width={58} height={58} key={guide.name} />)}
-              </span>
-              <span className={styles.gradeGuideCopy}>
-                <strong>{grade.label}</strong>
-                <small>{grade.guides.map((guide) => guide.name).join(" · ")}</small>
-              </span>
-              <b aria-hidden="true">→</b>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       <section className={`${styles.hero} mx-auto !w-[calc(100%_-_2rem)] !max-w-7xl sm:!w-[calc(100%_-_3rem)]`} aria-labelledby="home-title">
         <Card className={styles.heroCopyCard}>
           <CardHeader className={styles.heroCopy}>
-            <HeroTitle title={hero.title} />
+            <CardTitle>
+              <HeroTitle title={hero.title} />
+            </CardTitle>
           </CardHeader>
           <CardContent className={styles.heroFeatureGrid}>
             <div className={styles.heroWeeklyLessons}>
-              <WeeklyLessonList lessons={HOME_VIDEO_SONGS.slice(2, 5)} title="New this week" limit={3} participation selected />
+              <WeeklyLessonList lessons={HOME_VIDEO_SONGS.slice(0, 3)} title="New this week" limit={3} participation selected />
             </div>
             <HomeCarousel selected />
           </CardContent>

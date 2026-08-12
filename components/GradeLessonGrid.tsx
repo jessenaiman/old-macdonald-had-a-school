@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { CLUSTERS, clusterFor } from "./SubjectDiscovery";
-import { CharacterBadge } from "./CharacterBadge";
 import { lessonHref } from "../lib/grade-routes";
 
 export type GradeLesson = {
@@ -49,7 +49,7 @@ export function GradeLessonGrid({ lessons }: { lessons: GradeLesson[] }) {
               <h3 className="gb-card-title">{lesson.title}</h3>
               {lesson.lead ? (
                 <div className="gb-card-teacher">
-                  <CharacterBadge charKey={lesson.lead.key} color="var(--navy)" name={lesson.lead.name} size={24} />
+                  <Image src={`/staff_and_students/${lesson.lead.key}-transparent-circle.png`} alt="" width={24} height={24} />
                   <span>{lesson.lead.name}</span>
                 </div>
               ) : null}
@@ -63,7 +63,7 @@ export function GradeLessonGrid({ lessons }: { lessons: GradeLesson[] }) {
                   Open lesson →
                 </Link>
               ) : (
-                <span className="gb-card-action coming-soon">In the works 🌱</span>
+                <span className="gb-card-action coming-soon">In the works</span>
               )}
             </div>
           </article>

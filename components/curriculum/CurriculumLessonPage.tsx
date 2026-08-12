@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurriculumLessonBySlug } from "../../lib/curriculum-lesson";
@@ -31,8 +30,6 @@ export async function CurriculumLessonPage({ slug }: Props) {
     list.push(s);
     standardsByFramework.set(s.framework, list);
   }
-
-  const firstGrade = lesson.grades[0];
 
   return (
     <div className={styles.page}>
@@ -132,7 +129,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
               <div className={styles.assets}>
                 {lesson.assets.map((a, i) => (
                   <a key={i} href={a.filePath || "#"} className={styles.asset} download>
-                    <span className={styles.assetIcon} aria-hidden="true">{a.type === "poster" ? "🖼" : "📄"}</span>
+                    <span className={styles.assetIcon}>{a.type === "poster" ? "Poster" : "Printable"}</span>
                     <div>
                       <strong>{a.title}</strong>
                       <span>{a.type} {a.format && `• ${a.format.toUpperCase()}`}</span>

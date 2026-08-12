@@ -53,6 +53,22 @@
   .teacherCard .teacherImage{right:-10px;bottom:-18px;width:145px;height:145px}
 }
 
+/* Shared Button defaults are single-line; pathway cards need to wrap at 320px. */
+.daycarePathway {
+  min-width: 0;
+  white-space: normal;
+  touch-action: manipulation;
+}
+
+.daycarePathway span {
+  min-width: 0;
+}
+
+.daycarePathway strong,
+.daycarePathway small {
+  overflow-wrap: anywhere;
+}
+
 /* The grade rail is a compact lesson workspace, not a second brand header. */
 .identity{
   display:grid;

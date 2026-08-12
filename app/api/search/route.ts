@@ -19,9 +19,9 @@ async function getEmbedder() {
   if (!embedderPromise) {
     embedderPromise = (async () => {
       const { pipeline, env } = await import("@xenova/transformers");
+      // Allow remote download on first use; cache persists so subsequent loads are local.
+      env.allowRemoteModels = true;
       env.allowLocalModels = true;
-      env.allowRemoteModels = false;
-      env.localModelPath = path.join(process.cwd(), "node_modules", "@xenova", "transformers", ".cache");
       const embedder = await pipeline("feature-extraction", SEMANTIC_MODEL);
       return {
         async embed(text: string): Promise<number[]> {

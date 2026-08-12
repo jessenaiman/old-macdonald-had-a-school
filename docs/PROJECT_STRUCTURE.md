@@ -1,7 +1,13 @@
 # Project structure
 
 This repository is a conventional Next.js App Router content site. The tactile visual system is rich;
-the application architecture is deliberately ordinary and requires approval before it changes.
+
+ ## USE SKILLS
+
+- frontend-design — responsive layout, visual hierarchy, and intentional UI design.- vercel:nextjs — current Next.js App Router conventions.
+- vercel:shadcn — shadcn/ui composition, accessible components, and Tailwind integration.
+- vercel:agent-browser-verify — visual responsive checks in a real browser at mobile and desktop viewports.
+- vercel:react-best-practices — review after multi-component TSX changes.
 
 The complete approved request path is:
 
@@ -79,10 +85,6 @@ application. A visual reference does not override locked cast data or the asset 
 - `scripts/content/validate.mjs` currently assumes `publicationStatus`, workbook/sheet/row provenance,
   fixed template values, and fixed section names. Those rules are premature while the spreadsheet is
   still being defined and must not be treated as the approved content contract.
-- Root demo files and `figma-copy-design/` make prototype code look production-ready.
-- Several overlapping QA and handoff documents can disagree. Use
-  `docs/PROJECT_FILE_MAP_AND_QA_START.md` as the current orientation checkpoint and update it when a
-  decision changes.
 - The old root `texture-assets/` deletion and untracked `public/texture-assets/` copy are an in-progress
   relocation. Do not restore, delete, or finalize either side without explicit approval.
 - Generated directories and logs (`.next/`, reports, test results, and local dev logs) should not be

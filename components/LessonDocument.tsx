@@ -30,7 +30,7 @@ export function LessonDocument({ Content, metadata }: { Content: ComponentType; 
           </ol>
         ) : null}
       </header>
-      <div className="lesson-markdown lesson-document-content" id="lesson-plan">
+      <div className="lesson-markdown lesson-document-content typeset typeset-farm-reading" id="lesson-plan">
         <Content />
       </div>
       {hasProvenance ? (

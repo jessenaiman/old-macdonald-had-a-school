@@ -7,16 +7,38 @@ description: Use for every Old MacDonald Had a School visual, homepage, grade, t
 
 Use this skill before selecting assets or changing visual code in this repository.
 
-## Read first
+## Start here: the compact visual catalog
 
-1. `docs/PROJECT_STRUCTURE.md`
-2. `docs/PROJECT_FILE_MAP_AND_QA_START.md`
-3. `docs/ASSET_LIBRARY_GOVERNANCE.md`
-4. `public/CAST_AND_ROLES.md`
-5. `docs/DESIGN_ASSET_MASTER_LIST.md`
-6. `docs/HOMEPAGE_REFERENCE_ASSET_INVENTORY.md` for homepage/reference work
+1. Open `/branding` in the running app. It is the visual index for approved production families, canonical
+   character pairings, exact example paths, and the main prohibited/reference-only rules.
+2. Choose a family from that page before reading directories. Do not recursively scan `public/` to discover
+   options already shown on `/branding`.
+3. Read only the targeted source needed for the choice:
+   - character identity, role, grade, or colour: the relevant row in `public/CAST_AND_ROLES.md`;
+   - asset status, ambiguity, or a proposed asset mutation: the relevant section or manifest line in
+     `docs/ASSET_LIBRARY_GOVERNANCE.md`;
+   - exact dimensions/status not shown on `/branding`: query the matching record in
+     `docs/design-asset-master-list.json` by the already-selected path.
 
-## Production lookup order
+Do not read the full governance document, full cast document, or full asset inventory by default. Full-file reads
+are reserved for governance audits or when several unrelated families are explicitly in scope.
+
+## What is available
+
+| Need | Use first | Example shown on `/branding` |
+| --- | --- | --- |
+| Character | Canonical transparent-circle portrait | `public/staff_and_students/` |
+| Character badge | Matching portrait over matching authored circle patch | `public/design-assets/blank-felt-patches-v1/individual-patches/` |
+| Felt, woven cloth, paper, cardboard | Repeatable authored material tile | `public/design-assets/web-material-library-v1/` |
+| Cork | Governed seamless tile or board piece | `public/design-assets/cork-board-kit-v1/` |
+| Attachment detail | Separated classroom fastener | `public/design-assets/classroom-fasteners-v1/individual-icons/` |
+| Curriculum signal | Approved grade or subject icon | `public/brand-kit-icon-sheets/individual-icons/` |
+
+If `/branding` does not show a suitable option, report the missing category before scanning. Then search only the
+single production family above that matches the need.
+
+
+## Targeted production lookup order
 
 - Repeating materials: `public/design-assets/web-material-library-v1/`
 - Cork surfaces: `public/design-assets/cork-board-kit-v1/`
@@ -25,6 +47,8 @@ Use this skill before selecting assets or changing visual code in this repositor
 - Canonical character portraits: `public/staff_and_students/`
 - Blank usable patches: `public/design-assets/blank-felt-patches-v1/`; reject every rectangle marked `DO NOT USE`
 - Homepage-specific reviewed assets: `public/design-assets/homepage-v2/` and, once approved, `homepage-reference-parts-v1/`
+
+Use exact paths presented by `/branding` wherever possible. A file tree listing is not an asset-selection method.
 
 Treat contact sheets, atlases, page composites, page-section crops, `figma-copy-design/`, `public/design-concepts/`,
 and `public/design-explorations-v5/` as references, never production components.
@@ -53,20 +77,21 @@ locked teaching topics and grades; if a requested association conflicts, stop an
 ## Visual implementation workflow
 
 1. Capture or inspect the current page at the target viewport before editing.
-2. Name the reference image and viewport that control the change.
-3. Reconcile every visible raster element against the inventory. Record `present`, `missing`, `reference-only`,
+2. Open `/branding`, name the shown production example(s) you will reuse, and record their exact paths.
+3. Name the reference image and viewport that control the change.
+4. Reconcile every visible raster element against the targeted catalog records. Record `present`, `missing`, `reference-only`,
    `DO NOT USE`, or `needs review`.
-4. If anything required is missing or ambiguous, follow the exact mutation approval gate in
+5. If anything required is missing or ambiguous, follow the exact mutation approval gate in
    `docs/ASSET_LIBRARY_GOVERNANCE.md`. Never approximate it.
-5. Keep navigation, headings, labels, links, and buttons as semantic React/HTML. Never use a screenshot with
+6. Keep navigation, headings, labels, links, and buttons as semantic React/HTML. Never use a screenshot with
    invisible hotspots.
-6. Use `next/image` with intrinsic dimensions or a correctly sized `fill` container to prevent layout shift.
-7. Use the existing Tailwind v4 theme and local font variables for the type scale. Do not introduce a new visual
+7. Use `next/image` with intrinsic dimensions or a correctly sized `fill` container to prevent layout shift.
+8. Use the existing Tailwind v4 theme and local font variables for the type scale. Do not introduce a new visual
    language or force single-line headings.
-8. Make grid/flex children shrinkable, allow text wrapping, and avoid fixed heights for text-bearing surfaces.
-9. Verify at matching desktop, tablet, 390px, and 320px viewports. Scan the entire document for horizontal
+9. Make grid/flex children shrinkable, allow text wrapping, and avoid fixed heights for text-bearing surfaces.
+10. Verify at matching desktop, tablet, 390px, and 320px viewports. Scan the entire document for horizontal
    overflow, clipped text, overlap, keyboard focus, reduced-motion behavior, and meaningful alt text.
-10. Run `npm.cmd run lint` and `npm.cmd run typecheck`; run the relevant runtime/visual checks for layout work.
+11. Run `npm.cmd run lint` and `npm.cmd run typecheck`; run the relevant runtime/visual checks for layout work.
 
 ## Handoff format
 

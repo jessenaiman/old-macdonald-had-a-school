@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { NativeSelect } from "@/components/ui/native-select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import styles from "./SearchPage.module.css";
 
 interface SearchResult {
@@ -96,16 +100,16 @@ function topicGuide(topic: CurriculumResult | undefined, lesson: LessonResult | 
   const title = `${topic?.lesson_topic ?? lesson?.title ?? ""} ${topic?.subject ?? lesson?.subject ?? ""}`.toLowerCase();
   const grades = (topic?.grade ?? lesson?.grade_band ?? "").toLowerCase();
   if (/pony|horse|dance|movement|music|rhythm|beat/.test(title)) {
-    return { src: "/icons/staff/mr-rusty.png", alt: "Mr Rusty, the dance and rhythm teacher" };
+    return { src: "/staff_and_students/mr-rusty-transparent-circle.png", alt: "Mr Rusty, the dance and rhythm teacher" };
   }
   if (/math|count|measure|pattern|science|build/.test(title)) {
-    return { src: "/icons/staff/mr-sam.png", alt: "Mr Sam, the math, science, and building teacher" };
+    return { src: "/staff_and_students/mr-sam-transparent-circle.png", alt: "Mr Sam, the math, science, and building teacher" };
   }
   if (/story|drama|language|literacy|rhyme|imagination/.test(title)) {
-    return { src: "/icons/staff/miss-hayley.png", alt: "Miss Hayley, the story, song, and drama teacher" };
+    return { src: "/staff_and_students/miss-hayley-transparent-circle.png", alt: "Miss Hayley, the story, song, and drama teacher" };
   }
   if (/daycare|preschool/.test(grades)) {
-    return { src: "/icons/staff/miss-puddles.png", alt: "Miss Puddles, the early-years teacher" };
+    return { src: "/staff_and_students/miss-puddles-transparent-circle.png", alt: "Miss Puddles, the early-years teacher" };
   }
   return null;
 }
@@ -147,6 +151,7 @@ export default function SearchPage() {
       const params = new URLSearchParams({ q: cleanedQuery });
       if (kindFilter) params.set("kind", kindFilter);
       if (gradeFilter) params.set("grade", gradeFilter);
+      window.history.replaceState(null, "", `/search?${params.toString()}`);
       const response = await fetch(`/api/search?${params}`);
       if (!response.ok) throw new Error("Search service did not return a usable response.");
       const baseResponse = await response.json() as SearchResponse;
@@ -229,34 +234,37 @@ export default function SearchPage() {
             <p>Old MacDonald Had a School</p>
             <h1 id="search-title">Curriculum workroom</h1>
           </div>
-          <form className={styles.searchForm} onSubmit={submitSearch} role="search">
+          <form className={styles.searchForm} onSubmit={submitSearch} role="search" aria-busy={loading}>
             <label className={styles.srOnly} htmlFor="curriculum-search">Search curriculum and teaching resources</label>
-            <input
+            <Input
               id="curriculum-search"
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Try ponies, counting, or a lesson goal"
+              name="q"
+              autoComplete="off"
+              placeholder="Try ponies, counting, or a lesson goal…"
               minLength={2}
+              required
             />
-            <button type="submit" disabled={loading || query.trim().length < 2}>
+            <Button type="submit" disabled={loading}>
               {loading ? "Searching…" : "Search"}
-            </button>
+            </Button>
           </form>
           <div className={styles.filters} aria-label="Search filters">
             <label>
               <span>Grade</span>
-              <select value={gradeFilter} onChange={(event) => setGradeFilter(event.target.value)}>
+              <NativeSelect name="grade" value={gradeFilter} onChange={(event) => setGradeFilter(event.target.value)}>
                 {GRADE_OPTIONS.map((grade) => <option key={grade.value} value={grade.value}>{grade.label}</option>)}
-              </select>
+              </NativeSelect>
             </label>
             <label>
               <span>Resource type</span>
-              <select value={kindFilter} onChange={(event) => setKindFilter(event.target.value)}>
+              <NativeSelect name="kind" value={kindFilter} onChange={(event) => setKindFilter(event.target.value)}>
                 <option value="">All resources</option>
                 <option value="song">Songs</option>
                 <option value="knowledge">Knowledge</option>
-              </select>
+              </NativeSelect>
             </label>
           </div>
         </section>
@@ -274,7 +282,7 @@ export default function SearchPage() {
           <section className={styles.errorState} role="alert">
             <h2>The search could not be completed.</h2>
             <p>{error}</p>
-            <button type="button" onClick={() => void search()}>Try again</button>
+            <Button type="button" onClick={() => void search()}>Try again</Button>
           </section>
         ) : totalCurriculum === 0 && results.length === 0 ? (
           <section className={styles.emptyState}>
@@ -304,8 +312,9 @@ export default function SearchPage() {
                     const key = `topic:${topic.id}:${topic.grade_key}`;
                     return (
                       <li key={key}>
-                        <button
+                        <Button
                           type="button"
+                          variant="ghost"
                           className={selectedKey === key ? styles.selectedResult : styles.resultButton}
                           onClick={() => setSelectedKey(key)}
                           aria-pressed={selectedKey === key}
@@ -317,7 +326,7 @@ export default function SearchPage() {
                             {topic.why_match ? <small>{topic.why_match}</small> : null}
                           </span>
                           <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}</span>
-                        </button>
+                        </Button>
                       </li>
                     );
                   })}
@@ -325,8 +334,9 @@ export default function SearchPage() {
                     const key = `lesson:${lesson.id}`;
                     return (
                       <li key={key}>
-                        <button
+                        <Button
                           type="button"
+                          variant="ghost"
                           className={selectedKey === key ? styles.selectedResult : styles.resultButton}
                           onClick={() => setSelectedKey(key)}
                           aria-pressed={selectedKey === key}
@@ -337,7 +347,7 @@ export default function SearchPage() {
                             <span>{lesson.summary || "No lesson summary is available."}</span>
                           </span>
                           <span className={styles.resultMeta}>{lesson.grade_band}<br />{lesson.subject}</span>
-                        </button>
+                        </Button>
                       </li>
                     );
                   })}
@@ -352,8 +362,8 @@ export default function SearchPage() {
 
             <aside className={styles.learningCrew} aria-label="Puddles and Rusty are excited to explore the curriculum">
               <Image className={styles.crewTape} src="/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" alt="" width={68} height={68} />
-              <Image src="/icons/staff/puddles.png" alt="Puddles" width={118} height={118} />
-              <Image src="/icons/staff/rusty.png" alt="Rusty" width={118} height={118} />
+              <Image src="/staff_and_students/puddles-transparent-circle.png" alt="Puddles" width={118} height={118} />
+              <Image src="/staff_and_students/rusty-transparent-circle.png" alt="Rusty" width={118} height={118} />
             </aside>
 
             <main className={styles.detailColumn}>
@@ -410,22 +420,19 @@ export default function SearchPage() {
                     </section>
                   </article>
 
-                  <section className={styles.resourceShelf} aria-labelledby="resources-title">
-                    <div className={styles.tabList} role="tablist" aria-label="Teaching material previews">
+                  <Tabs className={styles.resourceShelf} value={activeTab} onValueChange={(value) => setActiveTab(value as ResourceTab)}>
+                    <TabsList className={styles.tabList} aria-label="Teaching material previews">
                       {(["video", "songs", "printouts"] as const).map((tab) => (
-                        <button
+                        <TabsTrigger
                           key={tab}
-                          type="button"
-                          role="tab"
-                          aria-selected={activeTab === tab}
                           className={activeTab === tab ? styles.activeTab : styles.tab}
-                          onClick={() => setActiveTab(tab)}
+                          value={tab}
                         >
                           {tab === "songs" ? "Songs & Spotify" : tab[0].toUpperCase() + tab.slice(1)}
-                        </button>
+                        </TabsTrigger>
                       ))}
-                    </div>
-                    <div className={styles.resourceContent} role="tabpanel">
+                    </TabsList>
+                    <TabsContent className={styles.resourceContent} value={activeTab}>
                       <h2 id="resources-title" className={styles.srOnly}>Search-related teaching materials</h2>
                       {activeResources.length > 0 ? (
                         <div className={styles.resourceGrid}>
@@ -455,8 +462,8 @@ export default function SearchPage() {
                           <span>The database record is preserved, but this material type has not been linked or reviewed yet.</span>
                         </div>
                       )}
-                    </div>
-                  </section>
+                    </TabsContent>
+                  </Tabs>
                 </>
               ) : (
                 <section className={styles.resourceOnlyState}>

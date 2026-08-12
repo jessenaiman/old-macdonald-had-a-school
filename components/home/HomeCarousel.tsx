@@ -13,13 +13,13 @@ import {
 } from "@/components/ui/carousel";
 import legacyStyles from "./HomePage.module.css";
 import selectedStyles from "./BulletinHomePage.module.css";
+import { Button } from "@/components/ui/button";
 
 const SLIDES = [
-  { src: "/scenes/home-schoolhouse-classroom-hero-v1.png", alt: "Old MacDonald and the farm-school class learning together indoors", label: "Browse topics", href: "/topics" },
-  { src: "/scenes/singing-together-on-old-macs-farm.png", alt: "The farm-school class singing together", label: "Music lessons", href: "/search?q=music" },
-  { src: "/scenes/old-mac-and-barnyard-music-circle.png", alt: "Old MacDonald and the farm-school class making music in a circle", label: "Movement and music", href: "/search?q=movement+music" },
-  { src: "/scenes/old-macs-open-circle-gathering.png", alt: "The farm-school class gathered in an open circle", label: "Circle-time lessons", href: "/search?q=circle+time" },
-  { src: "/scenes/oldmac-school.png", alt: "The welcoming red barn schoolhouse", label: "Meet the school", href: "/about" },
+  { src: "/scenes/hero/old-macs-open-circle-gathering.png", alt: "Old MacDonald and the farm-school class gathered for outdoor music", label: "Meet the class", href: "/topics" },
+  { src: "/scenes/hero/home-journey-reflect-v1.png", alt: "Farm-school friends observing and caring for a young plant", label: "Explore lessons", href: "/lessons" },
+  { src: "/scenes/hero/old-mac-branding-where-did-the-folder-go.png", alt: "Old MacDonald and friends discovering music in an imaginative stitched landscape", label: "Music lessons", href: "/search?q=music" },
+  { src: "/scenes/hero/oldmac-school.png", alt: "The welcoming red barn farm school", label: "Meet the school", href: "/about" },
 ] as const;
 
 export function HomeCarousel({ selected = false }: { selected?: boolean }) {
@@ -38,7 +38,7 @@ export function HomeCarousel({ selected = false }: { selected?: boolean }) {
 
   return (
     <Carousel className={styles.carousel} opts={{ loop: true }} setApi={setApi} aria-label="Explore the farm school">
-      <div className={styles.carouselPhoto} aria-live="polite">
+      <div className={styles.carouselPhoto}>
         <CarouselContent className={styles.carouselTrack}>
           {SLIDES.map((item, index) => (
             <CarouselItem className={styles.carouselSlide} key={item.src}>
@@ -57,10 +57,13 @@ export function HomeCarousel({ selected = false }: { selected?: boolean }) {
         <div className={styles.carouselNav}>
           <div role="group" aria-label="Choose a featured scene">
             {SLIDES.map((item, index) => (
-              <button className={index === active ? styles.carouselLinkActive : undefined} type="button" aria-label={`Show ${item.label}`} aria-pressed={index === active} onClick={() => api?.scrollTo(index)} key={item.label} />
+              <Button variant="ghost" size="icon" className={index === active ? styles.carouselLinkActive : undefined} type="button" aria-label={`Show ${item.label}`} aria-pressed={index === active} onClick={() => api?.scrollTo(index)} key={item.label}>
+                <span aria-hidden="true" />
+              </Button>
             ))}
           </div>
           <Link href={slide.href}>{active === 0 ? "Meet the class" : slide.label} <span aria-hidden="true">→</span></Link>
+          <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">Showing {slide.label}</span>
         </div>
       ) : (
         <nav className={styles.carouselNav} aria-label="Farm school features">

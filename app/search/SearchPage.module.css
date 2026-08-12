@@ -33,7 +33,7 @@
 
 .searchForm { display: flex; align-items: stretch; min-width: 0; }
 .searchForm input { flex: 1 1 auto; min-width: 0; min-height: 52px; padding: 0 18px; border: 1px solid rgba(71, 55, 37, .28); border-radius: 10px 0 0 10px; color: #172f4b; background: rgba(255, 253, 247, .9); font: 600 16px/1.2 var(--font-farm-body), sans-serif; box-shadow: inset 0 2px 4px rgba(65, 45, 24, .08); }
-.searchForm input:focus { outline: 3px solid #2c6c9b; outline-offset: 2px; }
+.searchForm input:focus-visible { outline: 3px solid #2c6c9b; outline-offset: 2px; }
 .searchForm button { min-width: 104px; border: 0; border-radius: 0 10px 10px 0; color: #fff9e8; background-color: #173552; background-image: url("/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png"); background-repeat: repeat; background-size: 190px; font: 800 13px/1 var(--font-farm-body), sans-serif; cursor: pointer; box-shadow: inset 0 0 0 2px rgba(255, 241, 196, .26); }
 .searchForm button:disabled { cursor: wait; opacity: .58; }
 .searchForm button:focus-visible, .filters select:focus-visible, .resultButton:focus-visible, .selectedResult:focus-visible, .tab:focus-visible, .activeTab:focus-visible { outline: 3px solid #173552; outline-offset: 3px; }
@@ -73,7 +73,7 @@
 .searchProvenance { margin: 0; padding: 9px 20px; border-bottom: 1px solid rgba(91, 69, 42, .14); color: #496054; background: rgba(255, 250, 238, .48); font: 800 10px/1.35 var(--font-farm-body), sans-serif; letter-spacing: .02em; }
 .resultList { max-height: calc(100vh - 224px); margin: 0; padding: 8px; overflow-y: auto; list-style: none; scrollbar-color: #8b603d #f2e5ca; }
 .resultList li + li { margin-top: 6px; }
-.resultButton, .selectedResult { display: grid; grid-template-columns: 68px minmax(0, 1fr) 86px; align-items: center; gap: 11px; width: 100%; min-height: 86px; padding: 12px; border: 1px solid rgba(82, 59, 35, .16); border-radius: 9px; color: #172f4b; background: rgba(255, 253, 247, .64); text-align: left; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.resultButton, .selectedResult { display: grid; grid-template-columns: 68px minmax(0, 1fr) 86px; align-items: center; gap: 11px; width: 100%; height: auto; min-height: 86px; padding: 12px; border: 1px solid rgba(82, 59, 35, .16); border-radius: 9px; color: #172f4b; background: rgba(255, 253, 247, .64); text-align: left; white-space: normal; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
 .resultButton:hover { border-color: #a67a3c; transform: translateX(2px); }
 .selectedResult { border: 2px solid #2c6c9b; background: rgba(255, 250, 235, .96); box-shadow: 0 4px 0 rgba(44, 108, 155, .24); }
 .resultType { align-self: start; margin-top: 2px; color: #7a5b3b; font: 900 9px/1.2 var(--font-farm-body), sans-serif; letter-spacing: .07em; text-transform: uppercase; }
@@ -112,7 +112,7 @@
 .activeTab { color: #172f4b; background-color: #fff9eb; background-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png"); background-repeat: repeat; background-size: 260px; }
 .resourceContent { min-height: 190px; padding: 18px; border: 1px solid rgba(67, 48, 25, .25); border-radius: 10px; background-color: #fff9eb; background-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png"); background-repeat: repeat; background-size: 300px; box-shadow: 0 5px 0 rgba(7, 24, 39, .35); }
 .resourceGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.resourceCard { min-width: 0; padding: 15px; border: 1px solid rgba(86, 62, 36, .2); border-radius: 9px; background: rgba(255, 253, 247, .62); }
+.resourceCard { min-width: 0; padding: 15px; overflow-wrap: anywhere; border: 1px solid rgba(86, 62, 36, .2); border-radius: 9px; background: rgba(255, 253, 247, .62); }
 .resourceCard > p { margin: 0 0 5px; color: #8b603d; font: 900 9px/1 var(--font-farm-body), sans-serif; letter-spacing: .08em; text-transform: uppercase; }
 .resourceCard h3 { margin: 0 0 7px; font-family: var(--font-farm-display), Georgia, serif; font-size: 17px; }
 .resourceCard > span { display: block; color: #4e4a42; font: 600 11px/1.4 var(--font-farm-body), sans-serif; }
@@ -179,6 +179,21 @@
   .tab, .activeTab { min-width: 0; padding-inline: 6px; font-size: 10px; }
   .resourceContent { padding: 10px; }
   .resourceGrid { grid-template-columns: 1fr; }
+  .welcomeState, .emptyState, .errorState, .resourceOnlyState { margin-block: 42px; padding: 32px 18px; }
+}
+
+@media (max-width: 380px) {
+  .page { padding-inline: 6px; }
+  .searchSheet { grid-template-columns: 44px minmax(0, 1fr); gap: 9px; padding: 12px 10px; }
+  .emblem { width: 44px; height: 44px; }
+  .headingCopy p { font-size: 14px; line-height: 1.05; }
+  .filters { grid-template-columns: 1fr; }
+  .detailHeader { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+  .detailHeader h2 { font-size: 27px; }
+  .topicFigure { width: 58px; height: 58px; }
+  .resultButton, .selectedResult { grid-template-columns: 48px minmax(0, 1fr); gap: 8px; padding: 10px 8px; }
+  .resourceShelf { margin-inline: 0; }
+  .tab, .activeTab { min-height: 46px; padding-inline: 3px; font-size: 9px; white-space: normal; }
 }
 
 @media (prefers-reduced-motion: reduce) {

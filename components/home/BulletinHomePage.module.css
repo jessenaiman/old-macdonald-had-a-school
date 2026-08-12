@@ -1,30 +1,27 @@
 .homePage {
-  --home-navy: #061d34;
-  --home-navy-soft: #0b2b49;
-  --home-gold: #f2ad1f;
-  --home-cream: #fff7e5;
-  --home-ink: #173b3a;
+  --home-gold: var(--site-chrome-accent);
+  --home-cream: var(--site-chrome-foreground);
+  --home-ink: var(--foreground);
   min-width: 0;
   display: flex;
   flex-direction: column;
-  color: var(--home-cream);
-  background-color: var(--home-navy);
-  background-image: url("/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png");
+  color: var(--home-ink);
+  background-color: var(--home-surface-color);
+  background-image: var(--home-surface-texture);
   background-repeat: repeat;
-  background-size: 250px;
-  background-blend-mode: multiply;
+  background-size: 240px;
 }
 
 .homePage :is(a, button):focus-visible {
-  outline: 3px solid #ffd463;
+  outline: 3px solid var(--ring);
   outline-offset: 3px;
 }
 
 .hero {
-  order: 1;
-  width: min(1120px, calc(100% - 44px));
-  margin: 0 auto;
-  padding: 14px 0 18px;
+  order: 0;
+  width: min(1480px, 100%);
+  margin: 0 auto 18px;
+  padding: 0;
 }
 
 .heroCopyCard {
@@ -32,15 +29,18 @@
   gap: 0;
   overflow: hidden;
   padding: 0;
-  border: 1px solid rgba(214, 185, 128, .82);
-  border-radius: 12px;
-  color: #173b3a;
-  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
-  background-size: 230px;
-  box-shadow: 0 7px 0 rgba(0,0,0,.24), 0 14px 24px rgba(0,0,0,.16);
+  border: 0;
+  border-radius: 0 0 18px 18px;
+  color: var(--home-cream);
+  background-color: var(--home-board-color);
+  background-image: var(--home-board-texture);
+  background-repeat: repeat;
+  background-size: 220px;
+  background-blend-mode: multiply;
+  box-shadow: 0 8px 0 rgba(4,18,35,.28), 0 18px 28px rgba(4,18,35,.2);
 }
 
-.heroCopy { min-width: 0; gap: 0; padding: 10px 20px 4px; text-align: center; }
+.heroCopy { min-width: 0; gap: 0; padding: clamp(24px, 3vw, 38px) 20px 16px; text-align: center; }
 
 .heroCopy > p {
   margin: 0 0 11px;
@@ -54,33 +54,26 @@
 
 .heroCopy h1 {
   margin: 0;
-  color: #8f3f4c;
-  font-family: var(--font-farm-hand), cursive;
-  font-size: clamp(23px, 2vw, 29px);
-  font-weight: 700;
+  max-width: 760px;
+  margin-inline: auto;
+  color: var(--home-cream);
+  font-family: var(--font-farm-display), Georgia, serif;
+  font-size: clamp(31px, 3.5vw, 48px);
+  font-weight: 800;
   letter-spacing: 0;
-  line-height: 1.05;
+  line-height: 1.02;
+  text-wrap: balance;
 }
 
 .heroCopy h1 span { display: block; }
-.heroCopy h1 em { color: #bd4f3d; font-style: normal; }
-
-.heroSummary {
-  display: block;
-  max-width: 630px;
-  margin: 8px auto 0;
-  color: #554a3b;
-  font-family: var(--font-farm-body), sans-serif;
-  font-size: clamp(12px, 1vw, 15px);
-  line-height: 1.42;
-}
+.heroCopy h1 em { color: var(--red); font-style: normal; }
 
 .heroFeatureGrid {
   display: grid;
-  grid-template-columns: minmax(480px, 1fr) minmax(300px, 420px);
-  gap: clamp(16px, 2vw, 24px);
-  align-items: center;
-  padding: 6px clamp(18px, 2.2vw, 28px) 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+  align-items: stretch;
+  padding: 8px clamp(30px, 4vw, 54px) clamp(20px, 2.5vw, 32px);
 }
 
 .heroWeeklyLessons {
@@ -106,42 +99,18 @@
 .heroWeeklyLessons .gradeChips b { min-width: 20px; padding: 3px 4px; border: 1px solid #dfa72c; border-radius: 4px; color: #8a5700; background: #fff1c8; font: 800 8px/1 var(--font-farm-body), sans-serif; text-align: center; }
 .heroWeeklyLessons .weeklyMore { min-height: 30px; font-size: 11px; }
 
-.heroActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 0;
-  justify-content: center;
-  padding: 14px clamp(20px, 2.5vw, 36px) 18px;
-}
-
-.heroActions a {
-  display: inline-flex;
-  min-height: 40px;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  padding: 8px 17px;
-  border-radius: 7px;
-  border-radius: 5px;
-  font-family: var(--font-farm-body), sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.primaryAction { color: #1f341f; background: var(--home-gold); box-shadow: 0 4px 0 #9a650a; }
-.secondaryAction { color: #123b4a; border: 1px solid rgba(18, 59, 74, .48); background: rgba(255, 252, 241, .68); }
-
-.carousel { width: min(420px, 100%); min-width: 0; justify-self: end; }
+.carousel { width: 100%; min-width: 0; justify-self: end; }
 
 .carouselPhoto {
   position: relative;
   width: 100%;
-  height: clamp(125px, 11vw, 150px);
+  height: auto;
+  aspect-ratio: 16 / 9;
   border: 8px solid transparent;
-  border-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") 22 round;
-  background: #362716;
+  border-image: var(--home-paper-texture) 22 round;
+  background-color: var(--home-board-color);
+  background-image: var(--home-board-texture);
+  background-size: 220px;
   box-shadow: 0 10px 0 rgba(0, 0, 0, 0.28), 0 17px 27px rgba(0, 0, 0, 0.22);
   transform: rotate(0.7deg);
 }
@@ -177,7 +146,7 @@
   border: 1px solid #d8c7a4;
   border-radius: 50%;
   color: #173d3b;
-  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background: var(--home-paper-texture) repeat;
   background-size: 140px;
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.26);
   font: 27px/1 Georgia, serif;
@@ -205,17 +174,22 @@
 }
 
 .carouselNav button {
-  width: 42px;
-  height: 5px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
-  border-radius: 9px;
-  background: rgba(255, 247, 222, 0.4);
+  border-radius: 50%;
+  background: transparent;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
-.carouselNav button.carouselLinkActive { background: var(--home-gold); }
+.carouselNav button > span { width: 42px; height: 5px; border-radius: 9px; background: rgba(255, 247, 222, 0.4); }
+.carouselNav button.carouselLinkActive > span { background: var(--home-gold); }
+.carouselNav button:hover > span { background: #fff7de; }
+.carouselNav button:active > span { transform: scaleX(.9); }
 .carouselNav > a { color: #fff7e3; font: 700 12px/1.2 var(--font-farm-body), sans-serif; }
+.carouselNav > a:hover { color: var(--home-gold); text-decoration: underline; text-underline-offset: 3px; }
 
 .bulletinBoard {
   order: 2;
@@ -224,7 +198,7 @@
   margin: 0 auto;
   padding: clamp(43px, 3.5vw, 54px) clamp(24px, 2.5vw, 40px) clamp(22px, 2vw, 30px);
   color: var(--home-ink);
-  background: url("/design-assets/cork-board-kit-v1/medium-board.png") center / 100% 100% no-repeat;
+  background: var(--home-cork-board) center / 100% 100% no-repeat;
   filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.28));
 }
 
@@ -241,7 +215,7 @@
   margin: 0;
   padding: 6px clamp(24px, 3vw, 48px);
   color: #244c45;
-  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background: var(--home-paper-texture) repeat;
   background-size: 210px;
   box-shadow: 0 3px 4px rgba(66, 42, 20, 0.24);
   font-family: var(--font-farm-hand), cursive;
@@ -263,7 +237,7 @@
   overflow: visible;
   border: 1px solid rgba(98, 67, 34, 0.33);
   border-radius: 5px;
-  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
+  background: var(--home-paper-texture) repeat;
   background-size: 240px;
   box-shadow: 3px 5px 0 rgba(74, 48, 24, 0.28);
 }
@@ -352,19 +326,6 @@
 .learnerBand span { font: 800 11px/1.15 var(--font-farm-body), sans-serif; }
 .learnerBand img { width: 40px; height: 40px; flex: 0 0 auto; object-fit: contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.32)); }
 
-.weeklySection {
-  order: 3;
-  display: grid;
-  grid-template-columns: 1fr;
-  width: min(1420px, calc(100% - 58px));
-  margin: 12px auto 0;
-  overflow: hidden;
-  border: 1px solid rgba(99, 74, 38, 0.46);
-  background: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png") repeat;
-  background-size: 280px;
-  box-shadow: 0 5px 0 rgba(0,0,0,.24);
-}
-
 .weeklyList { min-width: 0; color: #243b46; }
 .weeklyList + .weeklyList { border-left: 1px dashed rgba(190, 73, 91, 0.55); }
 .weeklyList > header { display: flex; min-height: 36px; align-items: center; justify-content: space-between; padding: 6px 16px 5px; border-bottom: 1px solid rgba(80, 104, 113, 0.22); }
@@ -379,84 +340,14 @@
 .gradeChips, .lessonAction { display: none; }
 .weeklyMore { display: flex; min-height: 28px; align-items: center; justify-content: center; color: #244c58; font: 800 10px/1 var(--font-farm-body), sans-serif; }
 
-.gradeGuide {
-  order: 0;
-  width: min(1420px, calc(100% - 58px));
-  margin: 12px auto 0;
-  padding: 10px 0 5px;
-  border-top: 1px solid rgba(240, 186, 73, 0.35);
-}
-
-.gradeGuide > h2 { margin: 0 0 11px; color: #f2b22e; font: 900 16px/1.25 var(--font-farm-body), sans-serif; }
-.gradeGuideGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; }
-
-.gradeGuideCard {
-  display: grid;
-  min-width: 0;
-  min-height: 62px;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: center;
-  padding: 8px 12px;
-  overflow: hidden;
-  border: 1px solid rgba(242, 189, 83, 0.45);
-  border-radius: 6px;
-  color: #fff8e8;
-  background-image: var(--grade-texture);
-  background-repeat: repeat;
-  background-size: 180px;
-  box-shadow: 0 3px 0 rgba(0,0,0,.26);
-  text-decoration: none;
-}
-
-.gradeFaces { display: flex; align-items: center; }
-.gradeFaces img { width: 43px; height: 43px; object-fit: contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
-.gradeFaces img + img { margin-left: -17px; }
-.gradeGuideCopy { display: flex; min-width: 0; flex-direction: column; }
-.gradeGuideCopy strong { font-family: var(--font-farm-body), sans-serif; font-size: clamp(17px, 1.5vw, 22px); font-weight: 900; letter-spacing: -0.015em; line-height: 1.08; }
-.gradeGuideCopy small { margin-top: 4px; overflow: hidden; font: 700 9px/1.2 var(--font-farm-body), sans-serif; text-overflow: ellipsis; white-space: nowrap; }
-.gradeGuideCard > b { color: #ffd056; font-size: 20px; }
-
-.utilityFooter {
-  order: 5;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  width: min(1420px, calc(100% - 58px));
-  margin: 10px auto 0;
-  border-top: 1px solid rgba(240, 186, 73, 0.35);
-}
-
-.utilityFooter a {
-  display: flex;
-  min-width: 0;
-  min-height: 52px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px;
-  color: #fff5dc;
-  border-left: 1px solid rgba(255,255,255,.15);
-  font: 700 11px/1.2 var(--font-farm-body), sans-serif;
-  text-decoration: none;
-  text-align: center;
-}
-
-.utilityFooter a:first-child { border-left: 0; }
-.utilityFooter svg { color: var(--home-gold); font-size: 19px; }
-
 @media (max-width: 1000px) {
-  .hero { width: min(768px, calc(100% - 30px)); padding-block: 13px 10px; }
+  .hero { width: 100%; margin-block: 0 10px; }
   .heroCopy { text-align: center; }
-  .heroCopy h1 { font-size: clamp(22px, 3.8vw, 27px); line-height: 1.05; }
-  .heroSummary { max-width: 650px; margin-top: 7px; font-size: 12px; line-height: 1.3; }
-  .heroActions { margin-top: 9px; }
-  .heroSummary { margin-inline: auto; }
-  .heroActions { justify-content: center; }
-  .heroFeatureGrid { grid-template-columns: minmax(330px, 1fr) minmax(280px, 360px); gap: 15px; padding-inline: 18px; }
+  .heroCopy h1 { font-size: clamp(30px, 5vw, 40px); line-height: 1.05; }
+  .heroFeatureGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; padding-inline: 28px; }
   .heroWeeklyLessons .weeklyList li { grid-template-columns: 18px minmax(0, 1fr) auto; }
   .heroWeeklyLessons .participationWays { display: none; }
-  .carousel { width: min(360px, 100%); margin: 0 auto; }
-  .carouselPhoto { height: clamp(112px, 16vw, 135px); }
+  .carousel { width: 100%; margin: 0 auto; }
   .subjectGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .subjectCard > a { min-height: 111px; }
   .subjectMain { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 9px; align-items: center; padding: 8px 12px 6px; }
@@ -470,54 +361,17 @@
   .learnerBand { min-height: 30px; padding-block: 2px; }
   .learnerBand img { width: 29px; height: 29px; }
   .learnerBand span { font-size: 10px; }
-  .gradeGuideGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .utilityFooter { width: min(768px, calc(100% - 30px)); }
 }
 
 @media (max-width: 680px) {
-  .gradeGuide {
-    order: 0;
-    width: 100%;
-    margin: 0;
-    padding: 10px 10px 9px;
-    border-top: 0;
-    border-bottom: 1px solid rgba(240, 186, 73, 0.35);
-    background: rgba(2, 18, 32, 0.72);
-  }
-  .gradeGuide > h2 {
-    margin: 0 0 7px;
-    color: #ffd36c;
-    font: 900 15px/1.2 var(--font-farm-body), sans-serif;
-    text-align: center;
-  }
-  .gradeGuideGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
-  .gradeGuideCard { min-height: 58px; gap: 6px; padding: 5px 7px; }
-  .gradeFaces img { width: 31px; height: 31px; }
-  .gradeFaces img + img { margin-left: -14px; }
-  .gradeGuideCopy strong { font-size: 14px; }
-  .gradeGuideCopy small {
-    margin-top: 2px;
-    overflow: visible;
-    font-size: 7px;
-    line-height: 1.05;
-    text-overflow: clip;
-    white-space: normal;
-  }
-  .gradeGuideCard > b { font-size: 15px; }
-
-  .hero { width: calc(100% - 28px); gap: 7px; padding: 10px 0 8px; }
+  .hero { width: calc(100% - 28px); gap: 7px; margin: 10px auto 8px; }
   .heroCopy > p { display: none; }
-  .heroCopy { padding: 8px 12px 2px; }
-  .heroCopy h1 { font-size: clamp(21px, 6vw, 24px); line-height: 1.05; }
-  .heroSummary { max-width: 350px; margin-top: 8px; font-size: 13px; line-height: 1.42; }
-  .heroActions { display: grid; grid-template-columns: 1fr; gap: 5px; margin-top: 7px; }
-  .heroFeatureGrid { grid-template-columns: 1fr; gap: 10px; padding: 0 10px; }
+  .heroCopy { padding: 22px 16px 10px; }
+  .heroCopy h1 { font-size: clamp(28px, 9vw, 37px); line-height: 1.03; }
+  .heroFeatureGrid { grid-template-columns: 1fr; gap: 22px; padding: 4px 18px 28px; }
   .heroWeeklyLessons { margin: 0; }
   .heroWeeklyLessons .weeklyList li { grid-template-columns: 18px minmax(0, 1fr) auto; padding-inline: 9px; }
-  .heroActions a { width: 100%; min-height: 44px; padding-block: 6px; font-size: 10px; }
-  .primaryAction { display: none !important; }
-  .carousel { width: min(320px, 100%); }
-  .carouselPhoto { height: clamp(92px, 26vw, 108px); }
+  .carousel { width: 100%; }
   .carouselPhoto { border-width: 5px; transform: none; }
   .photoPinLeft, .photoPinRight { top: -16px; width: 28px; height: 28px; }
   .photoPinLeft { left: -15px; }
@@ -527,7 +381,8 @@
   .carouselNext { right: -15px; }
   .carouselNav { grid-template-columns: 1fr auto; justify-items: center; margin-top: 4px; }
   .carouselNav > div { gap: 12px; }
-  .carouselNav button { width: 34px; }
+  .carouselNav button { width: 44px; height: 44px; }
+  .carouselNav button > span { width: 34px; }
   .carouselNav > a { font-size: 10px; }
   .bulletinBoard { width: calc(100% - 20px); padding: 38px 10px 13px; background-image: url("/design-assets/cork-board-kit-v1/vertical-board.png"); }
   .subjectHeading { top: 10px; }
@@ -546,24 +401,9 @@
   .learnerBand { min-height: 34px; padding: 2px 7px 2px 11px; }
   .learnerBand img { width: 32px; height: 32px; }
   .learnerBand span { font-size: 10px; }
-  .weeklySection { grid-template-columns: 1fr; width: calc(100% - 20px); margin-top: 9px; }
-  .weeklyList + .weeklyList { border-top: 1px dashed rgba(190, 73, 91, 0.55); border-left: 0; }
-  .weeklyList > header { min-height: 30px; padding-block: 4px; }
-  .weeklyList h2 { font-size: 16px; }
-  .weeklyList li { min-height: 29px; grid-template-columns: 18px minmax(0, 1fr); padding: 3px 11px; }
-  .weeklyMore { min-height: 24px; }
-  .participationWays { display: none; }
-  .utilityFooter { grid-template-columns: repeat(5, minmax(0, 1fr)); width: calc(100% - 20px); }
-  .utilityFooter a { min-height: 58px; flex-direction: column; gap: 5px; padding: 6px 3px; font-size: 7px; }
-  .utilityFooter svg { font-size: 17px; }
 }
 
 @media (max-width: 420px) {
-  .gradeGuideGrid { grid-template-columns: 1fr; }
-  .gradeGuideCard { min-height: 54px; padding-inline: 11px; }
-  .gradeFaces img { width: 39px; height: 39px; }
-  .gradeGuideCopy strong { font-size: 17px; }
-  .gradeGuideCopy small { font-size: 8px; }
   .heroCopy h1 { font-size: clamp(20px, 6vw, 23px); }
 }
 
@@ -573,9 +413,8 @@
   .subjectHeading h2 { max-width: calc(100vw - 54px); padding-inline: 16px; }
   .subjectMain { grid-template-columns: 58px minmax(0, 1fr); }
   .subjectIcon { width: 56px; height: 56px; }
-  .gradeFaces img { width: 38px; height: 38px; }
-  .gradeGuideCopy strong { font-size: 17px; }
-  .utilityFooter a { font-size: 7px; }
+  .carouselNav { grid-template-columns: 1fr; gap: 2px; }
+  .carouselNav > a { justify-self: end; padding-inline: 4px; white-space: nowrap; }
 }
 
 @media (prefers-reduced-motion: reduce) {

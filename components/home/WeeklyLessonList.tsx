@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaEarListen, FaMicrophone, FaMusic, FaPersonWalking, FaWaveSquare } from "react-icons/fa6";
+import Image from "next/image";
 import { lessonHref } from "@/lib/grade-routes";
 import legacyStyles from "./HomePage.module.css";
 import selectedStyles from "./BulletinHomePage.module.css";
@@ -48,7 +48,7 @@ export function WeeklyLessonList({
       <ul>
         {lessons.slice(0, limit).map((lesson) => (
           <li key={lesson.slug}>
-            <FaMusic className={styles.noteIcon} aria-hidden="true" />
+            <Image className={styles.noteIcon} src="/brand-kit-icon-sheets/individual-icons/subject-music-dance.png" alt="" width={24} height={24} />
             <Link
               href={lesson.href ?? lessonHref(lesson)}
               target={lesson.href?.startsWith("https://") ? "_blank" : undefined}
@@ -58,16 +58,16 @@ export function WeeklyLessonList({
             </Link>
             {participation ? (
               <span className={styles.participationWays} role="group" aria-label="Ways to join: listen, move, hum, or sing">
-                <span><FaEarListen aria-hidden="true" />Listen</span>
-                <span><FaPersonWalking aria-hidden="true" />Move</span>
-                <span><FaWaveSquare aria-hidden="true" />Hum</span>
-                <span><FaMicrophone aria-hidden="true" />Sing</span>
+                <span>Listen</span>
+                <span>Move</span>
+                <span>Hum</span>
+                <span>Sing</span>
               </span>
             ) : <p>{lesson.summary}</p>}
-            <span className={styles.gradeChips} role="img" aria-label={`Best for ${lesson.grade}`}>
+            <span className={styles.gradeChips} role="group" aria-label={`Best for ${lesson.grade}`}>
               {gradeChips(lesson.grade).map((grade) => <b key={grade}>{grade}</b>)}
             </span>
-            {selected ? <Link className={styles.lessonAction} href={lesson.href ?? lessonHref(lesson)}>Play lesson <span aria-hidden="true">→</span></Link> : null}
+            {selected ? null : <Link className={styles.lessonAction} href={lesson.href ?? lessonHref(lesson)}>Play lesson <span aria-hidden="true">→</span></Link>}
           </li>
         ))}
       </ul>

@@ -5,28 +5,42 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { MobileNavigation } from "./MobileNavigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { activePageFromPathname, GRADE_NAV_ITEMS, TEACHER_GRADE_ITEMS } from "./site-navigation";
+import { activePageFromPathname, GRADE_NAV_ITEMS } from "./site-navigation";
 
 export function SiteHeader() {
   const active = activePageFromPathname(usePathname());
-  const teacherMenuIsActive = TEACHER_GRADE_ITEMS.some((grade) => grade.key === active);
 
   return <header className="site-header material-site-fabric">
-    <div className="site-header-inner container mx-auto !w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="site-header-inner">
       <Link className="site-brand" href="/" aria-label="Old MacDonald Had a School home">
         <Image src="/brand-emblem.png" alt="" width={44} height={44} priority />
         <span><strong><span className="site-brand-full">Old MacDonald Had a School</span><span className="site-brand-short">Old MacDonald</span></strong><small>Had a School</small></span>
       </Link>
-      <nav className="site-nav-desktop" aria-label="Primary navigation">
-        <Link className={`site-nav-link${active === "lessons" ? " is-active" : ""}`} href="/lessons" aria-current={active === "lessons" ? "page" : undefined}>Lessons</Link>
-        <Link className={`site-nav-link${active === "topics" ? " is-active" : ""}`} href="/#browse-by-subject" aria-current={active === "topics" ? "page" : undefined}>Subjects</Link>
-        <details className="site-teacher-menu"><summary className={`site-nav-link${teacherMenuIsActive ? " is-active" : ""}`}>For Teachers</summary><nav aria-label="Grade destinations">{TEACHER_GRADE_ITEMS.map((grade) => <Link href={grade.href} key={grade.key} aria-current={active === grade.key ? "page" : undefined}>{grade.label}</Link>)}</nav></details>
-        <Link className={`site-nav-link${active === "cast-guide" ? " is-active" : ""}`} href="/branding" aria-current={active === "cast-guide" ? "page" : undefined}>Brand guide</Link>
-        <Link className={`site-nav-link${active === "about" ? " is-active" : ""}`} href="/about" aria-current={active === "about" ? "page" : undefined}>About</Link>
-        <Link className={`site-nav-search${active === "search" ? " is-active" : ""}`} href="/search" aria-label="Search lessons" aria-current={active === "search" ? "page" : undefined}><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link>
-      </nav>
+      <NavigationMenu className="site-nav-desktop" aria-label="Primary navigation" viewport={false}>
+        <NavigationMenuList>
+          {GRADE_NAV_ITEMS.map((grade) => {
+            const isActive = active === grade.key || grade.children?.some((child) => child.key === active);
+            return <NavigationMenuItem key={grade.key}>
+              <NavigationMenuLink asChild active={isActive}>
+                <Link className={`site-nav-link site-nav-grade site-nav-grade-${grade.key}${isActive ? " is-active" : ""}`} href={grade.href} aria-current={isActive ? "page" : undefined}>{grade.label}</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>;
+          })}
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild active={active === "search"}>
+              <Link className={`site-nav-search${active === "search" ? " is-active" : ""}`} href="/search" aria-label="Search lessons" aria-current={active === "search" ? "page" : undefined}><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
       <div className="site-desktop-theme"><ThemeSwitcher /></div>
       <div className="site-mobile-actions">
         <Button asChild variant="ghost" size="icon" className="site-mobile-search">

@@ -29,7 +29,7 @@ export function DatabaseLessonDocument({ topic }: { topic: CurriculumTopic }) {
           <div><dt>Standards</dt><dd>{available(topic.standards)}</dd></div>
         </dl>
       </header>
-      <div className="lesson-markdown lesson-document-content" id="lesson-plan">
+      <div className="lesson-markdown lesson-document-content typeset typeset-farm-reading" id="lesson-plan">
         <h2>Curriculum focus</h2>
         <p>{available(topic.skillStatement)}</p>
         <h2>Teaching sequence</h2>

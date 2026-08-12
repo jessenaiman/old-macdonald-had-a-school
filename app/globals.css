@@ -39,6 +39,39 @@
   --color-site-chrome-accent: var(--site-chrome-accent);
 }
 
+/* Shadcn Typeset rhythm mapped to the farm-school font system. Layout remains
+   owned by each page; these presets own semantic reading and compact UI type. */
+.typeset-farm-ui {
+  --typeset-font-body: var(--font-farm-body);
+  --typeset-font-heading: var(--font-farm-display);
+  --typeset-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --typeset-size: 14px;
+  --typeset-leading: 1.55;
+  --typeset-flow: 1em;
+  font-family: var(--typeset-font-body), sans-serif;
+  font-size: var(--typeset-size);
+  line-height: var(--typeset-leading);
+}
+
+.typeset-farm-reading {
+  --typeset-font-body: var(--font-farm-body);
+  --typeset-font-heading: var(--font-farm-display);
+  --typeset-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --typeset-size: 16px;
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.35em;
+  font-family: var(--typeset-font-body), sans-serif;
+  font-size: var(--typeset-size);
+  line-height: var(--typeset-leading);
+}
+
+.typeset-farm-reading :where(h1,h2,h3,h4) {
+  font-family: var(--typeset-font-heading), sans-serif;
+  text-wrap: balance;
+}
+
+.typeset-farm-reading :where(p,ul,ol,blockquote,table):not(:first-child) { margin-block-start: var(--typeset-flow); }
+
 :root {
   --navy:#0b1a33; --blue:#3f78a4; --sky:#b9d3e6; --cool-white:#f2e8d0; --sunlit:#e9c65b; --gold:#e1b84b; --red:#c33f3f; --coral:#d45d6d; --pink:#d98291; --plum:#8d7aa8; --orange:#d97a2b; --brown:#4b5563; --green:#3f78a4; --ink:#172238; --heading:#0b1a33; --muted:#3d4650; --surface-soft:#f8fbfd; --hero-text:#e7f0f7; --paper:#fbfcf8; --line:#cdd9e6;
   /* Real value gap between the craft-paper page and the felt patches sewn onto
@@ -70,6 +103,21 @@
   --site-chrome-leather:url("/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png");
   --site-chrome-texture-size:230px;
   --site-chrome-blend:multiply;
+  --home-surface-color:#2c6c9b;
+  --home-surface-texture:url("/design-assets/web-material-library-v1/woven-fabric/woven-fabric-03-mr-rusty-tile.png");
+  --home-board-color:#0b2b49;
+  --home-board-texture:url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  --home-paper-texture:url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
+  --home-cork-board:url("/design-assets/cork-board-kit-v1/medium-board.png");
+  /* Production materials consumed by the site and demonstrated on /branding. */
+  --brand-ink:#173552;
+  --brand-copy:#574d40;
+  --brand-paper-color:#f7e8c8;
+  --brand-paper-texture:var(--home-paper-texture);
+  --brand-kraft-color:#f0d49c;
+  --brand-kraft-texture:url("/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png");
+  --brand-cork-color:#bd762f;
+  --brand-cork-texture:url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png");
 }
 @theme inline { --color-brand-navy:var(--navy); --color-brand-blue:var(--blue); --color-brand-sky:var(--sky); --color-brand-gold:var(--gold); --color-brand-red:var(--red); --color-brand-coral:var(--coral); --color-brand-pink:var(--pink); --color-brand-plum:var(--plum); --color-brand-orange:var(--orange); --color-brand-paper:var(--paper); --color-brand-line:var(--line); }
 
@@ -132,11 +180,9 @@ body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index
 .theme-switcher-item[data-state="on"] { color:var(--navy); background:var(--sunlit); }
 .theme-switcher-item:focus-visible { outline:2px solid var(--sunlit); outline-offset:2px; }
 
-/* Character badge â€” bust (public/icons/staff) on a color-coded
-   circle. Bright/bold by design: staff coded by subject, students by their
-   canonical signature color (see lib/cast.ts). Felt-stitched ring matches
-   the site's sewn-patch language. */
-.char-badge { display:inline-flex; position:relative; flex:0 0 auto; align-items:flex-end; justify-content:center; overflow:hidden; box-shadow:0 0 0 2px #ffffff40, 0 3px 0 #0000003d, inset 0 1px 0 #ffffff30; background-image:var(--grain-coarse); background-blend-mode:soft-light; background-size:60px 60px; }
+/* Canonical circular portraits may be sized here; authored badge pairings
+   use the matching portrait and felt patch documented on /branding. */
+.char-badge { display:inline-flex; position:relative; flex:0 0 auto; align-items:flex-end; justify-content:center; overflow:hidden; filter:drop-shadow(0 3px 1px #0000003d); }
 .char-badge--circle { border-radius:50%; }
 .char-badge--square { border-radius:18%; }
 .char-badge--empty { opacity:.55; }
@@ -194,8 +240,7 @@ h1 { margin:0; color:var(--heading); font-family:"Aptos Display","Trebuchet MS",
    color), --st-h (hover thread), --st-inset, --st-r, --st-shadow (step color). */
 .stitch { position:relative; box-shadow:0 4px 0 var(--st-shadow,rgba(0,0,0,.22)), 0 3px 10px rgba(0,0,0,.12); }
 .stitch::before { content:""; position:absolute; inset:var(--st-inset,6px); border-radius:var(--st-r,8px); box-shadow:inset 0 2px 5px rgba(0,0,0,.16), inset 0 0 0 1px rgba(0,0,0,.06); pointer-events:none; }
-.stitch::after { content:""; position:absolute; inset:calc(var(--st-inset,6px) + 3px); border-radius:calc(var(--st-r,8px) - 2px); border:2px dashed var(--st,#c0941e73); filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.2)) drop-shadow(0 -0.5px 0 rgba(255,255,255,.5)); pointer-events:none; transition:border-color .18s ease; }
-.stitch:hover::after { border-color:var(--st-h,#c0941e); }
+.stitch::after { content:""; position:absolute; inset:calc(var(--st-inset,6px) + 3px); background:url("/texture-assets/stitch-horizontal.png") top/auto 4px repeat-x,url("/texture-assets/stitch-horizontal.png") bottom/auto 4px repeat-x,url("/texture-assets/stitch-vertical.png") left/4px auto repeat-y,url("/texture-assets/stitch-vertical.png") right/4px auto repeat-y; pointer-events:none; }
 @keyframes spin { to { transform:rotate(360deg); } }
 @keyframes rise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 
@@ -2119,7 +2164,7 @@ a { color: inherit; }
 .grade-grid { width:1370px; max-width:calc(100vw - 64px); gap:14px; margin:0 auto; }
 .grade-card { --grade-shadow:#07182b; min-height:104px; align-items:center; padding:10px 12px 10px 72px; border:0; border-radius:17px; background-image:linear-gradient(180deg,rgba(255,255,255,.045),transparent 42%),var(--grain-coarse); background-size:auto,150px 150px; background-blend-mode:normal,soft-light; box-shadow:5px 6px 0 var(--grade-shadow),0 12px 22px rgba(3,12,24,.28),inset 0 1px 0 rgba(255,255,255,.2); }
 .grade-card::before { content:""; position:absolute; inset:2px; border:1px solid rgba(255,249,232,.7); border-radius:14px; box-shadow:inset 0 0 0 1px rgba(30,18,10,.2),0 1px 0 rgba(255,255,255,.22); pointer-events:none; }
-.grade-card::after { inset:8px; border:0; border-radius:9px; background:repeating-linear-gradient(115deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) top left 6px / calc(100% - 12px) 3px no-repeat,repeating-linear-gradient(65deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) bottom left 6px / calc(100% - 12px) 3px no-repeat,repeating-linear-gradient(25deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) top 6px left / 3px calc(100% - 12px) no-repeat,repeating-linear-gradient(155deg,transparent 0 5px,rgba(255,252,240,.94) 5px 6.5px,transparent 6.5px 10px) top 6px right / 3px calc(100% - 12px) no-repeat; filter:drop-shadow(0 1px 0 rgba(0,0,0,.62)); opacity:.94; }
+.grade-card::after { inset:8px; border:0; border-radius:9px; background:url("/texture-assets/stitch-horizontal.png") top/auto 4px repeat-x,url("/texture-assets/stitch-horizontal.png") bottom/auto 4px repeat-x,url("/texture-assets/stitch-vertical.png") left/4px auto repeat-y,url("/texture-assets/stitch-vertical.png") right/4px auto repeat-y; filter:drop-shadow(0 1px 0 rgba(0,0,0,.62)); opacity:.94; }
 .grade-card:hover { box-shadow:5px 9px 0 var(--grade-shadow),0 15px 24px rgba(3,12,24,.28),inset 0 1px 0 rgba(255,255,255,.2); }
 .grade-card-early-years { background-color:#7744cc; }
 .grade-card-pre-school { background-color:#3f7a4f; }
@@ -2138,7 +2183,7 @@ a { color: inherit; }
 .grade-card-copy span { margin-top:3px; font-family:var(--font-hand); font-size:15px; font-style:italic; line-height:1; }
 .grade-card-copy small { margin-top:4px; font-size:9px; line-height:1.1; opacity:.76; }
 .grade-card-copy b { position:relative; margin-top:7px; padding:7px 12px; border:0; border-radius:8px; background:rgba(8,23,45,.27); box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset 0 2px 3px rgba(0,0,0,.28),1px 2px 0 rgba(4,15,28,.24); font-size:10px; }
-.grade-card-copy b::after { content:""; position:absolute; inset:3px; border:0; border-radius:5px; background:repeating-linear-gradient(115deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) top left 4px / calc(100% - 8px) 2px no-repeat,repeating-linear-gradient(65deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) bottom left 4px / calc(100% - 8px) 2px no-repeat,repeating-linear-gradient(25deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) top 4px left / 2px calc(100% - 8px) no-repeat,repeating-linear-gradient(155deg,transparent 0 4px,rgba(255,252,240,.92) 4px 5.25px,transparent 5.25px 8px) top 4px right / 2px calc(100% - 8px) no-repeat; filter:drop-shadow(0 1px 0 rgba(0,0,0,.64)); pointer-events:none; }
+.grade-card-copy b::after { content:""; position:absolute; inset:3px; border:0; border-radius:5px; background:url("/texture-assets/stitch-horizontal.png") top/auto 3px repeat-x,url("/texture-assets/stitch-horizontal.png") bottom/auto 3px repeat-x,url("/texture-assets/stitch-vertical.png") left/3px auto repeat-y,url("/texture-assets/stitch-vertical.png") right/3px auto repeat-y; filter:drop-shadow(0 1px 0 rgba(0,0,0,.64)); pointer-events:none; }
 .grade-card-copy b span { margin:0; font-family:var(--font-body); font-size:12px; font-style:normal; }
 .home-hero-board { position:relative; display:grid; grid-template-columns:minmax(0,1fr) 350px; align-items:center; gap:clamp(34px,5vw,68px); min-height:267px; margin:0; padding:24px max(35px,calc((100vw - 1370px) / 2)); overflow:hidden; border:0; border-radius:0 0 14px 14px; color:#fff; background-color:#123352; background-image:linear-gradient(120deg,#0d2846 0%,#143b60 66%,#28668d 100%),var(--grain-coarse); background-size:cover,160px 160px; background-blend-mode:normal,soft-light; box-shadow:inset 0 0 0 7px rgba(5,22,42,.3),0 9px 0 rgba(8,27,47,.28),0 18px 30px rgba(30,22,13,.14); }
 .home-hero-board::before { display:block; content:""; position:absolute; width:310px; height:310px; left:-26px; top:-170px; border:27px solid rgba(185,211,230,.16); border-radius:50%; box-shadow:0 0 0 27px rgba(233,198,91,.09); pointer-events:none; }
@@ -2767,7 +2812,9 @@ html.dark .site-review {
 .site-review.site-shell-home .site-page {
   min-height: 0;
   padding: 0;
-  background: #071f3b url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png") repeat;
+  background-color: var(--home-surface-color);
+  background-image: var(--home-surface-texture);
+  background-repeat: repeat;
   background-size: 240px;
 }
 
@@ -3483,6 +3530,66 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   .site-review.site-chrome-home .theme-switcher{order:3;width:40px;min-width:40px;height:44px;min-height:44px}
 }
 
+/* Persistent grade navigation: the shadcn Sheet is a phone pattern, not the
+   default navigation for tablet and compact desktop widths. */
+.site-review.site-chrome-home .site-header-inner{
+  width:min(1390px,calc(100% - 32px));
+}
+.site-review.site-chrome-home .site-brand{
+  min-width:clamp(220px,28vw,300px);
+}
+.site-review.site-chrome-home .site-nav-desktop{
+  gap:clamp(7px,1.2vw,18px);
+}
+.site-review.site-chrome-home .site-nav-desktop .site-nav-grade{
+  min-height:40px;
+  padding:4px clamp(8px,1vw,14px);
+  border:1px solid rgba(255,248,226,.45);
+  border-radius:8px;
+  color:#fff8e8;
+  background-color:var(--nav-grade-color);
+  background-image:var(--nav-grade-texture);
+  background-size:150px;
+  background-blend-mode:soft-light;
+  box-shadow:inset 0 0 0 1px rgba(19,31,24,.18),0 2px 0 var(--nav-grade-edge);
+  font:700 clamp(11px,1.15vw,14px)/1.05 Georgia,"Times New Roman",serif;
+  text-shadow:0 1px 1px rgba(0,0,0,.34);
+}
+@media(max-width:1000px){
+  .site-review.site-chrome-home .site-nav-desktop{display:flex!important}
+  .site-review.site-chrome-home .site-desktop-theme{display:block!important}
+  .site-review.site-chrome-home .site-mobile-actions{display:none!important}
+  .site-review.site-chrome-home .site-brand{min-width:clamp(190px,27vw,250px)}
+  .site-review.site-chrome-home .site-brand strong{font-size:clamp(12px,1.7vw,15px)}
+  .site-review.site-chrome-home .site-nav-search span{display:none}
+}
+@media(max-width:760px){
+  .site-review.site-chrome-home .site-nav-desktop,
+  .site-review.site-chrome-home .site-desktop-theme{display:none!important}
+  .site-review.site-chrome-home .site-mobile-actions{display:flex!important;align-items:center;gap:4px;margin-left:auto}
+  .site-review.site-chrome-home .site-header-inner{width:calc(100% - 22px)}
+  .site-review.site-chrome-home .site-mobile-menu-trigger .sr-only,
+  .site-review.site-chrome-home .site-mobile-search .sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    clip-path:inset(50%);
+    white-space:nowrap;
+    border:0;
+  }
+}
+.site-review.site-chrome-home .site-nav-search{
+  color:#fff0d0;
+}
+.site-review.site-chrome-home .site-nav-search:hover,
+.site-review.site-chrome-home .site-nav-search.is-active{
+  color:#f1c95d;
+}
+
 /* Teacher-first mobile navigation: quiet paper index over the authored cork surface. */
 .site-review .site-mobile-menu > nav {
   top: calc(100% + 10px);
@@ -3847,14 +3954,23 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 .site-review.site-chrome-home .site-footer-fastener-left{left:clamp(14px,2.5vw,42px)}
 .site-review.site-chrome-home .site-footer-fastener-right{right:clamp(14px,2.5vw,42px)}
 .site-review.site-chrome-home .site-footer>div{position:relative;z-index:1}
+.site-review.site-chrome-home .site-footer-card{position:relative;z-index:1;width:min(1280px,calc(100% - 40px));margin-inline:auto}
+.site-review.site-chrome-home .site-footer-main{grid-template-columns:minmax(260px,1.35fr) repeat(2,minmax(170px,.8fr))}
 @media(max-width:1000px){
-  .site-review.site-chrome-home .site-footer>div{padding-top:56px}
+  .site-review.site-chrome-home .site-footer-card{padding-top:42px}
+  .site-review.site-chrome-home .site-footer-main{grid-template-columns:minmax(260px,1.25fr) repeat(2,minmax(150px,.8fr));gap:24px}
 }
 @media(max-width:640px){
   .site-review.site-chrome-home .site-footer::after{inset:7px}
   .site-review.site-chrome-home .site-footer-fastener{top:8px;width:30px;height:30px}
   .site-review.site-chrome-home .site-footer-brand{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;column-gap:12px}
   .site-review.site-chrome-home .site-footer-brand>span{min-width:0}
+  .site-review.site-chrome-home .site-footer-card{width:calc(100% - 28px);padding-top:42px}
+  .site-review.site-chrome-home .site-footer-main{grid-template-columns:1fr 1fr;padding-block:18px;gap:22px 18px}
+  .site-review.site-chrome-home .site-footer-main>div{grid-column:1 / -1;max-width:none}
+  .site-review.site-chrome-home .site-footer-summary{max-width:none;margin-top:10px}
+  .site-review.site-chrome-home .site-footer-nav a{display:flex;min-height:44px;align-items:center}
+  .site-review.site-chrome-home .site-footer-legal a{display:inline-flex;min-height:44px;align-items:center}
 }
 
 /* Final mobile chrome: shadcn icon controls own sizing and accessible labels. */
@@ -3872,7 +3988,38 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 }
 .site-review.site-chrome-home .site-mobile-search svg{width:18px;height:18px}
 @media(max-width:620px){
-  .site-review.site-chrome-home .site-header-inner{gap:3px}
-  .site-review.site-chrome-home .site-brand{min-width:0;flex:1 1 auto}
-  .site-review.site-chrome-home .site-mobile-actions{flex:0 0 auto;gap:2px}
+  .site-review.site-chrome-home .site-header-inner{
+    min-height:58px;
+    align-items:center;
+    gap:6px;
+  }
+  .site-review.site-chrome-home .site-brand{
+    min-width:0;
+    flex:0 1 auto;
+    max-width:calc(100% - 148px);
+    gap:7px;
+    margin-bottom:0;
+  }
+  .site-review.site-chrome-home .site-brand img{width:42px;height:42px}
+  .site-review.site-chrome-home .site-brand>span{width:146px}
+  .site-review.site-chrome-home .site-brand strong{max-width:146px;font-size:13px;line-height:1.02}
+  .site-review.site-chrome-home .site-mobile-actions{flex:0 0 auto;gap:4px}
+}
+
+/* Final mobile navigation guard: legacy review rules must never reveal the
+   accessible names inside shadcn icon buttons. */
+@media(max-width:760px){
+  .site-review.site-chrome-home .site-mobile-menu-trigger .sr-only,
+  .site-review.site-chrome-home .site-mobile-search .sr-only{
+    position:absolute!important;
+    width:1px!important;
+    height:1px!important;
+    padding:0!important;
+    margin:-1px!important;
+    overflow:hidden!important;
+    clip:rect(0,0,0,0)!important;
+    clip-path:inset(50%)!important;
+    white-space:nowrap!important;
+    border:0!important;
+  }
 }

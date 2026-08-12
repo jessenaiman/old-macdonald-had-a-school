@@ -1,9 +1,5 @@
-"use client";
+import { LessonPrintActions } from "../planning/LessonPrintActions";
 
 export function LessonPrintButton() {
-  return (
-    <button className="lp-btn-ghost" type="button" onClick={() => window.print()}>
-      Print teacher plan
-    </button>
-  );
+  return <LessonPrintActions label="Print teacher plan" />;
 }

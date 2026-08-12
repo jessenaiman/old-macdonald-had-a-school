@@ -35,9 +35,13 @@ export default function TopicsClient({ lessons }: { lessons: LessonMetadata[] })
           </p>
         )}
       </header>
-      <section className="topic-list">
+      <section className="topic-list" aria-label="Lesson topics">
         {filtered.map((lesson) => (
-          <Link href={lessonHref(lesson)} className="topic-list-card stitch" key={lesson.slug}>
+          <Link
+            href={lessonHref(lesson)}
+            className="topic-list-card stitch [content-visibility:auto] [contain-intrinsic-size:auto_240px] print:[content-visibility:visible] print:[contain-intrinsic-size:none]"
+            key={lesson.slug}
+          >
             <div><span>{lesson.subject}</span><strong>{lesson.category}</strong></div>
             <h2>{lesson.title}</h2>
             <p>{lesson.summary}</p>

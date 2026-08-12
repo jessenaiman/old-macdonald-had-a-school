@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./CurriculumTemplates.module.css";
+import { Button } from "@/components/ui/button";
 
 export type GradePathItem = {
   title: string;
@@ -82,7 +83,7 @@ export function GradePathways({ grade, items, activeIndex = 0, onSelect }: { gra
             <Image src={item.icon || activityIcons[index % activityIcons.length]} width={112} height={112} alt="" className={styles.pathIcon} />
             <span>{item.kicker}</span><h3>{item.title}</h3><p>{item.summary}</p><b>View path →</b>
           </>;
-          return item.href ? <Link href={item.href} className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} key={item.title}>{body}</Link> : <button type="button" className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} aria-pressed={index === activeIndex} onClick={() => onSelect?.(index)} key={item.title}>{body}</button>;
+          return item.href ? <Link href={item.href} className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} key={item.title}>{body}</Link> : <Button variant="ghost" type="button" className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} aria-pressed={index === activeIndex} onClick={() => onSelect?.(index)} key={item.title}>{body}</Button>;
         })}
       </div>
     </section>

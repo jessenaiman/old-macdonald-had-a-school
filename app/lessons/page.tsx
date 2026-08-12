@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { NativeSelect } from "@/components/ui/native-select";
 import { getAllLessons } from "../../lib/content";
 import { searchCurriculumTopics } from "../../lib/curriculum-db";
 import { GRADE_KEYS, gradeKeysForLabel, lessonHref, type GradeKey } from "../../lib/grade-routes";
@@ -84,14 +87,14 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
             <p>Start with a skill, song, or classroom moment. Teacher-ready lessons appear first, with planning records clearly marked for further review.</p>
           </div>
           <form className={styles.search} method="get" action="/lessons" role="search">
-            <label><span>What are you planning?</span><input name="q" type="search" defaultValue={query} placeholder="Try steady beat, rhyming, plants, or calming songs" /></label>
+            <label><span>What are you planning?</span><Input name="q" type="search" autoComplete="off" defaultValue={query} placeholder="Try steady beat, rhyming, plants, or calming songs…" /></label>
             <label>
               <span>Teaching group</span>
-              <select name="grade" defaultValue={grade ?? ""}>
+              <NativeSelect name="grade" defaultValue={grade ?? ""}>
                 <option value="">All supported grades</option><option value="daycare">Daycare</option><option value="pre-school">Pre-School</option><option value="kindergarten">Kindergarten</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option>
-              </select>
+              </NativeSelect>
             </label>
-            <button type="submit">Search lessons</button>
+            <Button type="submit">Search lessons</Button>
           </form>
         </header>
 

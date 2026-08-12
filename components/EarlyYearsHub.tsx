@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle } from "./ui/sheet";
 import type { EarlyYearsGradeKey, EarlyYearsTopic } from "../lib/early-years";
 import { DaycareTemplate } from "./grades/daycare/DaycareTemplate";
 import { KindergartenTemplate } from "./grades/kindergarten/KindergartenTemplate";
@@ -26,20 +28,11 @@ export function EarlyYearsHub({
   const [active, setActive] = useState(0);
   const [preview, setPreview] = useState(false);
   const topic = topics[active];
-  const leadImage = lead.patch === "old-macdonald" ? "/icons/staff/old-mac.png" : `/icons/staff/${lead.patch}.png`;
+  const leadImage = `/staff_and_students/${lead.patch}-transparent-circle.png`;
   const headline = grade === "daycare" ? "Plan for little hands," : grade === "pre-school" ? "Grow confidence through" : "Turn curiosity into";
   const accentHeadline = grade === "daycare" ? "big feelings." : grade === "pre-school" ? "story and sensation." : "a day of discovery.";
   const leadQuote = grade === "daycare" ? "What will make joining in feel safe today?" : grade === "pre-school" ? "What can they choose, try, and tell us about?" : "Where can one good question take us?";
   const GradePageTemplate = grade === "daycare" ? DaycareTemplate : grade === "pre-school" ? PreschoolTemplate : KindergartenTemplate;
-
-  useEffect(() => {
-    if (!preview) return;
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setPreview(false);
-    };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [preview]);
 
   return (
     <div className={`ey-page ey-${grade}`}>
@@ -69,9 +62,13 @@ export function EarlyYearsHub({
         }))}
       />
 
-      {preview && (
-        <div className="lp-lightbox" role="dialog" aria-modal="true" aria-label={`Preview: ${topic.title}`} onClick={() => setPreview(false)}>
-          <button className="lp-lightbox-close" type="button" onClick={() => setPreview(false)} aria-label="Close preview">Close</button>
+      <Sheet open={preview} onOpenChange={setPreview}>
+        <SheetContent className="lp-lightbox" side="bottom" showCloseButton={false}>
+          <SheetTitle className="sr-only">Preview: {topic.title}</SheetTitle>
+          <SheetDescription className="sr-only">{topic.focus}</SheetDescription>
+          <SheetClose asChild>
+            <Button className="lp-lightbox-close" type="button" variant="ghost" aria-label="Close preview">Close</Button>
+          </SheetClose>
           <div className="lp-lightbox-card" onClick={(event) => event.stopPropagation()}>
             <Image className="lp-lightbox-img" src={topic.image} alt={topic.title} width={1200} height={800} />
             <div className="lp-lightbox-bar">
@@ -82,8 +79,8 @@ export function EarlyYearsHub({
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
