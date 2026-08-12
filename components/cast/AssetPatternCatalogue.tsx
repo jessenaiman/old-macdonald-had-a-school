@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Check, Copy, Info } from "lucide-react";
+import { Check, Copy, CopyCheck, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -64,7 +64,7 @@ function CopyPath({ value }: { value: string }) {
 
   return <div className="assetCataloguePath">
     <code translate="no">{value}</code>
-    <Button type="button" variant="outline" size="xs" onClick={copy}>{copied ? "Copied" : "Copy path"}</Button>
+    <Button type="button" variant="outline" size="icon-xs" className="brandCopyIcon" onClick={copy} aria-label={copied ? "Path copied" : "Copy path"}>{copied ? <CopyCheck aria-hidden="true" /> : <Copy aria-hidden="true" />}</Button>
   </div>;
 }
 
@@ -109,6 +109,15 @@ export function BrandSpecimenNav() {
       </article>)}
     </nav>
     <p className="brandSpacingRule"><strong>Spacing recipe</strong><code translate="no">grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5</code><span>One shared button height. A 1rem gap. Columns change only at documented Tailwind breakpoints.</span></p>
+    <section className="brandPatchButtonShelf" aria-labelledby="patch-button-shelf-title">
+      <header><span>Authored silhouette variants</span><h3 id="patch-button-shelf-title">The same reliable control, wearing a real patch</h3><p>The transparent shadcn button owns the interaction footprint. The authored PNG owns the irregular edge and stitching.</p></header>
+      <nav className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" aria-label="Irregular cut-out navigation examples">
+        {NAV_SPECIMENS.map((item) => <article className="brandSpecimen brandPatchButtonSpecimen" data-specimen={item.kind} key={item.href}>
+          <Button asChild variant="ghost" className="brandPatchButton"><a href={item.href}><Image className="brandPatchFastener" src={item.fastener} alt="" width={52} height={52} /><span>{item.label}</span></a></Button>
+          <AssetRecipeDialog label={item.label} value={`Button data-specimen="${item.kind}"\nSurface: public${item.path}\nAttachment: public${item.fastener}`} />
+        </article>)}
+      </nav>
+    </section>
     <section className="brandLinkShelf" aria-labelledby="brand-link-shelf-title">
       <div><span>Semantic hyperlink objects</span><h3 id="brand-link-shelf-title">A link can look like something you would find in a classroom</h3></div>
       <nav aria-label="Creative hyperlink examples">

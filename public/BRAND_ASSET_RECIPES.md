@@ -9,6 +9,51 @@ This is the text companion to the live `#asset-patterns` section on `/branding`.
 - Never use `blank-felt-patches-v1/individual-patches/*-rectangle.png`; all sixteen rectangle exports are `DO NOT USE`.
 - Do not use contact sheets, atlases, composites, Figma exports, design concepts, or review-only extractions in production.
 
+## Named asset registry
+
+The filepath registry is `app/brand-assets.css`, imported once by `app/globals.css`. Components use semantic classes; they do not repeat public filepaths.
+
+```html
+<span class="brand-asset music-fiddle icon-small" role="img" aria-label="Fiddle"></span>
+```
+
+Class responsibilities:
+
+| Class | Responsibility |
+| --- | --- |
+| `brand-asset` | Renders the registered image as a contained background asset |
+| `music-fiddle` | Selects the approved dimensional fiddle file |
+| `music-fiddle-flat` | Selects the compact review fiddle file |
+| `icon-micro`, `icon-small`, `icon-medium`, `icon-large` | Selects display size without changing asset identity |
+| `grade-one`, `grade-two` | Selects the approved general grade signal |
+| `fastener-*` | Selects a fastener that must remain inside the component it attaches to |
+
+### Direct lookup examples
+
+| Search term | Class recipe | Status | Meaning |
+| --- | --- | --- | --- |
+| Grade 1 music, small | `brand-asset music-note-single-flat icon-small` | Review family | Compact music signal; do not call it a Grade 1-owned asset |
+| Grade 1 fiddle, medium | `brand-asset music-fiddle icon-medium` | Approved | Music/dance activity, appropriate with Mr Rusty |
+| Grade 2 general badge | `brand-asset grade-two icon-medium` | Approved | General Grade 2 signal |
+| Grade 2 measuring | `brand-asset grade-two-measuring-patterns icon-medium` | Approved | Measuring and patterns; not a science badge |
+| Grade 2 science badge | No class exists | Missing | No approved science-specific badge exists; do not substitute a math/building icon |
+
+### Music and arts names
+
+The dimensional class is for medium and large use. Add `-flat` to the asset class only for the compact review family.
+
+| Topic | Named asset classes |
+| --- | --- |
+| Instruments | `music-fiddle`, `music-hand-drum`, `music-banjo`, `music-handbells` |
+| Dance | `dance-turning-footprints`, `dance-crossing-ribbons`, `dance-tap-shoes`, `dance-spiralling-scarves` |
+| Music signals | `music-note-single`, `music-notes-paired`, `music-notes-ascending`, `music-rhythm-dots` |
+| Acting | `acting-theatre-masks`, `acting-stage-curtains`, `acting-pocket-puppets`, `acting-spotlight-star` |
+| Painting | `painting-handprint`, `painting-sponge-shapes`, `painting-crayon-swatches`, `painting-easel` |
+
+### Fastener names
+
+Use `fastener-push-pin`, `fastener-paperclip`, `fastener-binder-clip`, `fastener-masking-tape`, `fastener-sewing-button`, `fastener-gingham-tape`, `fastener-apple-peg`, `fastener-kraft-pocket`, or `fastener-quilted-tab`. The fastener element belongs inside the button, note, or card that it attaches to so its positioning remains responsive.
+
 ## Patch-shaped shadcn buttons
 
 | Example | Component recipe | Public asset |

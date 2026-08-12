@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { Copy, CopyCheck } from "lucide-react";
 import type { CastRosterMember } from "@/lib/cast-roster";
 import { globalClassNames as styles } from "@/lib/global-class-names";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import { GradeInteractionLane } from "@/components/grades/GradeInteractionLane";
 import { ResponsiveFeatureSplit } from "@/components/layout/ResponsiveFeatureSplit";
 import { GRADE_INTERACTION_CONFIGS } from "@/components/grades/grade-config";
 import { AssetPatternCatalogue, BrandSpecimenNav } from "@/components/cast/AssetPatternCatalogue";
+import { CurriculumAssetGuide } from "@/components/cast/CurriculumAssetGuide";
 
 const MATERIALS = [
   ["Felt", "/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png", "Buttons, rails, and soft panels"],
@@ -45,6 +47,25 @@ const CURRICULUM_ICONS = [
   ["Math & building", "/brand-kit-icon-sheets/individual-icons/subject-math-building.png"],
   ["Drama & storytelling", "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png"],
 ] as const;
+
+const MATCHED_CAST_ASSETS: Record<string, readonly [string, string][]> = {
+  "Old MacDonald": [["Kindergarten", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/13-kindergarten-schoolhouse.png"], ["Banjo", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/11-instrument-banjo-strap.png"], ["Community", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/03-community-schoolhouse-ribbon.png"]],
+  "Miss Puddles": [["Daycare", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/01-daycare-stacking-blocks.png"], ["Early learning", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/07-early-learning-shape-blocks.png"], ["First painting", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/05-painting-handprint-dots.png"]],
+  "Mr Rusty": [["Grade 1", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/04-grade-1-book-pencil.png"], ["Fiddle", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/01-instrument-fiddle-bow.png"], ["Dance", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/02-dance-turning-footprints.png"]],
+  "Miss Hayley": [["Grade 1", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/14-grade-1-writing-slate-books.png"], ["Acting", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/04-acting-theatre-masks.png"], ["Stage", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/09-acting-stage-curtains.png"]],
+  "Mr Sam": [["Math", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/13-math-abacus-ruler-block.png"], ["Measure", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/15-math-construction-measure.png"], ["Balance", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/14-math-balance-scale.png"]],
+  "Mr Maisy": [["Grade 2", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/10-grade-2-balance-scale.png"], ["Physical play", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/19-physical-play-ball-rope.png"], ["Movement", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/20-physical-stepping-spots-beanbag.png"]],
+  "Mr Puddles": [["Art", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/16-art-camera-brush.png"], ["Colour", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/18-art-color-wheel-frame.png"], ["Painting", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/20-painting-easel-brush-palette.png"]],
+  "Miss Maisy": [["Preschool", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/12-preschool-sprout-counting-beads.png"], ["Gardening", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/23-garden-seed-packet-trowel.png"], ["Health", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/24-health-gingham-lunch.png"]],
+  Hopper: [["Movement", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/02-dance-turning-footprints.png"], ["Physical play", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/20-physical-stepping-spots-beanbag.png"]],
+  Whiskers: [["Lacing", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/09-early-learning-lacing-card.png"], ["Observe", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/16-art-camera-brush.png"]],
+  Scout: [["Helping", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.png"], ["Discovery", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/22-garden-watering-can-produce.png"]],
+  Penny: [["Handbells", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/16-instrument-handbells-ribbon.png"], ["Music", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/03-music-note-single-eighth.png"]],
+  Maisy: [["Encourage", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.png"], ["Clap & move", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/07-dance-crossing-ribbons.png"]],
+  Puddles: [["Rhythm", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/18-music-note-rhythm-dots.png"], ["Move", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/17-dance-spiralling-scarves.png"]],
+  Sam: [["Count", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/13-math-abacus-ruler-block.png"], ["Build", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/15-math-construction-measure.png"]],
+  Rusty: [["Instrument", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/11-instrument-banjo-strap.png"], ["Steady beat", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/06-instrument-hand-drum.png"]],
+};
 
 const PALETTE = [
   ["Navy", "--navy", "#0B1A33", "bg-brand-navy"],
@@ -85,7 +106,7 @@ function BrandAssetDialog({ label, path, kind }: { label: string; path: string; 
   };
 
   return <Dialog>
-    <DialogTrigger asChild><Button variant="outline" size="xs">{label}</Button></DialogTrigger>
+    <DialogTrigger asChild><Button className="brandAssetDialogTrigger" variant="outline" size="xs">{label}</Button></DialogTrigger>
     <DialogContent className="material-surface material-cardboard-paper max-h-[calc(100svh-2rem)] max-w-3xl overflow-y-auto text-foreground">
       <DialogHeader>
         <DialogTitle className="font-heading text-3xl">{label}</DialogTitle>
@@ -96,7 +117,7 @@ function BrandAssetDialog({ label, path, kind }: { label: string; path: string; 
       </div>
       <div className="flex flex-col gap-2 rounded-lg border border-border bg-background/75 p-3 sm:flex-row sm:items-center sm:justify-between">
         <code className="break-all text-xs text-foreground" translate="no">{path}</code>
-        <Button type="button" variant="secondary" size="sm" onClick={copyPath}>{copied ? "Copied" : "Copy filepath"}</Button>
+        <Button type="button" variant="outline" size="icon-sm" className="brandCopyIcon" onClick={copyPath} aria-label={copied ? "Filepath copied" : "Copy filepath"}>{copied ? <CopyCheck aria-hidden="true" /> : <Copy aria-hidden="true" />}</Button>
       </div>
       <DialogFooter showCloseButton />
     </DialogContent>
@@ -111,18 +132,19 @@ function CopyRecipe({ label, value }: { label: string; value: string }) {
     window.setTimeout(() => setCopied(false), 1800);
   };
 
-  return <div className="grid gap-2 rounded-lg border border-border bg-background p-3">
+  return <div className="brandCopyRecipe">
     <strong className="font-body text-xs uppercase tracking-wide text-muted-foreground">{label}</strong>
     <code className="break-words font-mono text-sm font-bold leading-6 text-foreground" translate="no">{value}</code>
-    <Button className="justify-self-start" type="button" variant="outline" size="sm" onClick={copy}>{copied ? "Copied" : "Copy recipe"}</Button>
+    <Button className="brandCopyIcon" type="button" variant="outline" size="icon-sm" onClick={copy} aria-label={copied ? "Recipe copied" : "Copy recipe"}>{copied ? <CopyCheck aria-hidden="true" /> : <Copy aria-hidden="true" />}</Button>
   </div>;
 }
 
 function CastCard({ member, featured = false }: { member: CastRosterMember; featured?: boolean }) {
   const castKey = member.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const castClass = `cast-${castKey}`;
+  const matchedAssets = MATCHED_CAST_ASSETS[member.name] ?? [];
   return <article className={`${styles.card} cast-${castKey} ${featured ? styles.featured : ""}`} data-cast={castKey}>
-    <div className={`${styles.portrait} character-surface`}><Image src={member.portrait} alt={member.name} width={280} height={280} /></div>
+    <div className={`${styles.portrait} character-surface`}><Image className="castPortraitImage" src={member.portrait} alt={member.name} width={280} height={280} /><div className="portraitMatchedAssets" aria-label={`${member.name} matched grade and curriculum assets`}>{matchedAssets.map(([label,path])=><Image key={path} src={path} alt={label} title={label} width={58} height={58}/>)}</div></div>
     <div className={styles.cardCopy}>
       <span className={styles.species}>{member.species}</span><h3>{member.name}</h3>
       <p className={styles.role}>{member.descriptor}</p>
@@ -138,6 +160,10 @@ function CastCard({ member, featured = false }: { member: CastRosterMember; feat
         </nav>
         <small><strong>Safe visual example:</strong> show {member.name} in scenes involving {member.activities.toLowerCase()}.</small>
       </div>
+      <Collapsible className="matchedVisualKit">
+        <CollapsibleTrigger className="matchedVisualKitTrigger">Matched visual kit <span aria-hidden="true">+</span></CollapsibleTrigger>
+        <CollapsibleContent><p>These curriculum signals match the canonical role, grade, or activities above. <a href="/CAST_AND_ROLES.md" target="_blank" rel="noreferrer">Open the character Markdown to correct this record.</a></p><div>{matchedAssets.map(([label,path])=><figure key={path}><Image src={path} alt="" width={72} height={72}/><figcaption>{label}</figcaption><BrandAssetDialog label="Preview & copy" path={path} kind="texture" /></figure>)}</div></CollapsibleContent>
+      </Collapsible>
     </div>
   </article>;
 }
@@ -149,16 +175,16 @@ function BrandingUiExamples() {
       <Card className="material-surface material-cardboard-paper gap-5 border-border bg-transparent py-5 shadow-sm">
         <CardHeader className="px-5"><CardTitle className="font-heading text-3xl text-foreground">Neutral school controls</CardTitle><CardDescription className="text-muted-foreground">Use these for ordinary actions. A grade page stays neutral unless a component is actually about a character.</CardDescription></CardHeader>
         <CardContent className="grid gap-4 px-5">
-          <div className="flex flex-wrap gap-3"><Button>Build this lesson</Button><Button variant="secondary">Browse paths</Button><Button variant="outline">Save for later</Button><Button variant="link">View all resources</Button></div>
+          <div className="flex flex-wrap gap-3"><Button className="brand-button brand-button--felt">Build this lesson</Button><Button className="brand-button brand-button--woven" variant="secondary">Browse paths</Button><Button className="brand-button brand-button--cardboard" variant="outline">Save for later</Button><Button className="brandTextLink" variant="link">View all resources</Button></div>
           <Separator />
           <div className="grid gap-3 sm:grid-cols-2"><Input aria-label="Example lesson search" placeholder="Search lessons" /><NativeSelect aria-label="Example grade filter" defaultValue="grade-one"><option value="daycare">Daycare</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option></NativeSelect></div>
           <Tabs defaultValue="today"><TabsList className="grid w-full grid-cols-3 rounded-lg border border-border bg-background/75 p-1"><TabsTrigger value="today" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Today</TabsTrigger><TabsTrigger value="curriculum" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Curriculum</TabsTrigger><TabsTrigger value="planner" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Planner</TabsTrigger></TabsList><TabsContent value="today" className="pt-3 text-sm text-muted-foreground">A tab is a real navigational control, not a styled `div`.</TabsContent><TabsContent value="curriculum" className="pt-3 text-sm text-muted-foreground">Use it for switching related panel content.</TabsContent><TabsContent value="planner" className="pt-3 text-sm text-muted-foreground">Use forms and inputs only when the task genuinely needs them.</TabsContent></Tabs>
         </CardContent>
       </Card>
       <Card className="cast-miss-hayley character-surface gap-4 border-white/30 py-5 shadow-sm">
-        <CardHeader className="px-5"><CardTitle className="font-heading text-3xl text-[var(--character-foreground)]">Character-specific context</CardTitle><CardDescription className="text-[color:var(--character-foreground)]/85">Miss Hayley’s colour and texture belong here, on her own note, not on Grade 1.</CardDescription></CardHeader>
-        <CardContent className="px-5"><blockquote className="font-hand text-3xl leading-none text-[var(--character-foreground)]">“What can they notice, explain, and share today?”</blockquote></CardContent>
-        <CardFooter className="justify-between gap-3 px-5"><span className="text-xs font-bold text-[var(--character-foreground)]">cast-miss-hayley</span><DropdownMenu><DropdownMenuTrigger asChild><Button variant="secondary">Teacher actions</Button></DropdownMenuTrigger><DropdownMenuContent><DropdownMenuItem>Open lesson notes</DropdownMenuItem><DropdownMenuItem>View drama resources</DropdownMenuItem></DropdownMenuContent></DropdownMenu></CardFooter>
+        <CardHeader className="px-5"><CardTitle className="font-heading text-3xl text-[var(--character-foreground)]">Character-specific context</CardTitle><CardDescription className="text-[color:var(--character-foreground)]/85">Miss Hayleyâ€™s colour and texture belong here, on her own note, not on Grade 1.</CardDescription></CardHeader>
+        <CardContent className="px-5"><blockquote className="font-hand text-3xl leading-none text-[var(--character-foreground)]">â€œWhat can they notice, explain, and share today?â€</blockquote></CardContent>
+        <CardFooter className="justify-between gap-3 px-5"><span className="text-xs font-bold text-[var(--character-foreground)]">cast-miss-hayley</span><DropdownMenu><DropdownMenuTrigger asChild><Button className="brand-button brand-button--patch-pink" variant="secondary">Teacher actions</Button></DropdownMenuTrigger><DropdownMenuContent><DropdownMenuItem>Open lesson notes</DropdownMenuItem><DropdownMenuItem>View drama resources</DropdownMenuItem></DropdownMenuContent></DropdownMenu></CardFooter>
       </Card>
     </div>
   </section>;
@@ -168,13 +194,13 @@ export function TypographySpread() {
   return <section className={`${styles.section} ${styles.typeSpread} min-h-svh`} id="typography">
     <header><span>Typography reference page</span><h2>Type has jobs, not just styles</h2><p>This complete page-sized specimen defines the roles used by navigation, grade workspaces, lessons, controls, and teacher notes. Agents should copy the role, not improvise a nearby font treatment.</p></header>
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,.75fr)]">
-      <Card className="material-surface material-cardboard-paper gap-5 border-border bg-transparent py-7 shadow-sm"><CardHeader className="px-7"><CardDescription className="font-body text-xs font-extrabold uppercase tracking-[.12em] text-muted-foreground">Display heading</CardDescription><CopyRecipe label="Copy display-heading classes" value="font-heading text-5xl leading-[.9] text-foreground sm:text-6xl" /><CardTitle className="font-heading text-5xl leading-[.9] text-foreground sm:text-6xl">Turn rhythm into a day of discovery.</CardTitle></CardHeader><CardContent className="grid gap-5 px-7"><div className="grid gap-3"><CopyRecipe label="Copy body-copy classes" value="font-body text-base leading-7 text-muted-foreground" /><p className="max-w-prose font-body text-base leading-7 text-muted-foreground">Body copy uses the reading face at a comfortable line length and line height. It explains the teaching task without competing with the heading.</p></div><Separator /><div className="grid gap-3"><p className="font-body text-xs font-extrabold uppercase tracking-[.12em] text-muted-foreground">Handwritten emphasis</p><CopyRecipe label="Copy handwritten-emphasis classes" value="font-hand text-4xl leading-[1.1] text-primary sm:text-5xl" /><p className="font-hand text-4xl leading-[1.1] text-primary sm:text-5xl">Make room for what learners show you.</p></div></CardContent><CardFooter className="flex-wrap gap-3 px-7"><div className="grid w-full gap-3"><CopyRecipe label="Control source" value="components/ui/button.tsx · Button variant='default' | variant='outline'" /><div className="flex flex-wrap gap-3"><Button>Build this lesson</Button><Button variant="outline">Browse learning paths</Button></div></div></CardFooter></Card>
+      <Card className="material-surface material-cardboard-paper gap-5 border-border bg-transparent py-7 shadow-sm"><CardHeader className="px-7"><CardDescription className="font-body text-xs font-extrabold uppercase tracking-[.12em] text-muted-foreground">Display heading</CardDescription><CopyRecipe label="Copy display-heading classes" value="font-heading text-5xl leading-[.9] text-foreground sm:text-6xl" /><CardTitle className="font-heading text-5xl leading-[.9] text-foreground sm:text-6xl">Turn rhythm into a day of discovery.</CardTitle></CardHeader><CardContent className="grid gap-5 px-7"><div className="grid gap-3"><CopyRecipe label="Copy body-copy classes" value="font-body text-base leading-7 text-muted-foreground" /><p className="max-w-prose font-body text-base leading-7 text-muted-foreground">Body copy uses the reading face at a comfortable line length and line height. It explains the teaching task without competing with the heading.</p></div><Separator /><div className="grid gap-3"><p className="font-body text-xs font-extrabold uppercase tracking-[.12em] text-muted-foreground">Handwritten emphasis</p><CopyRecipe label="Copy handwritten-emphasis classes" value="font-hand text-4xl leading-[1.1] text-primary sm:text-5xl" /><p className="font-hand text-4xl leading-[1.1] text-primary sm:text-5xl">Make room for what learners show you.</p></div></CardContent><CardFooter className="flex-wrap gap-3 px-7"><div className="grid w-full gap-3"><CopyRecipe label="Control source" value="components/ui/button.tsx Â· Button variant='default' | variant='outline'" /><div className="flex flex-wrap gap-3"><Button className="brand-button brand-button--felt">Build this lesson</Button><Button className="brand-button brand-button--cardboard" variant="outline">Browse learning paths</Button></div></div></CardFooter></Card>
       <div className="grid gap-5">
         <Card className="material-surface material-leather gap-4 border-white/20 py-6 text-[var(--site-chrome-foreground)] shadow-sm"><CardHeader className="px-6"><CardDescription className="font-body text-xs font-extrabold uppercase tracking-[.12em] text-[var(--site-chrome-accent)]">Navigation label</CardDescription><CopyRecipe label="Copy navigation-title classes" value="material-surface material-leather font-heading text-4xl leading-none text-[var(--site-chrome-foreground)]" /><CardTitle className="font-heading text-4xl leading-none text-[var(--site-chrome-foreground)]">The farm school</CardTitle></CardHeader><CardContent className="grid gap-3 px-6 font-body text-sm leading-6"><CopyRecipe label="Copy compact-body classes" value="font-body text-sm leading-6" /><p>Compact labels guide. Display type names the destination. Body type carries explanation.</p></CardContent></Card>
         <Card className="cast-miss-hayley character-surface gap-4 border-white/20 py-6 shadow-sm"><CardHeader className="px-6"><CardDescription className="font-body text-xs font-extrabold uppercase tracking-[.12em] text-[var(--character-foreground)]">Character voice</CardDescription><CopyRecipe label="Copy character-voice classes" value="cast-miss-hayley character-surface font-hand text-4xl leading-[1.1] text-[var(--character-foreground)]" /><CardTitle className="font-hand text-4xl leading-[1.1] text-[var(--character-foreground)]">What can they notice, explain, and share today?</CardTitle></CardHeader><CardContent className="grid gap-3 px-6 font-body text-sm leading-6 text-[var(--character-foreground)]"><CopyRecipe label="Copy character-body classes" value="font-body text-sm leading-6 text-[var(--character-foreground)]" /><p>Handwriting is reserved for a short human voice or emphasis. It is never the body-reading face.</p></CardContent></Card>
       </div>
     </div>
-    <Card className="mt-5 gap-4 border-border bg-card py-5 shadow-sm"><CardHeader className="px-5"><CardTitle className="font-heading text-3xl">Selector ownership</CardTitle><CardDescription>Use reusable names directly. Scoped production selectors are for diagnosis and must remain inside their component.</CardDescription></CardHeader><CardContent className="grid gap-3 px-5 text-sm md:grid-cols-2"><CopyRecipe label="Reusable global utilities" value="font-heading · font-body · font-hand · typeset-farm-ui · typeset-farm-reading" /><CopyRecipe label="Scoped grade typography" value="[data-style-scope='grade-interaction-lane'] .eyebrow · .welcomeCopy h1 · .teacherCardTitle · .teacherCardContent blockquote" /></CardContent><CardFooter className="px-5"><Button asChild><a href="http://localhost:6006/?path=/story/branding-typography--type-roles" target="_blank" rel="noreferrer">Open typography in Storybook</a></Button></CardFooter></Card>
+    <Card className="mt-5 gap-4 border-border bg-card py-5 shadow-sm"><CardHeader className="px-5"><CardTitle className="font-heading text-3xl">Selector ownership</CardTitle><CardDescription>Use reusable names directly. Scoped production selectors are for diagnosis and must remain inside their component.</CardDescription></CardHeader><CardContent className="grid gap-3 px-5 text-sm md:grid-cols-2"><CopyRecipe label="Reusable global utilities" value="font-heading Â· font-body Â· font-hand Â· typeset-farm-ui Â· typeset-farm-reading" /><CopyRecipe label="Scoped grade typography" value="[data-style-scope='grade-interaction-lane'] .eyebrow Â· .welcomeCopy h1 Â· .teacherCardTitle Â· .teacherCardContent blockquote" /></CardContent><CardFooter className="px-5"><Button asChild><a href="http://localhost:6006/?path=/story/branding-typography--type-roles" target="_blank" rel="noreferrer">Open typography in Storybook</a></Button></CardFooter></Card>
   </section>;
 }
 
@@ -237,6 +263,7 @@ export function CastShowcase({ staff, students }: { staff: CastRosterMember[]; s
         <article><header><span>Curriculum signals</span><h3>Grade &amp; subject icons</h3></header><div className={styles.iconShelf}>{CURRICULUM_ICONS.map(([name,src])=><figure key={name}><Image src={src} alt="" width={72} height={72}/><figcaption>{name}</figcaption><code>{src}</code></figure>)}</div></article>
       </div>
     </section>
+    <CurriculumAssetGuide />
     <section className={`${styles.section} ${styles.badgeRecipe}`} id="badge-recipe">
       <header><span>Canonical character construction</span><h2>Build badges from 2 authored layers</h2><p>Use the unchanged transparent-circle portrait over the matching authored circle patch. Never recolour either layer or substitute an extracted face patch.</p></header>
       <div className={styles.recipeBody}>
@@ -247,8 +274,8 @@ export function CastShowcase({ staff, students }: { staff: CastRosterMember[]; s
     </section>
     <AssetPatternCatalogue />
     <PaletteSpread />
-    <section className={styles.section} id="cast-staff"><header><span>Eight canonical staff</span><h2>Meet the teaching team</h2><p>Roles and grade ownership remain visible in plain text so this page can function as a practical brand check.</p></header><div className={styles.staffGrid}>{staff.map((member,index)=><CastCard key={member.name} member={member} featured={index < 2}/>)}</div></section>
-    <section className={`${styles.section} ${styles.studentSection}`} id="cast-students"><header><span>Eight students - eight learning lenses</span><h2>The learners bring the school to life</h2><p>Students are optional teaching lenses, not substitute subjects. Their approved actions stay scene-dependent.</p></header><div className={styles.studentGrid}>{students.map((member)=><CastCard key={member.name} member={member}/>)}</div></section>
+    <section className={styles.section} id="cast-staff"><header><span>Eight canonical staff</span><h2>Meet the teaching team</h2><p>Roles and grade ownership remain visible in plain text so this page can function as a practical brand check.</p><Button asChild variant="outline"><a href="/CAST_AND_ROLES.md" target="_blank" rel="noreferrer">Open character Markdown</a></Button></header><div className={styles.staffGrid}>{staff.map((member,index)=><CastCard key={member.name} member={member} featured={index < 2}/>)}</div></section>
+    <section className={`${styles.section} ${styles.studentSection}`} id="cast-students"><header><span>Eight students - eight learning lenses</span><h2>The learners bring the school to life</h2><p>Students are optional teaching lenses, not substitute subjects. Their approved actions stay scene-dependent.</p><Button asChild variant="outline"><a href="/CAST_AND_ROLES.md" target="_blank" rel="noreferrer">Open character Markdown</a></Button></header><div className={styles.studentGrid}>{students.map((member)=><CastCard key={member.name} member={member}/>)}</div></section>
     <BrandingUiExamples />
     <BrandingControls />
     <TypographySpread />
