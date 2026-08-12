@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import styles from "./SearchPage.module.css";
+import { globalClassNames as styles } from "@/lib/global-class-names";
 
 interface SearchResult {
   id: string;
@@ -72,7 +72,7 @@ const GRADE_OPTIONS = [
 ] as const;
 
 function plainText(value: string | null | undefined) {
-  return value?.replace(/<[^>]+>/g, "").replace(/&hellip;/g, "…") ?? "";
+  return value?.replace(/<[^>]+>/g, "").replace(/&hellip;/g, "...") ?? "";
 }
 
 function readableStatus(value: string | undefined) {
@@ -91,8 +91,8 @@ function readableResourceTitle(value: string) {
 function readableMetadata(value: string | undefined) {
   return value
     ?.replace(/^"+|"+$/g, "")
-    .replaceAll("â", "–")
-    .replaceAll("â", "—")
+    .replaceAll("...??", "...")
+    .replaceAll("...??", "...")
     .trim();
 }
 
@@ -227,7 +227,7 @@ export default function SearchPage() {
   const activeResources = activeTab === "video" ? videos : activeTab === "printouts" ? printouts : songs;
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-style-scope="search-page">
         <section className={styles.searchSheet} aria-labelledby="search-title">
           <Image className={styles.emblem} src="/brand-emblem.png" alt="" width={86} height={86} priority />
           <div className={styles.headingCopy}>
@@ -243,12 +243,12 @@ export default function SearchPage() {
               onChange={(event) => setQuery(event.target.value)}
               name="q"
               autoComplete="off"
-              placeholder="Try ponies, counting, or a lesson goal…"
+              placeholder="Try ponies, counting, or a lesson goal..."
               minLength={2}
               required
             />
             <Button type="submit" disabled={loading}>
-              {loading ? "Searching…" : "Search"}
+              {loading ? "Searching..." : "Search"}
             </Button>
           </form>
           <div className={styles.filters} aria-label="Search filters">
@@ -274,10 +274,10 @@ export default function SearchPage() {
             <Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={42} height={42} />
             <h2>Start with what you want to teach.</h2>
             <p>Search a topic, goal, song, rhyme, activity, story, or classroom resource.</p>
-            <p className={styles.suggestions}>Try “ponies lap rhymes”, “fingerplay”, or “word problems”.</p>
+            <p className={styles.suggestions}>Try ...ponies lap rhymes..., ...fingerplay..., or ...word problems....</p>
           </section>
         ) : loading ? (
-          <div className={styles.loadingState} role="status">Searching the curriculum collection…</div>
+          <div className={styles.loadingState} role="status">Searching the curriculum collection...</div>
         ) : error ? (
           <section className={styles.errorState} role="alert">
             <h2>The search could not be completed.</h2>
@@ -302,8 +302,8 @@ export default function SearchPage() {
               <p className={styles.searchProvenance} role="status">
                 {searchStatus.database === "omhas.db" ? "Curriculum database connected" : "Curriculum index connected"}
                 {searchStatus.searchMode === "hybrid-keyword-semantic"
-                  ? " · keyword + meaning search"
-                  : " · keyword search"}
+                  ? " ... keyword + meaning search"
+                  : " ... keyword search"}
               </p>
 
               {totalCurriculum > 0 ? (
@@ -394,7 +394,7 @@ export default function SearchPage() {
                       </section>
                       <section>
                         <h3>{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
-                        <p>{selectedTopic ? `${selectedTopic.grade} · ${selectedTopic.subject}` : selectedLesson?.purpose || "No purpose is available."}</p>
+                        <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}` : selectedLesson?.purpose || "No purpose is available."}</p>
                       </section>
                       <section>
                         <h3>Related standards</h3>
@@ -442,7 +442,7 @@ export default function SearchPage() {
                               <h3>{readableResourceTitle(resource.title)}</h3>
                               <span>{plainText(resource.excerpt) || "No preview is available."}</span>
                               {resource.meta.ageRange || resource.meta.domain ? (
-                                <span>{[readableMetadata(resource.meta.ageRange), readableMetadata(resource.meta.domain)].filter(Boolean).join(" · ")}</span>
+                                <span>{[readableMetadata(resource.meta.ageRange), readableMetadata(resource.meta.domain)].filter(Boolean).join(" ... ")}</span>
                               ) : null}
                               {activeTab === "songs" && resource.lyrics ? (
                                 <details>

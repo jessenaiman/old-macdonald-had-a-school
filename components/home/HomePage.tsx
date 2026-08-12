@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomeCarousel } from "./HomeCarousel";
 import { HOME_SUBJECTS, HOME_VIDEO_SONGS, type HomeLesson } from "./home-data";
 import { WeeklyLessonList } from "./WeeklyLessonList";
-import styles from "./BulletinHomePage.module.css";
+import { globalClassNames as styles } from "@/lib/global-class-names";
+import { ResponsiveFeatureSplit } from "@/components/layout/ResponsiveFeatureSplit";
 
 type HomePageProps = {
   hero: { title?: string };
@@ -68,7 +69,7 @@ function HeroTitle({ title }: { title?: string }) {
 
 export function HomePage({ hero, lessons }: HomePageProps) {
   return (
-    <div className={styles.homePage}>
+    <div className={styles.homePage} data-style-scope="bulletin-home-page">
       <section className={`${styles.hero} mx-auto !w-[calc(100%_-_2rem)] !max-w-7xl sm:!w-[calc(100%_-_3rem)]`} aria-labelledby="home-title">
         <Card className={styles.heroCopyCard}>
           <CardHeader className={styles.heroCopy}>
@@ -76,12 +77,14 @@ export function HomePage({ hero, lessons }: HomePageProps) {
               <HeroTitle title={hero.title} />
             </CardTitle>
           </CardHeader>
-          <CardContent className={styles.heroFeatureGrid}>
-            <div className={styles.heroWeeklyLessons}>
-              <WeeklyLessonList lessons={HOME_VIDEO_SONGS.slice(0, 3)} title="New this week" limit={3} participation selected />
-            </div>
-            <HomeCarousel selected />
-          </CardContent>
+          <ResponsiveFeatureSplit asChild ratio="feature" className={styles.heroFeatureGrid}>
+            <CardContent>
+              <div className={styles.heroWeeklyLessons}>
+                <WeeklyLessonList lessons={HOME_VIDEO_SONGS.slice(0, 3)} title="New this week" limit={3} participation selected />
+              </div>
+              <HomeCarousel selected />
+            </CardContent>
+          </ResponsiveFeatureSplit>
         </Card>
       </section>
 
@@ -95,11 +98,7 @@ export function HomePage({ hero, lessons }: HomePageProps) {
             const learner = SUBJECT_LEARNERS[subject.key];
 
             return (
-              <article
-                className={styles.subjectCard}
-                style={{ "--subject-color": subject.color } as React.CSSProperties}
-                key={subject.key}
-              >
+              <article className={styles.subjectCard} data-subject={subject.key} key={subject.key}>
                 <Image
                   className={styles.cardFastener}
                   src={index % 3 === 1
@@ -118,13 +117,10 @@ export function HomePage({ hero, lessons }: HomePageProps) {
                         {subject.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
                       </ul>
                       <small>{lessonCount} {lessonCount === 1 ? "lesson" : "lessons"}</small>
-                      <b>Explore subject <span aria-hidden="true">→</span></b>
+                      <b>Explore subject <span aria-hidden="true">-&gt;</span></b>
                     </span>
                   </span>
-                  <span
-                    className={styles.learnerBand}
-                    style={{ "--learner-texture": `url(${learner.texture})` } as React.CSSProperties}
-                  >
+                  <span className={styles.learnerBand}>
                     <span>Explore with {learner.name}</span>
                     <Image src={learner.portrait} alt="" width={66} height={66} />
                   </span>

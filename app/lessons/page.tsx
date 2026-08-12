@@ -7,7 +7,7 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { getAllLessons } from "../../lib/content";
 import { searchCurriculumTopics } from "../../lib/curriculum-db";
 import { GRADE_KEYS, gradeKeysForLabel, lessonHref, type GradeKey } from "../../lib/grade-routes";
-import styles from "./LessonsPage.module.css";
+import { globalClassNames as styles } from "@/lib/global-class-names";
 
 export const metadata: Metadata = {
   title: "Lessons | Old MacDonald Had a School",
@@ -79,7 +79,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
   const resultCount = markdownLessons.length + databaseResults.length;
 
   return (
-    <section className={styles.page} aria-labelledby="lessons-index-title">
+    <section className={styles.page} data-style-scope="lessons-page" aria-labelledby="lessons-index-title">
         <header className={styles.header}>
           <div className={styles.headerCopy}>
             <p className={styles.eyebrow}>Teacher planning library</p>
@@ -87,7 +87,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
             <p>Start with a skill, song, or classroom moment. Teacher-ready lessons appear first, with planning records clearly marked for further review.</p>
           </div>
           <form className={styles.search} method="get" action="/lessons" role="search">
-            <label><span>What are you planning?</span><Input name="q" type="search" autoComplete="off" defaultValue={query} placeholder="Try steady beat, rhyming, plants, or calming songs…" /></label>
+            <label><span>What are you planning?</span><Input name="q" type="search" autoComplete="off" defaultValue={query} placeholder="Try steady beat, rhyming, plants, or calming songs..." /></label>
             <label>
               <span>Teaching group</span>
               <NativeSelect name="grade" defaultValue={grade ?? ""}>
@@ -99,7 +99,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
         </header>
 
         <div className={styles.resultSummary} aria-live="polite">
-          <div><span>{query ? "Search results" : "Ready for your week"}</span>{query ? <p>{resultCount} result{resultCount === 1 ? "" : "s"} for “{query}”</p> : <p>{markdownLessons.length} finished lessons ready to browse</p>}</div>
+          <div><span>{query ? "Search results" : "Ready for your week"}</span>{query ? <p>{resultCount} result{resultCount === 1 ? "" : "s"} for &quot;{query}&quot;</p> : <p>{markdownLessons.length} finished lessons ready to browse</p>}</div>
           <p className={styles.summaryNote}>Clear goals, classroom steps, and source notes stay together.</p>
           {databaseUnavailable ? <p className={styles.warning}>The curriculum database is unavailable; finished Markdown lessons are still shown.</p> : null}
         </div>
@@ -112,7 +112,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
                 <div className={styles.cardTop}><span>Teacher-ready lesson</span><strong>{lesson.metadata.grade}</strong></div>
                 <h2><Link href={lessonHref(lesson.metadata)}>{lesson.metadata.title}</Link></h2>
                 <p>{lesson.metadata.summary}</p>
-                <div className={styles.cardFooter}><span>{lesson.metadata.subject}</span><Link className={styles.cardLink} href={lessonHref(lesson.metadata)}>Open lesson <span aria-hidden="true">→</span></Link></div>
+                <div className={styles.cardFooter}><span>{lesson.metadata.subject}</span><Link className={styles.cardLink} href={lessonHref(lesson.metadata)}>Open lesson <span aria-hidden="true">-&gt;</span></Link></div>
               </div>
             </article>
           ))}
@@ -123,7 +123,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
                 <div className={styles.cardTop}><span>{markdownLesson ? "Teacher-ready lesson" : "Planning record"}</span><strong>{topic.grade}</strong></div>
                 <h2><Link href={href}>{markdownLesson?.metadata.title ?? topic.title}</Link></h2>
                 <p>{markdownLesson?.metadata.summary ?? topic.skillStatement ?? "Open the grade-scoped curriculum record and review what is available."}</p>
-                <div className={styles.cardFooter}><span>{markdownLesson?.metadata.subject ?? topic.subject}</span><Link className={styles.cardLink} href={href}>{markdownLesson ? "Open lesson" : "Review record"} <span aria-hidden="true">→</span></Link></div>
+                <div className={styles.cardFooter}><span>{markdownLesson?.metadata.subject ?? topic.subject}</span><Link className={styles.cardLink} href={href}>{markdownLesson ? "Open lesson" : "Review record"} <span aria-hidden="true">-&gt;</span></Link></div>
               </div>
             </article>
           ))}

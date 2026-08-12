@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurriculumLessonBySlug } from "../../lib/curriculum-lesson";
-import styles from "./CurriculumLessonPage.module.css";
+import { globalClassNames as styles } from "@/lib/global-class-names";
 
 interface Props {
   slug: string;
@@ -32,15 +32,15 @@ export async function CurriculumLessonPage({ slug }: Props) {
   }
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-style-scope="curriculum-lesson-page">
         <article className={styles.lesson}>
-          {/* ── Header ── */}
+          {/* -- Header -- */}
           <header className={styles.header}>
             <div className={styles.breadcrumb}>
               <Link href="/topics">Curriculum</Link>
-              <span aria-hidden="true">›</span>
+              <span aria-hidden="true">&gt;</span>
               <span>{lesson.subject}</span>
-              <span aria-hidden="true">›</span>
+              <span aria-hidden="true">&gt;</span>
               <span>{lesson.topic}</span>
             </div>
             <div className={styles.headerRow}>
@@ -50,7 +50,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
               </div>
               <div className={styles.badges}>
                 {lesson.grades.map(g => (
-                  <span key={g.label} className={styles.badge}>{g.label}{g.ageRange ? ` · ${g.ageRange}` : ""}</span>
+                  <span key={g.label} className={styles.badge}>{g.label}{g.ageRange ? ` - ${g.ageRange}` : ""}</span>
                 ))}
                 {lesson.circleTime && <span className={styles.cycle}>Circle time: {lesson.circleTime}</span>}
                 {lesson.pacing.length > 0 && (
@@ -62,7 +62,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
             </div>
           </header>
 
-          {/* ── Rapid glance: ratios ── */}
+          {/* -- Rapid glance: ratios -- */}
           <section className={styles.glance}>
             <div className={styles.glanceItem}><strong>{songs.length}</strong><span>songs &amp; rhymes</span></div>
             <div className={styles.glanceItem}><strong>{resources.length}</strong><span>resources</span></div>
@@ -70,20 +70,20 @@ export async function CurriculumLessonPage({ slug }: Props) {
             <div className={styles.glanceItem}><strong>{lesson.assets.length}</strong><span>printables</span></div>
           </section>
 
-          {/* ── Curriculum focus ── */}
+          {/* -- Curriculum focus -- */}
           <section className={styles.section}>
             <h2>Curriculum focus</h2>
             {standardsByFramework.size > 0 ? (
               [...standardsByFramework.entries()].map(([framework, list]) => (
                 <div key={framework} className={styles.frameworkGroup}>
-                  <h3>{framework}{framework.includes("Kindergarten") && <em> — full-day Kindergarten</em>}</h3>
+                  <h3>{framework}{framework.includes("Kindergarten") && <em> - full-day Kindergarten</em>}</h3>
                   <ul className={styles.standards}>
                     {list.map((s, i) => (
                       <li key={i}>
                         <strong>{s.code}</strong>
                         <span>{s.fullText}</span>
                         {s.frames && (
-                          <small>{s.frames.split(",").map(f => FRAME_LABELS[f.trim()]).filter(Boolean).join(" · ")}</small>
+                          <small>{s.frames.split(",").map(f => FRAME_LABELS[f.trim()]).filter(Boolean).join(" - ")}</small>
                         )}
                       </li>
                     ))}
@@ -95,7 +95,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
             )}
           </section>
 
-          {/* ── Focus materials ── */}
+          {/* -- Focus materials -- */}
           {focus.length > 0 && (
             <section className={styles.section}>
               <h2>Focus materials <em className={styles.emphasis}>start here</em></h2>
@@ -108,7 +108,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
             </section>
           )}
 
-          {/* ── Supporting bank ── */}
+          {/* -- Supporting bank -- */}
           {supporting.length > 0 && (
             <section className={styles.section}>
               <h2>Supporting bank</h2>
@@ -122,7 +122,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
             </section>
           )}
 
-          {/* ── Printables ── */}
+          {/* -- Printables -- */}
           {lesson.assets.length > 0 && (
             <section className={styles.section}>
               <h2>Printable resources</h2>
@@ -132,16 +132,16 @@ export async function CurriculumLessonPage({ slug }: Props) {
                     <span className={styles.assetIcon}>{a.type === "poster" ? "Poster" : "Printable"}</span>
                     <div>
                       <strong>{a.title}</strong>
-                      <span>{a.type} {a.format && `• ${a.format.toUpperCase()}`}</span>
+                      <span>{a.type} {a.format && `- ${a.format.toUpperCase()}`}</span>
                     </div>
-                    <span className={styles.downloadCue}>↓</span>
+                    <span className={styles.downloadCue}>-&gt;</span>
                   </a>
                 ))}
               </div>
             </section>
           )}
 
-          {/* ── Teacher notes ── */}
+          {/* -- Teacher notes -- */}
           <section className={styles.notes}>
             <h2>Teacher planning notes</h2>
             <div className={styles.noteGrid}>
@@ -160,14 +160,14 @@ export async function CurriculumLessonPage({ slug }: Props) {
             </div>
           </section>
 
-          {/* ── Tags + back ── */}
+          {/* -- Tags + back -- */}
           {lesson.tags.length > 0 && (
             <div className={styles.tags}>
               {lesson.tags.map((tag, i) => <span key={i} className={styles.tag}>{tag}</span>)}
             </div>
           )}
           <div className={styles.back}>
-            <Link href="/topics">← Back to curriculum</Link>
+            <Link href="/topics">{"<- Back to curriculum"}</Link>
           </div>
         </article>
     </div>
@@ -182,7 +182,7 @@ function MaterialCard({ material, compact = false }: {
     <div className={`${styles.material} ${compact ? styles.materialCompact : ""}`}>
       <div className={styles.materialHeader}>
         <span className={styles.materialKind}>{material.kind}</span>
-        {material.url && <a className={styles.external} href={material.url} target="_blank" rel="noopener noreferrer">source ↗</a>}
+        {material.url && <a className={styles.external} href={material.url} target="_blank" rel="noopener noreferrer">{"source ->"}</a>}
       </div>
       <h3 className={styles.materialTitle}>{material.title}</h3>
       {(material.lyrics || material.actions || material.instructions) && (

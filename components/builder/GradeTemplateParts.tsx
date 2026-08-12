@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./CurriculumTemplates.module.css";
+import { globalClassNames as styles } from "@/lib/global-class-names";
 import { Button } from "@/components/ui/button";
 
 export type GradePathItem = {
@@ -62,7 +62,7 @@ export function GradeTeacherPanel({ leadName, leadImage, leadQuote, showNotesLin
   return (
     <aside className={styles.teacherCard} aria-label={`A note from ${leadName}`}>
       <span>A note from {leadName}</span>
-      <blockquote>“{leadQuote}”</blockquote>
+      <blockquote>{`"${leadQuote}"`}</blockquote>
       <Image src={leadImage} width={230} height={230} alt={leadName} priority className={styles.teacherImage} />
       {showNotesLink && <a href="#planner" className={styles.teacherNotesLink}>Open teacher notes</a>}
     </aside>
@@ -81,7 +81,7 @@ export function GradePathways({ grade, items, activeIndex = 0, onSelect }: { gra
           const body = <>
             <Image src="/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png" width={22} height={22} alt="" className={styles.pathPin} />
             <Image src={item.icon || activityIcons[index % activityIcons.length]} width={112} height={112} alt="" className={styles.pathIcon} />
-            <span>{item.kicker}</span><h3>{item.title}</h3><p>{item.summary}</p><b>View path →</b>
+            <span>{item.kicker}</span><h3>{item.title}</h3><p>{item.summary}</p><b>{"View path ->"}</b>
           </>;
           return item.href ? <Link href={item.href} className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} key={item.title}>{body}</Link> : <Button variant="ghost" type="button" className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} aria-pressed={index === activeIndex} onClick={() => onSelect?.(index)} key={item.title}>{body}</Button>;
         })}

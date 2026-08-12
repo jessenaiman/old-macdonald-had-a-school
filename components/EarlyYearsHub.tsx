@@ -47,7 +47,7 @@ export function EarlyYearsHub({
         summary={tagline}
         activeIndex={active}
         onSelect={setActive}
-        onPreview={() => setPreview(true)}
+        onPreview={topic.image ? () => setPreview(true) : undefined}
         items={topics.map((item, index) => ({
           title: item.title,
           kicker: index === 0 ? "Story circle" : index === 1 ? "Mix & measure" : index === 2 ? "Explore together" : "Make & explain",
@@ -62,7 +62,7 @@ export function EarlyYearsHub({
         }))}
       />
 
-      <Sheet open={preview} onOpenChange={setPreview}>
+      <Sheet open={Boolean(topic.image) && preview} onOpenChange={setPreview}>
         <SheetContent className="lp-lightbox" side="bottom" showCloseButton={false}>
           <SheetTitle className="sr-only">Preview: {topic.title}</SheetTitle>
           <SheetDescription className="sr-only">{topic.focus}</SheetDescription>
@@ -70,12 +70,12 @@ export function EarlyYearsHub({
             <Button className="lp-lightbox-close" type="button" variant="ghost" aria-label="Close preview">Close</Button>
           </SheetClose>
           <div className="lp-lightbox-card" onClick={(event) => event.stopPropagation()}>
-            <Image className="lp-lightbox-img" src={topic.image} alt={topic.title} width={1200} height={800} />
+            {topic.image ? <Image className="lp-lightbox-img" src={topic.image} alt={topic.title} width={1200} height={800} /> : null}
             <div className="lp-lightbox-bar">
               <div className="lp-lightbox-cap"><strong>{topic.title}</strong><small>{topic.focus}</small></div>
               <div className="lp-lightbox-actions">
-                <a className="lp-btn-ghost" href={topic.image} download>Download</a>
-                <a className="lp-btn" href={topic.image} target="_blank" rel="noreferrer">Open for printing</a>
+                {topic.image ? <a className="lp-btn-ghost" href={topic.image} download>Download</a> : null}
+                {topic.image ? <a className="lp-btn" href={topic.image} target="_blank" rel="noreferrer">Open for printing</a> : null}
               </div>
             </div>
           </div>

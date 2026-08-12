@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { HOME_SUBJECTS } from "./home-data";
-import styles from "./HomePage.module.css";
+import { globalClassNames as styles } from "@/lib/global-class-names";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function TopicCabinet() {
@@ -18,7 +18,7 @@ export function TopicCabinet() {
       <TabsList className={styles.cabinetTabs} aria-label="Curriculum subjects">
         {HOME_SUBJECTS.map((item) => (
           <TabsTrigger value={item.key} key={item.key}>
-            {item.earlyYearsLabel} → {item.title}
+            {item.earlyYearsLabel} - {item.title}
           </TabsTrigger>
         ))}
       </TabsList>
@@ -26,7 +26,7 @@ export function TopicCabinet() {
       <article>
         <Image src={subject.icon} alt="" width={58} height={58} />
         <h3>{subject.title}</h3>
-        <Link className={styles.topicMore} href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}>Explore this subject →</Link>
+        <Link className={styles.topicMore} href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}>{"Explore this subject ->"}</Link>
       </article>
       </TabsContent>
     </section>

@@ -11,8 +11,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import legacyStyles from "./HomePage.module.css";
-import selectedStyles from "./BulletinHomePage.module.css";
+import { globalClassNames as legacyStyles } from "@/lib/global-class-names";
+import { globalClassNames as selectedStyles } from "@/lib/global-class-names";
 import { Button } from "@/components/ui/button";
 
 const SLIDES = [
@@ -62,7 +62,7 @@ export function HomeCarousel({ selected = false }: { selected?: boolean }) {
               </Button>
             ))}
           </div>
-          <Link href={slide.href}>{active === 0 ? "Meet the class" : slide.label} <span aria-hidden="true">→</span></Link>
+          <Link href={slide.href}>{active === 0 ? "Meet the class" : slide.label} <span aria-hidden="true">-&gt;</span></Link>
           <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">Showing {slide.label}</span>
         </div>
       ) : (

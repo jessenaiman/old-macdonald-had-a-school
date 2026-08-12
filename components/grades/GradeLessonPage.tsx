@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LessonDocument } from "../LessonDocument";
@@ -6,7 +6,7 @@ import { getLesson } from "../../lib/content";
 import { getCurriculumTopic } from "../../lib/curriculum-db";
 import { gradeKeysForLabel, type GradeKey } from "../../lib/grade-routes";
 import { DatabaseLessonDocument } from "./DatabaseLessonDocument";
-import styles from "./GradeLessonPage.module.css";
+import { globalClassNames as styles } from "@/lib/global-class-names";
 
 const GRADE_LESSON_DETAILS: Record<GradeKey, {
   label: string;
@@ -15,11 +15,11 @@ const GRADE_LESSON_DETAILS: Record<GradeKey, {
   teacher: string;
   teacherName: string;
 }> = {
-  daycare: { label: "Daycare", age: "Ages 2–3", badge: "/brand-kit-icon-sheets/individual-icons/grade-daycare.png", teacher: "/staff_and_students/miss-puddles-transparent-circle.png", teacherName: "Miss Puddles" },
-  "pre-school": { label: "Pre-School", age: "Ages 3–4", badge: "/staff_and_students/miss-maisy-transparent-circle.png", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
-  kindergarten: { label: "Kindergarten", age: "Ages 4–6", badge: "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png", teacher: "/staff_and_students/mr-rusty-transparent-circle.png", teacherName: "Mr Rusty" },
-  "grade-one": { label: "Grade 1", age: "5–6 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-1.png", teacher: "/staff_and_students/miss-hayley-transparent-circle.png", teacherName: "Miss Hayley" },
-  "grade-two": { label: "Grade 2", age: "6–7 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-2.png", teacher: "/staff_and_students/mr-maisy-transparent-circle.png", teacherName: "Mr Maisy" },
+  daycare: { label: "Daycare", age: "Ages 2-3", badge: "/brand-kit-icon-sheets/individual-icons/grade-daycare.png", teacher: "/staff_and_students/miss-puddles-transparent-circle.png", teacherName: "Miss Puddles" },
+  "pre-school": { label: "Pre-School", age: "Ages 3-4", badge: "/staff_and_students/miss-maisy-transparent-circle.png", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
+  kindergarten: { label: "Kindergarten", age: "Ages 4-6", badge: "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png", teacher: "/staff_and_students/mr-rusty-transparent-circle.png", teacherName: "Mr Rusty" },
+  "grade-one": { label: "Grade 1", age: "5-6 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-1.png", teacher: "/staff_and_students/miss-hayley-transparent-circle.png", teacherName: "Miss Hayley" },
+  "grade-two": { label: "Grade 2", age: "6-7 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-2.png", teacher: "/staff_and_students/mr-maisy-transparent-circle.png", teacherName: "Mr Maisy" },
 };
 
 export async function GradeLessonPage({
@@ -40,7 +40,7 @@ export async function GradeLessonPage({
   const title = lesson?.metadata.title ?? databaseTopic?.title ?? "Lesson";
 
   return (
-    <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson?.metadata.template ?? "database-draft"}>
+    <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson?.metadata.template ?? "database-draft"} data-style-scope="grade-lesson-page">
         <aside className={styles.rail} aria-label={`${details.label} lesson sections`}>
           <div className={styles.railIdentity}>
             <Image src={details.badge} alt="" width={68} height={68} className={styles.gradeBadge} priority />
@@ -59,7 +59,7 @@ export async function GradeLessonPage({
           </div>
         </aside>
         <div className={styles.lessonStage}>
-          <div className={styles.lessonCrumb}><Link href={`/grade/${grade}`}>{details.label}</Link><span aria-hidden="true">›</span><span>{subject}</span><span aria-hidden="true">›</span><span>{title}</span></div>
+          <div className={styles.lessonCrumb}><Link href={`/grade/${grade}`}>{details.label}</Link><span aria-hidden="true">&gt;</span><span>{subject}</span><span aria-hidden="true">&gt;</span><span>{title}</span></div>
           <div id="lesson-overview">
             {lesson
               ? <LessonDocument Content={lesson.Content} metadata={lesson.metadata} />
@@ -91,7 +91,7 @@ export async function GradeLessonPage({
             </div>
           </section>
           <div className={styles.bottomAction}>
-            <Link href={`/grade/${grade}`}>← Back to {details.label} lessons</Link>
+            <Link href={`/grade/${grade}`}>{`<- Back to ${details.label} lessons`}</Link>
           </div>
         </div>
     </div>

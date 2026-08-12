@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   GradePlanningNotes,
   GradePathways,
@@ -8,7 +9,7 @@ import {
   GradeTeacherPanel,
   type GradePathItem,
 } from "../builder/CurriculumTemplates";
-import workStyles from "../builder/CurriculumTemplates.module.css";
+import { globalClassNames as workStyles } from "@/lib/global-class-names";
 
 export type DefaultGradeTemplateProps = {
   gradeKey: string;
@@ -67,6 +68,7 @@ export function DefaultGradeTemplate({
         "block! w-full! max-w-none! min-h-0! mx-0! mt-0! mb-8! md:grid! md:grid-cols-[220px_minmax(0,1fr)]! md:mt-0! md:mb-14! xl:grid-cols-[240px_minmax(0,1fr)]!",
       ].join(" ")}
       data-grade-template={gradeKey}
+      data-style-scope="curriculum-templates"
     >
       <GradeRail grade={grade} age={age} badge={badge} reminder={reminder} />
       <main className={workStyles.stage}>
@@ -80,7 +82,7 @@ export function DefaultGradeTemplate({
               {currentItem?.href ? (
                 <Link href={currentItem.href} className={workStyles.feltButton}>Build this lesson</Link>
               ) : onPreview ? (
-                <button type="button" className={workStyles.feltButton} onClick={onPreview}>Preview the story</button>
+                <Button type="button" variant="ghost" className={workStyles.feltButton} onClick={onPreview}>Preview the story</Button>
               ) : (
                 <a href="#curriculum" className={workStyles.feltButton}>Choose a learning path</a>
               )}

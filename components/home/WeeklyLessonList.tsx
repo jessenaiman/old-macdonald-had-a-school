@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { lessonHref } from "@/lib/grade-routes";
-import legacyStyles from "./HomePage.module.css";
-import selectedStyles from "./BulletinHomePage.module.css";
+import { globalClassNames as legacyStyles } from "@/lib/global-class-names";
+import { globalClassNames as selectedStyles } from "@/lib/global-class-names";
 
 export type WeeklyLesson = {
   slug: string;
@@ -67,11 +67,11 @@ export function WeeklyLessonList({
             <span className={styles.gradeChips} role="group" aria-label={`Best for ${lesson.grade}`}>
               {gradeChips(lesson.grade).map((grade) => <b key={grade}>{grade}</b>)}
             </span>
-            {selected ? null : <Link className={styles.lessonAction} href={lesson.href ?? lessonHref(lesson)}>Play lesson <span aria-hidden="true">→</span></Link>}
+            {selected ? null : <Link className={styles.lessonAction} href={lesson.href ?? lessonHref(lesson)}>Play lesson <span aria-hidden="true">-&gt;</span></Link>}
           </li>
         ))}
       </ul>
-      <Link className={styles.weeklyMore} href="/lessons">See all lessons <span aria-hidden="true">→</span></Link>
+      <Link className={styles.weeklyMore} href="/lessons">See all lessons <span aria-hidden="true">-&gt;</span></Link>
     </section>
   );
 }

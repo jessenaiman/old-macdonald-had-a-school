@@ -28,3 +28,6 @@ NUL
 $null
 
 .vercel
+
+*storybook.log
+storybook-static

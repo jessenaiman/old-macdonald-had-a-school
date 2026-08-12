@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
@@ -35,11 +36,12 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
           </Button>
         </SheetTrigger>
 
-        <SheetContent className="site-menu-sheet material-site-fabric" side="right" showCloseButton={false}>
+        <SheetContent className="site-menu-sheet material-site-leather" side="right" showCloseButton={false}>
           <SheetHeader className="site-menu-sheet-header">
-            <div>
-              <SheetTitle>Teacher shortcuts</SheetTitle>
-              <SheetDescription>Choose where you want to start.</SheetDescription>
+            <Image src="/brand-emblem.png" alt="" width={48} height={48} />
+            <div className="site-menu-sheet-heading">
+              <SheetTitle>Old MacDonald Had a School</SheetTitle>
+              <SheetDescription>Lessons, subjects, and grade workspaces</SheetDescription>
             </div>
             <SheetClose asChild>
               <Button className="site-menu-sheet-close" variant="ghost" size="icon" aria-label="Close navigation menu">
@@ -56,6 +58,9 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
               <Link href="/lessons" aria-current={active === "lessons" ? "page" : undefined} onClick={() => setOpen(false)}>Find lessons</Link>
             </Button>
             <Button asChild variant="ghost">
+              <Link href="/search" aria-current={active === "search" ? "page" : undefined} onClick={() => setOpen(false)}>Search lessons</Link>
+            </Button>
+            <Button asChild variant="ghost">
               <Link href="/#browse-by-subject" onClick={() => setOpen(false)}>Browse subjects</Link>
             </Button>
             <Button asChild variant="ghost">
@@ -69,7 +74,7 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
           <Separator className="site-menu-sheet-separator" />
 
           <section className="site-menu-sheet-grades" aria-labelledby="mobile-grade-heading">
-            <h2 id="mobile-grade-heading">Choose a grade</h2>
+            <h2 id="mobile-grade-heading">Grade workspaces</h2>
             <div>
               {gradeLinks.map((grade) => (
                 <Button asChild variant="outline" key={grade.key}>
