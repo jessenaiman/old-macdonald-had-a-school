@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SiteShell } from "../../components/SiteShell";
 import styles from "./SearchPage.module.css";
 
 interface SearchResult {
@@ -30,17 +29,17 @@ interface CurriculumResult {
 }
 
 interface LessonResult {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   subject: string;
   grade_band: string;
   summary: string;
   purpose: string;
-  duration_minutes: number;
+  duration_minutes: number | null;
   editorial_status: string;
   review_state: string;
-  topic_id: number;
+  topic_id: number | null;
   song_count: number;
   resource_count: number;
 }
@@ -49,6 +48,10 @@ interface SearchResponse {
   results?: SearchResult[];
   curriculum?: CurriculumResult[];
   lessons?: LessonResult[];
+  total?: number;
+  searchMode?: "structured-keyword" | "hybrid-keyword-semantic";
+  semanticModel?: string | null;
+  database?: string;
   error?: string;
 }
 
@@ -130,6 +133,7 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchStatus, setSearchStatus] = useState<Pick<SearchResponse, "searchMode" | "semanticModel" | "database">>({});
 
   const search = useCallback(async (requestedQuery?: string) => {
     const cleanedQuery = (requestedQuery ?? query).trim();
@@ -151,6 +155,11 @@ export default function SearchPage() {
       setResults(baseResponse.results ?? []);
       setCurriculum(nextCurriculum);
       setLessons(nextLessons);
+      setSearchStatus({
+        searchMode: baseResponse.searchMode,
+        semanticModel: baseResponse.semanticModel,
+        database: baseResponse.database,
+      });
       setSelectedKey(
         nextCurriculum[0]
           ? `topic:${nextCurriculum[0].id}:${nextCurriculum[0].grade_key}`
@@ -164,6 +173,7 @@ export default function SearchPage() {
       setCurriculum([]);
       setLessons([]);
       setSelectedKey(null);
+      setSearchStatus({});
       setError(searchError instanceof Error ? searchError.message : "Search failed.");
     } finally {
       setLoading(false);
@@ -212,8 +222,7 @@ export default function SearchPage() {
   const activeResources = activeTab === "video" ? videos : activeTab === "printouts" ? printouts : songs;
 
   return (
-    <SiteShell active="search">
-      <div className={styles.page}>
+    <div className={styles.page}>
         <section className={styles.searchSheet} aria-labelledby="search-title">
           <Image className={styles.emblem} src="/brand-emblem.png" alt="" width={86} height={86} priority />
           <div className={styles.headingCopy}>
@@ -282,6 +291,12 @@ export default function SearchPage() {
                 </div>
                 <span>{results.length} related {results.length === 1 ? "resource" : "resources"}</span>
               </div>
+              <p className={styles.searchProvenance} role="status">
+                {searchStatus.database === "omhas.db" ? "Curriculum database connected" : "Curriculum index connected"}
+                {searchStatus.searchMode === "hybrid-keyword-semantic"
+                  ? " · keyword + meaning search"
+                  : " · keyword search"}
+              </p>
 
               {totalCurriculum > 0 ? (
                 <ol className={styles.resultList}>
@@ -453,7 +468,6 @@ export default function SearchPage() {
             </main>
           </div>
         )}
-      </div>
-    </SiteShell>
+    </div>
   );
 }

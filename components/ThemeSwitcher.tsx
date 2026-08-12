@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
+import { Button } from "@/components/ui/button";
 
 const THEMES = [
   { value: "light", label: "Farm day", icon: "/design-assets/theme-toggle-patches-v1/sun-patch.png" },
@@ -18,8 +19,10 @@ export function ThemeSwitcher() {
   const next = THEMES.find((item) => item.value !== current.value) ?? THEMES[0];
 
   return (
-    <button
+    <Button
       type="button"
+      variant="ghost"
+      size="icon"
       className="theme-switcher"
       onClick={() => setTheme(next.value)}
       aria-label={`Switch to ${next.label}`}
@@ -27,6 +30,6 @@ export function ThemeSwitcher() {
     >
       <Image src={current.icon} alt="" width={34} height={34} loading="eager" aria-hidden="true" />
       <span className="sr-only">{current.label}</span>
-    </button>
+    </Button>
   );
 }

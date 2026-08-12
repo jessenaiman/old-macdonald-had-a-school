@@ -254,6 +254,7 @@
    Matches the approved working-wall composition while keeping topic and lesson
    templates stable. Felt seams are pressed inset edges, not CSS stitch marks. */
 .gradeWall {
+  --rail-thread: url("/design-assets/web-material-library-v1/thread-overlays/thread-overlay-08-miss-maisy-tile.png");
   grid-template-columns: 220px minmax(0, 1fr);
   width: min(1280px, calc(100% - 32px));
   min-height: 900px;
@@ -281,7 +282,9 @@
 .gradeWall .rail {
   padding: 28px 24px 24px;
   background-color: #315942;
-  background-size: 300px;
+  background-image: var(--rail-thread), url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png");
+  background-size: 112px, 300px;
+  background-repeat: repeat;
   box-shadow: inset -2px 0 0 rgba(20, 53, 38, .42), 5px 0 10px rgba(52, 39, 24, .12);
 }
 
@@ -902,6 +905,7 @@
    the shared GradeTemplate markup and quiet pressed felt edges while moving
    Grade 1 toward the wider, more editorial composition in the reference. */
 .gradeOneWall {
+  --rail-thread: url("/design-assets/web-material-library-v1/thread-overlays/thread-overlay-04-miss-hayley-tile.png");
   grid-template-columns: 220px minmax(0, 1fr);
   width: min(1280px, calc(100% - 32px));
   min-height: 790px;
@@ -914,8 +918,9 @@
 
 .gradeOneWall .rail {
   padding-inline: 20px;
-  background-color: #176a68;
-  background-image: url("/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png");
+  background-color: #c9527a;
+  background-image: var(--rail-thread), url("/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png");
+  background-size: 112px, 300px;
 }
 
 .gradeOneWall .rail::after {
@@ -1145,8 +1150,10 @@
 /* Grade 2 keeps the same approved composition, with Mr Sam's locked teal
    identity used for the primary teaching action. */
 .gradeTwoWall .rail {
+  --rail-thread: url("/design-assets/web-material-library-v1/thread-overlays/thread-overlay-07-mr-puddles-tile.png");
   background-color: #4f5fa0;
-  background-image: url("/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png");
+  background-image: var(--rail-thread), url("/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png");
+  background-size: 112px, 300px;
 }
 
 .gradeTwoWall .rail::after {
@@ -1217,8 +1224,10 @@
    Uses the approved wide composition with Mr Rusty's canonical blue as the
    organizing color, supported by the warm brown and gold in the reference. */
 .kindergartenWall .rail {
+  --rail-thread: url("/design-assets/web-material-library-v1/thread-overlays/thread-overlay-03-mr-rusty-tile.png");
   background-color: #2c6c9b;
-  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-image: var(--rail-thread), url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 112px, 300px;
 }
 
 .kindergartenWall .railIdentity strong {

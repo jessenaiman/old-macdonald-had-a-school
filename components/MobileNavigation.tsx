@@ -14,7 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import type { ActivePage, GradeNavigationItem } from "./SiteShell";
+import type { ActivePage, GradeNavigationItem } from "./site-navigation";
 
 export function MobileNavigation({ active, grades }: { active?: ActivePage; grades: readonly GradeNavigationItem[] }) {
   const [open, setOpen] = useState(false);
@@ -29,13 +29,13 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
     <div className="site-mobile-menu">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button className="site-mobile-menu-trigger" variant="ghost" aria-label="Open navigation menu">
+          <Button className="site-mobile-menu-trigger" variant="ghost" size="icon-lg" aria-label="Open navigation menu">
             <FaBars aria-hidden="true" />
-            <span>Menu</span>
+            <span className="sr-only">Open navigation menu</span>
           </Button>
         </SheetTrigger>
 
-        <SheetContent className="site-menu-sheet" side="right" showCloseButton={false}>
+        <SheetContent className="site-menu-sheet material-site-fabric" side="right" showCloseButton={false}>
           <SheetHeader className="site-menu-sheet-header">
             <div>
               <SheetTitle>Teacher shortcuts</SheetTitle>

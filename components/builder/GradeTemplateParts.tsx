@@ -41,7 +41,7 @@ export function GradeRail({ grade, age, badge, reminder }: { grade: string; age:
     <aside className={styles.rail} aria-label={`${grade} planning sections`}>
       <div className={styles.railIdentity}>
         <Image src={badge} width={72} height={72} alt="" className={styles.gradeBadge} />
-        <div><span>Farm School</span><strong>{grade}</strong><small>{age}</small></div>
+        <div><span>Learning plan</span><strong>{grade}</strong><small>{age}</small></div>
       </div>
       <nav className={styles.railNav}>
         <a href="#today"><b>01</b><span>Today</span></a>

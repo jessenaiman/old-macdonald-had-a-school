@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Lilita_One, Nunito } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "../components/ThemeProvider";
+import { SiteFooter } from "../components/SiteFooter";
+import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
 
 const bodyFont = Nunito({
@@ -44,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${handFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
-      <body><ThemeProvider>{children}</ThemeProvider></body>
+      <body><ThemeProvider><div className="site-shell site-review site-chrome-home"><SiteHeader /><main className="site-page">{children}</main><SiteFooter /></div></ThemeProvider></body>
     </html>
   );
 }

@@ -24,3 +24,57 @@
 @media(min-width:1200px){.welcome{grid-template-columns:minmax(0,1fr) 400px}.teacherCard{min-height:280px}.teacherCard>span{max-width:210px}.teacherCard blockquote{max-width:220px}.teacherImage{width:240px;height:240px}}
 @media(max-width:900px){.board{width:min(100% - 18px,900px)}.welcome{grid-template-columns:1fr}.welcomeCopy h1{max-width:620px}.teacherCard{min-height:230px}.teacherCard blockquote{max-width:52%}.teacherImage{width:210px;height:210px}}
 @media(max-width:640px){.board{width:calc(100% - 12px)}.teacherCard{min-height:250px}.teacherImage{width:205px;height:205px}}
+
+/* Shared edge-to-edge grade workroom: the rail is a fixed teaching index and
+   uses the governed felt plus its authored thread overlay. */
+.board{grid-template-columns:240px minmax(0,1fr);width:100%;margin:0 0 50px;border-inline:0;border-radius:0}
+.rail{padding:22px 18px 20px;background-color:var(--identity-color);background-repeat:repeat;background-size:112px,220px}
+@media(max-width:900px){.board{grid-template-columns:190px minmax(0,1fr);width:100%}}
+@media(max-width:640px){.board{display:block;width:100%;margin-top:0;border-radius:0}}
+
+/* The teacher prompt is persistent grade context, not tab content. It uses
+   shadcn's Card composition while retaining the governed grade felt. */
+.teacherQuote{margin:0 0 16px}
+.teacherCard{position:relative;min-height:176px;gap:0;padding:0;overflow:hidden;border-color:#fff6dd42;color:#fff8e7;background-color:var(--identity-color);background-repeat:repeat;background-size:190px;box-shadow:0 6px 0 #44270e2e,0 12px 24px #44270e20}
+.teacherCardHeader{position:relative;z-index:2;padding:22px 220px 6px 24px}
+.teacherCardTitle{color:#fff5dc;font-family:var(--font-farm-body),sans-serif;font-size:11px;font-weight:900;line-height:1.2;letter-spacing:.1em;text-transform:uppercase}
+.teacherCardContent{position:relative;z-index:1;min-width:0;padding:0 220px 24px 24px}
+.teacherCardContent blockquote{max-width:720px;margin:0;color:#fff9e8;font-family:var(--font-farm-hand),"Segoe Print",cursive;font-size:clamp(25px,3vw,38px);font-weight:700;line-height:1.05;text-wrap:balance}
+.teacherCard .teacherImage{right:14px;bottom:-25px;width:205px;height:205px}
+.welcome{grid-template-columns:minmax(0,1fr)!important;min-height:0}
+
+@media(max-width:640px){
+  .teacherQuote{margin-bottom:8px}
+  .teacherCard{min-height:164px}
+  .teacherCardHeader{padding:16px 128px 5px 15px}
+  .teacherCardTitle{font-size:9px}
+  .teacherCardContent{padding:0 126px 18px 15px}
+  .teacherCardContent blockquote{font-size:clamp(21px,7vw,29px)}
+  .teacherCard .teacherImage{right:-10px;bottom:-18px;width:145px;height:145px}
+}
+
+/* The grade rail is a compact lesson workspace, not a second brand header. */
+.identity{
+  display:grid;
+  gap:4px;
+  min-height:76px;
+  padding:4px 4px 18px;
+}
+.identity strong{font-size:24px}
+.identity small{color:rgba(255,246,221,.82)}
+@media(max-width:640px){
+  .identity{
+    grid-template-columns:auto 1fr auto;
+    align-items:baseline;
+    min-height:0;
+    padding:2px 3px 9px;
+  }
+  .identity strong{font-size:19px}
+  .identity small{text-align:right}
+}
+
+/* Keep every governed staff portrait fully visible inside the persistent quote. */
+.teacherCard .teacherImage{right:clamp(8px,2vw,22px);bottom:0;width:clamp(160px,18vw,228px);height:calc(100% - 8px);max-height:248px;object-fit:contain;object-position:center bottom}
+.teacherCardHeader{padding-right:clamp(172px,21vw,252px)}
+.teacherCardContent{padding-right:clamp(172px,21vw,252px)}
+@media(max-width:640px){.teacherCard .teacherImage{right:4px;bottom:0;width:132px;height:calc(100% - 4px);max-height:none}.teacherCardHeader{padding-right:130px}.teacherCardContent{padding-right:128px}}

@@ -64,7 +64,7 @@ export function DefaultGradeTemplate({
         workStyles.gradeWall,
         ...wallClassNames,
         gradeClassName,
-        "block! w-full! max-w-[1480px]! min-h-0! mx-auto! mt-0! mb-8! md:grid! md:grid-cols-[220px_minmax(0,1fr)]! md:mt-6! md:mb-14! xl:grid-cols-[240px_minmax(0,1fr)]!",
+        "block! w-full! max-w-none! min-h-0! mx-0! mt-0! mb-8! md:grid! md:grid-cols-[220px_minmax(0,1fr)]! md:mt-0! md:mb-14! xl:grid-cols-[240px_minmax(0,1fr)]!",
       ].join(" ")}
       data-grade-template={gradeKey}
     >

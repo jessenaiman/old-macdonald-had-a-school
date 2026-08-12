@@ -14,6 +14,29 @@
   --font-button: var(--font-farm-display);
   --font-serif-italic: Georgia, "Times New Roman", serif;
   --font-sans: var(--font-farm-body);
+  /* shadcn semantic colors follow the same next-themes class switch as the
+     existing farm-school palette. Components consume these names instead of
+     introducing a second, page-specific light/dark system. */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted-surface);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-site-chrome: var(--site-chrome-background);
+  --color-site-chrome-foreground: var(--site-chrome-foreground);
+  --color-site-chrome-accent: var(--site-chrome-accent);
 }
 
 :root {
@@ -30,6 +53,23 @@
      of body text, where the full-strength grain above reads as noise behind
      the type instead of fabric. */
   --grain-soft: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
+  --background:#e3cf9f; --foreground:#172238;
+  --card:#fdf8ec; --card-foreground:#172238;
+  --popover:#fdf8ec; --popover-foreground:#172238;
+  --primary:#0b1a33; --primary-foreground:#fff8e8;
+  --secondary:#f0e4c5; --secondary-foreground:#173552;
+  --muted-surface:#eadfca; --muted-foreground:#5d5447;
+  --accent:#e9c65b; --accent-foreground:#173552;
+  --border:#bcae91; --input:#9f9278; --ring:#c0941e;
+  /* Shared material theme: site navigation uses felt; the footer uses leather. */
+  --site-chrome-background:#05192d;
+  --site-chrome-foreground:#fff0d0;
+  --site-chrome-accent:#f1c95d;
+  --site-chrome-border:rgba(224,172,70,.7);
+  --site-chrome-fabric:url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  --site-chrome-leather:url("/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png");
+  --site-chrome-texture-size:230px;
+  --site-chrome-blend:multiply;
 }
 @theme inline { --color-brand-navy:var(--navy); --color-brand-blue:var(--blue); --color-brand-sky:var(--sky); --color-brand-gold:var(--gold); --color-brand-red:var(--red); --color-brand-coral:var(--coral); --color-brand-pink:var(--pink); --color-brand-plum:var(--plum); --color-brand-orange:var(--orange); --color-brand-paper:var(--paper); --color-brand-line:var(--line); }
 
@@ -39,7 +79,18 @@
    thread, cool blue structure, and character-patch accents. Themes change the
    atmosphere while keeping that language recognisable. */
 html.light { --navy:#0b1a33; --blue:#3f78a4; --sky:#b9d3e6; --cool-white:#f2e8d0; --sunlit:#e9c65b; --gold:#e1b84b; --red:#c33f3f; --coral:#d45d6d; --pink:#d98291; --plum:#8d7aa8; --orange:#d97a2b; --brown:#4b5563; --green:#3f78a4; --ink:#172238; --heading:#0b1a33; --muted:#3d4650; --surface-soft:#f8fbfd; --hero-text:#e7f0f7; --paper:#fbfcf8; --line:#cdd9e6; --page-bg:#e3cf9f; --card-bg:#fdf8ec; }
-html.dark { --navy:#101b3a; --blue:#6887b7; --sky:#c8d0e5; --cool-white:#221c2c; --sunlit:#f4c968; --gold:#e8b65b; --red:#b86d82; --coral:#c684a0; --pink:#ba93b5; --plum:#8e83b8; --orange:#c4866b; --brown:#b8c1d3; --green:#6887b7; --ink:#f2f3f7; --heading:#f2f3f7; --muted:#b6bfd1; --surface-soft:#222847; --hero-text:#dfe5f3; --paper:#1d2544; --line:#404b6d; --page-bg:#100b19; --card-bg:#302949; }
+html.dark { --navy:#101b3a; --blue:#6887b7; --sky:#c8d0e5; --cool-white:#221c2c; --sunlit:#f4c968; --gold:#e8b65b; --red:#b86d82; --coral:#c684a0; --pink:#ba93b5; --plum:#8e83b8; --orange:#c4866b; --brown:#b8c1d3; --green:#6887b7; --ink:#f2f3f7; --heading:#f2f3f7; --muted:#b6bfd1; --surface-soft:#222847; --hero-text:#dfe5f3; --paper:#1d2544; --line:#404b6d; --page-bg:#100b19; --card-bg:#302949; --background:#100b19; --foreground:#f2f3f7; --card:#302949; --card-foreground:#f2f3f7; --popover:#302949; --popover-foreground:#f2f3f7; --primary:#e8b65b; --primary-foreground:#101b3a; --secondary:#222847; --secondary-foreground:#f2f3f7; --muted-surface:#282e4c; --muted-foreground:#c8cfdd; --accent:#e8b65b; --accent-foreground:#101b3a; --border:#58617e; --input:#68718c; --ring:#e8b65b; --site-chrome-background:#030f20; --site-chrome-foreground:#fff4dc; --site-chrome-accent:#f4c968; }
+
+.material-site-fabric,
+.material-site-leather{
+  color:var(--site-chrome-foreground);
+  background-color:var(--site-chrome-background);
+  background-repeat:repeat;
+  background-size:var(--site-chrome-texture-size);
+  background-blend-mode:var(--site-chrome-blend);
+}
+.material-site-fabric{background-image:var(--site-chrome-fabric)}
+.material-site-leather{background-image:var(--site-chrome-leather)}
 
 /* Subject-discovery clusters (homepage) â€” a separate small palette that never
    reuses a grade hue, so grade color and subject color never compete on one card. */
@@ -2615,14 +2666,14 @@ html.dark .site-review {
 }
 
 .site-review .site-nav-desktop .site-nav-link {
-  width: clamp(76px, 6.6vw, 94px);
-  min-height: 42px;
+  width: clamp(88px, 7.2vw, 108px);
+  min-height: 46px;
   justify-content: center;
   padding: 5px 8px;
   border: 2px solid rgba(255, 248, 226, .78);
   border-radius: 11px;
   font-family: var(--font-farm-display), Georgia, serif;
-  font-size: 11px;
+  font-size: clamp(13px, .86vw, 15px);
   font-weight: 700;
   letter-spacing: .01em;
   text-align: center;
@@ -2693,6 +2744,20 @@ html.dark .site-review {
   max-width: none;
   min-height: calc(100vh - 68px);
   padding: 18px clamp(14px, 3vw, 42px) 0;
+}
+
+.site-review .site-page:has(> [data-grade-template]:not([data-lesson-template])) {
+  padding-inline: 0;
+}
+
+.site-review .site-page:has([data-grade-template]:not([data-lesson-template])) {
+  padding: 0;
+}
+
+.site-review .site-page:has([data-grade-template]:not([data-lesson-template])) :is(.ey-page, [data-grade-template]) {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
 }
 
 .site-review .site-page:has(> .home-page) {
@@ -2772,9 +2837,12 @@ html.dark .site-review {
 
 /* Grade TSX templates remain independent inside one shared page frame. */
 .site-review [data-grade-template]:not([data-lesson-template]) {
-  width: min(1680px, calc(100% - 24px));
+  width: 100%;
+  max-width: none;
   min-height: 0;
-  margin: 22px auto 0;
+  margin: 0;
+  border-inline: 0;
+  border-radius: 0;
   border-color: color-mix(in srgb, var(--review-paper-soft) 88%, transparent);
   background-color: var(--review-paper);
   box-shadow: var(--review-shadow);
@@ -2786,6 +2854,7 @@ html.dark .site-review {
 }
 
 .site-review [data-grade-template]:not([data-lesson-template]) > main {
+  width: 100%;
   min-width: 0;
 }
 
@@ -2838,7 +2907,10 @@ html.dark .site-review [data-lesson-template] > div {
 
 html.dark .site-review [data-grade-template] :is(h1, h2, h3),
 html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
-  color: var(--review-ink);
+  /* Grade templates deliberately retain authored ivory paper in both site
+     themes. Their local ink token therefore remains the accessible heading
+     color; forcing the site-dark foreground here produced ivory-on-ivory. */
+  color: var(--ink);
 }
 
 .site-review .site-mobile-menu-trigger {
@@ -2965,8 +3037,8 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   }
 
   .site-review [data-grade-template]:not([data-lesson-template]) {
-    width: min(100%, 760px);
-    margin-top: 10px;
+    width: 100%;
+    margin-top: 0;
   }
 
   .site-review .footer-cast { grid-template-columns: repeat(2,minmax(0,1fr)); row-gap: 16px; }
@@ -3114,6 +3186,42 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   .site-review [data-grade-template]:not([data-lesson-template]) > main {
     padding-inline: 14px;
   }
+}
+
+/* Shared footer material: governed full-grain leather tile plus the approved
+   classroom brass split pins. The footer belongs to app/layout.tsx. */
+.site-review.site-chrome-home .site-footer{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border-top:5px solid #5b351f;
+  background-color:#8b5e34;
+  background-image:url("/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png");
+  background-repeat:repeat;
+  background-size:256px;
+  background-blend-mode:normal;
+  box-shadow:inset 0 3px 0 rgba(255,232,177,.25),inset 0 -8px 18px rgba(52,24,10,.3);
+}
+.site-review.site-chrome-home .site-footer::after{
+  inset:10px;
+  border:2px dashed rgba(255,220,145,.48);
+  border-radius:10px;
+}
+.site-footer-fastener{
+  position:absolute;
+  z-index:2;
+  top:10px;
+  width:34px;
+  height:34px;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 1px rgba(33,15,4,.55));
+}
+.site-footer-fastener-left{left:clamp(14px,2.5vw,42px)}
+.site-footer-fastener-right{right:clamp(14px,2.5vw,42px)}
+.site-review.site-chrome-home .site-footer>div{position:relative;z-index:1}
+@media(max-width:640px){
+  .site-footer-fastener{top:8px;width:28px;height:28px}
+  .site-review.site-chrome-home .site-footer::after{inset:7px}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3274,15 +3382,15 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   display: block;
   color: #fff8e8;
   font-family: var(--font-farm-display), sans-serif;
-  font-size: 18px;
-  line-height: 1;
+  font-size: clamp(19px, 1.35vw, 22px);
+  line-height: 1.05;
 }
 
 .site-footer-brand small {
   display: block;
   margin-top: 5px;
   color: #ffd064;
-  font: 800 9px/1.2 var(--font-farm-body), sans-serif;
+  font: 900 10px/1.25 var(--font-farm-body), sans-serif;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
@@ -3291,7 +3399,7 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   max-width: 330px;
   margin: 14px 0 0;
   color: rgba(255, 248, 232, .72);
-  font: 600 12px/1.5 var(--font-farm-body), sans-serif;
+  font: 700 14px/1.55 var(--font-farm-body), sans-serif;
 }
 
 .site-footer-nav {
@@ -3303,10 +3411,11 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 .site-footer-nav strong {
   margin-bottom: 3px;
   color: #ffd064;
-  font: 900 13px/1.2 var(--font-farm-body), sans-serif;
+  font: 400 18px/1.1 var(--font-farm-display), Georgia, serif;
 }
 
-.site-footer-nav a { font: 700 12px/1.35 var(--font-farm-body), sans-serif; }
+.site-footer-nav a { font: 750 14px/1.45 var(--font-farm-body), sans-serif; }
+.site-footer-legal { color: rgba(255,248,232,.8); font: 700 13px/1.45 var(--font-farm-body), sans-serif; }
 .site-review.site-shell-home .site-nav-search svg { flex: 0 0 auto; }
 
 /* The selected homepage menu and footer are the single site-wide chrome. */
@@ -3318,9 +3427,10 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   margin: 0;
   border: 0;
   border-radius: 0;
-  background-color: #082746;
-  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
-  background-size: 230px;
+  background-color:var(--site-chrome-background);
+  background-image:var(--site-chrome-fabric);
+  background-size:var(--site-chrome-texture-size);
+  background-blend-mode:var(--site-chrome-blend);
   box-shadow: none;
 }
 .site-review.site-chrome-home .site-header::after {
@@ -3338,7 +3448,7 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 .site-review.site-chrome-home .site-brand-short { display:none }
 .site-review.site-chrome-home .site-nav-desktop { display:flex!important;flex:1 1 auto;align-items:center;justify-content:flex-end;gap:clamp(22px,3vw,50px) }
 .site-review.site-chrome-home .site-nav-desktop .site-nav-link,
-.site-review.site-chrome-home .site-teacher-menu>summary { display:inline-flex;width:auto;min-height:40px;align-items:center;padding:3px 0;border:0;border-bottom:1px solid transparent;border-radius:0;color:#fff0d0;background:transparent;box-shadow:none;font:700 11px/1 Georgia,"Times New Roman",serif;text-shadow:none }
+.site-review.site-chrome-home .site-teacher-menu>summary { display:inline-flex;width:auto;min-height:42px;align-items:center;padding:3px 0;border:0;border-bottom:1px solid transparent;border-radius:0;color:#fff0d0;background:transparent;box-shadow:none;font:700 14px/1.1 Georgia,"Times New Roman",serif;text-shadow:none }
 .site-review.site-chrome-home .site-nav-desktop .site-nav-link:hover,
 .site-review.site-chrome-home .site-nav-desktop .site-nav-link.is-active,
 .site-review.site-chrome-home .site-teacher-menu>summary:hover,
@@ -3350,13 +3460,13 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
 .site-review.site-chrome-home .site-mobile-actions { display:none }
 .site-review.site-chrome-home .theme-switcher { width:36px;min-width:36px;height:36px;min-height:36px;padding:2px;border:0;border-radius:50%;background:transparent;box-shadow:none }
 .site-review.site-chrome-home .theme-switcher img { width:31px;height:31px }
-.site-review.site-chrome-home .site-footer { border-top:2px solid rgba(224,172,70,.7);background-color:#05192d;background-image:url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");background-size:230px;background-blend-mode:multiply }
+.site-review.site-chrome-home .site-footer { border-top:2px solid var(--site-chrome-border);background-color:var(--site-chrome-background);background-image:var(--site-chrome-leather);background-size:var(--site-chrome-texture-size);background-blend-mode:var(--site-chrome-blend) }
 
 @media(max-width:1000px){
   .site-review.site-chrome-home .site-header-inner{min-height:64px}
   .site-review.site-chrome-home .site-nav-desktop,.site-review.site-chrome-home .site-desktop-theme{display:none!important}
   .site-review.site-chrome-home .site-mobile-actions{display:flex;align-items:center;gap:7px;margin-left:auto}
-  .site-review.site-chrome-home .site-mobile-menu-trigger{min-width:76px;min-height:44px;padding:4px 10px;border:0;border-radius:0;color:#fff0d0;background:transparent;box-shadow:none;font:700 11px/1 Georgia,serif}
+  .site-review.site-chrome-home .site-mobile-menu-trigger{width:44px;min-width:44px;height:44px;min-height:44px;padding:0;border:0;border-radius:6px;color:#fff0d0;background:transparent;box-shadow:none}
   .site-review.site-chrome-home .site-mobile-menu-trigger svg{color:#fff0d0}
 }
 @media(max-width:620px){
@@ -3369,8 +3479,7 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   .site-review.site-chrome-home .site-mobile-actions{gap:1px}
   .site-review.site-chrome-home .site-mobile-search{order:1;min-width:40px}
   .site-review.site-chrome-home .site-mobile-menu{order:2}
-  .site-review.site-chrome-home .site-mobile-menu-trigger{min-width:58px;padding-inline:5px}
-  .site-review.site-chrome-home .site-mobile-menu-trigger span{font-size:9px}
+  .site-review.site-chrome-home .site-mobile-menu-trigger{width:44px;min-width:44px;padding:0}
   .site-review.site-chrome-home .theme-switcher{order:3;width:40px;min-width:40px;height:44px;min-height:44px}
 }
 
@@ -3546,13 +3655,17 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   width: min(390px, 92vw) !important;
   max-width: 390px !important;
   gap: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   padding: 0;
-  border-left: 4px solid #8b572d;
-  color: #173b3a;
-  background: url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png") repeat;
-  background-size: 512px;
-  box-shadow: inset 2px 0 0 rgba(255,226,169,.32), -14px 0 30px rgba(2,12,25,.36);
+  border-left:3px solid var(--site-chrome-accent);
+  color:var(--site-chrome-foreground);
+  background-color:var(--site-chrome-background);
+  background-image:var(--site-chrome-fabric);
+  background-repeat: repeat;
+  background-size:var(--site-chrome-texture-size);
+  background-blend-mode:var(--site-chrome-blend);
+  box-shadow: inset 2px 0 0 rgba(255,226,169,.18), -14px 0 30px rgba(2,12,25,.46);
 }
 
 .site-menu-sheet-header {
@@ -3695,4 +3808,71 @@ html.dark .site-review [data-lesson-template] :is(h1, h2, h3) {
   .site-menu-sheet-separator { margin-inline: 9px; }
   .site-menu-sheet-grades { padding-inline: 9px; }
   .site-menu-sheet-grades [data-slot="button"] { min-height: 46px; }
+}
+
+/* Final shared-layout footer cascade. This must remain after legacy review
+   selectors while those historical rules are being retired. */
+.site-review.site-chrome-home .site-footer{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border-top:5px solid var(--site-chrome-background);
+  background-color:var(--site-chrome-background);
+  background-image:var(--site-chrome-leather);
+  background-repeat:repeat;
+  background-size:var(--site-chrome-texture-size);
+  background-blend-mode:var(--site-chrome-blend);
+  box-shadow:inset 0 3px 0 rgba(255,232,177,.16),inset 0 -8px 18px rgba(0,8,18,.34);
+}
+.site-review.site-chrome-home .site-footer::after{
+  inset:10px;
+  border:2px dashed rgba(255,220,145,.54);
+  border-radius:10px;
+}
+.site-review.site-chrome-home .site-footer-fastener{
+  position:absolute;
+  z-index:2;
+  top:10px;
+  display:block;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  filter:drop-shadow(0 2px 1px rgba(33,15,4,.55));
+}
+.site-review.site-chrome-home .site-footer-fastener img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.site-review.site-chrome-home .site-footer-fastener-left{left:clamp(14px,2.5vw,42px)}
+.site-review.site-chrome-home .site-footer-fastener-right{right:clamp(14px,2.5vw,42px)}
+.site-review.site-chrome-home .site-footer>div{position:relative;z-index:1}
+@media(max-width:1000px){
+  .site-review.site-chrome-home .site-footer>div{padding-top:56px}
+}
+@media(max-width:640px){
+  .site-review.site-chrome-home .site-footer::after{inset:7px}
+  .site-review.site-chrome-home .site-footer-fastener{top:8px;width:30px;height:30px}
+  .site-review.site-chrome-home .site-footer-brand{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;column-gap:12px}
+  .site-review.site-chrome-home .site-footer-brand>span{min-width:0}
+}
+
+/* Final mobile chrome: shadcn icon controls own sizing and accessible labels. */
+.site-review.site-chrome-home .site-mobile-search,
+.site-review.site-chrome-home .theme-switcher{
+  flex:0 0 44px;
+  width:44px;
+  min-width:44px;
+  height:44px;
+  min-height:44px;
+  padding:0;
+  color:#fff0d0;
+  background:transparent;
+  box-shadow:none;
+}
+.site-review.site-chrome-home .site-mobile-search svg{width:18px;height:18px}
+@media(max-width:620px){
+  .site-review.site-chrome-home .site-header-inner{gap:3px}
+  .site-review.site-chrome-home .site-brand{min-width:0;flex:1 1 auto}
+  .site-review.site-chrome-home .site-mobile-actions{flex:0 0 auto;gap:2px}
 }
