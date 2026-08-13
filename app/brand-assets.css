@@ -24,6 +24,34 @@
 
 /* Repeatable material sources. Components consume these names, never raw URLs. */
 :root {
+  --grain-fine: var(--asset-cardboard-ivory);
+  --grain-coarse: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-13-maisy-tile.png');
+  --grain-soft: var(--asset-cardboard-ivory);
+  --site-chrome-fabric: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png');
+  --site-chrome-leather: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png');
+  --home-surface-texture: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-03-mr-rusty-tile.png');
+  --home-board-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png');
+  --home-paper-texture: var(--asset-cardboard-ivory);
+  --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.png');
+  --brand-paper-texture: var(--home-paper-texture);
+  --brand-kraft-texture: var(--asset-cardboard-kraft);
+  --brand-cork-texture: var(--asset-cork-board);
+  --cast-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png');
+  --cast-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png');
+  --cast-mr-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png');
+  --cast-miss-hayley-texture: url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png');
+  --cast-mr-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png');
+  --cast-mr-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png');
+  --cast-mr-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png');
+  --cast-miss-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png');
+  --cast-hopper-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png');
+  --cast-whiskers-texture: url('/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png');
+  --cast-scout-texture: url('/design-assets/web-material-library-v1/felt/felt-11-scout-tile.png');
+  --cast-penny-texture: url('/design-assets/web-material-library-v1/felt/felt-12-penny-tile.png');
+  --cast-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.png');
+  --cast-puddles-texture: var(--cast-mr-puddles-texture);
+  --cast-sam-texture: var(--cast-old-macdonald-texture);
+  --cast-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.png');
   --asset-cardboard-kraft: url('/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png');
   --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png');
   --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.png');
@@ -52,24 +80,13 @@
 .icon-medium { --brand-asset-size: 4.25rem; }
 .icon-large { --brand-asset-size: 7rem; }
 
-/* Grade identity: shared components consume these tokens via data-grade. */
-:is([data-grade],[data-grade-group]) {
-  --grade-accent:var(--grade-color);
-  --grade-dark:var(--grade-edge);
-  --grade-felt:var(--grade-texture);
-  --identity-color:var(--grade-color);
-  --identity-ink:var(--grade-ink);
-  --identity-texture:var(--grade-texture);
-  --nav-grade-color:var(--grade-color);
-  --nav-grade-edge:var(--grade-edge);
-  --nav-grade-texture:var(--grade-texture);
-}
-[data-grade-group='early-years'] { --grade-color:var(--grade-early-years-color); --grade-edge:var(--grade-early-years-edge); --grade-ink:var(--grade-early-years-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png'); }
-[data-grade='daycare'] { --grade-color:var(--grade-daycare-color); --grade-edge:var(--grade-daycare-edge); --grade-ink:var(--grade-daycare-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png'); }
-[data-grade='pre-school'] { --grade-color:var(--grade-pre-school-color); --grade-edge:var(--grade-pre-school-edge); --grade-ink:var(--grade-pre-school-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png'); }
-[data-grade='kindergarten'] { --grade-color:var(--grade-kindergarten-color); --grade-edge:var(--grade-kindergarten-edge); --grade-ink:var(--grade-kindergarten-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png'); }
-[data-grade='grade-one'] { --grade-color:var(--grade-one-color); --grade-edge:var(--grade-one-edge); --grade-ink:var(--grade-one-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png'); }
-[data-grade='grade-two'] { --grade-color:var(--grade-two-color); --grade-edge:var(--grade-two-edge); --grade-ink:var(--grade-two-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png'); }
+/* Grade textures only. Theme routing for grade colour and ink lives in theme.css. */
+[data-grade-group='early-years'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png'); }
+[data-grade='daycare'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png'); }
+[data-grade='pre-school'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png'); }
+[data-grade='kindergarten'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png'); }
+[data-grade='grade-one'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png'); }
+[data-grade='grade-two'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png'); }
 
 /* Grade signals: asset selection is separate from grade colour. */
 .grade-icon[data-grade-icon='daycare'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-daycare.png'); }

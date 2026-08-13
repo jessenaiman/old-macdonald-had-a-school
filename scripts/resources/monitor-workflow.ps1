@@ -1,7 +1,27 @@
 param(
   [int]$WatchSeconds = 0,
-  [int]$RefreshSeconds = 20
+  [int]$RefreshSeconds = 20,
+  [string]$PythonExecutable = ""
 )
+
+if (-not $PythonExecutable) {
+  $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+  if ($pythonCommand) {
+    $PythonExecutable = $pythonCommand.Source
+  } else {
+    $pyCommand = Get-Command py -ErrorAction SilentlyContinue
+    if ($pyCommand) { $PythonExecutable = $pyCommand.Source }
+  }
+}
+if (-not $PythonExecutable) {
+  throw "No Python interpreter found. Pass -PythonExecutable with the project runtime."
+}
+
+function Invoke-ResourcePython {
+  param([string]$Script, [string[]]$Arguments = @())
+  & $PythonExecutable $Script @Arguments
+  if ($LASTEXITCODE -ne 0) { throw "$Script exited with code $LASTEXITCODE" }
+}
 
 function Show-WorkflowStatus {
   $start = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -9,15 +29,15 @@ function Show-WorkflowStatus {
   Write-Host
 
   Write-Host "--- Completion snapshot ---"
-  python scripts/resources/resource_completion_report.py
+  Invoke-ResourcePython scripts/resources/resource_completion_report.py
   Write-Host
 
   Write-Host "--- Validation checks ---"
-  python scripts/resources/validate_resource_workflow.py
+  Invoke-ResourcePython scripts/resources/validate_resource_workflow.py
   Write-Host
 
   Write-Host "--- Next batch (up to 10) ---"
-  python scripts/resources/run_resource_pipeline.py --limit 10
+  Invoke-ResourcePython scripts/resources/run_resource_pipeline.py @("--limit", "10")
   Write-Host
 
   Write-Host "--- Process health (hermes/ollama/python/node) ---"

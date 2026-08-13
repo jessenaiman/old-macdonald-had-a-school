@@ -1,11 +1,38 @@
 ---
 name: old-macdonald-asset-system
-description: Use for Old MacDonald visual work involving branding, pages, components, responsive layout, characters, colors, textures, paper notes, fasteners, or icons. Use the live /branding catalog and named asset recipes; make the smallest change in the established system.
+description: Mandatory for Old MacDonald visual work involving branding, pages, components, layout, characters, colors, textures, paper, fasteners, icons, or responsive behavior. Read the current rendered /branding guide and its focused MDX source first; reuse the established Tailwind, theme, shadcn, and governed-asset contract without inventing palettes, viewports, or parallel components.
 ---
 
 # Old MacDonald asset system
 
-Use this skill before selecting an asset or changing visual code. Preserve nearby working elements and do not turn a bounded request into a redesign or a repository-wide asset audit.
+Use this skill before selecting an asset or changing visual code. Treat the current site as an established system. Do not reconstruct project history or carry assumptions from an earlier task: the rendered `/branding` route and its focused Markdown chapters are the current visual contract.
+
+## Mandatory preflight
+
+1. Identify the active route, owning component, and exact requested change.
+2. Open the current rendered `/branding` page at the closest matching anchor and viewport. Source inspection alone is insufficient for visual work.
+3. Read only the matching file in `content/pages/branding/`: page recipe, assets, icons, cast, subject cards, typography, buttons, controls, grades, or palette.
+4. Follow links in that chapter to the owning component or focused source. Do not recursively scan `public/`, a giant stylesheet, or unrelated chapters.
+5. Compare the live production component with the branding example. If they differ, stop and identify which is a fixture, fork, or stale reference before editing.
+
+## Non-negotiable ownership
+
+- `app/layout.tsx` owns the single site shell, `ThemeProvider`, shared header, shared footer, and global main. Pages and nested layouts must not duplicate or visually replace them.
+- `app/theme.css` is the only palette owner. Raw HEX, RGB, HSL, named presentation colors, and component-local dark palettes are forbidden outside it. Literal HEX is allowed only as printed reference content on the matching live semantic surface.
+- `app/brand-assets.css` maps approved asset paths and textures; it must not own palette values.
+- Shared shadcn primitives own control appearance and behavior. Pages may compose and position them; pages must not recolor or redesign them.
+- Components receive semantic identities such as `character="miss-puddles"`, `data-grade="grade-two"`, or a subject key—never color, ink, portrait URL, texture URL, or breakpoint props.
+- One reusable component represents one behavior. Variants are semantic props or data attributes, not copied components.
+
+## Tailwind and responsive contract
+
+Use intrinsic layout first: normal flow, `flex-wrap`, `min-w-0`, `max-w-full`, flexible tracks, and `minmax(0, 1fr)`. Let the parent determine available space.
+
+Use only Tailwind's configured standard breakpoints (`sm`, `md`, `lg`, `xl`, `2xl`) when content truly changes arrangement. Do not declare custom viewport widths in TSX, MDX, CSS modules, inline styles, or component props. Do not create a page-private breakpoint system.
+
+A custom media or container query is allowed only for an approved raster asset with a documented safe-area/aspect-ratio requirement that intrinsic layout cannot express. Document the asset and reason beside the rule, keep it in the owning primitive, and verify the boundary widths. Convenience is not an exception.
+
+Never hide overflow at a page or section boundary to conceal a responsive failure. Find the child whose minimum, unwrapped text, fixed width, or positioning expands the document. Horizontal scrolling is acceptable only inside an intentionally labelled control such as a code sample, tab rail, or data region.
 
 ## Fast path
 
@@ -68,6 +95,21 @@ If a required asset is missing or ambiguous, report the gap and follow the named
 For a visual change, capture the current target first, render the same target at the controlling desktop width plus 390px and 320px when dense, and check overflow, clipping, overlap, readability, asset loading, focus, reduced motion, and the affected interaction. Run focused lint/typecheck; run a production build when shared routing, shell, or global tokens changed. Automated checks do not replace visual inspection.
 
 For a documentation-only review, report the rendered route and source evidence without running unrelated checks.
+
+## Rejection checklist
+
+Stop before editing if the proposed approach would add:
+
+- another header, footer, page shell, theme provider, or root main;
+- raw color values outside `theme.css`;
+- runtime asset URLs outside `brand-assets.css` or a canonical identity mapping;
+- private button/control appearance outside the shared primitive;
+- arbitrary `w-[...]`, `max-w-[...]`, viewport calculations, or undocumented breakpoints used to force a screenshot match;
+- a component that duplicates an existing production behavior;
+- page-level overflow clipping that hides an oversized child;
+- invented character, grade, subject, or curriculum data.
+
+For App Router structure, layouts, Server/Client boundaries, metadata, or data loading, also use `next-best-practices` and read the installed guide under `node_modules/next/dist/docs/`. Use `vercel-react-best-practices` only for measurable performance work; it is not a design or routing validator. A branding example of a production route must use the same query, mapping, configuration, and component, or clearly identify fixture data.
 
 ## Handoff
 

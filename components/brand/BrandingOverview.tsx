@@ -30,7 +30,7 @@ const decisions = [
 
 export function BrandingOverview() {
   return <>
-    <header className="flex min-h-[32rem] flex-wrap overflow-hidden rounded-2xl border border-border bg-site-chrome text-site-chrome-foreground shadow-xl">
+    <header className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-site-chrome text-site-chrome-foreground shadow-xl">
       <div className="flex min-w-[min(100%,32rem)] flex-[1.15_1_38rem] flex-col justify-center p-[clamp(1.5rem,4vw,4rem)]">
         <p className="mb-3 font-body text-xs font-black uppercase tracking-widest text-site-chrome-accent">Working brand reference</p>
         <h1 className="m-0 max-w-3xl text-balance font-heading text-[clamp(3rem,7vw,6rem)] leading-[.88] text-site-chrome-foreground">The whole school <em className="block font-hand text-brand-pink">in character.</em></h1>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "./brand-assets.css";
 @plugin "@tailwindcss/typography";
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-display: var(--font-farm-display);
@@ -44,54 +44,23 @@
   --color-brand-orange: var(--orange);
   --color-brand-paper: var(--paper);
   --color-brand-line: var(--line);
-}
-
-:root {
-  --grain-fine: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
-  --grain-coarse: url("/design-assets/web-material-library-v1/woven-fabric/woven-fabric-13-maisy-tile.png");
-  --grain-soft: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
-  --site-chrome-fabric: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
-  --site-chrome-leather: url("/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png");
-  --site-chrome-texture-size: 230px;
-  --site-chrome-blend: multiply;
-  --home-surface-color: var(--curriculum-blue, #2c6c9b);
-  --home-surface-texture: url("/design-assets/web-material-library-v1/woven-fabric/woven-fabric-03-mr-rusty-tile.png");
-  --home-board-color: var(--theme-navy, #0b2b49);
-  --home-board-texture: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
-  --home-paper-texture: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
-  --home-cork-board: url("/design-assets/cork-board-kit-v2/medium-board.png");
-  --brand-ink: var(--theme-ink, #173552);
-  --brand-copy: var(--theme-copy, #574d40);
-  --brand-paper-color: var(--theme-paper, #f7e8c8);
-  --brand-paper-texture: var(--home-paper-texture);
-  --brand-kraft-color: var(--theme-paper-muted, #f0d49c);
-  --brand-kraft-texture: url("/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png");
-  --brand-cork-texture: var(--asset-cork-board);
-  --cast-old-macdonald-texture: url("/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png");
-  --cast-miss-puddles-texture: url("/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png");
-  --cast-mr-rusty-texture: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
-  --cast-miss-hayley-texture: url("/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png");
-  --cast-mr-sam-texture: url("/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png");
-  --cast-mr-maisy-texture: url("/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png");
-  --cast-mr-puddles-texture: url("/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png");
-  --cast-miss-maisy-texture: url("/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png");
-  --cast-hopper-texture: url("/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png");
-  --cast-whiskers-texture: url("/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png");
-  --cast-scout-texture: url("/design-assets/web-material-library-v1/felt/felt-11-scout-tile.png");
-  --cast-penny-texture: url("/design-assets/web-material-library-v1/felt/felt-12-penny-tile.png");
-  --cast-maisy-texture: url("/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.png");
-  --cast-puddles-texture: url("/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png");
-  --cast-sam-texture: url("/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png");
-  --cast-rusty-texture: url("/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.png");
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 @layer base {
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; @apply border-border outline-ring/50; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; color: var(--foreground); background: var(--background); font-family: var(--font-farm-body), sans-serif; }
-  button, a { font: inherit; }
+  body { margin: 0; @apply bg-background text-foreground; font-family: var(--font-farm-body), sans-serif; line-height: 1.5; }
+  :where(h1, h2, h3, h4, h5, h6) { color: var(--foreground); font-family: var(--font-farm-display), Georgia, serif; font-weight: 400; text-wrap: balance; }
+  :where(button, input, select, textarea) { font: inherit; }
   button { color: inherit; }
   a { color: inherit; text-decoration: none; }
+  :where(input, select, textarea) { border: 1px solid var(--input); color: var(--foreground); background: var(--card); }
+  :where(input, textarea)::placeholder { color: var(--muted-foreground); opacity: 1; }
+  ::selection { color: var(--primary-foreground); background: var(--primary); }
 }
 
 .dark { color-scheme: dark; }
@@ -137,7 +106,7 @@ body::before { position: fixed; z-index: -1; inset: 0; background: var(--grain-f
 pre { max-width: 100%; overflow-x: auto; }
 .grade-surface { color: var(--grade-ink); background-color: var(--grade-color); box-shadow: 0 .25rem 0 var(--grade-edge); }
 
-.char-badge { position: relative; display: inline-flex; flex: 0 0 auto; align-items: flex-end; justify-content: center; overflow: hidden; filter: drop-shadow(0 3px 1px rgb(0 0 0 / 24%)); }
+.char-badge { position: relative; display: inline-flex; flex: 0 0 auto; align-items: flex-end; justify-content: center; overflow: hidden; filter: drop-shadow(var(--shadow-character)); }
 .char-badge--circle { border-radius: 50%; }
 .char-badge--square { border-radius: 18%; }
 .char-badge--empty { opacity: .55; }

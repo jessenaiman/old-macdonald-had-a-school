@@ -18,7 +18,11 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from plan_song_import import (
+# Make direct root invocation use the same package imports as module invocation.
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from scripts.songbook.plan_song_import import (
     collect_source_paths,
     load_songs,
     parse_frontmatter,

@@ -1,6 +1,7 @@
 import { chromium } from "playwright";
 const browser = await chromium.launch({ headless: true, executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" });
-const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+const width = Number.parseInt(process.argv[2] ?? "390", 10);
+const page = await browser.newPage({ viewport: { width, height: 844 } });
 await page.goto("http://localhost:3000/branding", { waitUntil: "networkidle" });
 const nodes = await page.evaluate(() => [...document.querySelectorAll("body *")].map((node) => {
   const rect = node.getBoundingClientRect();

@@ -48,7 +48,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${handFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
-      <body><ThemeProvider><div className={styles.shell}><SiteHeader /><main className={styles.page}>{children}</main><SiteFooter /></div></ThemeProvider></body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          themes={["light", "dark"]}
+          disableTransitionOnChange
+        >
+          <div className={styles.shell}>
+            <SiteHeader />
+            <main className={styles.page}>{children}</main>
+            <SiteFooter />
+          </div>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

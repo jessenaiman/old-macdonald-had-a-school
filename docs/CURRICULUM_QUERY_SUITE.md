@@ -2,9 +2,9 @@
 
 **Purpose:** Verification checklist to run after every database migration or update to ensure curriculum planning queries return relevant results.
 
-**How to run:** `node scripts/data/test-curriculum-queries.mjs`
+**How to run:** `npm run db:evaluate-search` (use the direct script without `--summary` when you need ranked rows)
 
-**Success criteria:** All queries should return ≥1 result with score ≥0.2 within 200ms.
+**Success criteria:** Every active query should return at least one linked topic, stored expectations should be met, and the database integrity, foreign-key, and FTS parity checks should pass. The evaluator is read-only unless `--record` is explicitly added to the underlying command.
 
 ---
 
@@ -63,11 +63,10 @@
 
 After each migration, verify:
 
-- [ ] All 29 queries return ≥1 result
-- [ ] Average latency <100ms
-- [ ] No query exceeds 200ms
-- [ ] Top result score ≥0.2 for each query
-- [ ] Results are relevant (spot-check 5 random queries)
+- [ ] All active queries return at least one linked topic
+- [ ] Stored title expectations pass
+- [ ] Integrity, foreign-key, and FTS parity checks pass
+- [ ] Results are relevant (spot-check 5 queries)
 
 ## Current Baseline (2026-08-07)
 
@@ -87,13 +86,12 @@ After each migration, verify:
 
 ## Query Syntax Reference
 
-### Hybrid Search Formula
-```sql
-combined_score = (0.4 × keyword_score) + (0.6 × semantic_score)
-```
+### Current evaluator boundary
 
-- **Keyword search** (40%): Exact word matches using PostgreSQL full-text search
-- **Semantic search** (60%): Meaning-based matches using embeddings
+The maintained evaluator currently tests SQLite FTS5 keyword retrieval and the
+links from matching search chunks to teacher-facing topics. It reports
+`semantic: false`; embeddings may be useful for candidate generation, but they
+are not silently treated as a verified semantic-search result.
 
 ### Filter Examples
 ```sql
@@ -104,7 +102,7 @@ WHERE kind = 'song'
 WHERE kind = 'knowledge'
 
 -- Grade level filter (if meta contains grade)
-WHERE meta->>'grade' = 'preschool'
+WHERE json_extract(meta, '$.grade') = 'preschool'
 
 -- Date range
 WHERE created_at >= '2026-01-01'

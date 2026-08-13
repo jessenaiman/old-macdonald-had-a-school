@@ -8,14 +8,7 @@
 
 :root {
   color-scheme: light;
-
-  /* Curriculum colour wheel: three primaries and three secondaries. */
-  --curriculum-red: #a8323a;
-  --curriculum-yellow: #e3ad27;
-  --curriculum-blue: #2f6f9f;
-  --curriculum-orange: #c65f28;
-  --curriculum-green: #477a4d;
-  --curriculum-purple: #6d5596;
+  --radius: .625rem;
 
   /* Foundation colours stay quiet so character colours remain meaningful. */
   --theme-cream: #f7edda;
@@ -29,6 +22,59 @@
   --theme-copy: #46535b;
   --theme-white: #fffdf7;
   --brand-cork-color: #b8906a;
+  --site-chrome-texture-size: 230px;
+  --site-chrome-blend: multiply;
+  --home-surface-color: var(--curriculum-blue);
+  --home-board-color: var(--theme-navy);
+  --brand-ink: var(--theme-ink);
+  --brand-copy: var(--theme-copy);
+  --brand-paper-color: var(--theme-paper);
+  --brand-kraft-color: var(--theme-paper-muted);
+
+  /*
+   * Canonical identity palette: these are the only 16 hardcoded identity
+   * colours. Curriculum, grade, and subject roles below alias this block.
+   */
+  --cast-old-macdonald-color: #8b5e34;
+  --cast-old-macdonald-foreground: var(--theme-white);
+  --cast-miss-puddles-color: #e8a227;
+  --cast-miss-puddles-foreground: var(--theme-navy);
+  --cast-miss-maisy-color: #55705a;
+  --cast-miss-maisy-foreground: var(--theme-white);
+  --cast-mr-rusty-color: #2c6c9b;
+  --cast-mr-rusty-foreground: var(--theme-white);
+  --cast-miss-hayley-color: #c9527a;
+  --cast-miss-hayley-foreground: var(--theme-navy);
+  --cast-mr-maisy-color: #b5272c;
+  --cast-mr-maisy-foreground: var(--theme-white);
+  --cast-mr-sam-color: #1f6b6b;
+  --cast-mr-sam-foreground: var(--theme-white);
+  --cast-mr-puddles-color: #4f5fa0;
+  --cast-mr-puddles-foreground: var(--theme-white);
+  --cast-hopper-color: #d9713c;
+  --cast-hopper-foreground: var(--theme-white);
+  --cast-whiskers-color: #7b4fa8;
+  --cast-whiskers-foreground: var(--theme-white);
+  --cast-scout-color: #4a7a3a;
+  --cast-scout-foreground: var(--theme-white);
+  --cast-penny-color: #c9962e;
+  --cast-penny-foreground: var(--theme-navy);
+  --cast-maisy-color: #1f4e5f;
+  --cast-maisy-foreground: var(--theme-white);
+  --cast-puddles-color: #4fa0c9;
+  --cast-puddles-foreground: var(--theme-white);
+  --cast-sam-color: #7a9a3d;
+  --cast-sam-foreground: var(--theme-white);
+  --cast-rusty-color: #8b5030;
+  --cast-rusty-foreground: var(--theme-white);
+
+  /* Introductory colour-wheel roles alias canonical identities. */
+  --curriculum-red: var(--cast-mr-maisy-color);
+  --curriculum-yellow: var(--cast-miss-puddles-color);
+  --curriculum-blue: var(--cast-mr-rusty-color);
+  --curriculum-orange: var(--cast-hopper-color);
+  --curriculum-green: var(--cast-miss-maisy-color);
+  --curriculum-purple: var(--cast-mr-puddles-color);
 
   /* Semantic application tokens. Components should depend on these. */
   --background: var(--theme-cream);
@@ -50,17 +96,18 @@
   --border: var(--theme-wood-light);
   --input: #9f8b6d;
   --ring: var(--curriculum-blue);
+  --shadow-character: 0 3px 1px color-mix(in srgb, var(--theme-ink) 24%, transparent);
 
   /* Compatibility aliases for legacy selectors during cleanup. */
   --navy: var(--theme-navy);
   --blue: var(--curriculum-blue);
-  --sky: #b9d8e8;
+  --sky: color-mix(in srgb, var(--curriculum-blue) 36%, var(--theme-paper));
   --cool-white: var(--theme-paper);
   --sunlit: var(--curriculum-yellow);
   --gold: var(--curriculum-yellow);
   --red: var(--curriculum-red);
-  --coral: #c95d58;
-  --pink: #c94f78;
+  --coral: color-mix(in srgb, var(--curriculum-red) 76%, var(--theme-paper));
+  --pink: var(--cast-miss-hayley-color);
   --plum: var(--curriculum-purple);
   --orange: var(--curriculum-orange);
   --brown: var(--theme-wood);
@@ -81,33 +128,33 @@
   --site-chrome-accent: var(--curriculum-yellow);
   --site-chrome-border: #a9824d;
 
-  /* Grade navigation identities. */
-  --grade-early-years-color: #1f6b6b;
-  --grade-early-years-edge: #164a4a;
+  /* Grade navigation aliases. Grade leads own these colours below. */
+  --grade-early-years-color: var(--curriculum-green);
+  --grade-early-years-edge: color-mix(in srgb, var(--grade-early-years-color) 72%, black);
   --grade-early-years-ink: var(--theme-white);
-  --grade-daycare-color: #e3ad27;
-  --grade-daycare-edge: #9b6e10;
-  --grade-daycare-ink: var(--theme-navy);
-  --grade-pre-school-color: #55705a;
-  --grade-pre-school-edge: #2d5533;
-  --grade-pre-school-ink: var(--theme-white);
-  --grade-kindergarten-color: #2c6c9b;
-  --grade-kindergarten-edge: #204d70;
-  --grade-kindergarten-ink: var(--theme-white);
-  --grade-one-color: #c9527a;
-  --grade-one-edge: #8c304e;
-  --grade-one-ink: #200b13;
-  --grade-two-color: #b5272c;
-  --grade-two-edge: #873d19;
-  --grade-two-ink: var(--theme-white);
+  --grade-daycare-color: var(--cast-miss-puddles-color);
+  --grade-daycare-edge: color-mix(in srgb, var(--grade-daycare-color) 72%, black);
+  --grade-daycare-ink: var(--cast-miss-puddles-foreground);
+  --grade-pre-school-color: var(--cast-miss-maisy-color);
+  --grade-pre-school-edge: color-mix(in srgb, var(--grade-pre-school-color) 72%, black);
+  --grade-pre-school-ink: var(--cast-miss-maisy-foreground);
+  --grade-kindergarten-color: var(--cast-mr-rusty-color);
+  --grade-kindergarten-edge: color-mix(in srgb, var(--grade-kindergarten-color) 72%, black);
+  --grade-kindergarten-ink: var(--cast-mr-rusty-foreground);
+  --grade-one-color: var(--cast-miss-hayley-color);
+  --grade-one-edge: color-mix(in srgb, var(--grade-one-color) 72%, black);
+  --grade-one-ink: var(--cast-miss-hayley-foreground);
+  --grade-two-color: var(--cast-mr-maisy-color);
+  --grade-two-edge: color-mix(in srgb, var(--grade-two-color) 72%, black);
+  --grade-two-ink: var(--cast-mr-maisy-foreground);
 
-  /* Homepage subject identities. */
-  --subject-language-color: #c9527a;
-  --subject-math-color: #1f6b6b;
-  --subject-science-color: #55705a;
-  --subject-music-color: #2c6c9b;
-  --subject-arts-color: #4f5fa0;
-  --subject-health-color: #b5272c;
+  /* Subject identities alias the staff member who owns that teaching role. */
+  --subject-language-color: var(--cast-miss-hayley-color);
+  --subject-math-color: var(--cast-mr-sam-color);
+  --subject-science-color: var(--cast-miss-maisy-color);
+  --subject-music-color: var(--cast-mr-rusty-color);
+  --subject-arts-color: var(--cast-mr-puddles-color);
+  --subject-health-color: var(--cast-mr-maisy-color);
 
   /* Grade workspace: functional surfaces shared by every grade route. */
   --workspace-paper: #fbf2df;
@@ -130,46 +177,26 @@
   --workspace-alert: #7d2e52;
   --workspace-focus: #f4cb68;
 
-  /*
-   * Grade-lead colour wheel.
-   * Pink is explicitly a tint in the red family; all other labels use one
-   * of the six introductory colour-wheel families.
-   */
-  --cast-old-macdonald-color: #8b5e34;
-  --cast-old-macdonald-foreground: var(--theme-white);
-  --cast-miss-puddles-color: #e8a227;
-  --cast-miss-puddles-foreground: var(--theme-navy);
-  --cast-miss-maisy-color: #55705a;
-  --cast-miss-maisy-foreground: var(--theme-white);
-  --cast-mr-rusty-color: #2c6c9b;
-  --cast-mr-rusty-foreground: var(--theme-white);
-  --cast-miss-hayley-color: #c9527a;
-  --cast-miss-hayley-foreground: #200b13;
-  --cast-mr-maisy-color: #b5272c;
-  --cast-mr-maisy-foreground: var(--theme-white);
-  --cast-mr-sam-color: #1f6b6b;
-  --cast-mr-sam-foreground: var(--theme-white);
-  --cast-mr-puddles-color: #4f5fa0;
-  --cast-mr-puddles-foreground: var(--theme-white);
-
-  /* Students repeat the six families as lesson-planning lenses. */
-  --cast-hopper-color: #d9713c;
-  --cast-hopper-foreground: var(--theme-white);
-  --cast-whiskers-color: #7b4fa8;
-  --cast-whiskers-foreground: var(--theme-white);
-  --cast-scout-color: #4a7a3a;
-  --cast-scout-foreground: var(--theme-white);
-  --cast-penny-color: #c9962e;
-  --cast-penny-foreground: var(--theme-navy);
-  --cast-maisy-color: #1f4e5f;
-  --cast-maisy-foreground: var(--theme-white);
-  --cast-puddles-color: #4fa0c9;
-  --cast-puddles-foreground: var(--theme-white);
-  --cast-sam-color: #7a9a3d;
-  --cast-sam-foreground: var(--theme-white);
-  --cast-rusty-color: #8b5030;
-  --cast-rusty-foreground: var(--theme-white);
 }
+
+/* Shared grade identity routing. Asset textures are assigned separately. */
+:is([data-grade],[data-grade-group]) {
+  --grade-accent: var(--grade-color);
+  --grade-dark: var(--grade-edge);
+  --grade-felt: var(--grade-texture);
+  --identity-color: var(--grade-color);
+  --identity-ink: var(--grade-ink);
+  --identity-texture: var(--grade-texture);
+  --nav-grade-color: var(--grade-color);
+  --nav-grade-edge: var(--grade-edge);
+  --nav-grade-texture: var(--grade-texture);
+}
+[data-grade-group='early-years'] { --grade-color:var(--grade-early-years-color); --grade-edge:var(--grade-early-years-edge); --grade-ink:var(--grade-early-years-ink); }
+[data-grade='daycare'] { --grade-color:var(--grade-daycare-color); --grade-edge:var(--grade-daycare-edge); --grade-ink:var(--grade-daycare-ink); }
+[data-grade='pre-school'] { --grade-color:var(--grade-pre-school-color); --grade-edge:var(--grade-pre-school-edge); --grade-ink:var(--grade-pre-school-ink); }
+[data-grade='kindergarten'] { --grade-color:var(--grade-kindergarten-color); --grade-edge:var(--grade-kindergarten-edge); --grade-ink:var(--grade-kindergarten-ink); }
+[data-grade='grade-one'] { --grade-color:var(--grade-one-color); --grade-edge:var(--grade-one-edge); --grade-ink:var(--grade-one-ink); }
+[data-grade='grade-two'] { --grade-color:var(--grade-two-color); --grade-edge:var(--grade-two-edge); --grade-ink:var(--grade-two-ink); }
 
 .dark {
   color-scheme: dark;

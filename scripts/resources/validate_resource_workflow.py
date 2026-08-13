@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sqlite3
 from pathlib import Path
 
@@ -39,7 +40,7 @@ def main() -> int:
     passed = checks['integrity_ok'] and checks['foreign_key_violations'] == 0 and checks['undisposed_files'] == 0 \
         and checks['orphan_quarantine'] == 0 and checks['tag_cycles'] == 0 and checks['fts_parity'] \
         and checks['internal_public_leaks'] == 0
-    print({'passed': passed, **checks})
+    print(json.dumps({'passed': passed, **checks}, indent=2))
     return 0 if passed else 1
 
 

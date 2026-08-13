@@ -1,33 +1,35 @@
 import { CharacterPortrait } from "@/components/brand/CharacterPortrait"
 
-<section id="badge-recipe" className="mt-5 rounded-2xl border border-border bg-card p-[clamp(1.25rem,4vw,3rem)]">
+<section id="badge-recipe" className="mt-5 min-w-0 rounded-2xl border border-border bg-card p-[clamp(1.25rem,4vw,3rem)]">
 
 ## Character badge recipe
 
 A character badge has three independent layers: an authored blank patch, the matching canonical portrait, and a real attachment only when the badge is physically attached to another surface. Never recolour the portrait or replace the patch with a CSS circle.
 
-1. Choose the character from `cast.mdx`.
-2. Use the matching approved blank patch.
-3. Place the unchanged transparent portrait over it.
-4. Keep readable text outside the portrait silhouette.
-5. Add a fastener only where it crosses the badge and its supporting surface.
+<ol className="list-inside space-y-1 break-words pl-0">
+  <li>Choose the character from <code>cast.mdx</code>.</li>
+  <li>Use the matching approved blank patch.</li>
+  <li>Place the unchanged transparent portrait over it.</li>
+  <li>Keep readable text outside the portrait silhouette.</li>
+  <li>Add a fastener only where it crosses the badge and its supporting surface.</li>
+</ol>
 
-<div className="material-surface material-cork mt-7 grid gap-6 rounded-2xl p-6 md:grid-cols-2">
-  <article className="material-surface material-cardboard-paper relative grid min-h-80 place-items-center rounded-xl border border-border p-7 text-center shadow-lg">
+<div className="material-surface material-cork mt-7 grid min-w-0 gap-6 rounded-2xl p-[clamp(.75rem,3vw,1.5rem)] md:grid-cols-2">
+  <article className="material-surface material-cardboard-paper relative grid min-w-0 min-h-80 place-items-center rounded-xl border border-border p-[clamp(1rem,4vw,1.75rem)] text-center shadow-lg">
     <span className="brand-asset fastener-push-pin icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
-    <div className="relative grid h-44 w-44 place-items-center">
+    <div className="relative grid aspect-square w-[min(11rem,70vw)] place-items-center">
       <span className="brand-asset patch-old-macdonald-square absolute inset-0 h-full w-full" aria-hidden="true" />
       <CharacterPortrait className="relative z-10 h-36 w-36 object-contain" character="old-macdonald" />
     </div>
-    <div><strong className="font-heading text-2xl">Old MacDonald</strong><p className="mb-0 flex items-center justify-center gap-2">Brown <code className="cast-old-macdonald character-surface rounded-md px-2 py-1 font-black">#8B5E34</code> · Kindergarten music</p></div>
+    <div className="min-w-0"><strong className="font-heading text-2xl">Old MacDonald</strong><p className="mb-0 flex flex-wrap items-center justify-center gap-2">Brown <code className="cast-old-macdonald character-surface rounded-md px-2 py-1 font-black">#8B5E34</code> · Kindergarten music</p></div>
   </article>
-  <article className="material-surface material-cardboard-paper relative grid min-h-80 place-items-center rounded-xl border border-border p-7 text-center shadow-lg">
+  <article className="material-surface material-cardboard-paper relative grid min-w-0 min-h-80 place-items-center rounded-xl border border-border p-[clamp(1rem,4vw,1.75rem)] text-center shadow-lg">
     <span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" />
-    <div className="relative grid h-44 w-44 place-items-center">
+    <div className="relative grid aspect-square w-[min(11rem,70vw)] place-items-center">
       <span className="brand-asset patch-miss-puddles-circle absolute inset-0 h-full w-full" aria-hidden="true" />
       <CharacterPortrait className="relative z-10 h-36 w-36 object-contain" character="miss-puddles" />
     </div>
-    <div><strong className="font-heading text-2xl">Miss Puddles</strong><p className="mb-0 flex items-center justify-center gap-2">Yellow <code className="cast-miss-puddles character-surface rounded-md px-2 py-1 font-black">#E8A227</code> · Daycare</p></div>
+    <div className="min-w-0"><strong className="font-heading text-2xl">Miss Puddles</strong><p className="mb-0 flex flex-wrap items-center justify-center gap-2">Yellow <code className="cast-miss-puddles character-surface rounded-md px-2 py-1 font-black">#E8A227</code> · Daycare</p></div>
   </article>
 </div>
 
