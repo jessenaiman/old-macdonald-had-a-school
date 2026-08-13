@@ -72,6 +72,12 @@
 .subjectGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.8rem, 1.4vw, 1.25rem); align-items: stretch; }
 
 .subjectNote { --subject-note-color: var(--primary); --subject-note-paper: var(--home-paper-texture); --note-top: 12%; --note-right: 9%; --note-bottom: 10%; --note-left: 9%; position: relative; min-width: 0; min-height: clamp(12.5rem, 15vw, 14.5rem); container-type: inline-size; color: var(--foreground); background: var(--subject-note-paper) center / 100% 100% no-repeat; filter: drop-shadow(.12rem .35rem .3rem rgb(48 35 22 / 20%)); transform: rotate(var(--note-turn, 0deg)); }
+.subjectNote[data-subject="language"] { --subject-note-color: var(--subject-language-color); }
+.subjectNote[data-subject="math"] { --subject-note-color: var(--subject-math-color); }
+.subjectNote[data-subject="science"] { --subject-note-color: var(--subject-science-color); }
+.subjectNote[data-subject="music"] { --subject-note-color: var(--subject-music-color); }
+.subjectNote[data-subject="arts"] { --subject-note-color: var(--subject-arts-color); }
+.subjectNote[data-subject="health"] { --subject-note-color: var(--subject-health-color); }
 .subjectNote[data-note-shape="torn"] { --note-top: 14%; --note-right: 8%; --note-bottom: 12%; --note-left: 15%; }
 .subjectNote[data-note-shape="grid"] { --note-top: 11%; --note-bottom: 9%; }
 .subjectNote[data-note-shape="deckled"] { --note-top: 13%; --note-bottom: 12%; }

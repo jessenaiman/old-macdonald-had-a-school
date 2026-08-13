@@ -1,7 +1,10 @@
-import Link from "next/link"
-
 <section id="icons" className="mt-5 rounded-2xl border border-border bg-card p-[clamp(1.25rem,4vw,3rem)]">
-  <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Semantic icon catalogue</p><h2 className="m-0 font-heading text-[clamp(2rem,4vw,3.5rem)]">Curriculum signals already available</h2><p className="max-w-3xl leading-7">Grade colour and grade artwork are separate. Use <code>data-grade</code> on a grade surface; use <code>brand-asset grade-icon</code> with <code>data-grade-icon</code> only when the artwork is needed.</p><Link className="font-bold underline underline-offset-4" href="/BRAND_ASSET_RECIPES.md">Icon usage and status rules</Link>
+  <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Semantic icon catalogue</p><h2 className="m-0 font-heading text-[clamp(2rem,4vw,3.5rem)]">Curriculum signals already available</h2><p className="max-w-3xl leading-7">This is the canonical inclusion guide. Other branding examples link to the exact icon here instead of repeating instructions. Grade colour and grade artwork remain separate.</p>
+  <div className="mt-5 rounded-xl border border-border bg-muted p-4 text-muted-foreground">
+    <strong className="text-foreground">Use one semantic class:</strong>
+    <code className="mt-2 block overflow-x-auto rounded-md bg-background p-3 text-foreground">{`<span className="brand-asset music-icon icon-medium" aria-hidden="true" />`}</code>
+    <p className="mb-0 mt-2 text-sm">For grade artwork, combine <code>brand-asset grade-icon</code> with the documented <code>data-grade-icon</code>. Use <code>icon-small</code>, <code>icon-medium</code>, or <code>icon-large</code>; never paste an asset URL into a page component.</p>
+  </div>
 
   <h3 className="mt-8 font-heading text-3xl">Grades</h3>
   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
@@ -15,13 +18,13 @@ import Link from "next/link"
 
   <h3 className="mt-8 font-heading text-3xl">Subjects and learning</h3>
   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
-    <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset music-icon icon-medium" aria-hidden="true" /><figcaption>Music<br/><code>music-icon</code></figcaption></figure>
-    <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset math-building-icon icon-medium" aria-hidden="true" /><figcaption>Math and building<br/><code>math-building-icon</code></figcaption></figure>
-    <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset drama-storytelling-icon icon-medium" aria-hidden="true" /><figcaption>Drama<br/><code>drama-storytelling-icon</code></figcaption></figure>
-    <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset art-photography-icon icon-medium" aria-hidden="true" /><figcaption>Art<br/><code>art-photography-icon</code></figcaption></figure>
+    <figure id="icon-music" className="m-0 grid scroll-mt-24 justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset music-icon icon-medium" aria-hidden="true" /><figcaption>Music<br/><code>music-icon</code></figcaption></figure>
+    <figure id="icon-math" className="m-0 grid scroll-mt-24 justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset math-building-icon icon-medium" aria-hidden="true" /><figcaption>Math and building<br/><code>math-building-icon</code></figcaption></figure>
+    <figure id="icon-drama" className="m-0 grid scroll-mt-24 justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset drama-storytelling-icon icon-medium" aria-hidden="true" /><figcaption>Drama<br/><code>drama-storytelling-icon</code></figcaption></figure>
+    <figure id="icon-art" className="m-0 grid scroll-mt-24 justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset art-photography-icon icon-medium" aria-hidden="true" /><figcaption>Art<br/><code>art-photography-icon</code></figcaption></figure>
     <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset gardening-health-icon icon-medium" aria-hidden="true" /><figcaption>Garden and health<br/><code>gardening-health-icon</code></figcaption></figure>
     <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset physical-education-icon icon-medium" aria-hidden="true" /><figcaption>Physical education<br/><code>physical-education-icon</code></figcaption></figure>
-    <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset early-learning-blocks icon-medium" aria-hidden="true" /><figcaption>Early learning<br/><code>early-learning-blocks</code></figcaption></figure>
+    <figure id="icon-early-learning" className="m-0 grid scroll-mt-24 justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset early-learning-blocks icon-medium" aria-hidden="true" /><figcaption>Early learning<br/><code>early-learning-blocks</code></figcaption></figure>
     <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset math-abacus-ruler icon-medium" aria-hidden="true" /><figcaption>Measure<br/><code>math-abacus-ruler</code></figcaption></figure>
     <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset art-color-wheel icon-medium" aria-hidden="true" /><figcaption>Colour<br/><code>art-color-wheel</code></figcaption></figure>
     <figure className="m-0 grid justify-items-center rounded-lg border border-border p-3 text-center"><span className="brand-asset physical-ball-rope icon-medium" aria-hidden="true" /><figcaption>Physical play<br/><code>physical-ball-rope</code></figcaption></figure>

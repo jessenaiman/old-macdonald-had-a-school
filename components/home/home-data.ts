@@ -8,16 +8,14 @@ export type HomeLesson = {
 };
 
 export type HomeSubject = {
-  key: string;
+  key: "language" | "math" | "science" | "music" | "arts" | "health";
   title: string;
   earlyYearsLabel: string;
   searchQuery: string;
-  color: string;
   iconClass: string;
   teacherReason: string;
   highlights: readonly string[];
   fastenerClass: SubjectFastener;
-  paperAsset: string;
   noteShape: "torn" | "grid" | "deckled" | "ruled" | "scalloped" | "folded";
   rotation: "left" | "none" | "right";
   matches: (lesson: HomeLesson) => boolean;
@@ -32,20 +30,16 @@ export type SubjectFastener =
   | "fastener-apple-peg";
 
 export type SubjectLearner = {
-  name: string;
-  portrait: string;
-  color: `#${string}`;
-  texture: string;
-  ink?: "light" | "dark";
+  character: "whiskers" | "sam" | "scout" | "penny" | "puddles" | "hopper";
 };
 
 export const SUBJECT_LEARNERS: Record<string, SubjectLearner> = {
-  language: { name: "Whiskers", portrait: "/staff_and_students/whiskers-transparent-circle.png", color: "#6D5596", texture: "/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png" },
-  math: { name: "Sam", portrait: "/staff_and_students/sam-transparent-circle.png", color: "#A8323A", texture: "/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png" },
-  science: { name: "Scout", portrait: "/staff_and_students/scout-transparent-circle.png", color: "#477A4D", texture: "/design-assets/web-material-library-v1/felt/felt-11-scout-tile.png" },
-  music: { name: "Penny", portrait: "/staff_and_students/penny-transparent-circle.png", color: "#E3AD27", texture: "/design-assets/web-material-library-v1/felt/felt-12-penny-tile.png", ink: "dark" },
-  arts: { name: "Puddles", portrait: "/staff_and_students/puddles-transparent-circle.png", color: "#76508F", texture: "/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png" },
-  health: { name: "Hopper", portrait: "/staff_and_students/hopper-transparent-circle.png", color: "#C65F28", texture: "/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png" },
+  language: { character: "whiskers" },
+  math: { character: "sam" },
+  science: { character: "scout" },
+  music: { character: "penny" },
+  arts: { character: "puddles" },
+  health: { character: "hopper" },
 };
 
 function lessonText(lesson: HomeLesson) {
@@ -58,10 +52,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     earlyYearsLabel: "Stories & sounds",
     title: "Language & literacy",
     searchQuery: "language literacy",
-    color: "#C9527A",
     iconClass: "drama-storytelling-icon",
     fastenerClass: "fastener-paperclip",
-    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png",
     noteShape: "torn",
     rotation: "left",
     teacherReason: "Build confident talk, reading, and storytelling.",
@@ -73,10 +65,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     earlyYearsLabel: "Numbers",
     title: "Math",
     searchQuery: "math numeracy",
-    color: "#1F6B6B",
     iconClass: "math-building-icon",
     fastenerClass: "fastener-push-pin",
-    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png",
     noteShape: "grid",
     rotation: "none",
     teacherReason: "Make counting, shape, and patterns visible.",
@@ -88,10 +78,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     earlyYearsLabel: "Nature & discovery",
     title: "Nature & science",
     searchQuery: "science nature",
-    color: "#55705A",
     iconClass: "gardening-health-icon",
     fastenerClass: "fastener-binder-clip",
-    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.png",
     noteShape: "deckled",
     rotation: "right",
     teacherReason: "Explore seasons, weather, and living things.",
@@ -103,10 +91,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     earlyYearsLabel: "Songs & movement",
     title: "Music",
     searchQuery: "music",
-    color: "#2C6C9B",
     iconClass: "music-icon",
     fastenerClass: "fastener-masking-tape",
-    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/04-rose-ruled-note.png",
     noteShape: "ruled",
     rotation: "left",
     teacherReason: "Teach rhythm, listening, and movement through songs.",
@@ -118,10 +104,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     earlyYearsLabel: "Making & imagining",
     title: "The arts",
     searchQuery: "arts drama creativity",
-    color: "#4F5FA0",
     iconClass: "art-photography-icon",
     fastenerClass: "fastener-gingham-tape",
-    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/05-gold-scalloped-note.png",
     noteShape: "scalloped",
     rotation: "none",
     teacherReason: "Invite children to create, imagine, and express ideas.",
@@ -133,50 +117,13 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     earlyYearsLabel: "Movement & wellbeing",
     title: "Health & physical education",
     searchQuery: "health physical education movement",
-    color: "#B5272C",
     iconClass: "physical-education-icon",
     fastenerClass: "fastener-apple-peg",
-    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/06-lavender-folded-note.png",
     noteShape: "folded",
     rotation: "right",
     teacherReason: "Practise movement, cooperation, and healthy routines.",
     highlights: ["Move your body", "Play and cooperate", "Stay healthy"],
     matches: (lesson) => /gross motor|physical|health|routine|approaches to learning/i.test(lessonText(lesson)),
-  },
-] as const;
-
-export const EARLY_YEARS_STAFF = [
-  {
-    name: "Miss Puddles",
-    role: "Daycare & movement",
-    href: "/search?q=daycare+movement+circle+time",
-    portrait: "/staff_and_students/miss-puddles-transparent-circle.png",
-    color: "#E8A227",
-    texture: "/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png",
-  },
-  {
-    name: "Miss Maisy",
-    role: "Gardening & health",
-    href: "/search?q=gardening+health+preschool",
-    portrait: "/staff_and_students/miss-maisy-transparent-circle.png",
-    color: "#55705A",
-    texture: "/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png",
-  },
-  {
-    name: "Mr Rusty",
-    role: "Dance & rhythm",
-    href: "/search?q=dance+rhythm+movement",
-    portrait: "/staff_and_students/mr-rusty-transparent-circle.png",
-    color: "#2C6C9B",
-    texture: "/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png",
-  },
-  {
-    name: "Miss Hayley",
-    role: "Stories & drama",
-    href: "/search?q=stories+drama+language",
-    portrait: "/staff_and_students/miss-hayley-transparent-circle.png",
-    color: "#C9527A",
-    texture: "/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png",
   },
 ] as const;
 

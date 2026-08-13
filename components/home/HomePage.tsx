@@ -56,18 +56,16 @@ export function HomePage({ hero }: HomePageProps) {
           {HOME_SUBJECTS.map((subject) => (
               <HomeSubjectNote
                 key={subject.key}
+                subject={subject.key}
                 title={subject.title}
                 href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}
-                  color={subject.color as `#${string}`}
                   iconClass={subject.iconClass}
                   teacherReason={subject.teacherReason}
                   highlights={subject.highlights}
                 fastenerClass={subject.fastenerClass}
-                paperAsset={subject.paperAsset}
                 noteShape={subject.noteShape}
                 rotation={subject.rotation}
-                guideName={SUBJECT_LEARNERS[subject.key]?.name}
-                guidePortrait={SUBJECT_LEARNERS[subject.key]?.portrait}
+                guideCharacter={SUBJECT_LEARNERS[subject.key]?.character}
               />
           ))}
         </div>

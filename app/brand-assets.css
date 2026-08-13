@@ -22,6 +22,30 @@
   vertical-align: middle;
 }
 
+/* Repeatable material sources. Components consume these names, never raw URLs. */
+:root {
+  --asset-cardboard-kraft: url('/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png');
+  --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png');
+  --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.png');
+  --asset-woven-old-macdonald: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png');
+  --asset-construction-mr-sam: url('/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png');
+  --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png');
+  --asset-cork-board: url('/design-assets/cork-board-kit-v2/seamless-cork-tile.png');
+  --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png');
+  --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png');
+  --subject-science-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.png');
+  --subject-music-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/04-rose-ruled-note.png');
+  --subject-arts-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/05-gold-scalloped-note.png');
+  --subject-health-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/06-lavender-folded-note.png');
+}
+
+[data-subject='language'] { --subject-note-paper: var(--subject-language-paper); }
+[data-subject='math'] { --subject-note-paper: var(--subject-math-paper); }
+[data-subject='science'] { --subject-note-paper: var(--subject-science-paper); }
+[data-subject='music'] { --subject-note-paper: var(--subject-music-paper); }
+[data-subject='arts'] { --subject-note-paper: var(--subject-arts-paper); }
+[data-subject='health'] { --subject-note-paper: var(--subject-health-paper); }
+
 /* Size roles */
 .icon-micro { --brand-asset-size: 1rem; }
 .icon-small { --brand-asset-size: 2rem; }
@@ -40,12 +64,12 @@
   --nav-grade-edge:var(--grade-edge);
   --nav-grade-texture:var(--grade-texture);
 }
-[data-grade-group='early-years'] { --grade-color:#1F6B6B; --grade-edge:#164A4A; --grade-ink:#FFF8E8; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png'); }
-[data-grade='daycare'] { --grade-color:#E3AD27; --grade-edge:#9B6E10; --grade-ink:#142D42; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png'); }
-[data-grade='pre-school'] { --grade-color:#477A4D; --grade-edge:#2D5533; --grade-ink:#FFFDF7; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png'); }
-[data-grade='kindergarten'] { --grade-color:#2F6F9F; --grade-edge:#204D70; --grade-ink:#FFFDF7; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png'); }
-[data-grade='grade-one'] { --grade-color:#C94F78; --grade-edge:#8C304E; --grade-ink:#200B13; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png'); }
-[data-grade='grade-two'] { --grade-color:#C65F28; --grade-edge:#873D19; --grade-ink:#FFFDF7; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png'); }
+[data-grade-group='early-years'] { --grade-color:var(--grade-early-years-color); --grade-edge:var(--grade-early-years-edge); --grade-ink:var(--grade-early-years-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png'); }
+[data-grade='daycare'] { --grade-color:var(--grade-daycare-color); --grade-edge:var(--grade-daycare-edge); --grade-ink:var(--grade-daycare-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png'); }
+[data-grade='pre-school'] { --grade-color:var(--grade-pre-school-color); --grade-edge:var(--grade-pre-school-edge); --grade-ink:var(--grade-pre-school-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png'); }
+[data-grade='kindergarten'] { --grade-color:var(--grade-kindergarten-color); --grade-edge:var(--grade-kindergarten-edge); --grade-ink:var(--grade-kindergarten-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png'); }
+[data-grade='grade-one'] { --grade-color:var(--grade-one-color); --grade-edge:var(--grade-one-edge); --grade-ink:var(--grade-one-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png'); }
+[data-grade='grade-two'] { --grade-color:var(--grade-two-color); --grade-edge:var(--grade-two-edge); --grade-ink:var(--grade-two-ink); --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png'); }
 
 /* Grade signals: asset selection is separate from grade colour. */
 .grade-icon[data-grade-icon='daycare'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-daycare.png'); }

@@ -66,8 +66,7 @@
   --brand-paper-texture: var(--home-paper-texture);
   --brand-kraft-color: var(--theme-paper-muted, #f0d49c);
   --brand-kraft-texture: url("/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png");
-  --brand-cork-color: #b8906a;
-  --brand-cork-texture: url("/design-assets/cork-board-kit-v2/seamless-cork-tile.png");
+  --brand-cork-texture: var(--asset-cork-board);
   --cast-old-macdonald-texture: url("/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png");
   --cast-miss-puddles-texture: url("/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png");
   --cast-mr-rusty-texture: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
@@ -107,30 +106,31 @@ body::before { position: fixed; z-index: -1; inset: 0; background: var(--grain-f
 .material-site-fabric { background-image: var(--site-chrome-fabric); }
 .material-site-leather { background-image: var(--site-chrome-leather); }
 .material-surface { background-color: var(--material-color); background-image: var(--material-image); background-repeat: repeat; background-size: var(--material-size, 220px); }
-.material-cardboard-paper { --material-color: var(--theme-paper, #f7e8c8); --material-image: var(--home-paper-texture); --material-size: 320px; }
-.material-felt { --material-color: var(--curriculum-blue, #2c6c9b); --material-image: var(--cast-mr-rusty-texture); --material-size: 180px; }
-.material-woven-fabric { --material-color: var(--theme-wood-light, #c5a67a); --material-image: url("/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png"); --material-size: 190px; }
-.material-construction-paper { --material-color: var(--curriculum-green, #1f6b6b); --material-image: url("/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png"); --material-size: 190px; }
+.material-cardboard-paper { --material-color: var(--theme-paper); --material-image: var(--home-paper-texture); --material-size: 320px; }
+.material-felt { --material-color: var(--curriculum-blue); --material-image: var(--cast-mr-rusty-texture); --material-size: 180px; }
+.material-woven-fabric { --material-color: var(--theme-wood-light); --material-image: var(--asset-woven-old-macdonald); --material-size: 190px; }
+.material-construction-paper { --material-color: var(--curriculum-green); --material-image: var(--asset-construction-mr-sam); --material-size: 190px; }
 .material-cork { --material-color: var(--brand-cork-color); --material-image: var(--brand-cork-texture); --material-size: 300px; }
-.material-leather { --material-color: var(--theme-wood, #6c472f); --material-image: url("/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png"); --material-size: 240px; }
+.material-leather { --material-color: var(--theme-wood); --material-image: var(--asset-leather-old-macdonald); --material-size: 240px; }
 
-.cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-texture: var(--cast-old-macdonald-texture); --character-foreground: var(--cast-old-macdonald-foreground, #fff8e8); }
-.cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-texture: var(--cast-miss-puddles-texture); --character-foreground: var(--cast-miss-puddles-foreground, #173552); }
-.cast-mr-rusty { --character-color: var(--cast-mr-rusty-color); --character-texture: var(--cast-mr-rusty-texture); --character-foreground: var(--cast-mr-rusty-foreground, #fff8e8); }
-.cast-miss-hayley { --character-color: var(--cast-miss-hayley-color); --character-texture: var(--cast-miss-hayley-texture); --character-foreground: var(--cast-miss-hayley-foreground, #fff8e8); }
-.cast-mr-sam { --character-color: var(--cast-mr-sam-color); --character-texture: var(--cast-mr-sam-texture); --character-foreground: var(--cast-mr-sam-foreground, #fff8e8); }
-.cast-mr-maisy { --character-color: var(--cast-mr-maisy-color); --character-texture: var(--cast-mr-maisy-texture); --character-foreground: var(--cast-mr-maisy-foreground, #fff8e8); }
-.cast-mr-puddles { --character-color: var(--cast-mr-puddles-color); --character-texture: var(--cast-mr-puddles-texture); --character-foreground: var(--cast-mr-puddles-foreground, #fff8e8); }
-.cast-miss-maisy { --character-color: var(--cast-miss-maisy-color); --character-texture: var(--cast-miss-maisy-texture); --character-foreground: var(--cast-miss-maisy-foreground, #fff8e8); }
-.cast-hopper { --character-color: var(--cast-hopper-color); --character-texture: var(--cast-hopper-texture); --character-foreground: var(--cast-hopper-foreground, #fff8e8); }
-.cast-whiskers { --character-color: var(--cast-whiskers-color); --character-texture: var(--cast-whiskers-texture); --character-foreground: var(--cast-whiskers-foreground, #fff8e8); }
-.cast-scout { --character-color: var(--cast-scout-color); --character-texture: var(--cast-scout-texture); --character-foreground: var(--cast-scout-foreground, #fff8e8); }
-.cast-penny { --character-color: var(--cast-penny-color); --character-texture: var(--cast-penny-texture); --character-foreground: var(--cast-penny-foreground, #173552); }
-.cast-maisy { --character-color: var(--cast-maisy-color); --character-texture: var(--cast-maisy-texture); --character-foreground: var(--cast-maisy-foreground, #fff8e8); }
-.cast-puddles { --character-color: var(--cast-puddles-color); --character-texture: var(--cast-puddles-texture); --character-foreground: var(--cast-puddles-foreground, #173552); }
-.cast-sam { --character-color: var(--cast-sam-color); --character-texture: var(--cast-sam-texture); --character-foreground: var(--cast-sam-foreground, #fff8e8); }
-.cast-rusty { --character-color: var(--cast-rusty-color); --character-texture: var(--cast-rusty-texture); --character-foreground: var(--cast-rusty-foreground, #fff8e8); }
+.cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-texture: var(--cast-old-macdonald-texture); --character-foreground: var(--cast-old-macdonald-foreground); }
+.cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-texture: var(--cast-miss-puddles-texture); --character-foreground: var(--cast-miss-puddles-foreground); }
+.cast-mr-rusty { --character-color: var(--cast-mr-rusty-color); --character-texture: var(--cast-mr-rusty-texture); --character-foreground: var(--cast-mr-rusty-foreground); }
+.cast-miss-hayley { --character-color: var(--cast-miss-hayley-color); --character-texture: var(--cast-miss-hayley-texture); --character-foreground: var(--cast-miss-hayley-foreground); }
+.cast-mr-sam { --character-color: var(--cast-mr-sam-color); --character-texture: var(--cast-mr-sam-texture); --character-foreground: var(--cast-mr-sam-foreground); }
+.cast-mr-maisy { --character-color: var(--cast-mr-maisy-color); --character-texture: var(--cast-mr-maisy-texture); --character-foreground: var(--cast-mr-maisy-foreground); }
+.cast-mr-puddles { --character-color: var(--cast-mr-puddles-color); --character-texture: var(--cast-mr-puddles-texture); --character-foreground: var(--cast-mr-puddles-foreground); }
+.cast-miss-maisy { --character-color: var(--cast-miss-maisy-color); --character-texture: var(--cast-miss-maisy-texture); --character-foreground: var(--cast-miss-maisy-foreground); }
+.cast-hopper { --character-color: var(--cast-hopper-color); --character-texture: var(--cast-hopper-texture); --character-foreground: var(--cast-hopper-foreground); }
+.cast-whiskers { --character-color: var(--cast-whiskers-color); --character-texture: var(--cast-whiskers-texture); --character-foreground: var(--cast-whiskers-foreground); }
+.cast-scout { --character-color: var(--cast-scout-color); --character-texture: var(--cast-scout-texture); --character-foreground: var(--cast-scout-foreground); }
+.cast-penny { --character-color: var(--cast-penny-color); --character-texture: var(--cast-penny-texture); --character-foreground: var(--cast-penny-foreground); }
+.cast-maisy { --character-color: var(--cast-maisy-color); --character-texture: var(--cast-maisy-texture); --character-foreground: var(--cast-maisy-foreground); }
+.cast-puddles { --character-color: var(--cast-puddles-color); --character-texture: var(--cast-puddles-texture); --character-foreground: var(--cast-puddles-foreground); }
+.cast-sam { --character-color: var(--cast-sam-color); --character-texture: var(--cast-sam-texture); --character-foreground: var(--cast-sam-foreground); }
+.cast-rusty { --character-color: var(--cast-rusty-color); --character-texture: var(--cast-rusty-texture); --character-foreground: var(--cast-rusty-foreground); }
 .character-surface { color: var(--character-foreground); background-color: var(--character-color); background-image: var(--character-texture); background-repeat: repeat; background-size: 180px; }
+.grade-surface { color: var(--grade-ink); background-color: var(--grade-color); box-shadow: 0 .25rem 0 var(--grade-edge); }
 
 .char-badge { position: relative; display: inline-flex; flex: 0 0 auto; align-items: flex-end; justify-content: center; overflow: hidden; filter: drop-shadow(0 3px 1px rgb(0 0 0 / 24%)); }
 .char-badge--circle { border-radius: 50%; }

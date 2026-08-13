@@ -8,6 +8,11 @@ import json
 import sqlite3
 import sys
 from pathlib import Path
+
+# Support the runbook's direct-script invocation from the project root.
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 

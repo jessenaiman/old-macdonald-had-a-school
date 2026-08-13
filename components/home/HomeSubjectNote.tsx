@@ -1,44 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CAST } from "@/lib/cast";
 import styles from "./HomePage.module.css";
 
 export type SubjectNoteShape = "torn" | "grid" | "deckled" | "ruled" | "scalloped" | "folded";
 
 export type HomeSubjectNoteProps = {
+  subject: "language" | "math" | "science" | "music" | "arts" | "health";
   title: string;
   href: string;
   iconClass: string;
   teacherReason: string;
   highlights: readonly string[];
-  color: `#${string}`;
-  paperAsset: string;
   fastenerClass: string;
   noteShape: SubjectNoteShape;
-  guideName?: string;
-  guidePortrait?: string;
+  guideCharacter?: "whiskers" | "sam" | "scout" | "penny" | "puddles" | "hopper";
   rotation?: "left" | "none" | "right";
 };
 
 export function HomeSubjectNote({
+  subject,
   title,
   href,
   iconClass,
   teacherReason,
   highlights,
-  color,
-  paperAsset,
   fastenerClass,
   noteShape,
-  guideName,
-  guidePortrait,
+  guideCharacter,
   rotation = "none",
 }: HomeSubjectNoteProps) {
+  const guide = guideCharacter ? CAST[guideCharacter] : undefined;
   return (
     <article
       className={styles.subjectNote}
+      data-subject={subject}
       data-note-shape={noteShape}
       data-rotation={rotation}
-      style={{ "--subject-note-color": color, "--subject-note-paper": `url("${paperAsset}")` } as React.CSSProperties}
     >
       <span className={`${styles.subjectNoteFastener} brand-asset ${fastenerClass}`} aria-hidden="true" />
       <div className={styles.subjectNoteLink}>
@@ -58,10 +56,10 @@ export function HomeSubjectNote({
           ))}
         </ul>
         <span className={styles.subjectNoteBottom}>
-          {guidePortrait && guideName ? (
+          {guide ? (
             <span className={styles.subjectNoteGuide}>
-              <Image src={guidePortrait} alt="" width={32} height={32} />
-              <span>{guideName}</span>
+              <Image src={guide.portrait} alt="" width={32} height={32} />
+              <span>{guide.name}</span>
             </span>
           ) : <span />}
           <Link href={href} className={styles.subjectNoteAction}>Explore lessons <span aria-hidden="true">→</span></Link>

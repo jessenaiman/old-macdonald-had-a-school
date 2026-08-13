@@ -40,6 +40,7 @@ export function GradeControlsReference() {
         config={GRADE_INTERACTION_CONFIGS["grade-one"]}
         summary="Reading, rhythm, and reasoning belong in one teacher-ready starting point."
         items={referenceItems}
+        headingLevel="h2"
       />
     </div>
   );

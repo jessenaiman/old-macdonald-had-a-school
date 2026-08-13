@@ -11,6 +11,7 @@ const guideSections = [
   ["Typography", "#typography"],
   ["Controls", "#controls"],
   ["Grades", "#grades"],
+  ["Palette", "#palette"],
 ] as const
 
 const cast = [
@@ -61,7 +62,7 @@ export function BrandingOverview() {
         </div>
       </header>
 
-      <nav className="material-surface material-cardboard-paper my-5 grid grid-cols-2 gap-2 rounded-xl border border-border p-2 shadow-md sm:grid-cols-4 xl:grid-cols-8" aria-label="Brand guide sections">
+      <nav className="material-surface material-cardboard-paper my-5 grid grid-cols-2 gap-2 rounded-xl border border-border p-2 shadow-md sm:grid-cols-3 xl:grid-cols-9" aria-label="Brand guide sections">
         {guideSections.map(([label, href]) => (
           <a className="grid min-h-14 place-items-center rounded-lg border border-border bg-card px-3 text-center text-sm font-black text-card-foreground no-underline transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" href={href} key={href}>
             {label}

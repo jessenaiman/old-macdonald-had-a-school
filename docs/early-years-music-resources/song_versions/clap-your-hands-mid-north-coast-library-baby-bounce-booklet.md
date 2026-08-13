@@ -8,8 +8,8 @@ evidence_quote: 'Clap, clap, clap your hands
   As slowly as you can
 
   Clap, clap, clap your hands'
-page_section: unknown
-review_status: pending_qc
+page_section: p. 46
+review_status: reviewed
 skill_objective: Develops fine motor skills and hand coordination through fingerplay
   movements
 source_file: mid-north-coast-library-baby-bounce-booklet.pdf
@@ -27,3 +27,5 @@ As quickly as you can
 
 **Printed actions:**
 Tune: ‘Row, Row, Row Your Boat’
+Shake...
+Roll...

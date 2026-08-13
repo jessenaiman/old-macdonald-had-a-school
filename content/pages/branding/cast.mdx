@@ -1,88 +1,66 @@
-import { CharacterCard } from "../../../components/brand/CharacterCard"
-import styles from "../../../components/brand/CastReference.module.css"
+import Link from "next/link"
+import { CharacterCard } from "@/components/brand/CharacterCard"
+import { CastRoleIndex, CastRoleIndexItem } from "@/components/brand/CastRoleIndex"
 
-<section id="cast" className={`${styles.section} mt-5 min-w-0 rounded-2xl border border-border bg-background p-5 text-foreground sm:p-8 lg:p-12`}>
+<section id="cast" className="mt-5 min-w-0 rounded-2xl border border-border bg-background p-5 text-foreground sm:p-8 lg:p-12">
 
 ## Cast, teaching roles, and visual ownership
 
-Character colour uses one of six teachable families: **red, yellow, blue, orange, green, or purple**. It identifies a character's portrait panel, note, activity, or teaching context; it is not a page-wide grade theme. Pink is named as a tint of red. Portraits remain canonical and are never recoloured.
+Each identity pairs one unchanged [canonical portrait](#assets) with one signature colour from `theme.css` and the exact facts below. Change a character colour only in `theme.css`; do not pass a colour, portrait, texture, or ink value into a component. Curriculum artwork remains independent: choose and include it through the [semantic icon catalogue](#icons).
 
 ### Reusable character-card recipe
 
-Use `CharacterCard` anywhere a character needs a portrait, local colour, role, and safe activity context. The component owns the consistent frame, felt texture, responsive portrait, and hover/focus treatment. This Markdown remains the readable source of the actual content.
-
-<div className="max-w-full overflow-x-auto rounded-xl border border-border bg-site-chrome p-4 text-site-chrome-foreground [&_pre]:m-0 [&_pre]:min-w-[42rem] [&_pre]:whitespace-pre-wrap [&_pre]:text-xs">
+Use `CharacterCard` where a character needs a portrait, local identity colour, role, and safe activity context. The component resolves the portrait and themed identity from the semantic character key.
 
 ```mdx
 <CharacterCard character="miss-puddles"
-  role="Daycare teacher and swim instructor" meta="Daycare · early learning and swimming"
+  role="Daycare teacher and swim instructor"
+  meta="Daycare · early learning and swimming"
   activities="Circle time, songs, art, movement, sharing, and swimming." />
 ```
 
-</div>
-
-### Canonical staff
-
-On narrow screens, each source row becomes a labelled record so every field remains visible. The reusable portrait cards immediately below retain the primary visual facts.
-
-<div className={`${styles.tableRegion} ${styles.staff}`} role="region" aria-label="Canonical staff roles and colours">
-
-| Name | Species | Role | Grade/Level | Colour family | Activities |
-| --- | --- | --- | --- | --- | --- |
-| **Old MacDonald** | Human adult | Principal, music teacher | Kindergarten | Red `#A8323A` | Gatherings, processions, assembly, storytime, whole-school singing, banjo or guitar |
-| **Miss Puddles** | Duck adult | Daycare teacher, swim instructor | Daycare | Yellow `#E3AD27` | Circle time, fingerplay songs, art table, simple movement games, sharing and turn-taking, swimming |
-| **Mr Rusty** | Horse adult | Dance teacher | Kindergarten and Grade 1 | Blue `#2F6F9F` | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions |
-| **Miss Hayley** | Human adult | Music, singing, drama | Grade 1/2 | Pink, a tint of red `#C94F78` | Storytime, songs, imagination games, drama, class adventures, creative movement |
-| **Mr Sam** | Pig adult | Math, science, building | Whole school | Blue `#28577C` | Counting, measuring, sorting, patterns, simple engineering, build table |
-| **Mr Maisy** | Cow adult | Physical education, healthy eating, body positivity | Grade 2 | Orange `#C65F28` | Outdoor games, movement warm-ups, gross-motor play |
-| **Mr Puddles** | Duck adult | Art and photography | Whole school | Purple `#6D5596` | Bird studies, painting, photography, exhibitions |
-| **Miss Maisy** | Cow adult | Secretary, gardening lead, cooking | Preschool | Green `#477A4D` | Family welcome, office support, gardening, simple food preparation, healthy habits, seasonal displays |
-
-</div>
-
-<div className="mt-7 grid gap-4 md:grid-cols-2">
-  <CharacterCard character="old-macdonald" role="Principal and music teacher" meta="Kindergarten · whole-school anchor" activities="Gatherings, processions, assembly, storytime, whole-school singing, banjo, or guitar." />
-  <CharacterCard character="miss-puddles" role="Daycare teacher and swim instructor" meta="Daycare · early learning and swimming" activities="Circle time, fingerplay songs, art, simple movement, sharing, turn-taking, and swimming." />
-  <CharacterCard character="mr-rusty" role="Dance teacher" meta="Kindergarten and Grade 1 · rhythm" activities="Fiddle, steady beat, rhythm games, barn-dance circles, and movement transitions." />
-  <CharacterCard character="miss-hayley" role="Music, singing, and drama teacher" meta="Grade 1/2 · pink is a tint of red" activities="Storytime, songs, imagination games, drama, class adventures, and creative movement." />
-  <CharacterCard character="mr-sam" role="Math, science, and building teacher" meta="Whole school · careful thinking" activities="Counting, measuring, sorting, patterns, simple engineering, and the build table." />
-  <CharacterCard character="mr-maisy" role="Physical education and healthy-eating teacher" meta="Grade 2 · active participation" activities="Outdoor games, movement warm-ups, gross-motor play, health, and teamwork." />
-  <CharacterCard character="mr-puddles" role="Art and photography teacher" meta="Whole school · creativity" activities="Bird studies, painting, photography, exhibitions, and visual observation." />
-  <CharacterCard character="miss-maisy" role="Secretary, gardening lead, and cooking teacher" meta="Preschool · growing and food" activities="Family welcome, office support, gardening, simple food preparation, healthy habits, and seasonal displays." />
-</div>
+<CastRoleIndex title="Canonical staff">
+  <CastRoleIndexItem character="old-macdonald" colorReference="#8B5E34" role="Principal and music teacher" level="Kindergarten · whole-school anchor" permitted="Gatherings, processions, assembly, storytime, whole-school singing, banjo, or guitar." />
+  <CastRoleIndexItem character="miss-puddles" colorReference="#E8A227" role="Daycare teacher and swim instructor" level="Daycare · early learning and swimming" permitted="Circle time, fingerplay songs, art, simple movement, sharing, turn-taking, and swimming." />
+  <CastRoleIndexItem character="mr-rusty" colorReference="#2C6C9B" role="Dance teacher" level="Kindergarten and Grade 1 · rhythm" permitted="Fiddle, steady beat, rhythm games, barn-dance circles, and movement transitions." />
+  <CastRoleIndexItem character="miss-hayley" colorReference="#C9527A" role="Music, singing, and drama teacher" level="Grade 1/2 · stories and performance" permitted="Storytime, songs, imagination games, drama, class adventures, and creative movement." />
+  <CastRoleIndexItem character="mr-sam" colorReference="#1F6B6B" role="Math, science, and building teacher" level="Whole school · careful thinking" permitted="Counting, measuring, sorting, patterns, simple engineering, and the build table." />
+  <CastRoleIndexItem character="mr-maisy" colorReference="#B5272C" role="Physical education and healthy-eating teacher" level="Grade 2 · active participation" permitted="Outdoor games, movement warm-ups, gross-motor play, health, and teamwork." />
+  <CastRoleIndexItem character="mr-puddles" colorReference="#4F5FA0" role="Art and photography teacher" level="Whole school · creativity" permitted="Bird studies, painting, photography, exhibitions, and visual observation." />
+  <CastRoleIndexItem character="miss-maisy" colorReference="#55705A" role="Secretary, gardening lead, and cooking teacher" level="Preschool · growing and food" permitted="Family welcome, office support, gardening, simple food preparation, healthy habits, and seasonal displays." />
+</CastRoleIndex>
 
 ### Staff rule
 
 The staff roster is eight. Mr Puddles, Mr Maisy, and Miss Maisy are staff. Mr Maisy and Miss Maisy are also Maisy's parents. Sam's Mom is not canonical unless added here.
 
-### Students: eight learning lenses
+<CastRoleIndex title="Students · eight learning lenses">
+  <CastRoleIndexItem character="hopper" colorReference="#D9713C" role="Energetic, optimistic, and ready to join" level="Student · movement" permitted="Hop, walk, sit, listen, and imitate." />
+  <CastRoleIndexItem character="whiskers" colorReference="#7B4FA8" role="Curious, gentle, and thoughtful" level="Student · observation" permitted="Tilt their head, inspect, listen, sit, and participate." />
+  <CastRoleIndexItem character="scout" colorReference="#4A7A3A" role="Adventurous, observant, and dependable" level="Student · discovery" permitted="Lead discovery, point, listen, and help a classmate." />
+  <CastRoleIndexItem character="penny" colorReference="#C9962E" role="Young, earnest, and growing in confidence" level="Student · first attempts" permitted="Stand, step, sing, listen, and play a small instrument." />
+  <CastRoleIndexItem character="maisy" colorReference="#1F4E5F" role="Warm, confident, and encouraging" level="Student · modelling" permitted="Stand, clap, sing, listen, and model an action." />
+  <CastRoleIndexItem character="puddles" colorReference="#4FA0C9" role="Expressive, sociable, and enthusiastic" level="Student · participation" permitted="Waddle, gesture, sing, listen, and join rhythm play." />
+  <CastRoleIndexItem character="sam" colorReference="#7A9A3D" role="Thoughtful, inventive, and cheerful" level="Student · problem-solving" permitted="Examine, count, build, listen, and explain." />
+  <CastRoleIndexItem character="rusty" colorReference="#8B5030" role="Calm, reliable, and quietly courageous" level="Student · teamwork" permitted="Walk, gallop, listen, help, and play an instrument." />
+</CastRoleIndex>
 
-Students support a scene or learning action; they do not replace subject ownership. Their colours repeat the six families as lesson-planning cues.
+### One card, full truth
 
-<div className={`${styles.tableRegion} ${styles.students}`} role="region" aria-label="Canonical student personalities and colours">
-
-| # | Name | Species | Personality | Colour family | Can be shown |
-|---|---|---|---|---|---|
-| 1 | **Hopper** | Rabbit | Energetic, optimistic, ready to join | Orange `#C65F28` | Hop, walk, sit, listen, imitate |
-| 2 | **Whiskers** | Cat | Curious, gentle, thoughtful | Purple `#6D5596` | Tilt head, inspect, listen, sit, participate |
-| 3 | **Scout** | Dog | Adventurous, observant, dependable | Green `#477A4D` | Lead discovery, point, listen, help a classmate |
-| 4 | **Penny** | Chick | Young, earnest, growing in confidence | Yellow `#E3AD27` | Stand, step, sing, listen, play a small instrument |
-| 5 | **Maisy** | Cow | Warm, confident, encouraging | Blue `#2F6F9F` | Stand, clap, sing, listen, model an action |
-| 6 | **Puddles** | Duck | Expressive, sociable, enthusiastic | Purple `#76508F` | Waddle, gesture, sing, listen, join rhythm play |
-| 7 | **Sam** | Pig | Thoughtful, inventive, cheerful | Red `#A8323A` | Examine, count, build, listen, explain |
-| 8 | **Rusty** | Horse | Calm, reliable, quietly courageous | Orange `#C65F28` | Walk, gallop, listen, help, play an instrument |
-
+<div className="mt-5 max-w-2xl">
+  <CharacterCard character="miss-puddles" role="Daycare teacher and swim instructor" meta="Daycare · early learning and swimming" activities="Circle time, fingerplay songs, art, simple movement, sharing, turn-taking, and swimming." />
 </div>
 
-<div className="mt-7 grid gap-3 md:grid-cols-2">
-  <CharacterCard variant="student" character="hopper" role="Energetic and optimistic" meta="Movement and ready participation" activities="Hop, walk, sit, listen, and imitate." />
-  <CharacterCard variant="student" character="whiskers" role="Curious, gentle, and thoughtful" meta="Questions and imagination" activities="Tilt their head, inspect, listen, sit, and participate." />
-  <CharacterCard variant="student" character="scout" role="Adventurous and dependable" meta="Outdoor discovery and teamwork" activities="Lead discovery, point, listen, and help a classmate." />
-  <CharacterCard variant="student" character="penny" role="Earnest and growing in confidence" meta="Optimism and first attempts" activities="Stand, step, sing, listen, and play a small instrument." />
-  <CharacterCard variant="student" character="maisy" role="Warm, confident, and encouraging" meta="Patterns and modelling" activities="Stand, clap, sing, listen, and model an action." />
-  <CharacterCard variant="student" character="puddles" role="Expressive and sociable" meta="Storytelling and music" activities="Waddle, gesture, sing, listen, and join rhythm play." />
-  <CharacterCard variant="student" character="sam" role="Thoughtful, inventive, and cheerful" meta="Building and explanation" activities="Examine, count, build, listen, and explain." />
-  <CharacterCard variant="student" character="rusty" role="Calm, reliable, and courageous" meta="Rhythm and sequencing" activities="Walk, gallop, listen, help, and play an instrument." />
+### System in action
+
+Portrait explains identity. Colour remains local to that identity. Material explains construction. A curriculum icon explains learning meaning and links back to its single inclusion recipe.
+
+<div className="mt-5 flex flex-wrap gap-4 rounded-xl border border-border bg-card p-5">
+  <Link href="#icon-early-learning" aria-label="Open the early-learning icon instructions"><span className="brand-asset early-learning-blocks icon-medium" aria-hidden="true" /></Link>
+  <Link href="#icon-music" aria-label="Open the music icon instructions"><span className="brand-asset music-icon icon-medium" aria-hidden="true" /></Link>
+  <Link href="#icon-math" aria-label="Open the math icon instructions"><span className="brand-asset math-abacus-ruler icon-medium" aria-hidden="true" /></Link>
+  <Link href="#icon-drama" aria-label="Open the drama icon instructions"><span className="brand-asset acting-theatre-masks icon-medium" aria-hidden="true" /></Link>
+  <Link href="#icon-art" aria-label="Open the art icon instructions"><span className="brand-asset art-camera-brush icon-medium" aria-hidden="true" /></Link>
 </div>
 
 </section>

@@ -28,6 +28,7 @@
   --theme-ink: #182b39;
   --theme-copy: #46535b;
   --theme-white: #fffdf7;
+  --brand-cork-color: #b8906a;
 
   /* Semantic application tokens. Components should depend on these. */
   --background: var(--theme-cream);
@@ -80,44 +81,93 @@
   --site-chrome-accent: var(--curriculum-yellow);
   --site-chrome-border: #a9824d;
 
+  /* Grade navigation identities. */
+  --grade-early-years-color: #1f6b6b;
+  --grade-early-years-edge: #164a4a;
+  --grade-early-years-ink: var(--theme-white);
+  --grade-daycare-color: #e3ad27;
+  --grade-daycare-edge: #9b6e10;
+  --grade-daycare-ink: var(--theme-navy);
+  --grade-pre-school-color: #55705a;
+  --grade-pre-school-edge: #2d5533;
+  --grade-pre-school-ink: var(--theme-white);
+  --grade-kindergarten-color: #2c6c9b;
+  --grade-kindergarten-edge: #204d70;
+  --grade-kindergarten-ink: var(--theme-white);
+  --grade-one-color: #c9527a;
+  --grade-one-edge: #8c304e;
+  --grade-one-ink: #200b13;
+  --grade-two-color: #b5272c;
+  --grade-two-edge: #873d19;
+  --grade-two-ink: var(--theme-white);
+
+  /* Homepage subject identities. */
+  --subject-language-color: #c9527a;
+  --subject-math-color: #1f6b6b;
+  --subject-science-color: #55705a;
+  --subject-music-color: #2c6c9b;
+  --subject-arts-color: #4f5fa0;
+  --subject-health-color: #b5272c;
+
+  /* Grade workspace: functional surfaces shared by every grade route. */
+  --workspace-paper: #fbf2df;
+  --workspace-paper-soft: #fff9eb;
+  --workspace-paper-bright: #fffdf3;
+  --workspace-paper-overlay: #fcf3dfc7;
+  --workspace-ink: #173552;
+  --workspace-muted: #655846;
+  --workspace-kraft: #b66f2b;
+  --workspace-kraft-daycare: #d39a32;
+  --workspace-board: #ae6b29;
+  --workspace-cork: #b8906a;
+  --workspace-cork-edge: #9a632f;
+  --workspace-wood-pocket: #c48949;
+  --workspace-rail-foreground: #f8f0dc;
+  --workspace-note: #f5df9e;
+  --workspace-note-ink: #4d3b26;
+  --workspace-note-accent: #a0661e;
+  --workspace-rail-active: #0f312a59;
+  --workspace-alert: #7d2e52;
+  --workspace-focus: #f4cb68;
+
   /*
    * Grade-lead colour wheel.
    * Pink is explicitly a tint in the red family; all other labels use one
    * of the six introductory colour-wheel families.
    */
-  --cast-old-macdonald-color: var(--curriculum-red);
+  --cast-old-macdonald-color: #8b5e34;
   --cast-old-macdonald-foreground: var(--theme-white);
-  --cast-miss-puddles-color: var(--curriculum-yellow);
+  --cast-miss-puddles-color: #e8a227;
   --cast-miss-puddles-foreground: var(--theme-navy);
-  --cast-miss-maisy-color: var(--curriculum-green);
+  --cast-miss-maisy-color: #55705a;
   --cast-miss-maisy-foreground: var(--theme-white);
-  --cast-mr-rusty-color: var(--curriculum-blue);
+  --cast-mr-rusty-color: #2c6c9b;
   --cast-mr-rusty-foreground: var(--theme-white);
-  --cast-miss-hayley-color: #c94f78;
+  --cast-miss-hayley-color: #c9527a;
   --cast-miss-hayley-foreground: #200b13;
-  --cast-mr-maisy-color: var(--curriculum-orange);
+  --cast-mr-maisy-color: #b5272c;
   --cast-mr-maisy-foreground: var(--theme-white);
-  --cast-mr-sam-color: #28577c;
+  --cast-mr-sam-color: #1f6b6b;
   --cast-mr-sam-foreground: var(--theme-white);
-  --cast-mr-puddles-color: var(--curriculum-purple);
+  --cast-mr-puddles-color: #4f5fa0;
   --cast-mr-puddles-foreground: var(--theme-white);
 
   /* Students repeat the six families as lesson-planning lenses. */
-  --cast-hopper-color: var(--curriculum-orange);
+  --cast-hopper-color: #d9713c;
   --cast-hopper-foreground: var(--theme-white);
-  --cast-whiskers-color: var(--curriculum-purple);
+  --cast-whiskers-color: #7b4fa8;
   --cast-whiskers-foreground: var(--theme-white);
-  --cast-scout-color: var(--curriculum-green);
+  --cast-scout-color: #4a7a3a;
   --cast-scout-foreground: var(--theme-white);
-  --cast-penny-color: var(--curriculum-yellow);
+  --cast-penny-color: #c9962e;
   --cast-penny-foreground: var(--theme-navy);
-  --cast-maisy-color: var(--curriculum-blue);
+  --cast-maisy-color: #1f4e5f;
   --cast-maisy-foreground: var(--theme-white);
-  --cast-puddles-color: #76508f;
+  --cast-puddles-color: #4fa0c9;
   --cast-puddles-foreground: var(--theme-white);
-  --cast-sam-color: var(--curriculum-red);
+  --cast-sam-color: #7a9a3d;
   --cast-sam-foreground: var(--theme-white);
-  --cast-rusty-color: var(--curriculum-orange);
+  --cast-rusty-color: #8b5030;
   --cast-rusty-foreground: var(--theme-white);
 }
 
@@ -155,4 +205,12 @@
   --card-bg: #192c3a;
   --site-chrome-background: #0a1721;
   --site-chrome-foreground: #fffaf0;
+
+  --workspace-paper: #192c3a;
+  --workspace-paper-soft: #213543;
+  --workspace-paper-bright: #263947;
+  --workspace-paper-overlay: color-mix(in srgb, var(--workspace-paper) 88%, transparent);
+  --workspace-ink: #f7edda;
+  --workspace-muted: #cbd5d9;
+  --workspace-rail-foreground: #fffaf0;
 }

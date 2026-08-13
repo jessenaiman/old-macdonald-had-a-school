@@ -600,6 +600,7 @@ def render_text(candidates: list[Candidate], attachments: list[dict[str, Any]]) 
 
 
 def render_summary(
+    connection: sqlite3.Connection,
     candidates: list[Candidate], attachments: list[dict[str, Any]], project_root: Path
 ) -> str:
     """Report batch triage without emitting one token-heavy record per source."""
@@ -615,7 +616,7 @@ def render_summary(
     )
     lines.append(
         "reviewed_exact_attachable=" + str(sum(
-            1 for candidate in candidates if safe_to_attach(candidate, project_root)
+        1 for candidate in candidates if safe_to_attach(connection, candidate, project_root)
         ))
     )
     lines.append("highest-priority-source-files=")
@@ -705,7 +706,7 @@ def main() -> int:
                 for candidate in candidates:
                     if check_runtime(guard):
                         break
-                    if safe_to_attach(candidate, project_root):
+                    if safe_to_attach(connection, candidate, project_root):
                         attachments.append(attach_exact_sources(connection, candidate, project_root))
                 violations = connection.execute("PRAGMA foreign_key_check").fetchall()
                 if violations:
@@ -713,7 +714,7 @@ def main() -> int:
         if args.format == "json":
             print(json.dumps({"candidates": [asdict(item) for item in candidates], "attachments": attachments}, indent=2))
         elif args.format == "summary":
-            print(render_summary(candidates, attachments, project_root))
+            print(render_summary(connection, candidates, attachments, project_root))
         else:
             print(render_text(candidates, attachments))
     finally:

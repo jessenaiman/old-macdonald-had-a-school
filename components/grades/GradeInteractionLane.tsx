@@ -34,6 +34,8 @@ export type GradeInteractionLaneProps = {
   activeIndex?: number;
   onSelect?: (index: number) => void;
   onPreview?: () => void;
+  /** Use h2 when the real control is embedded in a branded reference page. */
+  headingLevel?: "h1" | "h2";
 };
 
 const sections: Array<{ id: GradeInteractionSection; label: string }> = [
@@ -139,12 +141,15 @@ export function GradeWelcomeControl({
   primaryHref,
   onBrowse,
   onPreview,
+  headingLevel: Heading = "h1",
 }: {
   config: GradeInteractionConfig;
   summary: string;
   primaryHref?: string;
   onBrowse?: () => void;
   onPreview?: () => void;
+  /** Branding embeds this real control under the route's single page-level h1. */
+  headingLevel?: "h1" | "h2";
 }) {
   return (
     <ResponsiveFeatureSplit
@@ -153,9 +158,9 @@ export function GradeWelcomeControl({
     >
       <div className={styles.welcomeCopy}>
         <span className={styles.eyebrow}>{config.eyebrow}</span>
-        <h1>
+        <Heading>
           {config.headline} <em>{config.accentHeadline}</em>
-        </h1>
+        </Heading>
         <p>{summary}</p>
         <div className={styles.actions}>
           {primaryHref ? (
@@ -195,6 +200,7 @@ function TodayPanel({
   onChoose,
   onSection,
   onPreview,
+  headingLevel = "h1",
 }: {
   config: GradeInteractionConfig;
   summary: string;
@@ -203,6 +209,7 @@ function TodayPanel({
   onChoose: (index: number) => void;
   onSection: (section: GradeInteractionSection) => void;
   onPreview?: () => void;
+  headingLevel?: "h1" | "h2";
 }) {
   const selected = items[selectedIndex] ?? items[0];
   return (
@@ -213,6 +220,7 @@ function TodayPanel({
         primaryHref={selected?.href}
         onBrowse={() => onSection("curriculum")}
         onPreview={onPreview}
+        headingLevel={headingLevel}
       />
       {config.variant === "daycare" ? (
         <div className={styles.daycareRibbon} aria-label="Daycare pathways">
@@ -576,6 +584,7 @@ export function GradeInteractionLane({
   activeIndex = 0,
   onSelect,
   onPreview,
+  headingLevel = "h1",
 }: GradeInteractionLaneProps) {
   const [section, setSection] = useState<GradeInteractionSection>("today");
   const [selectedIndex, setSelectedIndex] = useState(activeIndex);
@@ -612,6 +621,7 @@ export function GradeInteractionLane({
         onChoose={chooseItem}
         onSection={setSection}
         onPreview={onPreview}
+        headingLevel={headingLevel}
       />
     ) : section === "curriculum" ? (
       <CurriculumPanel
