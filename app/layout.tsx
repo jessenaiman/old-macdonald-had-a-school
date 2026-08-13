@@ -6,6 +6,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
 import "./theme.css";
+import styles from "./Layout.module.css";
 
 const bodyFont = Nunito({
   subsets: ["latin"],
@@ -47,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${handFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
-      <body><ThemeProvider><div className="site-shell site-review site-chrome-home"><SiteHeader /><main className="site-page">{children}</main><SiteFooter /></div></ThemeProvider></body>
+      <body><ThemeProvider><div className={styles.shell}><SiteHeader /><main className={styles.page}>{children}</main><SiteFooter /></div></ThemeProvider></body>
     </html>
   );
 }

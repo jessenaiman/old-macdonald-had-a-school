@@ -16,6 +16,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { ActivePage, GradeNavigationItem } from "./site-navigation";
+import styles from "./SiteChrome.module.css";
 
 export function MobileNavigation({ active, grades }: { active?: ActivePage; grades: readonly GradeNavigationItem[] }) {
   const [open, setOpen] = useState(false);
@@ -27,30 +28,30 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
   }
 
   return (
-    <div className="site-mobile-menu">
+    <div className={styles.mobileMenu}>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button className="site-mobile-menu-trigger" variant="ghost" size="icon-lg" aria-label="Open navigation menu">
+          <Button className={styles.menuTrigger} variant="ghost" size="icon-lg" aria-label="Open navigation menu">
             <FaBars aria-hidden="true" />
             <span className="sr-only">Open navigation menu</span>
           </Button>
         </SheetTrigger>
 
-        <SheetContent className="site-menu-sheet material-site-leather" side="right" showCloseButton={false}>
-          <SheetHeader className="site-menu-sheet-header">
+        <SheetContent className={styles.menuSheet} side="right" showCloseButton={false}>
+          <SheetHeader className={styles.menuSheetHeader}>
             <Image src="/brand-emblem.png" alt="" width={48} height={48} />
-            <div className="site-menu-sheet-heading">
+            <div className={styles.menuSheetHeading}>
               <SheetTitle>Old MacDonald Had a School</SheetTitle>
               <SheetDescription>Lessons, subjects, and grade workspaces</SheetDescription>
             </div>
             <SheetClose asChild>
-              <Button className="site-menu-sheet-close" variant="ghost" size="icon" aria-label="Close navigation menu">
+              <Button className={styles.menuClose} variant="ghost" size="icon" aria-label="Close navigation menu">
                 <FaXmark aria-hidden="true" />
               </Button>
             </SheetClose>
           </SheetHeader>
 
-          <nav className="site-menu-sheet-links" aria-label="Mobile navigation">
+          <nav className={styles.menuLinks} aria-label="Mobile navigation">
             <Button asChild variant="ghost">
               <Link href="/" aria-current={active === "home" ? "page" : undefined} onClick={() => setOpen(false)}>Home</Link>
             </Button>
@@ -74,15 +75,15 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
             </Button>
           </nav>
 
-          <Separator className="site-menu-sheet-separator" />
+          <Separator className={styles.menuSeparator} />
 
-          <section className="site-menu-sheet-grades" aria-labelledby="mobile-grade-heading">
+          <section className={styles.menuGrades} aria-labelledby="mobile-grade-heading">
             <h2 id="mobile-grade-heading">Grade workspaces</h2>
             <div>
               {gradeLinks.map((grade) => (
                 <Button asChild variant="outline" key={grade.key}>
                   <Link
-                    className="site-nav-grade"
+                    className={styles.gradeLink}
                     data-grade={grade.key}
                     href={grade.href}
                     aria-current={active === grade.key ? "page" : undefined}

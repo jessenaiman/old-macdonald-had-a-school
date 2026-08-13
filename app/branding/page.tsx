@@ -11,6 +11,7 @@ import Controls from "../../content/pages/branding/controls.mdx";
 import Grades from "../../content/pages/branding/grades.mdx";
 import Governance from "../../content/pages/branding/governance.mdx";
 import Sources from "../../content/pages/branding/sources.mdx";
+import "./branding.css";
 
 export const metadata = {
   title: "Brand and asset guide | Old MacDonald Had a School",

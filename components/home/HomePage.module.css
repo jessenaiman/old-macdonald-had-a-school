@@ -64,12 +64,13 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: start;
+  align-items: stretch;
   padding: .5rem clamp(1.875rem, 4vw, 3.375rem) clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .heroWeeklyLessons {
   min-width: 0;
+  height: 100%;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--foreground) 28%, transparent);
   border-radius: .5rem;
@@ -78,7 +79,10 @@
 }
 
 .weeklyList {
+  display: flex;
   min-width: 0;
+  height: 100%;
+  flex-direction: column;
   color: var(--foreground);
 }
 
@@ -105,6 +109,9 @@
 }
 
 .weeklyList ul {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -115,6 +122,7 @@
   grid-template-columns: 1.25rem minmax(8rem, .82fr) minmax(10rem, 1.18fr) auto;
   gap: .45rem;
   min-height: 2.875rem;
+  flex: 1;
   align-items: center;
   padding: .35rem .8rem;
   border-bottom: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);

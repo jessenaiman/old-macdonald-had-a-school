@@ -1,75 +1,89 @@
-import Image from "next/image"
+import { CharacterCard } from "../../../components/brand/CharacterCard"
 
 <section id="cast" className="mt-5 min-w-0 rounded-2xl border border-border bg-[#dce7ea] p-[clamp(1.25rem,4vw,3rem)] text-[#102842]">
 
 # Cast, teaching roles, and visual ownership
 
-Character colour is subject-coded and local. It identifies that character’s portrait panel, note, activity, or teaching context. It is not a page-wide grade theme. Portraits remain canonical and are never recoloured.
+Character colour uses one of six teachable families: **red, yellow, blue, orange, green, or purple**. It identifies a character's portrait panel, note, activity, or teaching context; it is not a page-wide grade theme. Pink is named as a tint of red. Portraits remain canonical and are never recoloured.
 
-## Canonical staff
+## Reusable character-card recipe
 
-On narrow screens, swipe or shift-scroll the labelled table region to review every column. The portrait cards immediately below retain the primary visual facts without scrolling.
+Use `CharacterCard` anywhere a character needs a portrait, local colour, role, and safe activity context. The component owns the consistent frame, felt texture, responsive portrait, and hover/focus treatment. This Markdown remains the readable source of the actual content.
 
-<div className="max-w-full overflow-x-auto pb-3 [&_table]:min-w-[62rem] [&_table]:whitespace-normal" role="region" aria-label="Canonical staff roles and colours" tabIndex="0">
+<div className="max-w-full overflow-x-auto rounded-xl border border-border bg-[#142d42] p-4 text-white [&_pre]:m-0 [&_pre]:min-w-[42rem] [&_pre]:whitespace-pre-wrap [&_pre]:text-xs">
 
-| Name | Species | Role | Grade/Level | Colour | Activities |
-| --- | --- | --- | --- | --- | --- |
-| **Old MacDonald** | Human adult | Principal, music teacher | Kindergarten | Brown `#8B5E34` | Gatherings, processions, assembly, storytime, whole-school singing, banjo or guitar |
-| **Miss Puddles** | Duck adult | Daycare teacher, swim instructor | Daycare | Yellow `#E8A227` | Circle time, fingerplay songs, art table, simple movement games, sharing and turn-taking, swimming |
-| **Mr Rusty** | Horse adult | Dance teacher | Kindergarten and Grade 1 | Blue `#2C6C9B` | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions |
-| **Miss Hayley** | Human adult | Music, singing, drama | Grade 1/2 | Pink `#C9527A` | Storytime, songs, imagination games, drama, class adventures, creative movement |
-| **Mr Sam** | Pig adult | Math, science, building | Whole school | Teal `#1F6B6B` | Counting, measuring, sorting, patterns, simple engineering, build table |
-| **Mr Maisy** | Cow adult | Physical education, healthy eating, body positivity | Grade 2 | Red `#B5272C` | Outdoor games, movement warm-ups, gross-motor play |
-| **Mr Puddles** | Duck adult | Art and photography | Whole school | Indigo `#4F5FA0` | Bird studies, painting, photography, exhibitions |
-| **Miss Maisy** | Cow adult | Secretary, gardening lead, cooking | Preschool | Sage `#55705A` | Family welcome, office support, gardening, simple food preparation, healthy habits, seasonal displays |
+```mdx
+<CharacterCard name="Miss Puddles" family="Yellow" color="#E3AD27" ink="dark"
+  portrait="/staff_and_students/miss-puddles-transparent-circle.png"
+  role="Daycare teacher and swim instructor" meta="Daycare · early learning and swimming"
+  activities="Circle time, songs, art, movement, sharing, and swimming."
+  texture="/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png" />
+```
 
 </div>
 
-<div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-  <article className="overflow-hidden rounded-xl bg-[#8B5E34] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/old-macdonald-transparent-circle.png" alt="Old MacDonald" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Old MacDonald</strong><p className="mb-0 text-sm">Kindergarten · principal and music</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#E8A227] text-[#172238]"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/miss-puddles-transparent-circle.png" alt="Miss Puddles" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Miss Puddles</strong><p className="mb-0 text-sm">Daycare · early learning and swimming</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#2C6C9B] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-rusty-transparent-circle.png" alt="Mr Rusty" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Rusty</strong><p className="mb-0 text-sm">K/1 · dance and rhythm</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#C9527A] text-[#050B18]"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/miss-hayley-transparent-circle.png" alt="Miss Hayley" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Miss Hayley</strong><p className="mb-0 text-sm">Grade 1/2 · music and drama</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#1F6B6B] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-sam-transparent-circle.png" alt="Mr Sam" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Sam</strong><p className="mb-0 text-sm">Whole school · math, science, building</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#B5272C] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-maisy-transparent-circle.png" alt="Mr Maisy" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Maisy</strong><p className="mb-0 text-sm">Grade 2 · physical education</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#4F5FA0] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-puddles-transparent-circle.png" alt="Mr Puddles" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Puddles</strong><p className="mb-0 text-sm">Whole school · art and photography</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#55705A] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/miss-maisy-transparent-circle.png" alt="Miss Maisy" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Miss Maisy</strong><p className="mb-0 text-sm">Preschool · gardening and cooking</p></div></article>
+## Canonical staff
+
+On narrow screens, swipe or shift-scroll the labelled table region to review every column. The reusable portrait cards immediately below retain the primary visual facts without scrolling.
+
+<div className="max-w-full overflow-x-auto pb-3 [&_table]:min-w-[62rem] [&_table]:whitespace-normal" role="region" aria-label="Canonical staff roles and colours" tabIndex="0">
+
+| Name | Species | Role | Grade/Level | Colour family | Activities |
+| --- | --- | --- | --- | --- | --- |
+| **Old MacDonald** | Human adult | Principal, music teacher | Kindergarten | Red `#A8323A` | Gatherings, processions, assembly, storytime, whole-school singing, banjo or guitar |
+| **Miss Puddles** | Duck adult | Daycare teacher, swim instructor | Daycare | Yellow `#E3AD27` | Circle time, fingerplay songs, art table, simple movement games, sharing and turn-taking, swimming |
+| **Mr Rusty** | Horse adult | Dance teacher | Kindergarten and Grade 1 | Blue `#2F6F9F` | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions |
+| **Miss Hayley** | Human adult | Music, singing, drama | Grade 1/2 | Pink, a tint of red `#C94F78` | Storytime, songs, imagination games, drama, class adventures, creative movement |
+| **Mr Sam** | Pig adult | Math, science, building | Whole school | Blue `#28577C` | Counting, measuring, sorting, patterns, simple engineering, build table |
+| **Mr Maisy** | Cow adult | Physical education, healthy eating, body positivity | Grade 2 | Orange `#C65F28` | Outdoor games, movement warm-ups, gross-motor play |
+| **Mr Puddles** | Duck adult | Art and photography | Whole school | Purple `#6D5596` | Bird studies, painting, photography, exhibitions |
+| **Miss Maisy** | Cow adult | Secretary, gardening lead, cooking | Preschool | Green `#477A4D` | Family welcome, office support, gardening, simple food preparation, healthy habits, seasonal displays |
+
+</div>
+
+<div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+  <CharacterCard name="Old MacDonald" family="Red" color="#A8323A" portrait="/staff_and_students/old-macdonald-transparent-circle.png" role="Principal and music teacher" meta="Kindergarten · whole-school anchor" activities="Gatherings, processions, assembly, storytime, whole-school singing, banjo, or guitar." texture="/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png" />
+  <CharacterCard name="Miss Puddles" family="Yellow" color="#E3AD27" ink="dark" portrait="/staff_and_students/miss-puddles-transparent-circle.png" role="Daycare teacher and swim instructor" meta="Daycare · early learning and swimming" activities="Circle time, fingerplay songs, art, simple movement, sharing, turn-taking, and swimming." texture="/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png" />
+  <CharacterCard name="Mr Rusty" family="Blue" color="#2F6F9F" portrait="/staff_and_students/mr-rusty-transparent-circle.png" role="Dance teacher" meta="Kindergarten and Grade 1 · rhythm" activities="Fiddle, steady beat, rhythm games, barn-dance circles, and movement transitions." texture="/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png" />
+  <CharacterCard name="Miss Hayley" family="Pink / red" color="#C94F78" ink="dark" portrait="/staff_and_students/miss-hayley-transparent-circle.png" role="Music, singing, and drama teacher" meta="Grade 1/2 · pink is a tint of red" activities="Storytime, songs, imagination games, drama, class adventures, and creative movement." texture="/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png" />
+  <CharacterCard name="Mr Sam" family="Blue" color="#28577C" portrait="/staff_and_students/mr-sam-transparent-circle.png" role="Math, science, and building teacher" meta="Whole school · careful thinking" activities="Counting, measuring, sorting, patterns, simple engineering, and the build table." texture="/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png" />
+  <CharacterCard name="Mr Maisy" family="Orange" color="#C65F28" portrait="/staff_and_students/mr-maisy-transparent-circle.png" role="Physical education and healthy-eating teacher" meta="Grade 2 · active participation" activities="Outdoor games, movement warm-ups, gross-motor play, health, and teamwork." texture="/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png" />
+  <CharacterCard name="Mr Puddles" family="Purple" color="#6D5596" portrait="/staff_and_students/mr-puddles-transparent-circle.png" role="Art and photography teacher" meta="Whole school · creativity" activities="Bird studies, painting, photography, exhibitions, and visual observation." texture="/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png" />
+  <CharacterCard name="Miss Maisy" family="Green" color="#477A4D" portrait="/staff_and_students/miss-maisy-transparent-circle.png" role="Secretary, gardening lead, and cooking teacher" meta="Preschool · growing and food" activities="Family welcome, office support, gardening, simple food preparation, healthy habits, and seasonal displays." texture="/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png" />
 </div>
 
 ### Staff rule
 
-The staff roster is eight. Mr Puddles, Mr Maisy, and Miss Maisy are staff. Mr Maisy and Miss Maisy are also Maisy’s parents. Sam’s Mom is not canonical unless added here.
+The staff roster is eight. Mr Puddles, Mr Maisy, and Miss Maisy are staff. Mr Maisy and Miss Maisy are also Maisy's parents. Sam's Mom is not canonical unless added here.
 
 ## Students: eight learning lenses
 
-Students support a scene or learning action; they do not replace subject ownership. Use only actions appropriate to the specific scene.
-
-On narrow screens, swipe or shift-scroll the labelled table region to review every column.
+Students support a scene or learning action; they do not replace subject ownership. Their colours repeat the six families as lesson-planning cues.
 
 <div className="max-w-full overflow-x-auto pb-3 [&_table]:min-w-[62rem] [&_table]:whitespace-normal" role="region" aria-label="Canonical student personalities and colours" tabIndex="0">
 
-| # | Name | Species | Personality | Signature colour | Can be shown |
+| # | Name | Species | Personality | Colour family | Can be shown |
 |---|---|---|---|---|---|
-| 1 | **Hopper** | Rabbit | Energetic, optimistic, ready to join | Orange `#D9713C` | Hop, walk, sit, listen, imitate |
-| 2 | **Whiskers** | Cat | Curious, gentle, thoughtful | Purple `#7B4FA8` | Tilt head, inspect, listen, sit, participate |
-| 3 | **Scout** | Dog | Adventurous, observant, dependable | Forest green `#4A7A3A` | Lead discovery, point, listen, help a classmate |
-| 4 | **Penny** | Chick | Young, earnest, growing in confidence | Amber `#C9962E` | Stand, step, sing, listen, play a small instrument |
-| 5 | **Maisy** | Cow | Warm, confident, encouraging | Dark teal `#1F4E5F` | Stand, clap, sing, listen, model an action |
-| 6 | **Puddles** | Duck | Expressive, sociable, enthusiastic | Light blue `#4FA0C9` | Waddle, gesture, sing, listen, join rhythm play |
-| 7 | **Sam** | Pig | Thoughtful, inventive, cheerful | Olive `#7A9A3D` | Examine, count, build, listen, explain |
-| 8 | **Rusty** | Horse | Calm, reliable, quietly courageous | Rust `#8B5030` | Walk, gallop, listen, help, play an instrument |
+| 1 | **Hopper** | Rabbit | Energetic, optimistic, ready to join | Orange `#C65F28` | Hop, walk, sit, listen, imitate |
+| 2 | **Whiskers** | Cat | Curious, gentle, thoughtful | Purple `#6D5596` | Tilt head, inspect, listen, sit, participate |
+| 3 | **Scout** | Dog | Adventurous, observant, dependable | Green `#477A4D` | Lead discovery, point, listen, help a classmate |
+| 4 | **Penny** | Chick | Young, earnest, growing in confidence | Yellow `#E3AD27` | Stand, step, sing, listen, play a small instrument |
+| 5 | **Maisy** | Cow | Warm, confident, encouraging | Blue `#2F6F9F` | Stand, clap, sing, listen, model an action |
+| 6 | **Puddles** | Duck | Expressive, sociable, enthusiastic | Purple `#76508F` | Waddle, gesture, sing, listen, join rhythm play |
+| 7 | **Sam** | Pig | Thoughtful, inventive, cheerful | Red `#A8323A` | Examine, count, build, listen, explain |
+| 8 | **Rusty** | Horse | Calm, reliable, quietly courageous | Orange `#C65F28` | Walk, gallop, listen, help, play an instrument |
 
 </div>
 
-<div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#D9713C]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/hopper-transparent-circle.png" alt="Hopper" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Hopper</figcaption></figure>
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#7B4FA8]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/whiskers-transparent-circle.png" alt="Whiskers" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Whiskers</figcaption></figure>
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#4A7A3A]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/scout-transparent-circle.png" alt="Scout" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Scout</figcaption></figure>
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#C9962E]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/penny-transparent-circle.png" alt="Penny" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Penny</figcaption></figure>
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#1F4E5F]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/maisy-transparent-circle.png" alt="Maisy" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Maisy</figcaption></figure>
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#4FA0C9]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/puddles-transparent-circle.png" alt="Puddles" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Puddles</figcaption></figure>
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#7A9A3D]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/sam-transparent-circle.png" alt="Sam" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Sam</figcaption></figure>
-  <figure className="m-0 text-center"><div className="rounded-xl bg-[#8B5030]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/rusty-transparent-circle.png" alt="Rusty" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Rusty</figcaption></figure>
+<div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <CharacterCard variant="student" name="Hopper" family="Orange" color="#C65F28" portrait="/staff_and_students/hopper-transparent-circle.png" role="Energetic and optimistic" meta="Movement and ready participation" activities="Hop, walk, sit, listen, and imitate." texture="/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png" />
+  <CharacterCard variant="student" name="Whiskers" family="Purple" color="#6D5596" portrait="/staff_and_students/whiskers-transparent-circle.png" role="Curious, gentle, and thoughtful" meta="Questions and imagination" activities="Tilt their head, inspect, listen, sit, and participate." texture="/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png" />
+  <CharacterCard variant="student" name="Scout" family="Green" color="#477A4D" portrait="/staff_and_students/scout-transparent-circle.png" role="Adventurous and dependable" meta="Outdoor discovery and teamwork" activities="Lead discovery, point, listen, and help a classmate." texture="/design-assets/web-material-library-v1/felt/felt-11-scout-tile.png" />
+  <CharacterCard variant="student" name="Penny" family="Yellow" color="#E3AD27" ink="dark" portrait="/staff_and_students/penny-transparent-circle.png" role="Earnest and growing in confidence" meta="Optimism and first attempts" activities="Stand, step, sing, listen, and play a small instrument." texture="/design-assets/web-material-library-v1/felt/felt-12-penny-tile.png" />
+  <CharacterCard variant="student" name="Maisy" family="Blue" color="#2F6F9F" portrait="/staff_and_students/maisy-transparent-circle.png" role="Warm, confident, and encouraging" meta="Patterns and modelling" activities="Stand, clap, sing, listen, and model an action." texture="/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.png" />
+  <CharacterCard variant="student" name="Puddles" family="Purple" color="#76508F" portrait="/staff_and_students/puddles-transparent-circle.png" role="Expressive and sociable" meta="Storytelling and music" activities="Waddle, gesture, sing, listen, and join rhythm play." texture="/design-assets/web-material-library-v1/felt/felt-14-puddles-tile.png" />
+  <CharacterCard variant="student" name="Sam" family="Red" color="#A8323A" portrait="/staff_and_students/sam-transparent-circle.png" role="Thoughtful, inventive, and cheerful" meta="Building and explanation" activities="Examine, count, build, listen, and explain." texture="/design-assets/web-material-library-v1/felt/felt-15-sam-tile.png" />
+  <CharacterCard variant="student" name="Rusty" family="Orange" color="#C65F28" portrait="/staff_and_students/rusty-transparent-circle.png" role="Calm, reliable, and courageous" meta="Rhythm and sequencing" activities="Walk, gallop, listen, help, and play an instrument." texture="/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.png" />
 </div>
 
 </section>

@@ -1,0 +1,14 @@
+.page { min-width: 0; }
+.lightbox { min-height: min(92dvh, 860px); padding: 1rem; color: var(--foreground); background: var(--background); }
+.lightboxClose { position: sticky; z-index: 2; top: 0; justify-self: end; min-height: 44px; }
+.lightboxCard { width: min(1100px, 100%); margin: 0 auto; overflow: hidden; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); box-shadow: 0 18px 42px rgb(0 0 0 / 28%); }
+.lightboxImage { display: block; width: 100%; height: auto; max-height: 70dvh; object-fit: contain; background: var(--muted-surface); }
+.lightboxBar { display: flex; gap: 1rem; align-items: center; justify-content: space-between; padding: 1rem; }
+.lightboxCaption { min-width: 0; }
+.lightboxCaption strong, .lightboxCaption small { display: block; }
+.lightboxCaption strong { font-family: var(--font-farm-display), Georgia, serif; font-size: 1.25rem; }
+.lightboxCaption small { margin-top: .25rem; color: var(--muted-foreground); }
+.lightboxActions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.lightboxActions a { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding-inline: 1rem; border: 1px solid var(--border); border-radius: .55rem; color: var(--primary-foreground); background: var(--primary); font-weight: 900; text-decoration: none; }
+.lightboxActions a:first-child { color: var(--foreground); background: var(--card); }
+@media (max-width: 600px) { .lightbox { padding: .5rem; } .lightboxBar { align-items: stretch; flex-direction: column; } .lightboxActions a { flex: 1 1 9rem; } }

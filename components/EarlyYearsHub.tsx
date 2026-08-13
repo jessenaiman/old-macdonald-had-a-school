@@ -8,6 +8,7 @@ import type { EarlyYearsGradeKey, EarlyYearsTopic } from "../lib/early-years";
 import { DaycareTemplate } from "./grades/daycare/DaycareTemplate";
 import { KindergartenTemplate } from "./grades/kindergarten/KindergartenTemplate";
 import { PreschoolTemplate } from "./grades/pre-school/PreschoolTemplate";
+import styles from "./EarlyYearsHub.module.css";
 
 export type EarlyYearsTier = "list" | "detailed" | "bridge";
 
@@ -35,7 +36,7 @@ export function EarlyYearsHub({
   const GradePageTemplate = grade === "daycare" ? DaycareTemplate : grade === "pre-school" ? PreschoolTemplate : KindergartenTemplate;
 
   return (
-    <div className={`ey-page ey-${grade}`}>
+    <div className={styles.page} data-grade={grade}>
       <GradePageTemplate
         grade={title}
         age={grade === "daycare" ? "Ages 0–2" : grade === "pre-school" ? "Ages 3–4" : "Ages 4–6"}
@@ -63,19 +64,19 @@ export function EarlyYearsHub({
       />
 
       <Sheet open={Boolean(topic.image) && preview} onOpenChange={setPreview}>
-        <SheetContent className="lp-lightbox" side="bottom" showCloseButton={false}>
+        <SheetContent className={styles.lightbox} side="bottom" showCloseButton={false}>
           <SheetTitle className="sr-only">Preview: {topic.title}</SheetTitle>
           <SheetDescription className="sr-only">{topic.focus}</SheetDescription>
           <SheetClose asChild>
-            <Button className="lp-lightbox-close" type="button" variant="ghost" aria-label="Close preview">Close</Button>
+            <Button className={styles.lightboxClose} type="button" variant="ghost" aria-label="Close preview">Close</Button>
           </SheetClose>
-          <div className="lp-lightbox-card" onClick={(event) => event.stopPropagation()}>
-            {topic.image ? <Image className="lp-lightbox-img" src={topic.image} alt={topic.title} width={1200} height={800} /> : null}
-            <div className="lp-lightbox-bar">
-              <div className="lp-lightbox-cap"><strong>{topic.title}</strong><small>{topic.focus}</small></div>
-              <div className="lp-lightbox-actions">
-                {topic.image ? <a className="lp-btn-ghost" href={topic.image} download>Download</a> : null}
-                {topic.image ? <a className="lp-btn" href={topic.image} target="_blank" rel="noreferrer">Open for printing</a> : null}
+          <div className={styles.lightboxCard} onClick={(event) => event.stopPropagation()}>
+            {topic.image ? <Image className={styles.lightboxImage} src={topic.image} alt={topic.title} width={1200} height={800} /> : null}
+            <div className={styles.lightboxBar}>
+              <div className={styles.lightboxCaption}><strong>{topic.title}</strong><small>{topic.focus}</small></div>
+              <div className={styles.lightboxActions}>
+                {topic.image ? <a href={topic.image} download>Download</a> : null}
+                {topic.image ? <a href={topic.image} target="_blank" rel="noreferrer">Open for printing</a> : null}
               </div>
             </div>
           </div>
