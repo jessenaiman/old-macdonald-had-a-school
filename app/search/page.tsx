@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { lessonHref } from "@/lib/grade-routes";
+import Link from "next/link";
 import { globalClassNames as styles } from "@/lib/global-class-names";
 
 interface SearchResult {
@@ -17,6 +19,8 @@ interface SearchResult {
   instructions: string | null;
   sourcePath: string;
   meta: Record<string, string>;
+  url: string | null;
+  href: string | null;
 }
 
 interface CurriculumResult {
@@ -46,6 +50,30 @@ interface LessonResult {
   topic_id: number | null;
   song_count: number;
   resource_count: number;
+}
+
+function slugify(value: string) {
+  return value
+    .toLocaleLowerCase()
+    .replaceAll("&", " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
+function curriculumResultHref(topic: CurriculumResult) {
+  const firstGrade = (topic.grade_key || "").split("|")[0] || "daycare";
+  const slug = slugify(topic.lesson_topic);
+  if (/^daycare$/.test(firstGrade)) return `/grade/daycare/${slug}`;
+  if (/^preschool$/.test(firstGrade) || /^pre[- ]?school$/.test(firstGrade)) return `/grade/pre-school/${slug}`;
+  if (/^kindergarten$/.test(firstGrade)) return `/grade/kindergarten/${slug}`;
+  if (/^grade[- ]?1$/.test(firstGrade) || /^grade-one$/.test(firstGrade) || /^grade1$/.test(firstGrade)) return `/grade/grade-one/${slug}`;
+  if (/^grade[- ]?2$/.test(firstGrade) || /^grade-two$/.test(firstGrade) || /^grade2$/.test(firstGrade)) return `/grade/grade-two/${slug}`;
+  return `/topics/${slug}`;
+}
+
+function lessonResultHref(lesson: LessonResult) {
+  return lessonHref({ slug: lesson.slug, grade: lesson.grade_band || "" });
 }
 
 interface SearchResponse {
@@ -310,14 +338,15 @@ export default function SearchPage() {
                 <ol className={styles.resultList}>
                   {curriculum.map((topic) => {
                     const key = `topic:${topic.id}:${topic.grade_key}`;
+                    const detailHref = curriculumResultHref(topic);
                     return (
                       <li key={key}>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          className={selectedKey === key ? styles.selectedResult : styles.resultButton}
-                          onClick={() => setSelectedKey(key)}
-                          aria-pressed={selectedKey === key}
+                        <Link
+                          href={detailHref}
+                          className={selectedKey === key ? `${styles.selectedResult}` : styles.resultButton}
+                          onClick={() => {
+                            setSelectedKey(key);
+                          }}
                         >
                           <span className={styles.resultType}>Topic</span>
                           <span className={styles.resultBody}>
@@ -326,20 +355,21 @@ export default function SearchPage() {
                             {topic.why_match ? <small>{topic.why_match}</small> : null}
                           </span>
                           <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}</span>
-                        </Button>
+                        </Link>
                       </li>
                     );
                   })}
                   {lessons.map((lesson) => {
                     const key = `lesson:${lesson.id}`;
+                    const detailHref = lessonResultHref(lesson);
                     return (
                       <li key={key}>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          className={selectedKey === key ? styles.selectedResult : styles.resultButton}
-                          onClick={() => setSelectedKey(key)}
-                          aria-pressed={selectedKey === key}
+                        <Link
+                          href={detailHref}
+                          className={selectedKey === key ? `${styles.selectedResult}` : styles.resultButton}
+                          onClick={() => {
+                            setSelectedKey(key);
+                          }}
                         >
                           <span className={styles.resultType}>Lesson draft</span>
                           <span className={styles.resultBody}>
@@ -347,7 +377,7 @@ export default function SearchPage() {
                             <span>{lesson.summary || "No lesson summary is available."}</span>
                           </span>
                           <span className={styles.resultMeta}>{lesson.grade_band}<br />{lesson.subject}</span>
-                        </Button>
+                        </Link>
                       </li>
                     );
                   })}
@@ -382,6 +412,11 @@ export default function SearchPage() {
                           {selectedLesson ? <span>{selectedLesson.duration_minutes} minutes</span> : null}
                         </div>
                       </div>
+                      {selectedTopic ? (
+                        <Link href={curriculumResultHref(selectedTopic)} className={styles.primaryCtaLink}>Open topic</Link>
+                      ) : selectedLesson ? (
+                        <Link href={lessonResultHref(selectedLesson)} className={styles.primaryCtaLink}>Open lesson</Link>
+                      ) : null}
                       {topicFigure ? (
                         <Image className={styles.topicFigure} src={topicFigure.src} alt={topicFigure.alt} width={154} height={154} />
                       ) : null}
@@ -435,26 +470,30 @@ export default function SearchPage() {
                     <TabsContent className={styles.resourceContent} value={activeTab}>
                       <h2 id="resources-title" className={styles.srOnly}>Search-related teaching materials</h2>
                       {activeResources.length > 0 ? (
-                        <div className={styles.resourceGrid}>
-                          {activeResources.slice(0, 6).map((resource) => (
-                            <article key={resource.id} className={styles.resourceCard}>
-                              <p>{resource.kind}</p>
-                              <h3>{readableResourceTitle(resource.title)}</h3>
-                              <span>{plainText(resource.excerpt) || "No preview is available."}</span>
-                              {resource.meta.ageRange || resource.meta.domain ? (
-                                <span>{[readableMetadata(resource.meta.ageRange), readableMetadata(resource.meta.domain)].filter(Boolean).join(" ... ")}</span>
-                              ) : null}
-                              {activeTab === "songs" && resource.lyrics ? (
-                                <details>
-                                  <summary>Preview lyrics</summary>
-                                  <pre>{resource.lyrics}</pre>
-                                </details>
-                              ) : null}
-                              {activeTab === "songs" && resource.meta.spotifyUrl?.startsWith("https://") ? (
-                                <a href={resource.meta.spotifyUrl} target="_blank" rel="noreferrer">Open Spotify source</a>
-                              ) : null}
-                            </article>
-                          ))}
+                    <div className={styles.resourceGrid}>
+                      {activeResources.slice(0, 6).map((resource) => (
+                        <article key={resource.id} className={styles.resourceCard}>
+                          <p>{resource.kind}</p>
+                          <h3>{readableResourceTitle(resource.title)}</h3>
+                          <span>{plainText(resource.excerpt) || "No preview is available."}</span>
+                          {resource.meta.ageRange || resource.meta.domain ? (
+                            <span>{[readableMetadata(resource.meta.ageRange), readableMetadata(resource.meta.domain)].filter(Boolean).join(" ... ")}</span>
+                          ) : null}
+                          {activeTab === "songs" && resource.lyrics ? (
+                            <details>
+                              <summary>Preview lyrics</summary>
+                              <pre>{resource.lyrics}</pre>
+                            </details>
+                          ) : null}
+                          {resource.href ? (
+                            <a href={resource.href} target="_blank" rel="noreferrer">
+                              {activeTab === "songs" ? "Open song page" : "Open source"}
+                            </a>
+                          ) : activeTab === "songs" && resource.meta.spotifyUrl?.startsWith("https://") ? (
+                            <a href={resource.meta.spotifyUrl} target="_blank" rel="noreferrer">Open Spotify source</a>
+                          ) : null}
+                        </article>
+                      ))}
                         </div>
                       ) : (
                         <div className={styles.resourceEmpty}>

@@ -143,6 +143,12 @@ function queryTerms(query: string) {
   return { primary, expanded: [...expanded] };
 }
 
+function normalizeUrl(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
 function includesTerm(text: string, term: string) {
   return new RegExp(`(^|[^a-z0-9])${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`).test(text);
 }
@@ -323,6 +329,7 @@ export async function GET(req: NextRequest) {
       sourcePath: row.source_path,
       url: row.url,
       meta: row.meta ? JSON.parse(row.meta as string) : {},
+      href: row.kind === "song" ? `/songs/${row.id}` : normalizeUrl(row.url),
     }));
 
     return NextResponse.json({
