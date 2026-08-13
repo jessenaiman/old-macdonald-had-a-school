@@ -94,6 +94,8 @@
   a { color: inherit; text-decoration: none; }
 }
 
+.dark { color-scheme: dark; }
+
 body::before { position: fixed; z-index: -1; inset: 0; background: var(--grain-fine) repeat; background-size: 400px; content: ""; opacity: .16; pointer-events: none; mix-blend-mode: multiply; }
 .dark body::before { opacity: .06; }
 
@@ -130,6 +132,9 @@ body::before { position: fixed; z-index: -1; inset: 0; background: var(--grain-f
 .cast-sam { --character-color: var(--cast-sam-color); --character-texture: var(--cast-sam-texture); --character-foreground: var(--cast-sam-foreground); }
 .cast-rusty { --character-color: var(--cast-rusty-color); --character-texture: var(--cast-rusty-texture); --character-foreground: var(--cast-rusty-foreground); }
 .character-surface { color: var(--character-foreground); background-color: var(--character-color); background-image: var(--character-texture); background-repeat: repeat; background-size: 180px; }
+
+/* MDX code examples scroll inside their paper instead of widening the page. */
+pre { max-width: 100%; overflow-x: auto; }
 .grade-surface { color: var(--grade-ink); background-color: var(--grade-color); box-shadow: 0 .25rem 0 var(--grade-edge); }
 
 .char-badge { position: relative; display: inline-flex; flex: 0 0 auto; align-items: flex-end; justify-content: center; overflow: hidden; filter: drop-shadow(0 3px 1px rgb(0 0 0 / 24%)); }

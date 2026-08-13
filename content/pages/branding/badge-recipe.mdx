@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { CharacterPortrait } from "@/components/brand/CharacterPortrait"
 
 <section id="badge-recipe" className="mt-5 rounded-2xl border border-border bg-card p-[clamp(1.25rem,4vw,3rem)]">
 
@@ -17,7 +17,7 @@ A character badge has three independent layers: an authored blank patch, the mat
     <span className="brand-asset fastener-push-pin icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
     <div className="relative grid h-44 w-44 place-items-center">
       <span className="brand-asset patch-old-macdonald-square absolute inset-0 h-full w-full" aria-hidden="true" />
-      <Image className="relative z-10 h-36 w-36 object-contain" src="/staff_and_students/old-macdonald-transparent-circle.png" alt="Old MacDonald layered over his matching brown patch" width={150} height={150} />
+      <CharacterPortrait className="relative z-10 h-36 w-36 object-contain" character="old-macdonald" />
     </div>
     <div><strong className="font-heading text-2xl">Old MacDonald</strong><p className="mb-0 flex items-center justify-center gap-2">Brown <code className="cast-old-macdonald character-surface rounded-md px-2 py-1 font-black">#8B5E34</code> · Kindergarten music</p></div>
   </article>
@@ -25,7 +25,7 @@ A character badge has three independent layers: an authored blank patch, the mat
     <span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" />
     <div className="relative grid h-44 w-44 place-items-center">
       <span className="brand-asset patch-miss-puddles-circle absolute inset-0 h-full w-full" aria-hidden="true" />
-      <Image className="relative z-10 h-36 w-36 object-contain" src="/staff_and_students/miss-puddles-transparent-circle.png" alt="Miss Puddles layered over her matching yellow patch" width={150} height={150} />
+      <CharacterPortrait className="relative z-10 h-36 w-36 object-contain" character="miss-puddles" />
     </div>
     <div><strong className="font-heading text-2xl">Miss Puddles</strong><p className="mb-0 flex items-center justify-center gap-2">Yellow <code className="cast-miss-puddles character-surface rounded-md px-2 py-1 font-black">#E8A227</code> · Daycare</p></div>
   </article>

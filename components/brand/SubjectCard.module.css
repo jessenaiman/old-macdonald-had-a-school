@@ -1,18 +1,18 @@
 .fastener {
   position: absolute;
   z-index: 4;
-  top: -1rem;
+  top: clamp(-1rem, -2vw, -.75rem);
   left: 50%;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: clamp(1.75rem, 4vw, 2.25rem);
+  height: clamp(1.75rem, 4vw, 2.25rem);
   transform: translateX(-50%);
   filter: drop-shadow(0 2px 1px color-mix(in srgb, var(--foreground) 34%, transparent));
   pointer-events: none;
 }
 
 .subjectIcon {
-  width: 7rem;
-  height: 7rem;
+  width: clamp(5.5rem, 18cqi, 7rem);
+  height: clamp(5.5rem, 18cqi, 7rem);
   filter: drop-shadow(0 3px 2px color-mix(in srgb, var(--foreground) 30%, transparent));
 }
 
@@ -21,15 +21,8 @@
 .action { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .25rem; font-size: .75rem; font-weight: 900; }
 .action span { font-size: 1rem; transition: transform 180ms ease; }
 .guide { font-size: .7rem; font-weight: 900; }
-.guidePortrait { width: 2.5rem; height: 2.5rem; margin-left: auto; object-fit: contain; filter: drop-shadow(0 2px 1px color-mix(in srgb, var(--foreground) 28%, transparent)); }
+.guidePortrait { width: clamp(2rem, 7cqi, 2.5rem); height: clamp(2rem, 7cqi, 2.5rem); margin-left: auto; object-fit: contain; filter: drop-shadow(0 2px 1px color-mix(in srgb, var(--foreground) 28%, transparent)); }
 :global([data-card-variant='subject']:hover) .action span,
 :global([data-card-variant='subject']:focus-within) .action span { transform: translateX(.2rem); }
-
-@media (max-width: 680px) {
-  .fastener { top: -.75rem; left: 1rem; width: 1.75rem; height: 1.75rem; transform: none; }
-  .subjectIcon { width: 5.5rem; height: 5.5rem; }
-  .highlights { font-size: .72rem; }
-  .guidePortrait { width: 2rem; height: 2rem; }
-}
 
 @media (prefers-reduced-motion: reduce) { .action span { transition: none; } }

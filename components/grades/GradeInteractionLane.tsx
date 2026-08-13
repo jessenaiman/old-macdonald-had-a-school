@@ -693,7 +693,7 @@ export function GradeInteractionLane({
             <strong>{config.reminder}</strong>
           </div>
         </aside>
-        <main className={styles.main}>
+        <div className={styles.main}>
           <div className={styles.panelFrame}>
             <TabsContent value={section} asChild>
               <section
@@ -707,7 +707,7 @@ export function GradeInteractionLane({
               </section>
             </TabsContent>
           </div>
-        </main>
+        </div>
       </div>
     </Tabs>
   );

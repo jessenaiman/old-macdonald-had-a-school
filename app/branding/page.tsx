@@ -22,11 +22,9 @@ export const metadata = {
 
 export default function BrandingPage() {
   return (
-    <main className="w-full bg-background px-2 py-2 text-foreground sm:px-6 sm:py-6 xl:px-20">
-      <div className="mx-auto max-w-[1280px]">
+    <div className="w-full bg-background p-[clamp(.5rem,2vw,2rem)] text-foreground">
+      <div className="w-full">
         <Overview />
-        <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_18rem]">
-          <div className="min-w-0">
             <PageRecipe />
             <Assets />
             <LogoFamily />
@@ -41,12 +39,8 @@ export default function BrandingPage() {
             <Grades />
             <Governance />
             <Sources />
-          </div>
-          <aside className="order-first min-w-0 xl:order-none xl:sticky xl:top-4" aria-label="Live branding reference">
-            <Palette />
-          </aside>
-        </div>
+        <Palette />
       </div>
-    </main>
+    </div>
   );
 }

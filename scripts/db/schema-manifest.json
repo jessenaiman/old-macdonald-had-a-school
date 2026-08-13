@@ -22,7 +22,8 @@
       "src/db/migrations-sqlite/0016_add_animal_taxonomy_inheritance.sql",
       "src/db/migrations-sqlite/0017_repair_material_links_and_dedupe_curriculum_links.sql",
       "src/db/migrations-sqlite/0018_add_planning_windows.sql",
-      "src/db/migrations-sqlite/0019_add_resource_page_evidence.sql"
+      "src/db/migrations-sqlite/0019_add_resource_page_evidence.sql",
+      "src/db/migrations-sqlite/0020_add_teacher_facing_topic_fields.sql"
     ],
     "drizzle": [
       {
@@ -87,6 +88,10 @@
       {
         "applied_at": "2026-08-13T14:52:09.199Z",
         "migration_id": "20260813_004_add_resource_page_evidence"
+      },
+      {
+        "applied_at": "2026-08-13T16:15:18.592Z",
+        "migration_id": "20260813_005_add_teacher_facing_topic_fields"
       },
       {
         "applied_at": "2026-08-13 05:54:57",
@@ -427,6 +432,34 @@
       {
         "applied_at": "2026-08-13 03:23:34",
         "migration_id": "exact-links-batch_02"
+      },
+      {
+        "applied_at": "2026-08-13 16:07:58",
+        "migration_id": "folk-intake-enrich-2026-08-13-a1"
+      },
+      {
+        "applied_at": "2026-08-13 16:07:58",
+        "migration_id": "folk-intake-enrich-2026-08-13-a2"
+      },
+      {
+        "applied_at": "2026-08-13 16:07:59",
+        "migration_id": "folk-intake-enrich-2026-08-13-a3"
+      },
+      {
+        "applied_at": "2026-08-13 15:42:33",
+        "migration_id": "folk-intake-visual-2026-08-13-a"
+      },
+      {
+        "applied_at": "2026-08-13 16:07:57",
+        "migration_id": "folk-intake-visual-2026-08-13-b1"
+      },
+      {
+        "applied_at": "2026-08-13 16:07:57",
+        "migration_id": "folk-intake-visual-2026-08-13-b2"
+      },
+      {
+        "applied_at": "2026-08-13 16:07:57",
+        "migration_id": "folk-intake-visual-2026-08-13-b3"
       },
       {
         "applied_at": "2026-08-13 14:05:42",
@@ -971,7 +1004,7 @@
     ]
   },
   "object_counts": {
-    "index": 14,
+    "index": 15,
     "table": 52,
     "trigger": 7,
     "view": 0
@@ -1059,6 +1092,12 @@
       "name": "song_sources_song_idx",
       "sql": "CREATE INDEX song_sources_song_idx ON song_sources(song_id)",
       "tbl_name": "song_sources",
+      "type": "index"
+    },
+    {
+      "name": "topics_teacher_title_idx",
+      "sql": "CREATE INDEX topics_teacher_title_idx\n  ON topics(teacher_title)",
+      "tbl_name": "topics",
       "type": "index"
     },
     {
@@ -1363,7 +1402,7 @@
     },
     {
       "name": "topics",
-      "sql": "CREATE TABLE \"topics\" (\n    id               INTEGER PRIMARY KEY AUTOINCREMENT,\n    subject_id       INTEGER NOT NULL,\n    category         TEXT,\n    topic     TEXT NOT NULL,\n    skill  TEXT,\n    sequence          REAL,\n    taught_status           TEXT, merged_into INTEGER REFERENCES \"topics\"(id), circle_time TEXT,\n    FOREIGN KEY (subject_id) REFERENCES \"subjects\" (id) ON DELETE RESTRICT\n)",
+      "sql": "CREATE TABLE \"topics\" (\n    id               INTEGER PRIMARY KEY AUTOINCREMENT,\n    subject_id       INTEGER NOT NULL,\n    category         TEXT,\n    topic     TEXT NOT NULL,\n    skill  TEXT,\n    sequence          REAL,\n    taught_status           TEXT, merged_into INTEGER REFERENCES \"topics\"(id), circle_time TEXT, teacher_title TEXT, teacher_summary TEXT, teacher_title_state TEXT NOT NULL DEFAULT 'pending'\n  CHECK (teacher_title_state IN ('pending', 'editorial', 'education-reviewed')),\n    FOREIGN KEY (subject_id) REFERENCES \"subjects\" (id) ON DELETE RESTRICT\n)",
       "tbl_name": "topics",
       "type": "table"
     },
@@ -1416,7 +1455,7 @@
       "type": "trigger"
     }
   ],
-  "schema_fingerprint": "56943c700cd114b20b8371040a96c04727dc8d806916e63bcb4a3a86d225c74b",
+  "schema_fingerprint": "bb3400196f69e6162a229fafc63bc0c02b47d7b242c378f56222541d35d91afe",
   "tables": {
     "__drizzle_migrations": {
       "columns": [
@@ -5444,6 +5483,30 @@
           "notnull": 0,
           "pk": 0,
           "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "teacher_title",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": null,
+          "name": "teacher_summary",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 11,
+          "dflt_value": "'pending'",
+          "name": "teacher_title_state",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
         }
       ],
       "foreign_keys": [
@@ -5468,7 +5531,15 @@
           "to": "id"
         }
       ],
-      "indexes": []
+      "indexes": [
+        {
+          "name": "topics_teacher_title_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        }
+      ]
     },
     "weekly_pacing": {
       "columns": [
@@ -5536,5 +5607,5 @@
       ]
     }
   },
-  "user_version": 19
+  "user_version": 20
 }

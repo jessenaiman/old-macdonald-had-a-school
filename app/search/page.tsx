@@ -150,6 +150,41 @@ function isPrintout(result: SearchResult) {
   return /printable|worksheet|printout|\.pdf/.test(haystack);
 }
 
+function isSong(result: SearchResult) {
+  return result.kind === "song" || /spotify/.test(`${result.meta.contentKind ?? ""} ${result.href ?? ""}`.toLowerCase());
+}
+
+function topicMaterialResults(topic: CurriculumResult): SearchResult[] {
+  const materials = (topic as CurriculumResult & {
+    linked_materials?: Array<{
+      id: string;
+      kind: string;
+      title: string;
+      url: string | null;
+      preview: string | null;
+      teacher_rationale: string;
+    }>;
+  }).linked_materials ?? [];
+  return materials.map((material) => ({
+    id: `topic-${topic.id}-${material.id}`,
+    kind: material.kind,
+    title: material.title,
+    lyrics: material.kind === "song" ? material.preview : null,
+    excerpt: material.teacher_rationale,
+    sourcePath: material.url ?? "",
+    href: material.url,
+    meta: { contentKind: material.kind },
+  } as unknown as SearchResult));
+}
+
+function teacherFacingTopicTitle(topic: CurriculumResult) {
+  return (topic as CurriculumResult & { teacher_title?: string | null }).teacher_title || topic.lesson_topic;
+}
+
+function teacherFacingTopicSummary(topic: CurriculumResult) {
+  return (topic as CurriculumResult & { teacher_summary?: string | null }).teacher_summary || topic.skill_statement;
+}
+
 export default function SearchPage() {
   const initialSearchApplied = useRef(false);
   const [query, setQuery] = useState("");
@@ -244,12 +279,16 @@ export default function SearchPage() {
     (topic) => selectedKey === `topic:${topic.id}:${topic.grade_key}`,
   );
   const selectedLesson = lessons.find((lesson) => selectedKey === `lesson:${lesson.id}`);
-  const selectedTitle = selectedTopic?.lesson_topic ?? selectedLesson?.title ?? "";
+  const selectedTitle = selectedTopic ? teacherFacingTopicTitle(selectedTopic) : selectedLesson?.title ?? "";
   const topicFigure = topicGuide(selectedTopic, selectedLesson);
 
-  const songs = useMemo(() => results.filter((result) => result.kind === "song"), [results]);
-  const videos = useMemo(() => results.filter(isVideo), [results]);
-  const printouts = useMemo(() => results.filter(isPrintout), [results]);
+  const materialPool = useMemo(
+    () => selectedTopic ? topicMaterialResults(selectedTopic) : results,
+    [results, selectedTopic],
+  );
+  const songs = useMemo(() => materialPool.filter(isSong), [materialPool]);
+  const videos = useMemo(() => materialPool.filter((result) => isVideo(result) || result.meta.contentKind === "activity"), [materialPool]);
+  const printouts = useMemo(() => materialPool.filter(isPrintout), [materialPool]);
   const totalCurriculum = curriculum.length + lessons.length;
 
   const activeResources = activeTab === "video" ? videos : activeTab === "printouts" ? printouts : songs;
@@ -350,8 +389,8 @@ export default function SearchPage() {
                         >
                           <span className={styles.resultType}>Topic</span>
                           <span className={styles.resultBody}>
-                            <strong>{topic.lesson_topic}</strong>
-                            <span>{topic.skill_statement || "No topic summary has been reviewed yet."}</span>
+                            <strong>{teacherFacingTopicTitle(topic)}</strong>
+                            <span>{teacherFacingTopicSummary(topic) || "No topic summary has been reviewed yet."}</span>
                             {topic.why_match ? <small>{topic.why_match}</small> : null}
                           </span>
                           <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}{topic.pacing ? <><br />{topic.pacing}</> : null}</span>
@@ -425,20 +464,25 @@ export default function SearchPage() {
                     <div className={styles.factGrid}>
                       <section>
                         <h3>{selectedTopic ? "Topic overview" : "Lesson summary"}</h3>
-                        <p>{selectedTopic?.skill_statement || selectedLesson?.summary || "No reviewed overview is available for this record."}</p>
+                        <p>{selectedTopic ? teacherFacingTopicSummary(selectedTopic) || "No reviewed overview is available for this record." : selectedLesson?.summary || "No reviewed overview is available for this record."}</p>
                       </section>
                       <section>
                         <h3>{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
                         <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}${selectedTopic.pacing ? ` ... ${selectedTopic.pacing}` : ""}` : selectedLesson?.purpose || "No purpose is available."}</p>
                       </section>
                       <section>
-                        <h3>Related standards</h3>
-                        <p>{selectedTopic?.standards || "No standard is attached to this result."}</p>
+                        <h3>Curriculum reference</h3>
+                        {selectedTopic ? (
+                          <details>
+                            <summary>Read the official curriculum wording</summary>
+                            <p>{selectedTopic.lesson_topic}{selectedTopic.standards ? ` ${selectedTopic.standards}` : ""}</p>
+                          </details>
+                        ) : <p>No standard is attached to this result.</p>}
                       </section>
-                      <section>
-                        <h3>Search-related materials</h3>
+                    <section>
+                        <h3>Linked lesson materials</h3>
                         <ul>
-                          <li>{videos.length} video {videos.length === 1 ? "match" : "matches"}</li>
+                          <li>{videos.length} video or activity {videos.length === 1 ? "link" : "links"}</li>
                           <li>{songs.length} song or rhyme {songs.length === 1 ? "match" : "matches"}</li>
                           <li>{printouts.length} printable {printouts.length === 1 ? "match" : "matches"}</li>
                         </ul>
@@ -463,7 +507,7 @@ export default function SearchPage() {
                           className={activeTab === tab ? styles.activeTab : styles.tab}
                           value={tab}
                         >
-                          {tab === "songs" ? "Songs & Spotify" : tab[0].toUpperCase() + tab.slice(1)}
+                          {tab === "songs" ? "Songs & Spotify" : tab === "video" ? "Videos & activities" : "Printouts"}
                         </TabsTrigger>
                       ))}
                     </TabsList>
@@ -497,8 +541,8 @@ export default function SearchPage() {
                         </div>
                       ) : (
                         <div className={styles.resourceEmpty}>
-                          <strong>No {activeTab === "songs" ? "song or Spotify" : activeTab} preview is attached.</strong>
-                          <span>The database record is preserved, but this material type has not been linked or reviewed yet.</span>
+                          <strong>No {activeTab === "songs" ? "song or Spotify" : activeTab === "video" ? "video or activity" : activeTab} link is attached.</strong>
+                          <span>This lesson currently has no reviewed link for this material type.</span>
                         </div>
                       )}
                     </TabsContent>

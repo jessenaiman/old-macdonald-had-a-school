@@ -66,6 +66,8 @@ const RELATED_TERMS: Record<string, string[]> = {
 type TopicRow = {
   id: number;
   topic: string;
+  teacher_title: string | null;
+  teacher_summary: string | null;
   category: string | null;
   skill: string | null;
   subject: string;
@@ -74,6 +76,20 @@ type TopicRow = {
   standards: string | null;
   tags: string | null;
   pacing: string | null;
+};
+
+type TopicMaterialRow = {
+  topic_id: number;
+  material_kind: string;
+  material_id: number;
+  title: string;
+  url: string | null;
+  preview: string | null;
+  resource_type: string | null;
+  role: string | null;
+  use_in_phase: string | null;
+  routine_slot: string | null;
+  teacher_rationale: string;
 };
 
 type PlanningWindowMatch = {
@@ -267,6 +283,8 @@ function hasKeywordAnchor(row: Record<string, unknown>, primary: string[]) {
 
 function scoreTopic(row: TopicRow, primary: string[], expanded: string[]) {
   const title = row.topic.toLowerCase();
+  const teacherTitle = (row.teacher_title ?? "").toLowerCase();
+  const teacherSummary = (row.teacher_summary ?? "").toLowerCase();
   const category = (row.category ?? "").toLowerCase();
   const skill = (row.skill ?? "").toLowerCase();
   const standards = (row.standards ?? "").toLowerCase();
@@ -277,6 +295,8 @@ function scoreTopic(row: TopicRow, primary: string[], expanded: string[]) {
   for (const term of expanded) {
     const primaryWeight = primary.includes(term) ? 1 : 0.45;
     if (includesTerm(title, term)) { score += 10 * primaryWeight; matched.add(term); }
+    if (includesTerm(teacherTitle, term)) { score += 12 * primaryWeight; matched.add(term); }
+    if (includesTerm(teacherSummary, term)) { score += 7 * primaryWeight; matched.add(term); }
     if (includesTerm(category, term)) { score += 6 * primaryWeight; matched.add(term); }
     if (includesTerm(skill, term)) { score += 5 * primaryWeight; matched.add(term); }
     if (includesTerm(tags, term)) { score += 3 * primaryWeight; matched.add(term); }
@@ -287,6 +307,60 @@ function scoreTopic(row: TopicRow, primary: string[], expanded: string[]) {
   score += directMatches * directMatches * 4;
   if (normalizeToken(title) === primary.join(" ")) score += 30;
   return { score, matched: [...matched] };
+}
+
+function linkedMaterialsForTopics(db: Database.Database, topicIds: number[]) {
+  const grouped = new Map<number, Array<{
+    id: string;
+    kind: string;
+    title: string;
+    url: string | null;
+    preview: string | null;
+    role: string | null;
+    use_in_phase: string | null;
+    routine_slot: string | null;
+    teacher_rationale: string;
+  }>>();
+  if (topicIds.length === 0) return grouped;
+
+  const placeholders = topicIds.map(() => "?").join(", ");
+  const rows = db.prepare(`
+    SELECT
+      tm.topic_id,
+      tm.material_kind,
+      tm.material_id,
+      COALESCE(s.title, r.name) AS title,
+      COALESCE(s.url, r.url) AS url,
+      COALESCE(s.lyrics, s.actions, r.description) AS preview,
+      r.type AS resource_type,
+      tm.role,
+      tm.use_in_phase,
+      tm.routine_slot,
+      tm.teacher_rationale
+    FROM topic_materials tm
+    LEFT JOIN songs s ON tm.material_kind = 'song' AND s.id = tm.material_id
+    LEFT JOIN resources r ON tm.material_kind = 'resource' AND r.id = tm.material_id
+    WHERE tm.topic_id IN (${placeholders})
+      AND trim(COALESCE(tm.teacher_rationale, '')) <> ''
+    ORDER BY tm.topic_id, CASE tm.role WHEN 'focus' THEN 0 ELSE 1 END, tm.id
+  `).all(...topicIds) as TopicMaterialRow[];
+
+  for (const row of rows) {
+    const materials = grouped.get(row.topic_id) ?? [];
+    materials.push({
+      id: `${row.material_kind}:${row.material_id}`,
+      kind: row.material_kind === 'resource' ? row.resource_type ?? 'resource' : 'song',
+      title: row.title,
+      url: row.url,
+      preview: row.preview,
+      role: row.role,
+      use_in_phase: row.use_in_phase,
+      routine_slot: row.routine_slot,
+      teacher_rationale: row.teacher_rationale,
+    });
+    grouped.set(row.topic_id, materials);
+  }
+  return grouped;
 }
 
 function makeFtsQuery(terms: string[]) {
@@ -334,7 +408,7 @@ export async function GET(req: NextRequest) {
       : "";
     const topicRows = db.prepare(`
       SELECT
-        t.id, t.topic, t.category, t.skill,
+        t.id, t.topic, t.teacher_title, t.teacher_summary, t.category, t.skill,
         s.label AS subject,
         coalesce((SELECT group_concat(g.key, '|') FROM topic_grades tg JOIN grades g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grade_keys,
         coalesce((SELECT group_concat(g.label, ', ') FROM topic_grades tg JOIN grades g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grades,
@@ -346,6 +420,7 @@ export async function GET(req: NextRequest) {
       WHERE t.merged_into IS NULL ${pacingFilter}
     `).all(...planningWindowIds, ...planningWindowIds) as TopicRow[];
 
+    const linkedMaterialsByTopic = linkedMaterialsForTopics(db, topicRows.map((row) => row.id));
     const curriculumResults = topicRows
       .filter((row) => !resolvedGrade || row.grade_keys.split("|").includes(resolvedGrade))
       .map((row) => ({ row, match: scoreTopic(row, primary, expanded) }))
@@ -358,11 +433,14 @@ export async function GET(req: NextRequest) {
         grade: row.grades || "Grade placement not recorded",
         subject: row.subject,
         lesson_topic: row.topic,
+        teacher_title: row.teacher_title,
+        teacher_summary: row.teacher_summary,
         skill_statement: row.skill,
         standards: row.standards,
         tags: row.tags,
         pacing: row.pacing,
         planning_windows: planningMatches.map((item) => item.label),
+        linked_materials: linkedMaterialsByTopic.get(row.id) ?? [],
         matched_terms: match.matched.slice(0, 6),
         why_match: [
           planningMatches.length ? `Scheduled for ${planningMatches.map((item) => item.label).join(", ")}${row.pacing ? ` (${row.pacing})` : ""}.` : "",

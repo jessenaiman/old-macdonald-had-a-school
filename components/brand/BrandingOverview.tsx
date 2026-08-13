@@ -1,99 +1,59 @@
-import Image from "next/image"
-
 import { Button } from "@/components/ui/button"
+import { CharacterPortrait } from "@/components/brand/CharacterPortrait"
+import type { CastKey } from "@/lib/cast"
 
 const guideSections = [
-  ["Page recipe", "#page-recipe"],
-  ["Materials", "#assets"],
-  ["Icons", "#icons"],
-  ["Cast", "#cast"],
-  ["Subjects", "#subject-cards"],
-  ["Typography", "#typography"],
-  ["Controls", "#controls"],
-  ["Grades", "#grades"],
-  ["Palette", "#palette"],
+  ["Page recipe", "#page-recipe"], ["Materials", "#assets"], ["Icons", "#icons"],
+  ["Cast", "#cast"], ["Subjects", "#subject-cards"], ["Typography", "#typography"],
+  ["Controls", "#controls"], ["Grades", "#grades"], ["Palette", "#palette"],
 ] as const
 
-const cast = [
-  ["Old MacDonald", "/staff_and_students/old-macdonald-transparent-circle.png"],
-  ["Miss Puddles", "/staff_and_students/miss-puddles-transparent-circle.png"],
-  ["Mr Rusty", "/staff_and_students/mr-rusty-transparent-circle.png"],
-  ["Miss Hayley", "/staff_and_students/miss-hayley-transparent-circle.png"],
+const cast: readonly CastKey[] = ["old-macdonald", "miss-puddles", "mr-rusty", "miss-hayley"]
+
+const rules = [
+  ["Palette", "theme.css is the only colour owner. Components consume semantic tokens; printed HEX values sit on their live semantic surface.", "fastener-push-pin"],
+  ["Assets", "brand-assets.css maps approved paths. Components request named classes or semantic character keys—never URLs.", "fastener-paperclip"],
+  ["Layout", "Prefer intrinsic flex/grid sizing and standard Tailwind utilities. A page must not declare a private breakpoint system.", "fastener-masking-tape"],
+  ["Identity", "Use character=\"miss-puddles\", data-grade, or a semantic subject key. Never pass colour, portrait, texture, or ink props.", "fastener-binder-clip"],
+  ["Materials", "Paper carries readable information. Fasteners cross both attached edges. Character colour remains local to character identity.", "fastener-gingham-tape"],
+  ["Verification", "Check light and dark at 1900, 1440, 768, 390, and 320px. Reject overflow, clipping, unused container space, unreadable text, detached fasteners, or extra page headings.", "fastener-brass-rivet"],
+] as const
+
+const decisions = [
+  ["Material, board, or fastener", "#assets", "Materials and attachment examples", "public/BRAND_ASSET_RECIPES.md"],
+  ["Icon or curriculum signal", "#icons", "Icon catalogue and size roles", "public/BRAND_ASSET_RECIPES.md"],
+  ["Character identity or teaching role", "#cast", "Canonical cast examples", "content/pages/branding/cast.mdx"],
+  ["Typography or palette role", "#typography", "Typography in context", "public/branding/PALETTE_AND_TYPOGRAPHY.md"],
+  ["Component behavior or responsive pattern", "#controls", "Shared controls and page recipe", "public/branding/DESIGN_SYSTEM.md"],
+  ["Approval, exclusion, or ambiguity", "#governance", "Production boundary", "docs/ASSET_LIBRARY_GOVERNANCE.md"],
 ] as const
 
 export function BrandingOverview() {
-  return (
-    <>
-      <header className="grid min-h-[32rem] overflow-hidden rounded-2xl border border-border bg-site-chrome text-site-chrome-foreground shadow-xl lg:grid-cols-[1.15fr_.85fr]">
-        <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-16">
-          <p className="mb-3 font-body text-xs font-black uppercase tracking-widest text-site-chrome-accent">
-            Working brand reference
-          </p>
-          <h1 className="m-0 max-w-3xl text-balance font-heading text-5xl leading-[.88] text-site-chrome-foreground sm:text-7xl lg:text-8xl">
-            The whole school <em className="block font-hand text-brand-pink">in character.</em>
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-site-chrome-foreground">
-            Start with readable structure. Add approved materials where they behave like real objects. Keep each character’s assigned colour local and unmistakable.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button asChild><a href="#page-recipe">See the complete recipe</a></Button>
-            <Button asChild variant="outline"><a href="#assets">Browse approved pieces</a></Button>
-          </div>
-        </div>
-
-        <div className="material-surface material-woven-fabric grid min-h-80 content-end overflow-hidden border-t border-border px-5 pt-10 lg:min-h-full lg:border-t-0 lg:border-l">
-          <div className="material-surface material-felt relative mx-auto mb-10 w-full max-w-sm rounded-xl p-7 text-center text-site-chrome-foreground shadow-xl">
-            <span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" />
-            <strong className="font-heading text-3xl leading-none">Structure first.</strong>
-            <small className="mt-2 block font-body font-black uppercase tracking-wider">Then layer the real pieces.</small>
-          </div>
-          <div className="flex items-end justify-center">
-            {cast.map(([name, src], index) => (
-              <Image
-                key={name}
-                className={index === 0 ? "h-auto w-24 sm:w-32" : "-ml-8 h-auto w-24 sm:-ml-10 sm:w-32"}
-                src={src}
-                alt={name}
-                width={150}
-                height={150}
-              />
-            ))}
-          </div>
-        </div>
-      </header>
-
-      <nav className="material-surface material-cardboard-paper my-5 grid grid-cols-2 gap-2 rounded-xl border border-border p-2 shadow-md sm:grid-cols-3 xl:grid-cols-9" aria-label="Brand guide sections">
-        {guideSections.map(([label, href]) => (
-          <a className="grid min-h-14 place-items-center rounded-lg border border-border bg-card px-3 text-center text-sm font-black text-card-foreground no-underline transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" href={href} key={href}>
-            {label}
-          </a>
-        ))}
-      </nav>
-    </>
-  )
+  return <>
+    <header className="flex min-h-[32rem] flex-wrap overflow-hidden rounded-2xl border border-border bg-site-chrome text-site-chrome-foreground shadow-xl">
+      <div className="flex min-w-[min(100%,32rem)] flex-[1.15_1_38rem] flex-col justify-center p-[clamp(1.5rem,4vw,4rem)]">
+        <p className="mb-3 font-body text-xs font-black uppercase tracking-widest text-site-chrome-accent">Working brand reference</p>
+        <h1 className="m-0 max-w-3xl text-balance font-heading text-[clamp(3rem,7vw,6rem)] leading-[.88] text-site-chrome-foreground">The whole school <em className="block font-hand text-brand-pink">in character.</em></h1>
+        <p className="mt-6 max-w-2xl text-base leading-7 text-site-chrome-foreground">Start with readable structure. Add approved materials where they behave like real objects. Keep each character’s assigned colour local and unmistakable.</p>
+        <div className="mt-7 flex flex-wrap gap-3"><Button asChild><a href="#page-recipe">See the complete recipe</a></Button><Button asChild variant="outline"><a href="#assets">Browse approved pieces</a></Button></div>
+      </div>
+      <div className="material-surface material-woven-fabric grid min-h-80 min-w-[min(100%,24rem)] flex-[.85_1_30rem] content-end overflow-hidden border border-border px-5 pt-10">
+        <div className="material-surface material-felt relative mx-auto mb-10 w-full max-w-sm rounded-xl p-7 text-center text-site-chrome-foreground shadow-xl"><span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" /><strong className="font-heading text-3xl leading-none">Structure first.</strong><small className="mt-2 block font-body font-black uppercase tracking-wider">Then layer the real pieces.</small></div>
+        <div className="flex items-end justify-center">{cast.map((character, index) => <CharacterPortrait key={character} character={character} className={index === 0 ? "h-auto w-[clamp(6rem,12vw,8rem)]" : "-ml-8 h-auto w-[clamp(6rem,12vw,8rem)]"} />)}</div>
+      </div>
+    </header>
+    <nav className="material-surface material-cardboard-paper my-5 rounded-xl border border-border p-3 shadow-md" aria-label="Brand guide contents">
+      <strong className="mb-2 block font-hand text-xl">Brand guide contents</strong>
+      <div className="flex flex-wrap gap-2">{guideSections.map(([label, href]) => <a className="min-h-11 flex-[1_1_9rem] rounded-lg border border-border bg-primary px-4 py-3 text-center text-sm font-black text-primary-foreground no-underline shadow-[0_3px_0_var(--border)] transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" href={href} key={href}>{label}</a>)}</div>
+    </nav>
+  </>
 }
 
 export function BrandingLookup() {
-  return (
-    <section id="fast-lookup" className="material-surface material-cardboard-paper mt-5 rounded-2xl border border-border p-4 shadow-md sm:p-8">
-      <div className="max-w-3xl">
-        <p className="mb-2 text-xs font-black uppercase tracking-widest text-primary">Start here</p>
-        <h2 className="m-0 font-heading text-3xl sm:text-5xl">Fast lookup by decision</h2>
-        <p className="mt-2 mb-0 leading-7">Use the visual example first, then open the named source for the exact class, path, fact, or status. This page is the visual index; the small source files hold the implementation contract.</p>
-      </div>
-      <div className="mt-5 overflow-x-auto rounded-xl border border-border bg-card">
-        <table className="w-full min-w-[44rem] border-collapse text-left text-sm">
-          <thead className="bg-muted text-xs uppercase tracking-wider"><tr><th className="p-3">If you need to decide</th><th className="p-3">See on this page</th><th className="p-3">Then open</th></tr></thead>
-          <tbody>
-            <tr className="border-t border-border"><th scope="row" className="p-3 font-bold">Material, board, or fastener</th><td className="p-3"><a className="font-bold underline" href="#assets">Materials and attachment examples</a></td><td className="p-3"><code>public/BRAND_ASSET_RECIPES.md</code></td></tr>
-            <tr className="border-t border-border"><th scope="row" className="p-3 font-bold">Icon or curriculum signal</th><td className="p-3"><a className="font-bold underline" href="#icons">Icon catalogue and size roles</a></td><td className="p-3"><code>public/BRAND_ASSET_RECIPES.md</code></td></tr>
-            <tr className="border-t border-border"><th scope="row" className="p-3 font-bold">Character identity or teaching role</th><td className="p-3"><a className="font-bold underline" href="#cast">Canonical cast examples</a></td><td className="p-3"><code>content/pages/branding/cast.mdx</code></td></tr>
-            <tr className="border-t border-border"><th scope="row" className="p-3 font-bold">Typography or palette role</th><td className="p-3"><a className="font-bold underline" href="#typography">Typography in context</a></td><td className="p-3"><code>public/branding/PALETTE_AND_TYPOGRAPHY.md</code></td></tr>
-            <tr className="border-t border-border"><th scope="row" className="p-3 font-bold">Component behavior or responsive pattern</th><td className="p-3"><a className="font-bold underline" href="#controls">Shared controls</a> or <a className="font-bold underline" href="#page-recipe">Page recipe</a></td><td className="p-3"><code>public/branding/DESIGN_SYSTEM.md</code></td></tr>
-            <tr className="border-t border-border"><th scope="row" className="p-3 font-bold">Approval, exclusion, or ambiguity</th><td className="p-3"><a className="font-bold underline" href="#governance">Production boundary</a></td><td className="p-3"><code>docs/ASSET_LIBRARY_GOVERNANCE.md</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  )
+  return <section id="fast-lookup" className="material-surface material-cardboard-paper mt-5 rounded-2xl border border-border p-[clamp(1rem,3vw,2rem)] shadow-md">
+    <div className="max-w-3xl"><p className="mb-2 text-xs font-black uppercase tracking-widest text-primary">Production contract</p><h2 className="m-0 font-heading text-[clamp(1.875rem,4vw,3rem)]">Rules every page must obey</h2><p className="mb-0 mt-2 leading-7">Read this before copying a visual example. Pages compose semantic components; they do not invent their own palette, asset paths, identity data, or breakpoint system.</p></div>
+    <div className="mt-5 flex flex-wrap gap-4">{rules.map(([title, copy, fastener]) => <article className="material-surface material-cardboard-paper relative min-w-[min(100%,16rem)] flex-[1_1_18rem] border border-border p-5 pt-7 text-foreground shadow-md" key={title}><span className={`brand-asset ${fastener} icon-small absolute -top-5 left-1/2 -translate-x-1/2`} aria-hidden="true" /><strong className="font-heading text-xl">{title}</strong><p className="mb-0 mt-2 text-base leading-7">{copy}</p></article>)}</div>
+    <h3 className="mt-8 font-heading text-2xl">Open the exact source only when needed</h3>
+    <div className="mt-4 flex flex-wrap gap-3">{decisions.map(([decision, href, example, source]) => <article className="min-w-[min(100%,20rem)] flex-[1_1_25rem] rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm" key={decision}><span className="text-xs font-black uppercase tracking-wider text-muted-foreground">If you need to decide</span><strong className="mt-1 block font-heading text-xl">{decision}</strong><a className="mt-3 inline-block font-bold text-primary underline underline-offset-4" href={href}>{example}</a><code className="mt-3 block break-all rounded bg-muted p-2 text-xs">{source}</code></article>)}</div>
+  </section>
 }

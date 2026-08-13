@@ -5,7 +5,7 @@
 .lessonSheet {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(15rem, .75fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
   gap: clamp(1.25rem, 3vw, 2.25rem);
   padding: clamp(2rem, 4vw, 3.5rem);
   border: 1px solid var(--border);
@@ -32,13 +32,10 @@
 
 .teacherNote {
   display: grid;
-  grid-template-columns: minmax(11rem, .42fr) minmax(0, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 1rem;
-  color: var(--cast-mr-maisy-foreground);
-  background-color: var(--cast-mr-maisy-color);
-  background-image: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png');
   background-size: 190px;
   box-shadow: 0 .4rem 0 color-mix(in srgb, var(--cast-mr-maisy-color) 60%, var(--foreground)), 0 1rem 1.5rem color-mix(in srgb, var(--foreground) 20%, transparent);
 }
@@ -50,14 +47,13 @@
 .teacherCopy blockquote { max-width: 38rem; margin: 0; font: 700 clamp(2rem, 4vw, 3.5rem)/1 var(--font-farm-hand), cursive; }
 .teacherCopy small { max-width: 42rem; font-weight: 700; line-height: 1.5; }
 .teacherActions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .5rem; }
-.teacherActions button { border-color: color-mix(in srgb, currentColor 72%, transparent); }
 
 .planningBoard {
   position: relative;
   padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem);
   border: .45rem solid var(--border);
   border-radius: 1.25rem;
-  background: var(--brand-cork-color) url('/design-assets/cork-board-kit-v2/seamless-cork-tile.png') repeat;
+  background: var(--brand-cork-color) var(--asset-cork-board) repeat;
   background-size: 512px;
   box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 28%, transparent), 0 .5rem 0 color-mix(in srgb, var(--foreground) 30%, transparent);
 }
@@ -65,7 +61,7 @@
 .planningPaper { display: grid; gap: 1.25rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--border); border-radius: .8rem; color: var(--card-foreground); background-color: var(--card); background-image: var(--home-paper-texture); background-repeat: repeat; background-size: 280px; box-shadow: .3rem .4rem 0 color-mix(in srgb, var(--foreground) 25%, transparent); }
 .planningHeader { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; justify-content: space-between; }
 .planningHeader h3 { margin: .25rem 0 0; color: var(--foreground); font: 400 clamp(2rem, 4vw, 3.25rem)/.95 var(--font-farm-display), Georgia, serif; }
-.formRow { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(11rem, .7fr) auto; gap: .75rem; align-items: end; }
+.formRow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: .75rem; align-items: end; }
 .field { display: grid; min-width: 0; gap: .4rem; color: var(--foreground); font-size: .75rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
 .field :is(input, select) { width: 100%; background: color-mix(in srgb, var(--card) 82%, transparent); }
 .planningTabs { display: grid; gap: 1rem; }
@@ -75,15 +71,5 @@
 .disclosure { padding-inline: 1rem; border: 1px solid var(--border); border-radius: .65rem; background: color-mix(in srgb, var(--card) 55%, transparent); }
 .disclosure button { display: flex; width: 100%; min-height: 44px; align-items: center; justify-content: space-between; gap: 1rem; color: var(--foreground); font-weight: 900; text-align: left; }
 .disclosure :global([data-slot='collapsible-content']) { padding: 0 0 1rem; color: var(--muted-foreground); line-height: 1.55; }
-
-@media (max-width: 760px) {
-  .lessonSheet, .teacherNote { grid-template-columns: 1fr; }
-  .teacherPortrait { min-height: 15rem; border-right: 0; border-bottom: 1px dashed color-mix(in srgb, currentColor 55%, transparent); }
-  .teacherCopy { padding-top: 1.25rem; }
-  .formRow { grid-template-columns: 1fr; }
-  .formRow button { width: 100%; }
-  .formRow input { font-size: .82rem; }
-  .planningTabs :global([data-slot='tabs-trigger']) { padding-inline: .35rem; font-size: .72rem; line-height: 1.15; }
-}
 
 @media (prefers-reduced-motion: reduce) { .taskNote { transform: none; } }

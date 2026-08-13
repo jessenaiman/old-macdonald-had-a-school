@@ -22,6 +22,15 @@ Use the smallest relevant mode. Source evidence lives at `docs/early-years-music
 - Treat `age_range` as developmental context; grade organizes curriculum.
 - End substantive answers with the practical implication for a teacher.
 
+## Teacher-facing curriculum language
+
+- Preserve the official curriculum wording verbatim as the curriculum reference. It is evidence and a link to the full standard, not a lesson-page headline.
+- Every curriculum record intended for teacher navigation needs a separate `teacher_title`: short, concrete, classroom-recognizable, and written around what children will do or practise. Never repeat or lightly shorten a standards sentence as the title.
+- Add a `teacher_summary` that answers: what will children practise, what will the teacher look/listen for, and how does this help plan the next lesson?
+- Use related standards, skill wording, and source-reviewed music/material details to propose search cues and specific resource links. Do not surface a concatenated standards dump as a teacher resource.
+- For each proposed title, retain the official wording beside it as `curriculum_reference` so a teacher can check the detail without navigating by word salad.
+- Apply this standard from Daycare through Grade 2. If the source does not support a useful interpretation, mark the title as pending rather than inventing one.
+
 ## Evidence discipline
 
 Ground substantive claims in the local knowledge layer or a primary source. Mark pending or extracted material as unverified. Never invent versions, lyrics, actions, chords, or curriculum links. Keep materially different versions separate.
