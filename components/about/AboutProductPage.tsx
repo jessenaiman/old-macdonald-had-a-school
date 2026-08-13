@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./AboutProductPage.module.css";
 
 export function AboutProductPage({ story }: { story: ReactNode }) {
   return (

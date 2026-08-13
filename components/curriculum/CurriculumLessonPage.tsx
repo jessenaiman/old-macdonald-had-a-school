@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurriculumLessonBySlug } from "../../lib/curriculum-lesson";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./CurriculumLessonPage.module.css";
 
 interface Props {
   slug: string;

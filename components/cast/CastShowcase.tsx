@@ -40,12 +40,12 @@ const FASTENERS = [
 ] as const;
 
 const CURRICULUM_ICONS = [
-  ["Daycare", "grade-daycare"],
-  ["Kindergarten", "grade-kindergarten"],
-  ["Grade 1", "grade-one"],
-  ["Music & dance", "music-icon"],
-  ["Math & building", "math-building-icon"],
-  ["Drama & storytelling", "drama-storytelling-icon"],
+  { name: "Daycare", assetClass: "grade-icon", gradeIcon: "daycare" },
+  { name: "Kindergarten", assetClass: "grade-icon", gradeIcon: "kindergarten" },
+  { name: "Grade 1", assetClass: "grade-icon", gradeIcon: "grade-one" },
+  { name: "Music & dance", assetClass: "music-icon" },
+  { name: "Math & building", assetClass: "math-building-icon" },
+  { name: "Drama & storytelling", assetClass: "drama-storytelling-icon" },
 ] as const;
 
 const MATCHED_CAST_ASSETS: Record<string, readonly [string, string][]> = {
@@ -315,7 +315,7 @@ export function CastShowcase({ staff, students }: { staff: CastRosterMember[]; s
       <div className={styles.materialGrid}>{MATERIALS.map(([name, className, use])=><article className={styles.materialCard} data-material={name.toLowerCase().replaceAll(" ", "-")} key={name}><div /><h3>{name}</h3><p>{use}</p><code translate="no">{className}</code></article>)}</div>
       <div className={styles.assetRows}>
         <article><header><span>Attachment details</span><h3>Classroom fasteners</h3></header><div className={styles.iconShelf}>{FASTENERS.map(([name,assetClass])=><figure key={name}><span className={`brand-asset ${assetClass} icon-medium`} aria-hidden="true"/><figcaption>{name}</figcaption><code>brand-asset {assetClass} icon-medium</code></figure>)}</div></article>
-        <article><header><span>Curriculum signals</span><h3>Grade &amp; subject icons</h3></header><div className={styles.iconShelf}>{CURRICULUM_ICONS.map(([name,assetClass])=><figure key={name}><span className={`brand-asset ${assetClass} icon-medium`} aria-hidden="true"/><figcaption>{name}</figcaption><code>brand-asset {assetClass} icon-medium</code></figure>)}</div></article>
+        <article><header><span>Curriculum signals</span><h3>Grade &amp; subject icons</h3></header><div className={styles.iconShelf}>{CURRICULUM_ICONS.map(({name,assetClass,...icon})=><figure key={name}><span className={`brand-asset ${assetClass} icon-medium`} data-grade-icon={"gradeIcon" in icon ? icon.gradeIcon : undefined} aria-hidden="true"/><figcaption>{name}</figcaption><code>{"gradeIcon" in icon ? `brand-asset grade-icon icon-medium; data-grade-icon=${icon.gradeIcon}` : `brand-asset ${assetClass} icon-medium`}</code></figure>)}</div></article>
       </div>
     </section>
     <PaletteSpread />

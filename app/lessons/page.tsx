@@ -6,7 +6,7 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { getAllLessons } from "../../lib/content";
 import { searchCurriculumTopics } from "../../lib/curriculum-db";
 import { GRADE_KEYS, gradeKeysForLabel, lessonHref, type GradeKey } from "../../lib/grade-routes";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./LessonsPage.module.css";
 
 export const metadata: Metadata = {
   title: "Lessons | Old MacDonald Had a School",

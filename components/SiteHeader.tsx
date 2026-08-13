@@ -37,7 +37,7 @@ export function SiteHeader() {
             const isActive = active === grade.key || grade.children?.some((child) => child.key === active);
             return <NavigationMenuItem key={grade.key}>
               <NavigationMenuLink asChild active={isActive}>
-                <Link className={`site-nav-link site-nav-grade site-nav-grade-${grade.key}${isActive ? " is-active" : ""}`} href={grade.href} aria-current={isActive ? "page" : undefined}>{grade.label}</Link>
+                <Link className={`site-nav-link site-nav-grade${isActive ? " is-active" : ""}`} data-grade={grade.key === "early-years" ? undefined : grade.key} data-grade-group={grade.key === "early-years" ? "early-years" : undefined} href={grade.href} aria-current={isActive ? "page" : undefined}>{grade.label}</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>;
           })}

@@ -9,7 +9,7 @@ import {
   GradeTeacherPanel,
   type GradePathItem,
 } from "../builder/CurriculumTemplates";
-import { globalClassNames as workStyles } from "@/lib/global-class-names";
+import workStyles from "./DefaultGradeTemplate.module.css";
 
 export type DefaultGradeTemplateProps = {
   gradeKey: string;

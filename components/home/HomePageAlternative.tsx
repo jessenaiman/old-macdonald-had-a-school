@@ -5,7 +5,7 @@ import { NEW_SLUGS, SONG_SLUGS } from "./home-data";
 import { pickLessons, type HomePageProps } from "./HomePage";
 import { TopicCabinet } from "./TopicCabinet";
 import { WeeklyLessonList } from "./WeeklyLessonList";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./HomePageAlternative.module.css";
 
 export function HomePageAlternative({ lessons }: HomePageProps) {
   return <div className={`${styles.homePage} ${styles.alternative}`} data-style-scope="home-page">

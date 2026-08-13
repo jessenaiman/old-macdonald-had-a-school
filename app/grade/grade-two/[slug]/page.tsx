@@ -8,5 +8,5 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  return <GradeLessonPage slug={slug} grade="grade-two" className="grade-two-template" />;
+  return <GradeLessonPage slug={slug} grade="grade-two" />;
 }

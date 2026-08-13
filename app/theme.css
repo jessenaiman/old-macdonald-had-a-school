@@ -1,0 +1,154 @@
+/*
+ * Old MacDonald Had a School: theme tokens
+ *
+ * This file owns colour decisions only. Layout, typography, components,
+ * responsive rules, and authored material textures belong elsewhere.
+ * Import it after globals.css while the legacy stylesheet is being reduced.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Curriculum colour wheel: three primaries and three secondaries. */
+  --curriculum-red: #a8323a;
+  --curriculum-yellow: #e3ad27;
+  --curriculum-blue: #2f6f9f;
+  --curriculum-orange: #c65f28;
+  --curriculum-green: #477a4d;
+  --curriculum-purple: #6d5596;
+
+  /* Foundation colours stay quiet so character colours remain meaningful. */
+  --theme-cream: #f7edda;
+  --theme-paper: #fffaf0;
+  --theme-paper-muted: #eee1c9;
+  --theme-denim: #244f70;
+  --theme-navy: #142d42;
+  --theme-wood: #8a603d;
+  --theme-wood-light: #cbb28c;
+  --theme-ink: #182b39;
+  --theme-copy: #46535b;
+  --theme-white: #fffdf7;
+
+  /* Semantic application tokens. Components should depend on these. */
+  --background: var(--theme-cream);
+  --foreground: var(--theme-ink);
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --popover: var(--theme-paper);
+  --popover-foreground: var(--theme-ink);
+  --primary: var(--theme-denim);
+  --primary-foreground: var(--theme-white);
+  --secondary: var(--theme-paper-muted);
+  --secondary-foreground: var(--theme-navy);
+  --muted-surface: #eadfc9;
+  --muted-foreground: #5b554c;
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --border: var(--theme-wood-light);
+  --input: #9f8b6d;
+  --ring: var(--curriculum-blue);
+
+  /* Compatibility aliases for legacy selectors during cleanup. */
+  --navy: var(--theme-navy);
+  --blue: var(--curriculum-blue);
+  --sky: #b9d8e8;
+  --cool-white: var(--theme-paper);
+  --sunlit: var(--curriculum-yellow);
+  --gold: var(--curriculum-yellow);
+  --red: var(--curriculum-red);
+  --coral: #c95d58;
+  --pink: #c94f78;
+  --plum: var(--curriculum-purple);
+  --orange: var(--curriculum-orange);
+  --brown: var(--theme-wood);
+  --green: var(--curriculum-green);
+  --ink: var(--theme-ink);
+  --heading: var(--theme-navy);
+  --muted: var(--theme-copy);
+  --surface-soft: #fbf3e4;
+  --hero-text: var(--theme-white);
+  --paper: var(--theme-paper);
+  --line: var(--theme-wood-light);
+  --page-bg: var(--theme-cream);
+  --card-bg: var(--theme-paper);
+
+  /* Site chrome is structural denim, not a seventh curriculum colour. */
+  --site-chrome-background: var(--theme-navy);
+  --site-chrome-foreground: var(--theme-white);
+  --site-chrome-accent: var(--curriculum-yellow);
+  --site-chrome-border: #a9824d;
+
+  /*
+   * Grade-lead colour wheel.
+   * Pink is explicitly a tint in the red family; all other labels use one
+   * of the six introductory colour-wheel families.
+   */
+  --cast-old-macdonald-color: var(--curriculum-red);
+  --cast-old-macdonald-foreground: var(--theme-white);
+  --cast-miss-puddles-color: var(--curriculum-yellow);
+  --cast-miss-puddles-foreground: var(--theme-navy);
+  --cast-miss-maisy-color: var(--curriculum-green);
+  --cast-miss-maisy-foreground: var(--theme-white);
+  --cast-mr-rusty-color: var(--curriculum-blue);
+  --cast-mr-rusty-foreground: var(--theme-white);
+  --cast-miss-hayley-color: #c94f78;
+  --cast-miss-hayley-foreground: #200b13;
+  --cast-mr-maisy-color: var(--curriculum-orange);
+  --cast-mr-maisy-foreground: var(--theme-white);
+  --cast-mr-sam-color: #28577c;
+  --cast-mr-sam-foreground: var(--theme-white);
+  --cast-mr-puddles-color: var(--curriculum-purple);
+  --cast-mr-puddles-foreground: var(--theme-white);
+
+  /* Students repeat the six families as lesson-planning lenses. */
+  --cast-hopper-color: var(--curriculum-orange);
+  --cast-hopper-foreground: var(--theme-white);
+  --cast-whiskers-color: var(--curriculum-purple);
+  --cast-whiskers-foreground: var(--theme-white);
+  --cast-scout-color: var(--curriculum-green);
+  --cast-scout-foreground: var(--theme-white);
+  --cast-penny-color: var(--curriculum-yellow);
+  --cast-penny-foreground: var(--theme-navy);
+  --cast-maisy-color: var(--curriculum-blue);
+  --cast-maisy-foreground: var(--theme-white);
+  --cast-puddles-color: #76508f;
+  --cast-puddles-foreground: var(--theme-white);
+  --cast-sam-color: var(--curriculum-red);
+  --cast-sam-foreground: var(--theme-white);
+  --cast-rusty-color: var(--curriculum-orange);
+  --cast-rusty-foreground: var(--theme-white);
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Dark mode changes surfaces, not character identity. */
+  --background: #101c26;
+  --foreground: #f7edda;
+  --card: #192c3a;
+  --card-foreground: #fffaf0;
+  --popover: #192c3a;
+  --popover-foreground: #fffaf0;
+  --primary: #8fc1dd;
+  --primary-foreground: #102333;
+  --secondary: #2b4050;
+  --secondary-foreground: #fffaf0;
+  --muted-surface: #263947;
+  --muted-foreground: #cbd5d9;
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: #142d42;
+  --border: #587080;
+  --input: #718795;
+  --ring: #8fc1dd;
+
+  --ink: #f7edda;
+  --heading: #fffaf0;
+  --muted: #cbd5d9;
+  --surface-soft: #213543;
+  --paper: #192c3a;
+  --line: #587080;
+  --page-bg: #101c26;
+  --card-bg: #192c3a;
+  --site-chrome-background: #0a1721;
+  --site-chrome-foreground: #fffaf0;
+}

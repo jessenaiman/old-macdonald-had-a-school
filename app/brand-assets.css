@@ -1,5 +1,5 @@
 /*
- * Old MacDonald named asset registry
+ * Old MacDonald grade tokens and named asset registry
  *
  * This file maps semantic class names to approved public assets. It contains
  * no layout, typography, component state, or page-specific selectors.
@@ -28,11 +28,31 @@
 .icon-medium { --brand-asset-size: 4.25rem; }
 .icon-large { --brand-asset-size: 7rem; }
 
-/* Grade signals */
-.grade-daycare { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/grade-daycare.png'); }
-.grade-kindergarten { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png'); }
-.grade-one { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/grade-1.png'); }
-.grade-two { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/grade-2.png'); }
+/* Grade identity: shared components consume these tokens via data-grade. */
+:is([data-grade],[data-grade-group]) {
+  --grade-accent:var(--grade-color);
+  --grade-dark:var(--grade-edge);
+  --grade-felt:var(--grade-texture);
+  --identity-color:var(--grade-color);
+  --identity-ink:var(--grade-ink);
+  --identity-texture:var(--grade-texture);
+  --nav-grade-color:var(--grade-color);
+  --nav-grade-edge:var(--grade-edge);
+  --nav-grade-texture:var(--grade-texture);
+}
+[data-grade-group='early-years'] { --grade-color:#1F6B6B; --grade-edge:#164A4A; --grade-ink:#FFF8E8; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png'); }
+[data-grade='daycare'] { --grade-color:#E8A227; --grade-edge:#9C6810; --grade-ink:#173552; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png'); }
+[data-grade='pre-school'] { --grade-color:#55705A; --grade-edge:#304C38; --grade-ink:#FFF8E8; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png'); }
+[data-grade='kindergarten'] { --grade-color:#2C6C9B; --grade-edge:#1D4C70; --grade-ink:#FFF8E8; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png'); }
+[data-grade='grade-one'] { --grade-color:#C9527A; --grade-edge:#8C304E; --grade-ink:#050B18; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png'); }
+[data-grade='grade-two'] { --grade-color:#B5272C; --grade-edge:#7D1F23; --grade-ink:#FFF8E8; --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png'); }
+
+/* Grade signals: asset selection is separate from grade colour. */
+.grade-icon[data-grade-icon='daycare'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-daycare.png'); }
+.grade-icon[data-grade-icon='pre-school'] { --brand-asset-image:url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/02-preschool-apron-crayon-leaf.png'); }
+.grade-icon[data-grade-icon='kindergarten'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png'); }
+.grade-icon[data-grade-icon='grade-one'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-1.png'); }
+.grade-icon[data-grade-icon='grade-two'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-2.png'); }
 .grade-two-ruler-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/05-grade-2-ruler-blocks.png'); }
 .grade-two-balance-scale { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/10-grade-2-balance-scale.png'); }
 .grade-two-measuring-patterns { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/15-grade-2-measuring-patterns-thread.png'); }
@@ -50,7 +70,6 @@
 .gardening-health-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png'); }
 .physical-education-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-physical-education.png'); }
 .early-learning-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-early-learning.png'); }
-.grade-preschool { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/02-preschool-button-board.png'); }
 .theme-farm-day { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/sun-patch.png'); }
 .theme-lullaby-dusk { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/moon-patch.png'); }
 .fastener-brass-rivet { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/17-brass-rivet-top-v01.png'); }

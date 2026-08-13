@@ -5,6 +5,7 @@ import { ThemeProvider } from "../components/ThemeProvider";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
+import "./theme.css";
 
 const bodyFont = Nunito({
   subsets: ["latin"],

@@ -1,12 +1,16 @@
 import Image from "next/image"
 
-<section id="cast" className="mt-5 rounded-2xl border border-border bg-[#dce7ea] p-[clamp(1.25rem,4vw,3rem)] text-[#102842]">
+<section id="cast" className="mt-5 min-w-0 rounded-2xl border border-border bg-[#dce7ea] p-[clamp(1.25rem,4vw,3rem)] text-[#102842]">
 
 # Cast, teaching roles, and visual ownership
 
 Character colour is subject-coded and local. It identifies that character’s portrait panel, note, activity, or teaching context. It is not a page-wide grade theme. Portraits remain canonical and are never recoloured.
 
 ## Canonical staff
+
+On narrow screens, swipe or shift-scroll the labelled table region to review every column. The portrait cards immediately below retain the primary visual facts without scrolling.
+
+<div className="max-w-full overflow-x-auto pb-3 [&_table]:min-w-[62rem] [&_table]:whitespace-normal" role="region" aria-label="Canonical staff roles and colours" tabIndex="0">
 
 | Name | Species | Role | Grade/Level | Colour | Activities |
 | --- | --- | --- | --- | --- | --- |
@@ -19,11 +23,13 @@ Character colour is subject-coded and local. It identifies that character’s po
 | **Mr Puddles** | Duck adult | Art and photography | Whole school | Indigo `#4F5FA0` | Bird studies, painting, photography, exhibitions |
 | **Miss Maisy** | Cow adult | Secretary, gardening lead, cooking | Preschool | Sage `#55705A` | Family welcome, office support, gardening, simple food preparation, healthy habits, seasonal displays |
 
+</div>
+
 <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
   <article className="overflow-hidden rounded-xl bg-[#8B5E34] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/old-macdonald-transparent-circle.png" alt="Old MacDonald" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Old MacDonald</strong><p className="mb-0 text-sm">Kindergarten · principal and music</p></div></article>
   <article className="overflow-hidden rounded-xl bg-[#E8A227] text-[#172238]"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/miss-puddles-transparent-circle.png" alt="Miss Puddles" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Miss Puddles</strong><p className="mb-0 text-sm">Daycare · early learning and swimming</p></div></article>
   <article className="overflow-hidden rounded-xl bg-[#2C6C9B] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-rusty-transparent-circle.png" alt="Mr Rusty" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Rusty</strong><p className="mb-0 text-sm">K/1 · dance and rhythm</p></div></article>
-  <article className="overflow-hidden rounded-xl bg-[#C9527A] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/miss-hayley-transparent-circle.png" alt="Miss Hayley" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Miss Hayley</strong><p className="mb-0 text-sm">Grade 1/2 · music and drama</p></div></article>
+  <article className="overflow-hidden rounded-xl bg-[#C9527A] text-[#050B18]"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/miss-hayley-transparent-circle.png" alt="Miss Hayley" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Miss Hayley</strong><p className="mb-0 text-sm">Grade 1/2 · music and drama</p></div></article>
   <article className="overflow-hidden rounded-xl bg-[#1F6B6B] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-sam-transparent-circle.png" alt="Mr Sam" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Sam</strong><p className="mb-0 text-sm">Whole school · math, science, building</p></div></article>
   <article className="overflow-hidden rounded-xl bg-[#B5272C] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-maisy-transparent-circle.png" alt="Mr Maisy" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Maisy</strong><p className="mb-0 text-sm">Grade 2 · physical education</p></div></article>
   <article className="overflow-hidden rounded-xl bg-[#4F5FA0] text-white"><Image className="mx-auto h-44 w-full object-contain" src="/staff_and_students/mr-puddles-transparent-circle.png" alt="Mr Puddles" width={180} height={180} /><div className="p-4"><strong className="font-heading text-xl">Mr Puddles</strong><p className="mb-0 text-sm">Whole school · art and photography</p></div></article>
@@ -38,6 +44,10 @@ The staff roster is eight. Mr Puddles, Mr Maisy, and Miss Maisy are staff. Mr Ma
 
 Students support a scene or learning action; they do not replace subject ownership. Use only actions appropriate to the specific scene.
 
+On narrow screens, swipe or shift-scroll the labelled table region to review every column.
+
+<div className="max-w-full overflow-x-auto pb-3 [&_table]:min-w-[62rem] [&_table]:whitespace-normal" role="region" aria-label="Canonical student personalities and colours" tabIndex="0">
+
 | # | Name | Species | Personality | Signature colour | Can be shown |
 |---|---|---|---|---|---|
 | 1 | **Hopper** | Rabbit | Energetic, optimistic, ready to join | Orange `#D9713C` | Hop, walk, sit, listen, imitate |
@@ -48,6 +58,8 @@ Students support a scene or learning action; they do not replace subject ownersh
 | 6 | **Puddles** | Duck | Expressive, sociable, enthusiastic | Light blue `#4FA0C9` | Waddle, gesture, sing, listen, join rhythm play |
 | 7 | **Sam** | Pig | Thoughtful, inventive, cheerful | Olive `#7A9A3D` | Examine, count, build, listen, explain |
 | 8 | **Rusty** | Horse | Calm, reliable, quietly courageous | Rust `#8B5030` | Walk, gallop, listen, help, play an instrument |
+
+</div>
 
 <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
   <figure className="m-0 text-center"><div className="rounded-xl bg-[#D9713C]"><Image className="mx-auto h-32 w-full object-contain" src="/staff_and_students/hopper-transparent-circle.png" alt="Hopper" width={130} height={130} /></div><figcaption className="mt-2 font-bold">Hopper</figcaption></figure>

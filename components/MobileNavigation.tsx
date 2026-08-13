@@ -82,7 +82,8 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
               {gradeLinks.map((grade) => (
                 <Button asChild variant="outline" key={grade.key}>
                   <Link
-                    className={`site-nav-grade site-nav-grade-${grade.key}`}
+                    className="site-nav-grade"
+                    data-grade={grade.key}
                     href={grade.href}
                     aria-current={active === grade.key ? "page" : undefined}
                     onClick={() => setOpen(false)}

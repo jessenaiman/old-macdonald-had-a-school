@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { HOME_SUBJECTS } from "./home-data";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./HomePageAlternative.module.css";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function TopicCabinet() {

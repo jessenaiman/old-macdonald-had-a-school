@@ -27,9 +27,9 @@ export function GradeDirectoryPage({
 
   return (
     <Tabs value={activeCluster ?? "all"} onValueChange={(value) => setActiveCluster(value === "all" ? null : value)} orientation="vertical" asChild>
-    <section className={`gb-page gb-${meta.key}`}>
+    <section className="gb-page" data-grade={meta.key}>
       <aside className="gb-rail" aria-label={`${meta.label} planning sections`}>
-        <span className={`gb-rail-grade-badge brand-asset ${meta.key === "grade-one" ? "grade-one" : "grade-two"} icon-medium`} aria-hidden="true" />
+        <span className="gb-rail-grade-badge brand-asset grade-icon icon-medium" data-grade-icon={meta.key} aria-hidden="true" />
         <p className="gb-rail-kicker">Old MacDonald’s<br />Farm School</p>
         <h2>{meta.label}</h2>
         <small>{meta.ageRange}</small>

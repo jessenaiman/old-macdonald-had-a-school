@@ -2,6 +2,7 @@ import Overview from "../../content/pages/branding/overview.mdx";
 import PageRecipe from "../../content/pages/branding/page-recipe.mdx";
 import Assets from "../../content/pages/branding/assets.mdx";
 import Icons from "../../content/pages/branding/icons.mdx";
+import IconSizes from "../../content/pages/branding/icon-sizes.mdx";
 import Cast from "../../content/pages/branding/cast.mdx";
 import BadgeRecipe from "../../content/pages/branding/badge-recipe.mdx";
 import Typography from "../../content/pages/branding/typography.mdx";
@@ -24,6 +25,7 @@ export default function BrandingPage() {
         <PageRecipe />
         <Assets />
         <Icons />
+        <IconSizes />
         <Cast />
         <BadgeRecipe />
         <Typography />

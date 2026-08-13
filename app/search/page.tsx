@@ -8,7 +8,7 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { lessonHref } from "@/lib/grade-routes";
 import Link from "next/link";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./SearchPage.module.css";
 
 interface SearchResult {
   id: string;

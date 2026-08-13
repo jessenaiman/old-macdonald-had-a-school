@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { GradePathItem } from "../builder/CurriculumTemplates";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./GradeInteractionLane.module.css";
 import { ResponsiveFeatureSplit } from "@/components/layout/ResponsiveFeatureSplit";
 
 export type GradeInteractionSection = "today" | "curriculum" | "planner" | "resources";
@@ -122,7 +122,7 @@ export function GradeInteractionLane({ config, summary, items, activeIndex = 0, 
   const panel = section === "today" ? <TodayPanel config={config} summary={summary} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} onPreview={onPreview} /> : section === "curriculum" ? <CurriculumPanel config={config} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} /> : section === "planner" ? <PlannerPanel config={config} item={items[selectedIndex] ?? items[0]} onSection={setSection} /> : <ResourcesPanel config={config} items={items} onChoose={chooseItem} />;
   const panelId = `${config.gradeKey}-grade-panel`;
   return <Tabs value={section} onValueChange={(value) => setSection(value as GradeInteractionSection)} orientation="vertical" asChild>
-  <div className={`${styles.board} ${config.variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`} data-grade-template={config.gradeKey} data-style-scope="grade-interaction-lane">
+  <div className={`${styles.board} ${config.variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`} data-grade={config.gradeKey} data-grade-template={config.gradeKey} data-style-scope="grade-interaction-lane">
     <aside className={styles.rail} aria-label={`${config.grade} lesson workspace`}><div className={styles.identity}><span>Lesson workspace</span><strong>{config.grade}</strong><small>{config.age}</small></div><TabsList className={styles.railNav} aria-label={`${config.grade} lesson tools`} onKeyDown={moveSectionFocus} asChild><nav>{sections.map((entry) => <TabsTrigger key={entry.id} value={entry.id} id={`${config.gradeKey}-${entry.id}-tab`} className={`${styles.railButton} ${section === entry.id ? styles.railButtonActive : ""}`}><b>{entry.number}</b><span>{entry.label}</span></TabsTrigger>)}</nav></TabsList><div className={styles.reminder}><span className="brand-asset fastener-push-pin icon-small" aria-hidden="true" /><span>Planning reminder</span><strong>{config.reminder}</strong></div></aside>
     <main className={styles.main}><div className={styles.panelFrame}><TabsContent value={section} asChild><section key={section} id={panelId} aria-label={`${config.grade} ${section} panel`} tabIndex={-1} className={styles.panel}>{panel}</section></TabsContent></div></main>
   </div>

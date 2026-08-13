@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "../grades/DefaultGradeTemplate.module.css";
 import { Button } from "@/components/ui/button";
 
 export type GradePathItem = {

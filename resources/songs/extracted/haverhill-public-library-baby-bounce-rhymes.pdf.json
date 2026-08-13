@@ -1,0 +1,137 @@
+{
+  "pdf": "haverhill-public-library-baby-bounce-rhymes.pdf",
+  "category": "01-libraries-agencies",
+  "extracted_songs": [
+    {
+      "db_id": null,
+      "song_name": "Bouncing, Bouncing, Baby on My Knee",
+      "lyrics": "Bouncing, Bouncing\nBounce baby\nBaby on my knee\nBouncing, Bouncing\nOne, Two, Three",
+      "actions": "Bounce baby. Tickle/Lift/Slide baby down legs on 3. Additional Verses: Clapping, Clapping... / Rocking, Rocking...",
+      "source_page_or_ref": "page 1",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "Toast in the Toaster",
+      "lyrics": "Toast in the toaster,\nGetting very hot,\nTick Tock Tick Tock,\nUp you pop!",
+      "actions": "Bounce baby. Rock baby side to side. Lift baby off lap and give little swing.",
+      "source_page_or_ref": "page 1",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "Chop, Chop, Choppity Chop",
+      "lyrics": "Chop, Chop, Choppity Chop\nCut off the bottoms\nAnd cut of the top\nAnd what there is left\nYou put it in the pot\nChop, Chop, Choppity Chop",
+      "actions": "Chopping motion with baby's hand. Chop hand along feet. Chop hand along forehead. Tickle tummy.",
+      "source_page_or_ref": "page 1",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "Gingerbread Man",
+      "lyrics": "Mix and stir and pat in the pan\nI'm going to make a gingerbread man\nWith a nose so neat,\nAnd a smile so sweet,\nGingerbread shoes on your gingerbread feet",
+      "actions": "Chopping motion with baby's hand. Poke nose. Smile. Move baby's feet.",
+      "source_page_or_ref": "page 1",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "Bumpy Road",
+      "lyrics": "Smooth road, smooth road.\nBumpy road, bumpy road.\nRough road, rough road.\nHole.",
+      "actions": "Move baby in circle. Bounce baby. Increase height of bounce. Gently drop baby between legs.",
+      "source_page_or_ref": "page 1",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "Jelly in the Bowl",
+      "lyrics": "Jelly in the bowl, jelly in the bowl\nWibble, wobble, wibble, wobble,\nJelly in the bowl.\n\nCookies in the jar, cookies in the jar,\nShake them up, shake them up,\nCookies in the jar.\n\nCandles on the cake, candles on the cake,\nBlow them out, blow them out,\nPfft, pfft, pfft!",
+      "actions": "Wiggle baby. Wiggle side to side. Wiggle. Bounce baby. Bounce side to side. Bounce. Lean in circle. Rock back and forth. Blow on hair and lie them down.",
+      "source_page_or_ref": "page 1",
+      "confidence": "high"
+    },
+    {
+      "db_id": 62,
+      "song_name": "Rickety Rocking Horse",
+      "lyrics": "Rickety, rickety rocking horse,\nOver the hills we go,\nRickety rickety rocking horse,\nGiddy-up, giddy-up, whoa!",
+      "actions": "Bounce baby on knees. Bounce fast and hug.",
+      "source_page_or_ref": "page 1",
+      "confidence": "medium"
+    },
+    {
+      "db_id": 1331,
+      "song_name": "Pizza, Pickle, Pumpernickel",
+      "lyrics": "Pizza, pickle, pumpernickel,\nMy little baby deserves a tickle!\nOne for her nose, and one for her toes,\nAnd one for her belly where the hot dog goes!",
+      "actions": "Tickle. Tickle.",
+      "source_page_or_ref": "page 1",
+      "confidence": "medium"
+    },
+    {
+      "db_id": 1760,
+      "song_name": "Zoom, Zoom, Zoom",
+      "lyrics": "Zoom, zoom, zoom,\nWe're going to the moon.\nDo you want to take a trip?\nClimb aboard my rocket ship!\nZoom, zoom, zoom,\nWe're going to the moon,\nIn 5-4-3-2-1\nBLAST OFF!",
+      "actions": "Rock baby side to side. Bounce baby. Rock baby side to side. Bounce baby. Lift baby into the air.",
+      "source_page_or_ref": "page 1",
+      "confidence": "medium"
+    },
+    {
+      "db_id": null,
+      "song_name": "Trot Trot to Boston",
+      "lyrics": "Trot trot to Boston,\nTrot trot to Lynn,\nBetter watch out,\nOr you might...fall...IN!",
+      "actions": "Bounce baby on knees. Gently drop baby between legs.",
+      "source_page_or_ref": "page 1",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "I'm An Airplane (Tune: Frere Jacques)",
+      "lyrics": "I'm an airplane (2x)\nFlying high (2x)\nWatch me tilt this way (2x)\nLean to the left\nIn the sky, (2x)\n\nAdditional Verses:\n-Watch me tilt that way\n-Watch me do a landing\nOn the ground",
+      "actions": "Bounce baby on knees. Lean to the left. Lean to right. Slide child down knees.",
+      "source_page_or_ref": "page 2",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "Baby, Baby, Smile At Me (Tune: London Bridge)",
+      "lyrics": "Baby, baby, smile at me,\nSmile at me, smile at me,\nBaby, baby, smile at me,\nI love you, my baby.\n\nAdditional Verses:\n-Baby, baby, clap with me,\n-Baby, baby, dance with me,",
+      "actions": "Bounce child on knees. Kiss child's cheek. Clap hands. Gently sway child.",
+      "source_page_or_ref": "page 2",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "The Grand Old Duke of York",
+      "lyrics": "The Grand Old Duke of York,\nHe had ten thousand men.\nHe marched them up to the top of the hill\nAnd he marched them down again!\nAnd when they're up, they're up.\nAnd when they're down, they're down.\nAnd when they're only half-way up,\nThey're neither up nor down!\nOh he marched them to the left.\nAnd he marched them to the right.\nThen he marched them round and round\nOh what a silly sight!",
+      "actions": "Lift baby up in air. Bring baby down to floor. Lift baby up. Bring baby down. Hold baby waist high. Lift baby up and then bring down again. Lean to left. Lean to right. Move in circle.",
+      "source_page_or_ref": "page 2",
+      "confidence": "high"
+    },
+    {
+      "db_id": null,
+      "song_name": "Chuga-Chuga Choo Choo",
+      "lyrics": "Here is the train chugging down the track,\nChuga-chuga Chuga-chuga Chuga-chuga ChOO ChOO\nNow it's going forward\nChuga-Chuga Chug\nNow it's going backward\nChuga-Chuga Chug\nHear the bell ring\nDing-ding, Ding-ding!\nHear the whistle blow\nChoo! Choo!\nWhat a lot of noise it makes\nChuga-chuga Chuga-chuga Chuga-chuga ChOO ChOO",
+      "actions": "Move arms like train wheels. Lean forward. Lean backward. Mime ringing a bell. Cup hands around mouth. Cover ears. Move arms like train wheels.",
+      "source_page_or_ref": "page 2",
+      "confidence": "high"
+    },
+    {
+      "db_id": 636,
+      "song_name": "On a City Bus",
+      "lyrics": "A hip, a hip, a hippopotamus\nGot on, got on, got on a city bus\nAnd all, and all, and all the people said,\n\"You're squishing us!\"\n\nAdditional Verses:\nA cow, a cow, a cow got on a bus\nAnd all, and all, and all the people said,\n\"Mooooove over!\"\n-A sheep ...\"Baaaack up!\"\n-A frog ... \"We're hoppy to see you!\"\n-A cat ... \"Your tail's tickling us!\"",
+      "actions": "Bounce child on knees. Hug baby. Move in circle. Lean back. Big bounces. Tickle child.",
+      "source_page_or_ref": "page 2",
+      "confidence": "medium"
+    },
+    {
+      "db_id": null,
+      "song_name": "Bouncing Rhyme",
+      "lyrics": "I bounce you here, I bounce you there.\nI bounce you, bounce you everywhere!\nI hug you here, I hug you there.\nI hug you, hug you everywhere!\nI tickle you here, I tickle you there,\nI tickle you, tickle you everywhere!",
+      "actions": "",
+      "source_page_or_ref": "page 2",
+      "confidence": "high"
+    }
+  ],
+  "songs_checked": 45,
+  "songs_found": 0,
+  "notes": "No songs from the 45-candidate list appear in this PDF (the candidates are largely Kathy Reid-Naiman and other-library songs not present here). Text extraction was clean; no OCR needed. The PDF ('Baby Bounce Rhymes' from Haverhill Public Library, 2 pages) contains 16 distinct bounce/fingerplay rhymes; per brief rule 3 these were added since they are clearly present with verbatim lyrics and actions. db_ids (62, 1331, 1760, 636) were assigned where the song matched an entry in master missing_lyrics_songs.json; all other present songs have no master entry so db_id: null. Non-candidate additions are the 16 rhymes in extracted_songs. Note: a few master matches (Rickety Rocking Horse, Pizza/Pumpernickel, Zoom Zoom Zoom, On a City Bus/Hippopotamus) are same-song different-source variants of other libraries' masters, hence 'medium' confidence on db_id assignment. PDF spells 'Additional Verses' as 'Additonal' in the On a City Bus section and uses curly quotes/ellipses, preserved verbatim."
+}
