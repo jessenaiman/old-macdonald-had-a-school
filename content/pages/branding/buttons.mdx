@@ -1,7 +1,12 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CharacterActionExample } from "../../../components/brand/BrandSystemExamples"
 
-<section id="buttons" className="mt-5 rounded-2xl border border-border bg-card p-[clamp(1.25rem,4vw,3rem)]">
-  <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Action reference</p><h2 className="m-0 font-heading text-[clamp(2rem,4vw,3.5rem)]">Every button variant and state</h2>
-  <Card className="mt-6 gap-4"><CardHeader><CardTitle>Actions</CardTitle></CardHeader><CardContent className="flex flex-wrap gap-3"><Button>Primary action</Button><Button variant="secondary">Secondary</Button><Button variant="outline">Outline</Button><Button variant="ghost">Quiet action</Button><Button variant="link">Text link</Button><Button disabled>Unavailable</Button><Button size="sm">Small</Button><Button size="icon" aria-label="Example icon button">+</Button></CardContent></Card>
+<section id="buttons" className="mt-5 rounded-2xl border border-border bg-[#dce7ea] p-[clamp(1.25rem,4vw,3rem)]">
+
+<p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Character-local action pattern</p>
+<h2 className="m-0 font-heading text-[clamp(2rem,4vw,3.5rem)]">Actions belong to a teaching context</h2>
+
+Buttons are not a detached variant wall. Primary, secondary, and quiet actions should express the next useful teacher decision while character colour remains local to the character's own surface.
+
+<div className="mt-7"><CharacterActionExample /></div>
+
 </section>

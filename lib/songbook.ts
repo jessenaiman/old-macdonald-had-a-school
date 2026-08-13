@@ -43,10 +43,11 @@ export function getSongbookFacets(): SongbookFacets {
     return {
       grades: database.prepare(`SELECT key, label FROM grades ORDER BY sort_order`).all() as SongbookFacets["grades"],
       topics: database.prepare(`
-        SELECT DISTINCT CAST(t.id AS TEXT) id, t.topic label
+        SELECT lower(trim(t.topic)) id, trim(t.topic) label
         FROM topics t JOIN topic_materials tm ON tm.topic_id = t.id
         WHERE tm.material_kind = 'song'
-        ORDER BY t.topic
+        GROUP BY lower(trim(t.topic))
+        ORDER BY trim(t.topic) COLLATE NOCASE
       `).all() as SongbookFacets["topics"],
       types: (database.prepare(`SELECT DISTINCT type FROM songs WHERE type IS NOT NULL AND trim(type) <> '' ORDER BY type`).all() as { type: string }[]).map((row) => row.type),
     };
@@ -75,7 +76,11 @@ export function listSongbookSongs(filters: SongbookFilters): SongbookSong[] {
       parameters.push(filters.grade);
     }
     if (filters.topic) {
-      where.push(`EXISTS (SELECT 1 FROM topic_materials tm WHERE tm.material_kind = 'song' AND tm.material_id = s.id AND CAST(tm.topic_id AS TEXT) = ?)`);
+      where.push(`EXISTS (
+        SELECT 1 FROM topic_materials tm
+        JOIN topics ft ON ft.id = tm.topic_id
+        WHERE tm.material_kind = 'song' AND tm.material_id = s.id AND lower(trim(ft.topic)) = ?
+      )`);
       parameters.push(filters.topic);
     }
     if (filters.type) {

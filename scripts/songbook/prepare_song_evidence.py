@@ -27,6 +27,7 @@ from plan_song_import import (
     read_text,
     sha256,
 )
+from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 
 OLLAMA_SCHEMA: dict[str, Any] = {
@@ -98,12 +99,14 @@ def main() -> int:
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--format", choices=("jsonl", "summary"), default="jsonl")
     parser.add_argument("--limit", type=int)
+    maybe_add_runtime_argument(parser, default_seconds=180)
     parser.add_argument("--ollama", action="store_true", help="Add a local Qwen extraction proposal; never writes SQLite")
     parser.add_argument("--ollama-endpoint", default="http://127.0.0.1:11434/api/generate")
     parser.add_argument("--ollama-model", default="qwen3:4b")
     args = parser.parse_args()
 
     root = args.project_root.resolve()
+    guard = install_runtime_guard("prepare_song_evidence", args.max_runtime_seconds)
     paths = collect_source_paths(args.sources, args.source_directory)
     if args.limit is not None:
         paths = paths[:args.limit]
@@ -113,6 +116,9 @@ def main() -> int:
         songs = load_songs(connection)
         records: list[dict[str, Any]] = []
         for path in paths:
+            if check_runtime(guard):
+                print(json.dumps({"status": "stopped", "count": len(records), "limit_hit": "runtime"}, indent=2))
+                break
             candidate = plan_candidate(path, root, songs)
             relative_path = project_relative(path, root)
             record: dict[str, Any] = {
@@ -148,4 +154,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (KeyboardInterrupt, TimeoutError, OSError, sqlite3.Error) as error:
+        print(f"prepare_song_evidence stopped: {error}", file=sys.stderr)
+        raise SystemExit(130)

@@ -6,7 +6,9 @@ from __future__ import annotations
 import argparse
 import json
 import sqlite3
+import sys
 from pathlib import Path
+from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 
 def latest_pending(connection: sqlite3.Connection, limit: int) -> list[sqlite3.Row]:
@@ -34,13 +36,18 @@ def main() -> int:
     parser.add_argument('--limit', type=int, default=10)
     parser.add_argument('--packet', type=Path)
     parser.add_argument('--apply', action='store_true')
+    maybe_add_runtime_argument(parser, default_seconds=None)
     args = parser.parse_args()
+    guard = install_runtime_guard("run_resource_pipeline", args.max_runtime_seconds)
     connection = sqlite3.connect(args.db)
     connection.row_factory = sqlite3.Row
     connection.execute('PRAGMA foreign_keys = ON')
     selected = latest_pending(connection, args.limit)
     packet: list[dict[str, object]] = []
     for row in selected:
+        if check_runtime(guard):
+            print(json.dumps({'status': 'stopped', 'count': len(packet), 'limit_hit': 'runtime'}), end='\n')
+            break
         path = Path(str(row['source_path']))
         disposition, reason = classify(path)
         packet.append({
@@ -69,4 +76,8 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (KeyboardInterrupt, TimeoutError, OSError) as error:
+        print(f"run_resource_pipeline stopped: {error}", file=sys.stderr)
+        raise SystemExit(130)

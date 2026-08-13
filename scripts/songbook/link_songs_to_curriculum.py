@@ -11,6 +11,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Set
+from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 DB = Path("data/omhas.db")
 
@@ -338,8 +339,15 @@ def determine_song_type(lyrics: str, actions: str, title: str, existing_type: st
     return "Song"
 
 
-def process_batch(c: sqlite3.Cursor, conn: sqlite3.Connection, batch_id: str, 
-                  limit: int = 25, offset: int = 0, dry_run: bool = False) -> Dict[str, Any]:
+def process_batch(
+    c: sqlite3.Cursor,
+    conn: sqlite3.Connection,
+    batch_id: str,
+    guard: Any | None,
+    limit: int = 25,
+    offset: int = 0,
+    dry_run: bool = False,
+) -> Dict[str, Any]:
     """Process one batch of unlinked songs."""
     
     # Load topic data for all subjects
@@ -390,6 +398,8 @@ def process_batch(c: sqlite3.Cursor, conn: sqlite3.Connection, batch_id: str,
     }
     
     for song in songs:
+        if guard is not None and check_runtime(guard):
+            break
         song_id = int(song[0])
         title = song[1] or ""
         lyrics = song[2] or ""
@@ -590,9 +600,11 @@ def main():
     parser.add_argument("--offset", type=int, default=0, help="Starting offset")
     parser.add_argument("--dry-run", action="store_true", help="Preview only")
     parser.add_argument("--batch-id", default=None, help="Custom batch ID")
+    maybe_add_runtime_argument(parser, default_seconds=300)
     args = parser.parse_args()
     
     batch_id = args.batch_id or f"llm-song-curric-link-{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
+    guard = install_runtime_guard("link_songs_to_curriculum", args.max_runtime_seconds)
     
     conn = sqlite3.connect(args.db)
     conn.row_factory = sqlite3.Row
@@ -600,7 +612,10 @@ def main():
     
     try:
         c.execute("PRAGMA foreign_keys = ON")
-        result = process_batch(c, conn, batch_id, limit=args.limit, offset=args.offset, dry_run=args.dry_run)
+        if check_runtime(guard):
+            print(json.dumps({"status": "stopped", "batch_id": batch_id, "reason": "runtime"}, indent=2))
+            return 0
+        result = process_batch(c, conn, batch_id, guard=guard, limit=args.limit, offset=args.offset, dry_run=args.dry_run)
         print(json.dumps(result, indent=2, default=str))
         return 0
     finally:

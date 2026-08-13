@@ -1,0 +1,17 @@
+import { SubjectCard } from "../../../components/brand/SubjectCard"
+
+<section id="subject-cards" className="mt-5 rounded-2xl border border-border bg-[#dce7ea] p-[clamp(1.25rem,4vw,3rem)] text-[#102842]">
+
+## Subject cards reuse the character frame
+
+The homepage subject card is a real use of the same `BrandIdentityCard` structure shown in the cast section. The subject remains the title and destination. The assigned learner supplies the local colour, felt, and unchanged portrait. The curriculum icon stays a separate visual signal.
+
+Use a fastener only when the card sits on a board. It must cross the card edge and the cork surface, as these examples do.
+
+<div className="material-surface material-cork mt-7 grid gap-5 rounded-2xl p-[clamp(1.25rem,3vw,2.5rem)] md:grid-cols-2 xl:grid-cols-3">
+  <SubjectCard title="Language & literacy" href="/search?q=language%20literacy" color="#6D5596" texture="/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png" characterName="Whiskers" portrait="/staff_and_students/whiskers-transparent-circle.png" iconClass="drama-storytelling-icon" highlights={["Build vocabulary", "Explore phonics", "Tell and retell stories"]} lessonCount={5} fastenerClass="fastener-paperclip" />
+  <SubjectCard title="Nature & science" href="/search?q=science%20nature" color="#477A4D" texture="/design-assets/web-material-library-v1/felt/felt-11-scout-tile.png" characterName="Scout" portrait="/staff_and_students/scout-transparent-circle.png" iconClass="gardening-health-icon" highlights={["Observe and explore", "Seasons and weather", "Living things"]} lessonCount={2} fastenerClass="fastener-push-pin" />
+  <SubjectCard title="Music" href="/search?q=music" color="#E3AD27" texture="/design-assets/web-material-library-v1/felt/felt-12-penny-tile.png" characterName="Penny" portrait="/staff_and_students/penny-transparent-circle.png" iconClass="music-icon" highlights={["Rhythm and beat", "Sing and move", "Create and perform"]} lessonCount={5} ink="dark" fastenerClass="fastener-masking-tape" />
+</div>
+
+</section>

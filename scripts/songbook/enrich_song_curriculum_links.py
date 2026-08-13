@@ -15,6 +15,8 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Tuple
+import sys
+from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 TOKEN_SPLIT = re.compile(r"[^a-z0-9]+", re.IGNORECASE)
 
@@ -123,8 +125,10 @@ def main() -> int:
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--verbose", action="store_true")
+    maybe_add_runtime_argument(parser, default_seconds=300)
     args = parser.parse_args()
 
+    guard = install_runtime_guard("enrich_song_curriculum_links", args.max_runtime_seconds)
     connection = sqlite3.connect(args.db)
     connection.row_factory = sqlite3.Row
 
@@ -154,6 +158,8 @@ def main() -> int:
         updates_to_fill: Dict[int, List[str]] = {}
 
         for song in songs:
+            if check_runtime(guard):
+                break
             song_id = int(song["id"])
             text = token_set(" ".join(filter(None, [song["title"], song["lyrics"], song["instructions"], song["tags"], song["source_title"]])))
             if not text:
@@ -300,4 +306,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (KeyboardInterrupt, TimeoutError, OSError, sqlite3.Error) as error:
+        print(f"enrich_song_curriculum_links stopped: {error}", file=sys.stderr)
+        raise SystemExit(130)

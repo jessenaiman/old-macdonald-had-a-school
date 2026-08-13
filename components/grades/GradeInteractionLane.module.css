@@ -96,8 +96,8 @@
 @media(max-width:640px){.teacherCard .teacherImage{right:4px;bottom:0;width:132px;height:calc(100% - 4px);max-height:none}.teacherCardHeader{padding-right:130px}.teacherCardContent{padding-right:128px}}
 .board { --identity-color:var(--grade-color); --identity-ink:var(--grade-ink); --identity-texture:var(--grade-texture); --identity-thread:none; }
 .rail { background-image:var(--identity-thread),var(--identity-texture); }
-.teacherCard.character-surface { color:var(--character-foreground); background-color:var(--character-color); background-image:var(--character-texture); }
-.teacherCard.character-surface :is(.teacherCardTitle, .teacherCardContent blockquote) { color:var(--character-foreground); }
+.teacherCard:global(.character-surface) { color:var(--character-foreground); background-color:var(--character-color); background-image:var(--character-texture); }
+.teacherCard:global(.character-surface) :is(.teacherCardTitle, .teacherCardContent blockquote) { color:var(--character-foreground); }
 .reminder>.brand-asset{width:26px;height:26px;transform:translate(4px,-23px) rotate(8deg)}
 .board {
   --paper:#fbf2df;

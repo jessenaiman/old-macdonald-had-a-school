@@ -16,6 +16,7 @@ import sqlite3
 import sys
 from pathlib import Path
 from typing import Any
+from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 
 def manifest_digest(path: Path) -> str:
@@ -46,9 +47,11 @@ def main() -> int:
     parser.add_argument("--db", type=Path, default=Path("data/omhas.db"))
     parser.add_argument("--batch-id", required=True)
     parser.add_argument("--apply", action="store_true")
+    maybe_add_runtime_argument(parser, default_seconds=180)
     args = parser.parse_args()
 
     records = load_records(args.manifest)
+    guard = install_runtime_guard("apply_exact_transcription_links", args.max_runtime_seconds)
     database = sqlite3.connect(args.db)
     try:
         database.execute("PRAGMA foreign_keys = ON")
@@ -78,6 +81,8 @@ def main() -> int:
                 (args.batch_id,),
             )
             for record in records:
+                if check_runtime(guard):
+                    break
                 source_id = database.execute("SELECT id FROM source_documents WHERE source_path = ?", (record["source_path"],)).fetchone()[0]
                 cursor = database.execute(
                     """INSERT INTO song_sources (song_id, source_document_id, relationship, locator, evidence_note)

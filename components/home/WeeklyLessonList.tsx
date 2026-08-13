@@ -10,18 +10,6 @@ export type WeeklyLesson = {
   href?: string;
 };
 
-function gradeChips(grade: string) {
-  const normalized = grade.toLowerCase();
-  if (normalized.includes("all")) return ["All"];
-  const chips: string[] = [];
-  if (normalized.includes("daycare")) chips.push("D");
-  if (normalized.includes("pre")) chips.push("Pre-K");
-  if (normalized.includes("kindergarten")) chips.push("K");
-  if (normalized.includes("one") || normalized.includes("1")) chips.push("1");
-  if (normalized.includes("two") || normalized.includes("2")) chips.push("2");
-  return chips.length ? chips : ["All"];
-}
-
 export function WeeklyLessonList({
   lessons,
   title,
@@ -41,7 +29,7 @@ export function WeeklyLessonList({
 }) {
   return (
     <section className={`${styles.weeklyList} ${compact ? styles.weeklyListCompact : ""} ${participation ? styles.weeklyParticipation : ""} ${twoColumn ? styles.weeklyTwoColumn : ""}`} aria-label={title}>
-      <header><h2>{title}</h2><span>Best for</span></header>
+      <header><h2>{title}</h2><Link href="/lessons">See all lessons <span aria-hidden="true">→</span></Link></header>
       <ul>
         {lessons.slice(0, limit).map((lesson) => (
           <li key={lesson.slug}>
@@ -53,7 +41,7 @@ export function WeeklyLessonList({
             >
               {lesson.title}
             </Link>
-            {participation ? (
+            {participation && !lesson.summary ? (
               <span className={styles.participationWays} role="group" aria-label="Ways to join: listen, move, hum, or sing">
                 <span>Listen</span>
                 <span>Move</span>
@@ -61,14 +49,10 @@ export function WeeklyLessonList({
                 <span>Sing</span>
               </span>
             ) : <p>{lesson.summary}</p>}
-            <span className={styles.gradeChips} role="group" aria-label={`Best for ${lesson.grade}`}>
-              {gradeChips(lesson.grade).map((grade) => <b key={grade}>{grade}</b>)}
-            </span>
             {selected ? null : <Link className={styles.lessonAction} href={lesson.href ?? lessonHref(lesson)}>Play lesson <span aria-hidden="true">-&gt;</span></Link>}
           </li>
         ))}
       </ul>
-      <Link className={styles.weeklyMore} href="/lessons">See all lessons <span aria-hidden="true">-&gt;</span></Link>
     </section>
   );
 }

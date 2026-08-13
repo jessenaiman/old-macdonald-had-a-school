@@ -25,6 +25,7 @@ import unicodedata
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
+from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 
 UNKNOWN_LOCATORS = {"", "unknown", "n/a", "none", "not stated"}
@@ -342,12 +343,20 @@ def main() -> int:
     parser.add_argument("--db", type=Path, default=Path("data/omhas.db"), help="Managed SQLite database")
     parser.add_argument("--project-root", type=Path, default=Path.cwd(), help="Repository root used for relative source paths")
     parser.add_argument("--apply-exact-sources", action="store_true", help="Attach only safe, reviewed exact duplicates as source references; never creates or edits songs")
+    parser.add_argument("--offset", type=int, default=0)
+    parser.add_argument("--limit", type=int, default=None, help="Process only first N matching sources")
     parser.add_argument("--format", choices=("text", "json", "summary"), default="text")
+    maybe_add_runtime_argument(parser, default_seconds=180)
     args = parser.parse_args()
 
     project_root = args.project_root.resolve()
     database_path = args.db.resolve()
+    guard = install_runtime_guard("plan_song_import", args.max_runtime_seconds)
     source_paths = collect_source_paths(args.sources, args.source_directory)
+    if args.offset:
+        source_paths = source_paths[args.offset:]
+    if args.limit is not None:
+        source_paths = source_paths[: args.limit]
     for path in source_paths:
         if not path.is_file():
             parser.error(f"Source file does not exist: {path}")
@@ -360,11 +369,17 @@ def main() -> int:
     try:
         connection.execute("PRAGMA foreign_keys = ON")
         songs = load_songs(connection)
-        candidates = [plan_candidate(path, project_root, songs) for path in source_paths]
+        candidates = []
+        for path in source_paths:
+            if check_runtime(guard):
+                break
+            candidates.append(plan_candidate(path, project_root, songs))
         attachments: list[dict[str, Any]] = []
         if args.apply_exact_sources:
             with connection:
                 for candidate in candidates:
+                    if check_runtime(guard):
+                        break
                     if safe_to_attach(candidate, project_root):
                         attachments.append(attach_exact_sources(connection, candidate, project_root))
                 violations = connection.execute("PRAGMA foreign_key_check").fetchall()

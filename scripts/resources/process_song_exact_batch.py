@@ -16,6 +16,7 @@ import argparse
 import hashlib
 import json
 import sqlite3
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +28,7 @@ from scripts.songbook.plan_song_import import (
     sha256,
     source_pdf_candidates,
 )
+from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 
 def ensure_source(connection: sqlite3.Connection, source_path: str, source_kind: str) -> int:
@@ -56,6 +58,7 @@ def main() -> int:
     parser.add_argument("--batch-id", required=True)
     parser.add_argument("--offset", type=int, default=0, help="Index offset into sorted source listing.")
     parser.add_argument("--batch-size", type=int, default=25)
+    maybe_add_runtime_argument(parser, default_seconds=60)
     args = parser.parse_args()
 
     project_root = args.project_root.resolve()
@@ -72,6 +75,7 @@ def main() -> int:
     connection.execute("PRAGMA busy_timeout = 5000")
 
     try:
+        guard = install_runtime_guard("process_song_exact_batch", args.max_runtime_seconds)
         songs = load_songs(connection)
         processed = 0
         exact = 0
@@ -100,6 +104,8 @@ def main() -> int:
                 )
 
             for source_path in source_paths:
+                if check_runtime(guard):
+                    break
                 if processed >= args.batch_size:
                     break
 
@@ -189,4 +195,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (KeyboardInterrupt, TimeoutError, OSError, sqlite3.Error) as error:
+        print(f"process_song_exact_batch stopped: {error}", file=sys.stderr)
+        raise SystemExit(130)

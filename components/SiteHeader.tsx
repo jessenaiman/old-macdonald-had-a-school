@@ -31,22 +31,7 @@ export function SiteHeader() {
           <NavigationMenuItem><NavigationMenuLink asChild active={active === "songs"}><Link className={styles.navLink} href="/songs" aria-current={active === "songs" ? "page" : undefined}>Songs</Link></NavigationMenuLink></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuLink asChild active={active === "topics"}><Link className={styles.navLink} href="/#browse-by-subject" aria-current={active === "topics" ? "page" : undefined}>Subjects</Link></NavigationMenuLink></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuLink asChild active={active === "about"}><Link className={styles.navLink} href="/about" aria-current={active === "about" ? "page" : undefined}>About</Link></NavigationMenuLink></NavigationMenuItem>
-        </NavigationMenuList>
-        <NavigationMenuList className={styles.gradeList} aria-label="Grade workspaces">
-          <li className={styles.gradeLabel} aria-hidden="true">Grade workspaces</li>
-          {GRADE_NAV_ITEMS.map((grade) => {
-            const isActive = active === grade.key || grade.children?.some((child) => child.key === active);
-            return <NavigationMenuItem key={grade.key}>
-              <NavigationMenuLink asChild active={isActive}>
-                <Link className={styles.gradeLink} data-grade={grade.key === "early-years" ? undefined : grade.key} data-grade-group={grade.key === "early-years" ? "early-years" : undefined} href={grade.href} aria-current={isActive ? "page" : undefined}>{grade.label}</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>;
-          })}
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild active={active === "search"}>
-              <Link className={styles.searchLink} href="/search" aria-label="Search lessons" aria-current={active === "search" ? "page" : undefined}><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+          <NavigationMenuItem><NavigationMenuLink asChild active={active === "search"}><Link className={styles.searchLink} href="/search" aria-label="Search lessons" aria-current={active === "search" ? "page" : undefined}><FaMagnifyingGlass aria-hidden="true" /><span>Search</span></Link></NavigationMenuLink></NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
       <div className={styles.desktopTheme}><ThemeSwitcher /></div>

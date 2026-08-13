@@ -12,10 +12,10 @@ export function SiteFooter() {
       <CardHeader className="grid gap-6 px-0 py-7 md:grid-cols-[1.35fr_1fr_1fr] md:items-start md:gap-10">
         <div className="max-w-sm"><Link className={styles.footerBrand} href="/" aria-label="Old MacDonald Had a School home"><Image src="/brand-emblem.png" alt="" width={48} height={48} /><span><strong>Old MacDonald Had a School</strong><small>Teacher lesson resources</small></span></Link><p className={styles.footerSummary}>Practical, playful lesson ideas organized for the grade and subject you teach.</p></div>
         <nav className={styles.footerNav} aria-label="Plan lessons"><strong>Plan lessons</strong><Link href="/lessons">Browse all lessons</Link><Link href="/#browse-by-subject">Browse by subject</Link><Link href="/search">Search lessons</Link></nav>
-        <nav className={styles.footerNav} aria-label="About the school"><strong>The farm school</strong><Link href="/about">About</Link><Link href="/branding">Brand &amp; cast guide</Link><Link href="/about#contact">Contact</Link></nav>
+        <nav className={styles.footerNav} aria-label="About the school"><strong>The farm school</strong><Link href="/about">About</Link><Link href="/branding">Brand &amp; cast guide</Link></nav>
       </CardHeader>
       <CardContent className="px-0"><Separator className="bg-white/15" /></CardContent>
-      <CardFooter className={`${styles.footerLegal} flex flex-col gap-3 px-0 py-4 sm:flex-row sm:items-center sm:justify-between`}><p className="m-0">© 2024 Old MacDonald Had a School</p><div className="flex flex-wrap gap-x-6 gap-y-2"><Link href="/about#privacy-policy">Privacy Policy</Link><Link href="/about#terms-of-use">Terms of Use</Link><Link href="/about#contact">Contact</Link></div></CardFooter>
+      <CardFooter className={`${styles.footerLegal} flex flex-col gap-3 px-0 py-4 sm:flex-row sm:items-center sm:justify-between`}><p className="m-0">© {new Date().getFullYear()} Old MacDonald Had a School</p><div className="flex flex-wrap gap-x-6 gap-y-2"><Link href="/about#privacy-policy">Privacy Policy</Link><Link href="/about#terms-of-use">Terms of Use</Link><Link href="/about#contact">Contact</Link></div></CardFooter>
     </Card>
   </footer>;
 }

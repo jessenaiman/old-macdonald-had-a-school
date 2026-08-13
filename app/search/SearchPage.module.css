@@ -1,5 +1,4 @@
 .page {
-  min-height: 100vh;
   padding: 24px clamp(14px, 3vw, 48px) 70px;
   color: #172f4b;
   background-color: #b77b43;

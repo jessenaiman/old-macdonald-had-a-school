@@ -1,4 +1,399 @@
-.page,.detailPage{min-height:100vh;padding:clamp(24px,5vw,68px) max(16px,calc((100vw - 1180px)/2));color:#172f4b;background-color:#d7c29a;background-image:url("/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png");background-size:320px;font-family:var(--font-farm-body),sans-serif}.hero{max-width:760px;margin-bottom:28px}.eyebrow{margin:0 0 8px;color:#8b3e2f;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.hero h1,.songHeader h1{margin:0;font-family:var(--font-farm-display),Georgia,serif;font-size:clamp(42px,7vw,76px);line-height:.95}.hero>p:last-child{max-width:650px;font-size:18px;line-height:1.55}.filters{display:grid;grid-template-columns:2fr repeat(3,minmax(150px,1fr));gap:14px;padding:20px;border:1px solid #c5a46d;border-radius:10px;background-color:#fff6df;background-image:url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");background-size:320px;box-shadow:0 6px 0 #6d4a2a33}.filters label,.filters legend{display:grid;gap:6px;font-size:12px;font-weight:900}.filters input,.filters select{min-width:0;height:42px;padding:0 11px;border:1px solid #9e855f;border-radius:6px;background:#fffdf5;color:#172f4b;font:700 14px var(--font-farm-body),sans-serif}.filters fieldset{grid-column:1/-2;display:flex;align-items:center;gap:16px;margin:0;padding:10px 0 0;border:0}.filters fieldset label{display:flex;align-items:center;gap:7px}.filters fieldset input{width:18px;height:18px}.filterActions{display:flex;align-items:end;justify-content:flex-end;gap:12px}.filterActions button,.open{display:inline-flex;min-height:40px;align-items:center;padding:0 15px;border:0;border-radius:6px;color:#fff9e8;background-color:#173f61;background-image:url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");background-size:180px;font-weight:900}.filterActions a{padding:10px;color:#69452c;font-weight:900}.results{margin-top:36px}.resultHeading{display:flex;align-items:end;justify-content:space-between;gap:12px}.resultHeading h2{margin:0;font-family:var(--font-farm-display),Georgia,serif;font-size:34px}.resultHeading span{font-weight:800}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:16px}.card{display:flex;min-width:0;min-height:310px;flex-direction:column;padding:22px;border:1px solid #c5a46d;border-radius:8px;background-color:#fff6df;background-image:url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");background-size:320px;box-shadow:0 6px 0 #6d4a2a2e}.card h3{margin:12px 0 4px;font:400 28px/1.05 var(--font-farm-display),Georgia,serif}.card h3 a{color:#172f4b}.badges,.meta{display:flex;flex-wrap:wrap;gap:6px}.badges span,.meta span,.status{padding:5px 8px;border-radius:999px;background:#e9d39c;color:#50351f;font-size:10px;font-weight:900;text-transform:uppercase}.artist{margin:0;color:#6c563e;font-size:12px;font-weight:800}.preview{display:-webkit-box;margin:18px 0;overflow:hidden;white-space:pre-line;-webkit-box-orient:vertical;-webkit-line-clamp:4;line-height:1.45}.meta{margin-top:auto}.open{align-self:flex-start;margin-top:16px;text-decoration:none}.empty{padding:40px;text-align:center;font-weight:900}.back{display:inline-block;margin-bottom:22px;color:#173f61;font-weight:900}.songHeader{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px}.songHeader>div>p:last-child{font-size:15px;font-weight:800}.status{flex:none;background:#315e48;color:#fff}.chordStrip{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px;padding:18px 22px;border-radius:8px;color:#fff7df;background-color:#173f61;background-image:url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");background-size:190px}.chordStrip span,.chordStrip p{font-size:11px;font-weight:900;text-transform:uppercase}.chordStrip h2{margin:4px 0 0;font:700 clamp(24px,4vw,38px) var(--font-farm-hand),cursive;letter-spacing:.08em}.songLayout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.65fr);gap:24px;align-items:start}.leadSheet,.teacherRail section{border:1px solid #c5a46d;background-color:#fff6df;background-image:url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");background-size:320px;box-shadow:0 6px 0 #6d4a2a2e}.leadSheet{padding:clamp(22px,5vw,52px)}.songSection+.songSection{margin-top:38px;padding-top:28px;border-top:1px dashed #a68d67}.songSection>h2,.teacherRail h2{margin:0 0 16px;color:#8b3e2f;font:400 24px var(--font-farm-display),Georgia,serif}.lyricLines{display:grid;gap:4px}.lyricRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.65fr);gap:20px;align-items:end}.lyricRow p{margin:0;white-space:pre-wrap;font:700 clamp(18px,2.5vw,25px)/1.42 var(--font-farm-body),sans-serif}.lineChord,.sectionChord strong{display:block;color:#8b3e2f;font:700 18px var(--font-farm-hand),cursive}.lyricRow aside,.actionNote{padding:8px 10px;border-left:4px solid #d29a2e;background:#f1e1b7;font-size:13px;line-height:1.4}.lyricRow aside strong,.actionNote strong{display:block;color:#69452c;font-size:10px;text-transform:uppercase}.actionNote{margin-top:22px}.actionNote p{margin:4px 0 0;white-space:pre-wrap}.sectionChord{margin-bottom:14px}.sectionChord span{display:block;font-size:10px;font-weight:900;text-transform:uppercase}.teacherRail{display:grid;gap:18px}.teacherRail section{padding:20px;border-radius:8px}.teacherRail p{line-height:1.5}.topic+.topic,.source+.source{margin-top:14px;padding-top:14px;border-top:1px dashed #b9a078}.topic h3{margin:0;font-size:15px}.topic p{margin:5px 0;font-size:12px}.source{display:grid;gap:3px;overflow-wrap:anywhere}.source strong,.source small{color:#8b3e2f;font-size:10px;text-transform:uppercase}.source span{font-size:12px}.detailPage{padding-bottom:80px}
-@media(max-width:900px){.filters{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}.filters fieldset{grid-column:1/-1}.grid{grid-template-columns:1fr 1fr}.songLayout{grid-template-columns:1fr}.teacherRail{grid-template-columns:1fr 1fr}.teacherRail section:last-child{grid-column:1/-1}}
-@media(max-width:600px){.page,.detailPage{padding-inline:14px}.filters,.grid,.teacherRail{grid-template-columns:1fr}.filters fieldset{align-items:flex-start;flex-direction:column}.filterActions{justify-content:flex-start}.resultHeading,.songHeader,.chordStrip{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:1fr}.lyricRow{grid-template-columns:1fr;gap:6px}.card{min-height:280px}.teacherRail section:last-child{grid-column:auto}}
-@media print{.detailPage{padding:0;background:#fff}.back,.site-header,.site-footer{display:none!important}.songHeader{margin-bottom:16px}.songHeader h1{font-size:42px}.songLayout{grid-template-columns:2fr 1fr;gap:12px}.leadSheet,.teacherRail section{box-shadow:none;background:#fff}.chordStrip{color:#000;background:#fff;border:2px solid #000}.teacherRail{gap:10px}.teacherRail section{padding:12px}.lyricRow p{font-size:15px}.actionNote,.lyricRow aside{background:#fff;border-left-color:#000}}
+.page,
+.detailPage {
+  --song-accent: var(--curriculum-red);
+  --song-note-accent: var(--curriculum-yellow);
+  min-height: 100vh;
+  padding: clamp(1.5rem, 5vw, 4.25rem) max(1rem, calc((100vw - 73.75rem) / 2));
+  color: var(--foreground);
+  background-color: var(--background);
+  background-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png");
+  background-size: 20rem;
+  background-blend-mode: soft-light;
+  font-family: var(--font-farm-body), sans-serif;
+}
+
+.hero {
+  max-width: 47.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.eyebrow {
+  margin: 0 0 .5rem;
+  color: var(--song-accent);
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.songHeader h1 {
+  margin: 0;
+  font: 400 clamp(2.625rem, 7vw, 4.75rem)/.95 var(--font-farm-display), Georgia, serif;
+  text-wrap: balance;
+}
+
+.hero > p:last-child {
+  max-width: 40.625rem;
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.filters,
+.card,
+.leadSheet,
+.teacherRail section {
+  border: 1px solid var(--border);
+  color: var(--card-foreground);
+  background-color: var(--card);
+  background-image: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
+  background-size: 20rem;
+  background-blend-mode: soft-light;
+  box-shadow: 0 .375rem 0 color-mix(in srgb, var(--border) 35%, transparent);
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, minmax(9.375rem, 1fr));
+  gap: .875rem;
+  padding: 1.25rem;
+  border-radius: .625rem;
+}
+
+.filters label,
+.filters legend {
+  display: grid;
+  gap: .375rem;
+  font-size: .75rem;
+  font-weight: 900;
+}
+
+.filters input,
+.filters select {
+  min-width: 0;
+  height: 2.625rem;
+  padding: 0 .6875rem;
+  border: 1px solid var(--input);
+  border-radius: .375rem;
+  color: var(--popover-foreground);
+  background: var(--popover);
+  font: 700 .875rem var(--font-farm-body), sans-serif;
+}
+
+.filters input:focus-visible,
+.filters select:focus-visible,
+.filterActions button:focus-visible,
+.open:focus-visible,
+.more a:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.filters fieldset {
+  display: flex;
+  grid-column: 1 / -2;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: .625rem 0 0;
+  border: 0;
+}
+
+.filters fieldset label {
+  display: flex;
+  align-items: center;
+  gap: .4375rem;
+}
+
+.filters fieldset input {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.filterActions {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  gap: .75rem;
+}
+
+.filterActions button,
+.open,
+.more a {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  padding: 0 .9375rem;
+  border: 0;
+  border-radius: .375rem;
+  color: var(--primary-foreground);
+  background-color: var(--primary);
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 11.25rem;
+  background-blend-mode: soft-light;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.filterActions a,
+.back {
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.filterActions a { padding: .625rem; }
+.results { margin-top: 2.25rem; }
+
+.resultHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.resultHeading h2 {
+  margin: 0;
+  font: 400 2.125rem var(--font-farm-display), Georgia, serif;
+}
+
+.resultHeading span { font-weight: 800; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.125rem;
+  margin-top: 1rem;
+}
+
+.card {
+  display: flex;
+  min-width: 0;
+  min-height: 19.375rem;
+  flex-direction: column;
+  padding: 1.375rem;
+  border-radius: .5rem;
+}
+
+.card h3 {
+  margin: .75rem 0 .25rem;
+  font: 400 1.75rem/1.05 var(--font-farm-display), Georgia, serif;
+}
+
+.card h3 a { color: var(--card-foreground); }
+
+.badges,
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+}
+
+.badges span,
+.meta span,
+.status {
+  padding: .3125rem .5rem;
+  border-radius: 999px;
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  font-size: .625rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.artist {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: .75rem;
+  font-weight: 800;
+}
+
+.preview {
+  display: -webkit-box;
+  margin: 1.125rem 0;
+  overflow: hidden;
+  white-space: pre-line;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-height: 1.45;
+}
+
+.meta { margin-top: auto; }
+.open { align-self: flex-start; margin-top: 1rem; }
+.empty { padding: 2.5rem; text-align: center; font-weight: 900; }
+.back { display: inline-block; margin-bottom: 1.375rem; }
+
+.songHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.songHeader > div > p:last-child { font-size: .9375rem; font-weight: 800; }
+
+.status {
+  flex: none;
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.chordStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.375rem;
+  padding: 1.125rem 1.375rem;
+  border-radius: .5rem;
+  color: var(--primary-foreground);
+  background-color: var(--primary);
+  background-image: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
+  background-size: 11.875rem;
+  background-blend-mode: soft-light;
+}
+
+.chordStrip span,
+.chordStrip p {
+  font-size: .6875rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.chordStrip h2 {
+  margin: .25rem 0 0;
+  font: 700 clamp(1.5rem, 4vw, 2.375rem) var(--font-farm-hand), cursive;
+  letter-spacing: .08em;
+}
+
+.songLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(16.25rem, .65fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.leadSheet { padding: clamp(1.375rem, 5vw, 3.25rem); }
+
+.songSection + .songSection {
+  margin-top: 2.375rem;
+  padding-top: 1.75rem;
+  border-top: 1px dashed var(--border);
+}
+
+.songSection > h2,
+.teacherRail h2 {
+  margin: 0 0 1rem;
+  color: var(--song-accent);
+  font: 400 1.5rem var(--font-farm-display), Georgia, serif;
+}
+
+.lyricLines { display: grid; gap: .25rem; }
+
+.lyricRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .65fr);
+  gap: 1.25rem;
+  align-items: end;
+}
+
+.lyricRow p {
+  margin: 0;
+  white-space: pre-wrap;
+  font: 700 clamp(1.125rem, 2.5vw, 1.5625rem)/1.42 var(--font-farm-body), sans-serif;
+}
+
+.lineChord,
+.sectionChord strong {
+  display: block;
+  color: var(--song-accent);
+  font: 700 1.125rem var(--font-farm-hand), cursive;
+}
+
+.lyricRow aside,
+.actionNote {
+  padding: .5rem .625rem;
+  border-left: .25rem solid var(--song-note-accent);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  font-size: .8125rem;
+  line-height: 1.4;
+}
+
+.lyricRow aside strong,
+.actionNote strong {
+  display: block;
+  color: var(--secondary-foreground);
+  font-size: .625rem;
+  text-transform: uppercase;
+}
+
+.actionNote { margin-top: 1.375rem; }
+.actionNote p { margin: .25rem 0 0; white-space: pre-wrap; }
+.sectionChord { margin-bottom: .875rem; }
+.sectionChord span { display: block; font-size: .625rem; font-weight: 900; text-transform: uppercase; }
+
+.teacherRail { display: grid; gap: 1.125rem; }
+.teacherRail section { padding: 1.25rem; border-radius: .5rem; }
+.teacherRail p { line-height: 1.5; }
+
+.topic + .topic,
+.source + .source {
+  margin-top: .875rem;
+  padding-top: .875rem;
+  border-top: 1px dashed var(--border);
+}
+
+.topic h3 { margin: 0; font-size: .9375rem; }
+.topic p { margin: .3125rem 0; font-size: .75rem; }
+.source { display: grid; gap: .1875rem; overflow-wrap: anywhere; }
+.source strong,
+.source small { color: var(--song-accent); font-size: .625rem; text-transform: uppercase; }
+.source span { font-size: .75rem; }
+.detailPage { padding-bottom: 5rem; }
+.more { display: flex; justify-content: center; margin-top: 1.625rem; }
+.more a { min-height: 2.75rem; padding-inline: 1.25rem; box-shadow: 0 .25rem 0 color-mix(in srgb, var(--border) 42%, transparent); }
+
+@media (max-width: 56.25rem) {
+  .filters { grid-template-columns: 1fr 1fr; }
+  .search,
+  .filters fieldset { grid-column: 1 / -1; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  .songLayout { grid-template-columns: 1fr; }
+  .teacherRail { grid-template-columns: 1fr 1fr; }
+  .teacherRail section:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 37.5rem) {
+  .page,
+  .detailPage { padding-inline: .875rem; }
+  .filters,
+  .grid,
+  .teacherRail { grid-template-columns: 1fr; }
+  .filters fieldset { align-items: flex-start; flex-direction: column; }
+  .filterActions { justify-content: flex-start; }
+  .resultHeading,
+  .songHeader,
+  .chordStrip { align-items: flex-start; flex-direction: column; }
+  .lyricRow { grid-template-columns: 1fr; gap: .375rem; }
+  .card { min-height: 17.5rem; }
+  .teacherRail section:last-child { grid-column: auto; }
+}
+
+@media print {
+  .detailPage { padding: 0; color: #000; background: #fff; }
+  .back,
+  :global(.site-header),
+  :global(.site-footer) { display: none !important; }
+  .songHeader { margin-bottom: 1rem; }
+  .songHeader h1 { font-size: 2.625rem; }
+  .songLayout { grid-template-columns: 2fr 1fr; gap: .75rem; }
+  .leadSheet,
+  .teacherRail section { color: #000; background: #fff; box-shadow: none; }
+  .chordStrip { border: 2px solid #000; color: #000; background: #fff; }
+  .teacherRail { gap: .625rem; }
+  .teacherRail section { padding: .75rem; }
+  .lyricRow p { font-size: .9375rem; }
+  .actionNote,
+  .lyricRow aside { color: #000; background: #fff; border-left-color: #000; }
+}

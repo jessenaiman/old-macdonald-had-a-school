@@ -1,0 +1,110 @@
+.card {
+  --identity-card-color: var(--card);
+  --identity-card-ink: var(--card-foreground);
+  --identity-card-texture: none;
+  position: relative;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--identity-card-color) 72%, #142d42);
+  border-radius: 1rem;
+  color: var(--identity-card-ink);
+  background-color: var(--identity-card-color);
+  background-image: linear-gradient(rgb(20 45 66 / 8%), rgb(20 45 66 / 8%)), var(--identity-card-texture);
+  background-repeat: repeat;
+  background-size: auto, 180px;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--identity-card-color) 55%, #142d42), 0 .75rem 1.25rem rgb(20 45 66 / 16%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.body {
+  display: grid;
+  height: 100%;
+  min-width: 0;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border-radius: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-.25rem) rotate(-.25deg);
+  box-shadow: 0 .6rem 0 color-mix(in srgb, var(--identity-card-color) 55%, #142d42), 0 1rem 1.6rem rgb(20 45 66 / 22%);
+}
+
+.body:focus-visible { outline: 3px solid #f4cb68; outline-offset: 4px; }
+
+.media {
+  position: relative;
+  display: grid;
+  min-height: 11rem;
+  place-items: end center;
+  overflow: hidden;
+  border-bottom: 1px dashed color-mix(in srgb, var(--identity-card-ink) 58%, transparent);
+  background: linear-gradient(180deg, rgb(255 255 255 / 15%), transparent 72%);
+}
+
+.media img {
+  width: 100%;
+  height: 11rem;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 .45rem .35rem rgb(0 0 0 / 25%));
+  transition: transform 180ms ease;
+}
+
+.card:hover .media img,
+.card:focus-within .media img { transform: scale(1.035); }
+
+.label {
+  position: absolute;
+  z-index: 2;
+  top: .7rem;
+  left: .7rem;
+  max-width: calc(100% - 1.4rem);
+  padding: .32rem .5rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--identity-card-color) 76%, transparent);
+  font: 900 .62rem/1 var(--font-farm-body), sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(3px);
+}
+
+.copy { display: grid; align-content: start; gap: .45rem; min-width: 0; padding: 1rem; }
+.copy h3 { margin: 0; color: inherit; font: 400 1.65rem/.95 var(--font-farm-display), Georgia, serif; text-wrap: balance; }
+.footer { align-self: end; margin-top: auto; padding: .55rem .75rem; border-top: 1px dashed color-mix(in srgb, var(--identity-card-ink) 52%, transparent); }
+
+.student .media { min-height: 8.5rem; }
+.student .media img { height: 8.5rem; }
+.student .copy { padding: .8rem; }
+.student .copy h3 { font-size: 1.35rem; }
+
+.subject { color: #142d42; background-color: #fffaf0; background-image: var(--home-paper-texture); background-size: 240px; }
+.subject .body { grid-template-rows: auto 1fr auto; }
+.subject .media { min-height: 8rem; border-bottom: 0; background: transparent; }
+.subject .copy { min-height: 10.5rem; padding-top: .35rem; text-align: center; }
+.subject .copy h3 { color: var(--identity-card-color); font-size: 1.55rem; }
+.subject .footer {
+  display: flex;
+  min-height: 2.8rem;
+  align-items: center;
+  gap: .5rem;
+  color: var(--identity-card-ink);
+  background-color: var(--identity-card-color);
+  background-image: var(--identity-card-texture);
+  background-repeat: repeat;
+  background-size: 180px;
+}
+
+@media (max-width: 680px) {
+  .subject .media { min-height: 6.25rem; }
+  .subject .copy { min-height: 0; padding: .25rem .85rem .8rem; }
+  .subject .copy h3 { font-size: 1.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .media img { transition: none; }
+  .card:hover, .card:focus-within, .card:hover .media img, .card:focus-within .media img { transform: none; }
+}

@@ -20,14 +20,12 @@
 .brand small, .footerBrand small { margin-top: .25rem; color: var(--site-chrome-accent); font: 900 .62rem/1 var(--font-farm-body), sans-serif; letter-spacing: .09em; text-transform: uppercase; }
 .brandShort { display: none; }
 
-.desktopNav { display: grid; min-width: 0; gap: .45rem; justify-items: center; }
-.primaryList, .gradeList { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; justify-content: center; }
+.desktopNav { display: grid; min-width: 0; justify-items: center; }
+.primaryList { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; justify-content: center; }
 .primaryList { gap: .2rem; }
-.gradeList { gap: .35rem; }
 .navLink, .searchLink, .gradeLink { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; border-radius: .55rem; color: inherit; font: 800 .82rem/1 var(--font-farm-body), sans-serif; text-decoration: none; white-space: nowrap; transition: background-color .15s ease, color .15s ease, transform .15s ease; }
 .navLink { padding-inline: .8rem; }
 .navLink:hover, .navLink[aria-current="page"] { background: rgb(255 255 255 / 12%); }
-.gradeLabel { margin-right: .35rem; color: color-mix(in srgb, var(--site-chrome-foreground) 70%, transparent); font: 900 .57rem/1 var(--font-farm-body), sans-serif; letter-spacing: .1em; text-transform: uppercase; }
 .gradeLink { min-height: 34px; padding-inline: .75rem; border: 1px solid color-mix(in srgb, var(--grade-color, var(--site-chrome-accent)) 80%, white); color: var(--grade-ink, white); background-color: var(--grade-color, transparent); box-shadow: 0 2px 0 rgb(0 0 0 / 28%); }
 .gradeLink:hover, .gradeLink[aria-current="page"] { transform: translateY(-1px); filter: brightness(1.08); }
 .searchLink { min-width: 5.25rem; gap: .4rem; min-height: 34px; padding-inline: .7rem; border: 1px solid color-mix(in srgb, var(--site-chrome-accent) 55%, transparent); flex-direction: row !important; flex-wrap: nowrap; }
@@ -71,7 +69,6 @@
   .brandFull { display: none; }
   .brandShort { display: inline; }
   .navLink { padding-inline: .55rem; }
-  .gradeLabel { display: none; }
 }
 
 @media (max-width: 820px) {
