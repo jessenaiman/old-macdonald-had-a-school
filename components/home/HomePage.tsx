@@ -32,9 +32,12 @@ export function HomePage({ hero }: HomePageProps) {
   return (
     <div className={styles.homePage}>
       <section className={styles.hero} aria-labelledby="home-title">
+        <span className={`${styles.heroFastener} ${styles.heroFastenerLeft} brand-asset fastener-sewing-button`} aria-hidden="true" />
+        <span className={`${styles.heroFastener} ${styles.heroFastenerRight} brand-asset fastener-sewing-button`} aria-hidden="true" />
         <div className={styles.heroCopy}><HeroTitle title={hero.title} /></div>
         <div className={styles.heroFeatureGrid}>
           <div className={styles.heroWeeklyLessons}>
+            <span className={`${styles.weeklyFastener} brand-asset fastener-paperclip`} aria-hidden="true" />
             <WeeklyLessonList lessons={HOME_VIDEO_SONGS.slice(0, 3)} title="New this week" limit={3} participation selected />
           </div>
           <HomeCarousel selected />
@@ -50,6 +53,7 @@ export function HomePage({ hero }: HomePageProps) {
 
       <section className={styles.bulletinBoard} id="browse-by-subject" aria-labelledby="subjects-title">
         <header className={styles.subjectHeading}>
+          <span className={`${styles.subjectHeadingFastener} brand-asset fastener-masking-tape`} aria-hidden="true" />
           <h2 id="subjects-title">Find a lesson by subject.</h2>
         </header>
         <div className={styles.subjectGrid}>

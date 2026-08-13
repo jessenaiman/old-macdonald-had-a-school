@@ -14,20 +14,27 @@
 .hero, .gradeRail, .bulletinBoard, .folkArts { width: min(1480px, calc(100% - 2rem)); min-width: 0; margin-inline: auto; }
 
 .hero {
+  position: relative;
   padding: clamp(1.25rem, 2.4vw, 2.25rem);
   border: 1px solid color-mix(in srgb, var(--site-chrome-border) 70%, transparent);
   border-radius: 1rem;
   background: color-mix(in srgb, var(--site-chrome-background) 92%, transparent);
   box-shadow: 0 .35rem 0 rgb(0 0 0 / 25%);
 }
+.hero::after { position: absolute; z-index: 0; inset: .65rem; border: 1px dashed color-mix(in srgb, var(--site-chrome-accent) 52%, transparent); border-radius: .65rem; content: ""; pointer-events: none; }
+.hero > *:not(.heroFastener) { position: relative; z-index: 1; }
+.heroFastener { position: absolute; z-index: 2; top: .25rem; width: 1.35rem; height: 1.35rem; filter: drop-shadow(var(--shadow-character)); }
+.heroFastenerLeft { left: .35rem; }
+.heroFastenerRight { right: .35rem; }
 
 .heroCopy { margin-bottom: clamp(1rem, 2vw, 1.75rem); text-align: center; }
 .heroCopy h1 { max-width: 58rem; margin: 0 auto; color: var(--site-chrome-foreground); font: 700 clamp(2rem, 4vw, 3.8rem)/1.02 var(--font-farm-display), Georgia, serif; text-wrap: balance; }
 .heroCopy h1 em { color: var(--red); font-style: normal; }
 .heroFeatureGrid { display: grid; grid-template-columns: minmax(20rem, 1fr) minmax(24rem, 1.15fr); gap: clamp(1.25rem, 3vw, 3rem); align-items: center; }
 
-.heroWeeklyLessons { overflow: hidden; border: 1px solid var(--border); border-radius: .55rem; color: var(--foreground); background: var(--surface-soft); box-shadow: 0 .2rem .45rem rgb(0 0 0 / 14%); }
-.weeklyList { display: grid; color: var(--foreground); }
+.heroWeeklyLessons { position: relative; border: 1px solid var(--border); border-radius: .55rem; color: var(--foreground); background: var(--surface-soft); box-shadow: 0 .2rem .45rem rgb(0 0 0 / 14%); transform: rotate(-.18deg); }
+.weeklyFastener { position: absolute; z-index: 2; top: -1.5rem; left: 1rem; width: 3.35rem; height: 3.35rem; filter: drop-shadow(var(--shadow-character)); transform: rotate(9deg); pointer-events: none; }
+.weeklyList { display: grid; overflow: hidden; border-radius: inherit; color: var(--foreground); }
 .weeklyList > header { display: flex; min-height: 2.7rem; align-items: center; justify-content: space-between; gap: 1rem; padding: .5rem 1rem; border-bottom: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent); }
 .weeklyList h2 { margin: 0; color: var(--red); font: 700 1.35rem/1 var(--font-farm-hand), cursive; }
 .weeklyList > header > a { color: var(--muted-foreground); font-size: .72rem; font-weight: 800; text-decoration: underline; text-underline-offset: .2rem; }
@@ -68,16 +75,17 @@
 
 .bulletinBoard { position: relative; padding: clamp(3.4rem, 5vw, 4.5rem) clamp(1.25rem, 2.4vw, 2.5rem) clamp(1.5rem, 2.5vw, 2.25rem); border: clamp(.3rem, .55vw, .5rem) solid #9b7656; border-radius: 1.2rem; color: var(--foreground); background-color: #b8906a; background-image: url("/design-assets/cork-board-kit-v2/seamless-cork-tile-web.webp"); background-repeat: repeat; background-size: clamp(22rem, 36vw, 32rem); box-shadow: inset 0 0 0 .12rem rgb(255 245 218 / 62%), inset 0 0 0 .3rem rgb(92 66 44 / 30%); filter: drop-shadow(0 .45rem 0 rgb(0 0 0 / 24%)); }
 .subjectHeading { position: absolute; top: 1.1rem; left: 50%; transform: translateX(-50%); }
+.subjectHeadingFastener { position: absolute; z-index: 2; top: -1.3rem; left: 50%; width: 4.4rem; height: 2.8rem; filter: drop-shadow(var(--shadow-character)); transform: translateX(-50%) rotate(-2deg); pointer-events: none; }
 .subjectHeading h2 { width: max-content; max-width: calc(100vw - 4rem); margin: 0; padding: .38rem clamp(1.2rem, 3vw, 2.5rem); color: var(--foreground); background: var(--home-paper-texture) repeat; background-size: 210px; box-shadow: 0 2px 3px rgb(0 0 0 / 20%); font: 700 clamp(1.2rem, 1.8vw, 1.65rem)/1 var(--font-farm-hand), cursive; text-align: center; }
 .subjectGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.8rem, 1.4vw, 1.25rem); align-items: stretch; }
 
 .subjectNote { --subject-note-color: var(--primary); --subject-note-paper: var(--home-paper-texture); --note-top: 12%; --note-right: 9%; --note-bottom: 10%; --note-left: 9%; position: relative; min-width: 0; min-height: clamp(12.5rem, 15vw, 14.5rem); container-type: inline-size; color: var(--foreground); background: var(--subject-note-paper) center / 100% 100% no-repeat; filter: drop-shadow(.12rem .35rem .3rem rgb(48 35 22 / 20%)); transform: rotate(var(--note-turn, 0deg)); }
-.subjectNote[data-subject="language"] { --subject-note-color: var(--subject-language-color); }
-.subjectNote[data-subject="math"] { --subject-note-color: var(--subject-math-color); }
-.subjectNote[data-subject="science"] { --subject-note-color: var(--subject-science-color); }
-.subjectNote[data-subject="music"] { --subject-note-color: var(--subject-music-color); }
-.subjectNote[data-subject="arts"] { --subject-note-color: var(--subject-arts-color); }
-.subjectNote[data-subject="health"] { --subject-note-color: var(--subject-health-color); }
+.subjectNote[data-subject="language"] { --subject-note-color: var(--subject-language-color); --subject-note-paper: var(--subject-language-paper); }
+.subjectNote[data-subject="math"] { --subject-note-color: var(--subject-math-color); --subject-note-paper: var(--subject-math-paper); }
+.subjectNote[data-subject="science"] { --subject-note-color: var(--subject-science-color); --subject-note-paper: var(--subject-science-paper); }
+.subjectNote[data-subject="music"] { --subject-note-color: var(--subject-music-color); --subject-note-paper: var(--subject-music-paper); }
+.subjectNote[data-subject="arts"] { --subject-note-color: var(--subject-arts-color); --subject-note-paper: var(--subject-arts-paper); }
+.subjectNote[data-subject="health"] { --subject-note-color: var(--subject-health-color); --subject-note-paper: var(--subject-health-paper); }
 .subjectNote[data-note-shape="torn"] { --note-top: 14%; --note-right: 8%; --note-bottom: 12%; --note-left: 15%; }
 .subjectNote[data-note-shape="grid"] { --note-top: 11%; --note-bottom: 9%; }
 .subjectNote[data-note-shape="deckled"] { --note-top: 13%; --note-bottom: 12%; }
@@ -114,7 +122,8 @@
 .subjectNote:nth-child(2) .subjectNoteFastener, .subjectNote:nth-child(5) .subjectNoteFastener { left: 24%; }
 .subjectNote:nth-child(3) .subjectNoteFastener, .subjectNote:nth-child(6) .subjectNoteFastener { left: 76%; }
 
-.folkArts { padding: 1rem; border-radius: .85rem; color: var(--foreground); background: var(--home-paper-texture) repeat; background-size: 18rem; }
+.folkArts { position: relative; padding: 1.35rem 1rem 1rem; border: 1px solid color-mix(in srgb, var(--border) 75%, transparent); border-radius: .85rem; color: var(--foreground); background: var(--home-paper-texture) repeat; background-size: 18rem; }
+.folkArtsFastener { position: absolute; z-index: 2; top: -1.3rem; left: 50%; width: 5rem; height: 3rem; filter: drop-shadow(var(--shadow-character)); transform: translateX(-50%) rotate(2deg); pointer-events: none; }
 .folkArts h2 { margin: 0 0 .8rem; font: 600 clamp(1.3rem, 2vw, 1.85rem)/1 var(--font-farm-hand), cursive; }
 .folkArtsGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; }
 .folkArtsCard { --folk-color: var(--curriculum-blue); position: relative; display: grid; min-height: 5.5rem; grid-template-columns: 3.5rem minmax(0, 1fr); align-items: center; gap: .6rem; padding: .7rem; overflow: hidden; border: 1px solid color-mix(in srgb, var(--folk-color) 70%, #142d42); border-radius: .7rem; color: #fffdf7; background: var(--folk-color) var(--folk-texture); background-size: 11rem; box-shadow: 0 .2rem 0 color-mix(in srgb, var(--folk-color) 55%, #142d42); }
@@ -142,10 +151,14 @@
   .homePage { gap: .7rem; padding-top: .55rem; }
   .hero, .gradeRail, .bulletinBoard, .folkArts { width: calc(100% - 1rem); }
   .hero { padding: 1.15rem .85rem 1rem; }
+  .hero::after { inset: .4rem; }
+  .heroFastener { width: 1.1rem; height: 1.1rem; }
   .heroCopy { margin-bottom: 1rem; }
   .heroCopy h1 { font-size: clamp(1.65rem, 8vw, 2.3rem); }
   .heroFeatureGrid { grid-template-columns: 1fr; gap: 1.15rem; }
   .weeklyList li { min-height: 3.7rem; padding: .45rem .65rem; }
+  .heroWeeklyLessons { transform: none; }
+  .weeklyFastener { top: -1.25rem; left: .5rem; width: 2.8rem; height: 2.8rem; }
   .carouselPhoto { border-width: .35rem; transform: none; }
   .photoPinLeft, .photoPinRight { top: -1rem; width: 1.7rem; height: 1.7rem; }
   .photoPinLeft, .carouselPrevious { left: -.8rem; }

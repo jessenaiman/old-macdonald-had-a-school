@@ -1,12 +1,36 @@
-import { CharacterActionExample } from "../../../components/brand/BrandSystemExamples"
+import Link from "next/link"
+import { Button } from "../../../components/ui/button"
 
-<section id="buttons" className="mt-5 rounded-2xl border border-border bg-background p-5 sm:p-8 lg:p-12">
+<section id="buttons" className="material-surface material-cork mt-5 rounded-2xl border border-border p-5 sm:p-8 lg:p-12">
 
-<p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Character-local action pattern</p>
-<h2 className="m-0 font-heading text-3xl sm:text-5xl">Actions belong to a teaching context</h2>
+<p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Shared production controls</p>
+<h2 className="m-0 font-heading text-3xl sm:text-5xl">One button family, real classroom materials</h2>
 
-Buttons are not a detached variant wall. Primary, secondary, and quiet actions should express the next useful teacher decision while character colour remains local to the character's own surface.
+Every route uses this shared `Button`. The variant selects behavior and material treatment; pages choose only the label, destination, and semantic variant. Character colour remains local to character-owned components.
 
-<div className="mt-7"><CharacterActionExample /></div>
+### Production actions
+
+These are the real shared `Button` variants used by routes. Use a `Button` for an action and `Button asChild` with `Link` for navigation. Do not style a native button inside a page.
+
+<div className="material-surface material-cork mt-5 rounded-2xl border border-border p-5 sm:p-8">
+  <div className="material-surface material-cardboard-paper relative flex flex-wrap items-center gap-4 rounded-xl border border-border p-6 pt-9 shadow-md">
+    <span className="brand-asset fastener-paperclip icon-small absolute -top-4 left-6" aria-hidden="true" />
+    <Button>Find lessons</Button>
+    <Button variant="secondary">Open planner</Button>
+    <Button variant="outline">Clear choices</Button>
+    <Button variant="ghost">Preview the story</Button>
+    <Button variant="link" asChild><Link href="#buttons">See all resources →</Link></Button>
+  </div>
+</div>
+
+```tsx
+<Button>Find lessons</Button>
+<Button variant="secondary">Open planner</Button>
+<Button variant="outline">Clear choices</Button>
+<Button variant="ghost">Preview the story</Button>
+<Button variant="link" asChild><Link href="/lessons">See all resources →</Link></Button>
+```
+
+All primary touch actions use the default 44-pixel minimum height. Icon-only controls use `size="icon"` and require an `aria-label`.
 
 </section>

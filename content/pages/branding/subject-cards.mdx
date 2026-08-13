@@ -1,24 +1,24 @@
-import { SubjectCard } from "../../../components/brand/SubjectCard"
-import { HomepageBrandPatterns } from "../../../components/brand/HomepageBrandPatterns"
+import { HomeSubjectNote } from "../../../components/home/HomeSubjectNote"
+import { FolkArtsSection } from "../../../components/home/FolkArtsSection"
 
-<section id="subject-cards" className="mt-5 rounded-2xl border border-border bg-background p-5 text-foreground sm:p-8 lg:p-12">
+<section id="subject-cards" className="material-surface material-cork mt-5 rounded-2xl border border-border p-5 text-foreground sm:p-8 lg:p-12">
 
-## Character-led subject cards
+## Production subject notes
 
-Use this larger `BrandIdentityCard` variant when a subject genuinely needs a named learner or teacher. The subject remains the title and destination. The assigned character supplies the local colour, felt, and unchanged portrait. The curriculum icon stays a separate visual signal.
+This is the exact `HomeSubjectNote` used by the homepage. It is not a branding-only card: the same production component owns the paper silhouette, live text, curriculum icon, fastener, teacher guide, and lesson links.
 
 Use a fastener only when the card sits on a board. It must cross the card edge and the cork surface, as these examples do.
 
 <div className="material-surface material-cork mt-7 grid gap-5 rounded-2xl p-[clamp(1.25rem,3vw,2.5rem)] md:grid-cols-2 xl:grid-cols-3">
-  <SubjectCard title="Language & literacy" href="/search?q=language%20literacy" character="whiskers" iconClass="drama-storytelling-icon" highlights={["Build vocabulary", "Explore phonics", "Tell and retell stories"]} lessonCount={5} fastenerClass="fastener-paperclip" />
-  <SubjectCard title="Nature & science" href="/search?q=science%20nature" character="scout" iconClass="gardening-health-icon" highlights={["Observe and explore", "Seasons and weather", "Living things"]} lessonCount={2} fastenerClass="fastener-push-pin" />
-  <SubjectCard title="Music" href="/search?q=music" character="penny" iconClass="music-icon" highlights={["Rhythm and beat", "Sing and move", "Create and perform"]} lessonCount={5} fastenerClass="fastener-masking-tape" />
+  <HomeSubjectNote subject="language" title="Language & literacy" href="/search?q=language%20literacy" iconClass="drama-storytelling-icon" teacherReason="Build confident talk, reading, and storytelling." highlights={["Build vocabulary", "Explore phonics", "Tell and retell stories"]} fastenerClass="fastener-paperclip" noteShape="torn" guideCharacter="whiskers" />
+  <HomeSubjectNote subject="science" title="Nature & science" href="/search?q=science%20nature" iconClass="gardening-health-icon" teacherReason="Explore seasons, weather, and living things." highlights={["Observe and explore", "Seasons and weather", "Living things"]} fastenerClass="fastener-push-pin" noteShape="deckled" guideCharacter="scout" />
+  <HomeSubjectNote subject="music" title="Music" href="/search?q=music" iconClass="music-icon" teacherReason="Teach rhythm, listening, and movement through songs." highlights={["Rhythm and beat", "Sing and move", "Create and perform"]} fastenerClass="fastener-masking-tape" noteShape="ruled" guideCharacter="penny" />
 </div>
 
 ### Homepage notes and folk-arts links
 
 The homepage uses the reusable `HomeSubjectNote` pattern so six subjects remain visible together without assigning a character to every subject. Each approved blank paper silhouette holds live HTML text, a separate curriculum icon, and an independently positioned fastener. This keeps the notes responsive and makes the attachment logic visible rather than baking a whole card into one image.
 
-<HomepageBrandPatterns />
+<FolkArtsSection />
 
 </section>

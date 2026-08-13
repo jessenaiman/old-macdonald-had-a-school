@@ -36,6 +36,7 @@ interface CurriculumResult {
   matched_terms?: string[];
   why_match?: string;
   pacing?: string | null;
+  suggested_plan?: string | null;
   planning_windows?: string[];
 }
 
@@ -65,13 +66,9 @@ function slugify(value: string) {
 }
 
 function curriculumResultHref(topic: CurriculumResult) {
-  const firstGrade = (topic.grade_key || "").split("|")[0] || "daycare";
   const slug = slugify(topic.lesson_topic);
-  if (/^daycare$/.test(firstGrade)) return `/grade/daycare/${slug}`;
-  if (/^preschool$/.test(firstGrade) || /^pre[- ]?school$/.test(firstGrade)) return `/grade/pre-school/${slug}`;
-  if (/^kindergarten$/.test(firstGrade)) return `/grade/kindergarten/${slug}`;
-  if (/^grade[- ]?1$/.test(firstGrade) || /^grade-one$/.test(firstGrade) || /^grade1$/.test(firstGrade)) return `/grade/grade-one/${slug}`;
-  if (/^grade[- ]?2$/.test(firstGrade) || /^grade-two$/.test(firstGrade) || /^grade2$/.test(firstGrade)) return `/grade/grade-two/${slug}`;
+  // Normalized curriculum topics are rendered by the canonical topic route.
+  // Grade routes serve a different lesson-draft model and can legitimately be absent.
   return `/topics/${slug}`;
 }
 
@@ -393,7 +390,7 @@ export default function SearchPage() {
                             <span>{teacherFacingTopicSummary(topic) || "No topic summary has been reviewed yet."}</span>
                             {topic.why_match ? <small>{topic.why_match}</small> : null}
                           </span>
-                          <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}{topic.pacing ? <><br />{topic.pacing}</> : null}</span>
+                          <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}{topic.suggested_plan ? <><br />Suggested: {topic.suggested_plan}</> : topic.pacing ? <><br />Legacy: {topic.pacing}</> : null}</span>
                         </Link>
                       </li>
                     );
@@ -468,7 +465,7 @@ export default function SearchPage() {
                       </section>
                       <section>
                         <h3>{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
-                        <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}${selectedTopic.pacing ? ` ... ${selectedTopic.pacing}` : ""}` : selectedLesson?.purpose || "No purpose is available."}</p>
+                        <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}${selectedTopic.suggested_plan ? ` ... Suggested in ${selectedTopic.suggested_plan}` : selectedTopic.pacing ? ` ... Legacy pacing: ${selectedTopic.pacing}` : ""}` : selectedLesson?.purpose || "No purpose is available."}</p>
                       </section>
                       <section>
                         <h3>Curriculum reference</h3>

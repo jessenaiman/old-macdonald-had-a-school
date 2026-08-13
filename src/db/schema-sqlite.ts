@@ -27,6 +27,9 @@ export const topics = sqliteTable('topics', {
   taughtStatus: text('taught_status'),
   mergedInto: integer('merged_into').references((): any => topics.id),
   circleTime: text('circle_time'),
+  teacherTitle: text('teacher_title'),
+  teacherSummary: text('teacher_summary'),
+  teacherTitleState: text('teacher_title_state'),
 });
 
 export const topicGrades = sqliteTable('topic_grades', {
@@ -66,6 +69,33 @@ export const weeklyPacing = sqliteTable('weekly_pacing', {
   month: text('month'),
   notes: text('notes'),
 });
+
+// Suggested plan placement is intentionally separate from tags and official
+// standards: a plan can vary by source, school, or teacher.
+export const suggestedCurriculumPlans = sqliteTable('suggested_curriculum_plans', {
+  id: integer('id').primaryKey(),
+  key: text('key').notNull(),
+  label: text('label').notNull(),
+  description: text('description').notNull(),
+  provenanceStatus: text('provenance_status').notNull(),
+  sourceDocumentId: integer('source_document_id').references(() => sourceDocuments.id, { onDelete: 'set null' }),
+  sourceLocator: text('source_locator'),
+  active: integer('active', { mode: 'boolean' }).notNull().default(true),
+});
+
+export const suggestedCurriculumPlanPlacements = sqliteTable('suggested_curriculum_plan_placements', {
+  id: integer('id').primaryKey(),
+  planId: integer('plan_id').notNull().references(() => suggestedCurriculumPlans.id, { onDelete: 'cascade' }),
+  topicGradeId: integer('topic_grade_id').notNull().references(() => topicGrades.id, { onDelete: 'cascade' }),
+  weekNumber: integer('week_number'),
+  month: text('month'),
+  sourceLocator: text('source_locator'),
+  relationshipNote: text('relationship_note'),
+}, (table) => ({
+  placementUnique: uniqueIndex('suggested_curriculum_plan_placements_plan_grade_week_month_unique').on(
+    table.planId, table.topicGradeId, table.weekNumber, table.month,
+  ),
+}));
 
 // ─── Standards & Tags ──────────────────────────────────────────────────────
 

@@ -15,7 +15,7 @@ try {
     await page.goto(`http://localhost:3000/grade/${route}`, { waitUntil: "networkidle" });
     const result = await page.evaluate(() => {
       const shell = document.querySelector(".grade-route-layout");
-      const board = document.querySelector('[data-style-scope="grade-interaction-lane"]');
+      const board = document.querySelector('[data-style-scope="grade-workspace"]');
       const footer = document.querySelector("footer");
       const boardRect = board?.getBoundingClientRect();
       const shellRect = shell?.getBoundingClientRect();

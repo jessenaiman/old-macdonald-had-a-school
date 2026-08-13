@@ -23,7 +23,8 @@
       "src/db/migrations-sqlite/0017_repair_material_links_and_dedupe_curriculum_links.sql",
       "src/db/migrations-sqlite/0018_add_planning_windows.sql",
       "src/db/migrations-sqlite/0019_add_resource_page_evidence.sql",
-      "src/db/migrations-sqlite/0020_add_teacher_facing_topic_fields.sql"
+      "src/db/migrations-sqlite/0020_add_teacher_facing_topic_fields.sql",
+      "src/db/migrations-sqlite/0021_add_suggested_curriculum_plans.sql"
     ],
     "drizzle": [
       {
@@ -92,6 +93,10 @@
       {
         "applied_at": "2026-08-13T16:15:18.592Z",
         "migration_id": "20260813_005_add_teacher_facing_topic_fields"
+      },
+      {
+        "applied_at": "2026-08-13T18:28:30.741Z",
+        "migration_id": "20260813_006_add_suggested_curriculum_plans"
       },
       {
         "applied_at": "2026-08-13 05:54:57",
@@ -420,6 +425,18 @@
       {
         "applied_at": "2026-08-13 03:17:22",
         "migration_id": "curric-enrich-final"
+      },
+      {
+        "applied_at": "2026-08-13 16:52:57",
+        "migration_id": "data-20260813-curriculum-map-local-resources-v1"
+      },
+      {
+        "applied_at": "2026-08-13 16:54:47",
+        "migration_id": "data-20260813-curriculum-map-local-resources-v2"
+      },
+      {
+        "applied_at": "2026-08-13 16:58:46",
+        "migration_id": "data-20260813-curriculum-map-local-resources-v3"
       },
       {
         "applied_at": "2026-08-13 13:13:05",
@@ -1004,8 +1021,8 @@
     ]
   },
   "object_counts": {
-    "index": 15,
-    "table": 52,
+    "index": 17,
+    "table": 54,
     "trigger": 7,
     "view": 0
   },
@@ -1092,6 +1109,18 @@
       "name": "song_sources_song_idx",
       "sql": "CREATE INDEX song_sources_song_idx ON song_sources(song_id)",
       "tbl_name": "song_sources",
+      "type": "index"
+    },
+    {
+      "name": "suggested_curriculum_plan_placements_month_idx",
+      "sql": "CREATE INDEX suggested_curriculum_plan_placements_month_idx\n  ON suggested_curriculum_plan_placements(month)",
+      "tbl_name": "suggested_curriculum_plan_placements",
+      "type": "index"
+    },
+    {
+      "name": "suggested_curriculum_plan_placements_topic_grade_idx",
+      "sql": "CREATE INDEX suggested_curriculum_plan_placements_topic_grade_idx\n  ON suggested_curriculum_plan_placements(topic_grade_id)",
+      "tbl_name": "suggested_curriculum_plan_placements",
       "type": "index"
     },
     {
@@ -1365,6 +1394,18 @@
       "type": "table"
     },
     {
+      "name": "suggested_curriculum_plan_placements",
+      "sql": "CREATE TABLE suggested_curriculum_plan_placements (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  plan_id INTEGER NOT NULL REFERENCES suggested_curriculum_plans(id) ON DELETE CASCADE,\n  topic_grade_id INTEGER NOT NULL REFERENCES topic_grades(id) ON DELETE CASCADE,\n  week_number INTEGER,\n  month TEXT,\n  source_locator TEXT,\n  relationship_note TEXT,\n  UNIQUE (plan_id, topic_grade_id, week_number, month)\n)",
+      "tbl_name": "suggested_curriculum_plan_placements",
+      "type": "table"
+    },
+    {
+      "name": "suggested_curriculum_plans",
+      "sql": "CREATE TABLE suggested_curriculum_plans (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  key TEXT NOT NULL COLLATE NOCASE UNIQUE,\n  label TEXT NOT NULL,\n  description TEXT NOT NULL,\n  provenance_status TEXT NOT NULL\n    CHECK (provenance_status IN ('source_backed', 'editorial', 'legacy_unverified')),\n  source_document_id INTEGER REFERENCES source_documents(id) ON DELETE SET NULL,\n  source_locator TEXT,\n  active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1))\n)",
+      "tbl_name": "suggested_curriculum_plans",
+      "type": "table"
+    },
+    {
       "name": "tag_aliases",
       "sql": "CREATE TABLE tag_aliases (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  tag_id INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE,\n  alias TEXT NOT NULL COLLATE NOCASE,\n  provenance TEXT NOT NULL DEFAULT 'editorial',\n  UNIQUE(tag_id, alias)\n)",
       "tbl_name": "tag_aliases",
@@ -1455,7 +1496,7 @@
       "type": "trigger"
     }
   ],
-  "schema_fingerprint": "bb3400196f69e6162a229fafc63bc0c02b47d7b242c378f56222541d35d91afe",
+  "schema_fingerprint": "c42cab42ab50cd3eddac87eab96fe8e53e9467cf194296d3f8896e386e9eda12",
   "tables": {
     "__drizzle_migrations": {
       "columns": [
@@ -5022,6 +5063,200 @@
         }
       ]
     },
+    "suggested_curriculum_plan_placements": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "plan_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "topic_grade_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "week_number",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "month",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "source_locator",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "relationship_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "topic_grade_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topic_grades",
+          "to": "id"
+        },
+        {
+          "from": "plan_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "suggested_curriculum_plans",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "suggested_curriculum_plan_placements_month_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        },
+        {
+          "name": "suggested_curriculum_plan_placements_topic_grade_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 1,
+          "unique": 0
+        },
+        {
+          "name": "sqlite_autoindex_suggested_curriculum_plan_placements_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 2,
+          "unique": 1
+        }
+      ]
+    },
+    "suggested_curriculum_plans": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "key",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "label",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "description",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "provenance_status",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "source_document_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "source_locator",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": "1",
+          "name": "active",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "source_document_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "SET NULL",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "source_documents",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_suggested_curriculum_plans_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
     "tag_aliases": {
       "columns": [
         {
@@ -5607,5 +5842,5 @@
       ]
     }
   },
-  "user_version": 20
+  "user_version": 21
 }

@@ -6,10 +6,17 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { gradeSearchHref, type GradeKey } from "@/lib/grade-routes";
+import { type GradeKey } from "@/lib/grade-routes";
 import { CAST, type CastKey } from "@/lib/cast";
 import type { GradePathItem } from "../builder/CurriculumTemplates";
 import styles from "./GradeInteractionLane.module.css";
+import {
+  GradeCurriculumPanel,
+  GradePlannerPanel,
+  GradeResourcesPanel,
+  GradeSearchPanel,
+  GradeTodayPanel,
+} from "./GradePanels";
 
 export type GradeInteractionSection =
   "today" | "curriculum" | "planner" | "resources" | "search";
@@ -87,96 +94,6 @@ const sections: Array<{ id: GradeInteractionSection; label: string }> = [
   { id: "resources", label: "Resources" },
   { id: "search", label: "Search" },
 ];
-const daycarePathways = [
-  ["Story & songs", "Books, songs, and rhymes"],
-  ["Explore & discover", "Hands-on play, sensory fun"],
-  ["Create & express", "Art, movement, pretend play"],
-  ["Care & connect", "Feelings, friends, routines"],
-];
-const fallbackIcons = [
-  "drama-storytelling-icon",
-  "math-building-icon",
-  "gardening-health-icon",
-  "art-photography-icon",
-];
-const fasteners = [
-  "fastener-paperclip",
-  "fastener-masking-tape",
-  "fastener-push-pin",
-];
-const itemIcon = (item: GradePathItem | undefined, index: number) =>
-  item?.icon || fallbackIcons[index % fallbackIcons.length];
-
-function PanelHeading({
-  eyebrow,
-  title,
-  summary,
-}: {
-  eyebrow: string;
-  title: string;
-  summary?: string;
-}) {
-  return (
-    <header className={styles.panelHeading}>
-      <div>
-        <span className={styles.eyebrow}>{eyebrow}</span>
-        <h2>{title}</h2>
-      </div>
-      {summary ? <p>{summary}</p> : null}
-    </header>
-  );
-}
-
-function LessonCard({
-  item,
-  index,
-  active,
-  onChoose,
-}: {
-  item: GradePathItem;
-  index: number;
-  active: boolean;
-  onChoose: (index: number) => void;
-}) {
-  const body = (
-    <>
-      <span className={styles.cardNumber}>
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      <span
-        className={`${styles.cardIcon} brand-asset ${itemIcon(item, index)} icon-medium`}
-        aria-hidden="true"
-      />
-      <span className={styles.cardKicker}>{item.kicker}</span>
-      <h3>{item.title}</h3>
-      <p>{item.summary}</p>
-      <span className={styles.cardAction}>
-        {item.href ? "View lesson" : "Choose path"}
-      </span>
-    </>
-  );
-  const className = `${styles.lessonCard} ${active ? styles.lessonCardActive : ""}`;
-  return item.href ? (
-    <Link
-      href={item.href}
-      className={className}
-      onClick={() => onChoose(index)}
-    >
-      {body}
-    </Link>
-  ) : (
-    <Button
-      variant="ghost"
-      type="button"
-      className={className}
-      aria-pressed={active}
-      onClick={() => onChoose(index)}
-    >
-      {body}
-    </Button>
-  );
-}
-
 export function GradeWelcomeControl({
   config,
   summary,
@@ -233,108 +150,16 @@ export function GradeWelcomeControl({
   );
 }
 
-function TodayPanel({
-  config,
-  summary,
-  items,
-  selectedIndex,
-  onChoose,
-  onSection,
-  onPreview,
-  headingLevel = "h1",
-}: {
-  config: GradeInteractionConfig;
-  summary: string;
-  items: GradePathItem[];
-  selectedIndex: number;
-  onChoose: (index: number) => void;
-  onSection: (section: GradeInteractionSection) => void;
-  onPreview?: () => void;
-  headingLevel?: "h1" | "h2";
-}) {
-  const selected = items[selectedIndex] ?? items[0];
-  return (
-    <>
-      <GradeWelcomeControl
-        config={config}
-        summary={summary}
-        primaryHref={selected?.href}
-        onBrowse={() => onSection("curriculum")}
-        onPreview={onPreview}
-        headingLevel={headingLevel}
-      />
-      {config.variant === "daycare" ? (
-        <div className={styles.daycareRibbon} aria-label="Daycare pathways">
-          {daycarePathways.map(([label, detail], index) => (
-            <Button
-              variant="ghost"
-              type="button"
-              key={label}
-              className={styles.daycarePathway}
-              onClick={() => {
-                onChoose(index % Math.max(items.length, 1));
-                onSection("curriculum");
-              }}
-            >
-              <span
-                className={`brand-asset ${itemIcon(items[index], index)} icon-medium`}
-                aria-hidden="true"
-              />
-              <span>
-                <strong>{label}</strong>
-                <small>{detail}</small>
-              </span>
-            </Button>
-          ))}
-        </div>
-      ) : null}
-      <div className={styles.sectionHeader}>
-        <PanelHeading
-          eyebrow="Pick a starting point"
-          title={`Learning paths for ${config.grade}`}
-        />
-        <Button
-          variant="ghost"
-          type="button"
-          className={styles.textButton}
-          onClick={() => onSection("resources")}
-        >
-          {"See all resources ->"}
-        </Button>
-      </div>
-      <div className={styles.lessonGrid}>
-        {items.slice(0, 4).map((item, index) => (
-          <LessonCard
-            key={`${item.title}-${index}`}
-            item={item}
-            index={index}
-            active={index === selectedIndex}
-            onChoose={onChoose}
-          />
-        ))}
-      </div>
-      <div className={styles.planningStrip}>
-        <span className={styles.eyebrow}>Today&apos;s planning board</span>
-        <strong>Invite a choice and notice the story.</strong>
-        <Button
-          variant="ghost"
-          type="button"
-          className={styles.textButton}
-          onClick={() => onSection("planner")}
-        >
-          {"Open planner ->"}
-        </Button>
-      </div>
-    </>
-  );
-}
-
 export function TeacherNote({
   character,
   quote,
+  actionHref,
+  actionLabel = "Open lesson workspace",
 }: {
   character: CastKey;
   quote: string;
+  actionHref?: string;
+  actionLabel?: string;
 }) {
   const teacher = CAST[character];
   return (
@@ -352,6 +177,8 @@ export function TeacherNote({
         </CardHeader>
         <CardContent className={styles.teacherCardContent}>
           <blockquote>{`"${quote}"`}</blockquote>
+          <p className={styles.teacherIdentity}>{teacher.name} · teaching note</p>
+          {actionHref ? <Link className={styles.teacherNoteAction} href={actionHref}>{actionLabel}</Link> : null}
           <Image
             src={teacher.portrait}
             width={220}
@@ -368,261 +195,6 @@ export function TeacherNote({
 
 function PersistentTeacherQuote({ config }: { config: GradeInteractionConfig }) {
   return <TeacherNote character={config.teacher} quote={config.leadQuote} />;
-}
-
-function CurriculumPanel({
-  config,
-  items,
-  selectedIndex,
-  onChoose,
-  onSection,
-}: {
-  config: GradeInteractionConfig;
-  items: GradePathItem[];
-  selectedIndex: number;
-  onChoose: (index: number) => void;
-  onSection: (section: GradeInteractionSection) => void;
-}) {
-  const selected = items[selectedIndex] ?? items[0];
-  return (
-    <>
-      <PanelHeading
-        eyebrow="Curriculum - topic overview"
-        title={`${config.grade} learning paths`}
-        summary="Choose a topic, then shape the lesson around the learners who will meet it."
-      />
-      <section className={styles.featuredGoal} aria-label="Featured topic goal">
-        <div>
-          <span className={styles.eyebrow}>Featured topic goal</span>
-          <h3>{selected?.title ?? "Choose a lesson to begin"}</h3>
-          <p>
-            {selected?.summary ??
-              "Open a learning path to load the current goal."}
-          </p>
-        </div>
-        <Button
-          variant="ghost"
-          type="button"
-          className={styles.paperAction}
-          onClick={() => onSection("planner")}
-        >
-          Plan this topic
-        </Button>
-      </section>
-      <div className={styles.sequenceHeading}>
-        <span className={styles.eyebrow}>Lesson sequence</span>
-        <span>{items.length} lessons</span>
-      </div>
-      <div className={styles.sequenceList}>
-        {items.map((item, index) => (
-          <LessonCard
-            key={`${item.title}-${index}`}
-            item={item}
-            index={index}
-            active={index === selectedIndex}
-            onChoose={onChoose}
-          />
-        ))}
-      </div>
-      <Button
-        variant="ghost"
-        type="button"
-        className={styles.backButton}
-        onClick={() => onSection("today")}
-      >
-        {"<- Back to today"}
-      </Button>
-    </>
-  );
-}
-
-function PlannerPanel({
-  config,
-  item,
-  onSection,
-}: {
-  config: GradeInteractionConfig;
-  item?: GradePathItem;
-  onSection: (section: GradeInteractionSection) => void;
-}) {
-  const notes = [
-    ["Set a goal", "Name the one thing learners might notice, try, or share."],
-    [
-      "Gather what helps",
-      "Leave room for the materials, song, book, or visual support.",
-    ],
-    [
-      "Prepare your plan",
-      "Carry forward what children showed you and one next step.",
-    ],
-  ];
-  return (
-    <>
-      <PanelHeading
-        eyebrow="Planner"
-        title="Prepare one helpful next step"
-        summary={`A quiet place to gather what ${config.grade} learners need before the lesson begins.`}
-      />
-      <div className={styles.plannerGoal}>
-        <div>
-          <span className={styles.eyebrow}>Current lesson goal</span>
-          <h3>{item?.title ?? "Choose a lesson to begin"}</h3>
-          <p>
-            {item?.summary ??
-              "Open a learning path above to load the current goal."}
-          </p>
-        </div>
-        {item?.href ? (
-          <Link href={item.href} className={styles.primaryAction}>
-            Open lesson
-          </Link>
-        ) : (
-          <Button
-            variant="ghost"
-            type="button"
-            className={styles.primaryAction}
-            onClick={() => onSection("curriculum")}
-          >
-            Choose a lesson
-          </Button>
-        )}
-      </div>
-      <div
-        className={styles.noteGrid}
-        aria-label={`${config.grade} planning notes`}
-      >
-        {notes.map(([label, prompt], index) => (
-          <article className={styles.noteSheet} key={label}>
-            <span
-              className={`${styles.fastener} brand-asset ${fasteners[index]} icon-small`}
-              aria-hidden="true"
-            />
-            <span>{label}</span>
-            <p>{prompt}</p>
-            <div className={styles.noteLines} aria-hidden="true">
-              <i />
-              <i />
-              <i />
-              <i />
-              <i />
-              <i />
-              <i />
-              <i />
-            </div>
-          </article>
-        ))}
-      </div>
-      <div className={styles.plannerFooter}>
-        <span>Planning reminder</span>
-        <strong>{config.reminder}</strong>
-        <Button
-          variant="ghost"
-          type="button"
-          className={styles.textButton}
-          onClick={() => onSection("today")}
-        >
-          {"Return to today ->"}
-        </Button>
-      </div>
-    </>
-  );
-}
-
-function ResourcesPanel({
-  config,
-  items,
-  onChoose,
-}: {
-  config: GradeInteractionConfig;
-  items: GradePathItem[];
-  onChoose: (index: number) => void;
-}) {
-  return (
-    <>
-      <PanelHeading
-        eyebrow="Resources"
-        title="Gather what helps"
-        summary="Open an existing lesson to find its starting point and supporting materials."
-      />
-      <div className={styles.resourceGrid}>
-        {items.map((item, index) => (
-          <LessonCard
-            key={`${item.title}-${index}`}
-            item={item}
-            index={index}
-            active={false}
-            onChoose={onChoose}
-          />
-        ))}
-      </div>
-      <div className={styles.resourceFooter}>
-        <span>Related to {config.grade}</span>
-        <strong>Use the lesson sequence to keep the work close at hand.</strong>
-      </div>
-    </>
-  );
-}
-
-function SearchPanel({
-  config,
-  items,
-  onSection,
-}: {
-  config: GradeInteractionConfig;
-  items: GradePathItem[];
-  onSection: (section: GradeInteractionSection) => void;
-}) {
-  const cues = [
-    "lesson resources",
-    ...items.map((item) => item.title),
-    ...items.map((item) => item.kicker),
-  ];
-  const uniqueCues = [...new Set(cues)].slice(0, 6);
-
-  return (
-    <>
-      <PanelHeading
-        eyebrow="Search this grade"
-        title={`Find ${config.grade} resources`}
-        summary="Choose a cue to search the complete resource collection while keeping this grade filter applied."
-      />
-      <section
-        className={styles.searchBoard}
-        aria-label={`${config.grade} search cues`}
-      >
-        <span
-          className={`${styles.searchFastener} brand-asset fastener-paperclip icon-medium`}
-          aria-hidden="true"
-        />
-        <div>
-          <span className={styles.eyebrow}>Current grade</span>
-          <h3>{config.grade}</h3>
-          <p>
-            Every cue opens the shared search with this grade already selected.
-          </p>
-        </div>
-        <div className={styles.searchCueGrid}>
-          {uniqueCues.map((cue) => (
-            <Link
-              key={cue}
-              className={styles.searchCue}
-              href={gradeSearchHref(config.gradeKey, cue)}
-            >
-              {cue}
-            </Link>
-          ))}
-        </div>
-      </section>
-      <Button
-        variant="ghost"
-        type="button"
-        className={styles.backButton}
-        onClick={() => onSection("today")}
-      >
-        {"<- Back to today"}
-      </Button>
-    </>
-  );
 }
 
 export function GradeInteractionLane({
@@ -661,18 +233,27 @@ export function GradeInteractionLane({
   };
   const panel =
     section === "today" ? (
-      <TodayPanel
+      <GradeTodayPanel
         config={config}
         summary={summary}
         items={items}
         selectedIndex={selectedIndex}
         onChoose={chooseItem}
         onSection={setSection}
-        onPreview={onPreview}
         headingLevel={headingLevel}
+        welcome={
+          <GradeWelcomeControl
+            config={config}
+            summary={summary}
+            primaryHref={(items[selectedIndex] ?? items[0])?.href}
+            onBrowse={() => setSection("curriculum")}
+            onPreview={onPreview}
+            headingLevel={headingLevel}
+          />
+        }
       />
     ) : section === "curriculum" ? (
-      <CurriculumPanel
+      <GradeCurriculumPanel
         config={config}
         items={items}
         selectedIndex={selectedIndex}
@@ -680,15 +261,15 @@ export function GradeInteractionLane({
         onSection={setSection}
       />
     ) : section === "planner" ? (
-      <PlannerPanel
+      <GradePlannerPanel
         config={config}
         item={items[selectedIndex] ?? items[0]}
         onSection={setSection}
       />
     ) : section === "resources" ? (
-      <ResourcesPanel config={config} items={items} onChoose={chooseItem} />
+      <GradeResourcesPanel config={config} items={items} onChoose={chooseItem} />
     ) : (
-      <SearchPanel config={config} items={items} onSection={setSection} />
+      <GradeSearchPanel config={config} onSection={setSection} />
     );
   const panelId = `${config.gradeKey}-grade-panel`;
   return (

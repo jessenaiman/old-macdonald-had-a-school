@@ -53,11 +53,11 @@ export async function CurriculumLessonPage({ slug }: Props) {
                   <span key={g.label} className={styles.badge}>{g.label}</span>
                 ))}
                 {lesson.circleTime && <span className={styles.cycle}>Circle time: {lesson.circleTime}</span>}
-                {lesson.pacing.length > 0 && (
+                {lesson.suggestedPlacements.length > 0 ? (
                   <span className={styles.pacingBadge}>
-                    Teach: {lesson.pacing.map(p => `${p.month}`).filter((v, i, a) => a.indexOf(v) === i).join(", ")}
+                    Suggested in: {lesson.suggestedPlacements.map(p => `${p.planLabel} · ${p.month}${p.week ? ` Week ${p.week}` : ""}`).join(", ")}
                   </span>
-                )}
+                ) : lesson.pacing.length > 0 ? <span className={styles.pacingBadge}>Legacy pacing: {lesson.pacing.map(p => `${p.month}`).filter((v, i, a) => a.indexOf(v) === i).join(", ")}</span> : null}
               </div>
             </div>
           </header>

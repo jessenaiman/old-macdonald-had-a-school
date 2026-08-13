@@ -48,6 +48,14 @@ export interface CurriculumAsset {
   format: string | null;
 }
 
+export interface SuggestedCurriculumPlacement {
+  planLabel: string;
+  provenanceStatus: 'source_backed' | 'editorial' | 'legacy_unverified';
+  week: number | null;
+  month: string | null;
+  note: string | null;
+}
+
 export interface CurriculumLesson {
   id: number;
   topic: string;
@@ -61,6 +69,7 @@ export interface CurriculumLesson {
   materials: CurriculumMaterial[];
   assets: CurriculumAsset[];
   pacing: Array<{ week: number; month: string }>;
+  suggestedPlacements: SuggestedCurriculumPlacement[];
 }
 
 export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
@@ -155,6 +164,15 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
     ORDER BY wp.week_number
   `).all(topicId) as Array<{ week_number: number; month: string }>;
 
+  const suggestedPlacements = db.prepare(`
+    SELECT plan.label, plan.provenance_status, placement.week_number, placement.month, placement.relationship_note
+    FROM suggested_curriculum_plan_placements placement
+    JOIN suggested_curriculum_plans plan ON plan.id = placement.plan_id
+    JOIN topic_grades tg ON tg.id = placement.topic_grade_id
+    WHERE tg.topic_id = ? AND plan.active = 1
+    ORDER BY placement.month, placement.week_number, plan.label
+  `).all(topicId) as Array<{ label: string; provenance_status: SuggestedCurriculumPlacement['provenanceStatus']; week_number: number | null; month: string | null; relationship_note: string | null }>;
+
   return {
     id: topic.id,
     topic: topic.topic,
@@ -192,6 +210,13 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
       format: a.format,
     })),
     pacing: pacing.map(p => ({ week: p.week_number, month: p.month })),
+    suggestedPlacements: suggestedPlacements.map(p => ({
+      planLabel: p.label,
+      provenanceStatus: p.provenance_status,
+      week: p.week_number,
+      month: p.month,
+      note: p.relationship_note,
+    })),
   };
 }
 

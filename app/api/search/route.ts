@@ -76,6 +76,7 @@ type TopicRow = {
   standards: string | null;
   tags: string | null;
   pacing: string | null;
+  suggested_plan: string | null;
 };
 
 type TopicMaterialRow = {
@@ -395,6 +396,15 @@ export async function GET(req: NextRequest) {
          WHERE paced_tg.topic_id = t.id
            AND paced_month.planning_window_id IN (${planningPlaceholders})) AS pacing`
       : "NULL AS pacing";
+    const suggestedPlanSelect = planningWindowIds.length
+      ? `(SELECT group_concat(suggested_plan.label || ' · Week ' || suggested_placement.week_number || ' · ' || suggested_placement.month, ' | ')
+          FROM topic_grades suggested_tg
+          JOIN suggested_curriculum_plan_placements suggested_placement ON suggested_placement.topic_grade_id = suggested_tg.id
+          JOIN suggested_curriculum_plans suggested_plan ON suggested_plan.id = suggested_placement.plan_id AND suggested_plan.active = 1
+          JOIN planning_window_months suggested_month ON suggested_month.month = suggested_placement.month
+          WHERE suggested_tg.topic_id = t.id
+            AND suggested_month.planning_window_id IN (${planningPlaceholders})) AS suggested_plan`
+      : "NULL AS suggested_plan";
     const pacingFilter = planningWindowIds.length
       ? `
         AND EXISTS (
@@ -414,11 +424,12 @@ export async function GET(req: NextRequest) {
         coalesce((SELECT group_concat(g.label, ', ') FROM topic_grades tg JOIN grades g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grades,
         (SELECT group_concat(st.framework || ' ' || st.code || ': ' || st.full_text, ' | ') FROM topic_standards ts JOIN standards st ON st.id = ts.standard_id WHERE ts.topic_id = t.id AND st.code IS NOT NULL) AS standards,
         (SELECT group_concat(ta.name, ', ') FROM topic_tags tt JOIN tags ta ON ta.id = tt.tag_id WHERE tt.topic_id = t.id) AS tags,
-        ${pacingSelect}
+        ${pacingSelect},
+        ${suggestedPlanSelect}
       FROM topics t
       JOIN subjects s ON s.id = t.subject_id
       WHERE t.merged_into IS NULL ${pacingFilter}
-    `).all(...planningWindowIds, ...planningWindowIds) as TopicRow[];
+    `).all(...planningWindowIds, ...planningWindowIds, ...planningWindowIds) as TopicRow[];
 
     const linkedMaterialsByTopic = linkedMaterialsForTopics(db, topicRows.map((row) => row.id));
     const curriculumResults = topicRows
@@ -439,11 +450,12 @@ export async function GET(req: NextRequest) {
         standards: row.standards,
         tags: row.tags,
         pacing: row.pacing,
+        suggested_plan: row.suggested_plan,
         planning_windows: planningMatches.map((item) => item.label),
         linked_materials: linkedMaterialsByTopic.get(row.id) ?? [],
         matched_terms: match.matched.slice(0, 6),
         why_match: [
-          planningMatches.length ? `Scheduled for ${planningMatches.map((item) => item.label).join(", ")}${row.pacing ? ` (${row.pacing})` : ""}.` : "",
+          row.suggested_plan ? `Suggested in ${row.suggested_plan}.` : planningMatches.length ? `Legacy pacing matches ${planningMatches.map((item) => item.label).join(", ")}${row.pacing ? ` (${row.pacing})` : ""}.` : "",
           match.matched.length
             ? `Matched ${match.matched.slice(0, 3).join(", ")} in the curriculum topic, skill, tags, or standards.`
             : planningMatches.length ? "" : "Related curriculum wording matched this search.",
