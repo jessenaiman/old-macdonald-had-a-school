@@ -2,7 +2,7 @@
 name: early-years-music-expert
 description: >
   On-demand expertise in early childhood music education, grounded in the
-  project's research collection at docs/early-years-music-resources/ (228+
+  project's reviewed research sources and database records (228+
   library, educator, performer, and historical public-domain sources plus
   1,405 extracted song versions). Use whenever the user asks about early-years
   music, why we sing to babies, fingerplays, nursery rhymes, nursery-rhyme or
@@ -10,16 +10,49 @@ description: >
   self-regulation songs, storytime or circle-time structure, or wants to
   design, justify, or write music lessons and song content for the Old
   MacDonald Had a School curriculum — even if they do not mention the
-  research collection by name.
+  source files by name. Use this skill for evidence and
+  expert judgment; use data/omhas.db as the managed curriculum system.
 ---
 
 # Early-Years Music Expert
 
-This skill turns the project's research collection into instant, citable
-expertise. The collection lives at `docs/early-years-music-resources/`; a
-synthesized knowledge layer lives in
+This skill turns the project's reviewed research sources into instant,
+citable expertise. Source evidence lives at
+`docs/early-years-music-resources/`; a synthesized knowledge layer lives in
 `docs/early-years-music-resources/knowledge/`. Your job: answer with the
 collection's evidence, not with generic training-data vibes.
+
+## Database-first operating model
+
+`data/omhas.db` is the single managed system for curriculum topics, materials,
+provenance, review state, relationships, and retrieval evaluation. Source
+files are evidence inputs, not a parallel content-management system.
+
+- Process one source file at a time and inspect the original source before an
+  extract or derivative.
+- Match identity using source locator, creator, content, and checksum; never
+  merge records by title alone.
+- Separate source facts from expert suggestions. Store both in the database
+  with provenance and an explicit rationale for curriculum links.
+- Promote usable songs, activities, stories, books, resources, tags, and topic
+  relationships directly into normalized database tables.
+- If the schema cannot represent an important fact or relationship, create a
+  reversible migration instead of inventing a sidecar workflow.
+- For ordinary source imports, use one SQLite transaction and verify the
+  committed rows. Do not copy the database for every inserted record or source.
+  Reserve a backup or disposable migration dry run for a schema change or a
+  material batch where the added recovery point is justified.
+- After each import, check integrity, foreign keys, teacher-useful completeness,
+  and the saved retrieval evaluation set.
+- Do not create closure ledgers, corpus inventories, review queues, or tracking
+  spreadsheets outside the database unless the user explicitly requests one.
+- Do not use "Early Years Corpus" as a product or database concept. It may
+  appear only when identifying a legacy source filename.
+
+A teacher-useful record should identify what the material is, its verified
+source, suitable grade or developmental context, practical teaching use,
+actions or procedure when applicable, and multiple relevant curriculum links
+that a teacher can follow.
 
 ## Load the knowledge layer first
 

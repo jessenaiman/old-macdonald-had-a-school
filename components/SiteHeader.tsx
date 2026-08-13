@@ -27,6 +27,7 @@ export function SiteHeader() {
         <NavigationMenuList className="site-nav-primary-list">
           <NavigationMenuItem><NavigationMenuLink asChild active={active === "home"}><Link className="site-nav-link" href="/" aria-current={active === "home" ? "page" : undefined}>Home</Link></NavigationMenuLink></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuLink asChild active={active === "lessons"}><Link className="site-nav-link" href="/lessons" aria-current={active === "lessons" ? "page" : undefined}>Lessons</Link></NavigationMenuLink></NavigationMenuItem>
+          <NavigationMenuItem><NavigationMenuLink asChild active={active === "songs"}><Link className="site-nav-link" href="/songs" aria-current={active === "songs" ? "page" : undefined}>Songs</Link></NavigationMenuLink></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuLink asChild active={active === "topics"}><Link className="site-nav-link" href="/#browse-by-subject" aria-current={active === "topics" ? "page" : undefined}>Subjects</Link></NavigationMenuLink></NavigationMenuItem>
           <NavigationMenuItem><NavigationMenuLink asChild active={active === "about"}><Link className="site-nav-link" href="/about" aria-current={active === "about" ? "page" : undefined}>About</Link></NavigationMenuLink></NavigationMenuItem>
         </NavigationMenuList>

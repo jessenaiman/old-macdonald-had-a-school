@@ -19,6 +19,7 @@
     "db:migrate": "drizzle-kit migrate --config=drizzle.sqlite.config.ts",
     "db:push": "drizzle-kit push --config=drizzle.sqlite.config.ts",
     "db:studio": "drizzle-kit studio --config=drizzle.sqlite.config.ts",
+    "db:evaluate-search": "node scripts/evaluate-sqlite-retrieval.mjs data/omhas.db",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

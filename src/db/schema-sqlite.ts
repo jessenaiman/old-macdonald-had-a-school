@@ -112,6 +112,44 @@ export const songs = sqliteTable('songs', {
   markdownPath: text('markdown_path'),
 });
 
+export const songSections = sqliteTable('song_sections', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  songId: integer('song_id').notNull().references(() => songs.id, { onDelete: 'cascade' }),
+  label: text('label'),
+  sectionType: text('section_type').notNull().default('verse'),
+  sortOrder: integer('sort_order').notNull(),
+  lyrics: text('lyrics').notNull(),
+  actions: text('actions'),
+  actionScope: text('action_scope'),
+  actionLineNumber: integer('action_line_number'),
+  actionProvenance: text('action_provenance'),
+});
+
+export const songChordGuides = sqliteTable('song_chord_guides', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  songId: integer('song_id').notNull().references(() => songs.id, { onDelete: 'cascade' }),
+  sectionId: integer('section_id').references(() => songSections.id, { onDelete: 'cascade' }),
+  scope: text('scope').notNull(),
+  lineNumber: integer('line_number'),
+  progression: text('progression').notNull(),
+  musicalKey: text('musical_key'),
+  capo: text('capo'),
+  tuning: text('tuning'),
+  meter: text('meter'),
+  startingPitch: text('starting_pitch'),
+  provenance: text('provenance').notNull(),
+  sourceNote: text('source_note'),
+  sortOrder: integer('sort_order').notNull().default(1),
+});
+
+export const songSources = sqliteTable('song_sources', {
+  songId: integer('song_id').notNull().references(() => songs.id, { onDelete: 'cascade' }),
+  sourceDocumentId: integer('source_document_id').notNull().references(() => sourceDocuments.id, { onDelete: 'cascade' }),
+  relationship: text('relationship').notNull(),
+  locator: text('locator'),
+  evidenceNote: text('evidence_note'),
+});
+
 export const resources = sqliteTable('resources', {
   id: integer('id').primaryKey(),
   name: text('name'),
@@ -164,6 +202,40 @@ export const searchChunks = sqliteTable('search_chunks', {
   meta: text('meta').default('{}'),
   createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const retrievalEvaluationQueries = sqliteTable('retrieval_evaluation_queries', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  category: text('category').notNull(),
+  queryText: text('query_text').notNull().unique(),
+  teacherIntent: text('teacher_intent').notNull(),
+  expectedTitleContains: text('expected_title_contains'),
+  expectedResultKind: text('expected_result_kind'),
+  active: integer('active', { mode: 'boolean' }).notNull().default(true),
+  sourceNote: text('source_note'),
+  createdAt: text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const retrievalEvaluationRuns = sqliteTable('retrieval_evaluation_runs', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  queryId: integer('query_id').notNull().references(() => retrievalEvaluationQueries.id, { onDelete: 'cascade' }),
+  engineKind: text('engine_kind').notNull(),
+  engineVersion: text('engine_version'),
+  durationMs: integer('duration_ms').notNull(),
+  resultCount: integer('result_count').notNull(),
+  expectationMet: integer('expectation_met', { mode: 'boolean' }),
+  evaluatorNote: text('evaluator_note'),
+  executedAt: text('executed_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const retrievalEvaluationResults = sqliteTable('retrieval_evaluation_results', {
+  runId: integer('run_id').notNull().references(() => retrievalEvaluationRuns.id, { onDelete: 'cascade' }),
+  rank: integer('rank').notNull(),
+  resultKind: text('result_kind').notNull(),
+  resultId: text('result_id').notNull(),
+  title: text('title').notNull(),
+  matchScope: text('match_scope'),
+  score: real('score'),
 });
 
 export const searchChunkSources = sqliteTable('search_chunk_sources', {
@@ -234,6 +306,10 @@ export const songActions = sqliteTable('song_actions', {
   evidenceNote: text('evidence_note'),
   researchStatus: text('research_status').default('Not started'),
   reviewerNotes: text('reviewer_notes'),
+  songId: integer('song_id').references(() => songs.id, { onDelete: 'cascade' }),
+  sectionId: integer('section_id').references(() => songSections.id, { onDelete: 'set null' }),
+  lineNumber: integer('line_number'),
+  provenance: text('provenance'),
   createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
