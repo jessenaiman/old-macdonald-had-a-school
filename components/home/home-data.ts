@@ -16,6 +16,8 @@ export type HomeSubject = {
   iconClass: string;
   highlights: readonly string[];
   fastenerClass: SubjectFastener;
+  paperAsset: string;
+  rotation: "left" | "none" | "right";
   matches: (lesson: HomeLesson) => boolean;
 };
 
@@ -57,6 +59,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#C9527A",
     iconClass: "drama-storytelling-icon",
     fastenerClass: "fastener-paperclip",
+    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/01-torn-notebook-note.png",
+    rotation: "left",
     highlights: ["Build vocabulary", "Explore phonics", "Tell and retell stories"],
     matches: (lesson) => /language|literacy|phonic|reading|vocabulary/i.test(lessonText(lesson)),
   },
@@ -68,6 +72,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#1F6B6B",
     iconClass: "math-building-icon",
     fastenerClass: "fastener-push-pin",
+    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/02-blue-grid-note.png",
+    rotation: "none",
     highlights: ["Count and compare", "Explore shapes", "Find patterns in songs"],
     matches: (lesson) => /math|numeracy/i.test(lessonText(lesson)),
   },
@@ -79,6 +85,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#55705A",
     iconClass: "gardening-health-icon",
     fastenerClass: "fastener-binder-clip",
+    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/03-sage-deckled-note.png",
+    rotation: "right",
     highlights: ["Observe and explore", "Seasons and weather", "Living things"],
     matches: (lesson) => /science|nature/i.test(lessonText(lesson)),
   },
@@ -90,6 +98,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#2C6C9B",
     iconClass: "music-icon",
     fastenerClass: "fastener-masking-tape",
+    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/04-rose-ruled-note.png",
+    rotation: "left",
     highlights: ["Rhythm and beat", "Sing and move", "Create and perform"],
     matches: (lesson) => /music/i.test(lessonText(lesson)),
   },
@@ -101,6 +111,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#4F5FA0",
     iconClass: "art-photography-icon",
     fastenerClass: "fastener-gingham-tape",
+    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/05-gold-scalloped-note.png",
+    rotation: "none",
     highlights: ["Create and imagine", "Explore colour", "Draw and design"],
     matches: (lesson) => /\bart\b|arts|drama|creative/i.test(lessonText(lesson)),
   },
@@ -112,6 +124,8 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#B5272C",
     iconClass: "physical-education-icon",
     fastenerClass: "fastener-apple-peg",
+    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/06-lavender-folded-note.png",
+    rotation: "right",
     highlights: ["Move your body", "Play and cooperate", "Stay healthy"],
     matches: (lesson) => /gross motor|physical|health|routine|approaches to learning/i.test(lessonText(lesson)),
   },

@@ -17,7 +17,9 @@
 }
 
 .hero,
-.bulletinBoard {
+.bulletinBoard,
+.gradeRail,
+.folkArts {
   min-width: 0;
 }
 
@@ -103,9 +105,11 @@
   font-weight: 700;
 }
 
-.weeklyList > header span {
+.weeklyList > header > a {
   color: var(--muted-foreground);
-  font: 800 .625rem/1 var(--font-farm-body), sans-serif;
+  font: 800 .7rem/1 var(--font-farm-body), sans-serif;
+  text-decoration: underline;
+  text-underline-offset: .2rem;
 }
 
 .weeklyList ul {
@@ -119,7 +123,7 @@
 
 .weeklyList li {
   display: grid;
-  grid-template-columns: 1.25rem minmax(8rem, .82fr) minmax(10rem, 1.18fr) auto;
+  grid-template-columns: 1.25rem minmax(8rem, .8fr) minmax(10rem, 1.2fr);
   gap: .45rem;
   min-height: 2.875rem;
   flex: 1;
@@ -148,32 +152,7 @@
   font: 700 .56rem/1 var(--font-farm-body), sans-serif;
 }
 
-.gradeChips {
-  display: flex;
-  gap: .2rem;
-}
-
-.gradeChips b {
-  min-width: 1.25rem;
-  padding: .2rem .25rem;
-  border: 1px solid var(--site-chrome-accent);
-  border-radius: .25rem;
-  color: var(--foreground);
-  background: var(--background);
-  font: 800 .5rem/1 var(--font-farm-body), sans-serif;
-  text-align: center;
-}
-
 .lessonAction { display: none; }
-
-.weeklyMore {
-  display: flex;
-  min-height: 2rem;
-  align-items: center;
-  justify-content: center;
-  color: var(--foreground);
-  font: 800 .7rem/1 var(--font-farm-body), sans-serif;
-}
 
 .carousel {
   width: 100%;
@@ -264,6 +243,39 @@
 .carouselNav button.carouselLinkActive > span { background: var(--site-chrome-accent); }
 .carouselNav > a { color: var(--site-chrome-foreground); font: 700 .75rem/1.2 var(--font-farm-body), sans-serif; }
 
+.gradeRail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(.5rem, 1.25vw, 1rem);
+  width: min(76rem, calc(100% - 3rem));
+  margin: -.1rem auto .15rem;
+  padding: .75rem clamp(.75rem, 2vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-radius: .9rem;
+  background-color: var(--card);
+  background-image: var(--home-paper-texture);
+  background-size: 18rem;
+  box-shadow: 0 .3rem 0 color-mix(in srgb, var(--border) 40%, transparent);
+}
+
+.gradeRail a {
+  display: flex;
+  min-width: 0;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  border: 1px solid color-mix(in srgb, var(--grade-color) 72%, #142d42);
+  border-radius: .65rem;
+  color: var(--grade-ink);
+  background-color: var(--grade-color);
+  background-image: var(--grade-texture);
+  background-size: 11rem;
+  box-shadow: 0 .2rem 0 var(--grade-edge);
+  font: 400 clamp(.9rem, 1.4vw, 1.2rem)/1 var(--font-farm-display), Georgia, serif;
+  text-align: center;
+}
+
 .bulletinBoard {
   position: relative;
   padding: clamp(2.7rem, 3.5vw, 3.4rem) clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.4rem, 2vw, 1.9rem);
@@ -297,15 +309,145 @@
 
 .subjectGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(.75rem, 1.5vw, 1.25rem);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(.55rem, 1vw, .9rem);
+  align-items: start;
 }
+
+.subjectNote {
+  --subject-note-color: var(--primary);
+  --subject-note-paper: var(--home-paper-texture);
+  position: relative;
+  min-width: 0;
+  color: var(--foreground);
+  background-color: transparent;
+  background-image: var(--subject-note-paper);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  filter: drop-shadow(.15rem .35rem 0 rgb(48 35 22 / 20%)) drop-shadow(0 .65rem .55rem rgb(48 35 22 / 13%));
+  transform: rotate(var(--subject-note-rotation, 0deg));
+}
+
+.subjectNote[data-rotation="left"] { --subject-note-rotation: -.45deg; }
+.subjectNote[data-rotation="right"] { --subject-note-rotation: .45deg; }
+
+.subjectNoteLink {
+  display: grid;
+  min-height: 18rem;
+  grid-template-rows: auto auto 1fr auto;
+  justify-items: center;
+  gap: .55rem;
+  padding: 1.55rem .7rem .95rem;
+  color: inherit;
+  text-align: center;
+}
+
+.subjectNoteIcon {
+  width: 5.25rem;
+  height: 5.25rem;
+  filter: drop-shadow(0 .2rem .12rem rgb(0 0 0 / 25%));
+}
+
+.subjectNote h3 {
+  margin: 0;
+  color: var(--subject-note-color);
+  font: 400 clamp(1.15rem, 1.5vw, 1.45rem)/.98 var(--font-farm-display), Georgia, serif;
+  text-wrap: balance;
+}
+
+.subjectNote ul {
+  display: grid;
+  align-content: start;
+  gap: .25rem;
+  width: 100%;
+  margin: 0;
+  padding: .25rem 0 0;
+  font-size: .7rem;
+  line-height: 1.3;
+  list-style: none;
+}
+
+.subjectNote li::before { margin-right: .3rem; color: var(--subject-note-color); content: "•"; }
+
+.subjectNoteAction {
+  align-self: end;
+  border-bottom: 1px solid currentColor;
+  color: var(--subject-note-color);
+  font-size: .68rem;
+  font-weight: 900;
+}
+
+.subjectNoteFastener {
+  position: absolute;
+  z-index: 2;
+  top: -1rem;
+  left: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 .12rem .08rem rgb(0 0 0 / 35%));
+  pointer-events: none;
+}
+
+.subjectNote:nth-child(2) .subjectNoteFastener,
+.subjectNote:nth-child(5) .subjectNoteFastener { left: 22%; }
+.subjectNote:nth-child(3) .subjectNoteFastener,
+.subjectNote:nth-child(6) .subjectNoteFastener { left: 78%; }
+
+.folkArts {
+  width: min(76rem, calc(100% - 3rem));
+  margin: 0 auto;
+  padding: 1.15rem clamp(1rem, 2vw, 1.6rem) 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  color: var(--foreground);
+  background-color: var(--card);
+  background-image: var(--home-paper-texture);
+  background-size: 18rem;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--border) 40%, transparent);
+}
+
+.folkArts h2 {
+  margin: 0 0 1rem;
+  font: 600 clamp(1.35rem, 2.2vw, 2rem)/1 var(--font-farm-hand), cursive;
+}
+
+.folkArtsGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+
+.folkArtsCard {
+  display: grid;
+  min-width: 0;
+  min-height: 6.5rem;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  align-items: center;
+  gap: .55rem;
+  padding: .75rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--folk-color) 70%, #142d42);
+  border-radius: 1rem;
+  color: #fffdf7;
+  background-color: var(--folk-color);
+  background-image: var(--folk-texture);
+  background-size: 11rem;
+  box-shadow: 0 .28rem 0 color-mix(in srgb, var(--folk-color) 55%, #142d42);
+}
+
+.folkArtsCard::after { position: absolute; inset: .4rem; border: 1px dashed rgb(255 253 247 / 55%); border-radius: .7rem; content: ""; pointer-events: none; }
+.folkArtsCard { position: relative; }
+.folkArtsCard[data-tone="red"] { --folk-color: var(--curriculum-red); --folk-texture: var(--cast-old-macdonald-texture); }
+.folkArtsCard[data-tone="green"] { --folk-color: var(--curriculum-green); --folk-texture: var(--cast-scout-texture); }
+.folkArtsCard[data-tone="blue"] { --folk-color: var(--curriculum-blue); --folk-texture: var(--cast-mr-rusty-texture); }
+.folkArtsCard[data-tone="purple"] { --folk-color: var(--curriculum-purple); --folk-texture: var(--cast-mr-puddles-texture); }
+.folkArtsIcon { position: relative; z-index: 1; width: 3.5rem; height: 3.5rem; }
+.folkArtsCard strong { position: relative; z-index: 1; min-width: 0; font: 400 clamp(1rem, 1.5vw, 1.35rem)/1.05 var(--font-farm-display), Georgia, serif; text-wrap: balance; }
 
 @media (max-width: 1000px) {
   .heroFeatureGrid { gap: 1.4rem; padding-inline: 1.75rem; }
   .weeklyList li { grid-template-columns: 1.125rem minmax(0, 1fr) auto; }
   .participationWays { display: none; }
-  .subjectGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .subjectGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .folkArtsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 680px) {
@@ -322,10 +464,19 @@
   .carouselArrow { width: 2.75rem; height: 2.75rem; }
   .carouselPrevious { left: -.9rem; }
   .carouselNext { right: -.9rem; }
+  .gradeRail { grid-template-columns: repeat(2, minmax(0, 1fr)); width: calc(100% - 1.5rem); }
+  .gradeRail a:last-child { grid-column: 1 / -1; }
   .bulletinBoard { padding: 2.5rem .7rem .9rem; background-image: url("/design-assets/cork-board-kit-v1/vertical-board.png"); }
   .subjectHeading { top: .7rem; }
   .subjectHeading h2 { padding: .35rem 1.25rem; font-size: 1.2rem; }
-  .subjectGrid { grid-template-columns: 1fr; gap: .6rem; }
+  .subjectGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem .55rem; }
+  .subjectNote { transform: none; }
+  .subjectNoteLink { min-height: 17.5rem; padding-inline: .5rem; }
+  .subjectNoteIcon { width: 4rem; height: 4rem; }
+  .subjectNote h3 { font-size: 1.05rem; }
+  .subjectNote ul { font-size: .64rem; }
+  .folkArts { width: calc(100% - 1.5rem); }
+  .folkArtsGrid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 350px) {

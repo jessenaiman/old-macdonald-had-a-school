@@ -1,27 +1,37 @@
 ---
 name: old-macdonald-asset-system
-description: Use for every Old MacDonald Had a School visual, homepage, grade, topic, lesson, character, icon, texture, patch, or responsive design task. Locates approved assets, enforces repeating authored textures instead of flat colour, locks characters to CAST_AND_ROLES.md colours and teaching or grade associations, and prevents reference composites or prohibited assets from entering production.
+description: Use for Old MacDonald Had a School visual work involving branding, pages, components, responsive layout, characters, colors, textures, paper notes, fasteners, or icons. Treats the current design as an established working system, reuses its `/branding` references and approved assets, and makes restrained changes without redesigning unrelated areas.
 ---
 
-# Old MacDonald asset system
+# Old MacDonald brand design system
 
-Use this skill before selecting assets or changing visual code in this repository.
+Use this skill before selecting assets or changing visual code in this repository. The site is an established design system that is mostly working. Improve the named area; do not reinterpret the whole site.
 
-## Start here: the compact visual catalog
+## Working approach
 
-1. Open `/branding` in the running app. It is the visual index for approved production families, canonical
-   character pairings, exact example paths, and the main prohibited/reference-only rules.
-2. Choose a family from that page before reading directories. Do not recursively scan `public/` to discover
-   options already shown on `/branding`.
-3. Read only the targeted source needed for the choice:
+1. State the requested change and what nearby working elements will remain unchanged.
+2. Inspect the owning component and its local styles.
+3. Open the relevant example on `/branding`.
+4. Reuse an existing component, token, or approved asset whenever it fits.
+5. Make the smallest coherent change.
+6. Render the changed route at desktop and mobile before reporting success.
+
+Do not turn a bounded request into a redesign, route migration, asset-library audit, or broad CSS rewrite. Do not change adjacent components simply because they share a page.
+
+## Where to look
+
+1. Open `/branding`. It is the visual catalog for working components, materials, icons, character treatments, and responsive examples.
+2. Read only the targeted source needed for the choice:
    - character identity, role, grade, or colour: the relevant row in `public/CAST_AND_ROLES.md`;
    - asset status, ambiguity, or a proposed asset mutation: the relevant section or manifest line in
      `docs/ASSET_LIBRARY_GOVERNANCE.md`;
    - exact dimensions/status not shown on `/branding`: query the matching record in
      `docs/design-asset-master-list.json` by the already-selected path.
+   - semantic colors and themes: `app/theme.css`;
+   - asset class names: `app/brand-assets.css`;
+   - layout and behavior: the owning React component and CSS Module.
 
-Do not read the full governance document, full cast document, or full asset inventory by default. Full-file reads
-are reserved for governance audits or when several unrelated families are explicitly in scope.
+Do not read the full governance document, cast document, asset inventory, or global stylesheet for an ordinary component task. Do not recursively scan `public/` when `/branding` or the owning component already gives an exact path.
 
 ## What is available
 
@@ -74,33 +84,40 @@ Use the canonical portrait unchanged. Build coloured badges only from the matchi
 patch/material. Do not recolour portraits or invent a TypeScript character registry. Associate staff with their
 locked teaching topics and grades; if a requested association conflicts, stop and report the conflict.
 
-## Visual implementation workflow
+## Design rules
 
-1. Capture or inspect the current page at the target viewport before editing.
-2. Open `/branding`, name the shown production example(s) you will reuse, and record their exact paths.
-3. Name the reference image and viewport that control the change.
-4. Reconcile every visible raster element against the targeted catalog records. Record `present`, `missing`, `reference-only`,
-   `DO NOT USE`, or `needs review`.
-5. If anything required is missing or ambiguous, follow the exact mutation approval gate in
-   `docs/ASSET_LIBRARY_GOVERNANCE.md`. Never approximate it.
-6. Keep navigation, headings, labels, links, and buttons as semantic React/HTML. Never use a screenshot with
-   invisible hotspots.
-7. Use `next/image` with intrinsic dimensions or a correctly sized `fill` container to prevent layout shift.
-8. Use the existing Tailwind v4 theme and local font variables for the type scale. Do not introduce a new visual
-   language or force single-line headings.
-9. Make grid/flex children shrinkable, allow text wrapping, and avoid fixed heights for text-bearing surfaces.
-10. Verify at matching desktop, tablet, 390px, and 320px viewports. Scan the entire document for horizontal
-   overflow, clipped text, overlap, keyboard focus, reduced-motion behavior, and meaningful alt text.
-11. Run `npm.cmd run lint` and `npm.cmd run typecheck`; run the relevant runtime/visual checks for layout work.
+- Preserve the hierarchy and composition shown in the user’s reference; do not copy incorrect labels or bake the screenshot into the UI.
+- Keep reusable patterns demonstrated on `/branding`.
+- Keep text and controls semantic. Decorative raster layers must not contain required copy or interaction.
+- Use repeating authored tiles for large material surfaces and separate transparent assets for icons, portraits, fasteners, patches, and irregular silhouettes.
+- A fastener must visibly attach something by crossing its edge and the supporting surface.
+- Contact sheets, atlases, and page composites are review/export aids, never runtime crops.
+- Use canonical portraits unchanged and respect the current character role, grade, and color references.
+- Use semantic tokens from `theme.css`; character and grade colors are identity signals rather than the entire page palette.
+- Let text wrap and surfaces grow. Check dense layouts at 320 px.
+- Preserve explicitly excluded elements exactly, including their behavior.
+
+If a required asset is missing, report the gap and follow the exact approval gate in `docs/ASSET_LIBRARY_GOVERNANCE.md`. Do not generate, export, recolor, move, or replace assets before the named action is approved.
+
+## Verification
+
+For a visual change:
+
+1. Capture the current target at the controlling viewport.
+2. Render the result at the same viewport, 390 px, and 320 px when the layout is dense.
+3. Check horizontal overflow, clipping, overlap, readability, asset loading, and the affected interaction.
+4. Exercise any explicitly preserved adjacent interaction once to catch regressions; do not redesign it.
+5. Run focused lint/typecheck. Run a production build when shared shell, routing, or global tokens changed.
+
+Passing lint or accessibility tooling does not replace visual inspection.
 
 ## Handoff format
 
-Report:
+Report concisely:
 
 - the exact reference and viewport used;
 - assets reused, with paths;
 - missing or excluded assets and their governance status;
-- character-to-colour/topic/grade checks;
 - screenshots and overflow measurements at each viewport;
 - lint, typecheck, and runtime results;
 - unresolved items separately.

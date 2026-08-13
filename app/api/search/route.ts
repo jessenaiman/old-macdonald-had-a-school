@@ -90,6 +90,14 @@ type LessonRow = {
   resource_count: number;
 };
 
+type CanonicalMatch = {
+  chunk_id: string;
+  song_id: number;
+  song_title: string;
+  relationship: string;
+  review_state: string | null;
+};
+
 async function searchLessonFiles(query: string): Promise<LessonRow[]> {
   const { getAllLessons } = await import("../../../lib/content");
   const lessons = await getAllLessons();
@@ -132,6 +140,56 @@ function normalizeToken(value: string) {
   if (token.endsWith("ing") && token.length > 5) return token.slice(0, -3);
   if (token.endsWith("s") && !token.endsWith("ss") && token.length > 3) return token.slice(0, -1);
   return token;
+}
+
+function canonicalSongMap(
+  db: Database.Database,
+  songChunkIds: string[],
+): Map<string, { songId: number; songTitle: string } | null> {
+  if (songChunkIds.length === 0) return new Map();
+
+  const placeholders = songChunkIds.map(() => "?").join(", ");
+  const rows = db.prepare(`
+    SELECT
+      sc.id AS chunk_id,
+      s.id AS song_id,
+      s.title AS song_title,
+      ss.relationship,
+      sd.review_state
+    FROM search_chunks sc
+    INNER JOIN search_chunk_sources scs ON scs.search_chunk_id = sc.id
+    INNER JOIN source_documents sd ON sd.id = scs.source_document_id
+    INNER JOIN song_sources ss ON ss.source_document_id = sd.id
+    INNER JOIN songs s ON s.id = ss.song_id
+    WHERE sc.kind = 'song'
+      AND sc.id IN (${placeholders})
+    ORDER BY sc.id, CASE ss.relationship
+      WHEN 'primary' THEN 0
+      WHEN 'transcription' THEN 1
+      ELSE 2
+    END, COALESCE(sd.review_state, 'research_wip')
+  `).all(...songChunkIds) as CanonicalMatch[];
+
+  const groupedByChunk = new Map<string, CanonicalMatch[]>();
+  for (const row of rows) {
+    const existing = groupedByChunk.get(row.chunk_id) ?? [];
+    if (!existing.some((candidate) => candidate.song_id === row.song_id)) {
+      existing.push(row);
+    }
+    groupedByChunk.set(row.chunk_id, existing);
+  }
+
+  const result = new Map<string, { songId: number; songTitle: string } | null>();
+  for (const [chunkId, matches] of groupedByChunk.entries()) {
+    const uniqueSongIds = new Set<number>(matches.map((match) => match.song_id));
+    if (uniqueSongIds.size !== 1) {
+      result.set(chunkId, null);
+      continue;
+    }
+    const best = matches[0];
+    result.set(chunkId, { songId: best.song_id, songTitle: best.song_title });
+  }
+  return result;
 }
 
 function queryTerms(query: string) {
@@ -314,22 +372,61 @@ export async function GET(req: NextRequest) {
       .sort((a, b) => b.combinedScore - a.combinedScore)
       .slice(0, 40);
 
-    const resultRows = merged.map(({ row }) => row);
+    const searchRowCandidates = [...merged.values()]
+      .filter((item) => item)
+      .sort((a, b) => b.combinedScore - a.combinedScore);
+
+    const songChunkIds = [
+      ...new Set(
+        searchRowCandidates
+          .filter(({ row }) => row.kind === "song")
+          .map(({ row }) => row.id as string),
+      ),
+    ];
+    const canonicalSongMapByChunk = canonicalSongMap(db, songChunkIds);
+
+    const dedupedRows: Array<{
+      row: Record<string, unknown>;
+      combinedScore: number;
+      canonicalSongId: number | null;
+      displayTitle: string;
+    }> = [];
+    const seenKeys = new Set<string>();
+    for (const item of searchRowCandidates) {
+      const row = item.row;
+      const rowId = row.id as string;
+      const canonical = row.kind === "song" ? canonicalSongMapByChunk.get(rowId) ?? null : null;
+      const canonicalSongId = canonical ? canonical.songId : null;
+      const dedupeKey = canonicalSongId ? `song:${canonicalSongId}` : `chunk:${rowId}`;
+      if (seenKeys.has(dedupeKey)) continue;
+      seenKeys.add(dedupeKey);
+      dedupedRows.push({
+        row,
+        combinedScore: item.combinedScore,
+        canonicalSongId,
+        displayTitle: canonical?.songTitle ?? String(row.title),
+      });
+    }
+
+    const resultRows = dedupedRows.slice(0, 40);
 
     // ── Lesson pages (MDX files in content/lessons/) ─────────────────────
     const lessonResults = await searchLessonFiles(q) as LessonRow[];
 
-    const results = resultRows.map((row) => ({
-      id: row.id,
-      kind: row.kind,
-      title: row.title,
-      excerpt: row.excerpt,
-      lyrics: row.lyrics,
-      instructions: row.instructions,
-      sourcePath: row.source_path,
-      url: row.url,
-      meta: row.meta ? JSON.parse(row.meta as string) : {},
-      href: row.kind === "song" ? `/songs/${row.id}` : normalizeUrl(row.url),
+    const results = resultRows.map((item) => ({
+      id: item.row.id as string,
+      kind: item.row.kind as string,
+      title: item.displayTitle,
+      canonicalSongId: item.canonicalSongId,
+      excerpt: item.row.excerpt as string,
+      lyrics: item.row.lyrics as string,
+      instructions: item.row.instructions as string,
+      sourcePath: item.row.source_path as string,
+      url: item.row.url as string,
+      meta: item.row.meta ? JSON.parse(item.row.meta as string) : {},
+      href: item.row.kind === "song" && item.canonicalSongId
+        ? `/songs/${item.canonicalSongId}`
+        : normalizeUrl(item.row.url as string),
     }));
 
     return NextResponse.json({
