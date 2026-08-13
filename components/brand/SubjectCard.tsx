@@ -1,18 +1,15 @@
 import Image from "next/image";
 import { BrandIdentityCard } from "./BrandIdentityCard";
 import styles from "./SubjectCard.module.css";
+import { CAST, type CastKey } from "@/lib/cast";
 
 export type SubjectCardProps = {
   title: string;
   href: string;
-  color: `#${string}`;
-  texture: string;
-  characterName: string;
-  portrait: string;
+  character: CastKey;
   iconClass: string;
   highlights: readonly string[];
   lessonCount: number;
-  ink?: "light" | "dark";
   fastenerClass?:
     | "fastener-paperclip"
     | "fastener-push-pin"
@@ -25,23 +22,18 @@ export type SubjectCardProps = {
 export function SubjectCard({
   title,
   href,
-  color,
-  texture,
-  characterName,
-  portrait,
+  character,
   iconClass,
   highlights,
   lessonCount,
-  ink = "light",
   fastenerClass = "fastener-paperclip",
 }: SubjectCardProps) {
+  const { name: characterName, portrait } = CAST[character];
   return (
     <BrandIdentityCard
       title={title}
-      color={color}
-      texture={texture}
+      identityClass={`cast-${character}`}
       href={href}
-      ink={ink}
       variant="subject"
       attachment={<span className={`${styles.fastener} brand-asset ${fastenerClass} icon-small`} aria-hidden="true" />}
       media={<span className={`${styles.subjectIcon} brand-asset ${iconClass} icon-large`} aria-hidden="true" />}

@@ -31,7 +31,7 @@ const COMPOSITIONS = [
     name: "Cork notice",
     use: "Pinned information or a working-wall card",
     className: "material-surface material-cork",
-    path: "/design-assets/cork-board-kit-v1/seamless-cork-tile.png",
+    path: "/design-assets/cork-board-kit-v2/seamless-cork-tile.png",
   },
 ] as const;
 
@@ -41,7 +41,7 @@ const NAV_SPECIMENS = [
   { label: "Badge recipe", href: "#badge-recipe", kind: "patch-pink", path: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-square.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/11-stitched-label-tab.png" },
   { label: "Palette", href: "#palette", kind: "woven", path: "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png" },
   { label: "Staff roster", href: "#cast-staff", kind: "construction", path: "/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.png" },
-  { label: "Student roster", href: "#cast-students", kind: "cork", path: "/design-assets/cork-board-kit-v1/seamless-cork-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" },
+  { label: "Student roster", href: "#cast-students", kind: "cork", path: "/design-assets/cork-board-kit-v2/seamless-cork-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" },
   { label: "Actual controls", href: "#site-controls", kind: "cardboard", path: "/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png" },
   { label: "System gallery", href: "#controls", kind: "felt-blue", path: "/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/13-brass-split-pin.png" },
   { label: "Typography", href: "#typography", kind: "paper", path: "/design-assets/web-material-library-v1/construction-paper/construction-paper-09-hopper-tile.png", fastener: "/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" },

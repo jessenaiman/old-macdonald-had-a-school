@@ -1,6 +1,7 @@
 import Overview from "../../content/pages/branding/overview.mdx";
 import PageRecipe from "../../content/pages/branding/page-recipe.mdx";
 import Assets from "../../content/pages/branding/assets.mdx";
+import LogoFamily from "../../content/pages/branding/logo-family.mdx";
 import Icons from "../../content/pages/branding/icons.mdx";
 import IconSizes from "../../content/pages/branding/icon-sizes.mdx";
 import Cast from "../../content/pages/branding/cast.mdx";
@@ -20,11 +21,12 @@ export const metadata = {
 
 export default function BrandingPage() {
   return (
-    <main className="w-full bg-[#dce7ea] px-[clamp(.5rem,4vw,5rem)] py-6 text-[#102842] max-sm:py-2">
+    <main className="w-full bg-background px-2 py-2 text-foreground sm:px-6 sm:py-6 xl:px-20">
       <div className="mx-auto max-w-[1280px]">
         <Overview />
         <PageRecipe />
         <Assets />
+        <LogoFamily />
         <Icons />
         <IconSizes />
         <Cast />

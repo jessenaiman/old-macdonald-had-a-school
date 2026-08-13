@@ -1,5 +1,5 @@
 import { FolkArtsSection } from "@/components/home/FolkArtsSection";
-import { HOME_SUBJECTS } from "@/components/home/home-data";
+import { HOME_SUBJECTS, SUBJECT_LEARNERS } from "@/components/home/home-data";
 import { HomeSubjectNote } from "@/components/home/HomeSubjectNote";
 import styles from "@/components/home/HomePage.module.css";
 
@@ -14,12 +14,16 @@ export function HomepageBrandPatterns() {
               key={subject.key}
               title={subject.title}
               href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}
-              color={subject.color as `#${string}`}
-              iconClass={subject.iconClass}
-              highlights={subject.highlights}
+                color={subject.color as `#${string}`}
+                iconClass={subject.iconClass}
+                teacherReason={subject.teacherReason}
+                highlights={subject.highlights}
               fastenerClass={subject.fastenerClass}
               paperAsset={subject.paperAsset}
+              noteShape={subject.noteShape}
               rotation={subject.rotation}
+              guideName={SUBJECT_LEARNERS[subject.key]?.name}
+              guidePortrait={SUBJECT_LEARNERS[subject.key]?.portrait}
             />
           ))}
         </div>

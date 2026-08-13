@@ -26,9 +26,13 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
+from scripts.resources.library_pdf_tracker import PROCESSED_SOURCE_SUFFIX, mark_library_pdf_processed
 
 
 UNKNOWN_LOCATORS = {"", "unknown", "n/a", "none", "not stated"}
+SKIP_SOURCE_PARTS = {".git", ".tmp-01lib-process", "_processed"}
+ACTION_MARKER_RE = re.compile(r"\(([^)]+)\)|^\s*Actions?:\s*(.*)$|\*Action\*:\s*(.*)$", re.IGNORECASE)
+VERSION_RE = re.compile(r"\b(?:edition|ver(?:sion)?|ed\.?|release|v)\b[\s:-]*([0-9]{2,4}(?:-[0-9]{2,4})?|[0-9]{1,2}(?:\.[0-9]+)?)", re.IGNORECASE)
 
 
 @dataclass(frozen=True)
@@ -46,6 +50,11 @@ class Candidate:
     source_path: str
     title: str
     review_status: str
+    source_family: str
+    source_id: str
+    source_author: str
+    source_version: str
+    source_action_signature: str
     source_file: str
     page_section: str
     lyric_line_count: int
@@ -81,6 +90,124 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
         key, value = line.split(":", 1)
         values[key.strip()] = value.strip().strip("'\"")
     return values, text[end:]
+
+
+def extract_action_signature(markdown_body: str) -> str:
+    """Create a stable fingerprint for printed action cues."""
+    cues: list[str] = []
+    for line in markdown_body.splitlines():
+        for parenthetical, action_label, starred in ACTION_MARKER_RE.findall(line):
+            if parenthetical:
+                cues.append(parenthetical)
+            if action_label:
+                cues.append(action_label)
+            if starred:
+                cues.append(starred)
+    return mechanical_fingerprint(" ".join(cues))
+
+
+def extract_author(frontmatter: dict[str, str], source_title: str) -> str:
+    for key in ("author", "creator", "creator_artist", "source_author", "artist"):
+        value = frontmatter.get(key, "").strip()
+        if value:
+            return mechanical_fingerprint(value)
+    if source_title and ";" in source_title:
+        return mechanical_fingerprint(source_title.split(";", 1)[-1].strip())
+    return ""
+
+
+def extract_version(frontmatter: dict[str, str], source_path: str) -> str:
+    for key in ("source_version", "version", "edition", "release", "pub_year"):
+        value = frontmatter.get(key, "").strip()
+        if value:
+            return mechanical_fingerprint(value)
+    for value in (frontmatter.get("source_file", ""), source_path, frontmatter.get("source_id", ""), frontmatter.get("source_title", "")):
+        if not value:
+            continue
+        match = VERSION_RE.search(value)
+        if match:
+            return mechanical_fingerprint(match.group(1))
+    return ""
+
+
+def source_signature(frontmatter: dict[str, str], source_path: str, markdown_body: str) -> tuple[str, str, str, str]:
+    source_family = source_family_key(frontmatter, source_path)
+    return (
+        source_family,
+        extract_version(frontmatter, source_path),
+        extract_author(frontmatter, frontmatter.get("source_title", "")),
+        extract_action_signature(markdown_body),
+    )
+
+
+def source_family_key(frontmatter: dict[str, str], source_path: str) -> str:
+    """Collapse raw/processed markdown and repeated source family names to one key."""
+    raw_name = (
+        frontmatter.get("source_id", "").strip()
+        or frontmatter.get("source_file", "").strip()
+        or Path(source_path).name
+    )
+    if not raw_name:
+        return ""
+    family = Path(raw_name).with_suffix("").name
+    family = family.lower().strip()
+    family = re.sub(r"[._-]tmp-01lib-process$", "", family)
+    family = re.sub(r"[._-]processed$", "", family)
+    family = re.sub(r"[._-]{2,}", "-", family)
+    family = re.sub(r"[^a-z0-9]+", "-", family).strip("-")
+    return family
+
+
+def has_redundant_family_attachment(
+    connection: sqlite3.Connection,
+    song_id: int,
+    relationship: str,
+    source_family: str,
+    source_author: str = "",
+    source_version: str = "",
+    source_action_signature: str = "",
+    project_root: Path | None = None,
+) -> bool:
+    """Return True if a source-document family is already attached for this song/relationship."""
+    if not source_family:
+        return False
+    candidate_signature = (
+        source_family,
+        source_version or "",
+        source_author or "",
+        source_action_signature or "",
+    )
+    root = (project_root or Path.cwd()).resolve()
+    rows = connection.execute(
+        """
+        SELECT sd.source_path, sd.source_kind
+        FROM song_sources ss
+        JOIN source_documents sd ON sd.id = ss.source_document_id
+        WHERE ss.song_id = ? AND ss.relationship = ?
+        """,
+        (song_id, relationship),
+    ).fetchall()
+    for row in rows:
+        row_family = source_family_key({}, row["source_path"])
+        if row_family != source_family:
+            continue
+        if row["source_kind"] != "markdown":
+            return True
+        row_path = root / row["source_path"]
+        if not row_path.exists():
+            return True
+        row_frontmatter, row_body = parse_frontmatter(read_text(row_path))
+        row_signature = source_signature(row_frontmatter, row["source_path"], row_body)
+        if row_signature[0] != candidate_signature[0]:
+            continue
+        if row_signature[1] and candidate_signature[1] and row_signature[1] != candidate_signature[1]:
+            continue
+        if row_signature[2] and candidate_signature[2] and row_signature[2] != candidate_signature[2]:
+            continue
+        if row_signature[3] and candidate_signature[3] and row_signature[3] != candidate_signature[3]:
+            continue
+        return True
+    return False
 
 
 def lyric_body(markdown_body: str) -> tuple[str, str]:
@@ -127,7 +254,70 @@ def project_relative(path: Path, project_root: Path) -> str:
 def source_pdf_candidates(source_file: str, project_root: Path) -> list[Path]:
     if not source_file:
         return []
-    return [path for path in project_root.glob(f"docs/**/{source_file}") if path.is_file()]
+    candidates = [path for path in project_root.glob(f"docs/**/{source_file}") if path.is_file()]
+    if candidates:
+        return candidates
+
+    source_pdf = Path(source_file)
+    if source_pdf.suffix.lower() != ".pdf":
+        return []
+
+    processed_name = source_pdf.with_name(f"{source_pdf.stem}{PROCESSED_SOURCE_SUFFIX}{source_pdf.suffix}")
+    return [path for path in project_root.glob(f"docs/**/{processed_name.as_posix()}") if path.is_file()]
+
+
+def resolved_library_pdf_candidates(source_file: str, project_root: Path) -> list[Path]:
+    """Return library PDF candidates without changing the source file state."""
+    return list(dict.fromkeys(source_pdf_candidates(source_file, project_root)))
+
+
+def page_numbers_from_locator(locator: str) -> set[int]:
+    normalized = locator.casefold()
+    numbers = {int(value) for value in re.findall(r"(?:page|p\.)\s*(\d+)", normalized)}
+    for start, end in re.findall(r"(?:page|p\.)\s*(\d+)\s*(?:-|to)\s*(\d+)", normalized):
+        numbers.update(range(int(start), int(end) + 1))
+    return numbers
+
+
+def source_pdf_visual_evidence_ready(
+    connection: sqlite3.Connection,
+    source_pdf: Path,
+    locator: str,
+    project_root: Path,
+) -> bool:
+    """Require page-level review before a PDF can support a source attachment."""
+    page_numbers = page_numbers_from_locator(locator)
+    if not page_numbers:
+        return False
+    inventory_path = project_relative(source_pdf, project_root)
+    inventory = connection.execute(
+        "SELECT id FROM resource_file_inventory WHERE source_path = ?", (inventory_path,)
+    ).fetchone()
+    if inventory is None:
+        return False
+    rows = connection.execute(
+        """
+        SELECT page_number, text_layer_state, visual_review_state, image_or_layout_present
+        FROM resource_page_evidence
+        WHERE inventory_id = ? AND page_number IN (%s)
+        """ % ",".join("?" * len(page_numbers)),
+        (inventory[0], *sorted(page_numbers)),
+    ).fetchall()
+    evidence_by_page = {int(row[0]): row for row in rows}
+    for page_number in page_numbers:
+        row = evidence_by_page.get(page_number)
+        if row is None:
+            return False
+        _, text_state, visual_state, image_or_layout = row
+        text_only_confirmed = (
+            text_state == "definitive"
+            and visual_state == "not-required"
+            and int(image_or_layout) == 0
+        )
+        if visual_state != "reviewed" and not text_only_confirmed:
+            return False
+    return True
+
 
 
 def load_songs(connection: sqlite3.Connection) -> list[ExistingSong]:
@@ -149,16 +339,33 @@ def plan_candidate(path: Path, project_root: Path, songs: list[ExistingSong]) ->
     frontmatter, body = parse_frontmatter(text)
     title, lyrics = lyric_body(body)
     source_path = project_relative(path, project_root)
+    source_family, source_version, source_author, source_action_signature = source_signature(frontmatter, source_path, body)
+    source_id = frontmatter.get("source_id", "").strip()
     review_status = frontmatter.get("review_status", "").casefold()
     source_file = frontmatter.get("source_file", "")
     page_section = frontmatter.get("page_section", "")
+    libraries_pdfs = resolved_library_pdf_candidates(source_file, project_root)
 
     same_path = [song for song in songs if song.markdown_path == source_path]
     if same_path:
         song = same_path[0]
-        return Candidate(source_path, title, review_status, source_file, page_section,
-                         len(lyrics.splitlines()), "already-imported", song.id, song.title,
-                         ["This transcription path is already attached to a song record."])
+        return Candidate(
+            source_path,
+            title,
+            review_status,
+            source_family,
+            source_id,
+            source_author,
+            source_version,
+            source_action_signature,
+            source_file,
+            page_section,
+            len(lyrics.splitlines()),
+            "already-imported",
+            song.id,
+            song.title,
+            ["This transcription path is already attached to a song record."],
+        )
 
     title_key = mechanical_fingerprint(title)
     lyric_key = mechanical_fingerprint(lyrics)
@@ -171,50 +378,125 @@ def plan_candidate(path: Path, project_root: Path, songs: list[ExistingSong]) ->
             notes.append("Do not attach automatically: the transcription is not source-reviewed.")
         if page_section.casefold() in UNKNOWN_LOCATORS:
             notes.append("Do not attach automatically: the source page locator is missing.")
-        pdfs = source_pdf_candidates(source_file, project_root)
-        if len(pdfs) != 1:
-            notes.append(f"Do not attach automatically: expected one local source PDF, found {len(pdfs)}.")
-        return Candidate(source_path, title, review_status, source_file, page_section,
-                         len(lyrics.splitlines()), "exact-duplicate", song.id, song.title, notes)
+        if len(libraries_pdfs) != 1:
+            notes.append(f"Do not attach automatically: expected one local source PDF, found {len(libraries_pdfs)}.")
+        return Candidate(
+            source_path,
+            title,
+            review_status,
+            source_family,
+            source_id,
+            source_author,
+            source_version,
+            source_action_signature,
+            source_file,
+            page_section,
+            len(lyrics.splitlines()),
+            "exact-duplicate",
+            song.id,
+            song.title,
+            notes,
+        )
     if len(exact) > 1:
-        return Candidate(source_path, title, review_status, source_file, page_section,
-                         len(lyrics.splitlines()), "ambiguous-exact-match", None, None,
-                         [f"{len(exact)} canonical records have the same normalized title and lyrics; do not auto-attach."])
+        return Candidate(
+            source_path,
+            title,
+            review_status,
+            source_family,
+            source_id,
+            source_author,
+            source_version,
+            source_action_signature,
+            source_file,
+            page_section,
+            len(lyrics.splitlines()),
+            "ambiguous-exact-match",
+            None,
+            None,
+            [f"{len(exact)} canonical records have the same normalized title and lyrics; do not auto-attach."],
+        )
 
     same_title = [song for song in songs if mechanical_fingerprint(song.title) == title_key]
     if same_title:
-        return Candidate(source_path, title, review_status, source_file, page_section,
-                         len(lyrics.splitlines()), "material-variation-review", None, None,
-                         ["A title match has different normalized lyrics. Review the original pages before choosing a separate version or a source reference."])
+        return Candidate(
+            source_path,
+            title,
+            review_status,
+            source_family,
+            source_id,
+            source_author,
+            source_version,
+            source_action_signature,
+            source_file,
+            page_section,
+            len(lyrics.splitlines()),
+            "material-variation-review",
+            None,
+            None,
+            ["A title match has different normalized lyrics. Review the original pages before choosing a separate version or a source reference."],
+        )
 
     same_lyrics = [song for song in songs if mechanical_fingerprint(song.lyrics) == lyric_key and lyric_key]
     if same_lyrics:
-        return Candidate(source_path, title, review_status, source_file, page_section,
-                         len(lyrics.splitlines()), "title-variation-review", None, None,
-                         ["Lyrics match a different title. Preserve both source identities until an archivist verifies the relationship."])
+        return Candidate(
+            source_path,
+            title,
+            review_status,
+            source_family,
+            source_id,
+            source_author,
+            source_version,
+            source_action_signature,
+            source_file,
+            page_section,
+            len(lyrics.splitlines()),
+            "title-variation-review",
+            None,
+            None,
+            ["Lyrics match a different title. Preserve both source identities until an archivist verifies the relationship."],
+        )
 
-    return Candidate(source_path, title, review_status, source_file, page_section,
-                     len(lyrics.splitlines()), "unique-song-review", None, None,
-                     ["No automatic merge candidate. Review the original source and import only after lyrics, actions, and provenance are verified."])
+    return Candidate(
+        source_path,
+        title,
+        review_status,
+        source_family,
+        source_id,
+        source_author,
+        source_version,
+        source_action_signature,
+        source_file,
+        page_section,
+        len(lyrics.splitlines()),
+        "unique-song-review",
+        None,
+        None,
+        ["No automatic merge candidate. Review the original source and import only after lyrics, actions, and provenance are verified."],
+    )
 
 
-def safe_to_attach(candidate: Candidate, project_root: Path) -> bool:
+def safe_to_attach(connection: sqlite3.Connection, candidate: Candidate, project_root: Path) -> bool:
+    libraries_pdfs = resolved_library_pdf_candidates(candidate.source_file, project_root)
     return (
         candidate.classification == "exact-duplicate"
         and candidate.canonical_song_id is not None
         and candidate.review_status == "reviewed"
         and candidate.page_section.casefold() not in UNKNOWN_LOCATORS
-        and len(source_pdf_candidates(candidate.source_file, project_root)) == 1
+        and len(libraries_pdfs) == 1
+        and source_pdf_visual_evidence_ready(connection, libraries_pdfs[0], candidate.page_section, project_root)
     )
 
 
 def attach_exact_sources(connection: sqlite3.Connection, candidate: Candidate, project_root: Path) -> dict[str, Any]:
-    if not safe_to_attach(candidate, project_root):
+    if not safe_to_attach(connection, candidate, project_root):
         raise ValueError(f"{candidate.source_path} is not a safe exact-source attachment")
+    source_family = candidate.source_family or source_family_key({"source_file": candidate.source_file}, candidate.source_path)
     source_markdown = project_root / candidate.source_path
-    source_pdf = source_pdf_candidates(candidate.source_file, project_root)[0]
+    source_pdf_candidates = resolved_library_pdf_candidates(candidate.source_file, project_root)
+    source_pdf = source_pdf_candidates[0]
     pdf_path = project_relative(source_pdf, project_root)
     now = "CURRENT_TIMESTAMP"
+    attached_rows = 0
 
     connection.execute(
         f"""
@@ -244,25 +526,63 @@ def attach_exact_sources(connection: sqlite3.Connection, candidate: Candidate, p
     ).fetchone()[0]
     connection.execute(
         """
-        INSERT INTO song_sources (song_id, source_document_id, relationship, locator, evidence_note)
-        VALUES (?, ?, 'transcription', 'Reviewed local transcription', ?)
-        ON CONFLICT(song_id, source_document_id, relationship) DO UPDATE SET
-          locator = excluded.locator, evidence_note = excluded.evidence_note
+        UPDATE resource_page_evidence
+        SET source_document_id = ?
+        WHERE inventory_id = (SELECT id FROM resource_file_inventory WHERE source_path = ?)
         """,
-        (candidate.canonical_song_id, markdown_id,
-         "Exact normalized title-and-lyrics match; attached by the reviewed-source importer."),
+        (pdf_id, pdf_path),
     )
-    connection.execute(
-        """
-        INSERT INTO song_sources (song_id, source_document_id, relationship, locator, evidence_note)
-        VALUES (?, ?, 'primary', ?, ?)
-        ON CONFLICT(song_id, source_document_id, relationship) DO UPDATE SET
-          locator = excluded.locator, evidence_note = excluded.evidence_note
-        """,
-        (candidate.canonical_song_id, pdf_id, candidate.page_section,
-         "Exact normalized title-and-lyrics match; original PDF reference attached by the reviewed-source importer."),
-    )
-    return {"song_id": candidate.canonical_song_id, "markdown": candidate.source_path, "pdf": pdf_path}
+    if not has_redundant_family_attachment(
+        connection,
+        candidate.canonical_song_id,
+        "transcription",
+        source_family,
+        candidate.source_author,
+        candidate.source_version,
+        candidate.source_action_signature,
+        project_root,
+    ):
+        cursor = connection.execute(
+            """
+            INSERT INTO song_sources (song_id, source_document_id, relationship, locator, evidence_note)
+            VALUES (?, ?, 'transcription', 'Reviewed local transcription', ?)
+            ON CONFLICT(song_id, source_document_id, relationship) DO UPDATE SET
+              locator = excluded.locator, evidence_note = excluded.evidence_note
+            """,
+            (candidate.canonical_song_id, markdown_id,
+             "Exact normalized title-and-lyrics match; attached by the reviewed-source importer."),
+        )
+        attached_rows += cursor.rowcount
+    if not has_redundant_family_attachment(
+            connection,
+            candidate.canonical_song_id,
+            "primary",
+            source_family,
+            candidate.source_author,
+            candidate.source_version,
+            candidate.source_action_signature,
+            project_root,
+        ):
+        cursor = connection.execute(
+            """
+            INSERT INTO song_sources (song_id, source_document_id, relationship, locator, evidence_note)
+            VALUES (?, ?, 'primary', ?, ?)
+            ON CONFLICT(song_id, source_document_id, relationship) DO UPDATE SET
+              locator = excluded.locator, evidence_note = excluded.evidence_note
+            """,
+            (
+                candidate.canonical_song_id, pdf_id, candidate.page_section,
+                "Exact normalized title-and-lyrics match; original PDF reference attached by the reviewed-source importer.",
+            ),
+        )
+        attached_rows += cursor.rowcount
+    return {
+        "song_id": candidate.canonical_song_id,
+        "markdown": candidate.source_path,
+        "pdf": pdf_path,
+        "source_family": source_family,
+        "attached_rows": attached_rows,
+    }
 
 
 def render_text(candidates: list[Candidate], attachments: list[dict[str, Any]]) -> str:
@@ -320,14 +640,19 @@ def render_summary(
     return "\n".join(lines)
 
 
+def is_discovery_path_skipped(path: Path) -> bool:
+    return any(part in SKIP_SOURCE_PARTS for part in path.parts)
+
+
 def collect_source_paths(explicit_paths: list[Path], source_directories: list[Path]) -> list[Path]:
     """Expand local directory input without an OS command-line-length limit."""
     source_paths = list(explicit_paths)
     for directory in source_directories:
         if not directory.is_dir():
             raise ValueError(f"Source directory does not exist: {directory}")
-        source_paths.extend(directory.rglob("*.md"))
+        source_paths.extend(path for path in directory.rglob("*.md") if not is_discovery_path_skipped(path))
     unique_paths = {path.resolve() for path in source_paths}
+    unique_paths = {path for path in unique_paths if not is_discovery_path_skipped(path)}
     if not unique_paths:
         raise ValueError("Provide at least one Markdown source or --source-directory")
     return sorted(unique_paths)

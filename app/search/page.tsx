@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { lessonHref } from "@/lib/grade-routes";
+import { GRADE_SEARCH_VALUES, lessonHref } from "@/lib/grade-routes";
+import { TEACHER_GRADE_ITEMS } from "@/components/site-navigation";
 import Link from "next/link";
 import styles from "./SearchPage.module.css";
 
@@ -34,6 +35,8 @@ interface CurriculumResult {
   tags?: string | null;
   matched_terms?: string[];
   why_match?: string;
+  pacing?: string | null;
+  planning_windows?: string[];
 }
 
 interface LessonResult {
@@ -91,12 +94,7 @@ type ResourceTab = "video" | "songs" | "printouts";
 
 const GRADE_OPTIONS = [
   { value: "", label: "All grades" },
-  { value: "daycare", label: "Daycare" },
-  { value: "preschool", label: "Preschool" },
-  { value: "kindergarten", label: "Kindergarten" },
-  { value: "grade-1", label: "Grade 1" },
-  { value: "grade-2", label: "Grade 2" },
-  { value: "grade-3", label: "Grade 3" },
+  ...TEACHER_GRADE_ITEMS.map(({ key, label }) => ({ value: GRADE_SEARCH_VALUES[key], label })),
 ] as const;
 
 function plainText(value: string | null | undefined) {
@@ -167,8 +165,9 @@ export default function SearchPage() {
   const [error, setError] = useState<string | null>(null);
   const [searchStatus, setSearchStatus] = useState<Pick<SearchResponse, "searchMode" | "semanticModel" | "database">>({});
 
-  const search = useCallback(async (requestedQuery?: string) => {
+  const search = useCallback(async (requestedQuery?: string, requestedGrade?: string) => {
     const cleanedQuery = (requestedQuery ?? query).trim();
+    const selectedGrade = requestedGrade ?? gradeFilter;
     if (cleanedQuery.length < 2) return;
 
     setLoading(true);
@@ -178,7 +177,7 @@ export default function SearchPage() {
     try {
       const params = new URLSearchParams({ q: cleanedQuery });
       if (kindFilter) params.set("kind", kindFilter);
-      if (gradeFilter) params.set("grade", gradeFilter);
+      if (selectedGrade) params.set("grade", selectedGrade);
       window.history.replaceState(null, "", `/search?${params.toString()}`);
       const response = await fetch(`/api/search?${params}`);
       if (!response.ok) throw new Error("Search service did not return a usable response.");
@@ -216,18 +215,19 @@ export default function SearchPage() {
   useEffect(() => {
     if (initialSearchApplied.current) return;
 
-    const initialQuery = new URLSearchParams(window.location.search).get("q")?.trim() ?? "";
-    if (initialQuery.length < 2) {
-      initialSearchApplied.current = true;
-      return;
-    }
-
+    const initialParams = new URLSearchParams(window.location.search);
+    const initialQuery = (initialParams.get("q") ?? initialParams.get("cue") ?? "").trim();
+    const initialGrade = initialParams.get("grade") ?? "";
     let cancelled = false;
     queueMicrotask(() => {
       if (cancelled) return;
       initialSearchApplied.current = true;
+      if (initialGrade && GRADE_OPTIONS.some((option) => option.value === initialGrade)) {
+        setGradeFilter(initialGrade);
+      }
+      if (initialQuery.length < 2) return;
       setQuery(initialQuery);
-      void search(initialQuery);
+      void search(initialQuery, initialGrade);
     });
 
     return () => {
@@ -354,7 +354,7 @@ export default function SearchPage() {
                             <span>{topic.skill_statement || "No topic summary has been reviewed yet."}</span>
                             {topic.why_match ? <small>{topic.why_match}</small> : null}
                           </span>
-                          <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}</span>
+                          <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}{topic.pacing ? <><br />{topic.pacing}</> : null}</span>
                         </Link>
                       </li>
                     );
@@ -429,7 +429,7 @@ export default function SearchPage() {
                       </section>
                       <section>
                         <h3>{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
-                        <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}` : selectedLesson?.purpose || "No purpose is available."}</p>
+                        <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}${selectedTopic.pacing ? ` ... ${selectedTopic.pacing}` : ""}` : selectedLesson?.purpose || "No purpose is available."}</p>
                       </section>
                       <section>
                         <h3>Related standards</h3>

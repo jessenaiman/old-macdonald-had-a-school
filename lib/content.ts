@@ -48,6 +48,15 @@ function titleFromSlug(slug: string) {
   return slug.split("-").filter(Boolean).map((word) => word[0]?.toUpperCase() + word.slice(1)).join(" ");
 }
 
+function comparableTitle(value: string) {
+  return value
+    .toLocaleLowerCase()
+    .replaceAll("&", " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
 function gradeFromFolder(sourcePath: string) {
   const folder = path.basename(path.dirname(sourcePath));
   return /^(daycare|pre-school|preschool|kindergarten|grade-one|grade-two)$/i.test(folder)
@@ -111,6 +120,17 @@ export async function getLesson(slug: string): Promise<Lesson | undefined> {
     metadata: normalizeMetadata(file, lessonModule.metadata),
     sourcePath: file.sourcePath,
   };
+}
+
+export async function getLessonByTitleAndGrade(title: string, grade: GradeKey): Promise<Lesson | undefined> {
+  const matchingFiles = lessonFiles.filter((file) => comparableTitle(file.slug) === comparableTitle(title));
+
+  for (const file of matchingFiles) {
+    const lesson = await getLesson(file.slug);
+    if (lesson && gradeKeysForLabel(lesson.metadata.grade).includes(grade)) return lesson;
+  }
+
+  return undefined;
 }
 
 export async function getAllLessons(): Promise<Lesson[]> {

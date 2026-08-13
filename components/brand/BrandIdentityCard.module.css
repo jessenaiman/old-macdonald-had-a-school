@@ -1,7 +1,7 @@
 .card {
-  --identity-card-color: var(--card);
-  --identity-card-ink: var(--card-foreground);
-  --identity-card-texture: none;
+  --identity-card-color: var(--character-color, var(--card));
+  --identity-card-ink: var(--character-foreground, var(--card-foreground));
+  --identity-card-texture: var(--character-texture, none);
   position: relative;
   min-width: 0;
   border: 1px solid color-mix(in srgb, var(--identity-card-color) 72%, #142d42);
@@ -25,6 +25,36 @@
   color: inherit;
   text-decoration: none;
 }
+
+.character .body,
+.student .body {
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  grid-template-rows: auto;
+  align-items: center;
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.character .media,
+.student .media {
+  min-height: 7rem;
+  align-self: stretch;
+  border-right: .45rem solid var(--identity-card-color);
+  border-bottom: 0;
+  background-color: var(--identity-card-color);
+  background-image: var(--identity-card-texture);
+  background-repeat: repeat;
+  background-size: 180px;
+}
+
+.character .media img,
+.student .media img { width: 5rem; height: 6.5rem; }
+.character .label,
+.student .label { display: none; }
+.character .copy,
+.student .copy { padding: .9rem 1rem; }
+.character .copy h3,
+.student .copy h3 { color: var(--identity-card-color); font-size: 1.45rem; }
 
 .card:hover,
 .card:focus-within {
@@ -76,12 +106,12 @@
 .copy h3 { margin: 0; color: inherit; font: 400 1.65rem/.95 var(--font-farm-display), Georgia, serif; text-wrap: balance; }
 .footer { align-self: end; margin-top: auto; padding: .55rem .75rem; border-top: 1px dashed color-mix(in srgb, var(--identity-card-ink) 52%, transparent); }
 
-.student .media { min-height: 8.5rem; }
-.student .media img { height: 8.5rem; }
-.student .copy { padding: .8rem; }
-.student .copy h3 { font-size: 1.35rem; }
+.student .media { min-height: 6rem; }
+.student .media img { height: 5.5rem; }
+.student .copy { padding: .75rem .9rem; }
+.student .copy h3 { font-size: 1.3rem; }
 
-.subject { color: #142d42; background-color: #fffaf0; background-image: var(--home-paper-texture); background-size: 240px; }
+.subject { color: var(--card-foreground); background-color: var(--card); background-image: var(--home-paper-texture); background-size: 240px; }
 .subject .body { grid-template-rows: auto 1fr auto; }
 .subject .media { min-height: 8rem; border-bottom: 0; background: transparent; }
 .subject .copy { min-height: 10.5rem; padding-top: .35rem; text-align: center; }

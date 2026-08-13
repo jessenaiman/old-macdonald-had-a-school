@@ -16,6 +16,12 @@ import sqlite3
 import sys
 from pathlib import Path
 from typing import Any
+from scripts.songbook.plan_song_import import (
+    has_redundant_family_attachment,
+    resolved_library_pdf_candidates,
+    source_family_key,
+    source_pdf_visual_evidence_ready,
+)
 from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 
@@ -41,6 +47,18 @@ def load_records(path: Path) -> list[dict[str, Any]]:
     return records
 
 
+def should_skip_record(database: sqlite3.Connection, record: dict[str, Any], project_root: Path) -> bool:
+    source_family = source_family_key({"source_file": record.get("source_file", "")}, record["source_path"])
+    canonical_song_id = int(record["canonical_song_id"])
+    return has_redundant_family_attachment(
+        database,
+        canonical_song_id,
+        "transcription",
+        source_family,
+        project_root=project_root,
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("manifest", type=Path)
@@ -51,6 +69,7 @@ def main() -> int:
     args = parser.parse_args()
 
     records = load_records(args.manifest)
+    project_root = Path.cwd().resolve()
     guard = install_runtime_guard("apply_exact_transcription_links", args.max_runtime_seconds)
     database = sqlite3.connect(args.db)
     try:
@@ -71,10 +90,29 @@ def main() -> int:
         missing_sources = [record["source_path"] for record in records if record["source_path"] not in states]
         if missing_sources:
             raise ValueError(f"Manifest sources are not registered: {missing_sources[:5]}")
+        blocked_pdf_records = []
+        for record in records:
+            source_file = str(record.get("source_file") or "")
+            if not source_file.casefold().endswith(".pdf"):
+                continue
+            pdf_candidates = resolved_library_pdf_candidates(source_file, project_root)
+            if len(pdf_candidates) != 1 or not source_pdf_visual_evidence_ready(
+                database,
+                pdf_candidates[0],
+                str(record.get("page_section") or ""),
+                project_root,
+            ):
+                blocked_pdf_records.append(record["source_path"])
+        if blocked_pdf_records:
+            raise ValueError(
+                "PDF transcription links require page-level vision or confirmed text-only evidence: "
+                + ", ".join(blocked_pdf_records[:5])
+            )
         if not args.apply:
             print(json.dumps({"dry_run": True, "records": len(records), "batch_id": args.batch_id, "states": sorted(set(states.values()))}, indent=2))
             return 0
         attached = 0
+        skipped_redundant = 0
         with database:
             database.execute(
                 "INSERT INTO schema_migrations (migration_id, applied_at, omhas_sha256, curriculum_sha256, generated_sha256) VALUES (?, CURRENT_TIMESTAMP, 'DATA_IMPORT', 'NOT_APPLICABLE', 'NOT_APPLICABLE')",
@@ -83,6 +121,9 @@ def main() -> int:
             for record in records:
                 if check_runtime(guard):
                     break
+                if should_skip_record(database, record, project_root):
+                    skipped_redundant += 1
+                    continue
                 source_id = database.execute("SELECT id FROM source_documents WHERE source_path = ?", (record["source_path"],)).fetchone()[0]
                 cursor = database.execute(
                     """INSERT INTO song_sources (song_id, source_document_id, relationship, locator, evidence_note)
@@ -103,7 +144,14 @@ def main() -> int:
             violations = database.execute("PRAGMA foreign_key_check").fetchall()
             if violations:
                 raise RuntimeError(f"Foreign-key check failed: {violations}")
-        print(json.dumps({"dry_run": False, "records": len(records), "attached": attached, "already_linked": len(records) - attached, "batch_id": args.batch_id}, indent=2))
+        print(json.dumps({
+            "dry_run": False,
+            "records": len(records),
+            "attached": attached,
+            "already_linked": len(records) - attached,
+            "redundant_skipped": skipped_redundant,
+            "batch_id": args.batch_id,
+        }, indent=2))
     finally:
         database.close()
     return 0

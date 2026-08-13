@@ -2,6 +2,20 @@ export const GRADE_KEYS = ["daycare", "pre-school", "kindergarten", "grade-one",
 
 export type GradeKey = (typeof GRADE_KEYS)[number];
 
+/** Search-index grade values for the five navigable grade routes. */
+export const GRADE_SEARCH_VALUES: Record<GradeKey, string> = {
+  daycare: "daycare",
+  "pre-school": "preschool",
+  kindergarten: "kindergarten",
+  "grade-one": "grade-1",
+  "grade-two": "grade-2",
+};
+
+export function gradeSearchHref(grade: GradeKey, cue: string) {
+  const params = new URLSearchParams({ grade: GRADE_SEARCH_VALUES[grade], q: cue });
+  return `/search?${params.toString()}`;
+}
+
 export function gradeKeysForLabel(label: string): GradeKey[] {
   const normalized = label.toLowerCase();
   const keys: GradeKey[] = [];

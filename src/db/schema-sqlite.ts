@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, real, uniqueIndex } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
 
 // ─── Core curriculum (normalized) ──────────────────────────────────────────
@@ -185,7 +185,15 @@ export const songCurriculumLinks = sqliteTable('song_curriculum_links', {
   description: text('description').notNull(),
   relevance: text('relevance'),
   linkType: text('link_type').notNull().default('curriculum'),
-});
+}, (table) => ({
+  identityUnique: uniqueIndex('song_curriculum_links_identity_unique').on(
+    table.songId,
+    table.subject,
+    table.description,
+    sql`ifnull(${table.relevance}, '')`,
+    table.linkType,
+  ),
+}));
 
 // ─── Search index ──────────────────────────────────────────────────────────
 

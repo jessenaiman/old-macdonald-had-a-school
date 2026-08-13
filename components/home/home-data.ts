@@ -14,9 +14,11 @@ export type HomeSubject = {
   searchQuery: string;
   color: string;
   iconClass: string;
+  teacherReason: string;
   highlights: readonly string[];
   fastenerClass: SubjectFastener;
   paperAsset: string;
+  noteShape: "torn" | "grid" | "deckled" | "ruled" | "scalloped" | "folded";
   rotation: "left" | "none" | "right";
   matches: (lesson: HomeLesson) => boolean;
 };
@@ -59,8 +61,10 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#C9527A",
     iconClass: "drama-storytelling-icon",
     fastenerClass: "fastener-paperclip",
-    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/01-torn-notebook-note.png",
+    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png",
+    noteShape: "torn",
     rotation: "left",
+    teacherReason: "Build confident talk, reading, and storytelling.",
     highlights: ["Build vocabulary", "Explore phonics", "Tell and retell stories"],
     matches: (lesson) => /language|literacy|phonic|reading|vocabulary/i.test(lessonText(lesson)),
   },
@@ -72,8 +76,10 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#1F6B6B",
     iconClass: "math-building-icon",
     fastenerClass: "fastener-push-pin",
-    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/02-blue-grid-note.png",
+    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png",
+    noteShape: "grid",
     rotation: "none",
+    teacherReason: "Make counting, shape, and patterns visible.",
     highlights: ["Count and compare", "Explore shapes", "Find patterns in songs"],
     matches: (lesson) => /math|numeracy/i.test(lessonText(lesson)),
   },
@@ -85,8 +91,10 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#55705A",
     iconClass: "gardening-health-icon",
     fastenerClass: "fastener-binder-clip",
-    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/03-sage-deckled-note.png",
+    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.png",
+    noteShape: "deckled",
     rotation: "right",
+    teacherReason: "Explore seasons, weather, and living things.",
     highlights: ["Observe and explore", "Seasons and weather", "Living things"],
     matches: (lesson) => /science|nature/i.test(lessonText(lesson)),
   },
@@ -98,8 +106,10 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#2C6C9B",
     iconClass: "music-icon",
     fastenerClass: "fastener-masking-tape",
-    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/04-rose-ruled-note.png",
+    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/04-rose-ruled-note.png",
+    noteShape: "ruled",
     rotation: "left",
+    teacherReason: "Teach rhythm, listening, and movement through songs.",
     highlights: ["Rhythm and beat", "Sing and move", "Create and perform"],
     matches: (lesson) => /music/i.test(lessonText(lesson)),
   },
@@ -111,8 +121,10 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#4F5FA0",
     iconClass: "art-photography-icon",
     fastenerClass: "fastener-gingham-tape",
-    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/05-gold-scalloped-note.png",
+    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/05-gold-scalloped-note.png",
+    noteShape: "scalloped",
     rotation: "none",
+    teacherReason: "Invite children to create, imagine, and express ideas.",
     highlights: ["Create and imagine", "Explore colour", "Draw and design"],
     matches: (lesson) => /\bart\b|arts|drama|creative/i.test(lessonText(lesson)),
   },
@@ -124,8 +136,10 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     color: "#B5272C",
     iconClass: "physical-education-icon",
     fastenerClass: "fastener-apple-peg",
-    paperAsset: "/design-assets/classroom-paper-notes-v1-review/individual-notes/06-lavender-folded-note.png",
+    paperAsset: "/design-assets/classroom-paper-notes-v1/individual-notes/06-lavender-folded-note.png",
+    noteShape: "folded",
     rotation: "right",
+    teacherReason: "Practise movement, cooperation, and healthy routines.",
     highlights: ["Move your body", "Play and cooperate", "Stay healthy"],
     matches: (lesson) => /gross motor|physical|health|routine|approaches to learning/i.test(lessonText(lesson)),
   },

@@ -18,7 +18,7 @@ Scope: the three user-supplied homepage references from this task. This inventor
 | Visible element | Local source | Result |
 | --- | --- | --- |
 | Warm kraft, ivory paper, construction paper, woven cloth, felt | `public/design-assets/web-material-library-v1/` | Present as repeatable production tiles. |
-| Cork planning surface | `public/design-assets/cork-board-kit-v1/seamless-cork-tile.png` | Present. |
+| Cork planning surface | `public/design-assets/cork-board-kit-v2/seamless-cork-tile.png` | Present as the governed muted v2 family, with landscape, portrait, and planning-strip derivatives. |
 | Push pins, paperclips, masking tape, brass split pins, buttons, needle/thread | `public/design-assets/classroom-fasteners-v1/individual-icons/` | Present. |
 | Six curriculum subject symbols | `public/brand-kit-icon-sheets/individual-icons/subject-*.png` | Present, though reference-specific book/abacus/sprout/note/palette/shoe drawings are not exact individual exports. Use the canonical subject icons unless a new governed icon family is approved. |
 | Folk Stories banjo and Folk Instruments fiddle | Existing curriculum/scene imagery can represent the topics | Present enough for semantic use; do not claim pixel identity with the references. |

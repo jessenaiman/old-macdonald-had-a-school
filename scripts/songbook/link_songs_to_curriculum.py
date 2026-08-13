@@ -537,11 +537,11 @@ def process_batch(
         links_inserted = 0
         for sl in curriculum_links:
             song_id, subject, description, relevance, link_type = sl
-            c.execute(
-                "INSERT INTO song_curriculum_links (song_id, subject, description, relevance, link_type) VALUES (?, ?, ?, ?, ?)",
+            inserted = c.execute(
+                "INSERT OR IGNORE INTO song_curriculum_links (song_id, subject, description, relevance, link_type) VALUES (?, ?, ?, ?, ?)",
                 (song_id, subject, description, relevance, link_type)
             )
-            links_inserted += 1
+            links_inserted += inserted.rowcount
         
         # Insert topic_materials links
         topic_links_inserted = 0

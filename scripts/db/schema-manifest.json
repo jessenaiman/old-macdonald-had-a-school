@@ -19,7 +19,10 @@
       "src/db/migrations-sqlite/0013_rebuild_search_chunks_fts.sql",
       "src/db/migrations-sqlite/0014_gate_unreviewed_search_evidence.sql",
       "src/db/migrations-sqlite/0015_add_resource_processing_workflow.sql",
-      "src/db/migrations-sqlite/0016_add_animal_taxonomy_inheritance.sql"
+      "src/db/migrations-sqlite/0016_add_animal_taxonomy_inheritance.sql",
+      "src/db/migrations-sqlite/0017_repair_material_links_and_dedupe_curriculum_links.sql",
+      "src/db/migrations-sqlite/0018_add_planning_windows.sql",
+      "src/db/migrations-sqlite/0019_add_resource_page_evidence.sql"
     ],
     "drizzle": [
       {
@@ -76,20 +79,938 @@
       {
         "applied_at": "2026-08-11T06:28:15.168Z",
         "migration_id": "20260811_002_add_lesson_assets"
+      },
+      {
+        "applied_at": "2026-08-13T14:45:07.748Z",
+        "migration_id": "20260813_003_add_planning_windows"
+      },
+      {
+        "applied_at": "2026-08-13T14:52:09.199Z",
+        "migration_id": "20260813_004_add_resource_page_evidence"
+      },
+      {
+        "applied_at": "2026-08-13 05:54:57",
+        "migration_id": "add-song-recordings-20260813_015457"
+      },
+      {
+        "applied_at": "2026-08-13 05:56:06",
+        "migration_id": "add-song-recordings-20260813_015606"
+      },
+      {
+        "applied_at": "2026-08-13 02:59:01",
+        "migration_id": "batch-01-initial-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:04:34",
+        "migration_id": "batch-03-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:04:44",
+        "migration_id": "batch-04-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:04:54",
+        "migration_id": "batch-05-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:05:01",
+        "migration_id": "batch-06-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:05:29",
+        "migration_id": "batch-07-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:05:31",
+        "migration_id": "batch-08-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:05:32",
+        "migration_id": "batch-09-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:05:34",
+        "migration_id": "batch-10-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:08",
+        "migration_id": "batch-1000-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:10",
+        "migration_id": "batch-1020-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:11",
+        "migration_id": "batch-1040-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:12",
+        "migration_id": "batch-1060-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:13",
+        "migration_id": "batch-1080-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:05:43",
+        "migration_id": "batch-11-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:15",
+        "migration_id": "batch-1100-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:17",
+        "migration_id": "batch-1120-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:18",
+        "migration_id": "batch-1140-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:19",
+        "migration_id": "batch-1160-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:20",
+        "migration_id": "batch-1180-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:05:44",
+        "migration_id": "batch-12-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:22",
+        "migration_id": "batch-1200-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:23",
+        "migration_id": "batch-1220-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:24",
+        "migration_id": "batch-1240-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:26",
+        "migration_id": "batch-1260-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:28",
+        "migration_id": "batch-1280-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:29",
+        "migration_id": "batch-1300-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:30",
+        "migration_id": "batch-1320-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:32",
+        "migration_id": "batch-1340-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:33",
+        "migration_id": "batch-1360-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:34",
+        "migration_id": "batch-1380-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:36",
+        "migration_id": "batch-1400-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:01",
+        "migration_id": "batch-200-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:02",
+        "migration_id": "batch-220-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:04",
+        "migration_id": "batch-240-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:05",
+        "migration_id": "batch-260-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:06",
+        "migration_id": "batch-280-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:08",
+        "migration_id": "batch-300-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:09",
+        "migration_id": "batch-320-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:10",
+        "migration_id": "batch-340-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:12",
+        "migration_id": "batch-360-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:13",
+        "migration_id": "batch-380-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:29",
+        "migration_id": "batch-400-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:30",
+        "migration_id": "batch-420-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:31",
+        "migration_id": "batch-440-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:33",
+        "migration_id": "batch-460-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:34",
+        "migration_id": "batch-480-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:35",
+        "migration_id": "batch-500-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:37",
+        "migration_id": "batch-520-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:38",
+        "migration_id": "batch-540-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:39",
+        "migration_id": "batch-560-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:40",
+        "migration_id": "batch-580-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:41",
+        "migration_id": "batch-600-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:43",
+        "migration_id": "batch-620-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:44",
+        "migration_id": "batch-640-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:45",
+        "migration_id": "batch-660-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:47",
+        "migration_id": "batch-680-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:48",
+        "migration_id": "batch-700-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:49",
+        "migration_id": "batch-720-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:51",
+        "migration_id": "batch-740-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:52",
+        "migration_id": "batch-760-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:53",
+        "migration_id": "batch-780-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:55",
+        "migration_id": "batch-800-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:57",
+        "migration_id": "batch-820-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:58",
+        "migration_id": "batch-840-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:06:59",
+        "migration_id": "batch-860-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:01",
+        "migration_id": "batch-880-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:02",
+        "migration_id": "batch-900-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:03",
+        "migration_id": "batch-920-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:05",
+        "migration_id": "batch-940-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:06",
+        "migration_id": "batch-960-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:07:07",
+        "migration_id": "batch-980-canonical-safe"
+      },
+      {
+        "applied_at": "2026-08-13 03:15:07",
+        "migration_id": "curric-enrich-0000"
+      },
+      {
+        "applied_at": "2026-08-13 03:15:08",
+        "migration_id": "curric-enrich-0250"
+      },
+      {
+        "applied_at": "2026-08-13 03:15:09",
+        "migration_id": "curric-enrich-0500"
+      },
+      {
+        "applied_at": "2026-08-13 03:15:09",
+        "migration_id": "curric-enrich-0750"
+      },
+      {
+        "applied_at": "2026-08-13 03:15:10",
+        "migration_id": "curric-enrich-1000"
+      },
+      {
+        "applied_at": "2026-08-13 03:15:11",
+        "migration_id": "curric-enrich-1250"
+      },
+      {
+        "applied_at": "2026-08-13 03:15:11",
+        "migration_id": "curric-enrich-1500"
+      },
+      {
+        "applied_at": "2026-08-13 03:17:22",
+        "migration_id": "curric-enrich-final"
+      },
+      {
+        "applied_at": "2026-08-13 13:13:05",
+        "migration_id": "dedupe-identical-songs"
+      },
+      {
+        "applied_at": "2026-08-13 03:23:20",
+        "migration_id": "exact-links-batch_01"
+      },
+      {
+        "applied_at": "2026-08-13 03:23:34",
+        "migration_id": "exact-links-batch_02"
+      },
+      {
+        "applied_at": "2026-08-13 14:05:42",
+        "migration_id": "folk-mech-pass-2026-08-13-a"
+      },
+      {
+        "applied_at": "2026-08-13 14:06:00",
+        "migration_id": "folk-mech-pass-2026-08-13-b"
+      },
+      {
+        "applied_at": "2026-08-13 14:06:22",
+        "migration_id": "folk-mech-pass-2026-08-13-c"
+      },
+      {
+        "applied_at": "2026-08-13 14:06:59",
+        "migration_id": "folk-mech-pass-2026-08-13-d"
+      },
+      {
+        "applied_at": "2026-08-13 14:06:47",
+        "migration_id": "folk-variation-pass-2026-08-13-a"
+      },
+      {
+        "applied_at": "2026-08-13 14:10:05",
+        "migration_id": "folk-variation-pass-2026-08-13-h"
+      },
+      {
+        "applied_at": "2026-08-13 14:10:09",
+        "migration_id": "folk-variation-pass-2026-08-13-i"
+      },
+      {
+        "applied_at": "2026-08-13 14:10:21",
+        "migration_id": "folk-variation-pass-2026-08-13-j"
+      },
+      {
+        "applied_at": "2026-08-13 14:10:33",
+        "migration_id": "folk-variation-pass-2026-08-13-k"
+      },
+      {
+        "applied_at": "2026-08-13 04:58:19",
+        "migration_id": "llm-song-curric-link-20260813_005819_049159"
+      },
+      {
+        "applied_at": "2026-08-13 04:58:28",
+        "migration_id": "llm-song-curric-link-20260813_005827_728992"
+      },
+      {
+        "applied_at": "2026-08-13 04:58:35",
+        "migration_id": "llm-song-curric-link-20260813_005834_813501"
+      },
+      {
+        "applied_at": "2026-08-13 04:58:45",
+        "migration_id": "llm-song-curric-link-20260813_005845_513759"
+      },
+      {
+        "applied_at": "2026-08-13 04:58:53",
+        "migration_id": "llm-song-curric-link-20260813_005853_138534"
+      },
+      {
+        "applied_at": "2026-08-13 04:59:00",
+        "migration_id": "llm-song-curric-link-20260813_005859_587342"
+      },
+      {
+        "applied_at": "2026-08-13 04:59:17",
+        "migration_id": "llm-song-curric-link-20260813_005917_320179"
+      },
+      {
+        "applied_at": "2026-08-13 04:59:24",
+        "migration_id": "llm-song-curric-link-20260813_005924_206725"
+      },
+      {
+        "applied_at": "2026-08-13 04:59:31",
+        "migration_id": "llm-song-curric-link-20260813_005931_833828"
+      },
+      {
+        "applied_at": "2026-08-13 04:59:40",
+        "migration_id": "llm-song-curric-link-20260813_005940_470648"
+      },
+      {
+        "applied_at": "2026-08-13 04:59:50",
+        "migration_id": "llm-song-curric-link-20260813_005950_589533"
+      },
+      {
+        "applied_at": "2026-08-13 05:00:06",
+        "migration_id": "llm-song-curric-link-20260813_010006_186725"
+      },
+      {
+        "applied_at": "2026-08-13 05:00:13",
+        "migration_id": "llm-song-curric-link-20260813_010013_119944"
+      },
+      {
+        "applied_at": "2026-08-13 05:00:19",
+        "migration_id": "llm-song-curric-link-20260813_010019_402338"
+      },
+      {
+        "applied_at": "2026-08-13 05:00:25",
+        "migration_id": "llm-song-curric-link-20260813_010025_670711"
+      },
+      {
+        "applied_at": "2026-08-13 05:00:37",
+        "migration_id": "llm-song-curric-link-20260813_010036_912810"
+      },
+      {
+        "applied_at": "2026-08-13 05:01:57",
+        "migration_id": "llm-song-curric-link-20260813_010157_337950"
+      },
+      {
+        "applied_at": "2026-08-13 05:02:04",
+        "migration_id": "llm-song-curric-link-20260813_010204_731144"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:02",
+        "migration_id": "llm-song-curric-link-20260813_010401_975532"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:12",
+        "migration_id": "llm-song-curric-link-20260813_010412_456225"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:13",
+        "migration_id": "llm-song-curric-link-20260813_010413_398277"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:15",
+        "migration_id": "llm-song-curric-link-20260813_010414_814979"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:16",
+        "migration_id": "llm-song-curric-link-20260813_010416_563624"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:25",
+        "migration_id": "llm-song-curric-link-20260813_010425_125419"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:26",
+        "migration_id": "llm-song-curric-link-20260813_010426_058183"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:27",
+        "migration_id": "llm-song-curric-link-20260813_010427_107455"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:28",
+        "migration_id": "llm-song-curric-link-20260813_010427_927590"
+      },
+      {
+        "applied_at": "2026-08-13 05:04:36",
+        "migration_id": "llm-song-curric-link-20260813_010436_421976"
+      },
+      {
+        "applied_at": "2026-08-13 14:17:52",
+        "migration_id": "llm-song-curric-link-20260813_101752_196547"
+      },
+      {
+        "applied_at": "2026-08-13 12:50:10",
+        "migration_id": "mech-01lib-batch-01"
+      },
+      {
+        "applied_at": "2026-08-13 12:50:26",
+        "migration_id": "mech-01lib-batch-02"
+      },
+      {
+        "applied_at": "2026-08-13 12:50:37",
+        "migration_id": "mech-01lib-batch-03"
+      },
+      {
+        "applied_at": "2026-08-13 12:50:48",
+        "migration_id": "mech-01lib-batch-04"
+      },
+      {
+        "applied_at": "2026-08-13 12:50:59",
+        "migration_id": "mech-01lib-batch-05"
+      },
+      {
+        "applied_at": "2026-08-13 12:23:38",
+        "migration_id": "mech-exact-2026-08-13-all"
+      },
+      {
+        "applied_at": "2026-08-13 12:13:53",
+        "migration_id": "mech-exact-2026-08-13-b0"
+      },
+      {
+        "applied_at": "2026-08-13 12:14:08",
+        "migration_id": "mech-exact-2026-08-13-b1"
+      },
+      {
+        "applied_at": "2026-08-13 12:14:22",
+        "migration_id": "mech-exact-2026-08-13-b2"
+      },
+      {
+        "applied_at": "2026-08-13 12:14:34",
+        "migration_id": "mech-exact-2026-08-13-b3"
+      },
+      {
+        "applied_at": "2026-08-13 12:14:42",
+        "migration_id": "mech-exact-2026-08-13-b4"
+      },
+      {
+        "applied_at": "2026-08-13 12:14:52",
+        "migration_id": "mech-exact-2026-08-13-b5"
+      },
+      {
+        "applied_at": "2026-08-13 13:41:48",
+        "migration_id": "mech-exact-songbook-20260813-0"
+      },
+      {
+        "applied_at": "2026-08-13 13:42:42",
+        "migration_id": "mech-exact-songbook-20260813-1000"
+      },
+      {
+        "applied_at": "2026-08-13 13:42:54",
+        "migration_id": "mech-exact-songbook-20260813-1250"
+      },
+      {
+        "applied_at": "2026-08-13 13:42:04",
+        "migration_id": "mech-exact-songbook-20260813-250"
+      },
+      {
+        "applied_at": "2026-08-13 13:42:16",
+        "migration_id": "mech-exact-songbook-20260813-500"
+      },
+      {
+        "applied_at": "2026-08-13 13:42:28",
+        "migration_id": "mech-exact-songbook-20260813-750"
+      },
+      {
+        "applied_at": "2026-08-13 13:41:27",
+        "migration_id": "mech-exact-songbook-20260813-a"
+      },
+      {
+        "applied_at": "2026-08-13 14:17:28",
+        "migration_id": "mech-exact-songbook-20260813-b"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:41",
+        "migration_id": "mech-song-versions-0001"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:43",
+        "migration_id": "mech-song-versions-0002"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:44",
+        "migration_id": "mech-song-versions-0003"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:46",
+        "migration_id": "mech-song-versions-0004"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:47",
+        "migration_id": "mech-song-versions-0005"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:49",
+        "migration_id": "mech-song-versions-0006"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:51",
+        "migration_id": "mech-song-versions-0007"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:53",
+        "migration_id": "mech-song-versions-0008"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:54",
+        "migration_id": "mech-song-versions-0009"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:56",
+        "migration_id": "mech-song-versions-0010"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:57",
+        "migration_id": "mech-song-versions-0011"
+      },
+      {
+        "applied_at": "2026-08-13 13:00:59",
+        "migration_id": "mech-song-versions-0012"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:07",
+        "migration_id": "mech-song-versions-0013"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:09",
+        "migration_id": "mech-song-versions-0014"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:10",
+        "migration_id": "mech-song-versions-0015"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:12",
+        "migration_id": "mech-song-versions-0016"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:13",
+        "migration_id": "mech-song-versions-0017"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:15",
+        "migration_id": "mech-song-versions-0018"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:16",
+        "migration_id": "mech-song-versions-0019"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:18",
+        "migration_id": "mech-song-versions-0020"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:20",
+        "migration_id": "mech-song-versions-0021"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:21",
+        "migration_id": "mech-song-versions-0022"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:23",
+        "migration_id": "mech-song-versions-0023"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:24",
+        "migration_id": "mech-song-versions-0024"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:35",
+        "migration_id": "mech-song-versions-0025"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:37",
+        "migration_id": "mech-song-versions-0026"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:39",
+        "migration_id": "mech-song-versions-0027"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:40",
+        "migration_id": "mech-song-versions-0028"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:42",
+        "migration_id": "mech-song-versions-0029"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:44",
+        "migration_id": "mech-song-versions-0030"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:46",
+        "migration_id": "mech-song-versions-0031"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:48",
+        "migration_id": "mech-song-versions-0032"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:50",
+        "migration_id": "mech-song-versions-0033"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:52",
+        "migration_id": "mech-song-versions-0034"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:53",
+        "migration_id": "mech-song-versions-0035"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:55",
+        "migration_id": "mech-song-versions-0036"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:56",
+        "migration_id": "mech-song-versions-0037"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:58",
+        "migration_id": "mech-song-versions-0038"
+      },
+      {
+        "applied_at": "2026-08-13 13:01:59",
+        "migration_id": "mech-song-versions-0039"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:01",
+        "migration_id": "mech-song-versions-0040"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:02",
+        "migration_id": "mech-song-versions-0041"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:04",
+        "migration_id": "mech-song-versions-0042"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:06",
+        "migration_id": "mech-song-versions-0043"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:07",
+        "migration_id": "mech-song-versions-0044"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:09",
+        "migration_id": "mech-song-versions-0045"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:10",
+        "migration_id": "mech-song-versions-0046"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:11",
+        "migration_id": "mech-song-versions-0047"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:13",
+        "migration_id": "mech-song-versions-0048"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:15",
+        "migration_id": "mech-song-versions-0049"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:16",
+        "migration_id": "mech-song-versions-0050"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:18",
+        "migration_id": "mech-song-versions-0051"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:19",
+        "migration_id": "mech-song-versions-0052"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:21",
+        "migration_id": "mech-song-versions-0053"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:22",
+        "migration_id": "mech-song-versions-0054"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:24",
+        "migration_id": "mech-song-versions-0055"
+      },
+      {
+        "applied_at": "2026-08-13 13:02:25",
+        "migration_id": "mech-song-versions-0056"
+      },
+      {
+        "applied_at": "2026-08-13 13:15:18",
+        "migration_id": "mech-song-versions-0057"
+      },
+      {
+        "applied_at": "2026-08-13 13:24:33",
+        "migration_id": "mech-song-versions-b1"
+      },
+      {
+        "applied_at": "2026-08-13 13:24:44",
+        "migration_id": "mech-song-versions-b2"
+      },
+      {
+        "applied_at": "2026-08-13 13:24:54",
+        "migration_id": "mech-song-versions-b3"
+      },
+      {
+        "applied_at": "2026-08-13 13:25:11",
+        "migration_id": "mech-song-versions-b4"
+      },
+      {
+        "applied_at": "2026-08-13 13:25:25",
+        "migration_id": "mech-song-versions-b5"
+      },
+      {
+        "applied_at": "2026-08-13 13:25:40",
+        "migration_id": "mech-song-versions-b6"
+      },
+      {
+        "applied_at": "2026-08-13 13:25:53",
+        "migration_id": "mech-song-versions-b7"
+      },
+      {
+        "applied_at": "2026-08-13 13:26:08",
+        "migration_id": "mech-song-versions-b8"
+      },
+      {
+        "applied_at": "2026-08-13T05:31:09.440894",
+        "migration_id": "pdf-song-import-20260813_053109_440894"
+      },
+      {
+        "applied_at": "2026-08-13 14:14:03",
+        "migration_id": "song-curric-enrich-0001"
+      },
+      {
+        "applied_at": "2026-08-13 14:14:03",
+        "migration_id": "song-curric-enrich-0002"
+      },
+      {
+        "applied_at": "2026-08-13 14:14:04",
+        "migration_id": "song-curric-enrich-0003"
+      },
+      {
+        "applied_at": "2026-08-13 14:14:04",
+        "migration_id": "song-curric-enrich-0004"
+      },
+      {
+        "applied_at": "2026-08-13 14:17:52",
+        "migration_id": "song-curric-enrich-20260813-101752"
+      },
+      {
+        "applied_at": "2026-08-13 13:43:04",
+        "migration_id": "song-variations-20260813-a"
+      },
+      {
+        "applied_at": "2026-08-13 13:43:11",
+        "migration_id": "song-variations-20260813-b"
+      },
+      {
+        "applied_at": "2026-08-13 13:43:18",
+        "migration_id": "song-variations-20260813-c"
+      },
+      {
+        "applied_at": "2026-08-13 13:43:28",
+        "migration_id": "song-variations-20260813-d"
+      },
+      {
+        "applied_at": "2026-08-13 13:43:40",
+        "migration_id": "song-variations-20260813-e"
+      },
+      {
+        "applied_at": "2026-08-13 13:43:55",
+        "migration_id": "song-variations-20260813-f"
       }
     ]
   },
   "object_counts": {
-    "index": 8,
-    "table": 47,
-    "trigger": 3,
+    "index": 14,
+    "table": 52,
+    "trigger": 7,
     "view": 0
   },
   "objects": [
     {
+      "name": "idx_song_actions_action",
+      "sql": "CREATE INDEX idx_song_actions_action ON song_actions(action)",
+      "tbl_name": "song_actions",
+      "type": "index"
+    },
+    {
+      "name": "idx_song_actions_song_id",
+      "sql": "CREATE INDEX idx_song_actions_song_id ON song_actions(song_id)",
+      "tbl_name": "song_actions",
+      "type": "index"
+    },
+    {
+      "name": "idx_song_recordings_song_id",
+      "sql": "CREATE INDEX idx_song_recordings_song_id ON song_recordings(song_id)",
+      "tbl_name": "song_recordings",
+      "type": "index"
+    },
+    {
+      "name": "planning_window_months_month_idx",
+      "sql": "CREATE INDEX planning_window_months_month_idx\n  ON planning_window_months(month)",
+      "tbl_name": "planning_window_months",
+      "type": "index"
+    },
+    {
       "name": "resource_file_dispositions_inventory_idx",
       "sql": "CREATE INDEX resource_file_dispositions_inventory_idx\n  ON resource_file_dispositions(inventory_id, created_at)",
       "tbl_name": "resource_file_dispositions",
+      "type": "index"
+    },
+    {
+      "name": "resource_page_evidence_inventory_idx",
+      "sql": "CREATE INDEX resource_page_evidence_inventory_idx\n  ON resource_page_evidence(inventory_id, visual_review_state, page_number)",
+      "tbl_name": "resource_page_evidence",
       "type": "index"
     },
     {
@@ -123,6 +1044,12 @@
       "type": "index"
     },
     {
+      "name": "song_curriculum_links_identity_unique",
+      "sql": "CREATE UNIQUE INDEX song_curriculum_links_identity_unique ON song_curriculum_links(song_id, subject, description, ifnull(relevance, ''), link_type)",
+      "tbl_name": "song_curriculum_links",
+      "type": "index"
+    },
+    {
       "name": "song_sections_song_idx",
       "sql": "CREATE INDEX song_sections_song_idx ON song_sections(song_id, sort_order)",
       "tbl_name": "song_sections",
@@ -142,7 +1069,7 @@
     },
     {
       "name": "action_vocabulary",
-      "sql": "CREATE TABLE `action_vocabulary` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`normalized_action_family` text NOT NULL,\n\t`examples` text,\n\t`do_not_use_as_proof` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP\n)",
+      "sql": "CREATE TABLE \"action_vocabulary\" (\n        id          TEXT PRIMARY KEY,\n        category    TEXT NOT NULL UNIQUE,\n        examples    TEXT,\n        do_not_use_as_proof TEXT,\n        created_at  TEXT DEFAULT CURRENT_TIMESTAMP\n    )",
       "tbl_name": "action_vocabulary",
       "type": "table"
     },
@@ -201,6 +1128,24 @@
       "type": "table"
     },
     {
+      "name": "planning_window_aliases",
+      "sql": "CREATE TABLE planning_window_aliases (\n  planning_window_id INTEGER NOT NULL,\n  alias TEXT NOT NULL COLLATE NOCASE UNIQUE,\n  PRIMARY KEY (planning_window_id, alias),\n  FOREIGN KEY (planning_window_id) REFERENCES planning_windows(id) ON DELETE CASCADE\n)",
+      "tbl_name": "planning_window_aliases",
+      "type": "table"
+    },
+    {
+      "name": "planning_window_months",
+      "sql": "CREATE TABLE planning_window_months (\n  planning_window_id INTEGER NOT NULL,\n  month TEXT NOT NULL CHECK (month IN ('Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun')),\n  PRIMARY KEY (planning_window_id, month),\n  FOREIGN KEY (planning_window_id) REFERENCES planning_windows(id) ON DELETE CASCADE\n)",
+      "tbl_name": "planning_window_months",
+      "type": "table"
+    },
+    {
+      "name": "planning_windows",
+      "sql": "CREATE TABLE planning_windows (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  key TEXT NOT NULL COLLATE NOCASE UNIQUE,\n  label TEXT NOT NULL,\n  description TEXT NOT NULL,\n  sort_order INTEGER NOT NULL DEFAULT 0,\n  active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1))\n)",
+      "tbl_name": "planning_windows",
+      "type": "table"
+    },
+    {
       "name": "research_queue",
       "sql": "CREATE TABLE `research_queue` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`priority` integer NOT NULL,\n\t`resource` text NOT NULL,\n\t`why_it_matters` text,\n\t`source_url` text,\n\t`download_filename` text,\n\t`assigned_to` text,\n\t`status` text DEFAULT 'Download needed',\n\t`notes` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n)",
       "tbl_name": "research_queue",
@@ -222,6 +1167,12 @@
       "name": "resource_file_inventory",
       "sql": "CREATE TABLE resource_file_inventory (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  source_path TEXT NOT NULL UNIQUE,\n  source_kind TEXT NOT NULL,\n  checksum TEXT NOT NULL,\n  byte_size INTEGER NOT NULL CHECK (byte_size >= 0),\n  modified_at TEXT,\n  discovered_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  last_scanned_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
       "tbl_name": "resource_file_inventory",
+      "type": "table"
+    },
+    {
+      "name": "resource_page_evidence",
+      "sql": "CREATE TABLE resource_page_evidence (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  inventory_id INTEGER NOT NULL REFERENCES resource_file_inventory(id) ON DELETE CASCADE,\n  source_document_id INTEGER REFERENCES source_documents(id) ON DELETE SET NULL,\n  page_number INTEGER NOT NULL CHECK (page_number > 0),\n  assessment_method TEXT NOT NULL CHECK (assessment_method IN ('text', 'vision', 'hybrid')),\n  text_layer_state TEXT NOT NULL CHECK (text_layer_state IN ('definitive', 'incomplete', 'unavailable', 'not-applicable')),\n  visual_review_state TEXT NOT NULL CHECK (visual_review_state IN ('not-required', 'pending', 'reviewed', 'not-applicable')),\n  image_or_layout_present INTEGER NOT NULL DEFAULT 0 CHECK (image_or_layout_present IN (0, 1)),\n  rendered_page_path TEXT,\n  evidence_notes TEXT,\n  reviewed_by TEXT,\n  reviewed_at TEXT,\n  UNIQUE (inventory_id, page_number)\n)",
+      "tbl_name": "resource_page_evidence",
       "type": "table"
     },
     {
@@ -310,7 +1261,7 @@
     },
     {
       "name": "song_actions",
-      "sql": "CREATE TABLE `song_actions` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`song_title` text NOT NULL,\n\t`alternate_title` text,\n\t`tradition_performer` text,\n\t`action_wording` text,\n\t`normalized_action` text,\n\t`action_sequence` text,\n\t`song_cue` text,\n\t`action_classification` text,\n\t`core_or_optional` text,\n\t`age_range_stated` text,\n\t`educator_org` text,\n\t`source_title` text,\n\t`source_type` text,\n\t`page_timestamp` text,\n\t`source_url` text,\n\t`evidence_note` text,\n\t`research_status` text DEFAULT 'Not started',\n\t`reviewer_notes` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n, song_id INTEGER REFERENCES songs(id) ON DELETE CASCADE, section_id INTEGER REFERENCES song_sections(id) ON DELETE SET NULL, line_number INTEGER, provenance TEXT\n  CHECK (provenance IN ('source-documented', 'expert-suggested', 'community-legacy')))",
+      "sql": "CREATE TABLE song_actions (\n        id                  TEXT PRIMARY KEY,\n        song_title          TEXT NOT NULL,\n        alternate_title     TEXT,\n        tradition_performer TEXT,\n        action_wording      TEXT,\n        action              TEXT REFERENCES action_vocabulary(category),\n        action_sequence     TEXT,\n        song_cue            TEXT,\n        action_classification TEXT,\n        core_or_optional    TEXT,\n        age_range_stated    TEXT,\n        educator_org        TEXT,\n        source_title        TEXT,\n        source_type         TEXT,\n        page_timestamp      TEXT,\n        source_url          TEXT,\n        evidence_note       TEXT,\n        research_status     TEXT DEFAULT 'Not started',\n        reviewer_notes      TEXT,\n        created_at          TEXT DEFAULT CURRENT_TIMESTAMP,\n        updated_at          TEXT DEFAULT CURRENT_TIMESTAMP,\n        song_id             INTEGER REFERENCES songs(id) ON DELETE CASCADE,\n        section_id          INTEGER REFERENCES song_sections(id) ON DELETE SET NULL,\n        line_number         INTEGER,\n        provenance          TEXT\n    )",
       "tbl_name": "song_actions",
       "type": "table"
     },
@@ -324,6 +1275,12 @@
       "name": "song_curriculum_links",
       "sql": "CREATE TABLE song_curriculum_links (id INTEGER PRIMARY KEY AUTOINCREMENT, song_id INTEGER NOT NULL REFERENCES \"songs\"(id) ON DELETE CASCADE, subject TEXT NOT NULL, description TEXT NOT NULL, relevance TEXT, link_type TEXT NOT NULL DEFAULT \"curriculum\")",
       "tbl_name": "song_curriculum_links",
+      "type": "table"
+    },
+    {
+      "name": "song_recordings",
+      "sql": "CREATE TABLE song_recordings (\n        id          INTEGER PRIMARY KEY AUTOINCREMENT,\n        song_id     INTEGER NOT NULL REFERENCES songs(id) ON DELETE CASCADE,\n        artist      TEXT NOT NULL,\n        album       TEXT,\n        year        INTEGER,\n        key         TEXT,\n        url         TEXT,\n        notes       TEXT\n    )",
+      "tbl_name": "song_recordings",
       "type": "table"
     },
     {
@@ -433,9 +1390,33 @@
       "sql": "CREATE TRIGGER search_chunks_au AFTER UPDATE ON search_chunks BEGIN\n    UPDATE search_chunks_fts\n    SET id = new.id,\n        kind = new.kind,\n        title = new.title,\n        chunk_text = new.chunk_text,\n        lyrics = new.lyrics,\n        instructions = new.instructions,\n        source_path = new.source_path\n    WHERE rowid = new.rowid;\n  END",
       "tbl_name": "search_chunks",
       "type": "trigger"
+    },
+    {
+      "name": "topic_materials_resource_reference_insert",
+      "sql": "CREATE TRIGGER topic_materials_resource_reference_insert BEFORE INSERT ON topic_materials WHEN NEW.material_kind = 'resource' AND NOT EXISTS (SELECT 1 FROM resources WHERE id = NEW.material_id) BEGIN SELECT RAISE(ABORT, 'topic_materials resource must reference resources.id'); END",
+      "tbl_name": "topic_materials",
+      "type": "trigger"
+    },
+    {
+      "name": "topic_materials_resource_reference_update",
+      "sql": "CREATE TRIGGER topic_materials_resource_reference_update BEFORE UPDATE OF material_kind, material_id ON topic_materials WHEN NEW.material_kind = 'resource' AND NOT EXISTS (SELECT 1 FROM resources WHERE id = NEW.material_id) BEGIN SELECT RAISE(ABORT, 'topic_materials resource must reference resources.id'); END",
+      "tbl_name": "topic_materials",
+      "type": "trigger"
+    },
+    {
+      "name": "topic_materials_song_reference_insert",
+      "sql": "CREATE TRIGGER topic_materials_song_reference_insert BEFORE INSERT ON topic_materials WHEN NEW.material_kind = 'song' AND NOT EXISTS (SELECT 1 FROM songs WHERE id = NEW.material_id) BEGIN SELECT RAISE(ABORT, 'topic_materials song must reference songs.id'); END",
+      "tbl_name": "topic_materials",
+      "type": "trigger"
+    },
+    {
+      "name": "topic_materials_song_reference_update",
+      "sql": "CREATE TRIGGER topic_materials_song_reference_update BEFORE UPDATE OF material_kind, material_id ON topic_materials WHEN NEW.material_kind = 'song' AND NOT EXISTS (SELECT 1 FROM songs WHERE id = NEW.material_id) BEGIN SELECT RAISE(ABORT, 'topic_materials song must reference songs.id'); END",
+      "tbl_name": "topic_materials",
+      "type": "trigger"
     }
   ],
-  "schema_fingerprint": "6c427dc22f81550b59bfcdc486e5501bdf51f27190fe57cdd1657734427d136f",
+  "schema_fingerprint": "56943c700cd114b20b8371040a96c04727dc8d806916e63bcb4a3a86d225c74b",
   "tables": {
     "__drizzle_migrations": {
       "columns": [
@@ -473,14 +1454,14 @@
           "cid": 0,
           "dflt_value": null,
           "name": "id",
-          "notnull": 1,
+          "notnull": 0,
           "pk": 1,
           "type": "TEXT"
         },
         {
           "cid": 1,
           "dflt_value": null,
-          "name": "normalized_action_family",
+          "name": "category",
           "notnull": 1,
           "pk": 0,
           "type": "TEXT"
@@ -513,10 +1494,17 @@
       "foreign_keys": [],
       "indexes": [
         {
+          "name": "sqlite_autoindex_action_vocabulary_2",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        },
+        {
           "name": "sqlite_autoindex_action_vocabulary_1",
           "origin": "pk",
           "partial": 0,
-          "seq": 0,
+          "seq": 1,
           "unique": 1
         }
       ]
@@ -1239,6 +2227,164 @@
         }
       ]
     },
+    "planning_window_aliases": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "planning_window_id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "alias",
+          "notnull": 1,
+          "pk": 2,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "planning_window_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "planning_windows",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_planning_window_aliases_2",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        },
+        {
+          "name": "sqlite_autoindex_planning_window_aliases_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 1,
+          "unique": 1
+        }
+      ]
+    },
+    "planning_window_months": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "planning_window_id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "month",
+          "notnull": 1,
+          "pk": 2,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "planning_window_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "planning_windows",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "planning_window_months_month_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        },
+        {
+          "name": "sqlite_autoindex_planning_window_months_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 1,
+          "unique": 1
+        }
+      ]
+    },
+    "planning_windows": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "key",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "label",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "description",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": "0",
+          "name": "sort_order",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 5,
+          "dflt_value": "1",
+          "name": "active",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_planning_windows_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
     "research_queue": {
       "columns": [
         {
@@ -1614,6 +2760,144 @@
           "origin": "u",
           "partial": 0,
           "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "resource_page_evidence": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "inventory_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "source_document_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "page_number",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "assessment_method",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "text_layer_state",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "visual_review_state",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": "0",
+          "name": "image_or_layout_present",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "rendered_page_path",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "evidence_notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": null,
+          "name": "reviewed_by",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 11,
+          "dflt_value": null,
+          "name": "reviewed_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "source_document_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "SET NULL",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "source_documents",
+          "to": "id"
+        },
+        {
+          "from": "inventory_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "resource_file_inventory",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "resource_page_evidence_inventory_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        },
+        {
+          "name": "sqlite_autoindex_resource_page_evidence_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 1,
           "unique": 1
         }
       ]
@@ -2517,7 +3801,7 @@
           "cid": 0,
           "dflt_value": null,
           "name": "id",
-          "notnull": 1,
+          "notnull": 0,
           "pk": 1,
           "type": "TEXT"
         },
@@ -2556,7 +3840,7 @@
         {
           "cid": 5,
           "dflt_value": null,
-          "name": "normalized_action",
+          "name": "action",
           "notnull": 0,
           "pk": 0,
           "type": "TEXT"
@@ -2734,14 +4018,38 @@
           "seq": 0,
           "table": "songs",
           "to": "id"
+        },
+        {
+          "from": "action",
+          "id": 2,
+          "match": "NONE",
+          "on_delete": "NO ACTION",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "action_vocabulary",
+          "to": "category"
         }
       ],
       "indexes": [
         {
+          "name": "idx_song_actions_action",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        },
+        {
+          "name": "idx_song_actions_song_id",
+          "origin": "c",
+          "partial": 0,
+          "seq": 1,
+          "unique": 0
+        },
+        {
           "name": "sqlite_autoindex_song_actions_1",
           "origin": "pk",
           "partial": 0,
-          "seq": 0,
+          "seq": 2,
           "unique": 1
         }
       ]
@@ -2958,17 +4266,113 @@
       ],
       "indexes": [
         {
-          "name": "scl_subject_idx",
+          "name": "song_curriculum_links_identity_unique",
           "origin": "c",
           "partial": 0,
           "seq": 0,
+          "unique": 1
+        },
+        {
+          "name": "scl_subject_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 1,
           "unique": 0
         },
         {
           "name": "scl_song_id_idx",
           "origin": "c",
           "partial": 0,
-          "seq": 1,
+          "seq": 2,
+          "unique": 0
+        }
+      ]
+    },
+    "song_recordings": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "song_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "artist",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "album",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "year",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "key",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "song_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "songs",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_song_recordings_song_id",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
           "unique": 0
         }
       ]
@@ -4132,5 +5536,5 @@
       ]
     }
   },
-  "user_version": 0
+  "user_version": 19
 }

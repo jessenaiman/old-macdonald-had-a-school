@@ -57,7 +57,7 @@
   padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem);
   border: .45rem solid #8a603d;
   border-radius: 1.25rem;
-  background: #b77b43 url('/design-assets/cork-board-kit-v1/seamless-cork-tile.png') repeat;
+  background: var(--brand-cork-color) url('/design-assets/cork-board-kit-v2/seamless-cork-tile.png') repeat;
   background-size: 512px;
   box-shadow: inset 0 0 0 2px rgb(255 227 174 / 28%), 0 .5rem 0 rgb(86 52 24 / 30%);
 }

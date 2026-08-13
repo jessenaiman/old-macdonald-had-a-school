@@ -9,6 +9,20 @@ There are two human-editable brand sources:
 
 The live `/branding` route is the single visual authority. Storybook stories are isolated viewers of components from that page; they are not additional brand definitions.
 
+## Logo family
+
+The active logo remains `public/brand-emblem.png`. Review candidates are documented at `/branding#logo-family`; they are not approved replacements yet.
+
+- Composition authority: `public/brand-emblem.png` (1254x1254 RGB PNG).
+- Simplified 2D style reference: `public/icons/farm_school_character_face_patch_sheet_primary_secondary_16.png`.
+- Tiny 2D candidates: `public/design-assets/brand-emblem-v1/candidate-flat-marks/`.
+- Sharp screen candidates: `public/design-assets/brand-emblem-v1/individual-marks/`.
+- High-detail candidates: `public/design-assets/brand-emblem-v1/candidate-detail-marks/`.
+- Review-only sheet: `public/design-assets/brand-emblem-v1-review/brand-emblem-family-contact-sheet.png`.
+- Deterministic derivation: `scripts/build-brand-emblem-family.js` removes the source matte, adds safe padding, resamples, and applies restrained target-size sharpening.
+
+Do not use the contact sheet at runtime. Do not replace the active header, mobile-navigation, metadata, or search emblem until the user approves a specific candidate tier. No authentic green-tree alternative was found in the repository or Git history as of 2026-08-13.
+
 ## Rules
 
 - Use the real shadcn component for behavior, then add only the approved global material or patch class shown below.
@@ -84,7 +98,7 @@ Use `patch-old-macdonald-square` and `patch-miss-puddles-circle` as decorative `
 | --- | --- | --- |
 | Felt action | `material-surface material-felt` | `public/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png` |
 | Paper action | `material-surface material-cardboard-paper` | `public/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png` |
-| Cork notice | `material-surface material-cork` | `public/design-assets/cork-board-kit-v1/seamless-cork-tile.png` |
+| Cork notice | `material-surface material-cork` | `public/design-assets/cork-board-kit-v2/seamless-cork-tile.png` |
 
 ## Semantic asset composition
 

@@ -1,16 +1,28 @@
 import Link from "next/link";
 import type { CurriculumTopic } from "../../lib/lesson-model";
+import type { CurriculumLesson } from "../../lib/curriculum-lesson";
 import { LessonPrintButton } from "./LessonPrintButton";
 
 function available(value: string | null) {
   return value || "Not yet available";
 }
 
-export function DatabaseLessonDocument({ topic }: { topic: CurriculumTopic }) {
+export function DatabaseLessonDocument({
+  topic,
+  curriculumLesson,
+}: {
+  topic: CurriculumTopic;
+  curriculumLesson: CurriculumLesson | null;
+}) {
+  const materials = curriculumLesson?.materials.filter((material) => material.title) ?? [];
+  const focusMaterials = materials.filter((material) => material.role === "focus");
+  const supportingMaterials = materials.filter((material) => material.role === "supporting");
+  const assets = curriculumLesson?.assets ?? [];
+
   return (
     <article className="lesson-article" data-source-type="database" data-completeness={topic.completeness}>
       <header className="lesson-header">
-        <p className="lesson-eyebrow">Database planning draft</p>
+        <p className="lesson-eyebrow">Curriculum lesson outline</p>
         <p className="lesson-breadcrumb">{topic.grade} · {topic.subject}</p>
         <h1>{topic.title}</h1>
         <p className="lesson-summary">
@@ -24,7 +36,7 @@ export function DatabaseLessonDocument({ topic }: { topic: CurriculumTopic }) {
         </div>
         <dl className="lesson-meta">
           <div><dt>Subject</dt><dd>{topic.subject}</dd></div>
-          <div><dt>Status</dt><dd>Planning draft</dd></div>
+          <div><dt>Status</dt><dd>{topic.completeness === "complete" ? "Reviewed lesson" : "Database-led outline"}</dd></div>
           <div><dt>Category</dt><dd>{available(topic.category)}</dd></div>
           <div><dt>Standards</dt><dd>{available(topic.standards)}</dd></div>
         </dl>
@@ -33,13 +45,57 @@ export function DatabaseLessonDocument({ topic }: { topic: CurriculumTopic }) {
         <h2>Curriculum focus</h2>
         <p>{available(topic.skillStatement)}</p>
         <h2>Teaching sequence</h2>
-        <p>Not yet available. This record must not be presented as a complete lesson until a reviewed sequence is attached.</p>
-        <h2>Materials and adaptations</h2>
-        <p>{available(topic.linkedResources)}</p>
+        {focusMaterials.length > 0 ? (
+          <ol>
+            {focusMaterials.map((material) => (
+              <li key={`${material.kind}-${material.id}`}>
+                <strong>{material.title}</strong>
+                {material.useInPhase ? ` during ${material.useInPhase}` : ""}
+                {material.routineSlot ? ` as ${material.routineSlot}` : ""}
+                {material.teacherRationale ? `: ${material.teacherRationale}` : "."}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p>No focus material is linked yet. Use the curriculum focus above as the planning starting point; this outline does not claim a complete sequence.</p>
+        )}
+        <h2>Materials and teacher options</h2>
+        {materials.length > 0 ? (
+          <ul>
+            {materials.map((material) => (
+              <li key={`${material.kind}-${material.id}`}>
+                {material.url ? <a href={material.url}>{material.title}</a> : material.title}
+                {material.kind === "song" && material.actions ? ` - actions: ${material.actions}` : ""}
+                {material.role === "supporting" && material.teacherRationale ? ` - ${material.teacherRationale}` : ""}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>{available(topic.linkedResources)}</p>
+        )}
+        {assets.length > 0 ? (
+          <>
+            <h2>Printable resources</h2>
+            <ul>
+              {assets.map((asset) => (
+                <li key={asset.id}>
+                  {asset.filePath ? <a href={asset.filePath}>{asset.title}</a> : asset.title}
+                  {asset.format ? ` (${asset.format.toUpperCase()})` : ""}
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
         <h2>Observation and assessment</h2>
-        <p>Not yet available.</p>
+        <p>{topic.skillStatement ? `Observe evidence of: ${topic.skillStatement}` : "Not yet available."}</p>
         <h2>Tags and planning context</h2>
         <p>{topic.tags.length > 0 ? topic.tags.join(", ") : "Not yet available"}</p>
+        {supportingMaterials.length > 0 ? (
+          <>
+            <h2>Optional supporting materials</h2>
+            <p>{supportingMaterials.map((material) => material.title).join(", ")}</p>
+          </>
+        ) : null}
         {topic.supplementarySources.length > 0 ? (
           <>
             <h2>Supplementary source material</h2>

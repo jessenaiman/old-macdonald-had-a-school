@@ -1,9 +1,0 @@
-# Compact Relational Craft
-
-Compact Relational Craft treats the header as a small worktable: a quiet navy rail, a recognizable stitched emblem, and a few tactile controls arranged with the economy of tools laid out before planning begins. Space is reclaimed by letting the grade bands become small sewn markers that sit close to the identity, so the teaching index can meet the eye sooner. The composition should feel meticulously crafted, as if every patch, seam, and gap had been placed by a master maker.
-
-Material carries hierarchy. Warm paper and felt are allowed to do different jobs: the paper field holds reading and navigation, while felt patches signal actions, grade pathways, and state changes. Texture stays close to the supplied project materials—gold, navy, cream, and the canonical character colours—so the interface feels made by hand without becoming busy. Every edge, crop, and stitch should show painstaking attention and restrained confidence.
-
-The rhythm is compact but not cramped. The brand mark anchors the upper left; grade choices form a short secondary row; the editorial image becomes a rotating, linked story object rather than a static decoration; and the subject index rises into the central field. A sun and moon are treated as paired appliqués, two sides of the same small sewn object, with the same silhouette discipline and thread scale. The result should be the product of deep expertise: warm, useful, and calm enough for a teacher deciding what to do next.
-
-Words remain sparse and functional. Labels identify the route, the teaching level, and the story behind the image, while form, spacing, colour, and material do most of the communicating. The prototype should look like a carefully assembled piece of classroom equipment—friendly at a glance, legible at print scale, and polished through countless small refinements.

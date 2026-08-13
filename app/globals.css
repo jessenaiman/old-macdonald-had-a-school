@@ -25,6 +25,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -57,15 +59,15 @@
   --home-board-color: var(--theme-navy, #0b2b49);
   --home-board-texture: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
   --home-paper-texture: url("/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png");
-  --home-cork-board: url("/design-assets/cork-board-kit-v1/medium-board.png");
+  --home-cork-board: url("/design-assets/cork-board-kit-v2/medium-board.png");
   --brand-ink: var(--theme-ink, #173552);
   --brand-copy: var(--theme-copy, #574d40);
   --brand-paper-color: var(--theme-paper, #f7e8c8);
   --brand-paper-texture: var(--home-paper-texture);
   --brand-kraft-color: var(--theme-paper-muted, #f0d49c);
   --brand-kraft-texture: url("/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png");
-  --brand-cork-color: #bd762f;
-  --brand-cork-texture: url("/design-assets/cork-board-kit-v1/seamless-cork-tile.png");
+  --brand-cork-color: #b8906a;
+  --brand-cork-texture: url("/design-assets/cork-board-kit-v2/seamless-cork-tile.png");
   --cast-old-macdonald-texture: url("/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png");
   --cast-miss-puddles-texture: url("/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png");
   --cast-mr-rusty-texture: url("/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png");
@@ -109,7 +111,7 @@ body::before { position: fixed; z-index: -1; inset: 0; background: var(--grain-f
 .material-felt { --material-color: var(--curriculum-blue, #2c6c9b); --material-image: var(--cast-mr-rusty-texture); --material-size: 180px; }
 .material-woven-fabric { --material-color: var(--theme-wood-light, #c5a67a); --material-image: url("/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png"); --material-size: 190px; }
 .material-construction-paper { --material-color: var(--curriculum-green, #1f6b6b); --material-image: url("/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png"); --material-size: 190px; }
-.material-cork { --material-color: #bd762f; --material-image: var(--brand-cork-texture); --material-size: 300px; }
+.material-cork { --material-color: var(--brand-cork-color); --material-image: var(--brand-cork-texture); --material-size: 300px; }
 .material-leather { --material-color: var(--theme-wood, #6c472f); --material-image: url("/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png"); --material-size: 240px; }
 
 .cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-texture: var(--cast-old-macdonald-texture); --character-foreground: var(--cast-old-macdonald-foreground, #fff8e8); }

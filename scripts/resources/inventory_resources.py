@@ -9,6 +9,8 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
+from scripts.resources.library_pdf_tracker import mark_library_pdf_processed
+
 SUPPORTED = {'.pdf', '.md', '.markdown', '.docx', '.xlsx', '.csv', '.txt', '.html', '.htm', '.mp3', '.wav', '.mp4'}
 SKIP_PARTS = {'.git', 'node_modules', '.next', 'qa', '.codex-tmp', '__pycache__'}
 RESOURCE_HINTS = ('curriculum', 'early-years', 'song', 'music', 'lesson', 'story', 'stories', 'activity', 'activities', 'craft', 'book', 'video')
@@ -57,7 +59,15 @@ def main() -> int:
                      and path.resolve() != args.db.resolve())
 
     records = []
-    for path in sorted(set(found)):
+    scanned_paths = []
+    scan_targets = sorted(set(found))
+    if args.apply:
+        for path in scan_targets:
+            scanned_paths.append(mark_library_pdf_processed(path, project)[0])
+    else:
+        scanned_paths = scan_targets
+
+    for path in sorted(set(scanned_paths)):
         stat = path.stat()
         disposition, note = initial_disposition(path)
         records.append((path.resolve().relative_to(project).as_posix(), kind(path), digest(path), stat.st_size,

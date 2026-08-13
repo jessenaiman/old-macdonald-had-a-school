@@ -44,6 +44,8 @@
   --muted-foreground: #5b554c;
   --accent: var(--curriculum-yellow);
   --accent-foreground: var(--theme-navy);
+  --destructive: var(--curriculum-red);
+  --destructive-foreground: var(--theme-white);
   --border: var(--theme-wood-light);
   --input: #9f8b6d;
   --ring: var(--curriculum-blue);
@@ -137,6 +139,8 @@
   --muted-foreground: #cbd5d9;
   --accent: var(--curriculum-yellow);
   --accent-foreground: #142d42;
+  --destructive: var(--curriculum-red);
+  --destructive-foreground: var(--theme-white);
   --border: #587080;
   --input: #718795;
   --ring: #8fc1dd;

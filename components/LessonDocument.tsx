@@ -1,11 +1,22 @@
 import type { ComponentType } from "react";
 import type { LessonMetadata } from "../lib/content";
+import type { CurriculumLesson } from "../lib/curriculum-lesson";
 import { LessonPrintActions } from "./planning/LessonPrintActions";
 
-export function LessonDocument({ Content, metadata }: { Content: ComponentType; metadata: LessonMetadata }) {
+export function LessonDocument({
+  Content,
+  metadata,
+  curriculumLesson = null,
+}: {
+  Content: ComponentType;
+  metadata: LessonMetadata;
+  curriculumLesson?: CurriculumLesson | null;
+}) {
   const externalResource = metadata.externalResource || metadata.practiceResource?.match(/https?:\/\/\S+/)?.[0];
   const hasProvenance = Boolean(metadata.standards || metadata.sourceReference || metadata.recommendedSource);
   const isWorksheet = metadata.template === "worksheet" || metadata.slug === "worksheet-example";
+  const curriculumMaterials = curriculumLesson?.materials.filter((material) => material.title) ?? [];
+  const curriculumAssets = curriculumLesson?.assets.filter((asset) => asset.filePath) ?? [];
 
   return (
     <article className="lesson-article lesson-document" data-template={metadata.template} data-planning-layout={isWorksheet ? "worksheet" : undefined}>
@@ -32,6 +43,29 @@ export function LessonDocument({ Content, metadata }: { Content: ComponentType; 
       </header>
       <div className="lesson-markdown lesson-document-content typeset typeset-farm-reading" id="lesson-plan">
         <Content />
+        {(curriculumMaterials.length > 0 || curriculumAssets.length > 0) ? (
+          <section>
+            <h2>Linked curriculum materials</h2>
+            {curriculumMaterials.length > 0 ? (
+              <ul>
+                {curriculumMaterials.map((material) => (
+                  <li key={`${material.kind}-${material.id}`}>
+                    {material.url ? <a href={material.url}>{material.title}</a> : material.title}
+                    {material.useInPhase ? ` - ${material.useInPhase}` : ""}
+                    {material.teacherRationale ? `: ${material.teacherRationale}` : ""}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {curriculumAssets.length > 0 ? (
+              <ul>
+                {curriculumAssets.map((asset) => (
+                  <li key={asset.id}><a href={asset.filePath!}>{asset.title}</a></li>
+                ))}
+              </ul>
+            ) : null}
+          </section>
+        ) : null}
       </div>
       {hasProvenance ? (
         <aside className="lesson-provenance" aria-label="Curriculum alignment and source notes">

@@ -23,11 +23,16 @@ from typing import Any
 from scripts.songbook.plan_song_import import (
     collect_source_paths,
     load_songs,
+    has_redundant_family_attachment,
+    parse_frontmatter,
     plan_candidate,
+    source_family_key,
+    resolved_library_pdf_candidates,
     project_relative,
+    read_text,
     sha256,
-    source_pdf_candidates,
 )
+from scripts.resources.library_pdf_tracker import mark_library_pdf_processed
 from scripts.safety_guard import check_runtime, install_runtime_guard, maybe_add_runtime_argument
 
 
@@ -48,6 +53,24 @@ def ensure_source(connection: sqlite3.Connection, source_path: str, source_kind:
     return connection.execute(
         "SELECT id FROM source_documents WHERE source_path = ?", (source_path,)
     ).fetchone()[0]
+
+
+def mark_scanned_library_pdf(source_path: Path, project_root: Path) -> None:
+    # Keep scan progress moving: raw/invalid transcriptions can still be
+    # treated as scanned for source-file hygiene.
+    mark_library_pdf_processed(source_path, project_root)
+
+    try:
+        frontmatter, _ = parse_frontmatter(read_text(source_path))
+    except Exception:
+        frontmatter = {}
+
+    source_file = frontmatter.get("source_file", "")
+    if not source_file:
+        return
+
+    for source_pdf in resolved_library_pdf_candidates(source_file, project_root):
+        mark_library_pdf_processed(source_pdf, project_root)
 
 
 def main() -> int:
@@ -109,7 +132,9 @@ def main() -> int:
                 if processed >= args.batch_size:
                     break
 
+                mark_scanned_library_pdf(source_path, project_root)
                 candidate = plan_candidate(source_path, project_root, songs)
+                pdfs = resolved_library_pdf_candidates(candidate.source_file, project_root)
                 processed += 1
 
                 if candidate.classification != "exact-duplicate" or candidate.canonical_song_id is None:
@@ -119,8 +144,33 @@ def main() -> int:
                 exact += 1
                 relative_source = project_relative(source_path, project_root)
                 source_id = ensure_source(connection, relative_source, "markdown")
+                source_family = candidate.source_family or source_family_key({"source_file": candidate.source_file}, relative_source)
+                has_transcription = has_redundant_family_attachment(
+                    connection,
+                    candidate.canonical_song_id,
+                    "transcription",
+                    source_family,
+                    candidate.source_author,
+                    candidate.source_version,
+                    candidate.source_action_signature,
+                    project_root,
+                )
+                has_primary = has_redundant_family_attachment(
+                    connection,
+                    candidate.canonical_song_id,
+                    "primary",
+                    source_family,
+                    candidate.source_author,
+                    candidate.source_version,
+                    candidate.source_action_signature,
+                    project_root,
+                )
+                if has_transcription and has_primary:
+                    skipped += 1
+                    continue
 
-                connection.execute(
+                if not has_transcription:
+                    connection.execute(
                     """
                     INSERT INTO song_sources (song_id, source_document_id, relationship, locator, evidence_note)
                     VALUES (?, ?, 'transcription', ?, ?)
@@ -128,17 +178,18 @@ def main() -> int:
                       locator = excluded.locator,
                       evidence_note = excluded.evidence_note
                     """,
-                    (
-                        candidate.canonical_song_id,
-                        source_id,
-                        "Unreviewed transcription",
-                        "Exact normalized title-and-lyrics match. Source remains research_wip.",
-                    ),
-                )
+                        (
+                            candidate.canonical_song_id,
+                            source_id,
+                            "Unreviewed transcription",
+                            "Exact normalized title-and-lyrics match. Source remains research_wip.",
+                        ),
+                    )
+                    linked += 1
 
-                pdfs = source_pdf_candidates(candidate.source_file, project_root)
-                if len(pdfs) == 1:
-                    pdf_rel = project_relative(pdfs[0], project_root)
+                if len(pdfs) == 1 and not has_primary:
+                    pdf_path = pdfs[0]
+                    pdf_rel = project_relative(pdf_path, project_root)
                     pdf_id = ensure_source(connection, pdf_rel, "pdf")
                     connection.execute(
                         """
@@ -155,6 +206,7 @@ def main() -> int:
                             "Exact normalized title-and-lyrics match. Original source PDF attached for traceability.",
                         ),
                     )
+                    linked += 1
                 else:
                     missing_pdf += 1
 

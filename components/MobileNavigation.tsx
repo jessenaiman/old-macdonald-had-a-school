@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetClose,
@@ -15,17 +14,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import type { ActivePage, GradeNavigationItem } from "./site-navigation";
+import type { ActivePage } from "./site-navigation";
 import styles from "./SiteChrome.module.css";
 
-export function MobileNavigation({ active, grades }: { active?: ActivePage; grades: readonly GradeNavigationItem[] }) {
+export function MobileNavigation({ active }: { active?: ActivePage }) {
   const [open, setOpen] = useState(false);
-  const gradeLinks: { key: ActivePage; label: string; href: string }[] = [];
-
-  for (const grade of grades) {
-    if (grade.children) gradeLinks.push(...grade.children);
-    else gradeLinks.push({ key: grade.key, label: grade.label, href: grade.href });
-  }
 
   return (
     <div className={styles.mobileMenu}>
@@ -42,7 +35,7 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
             <Image src="/brand-emblem.png" alt="" width={48} height={48} />
             <div className={styles.menuSheetHeading}>
               <SheetTitle>Old MacDonald Had a School</SheetTitle>
-              <SheetDescription>Lessons, subjects, and grade workspaces</SheetDescription>
+              <SheetDescription>Lessons, subjects, and teacher resources</SheetDescription>
             </div>
             <SheetClose asChild>
               <Button className={styles.menuClose} variant="ghost" size="icon" aria-label="Close navigation menu">
@@ -53,48 +46,21 @@ export function MobileNavigation({ active, grades }: { active?: ActivePage; grad
 
           <nav className={styles.menuLinks} aria-label="Mobile navigation">
             <Button asChild variant="ghost">
-              <Link href="/" aria-current={active === "home" ? "page" : undefined} onClick={() => setOpen(false)}>Home</Link>
+              <Link href="/lessons" aria-current={active === "lessons" ? "page" : undefined} onClick={() => setOpen(false)}>Lessons</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="/lessons" aria-current={active === "lessons" ? "page" : undefined} onClick={() => setOpen(false)}>Find lessons</Link>
+              <Link href="/#browse-by-subject" onClick={() => setOpen(false)}>Subjects</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="/songs" aria-current={active === "songs" ? "page" : undefined} onClick={() => setOpen(false)}>Teacher songbook</Link>
+              <Link href="/songs" aria-current={active === "songs" ? "page" : undefined} onClick={() => setOpen(false)}>For Teachers</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="/search" aria-current={active === "search" ? "page" : undefined} onClick={() => setOpen(false)}>Search lessons</Link>
+              <Link href="/about" aria-current={active === "about" ? "page" : undefined} onClick={() => setOpen(false)}>About</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="/#browse-by-subject" onClick={() => setOpen(false)}>Browse subjects</Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/about" aria-current={active === "about" ? "page" : undefined} onClick={() => setOpen(false)}>About the school</Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/branding" aria-current={active === "cast-guide" ? "page" : undefined} onClick={() => setOpen(false)}>Brand &amp; cast guide</Link>
+              <Link href="/search" aria-current={active === "search" ? "page" : undefined} onClick={() => setOpen(false)}>Search</Link>
             </Button>
           </nav>
-
-          <Separator className={styles.menuSeparator} />
-
-          <section className={styles.menuGrades} aria-labelledby="mobile-grade-heading">
-            <h2 id="mobile-grade-heading">Grade workspaces</h2>
-            <div>
-              {gradeLinks.map((grade) => (
-                <Button asChild variant="outline" key={grade.key}>
-                  <Link
-                    className={styles.gradeLink}
-                    data-grade={grade.key}
-                    href={grade.href}
-                    aria-current={active === grade.key ? "page" : undefined}
-                    onClick={() => setOpen(false)}
-                  >
-                    {grade.label}
-                  </Link>
-                </Button>
-              ))}
-            </div>
-          </section>
         </SheetContent>
       </Sheet>
     </div>

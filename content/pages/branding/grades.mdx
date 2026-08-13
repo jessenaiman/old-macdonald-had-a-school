@@ -1,12 +1,25 @@
-<section id="grades" className="mt-5 rounded-2xl border border-border bg-[#071a33] p-[clamp(1.25rem,4vw,3rem)] text-[#f8fbfd]">
-  <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-[#e3ad27]">Grade pattern reference</p><h2 className="m-0 font-heading text-[clamp(2rem,4vw,3.5rem)]">One structure, distinct ownership</h2><p className="max-w-3xl leading-7 text-[#e7f0f7]">Grade pages share the same component styles. Their unique <code>.tsx</code> files own content and composition; <code>data-grade</code> supplies only the assigned colour, readable ink, edge, and governed felt texture. Early Years is the umbrella identity and uses <code>data-grade-group</code>; Daycare and Preschool keep their own child-grade identities. The candidate grade-lead sequence is yellow, green, blue, pink/red, and orange.</p>
+import { GradeControlsReference } from "../../../components/grades/GradeControlsReference"
+
+<section id="grades" className="mt-5 rounded-2xl border border-border bg-site-chrome p-5 text-site-chrome-foreground sm:p-8 lg:p-12">
+  <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-site-chrome-accent">Grade pattern reference</p>
+  <h2 className="m-0 font-heading text-[clamp(2rem,4vw,3.5rem)]">One structure, distinct ownership</h2>
+  <p className="max-w-3xl leading-7 text-site-chrome-foreground">All five grade routes use the same reusable grade-control surface. The route supplies content and assigned cast ownership; the shared control component supplies the rail, welcome actions, teacher note, learning paths, planner, resources, and grade-aware search cue.</p>
+
   <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
     <article data-grade-group="early-years" className="rounded-xl bg-[var(--grade-color)] p-4 text-[var(--grade-ink)] shadow-[0_4px_0_var(--grade-edge)]"><strong className="font-heading text-2xl">Early Years</strong><p className="text-sm">Umbrella · teal</p><code>data-grade-group=&quot;early-years&quot;</code></article>
     <article data-grade="daycare" className="rounded-xl bg-[var(--grade-color)] p-4 text-[var(--grade-ink)] shadow-[0_4px_0_var(--grade-edge)]"><strong className="font-heading text-2xl">Daycare</strong><p className="text-sm">Miss Puddles · yellow</p><code>data-grade=&quot;daycare&quot;</code></article>
-    <article data-grade="pre-school" className="rounded-xl bg-[var(--grade-color)] p-4 text-[var(--grade-ink)] shadow-[0_4px_0_var(--grade-edge)]"><strong className="font-heading text-2xl">Preschool</strong><p className="text-sm">Miss Maisy · green</p><code>data-grade=&quot;pre-school&quot;</code></article>
+    <article data-grade="pre-school" className="rounded-xl bg-[var(--grade-color)] p-4 text-[var(--grade-ink)] shadow-[0_4px_0_var(--grade-edge)]"><strong className="font-heading text-2xl">Pre-School</strong><p className="text-sm">Miss Maisy · green</p><code>data-grade=&quot;pre-school&quot;</code></article>
     <article data-grade="kindergarten" className="rounded-xl bg-[var(--grade-color)] p-4 text-[var(--grade-ink)] shadow-[0_4px_0_var(--grade-edge)]"><strong className="font-heading text-2xl">Kindergarten</strong><p className="text-sm">Mr Rusty · blue</p><code>data-grade=&quot;kindergarten&quot;</code></article>
     <article data-grade="grade-one" className="rounded-xl bg-[var(--grade-color)] p-4 text-[var(--grade-ink)] shadow-[0_4px_0_var(--grade-edge)]"><strong className="font-heading text-2xl">Grade 1</strong><p className="text-sm">Miss Hayley · pink</p><code>data-grade=&quot;grade-one&quot;</code></article>
     <article data-grade="grade-two" className="rounded-xl bg-[var(--grade-color)] p-4 text-[var(--grade-ink)] shadow-[0_4px_0_var(--grade-edge)]"><strong className="font-heading text-2xl">Grade 2</strong><p className="text-sm">Mr Maisy · orange</p><code>data-grade=&quot;grade-two&quot;</code></article>
   </div>
-  <p className="mt-6 mb-0 text-sm leading-6 text-[#e7f0f7]"><strong>Artwork is independent:</strong> add <code>className=&quot;brand-asset grade-icon icon-medium&quot;</code> and <code>data-grade-icon=&quot;grade-one&quot;</code> only where an icon belongs.</p>
+
+  <div className="mt-8 rounded-xl border border-border bg-card p-4 text-card-foreground sm:p-6">
+    <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Live reusable control example</p>
+    <h3 className="m-0 font-heading text-3xl">Grade 1 workroom</h3>
+    <p className="mt-2 max-w-3xl leading-7 text-card-foreground">This is the production <code>GradeInteractionLane</code>, not a static mock. Use Today, Curriculum, Planner, Resources, and Search resources to inspect the shared states and controls.</p>
+    <div className="mt-6 rounded-lg bg-background p-2 sm:p-4"><GradeControlsReference /></div>
+  </div>
+
+  <p className="mt-6 mb-0 text-sm leading-6 text-site-chrome-foreground"><strong>Artwork is independent:</strong> add <code>className=&quot;brand-asset grade-icon icon-medium&quot;</code> and <code>data-grade-icon=&quot;grade-one&quot;</code> only where an icon belongs. Do not create a separate subject page or a one-off grade control to make a visual example.</p>
 </section>

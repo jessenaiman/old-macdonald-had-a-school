@@ -47,6 +47,7 @@ function cosineSimilarity(a: number[], b: number[]): number {
 
 const STOP_WORDS = new Set([
   "a", "an", "and", "for", "from", "in", "of", "on", "the", "to", "with",
+  "curriculum", "lesson", "lessons", "plan", "planning", "resource", "resources", "teach", "teaching",
 ]);
 
 const RELATED_TERMS: Record<string, string[]> = {
@@ -72,6 +73,13 @@ type TopicRow = {
   grades: string;
   standards: string | null;
   tags: string | null;
+  pacing: string | null;
+};
+
+type PlanningWindowMatch = {
+  id: number;
+  label: string;
+  alias: string;
 };
 
 type LessonRow = {
@@ -140,6 +148,43 @@ function normalizeToken(value: string) {
   if (token.endsWith("ing") && token.length > 5) return token.slice(0, -3);
   if (token.endsWith("s") && !token.endsWith("ss") && token.length > 3) return token.slice(0, -1);
   return token;
+}
+
+function normalizeSearchText(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, " ");
+}
+
+function includesPhrase(value: string, phrase: string) {
+  return ` ${value} `.includes(` ${phrase} `);
+}
+
+function planningWindowMatches(db: Database.Database, query: string): PlanningWindowMatch[] {
+  const normalizedQuery = normalizeSearchText(query);
+  const aliases = db.prepare(`
+    SELECT planning_window_aliases.planning_window_id AS id, planning_windows.label, planning_window_aliases.alias
+    FROM planning_window_aliases
+    JOIN planning_windows ON planning_windows.id = planning_window_aliases.planning_window_id
+    WHERE planning_windows.active = 1
+    ORDER BY length(planning_window_aliases.alias) DESC, planning_windows.sort_order
+  `).all() as PlanningWindowMatch[];
+
+  const matches = aliases.filter((item) => includesPhrase(normalizedQuery, normalizeSearchText(item.alias)));
+  return [...new Map(matches.map((item) => [item.id, item])).values()];
+}
+
+function inferredGradeKey(db: Database.Database, query: string) {
+  const normalizedQuery = normalizeSearchText(query);
+  const grades = db.prepare("SELECT key, label FROM grades ORDER BY sort_order").all() as Array<{ key: string; label: string }>;
+  return grades.find((item) => includesPhrase(normalizedQuery, normalizeSearchText(item.label)))?.key ?? "";
+}
+
+function stripIntentPhrases(query: string, phrases: string[]) {
+  let result = query;
+  for (const phrase of phrases) {
+    const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
+    result = result.replace(new RegExp(`\\b${escaped}\\b`, "ig"), " ");
+  }
+  return result.trim();
 }
 
 function canonicalSongMap(
@@ -211,6 +256,15 @@ function includesTerm(text: string, term: string) {
   return new RegExp(`(^|[^a-z0-9])${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`).test(text);
 }
 
+function hasKeywordAnchor(row: Record<string, unknown>, primary: string[]) {
+  if (primary.length < 2) return true;
+  const searchable = [row.title, row.lyrics, row.instructions]
+    .filter((value): value is string => typeof value === "string")
+    .join(" ")
+    .toLowerCase();
+  return primary.filter((term) => includesTerm(searchable, term)).length >= 2;
+}
+
 function scoreTopic(row: TopicRow, primary: string[], expanded: string[]) {
   const title = row.topic.toLowerCase();
   const category = (row.category ?? "").toLowerCase();
@@ -248,7 +302,36 @@ export async function GET(req: NextRequest) {
 
   const db = new Database(DB_PATH, { readonly: true, fileMustExist: true });
   try {
-    const { primary, expanded } = queryTerms(q);
+    const planningMatches = planningWindowMatches(db, q);
+    const resolvedGrade = grade || inferredGradeKey(db, q);
+    const intentPhrases = [
+      ...planningMatches.map((item) => item.alias),
+      ...(resolvedGrade ? [db.prepare("SELECT label FROM grades WHERE key = ?").get(resolvedGrade) as { label: string } | undefined].flatMap((item) => item ? [item.label] : []) : []),
+    ];
+    const searchQuery = stripIntentPhrases(q, intentPhrases);
+    const { primary, expanded } = queryTerms(searchQuery);
+    const planningWindowIds = planningMatches.map((item) => item.id);
+    const planningPlaceholders = planningWindowIds.map(() => "?").join(", ");
+    const pacingSelect = planningWindowIds.length
+      ? `
+        (SELECT group_concat('Week ' || paced_wp.week_number || ' - ' || paced_wp.month, ' | ')
+         FROM topic_grades paced_tg
+         JOIN weekly_pacing paced_wp ON paced_wp.topic_grade_id = paced_tg.id
+         JOIN planning_window_months paced_month ON paced_month.month = paced_wp.month
+         WHERE paced_tg.topic_id = t.id
+           AND paced_month.planning_window_id IN (${planningPlaceholders})) AS pacing`
+      : "NULL AS pacing";
+    const pacingFilter = planningWindowIds.length
+      ? `
+        AND EXISTS (
+          SELECT 1
+          FROM topic_grades paced_tg
+          JOIN weekly_pacing paced_wp ON paced_wp.topic_grade_id = paced_tg.id
+          JOIN planning_window_months paced_month ON paced_month.month = paced_wp.month
+          WHERE paced_tg.topic_id = t.id
+            AND paced_month.planning_window_id IN (${planningPlaceholders})
+        )`
+      : "";
     const topicRows = db.prepare(`
       SELECT
         t.id, t.topic, t.category, t.skill,
@@ -256,17 +339,18 @@ export async function GET(req: NextRequest) {
         coalesce((SELECT group_concat(g.key, '|') FROM topic_grades tg JOIN grades g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grade_keys,
         coalesce((SELECT group_concat(g.label, ', ') FROM topic_grades tg JOIN grades g ON g.id = tg.grade_id WHERE tg.topic_id = t.id), '') AS grades,
         (SELECT group_concat(st.framework || ' ' || st.code || ': ' || st.full_text, ' | ') FROM topic_standards ts JOIN standards st ON st.id = ts.standard_id WHERE ts.topic_id = t.id AND st.code IS NOT NULL) AS standards,
-        (SELECT group_concat(ta.name, ', ') FROM topic_tags tt JOIN tags ta ON ta.id = tt.tag_id WHERE tt.topic_id = t.id) AS tags
+        (SELECT group_concat(ta.name, ', ') FROM topic_tags tt JOIN tags ta ON ta.id = tt.tag_id WHERE tt.topic_id = t.id) AS tags,
+        ${pacingSelect}
       FROM topics t
       JOIN subjects s ON s.id = t.subject_id
-      WHERE t.merged_into IS NULL
-    `).all() as TopicRow[];
+      WHERE t.merged_into IS NULL ${pacingFilter}
+    `).all(...planningWindowIds, ...planningWindowIds) as TopicRow[];
 
     const curriculumResults = topicRows
-      .filter((row) => !grade || row.grade_keys.split("|").includes(grade))
+      .filter((row) => !resolvedGrade || row.grade_keys.split("|").includes(resolvedGrade))
       .map((row) => ({ row, match: scoreTopic(row, primary, expanded) }))
-      .filter(({ match }) => match.score >= 4)
-      .sort((a, b) => b.match.score - a.match.score || a.row.topic.localeCompare(b.row.topic))
+      .filter(({ match }) => planningWindowIds.length > 0 && primary.length === 0 || match.score >= 4)
+      .sort((a, b) => b.match.score - a.match.score || (a.row.pacing ?? "").localeCompare(b.row.pacing ?? "") || a.row.topic.localeCompare(b.row.topic))
       .slice(0, 30)
       .map(({ row, match }) => ({
         id: String(row.id),
@@ -277,10 +361,15 @@ export async function GET(req: NextRequest) {
         skill_statement: row.skill,
         standards: row.standards,
         tags: row.tags,
+        pacing: row.pacing,
+        planning_windows: planningMatches.map((item) => item.label),
         matched_terms: match.matched.slice(0, 6),
-        why_match: match.matched.length
-          ? `Matched ${match.matched.slice(0, 3).join(", ")} in the curriculum topic, skill, tags, or standards.`
-          : "Related curriculum wording matched this search.",
+        why_match: [
+          planningMatches.length ? `Scheduled for ${planningMatches.map((item) => item.label).join(", ")}${row.pacing ? ` (${row.pacing})` : ""}.` : "",
+          match.matched.length
+            ? `Matched ${match.matched.slice(0, 3).join(", ")} in the curriculum topic, skill, tags, or standards.`
+            : planningMatches.length ? "" : "Related curriculum wording matched this search.",
+        ].filter(Boolean).join(" "),
       }));
 
     const ftsTerms = expanded.filter((term) => term.length > 1).slice(0, 18);
@@ -294,18 +383,21 @@ export async function GET(req: NextRequest) {
       JOIN search_chunks sc ON sc.rowid = search_chunks_fts.rowid
       WHERE search_chunks_fts MATCH ?
         AND COALESCE(json_extract(sc.meta, '$.visibility'), 'public') <> 'internal'
-        ${kind ? "AND sc.kind = ?" : ""}
+        ${kind ? "AND sc.kind = ?" : "AND sc.kind <> 'knowledge'"}
       ORDER BY rank
       LIMIT 40
     `).all(...(kind ? [makeFtsQuery(ftsTerms), kind] : [makeFtsQuery(ftsTerms)])) as Array<Record<string, unknown>> : [];
 
     // ── Semantic search (embedding cosine similarity) ─────────────────────
+    const anchoredKeywordRows = keywordRows.filter((row) => hasKeywordAnchor(row, primary));
+
     let semanticRows: Array<Record<string, unknown>> = [];
     let searchMode = "structured-keyword";
 
     try {
       const model = await getEmbedder();
-      const queryEmbedding = await model.embed(q);
+      if (primary.length === 0) throw new Error("No resource-search terms after resolving grade and school-year placement.");
+      const queryEmbedding = await model.embed(searchQuery);
 
       // Fetch chunks with embeddings (broader candidate set for semantic)
       const candidateRows = db.prepare(`
@@ -313,7 +405,7 @@ export async function GET(req: NextRequest) {
         FROM search_chunks sc
         WHERE sc.embedding IS NOT NULL
           AND COALESCE(json_extract(sc.meta, '$.visibility'), 'public') <> 'internal'
-          ${kind ? "AND sc.kind = ?" : ""}
+          ${kind ? "AND sc.kind = ?" : "AND sc.kind <> 'knowledge'"}
       `).all(...(kind ? [kind] : [])) as Array<Record<string, unknown>>;
 
       // Score each candidate by cosine similarity
@@ -326,6 +418,7 @@ export async function GET(req: NextRequest) {
           return { row, semanticScore };
         })
         .filter((item): item is { row: Record<string, unknown>; semanticScore: number } => item !== null)
+        .filter(({ row }) => hasKeywordAnchor(row, primary))
         .filter(({ semanticScore }) => semanticScore > 0.35)
         .sort((a, b) => b.semanticScore - a.semanticScore)
         .slice(0, 40);
@@ -340,7 +433,7 @@ export async function GET(req: NextRequest) {
     // ── Merge keyword + semantic results (deduplicated, hybrid-ranked) ────
     const mergedMap = new Map<string, { row: Record<string, unknown>; keywordRank: number; semanticScore: number }>();
 
-    keywordRows.forEach((row, idx) => {
+    anchoredKeywordRows.forEach((row, idx) => {
       const id = row.id as string;
       const existing = mergedMap.get(id);
       if (existing) {
@@ -362,7 +455,7 @@ export async function GET(req: NextRequest) {
     });
 
     // Hybrid score: 0.5 keyword rank score + 0.5 semantic score
-    const maxKeywordRank = keywordRows.length || 1;
+    const maxKeywordRank = anchoredKeywordRows.length || 1;
     const merged = [...mergedMap.values()]
       .map(({ row, keywordRank, semanticScore }) => {
         const keywordScore = 1 - (keywordRank / maxKeywordRank);
@@ -411,7 +504,7 @@ export async function GET(req: NextRequest) {
     const resultRows = dedupedRows.slice(0, 40);
 
     // ── Lesson pages (MDX files in content/lessons/) ─────────────────────
-    const lessonResults = await searchLessonFiles(q) as LessonRow[];
+    const lessonResults = primary.length ? await searchLessonFiles(searchQuery) as LessonRow[] : [];
 
     const results = resultRows.map((item) => ({
       id: item.row.id as string,

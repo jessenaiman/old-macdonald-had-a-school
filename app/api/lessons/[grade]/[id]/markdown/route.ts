@@ -1,8 +1,17 @@
 import { getCurriculumTopic } from "../../../../../../lib/curriculum-db";
+import { appendCurriculumMaterialsToMarkdown, getCurriculumLessonByTitleAndGrade } from "../../../../../../lib/curriculum-lesson";
 import { GRADE_KEYS, type GradeKey } from "../../../../../../lib/grade-routes";
 import { serializeCurriculumTopicAsMarkdown } from "../../../../../../lib/lesson-model";
 
 export const runtime = "nodejs";
+
+const GRADE_LABELS: Record<GradeKey, string> = {
+  daycare: "Daycare",
+  "pre-school": "Preschool",
+  kindergarten: "Kindergarten",
+  "grade-one": "Grade 1",
+  "grade-two": "Grade 2",
+};
 
 function isGradeKey(value: string): value is GradeKey {
   return GRADE_KEYS.includes(value as GradeKey);
@@ -14,13 +23,14 @@ export async function GET(_request: Request, { params }: { params: Promise<{ gra
 
   const topic = getCurriculumTopic(id, grade);
   if (!topic) return new Response("Not found", { status: 404 });
+  const curriculumLesson = getCurriculumLessonByTitleAndGrade(topic.title, GRADE_LABELS[grade]);
 
   const filename = topic.title.toLocaleLowerCase()
     .replaceAll("&", " and ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-  return new Response(serializeCurriculumTopicAsMarkdown(topic), {
+  return new Response(appendCurriculumMaterialsToMarkdown(serializeCurriculumTopicAsMarkdown(topic), curriculumLesson), {
     headers: {
       "Content-Disposition": `attachment; filename="${filename || topic.id}.md"`,
       "Content-Type": "text/markdown; charset=utf-8",

@@ -19,6 +19,9 @@ export interface CurriculumMaterial {
   id: number;
   role: 'focus' | 'supporting';
   title: string;
+  useInPhase?: string | null;
+  routineSlot?: string | null;
+  teacherRationale?: string | null;
   lyrics?: string | null;
   actions?: string | null;
   instructions?: string | null;
@@ -99,7 +102,8 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
   `).all(topicId) as Array<{ name: string }>;
 
   const materials = db.prepare(`
-    SELECT tm.material_kind, tm.material_id, tm.role,
+    SELECT tm.material_kind, tm.material_id, tm.role, tm.use_in_phase,
+           tm.routine_slot, tm.teacher_rationale,
            CASE WHEN tm.material_kind = 'song' THEN s.title ELSE r.name END as title,
            s.lyrics, s.actions, s.instructions,
            CASE WHEN tm.material_kind = 'song' THEN s.url ELSE r.url END as url,
@@ -108,6 +112,10 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
     LEFT JOIN songs s ON s.id = tm.material_id AND tm.material_kind = 'song'
     LEFT JOIN resources r ON r.id = tm.material_id AND tm.material_kind = 'resource'
     WHERE tm.topic_id = ?
+      AND (
+        tm.role = 'focus'
+        OR NULLIF(TRIM(tm.teacher_rationale), '') IS NOT NULL
+      )
     ORDER BY CASE tm.role WHEN 'focus' THEN 0 ELSE 1 END,
              CASE tm.material_kind WHEN 'song' THEN 0 ELSE 1 END,
              title
@@ -115,6 +123,9 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
     material_kind: string;
     material_id: number;
     role: string;
+    use_in_phase: string | null;
+    routine_slot: string | null;
+    teacher_rationale: string | null;
     title: string;
     lyrics: string;
     actions: string;
@@ -164,6 +175,9 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
       id: m.material_id,
       role: m.role === 'focus' ? 'focus' : 'supporting',
       title: m.title,
+      useInPhase: m.use_in_phase,
+      routineSlot: m.routine_slot,
+      teacherRationale: m.teacher_rationale,
       lyrics: m.lyrics,
       actions: m.actions,
       instructions: m.instructions,
@@ -179,6 +193,43 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
     })),
     pacing: pacing.map(p => ({ week: p.week_number, month: p.month })),
   };
+}
+
+export function getCurriculumLessonByTitleAndGrade(topicTitle: string, gradeLabel: string): CurriculumLesson | null {
+  const db = getDb();
+  const topic = db.prepare(`
+    SELECT t.id
+    FROM topics t
+    JOIN topic_grades tg ON tg.topic_id = t.id
+    JOIN grades g ON g.id = tg.grade_id
+    WHERE t.merged_into IS NULL
+      AND t.topic = ?
+      AND g.label = ?
+    LIMIT 1
+  `).get(topicTitle, gradeLabel) as { id: number } | undefined;
+
+  return topic ? getCurriculumLesson(topic.id) : null;
+}
+
+export function appendCurriculumMaterialsToMarkdown(markdown: string, lesson: CurriculumLesson | null): string {
+  if (!lesson || lesson.materials.length === 0) return markdown;
+
+  const lines = lesson.materials
+    .filter((material) => material.title)
+    .map((material) => {
+      const title = material.url ? `[${material.title}](${material.url})` : material.title;
+      const details = [
+        material.role === 'focus' ? 'focus material' : 'support material',
+        material.useInPhase,
+        material.routineSlot,
+        material.teacherRationale,
+      ].filter(Boolean).join('; ');
+      return `- ${title}${details ? ` - ${details}` : ''}`;
+    });
+
+  return lines.length > 0
+    ? `${markdown}\n## Linked lesson materials\n${lines.join('\n')}\n`
+    : markdown;
 }
 
 export function getCurriculumLessonBySlug(slug: string): CurriculumLesson | null {
