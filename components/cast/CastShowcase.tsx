@@ -87,6 +87,12 @@ const BRAND_THEME_OPTIONS = [
   { value: "patchwork-dusk", label: "Patchwork - Lullaby Dusk", description: "Deep blue and teal with quiet indigo notes and leather cards." },
   { value: "schoolhouse-day", label: "Schoolhouse Dusk - Early Evening", description: "Cool blue-green classroom surfaces with pale readable notes." },
   { value: "schoolhouse-dusk", label: "Schoolhouse Dusk - Storybook Night", description: "Blue-gray nighttime surfaces with gold limited to hardware." },
+  { value: "quiet-farm-day", label: "Quiet Farm Day", description: "Parchment, ivory paper, muted cork, and navy ink; character colours stay local." },
+  { value: "quiet-farm-night", label: "Quiet Farm Night", description: "Deep blue-green paper and softened hardware for a readable night comparison." },
+  { value: "quiet-workshop-day", label: "Quiet Workshop - Field Notebook", description: "Recycled cardboard, sage board, navy ink, and a restrained clay accent." },
+  { value: "quiet-workshop-night", label: "Quiet Workshop - Night Notebook", description: "Deep sage and paper surfaces with subdued clay reserved for emphasis." },
+  { value: "field-notes-day", label: "Field Notes - Linen Day", description: "Muted sage and linen with a deep navy reading system and restrained brass." },
+  { value: "field-notes-night", label: "Field Notes - Linen Night", description: "Deep blue-green and paper surfaces for a calm dark-mode comparison." },
 ] as const;
 
 type BrandThemeValue = (typeof BRAND_THEME_OPTIONS)[number]["value"];
@@ -288,6 +294,15 @@ function BrandThemeChooser({ value, onValueChange }: { value: BrandThemeValue; o
             <SelectLabel>Designer B - Schoolhouse Dusk</SelectLabel>
             <SelectItem value="schoolhouse-day">Schoolhouse Dusk - Early Evening</SelectItem>
             <SelectItem value="schoolhouse-dusk">Schoolhouse Dusk - Storybook Night</SelectItem>
+          </SelectGroup>
+          <SelectGroup>
+            <SelectLabel>New palette directions</SelectLabel>
+            <SelectItem value="quiet-farm-day">Quiet Farm Day</SelectItem>
+            <SelectItem value="quiet-farm-night">Quiet Farm Night</SelectItem>
+            <SelectItem value="quiet-workshop-day">Quiet Workshop - Field Notebook</SelectItem>
+            <SelectItem value="quiet-workshop-night">Quiet Workshop - Night Notebook</SelectItem>
+            <SelectItem value="field-notes-day">Field Notes - Linen Day</SelectItem>
+            <SelectItem value="field-notes-night">Field Notes - Linen Night</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>

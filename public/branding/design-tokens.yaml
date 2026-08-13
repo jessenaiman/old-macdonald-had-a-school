@@ -32,6 +32,12 @@ theme_comparisons:
   patchwork-dusk: { label: Patchwork - Lullaby Dusk, designer: A, page: "#0D2038", board: "#173F46", note: "#293D69", card: "#413224" }
   schoolhouse-day: { label: Schoolhouse Dusk - Early Evening, designer: B, page: "#DCE7EA", board: "#214B68", note: "#F8EFDA", card: "#F5F9F7" }
   schoolhouse-dusk: { label: Schoolhouse Dusk - Storybook Night, designer: B, page: "#0D1C2C", board: "#173D56", note: "#253F52", card: "#1B3043" }
+  quiet-farm-day: { label: Quiet Farm Day, designer: A, page: "#D6C6A7", board: "#6F573E", note: "#F6EFDF", card: "#E1D1AE" }
+  quiet-farm-night: { label: Quiet Farm Night, designer: A, page: "#142A38", board: "#1E4A4D", note: "#294B53", card: "#203F4A" }
+  quiet-workshop-day: { label: Quiet Workshop - Field Notebook, designer: B, page: "#E7E0D3", board: "#465A53", note: "#F7F2E7", card: "#F7F2E7" }
+  quiet-workshop-night: { label: Quiet Workshop - Night Notebook, designer: B, page: "#1A2628", board: "#233B39", note: "#E3D7C2", card: "#2D3A3B" }
+  field-notes-day: { label: Field Notes - Linen Day, designer: C, page: "#D9DFD8", board: "#365C59", note: "#FBF6EA", card: "#F3EBDD" }
+  field-notes-night: { label: Field Notes - Linen Night, designer: C, page: "#142932", board: "#1D4144", note: "#28464A", card: "#203B40" }
   cast_rule: Canonical cast colours do not change when a comparison theme changes.
 controls:
   action: Button

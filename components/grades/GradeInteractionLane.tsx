@@ -103,7 +103,6 @@ function ResourcesPanel({ config, items, onChoose }: { config: GradeInteractionC
 export function GradeInteractionLane({ config, summary, items, activeIndex = 0, onSelect, onPreview }: GradeInteractionLaneProps) {
   const [section, setSection] = useState<GradeInteractionSection>("today");
   const [selectedIndex, setSelectedIndex] = useState(activeIndex);
-  const panelId = `${config.gradeKey}-grade-panel`;
   const chooseItem = (index: number) => { setSelectedIndex(index); onSelect?.(index); };
   const moveSectionFocus = (event: React.KeyboardEvent<HTMLElement>) => {
     const currentIndex = sections.findIndex((entry) => entry.id === section);
@@ -121,6 +120,7 @@ export function GradeInteractionLane({ config, summary, items, activeIndex = 0, 
     requestAnimationFrame(() => document.getElementById(`${config.gradeKey}-${nextSection}-tab`)?.focus());
   };
   const panel = section === "today" ? <TodayPanel config={config} summary={summary} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} onPreview={onPreview} /> : section === "curriculum" ? <CurriculumPanel config={config} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} /> : section === "planner" ? <PlannerPanel config={config} item={items[selectedIndex] ?? items[0]} onSection={setSection} /> : <ResourcesPanel config={config} items={items} onChoose={chooseItem} />;
+  const panelId = `${config.gradeKey}-grade-panel`;
   return <Tabs value={section} onValueChange={(value) => setSection(value as GradeInteractionSection)} orientation="vertical" asChild>
   <div className={`${styles.board} ${config.variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`} data-grade-template={config.gradeKey} data-style-scope="grade-interaction-lane">
     <aside className={styles.rail} aria-label={`${config.grade} lesson workspace`}><div className={styles.identity}><span>Lesson workspace</span><strong>{config.grade}</strong><small>{config.age}</small></div><TabsList className={styles.railNav} aria-label={`${config.grade} lesson tools`} onKeyDown={moveSectionFocus} asChild><nav>{sections.map((entry) => <TabsTrigger key={entry.id} value={entry.id} id={`${config.gradeKey}-${entry.id}-tab`} className={`${styles.railButton} ${section === entry.id ? styles.railButtonActive : ""}`}><b>{entry.number}</b><span>{entry.label}</span></TabsTrigger>)}</nav></TabsList><div className={styles.reminder}><span className="brand-asset fastener-push-pin icon-small" aria-hidden="true" /><span>Planning reminder</span><strong>{config.reminder}</strong></div></aside>
