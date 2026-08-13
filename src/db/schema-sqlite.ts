@@ -379,6 +379,48 @@ export const importBatches = sqliteTable('import_batches', {
   importedAt: text('imported_at'),
 });
 
+export const resourceFileInventory = sqliteTable('resource_file_inventory', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  sourcePath: text('source_path').notNull().unique(),
+  sourceKind: text('source_kind').notNull(),
+  checksum: text('checksum').notNull(),
+  byteSize: integer('byte_size').notNull(),
+  modifiedAt: text('modified_at'),
+  discoveredAt: text('discovered_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+  lastScannedAt: text('last_scanned_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const resourceFileDispositions = sqliteTable('resource_file_dispositions', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  inventoryId: integer('inventory_id').notNull().references(() => resourceFileInventory.id, { onDelete: 'cascade' }),
+  disposition: text('disposition').notNull(),
+  materialKind: text('material_kind'),
+  materialId: integer('material_id'),
+  evidenceNote: text('evidence_note'),
+  decidedBy: text('decided_by').notNull(),
+  createdAt: text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const resourceQuarantine = sqliteTable('resource_quarantine', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  inventoryId: integer('inventory_id').notNull().references(() => resourceFileInventory.id, { onDelete: 'cascade' }),
+  recordLocator: text('record_locator'),
+  reasonCode: text('reason_code').notNull(),
+  evidence: text('evidence').notNull(),
+  retryStatus: text('retry_status').notNull().default('queued'),
+  retryCount: integer('retry_count').notNull().default(0),
+  resolutionNote: text('resolution_note'),
+  createdAt: text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text('updated_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const tagAliases = sqliteTable('tag_aliases', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  tagId: integer('tag_id').notNull().references(() => tags.id, { onDelete: 'cascade' }),
+  alias: text('alias').notNull(),
+  provenance: text('provenance').notNull().default('editorial'),
+});
+
 // ─── Lesson assets (linked to curriculum topics) ───────────────────────────
 
 export const lessonAssets = sqliteTable('lesson_assets', {

@@ -228,7 +228,9 @@ export async function GET(req: NextRequest) {
         rank
       FROM search_chunks_fts
       JOIN search_chunks sc ON sc.rowid = search_chunks_fts.rowid
-      WHERE search_chunks_fts MATCH ? ${kind ? "AND sc.kind = ?" : ""}
+      WHERE search_chunks_fts MATCH ?
+        AND COALESCE(json_extract(sc.meta, '$.visibility'), 'public') <> 'internal'
+        ${kind ? "AND sc.kind = ?" : ""}
       ORDER BY rank
       LIMIT 40
     `).all(...(kind ? [makeFtsQuery(ftsTerms), kind] : [makeFtsQuery(ftsTerms)])) as Array<Record<string, unknown>> : [];
@@ -246,6 +248,7 @@ export async function GET(req: NextRequest) {
         SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta, sc.embedding
         FROM search_chunks sc
         WHERE sc.embedding IS NOT NULL
+          AND COALESCE(json_extract(sc.meta, '$.visibility'), 'public') <> 'internal'
           ${kind ? "AND sc.kind = ?" : ""}
       `).all(...(kind ? [kind] : [])) as Array<Record<string, unknown>>;
 

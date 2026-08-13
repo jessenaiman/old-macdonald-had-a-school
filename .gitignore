@@ -39,7 +39,3 @@ storybook-static
 /tmp
 
 # Local browser/shell scratch artifacts
-({text
-a.getAttribute('href')
-e.textContent).slice(0
-getComputedStyle(element).backgroundImage

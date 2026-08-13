@@ -16,7 +16,10 @@
       "src/db/migrations-sqlite/0010_improve_pony_fingerplay_retrieval.sql",
       "src/db/migrations-sqlite/0011_review_mid_north_baby_bounce_animal_songs.sql",
       "src/db/migrations-sqlite/0012_review_mid_north_baby_bounce_follow_up_songs.sql",
-      "src/db/migrations-sqlite/0013_rebuild_search_chunks_fts.sql"
+      "src/db/migrations-sqlite/0013_rebuild_search_chunks_fts.sql",
+      "src/db/migrations-sqlite/0014_gate_unreviewed_search_evidence.sql",
+      "src/db/migrations-sqlite/0015_add_resource_processing_workflow.sql",
+      "src/db/migrations-sqlite/0016_add_animal_taxonomy_inheritance.sql"
     ],
     "drizzle": [
       {
@@ -48,6 +51,21 @@
         "created_at": "2026-08-11 15:38:41",
         "hash": "0005_add_frames_column",
         "id": 6
+      },
+      {
+        "created_at": "2026-08-13 00:41:40",
+        "hash": "0014_gate_unreviewed_search_evidence",
+        "id": 7
+      },
+      {
+        "created_at": "2026-08-13 01:26:27",
+        "hash": "0015_add_resource_processing_workflow",
+        "id": 8
+      },
+      {
+        "created_at": "2026-08-13 01:30:46",
+        "hash": "0016_add_animal_taxonomy_inheritance",
+        "id": 9
       }
     ],
     "legacy": [
@@ -62,12 +80,24 @@
     ]
   },
   "object_counts": {
-    "index": 6,
-    "table": 43,
+    "index": 8,
+    "table": 47,
     "trigger": 3,
     "view": 0
   },
   "objects": [
+    {
+      "name": "resource_file_dispositions_inventory_idx",
+      "sql": "CREATE INDEX resource_file_dispositions_inventory_idx\n  ON resource_file_dispositions(inventory_id, created_at)",
+      "tbl_name": "resource_file_dispositions",
+      "type": "index"
+    },
+    {
+      "name": "resource_quarantine_status_idx",
+      "sql": "CREATE INDEX resource_quarantine_status_idx\n  ON resource_quarantine(retry_status, created_at)",
+      "tbl_name": "resource_quarantine",
+      "type": "index"
+    },
     {
       "name": "retrieval_evaluation_runs_query_idx",
       "sql": "CREATE INDEX retrieval_evaluation_runs_query_idx\n  ON retrieval_evaluation_runs(query_id, executed_at)",
@@ -180,6 +210,24 @@
       "name": "research_sources",
       "sql": "CREATE TABLE `research_sources` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`educator_org` text NOT NULL,\n\t`source_title` text NOT NULL,\n\t`source_type` text NOT NULL,\n\t`age_setting` text,\n\t`songs_covered` text,\n\t`direct_url` text,\n\t`local_pdf_filename` text,\n\t`download_status` text DEFAULT 'Download needed',\n\t`research_notes` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n)",
       "tbl_name": "research_sources",
+      "type": "table"
+    },
+    {
+      "name": "resource_file_dispositions",
+      "sql": "CREATE TABLE resource_file_dispositions (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  inventory_id INTEGER NOT NULL REFERENCES resource_file_inventory(id) ON DELETE CASCADE,\n  disposition TEXT NOT NULL CHECK (disposition IN (\n    'pending', 'processed', 'duplicate_reference', 'quarantined',\n    'unsupported', 'intentionally_excluded'\n  )),\n  material_kind TEXT,\n  material_id INTEGER,\n  evidence_note TEXT,\n  decided_by TEXT NOT NULL,\n  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "resource_file_dispositions",
+      "type": "table"
+    },
+    {
+      "name": "resource_file_inventory",
+      "sql": "CREATE TABLE resource_file_inventory (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  source_path TEXT NOT NULL UNIQUE,\n  source_kind TEXT NOT NULL,\n  checksum TEXT NOT NULL,\n  byte_size INTEGER NOT NULL CHECK (byte_size >= 0),\n  modified_at TEXT,\n  discovered_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  last_scanned_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "resource_file_inventory",
+      "type": "table"
+    },
+    {
+      "name": "resource_quarantine",
+      "sql": "CREATE TABLE resource_quarantine (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  inventory_id INTEGER NOT NULL REFERENCES resource_file_inventory(id) ON DELETE CASCADE,\n  record_locator TEXT,\n  reason_code TEXT NOT NULL,\n  evidence TEXT NOT NULL,\n  retry_status TEXT NOT NULL DEFAULT 'queued'\n    CHECK (retry_status IN ('queued', 'retrying', 'resolved', 'needs_human', 'closed')),\n  retry_count INTEGER NOT NULL DEFAULT 0 CHECK (retry_count >= 0),\n  resolution_note TEXT,\n  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "resource_quarantine",
       "type": "table"
     },
     {
@@ -321,6 +369,12 @@
       "type": "table"
     },
     {
+      "name": "tag_aliases",
+      "sql": "CREATE TABLE tag_aliases (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  tag_id INTEGER NOT NULL REFERENCES tags(id) ON DELETE CASCADE,\n  alias TEXT NOT NULL COLLATE NOCASE,\n  provenance TEXT NOT NULL DEFAULT 'editorial',\n  UNIQUE(tag_id, alias)\n)",
+      "tbl_name": "tag_aliases",
+      "type": "table"
+    },
+    {
       "name": "tags",
       "sql": "CREATE TABLE \"tags\" (\n    id             INTEGER PRIMARY KEY AUTOINCREMENT,\n    parent_tag_id  INTEGER,\n    name           TEXT NOT NULL,\n    definition     TEXT,\n    FOREIGN KEY (parent_tag_id) REFERENCES \"tags\" (id) ON DELETE SET NULL,\n    UNIQUE (parent_tag_id, name) -- reviewed: prevents two \"Ponies\" under the same\n                                  -- parent; same name under a different parent is fine\n)",
       "tbl_name": "tags",
@@ -381,7 +435,7 @@
       "type": "trigger"
     }
   ],
-  "schema_fingerprint": "58a54daba9226e64880b2eca728559dfb873c0783cfe51ca47f1209349cc3226",
+  "schema_fingerprint": "6c427dc22f81550b59bfcdc486e5501bdf51f27190fe57cdd1657734427d136f",
   "tables": {
     "__drizzle_migrations": {
       "columns": [
@@ -1394,6 +1448,278 @@
           "partial": 0,
           "seq": 0,
           "unique": 1
+        }
+      ]
+    },
+    "resource_file_dispositions": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "inventory_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "disposition",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "material_kind",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "material_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "evidence_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "decided_by",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "inventory_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "resource_file_inventory",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "resource_file_dispositions_inventory_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        }
+      ]
+    },
+    "resource_file_inventory": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "source_path",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "source_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "checksum",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "byte_size",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "modified_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "discovered_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "last_scanned_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_resource_file_inventory_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "resource_quarantine": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "inventory_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "record_locator",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "reason_code",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "evidence",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": "'queued'",
+          "name": "retry_status",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": "0",
+          "name": "retry_count",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "resolution_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "updated_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "inventory_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "resource_file_inventory",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "resource_quarantine_status_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
         }
       ]
     },
@@ -3246,6 +3572,63 @@
       "indexes": [
         {
           "name": "sqlite_autoindex_subjects_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "tag_aliases": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "tag_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "alias",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": "'editorial'",
+          "name": "provenance",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "tag_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "tags",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_tag_aliases_1",
           "origin": "u",
           "partial": 0,
           "seq": 0,
