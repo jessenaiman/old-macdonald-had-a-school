@@ -23,6 +23,11 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, default=Path("scripts/db/schema-manifest.json"))
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
     parser.add_argument("--tables", nargs="*", default=[], help="Emit only these relevant live table contracts")
+    parser.add_argument(
+        "--summary",
+        action="store_true",
+        help="Emit the schema gate result without repeating table column contracts.",
+    )
     args = parser.parse_args()
 
     expected = json.loads(args.manifest.read_text(encoding="utf-8"))
@@ -35,8 +40,13 @@ def main() -> int:
         "object_counts": live["object_counts"],
         "migration_metadata_changed": live["migration_state"] != expected["migration_state"],
     }
-    if args.tables:
+    if args.tables and not args.summary:
         result["relevant_tables"] = table_contract(live, args.tables)
+    elif args.tables:
+        # Still validate requested table names in compact mode. This prevents a
+        # typo from looking like a passed schema gate.
+        table_contract(live, args.tables)
+        result["requested_tables"] = args.tables
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
     return 0 if unchanged else 2
 

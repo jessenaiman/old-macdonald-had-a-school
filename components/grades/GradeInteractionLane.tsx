@@ -7,9 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { gradeSearchHref, type GradeKey } from "@/lib/grade-routes";
+import { CAST, type CastKey } from "@/lib/cast";
 import type { GradePathItem } from "../builder/CurriculumTemplates";
 import styles from "./GradeInteractionLane.module.css";
-import { ResponsiveFeatureSplit } from "@/components/layout/ResponsiveFeatureSplit";
 
 export type GradeInteractionSection =
   "today" | "curriculum" | "planner" | "resources" | "search";
@@ -21,10 +21,8 @@ export type GradeInteractionConfig = {
   eyebrow: string;
   headline: string;
   accentHeadline: string;
-  leadName: string;
-  leadImage: string;
+  teacher: CastKey;
   leadQuote: string;
-  teacherClass: string;
   variant?: "standard" | "daycare";
 };
 export type GradeInteractionLaneProps = {
@@ -37,6 +35,50 @@ export type GradeInteractionLaneProps = {
   /** Use h2 when the real control is embedded in a branded reference page. */
   headingLevel?: "h1" | "h2";
 };
+
+type GradeWorkspaceProps = {
+  grade: GradeKey;
+  gradeLabel: string;
+  age: string;
+  reminder: string;
+  variant?: "standard" | "daycare";
+  navigation: React.ReactNode;
+  children: React.ReactNode;
+};
+
+export function GradeWorkspace({
+  grade,
+  gradeLabel,
+  age,
+  reminder,
+  variant,
+  navigation,
+  children,
+}: GradeWorkspaceProps) {
+  return (
+    <div
+      className={`${styles.board} ${variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`}
+      data-grade={grade}
+      data-grade-template={grade}
+      data-style-scope="grade-workspace"
+    >
+      <aside className={styles.rail} aria-label={`${gradeLabel} lesson workspace`}>
+        <div className={styles.identity}>
+          <span>Lesson workspace</span>
+          <strong>{gradeLabel}</strong>
+          <small>{age}</small>
+        </div>
+        {navigation}
+        <div className={styles.reminder}>
+          <span className="brand-asset fastener-push-pin icon-small" aria-hidden="true" />
+          <span>Planning reminder</span>
+          <strong>{reminder}</strong>
+        </div>
+      </aside>
+      <div className={styles.main}>{children}</div>
+    </div>
+  );
+}
 
 const sections: Array<{ id: GradeInteractionSection; label: string }> = [
   { id: "today", label: "Today" },
@@ -152,9 +194,8 @@ export function GradeWelcomeControl({
   headingLevel?: "h1" | "h2";
 }) {
   return (
-    <ResponsiveFeatureSplit
-      ratio="primary"
-      className={`${styles.welcome} ${config.variant === "daycare" ? styles.daycareWelcome : ""}`}
+    <section
+      className={`${styles.welcome} grid min-w-0 grid-cols-1 items-center gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(18rem,2fr)] [&>*]:min-w-0 ${config.variant === "daycare" ? styles.daycareWelcome : ""}`}
     >
       <div className={styles.welcomeCopy}>
         <span className={styles.eyebrow}>{config.eyebrow}</span>
@@ -188,7 +229,7 @@ export function GradeWelcomeControl({
         </div>
       </div>
       <PersistentTeacherQuote config={config} />
-    </ResponsiveFeatureSplit>
+    </section>
   );
 }
 
@@ -288,38 +329,45 @@ function TodayPanel({
   );
 }
 
-function PersistentTeacherQuote({
-  config,
+export function TeacherNote({
+  character,
+  quote,
 }: {
-  config: GradeInteractionConfig;
+  character: CastKey;
+  quote: string;
 }) {
+  const teacher = CAST[character];
   return (
     <aside
       className={styles.teacherQuote}
-      aria-label={`A note from ${config.leadName}`}
+      aria-label={`A note from ${teacher.name}`}
     >
       <Card
-        className={`${styles.teacherCard} ${config.teacherClass} character-surface`}
+        className={`${styles.teacherCard} cast-${character} character-surface`}
       >
-        <CardHeader className={`${styles.teacherCardHeader} lg:!pr-[44%]`}>
+        <CardHeader className={styles.teacherCardHeader}>
           <CardTitle className={styles.teacherCardTitle}>
-            A note from {config.leadName}
+            A note from {teacher.name}
           </CardTitle>
         </CardHeader>
-        <CardContent className={`${styles.teacherCardContent} lg:!pr-[44%]`}>
-          <blockquote className="lg:!max-w-none lg:![overflow-wrap:normal]">{`"${config.leadQuote}"`}</blockquote>
+        <CardContent className={styles.teacherCardContent}>
+          <blockquote>{`"${quote}"`}</blockquote>
           <Image
-            src={config.leadImage}
+            src={teacher.portrait}
             width={220}
             height={220}
-            alt={config.leadName}
-            className={`${styles.teacherImage} lg:!w-[44%]`}
+            alt={teacher.name}
+            className={styles.teacherImage}
             priority
           />
         </CardContent>
       </Card>
     </aside>
   );
+}
+
+function PersistentTeacherQuote({ config }: { config: GradeInteractionConfig }) {
+  return <TeacherNote character={config.teacher} quote={config.leadQuote} />;
 }
 
 function CurriculumPanel({
@@ -650,21 +698,13 @@ export function GradeInteractionLane({
       orientation="vertical"
       asChild
     >
-      <div
-        className={`${styles.board} ${config.variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`}
-        data-grade={config.gradeKey}
-        data-grade-template={config.gradeKey}
-        data-style-scope="grade-interaction-lane"
-      >
-        <aside
-          className={styles.rail}
-          aria-label={`${config.grade} lesson workspace`}
-        >
-          <div className={styles.identity}>
-            <span>Lesson workspace</span>
-            <strong>{config.grade}</strong>
-            <small>{config.age}</small>
-          </div>
+      <GradeWorkspace
+        grade={config.gradeKey}
+        gradeLabel={config.grade}
+        age={config.age}
+        reminder={config.reminder}
+        variant={config.variant}
+        navigation={
           <TabsList
             className={styles.railNav}
             aria-label={`${config.grade} lesson tools`}
@@ -684,16 +724,8 @@ export function GradeInteractionLane({
               ))}
             </nav>
           </TabsList>
-          <div className={styles.reminder}>
-            <span
-              className="brand-asset fastener-push-pin icon-small"
-              aria-hidden="true"
-            />
-            <span>Planning reminder</span>
-            <strong>{config.reminder}</strong>
-          </div>
-        </aside>
-        <div className={styles.main}>
+        }
+      >
           <div className={styles.panelFrame}>
             <TabsContent value={section} asChild>
               <section
@@ -707,8 +739,7 @@ export function GradeInteractionLane({
               </section>
             </TabsContent>
           </div>
-        </div>
-      </div>
+      </GradeWorkspace>
     </Tabs>
   );
 }
