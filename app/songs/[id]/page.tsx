@@ -24,6 +24,7 @@ export default async function SongPage({ params }: { params: Promise<{ id: strin
   const song = getSongbookSong(songId);
   if (!song) notFound();
   const songChords = song.chords.filter((chord) => chord.scope === "song");
+  const songLevelActions = song.actions.filter((action) => action.sectionId === null && action.lineNumber === null);
 
   return <article className={styles.detailPage}>
     <Link className={styles.back} href="/songs">← Back to the songbook</Link>
@@ -35,7 +36,7 @@ export default async function SongPage({ params }: { params: Promise<{ id: strin
     {songChords.length > 0 && <section className={styles.chordStrip} aria-labelledby="quick-chords"><div><span>Quick chords</span><h2 id="quick-chords">{songChords.map((chord) => chord.progression).join("  •  ")}</h2></div><p>{provenanceLabel(songChords[0].provenance)}{songChords[0].musicalKey ? ` · Key of ${songChords[0].musicalKey}` : ""}</p></section>}
 
     <div className={styles.songLayout}>
-      <main className={styles.leadSheet}>
+      <main className={styles.leadSheet} data-song-lyrics>
         {song.sections.map((section) => {
           const sectionChords = song.chords.filter((chord) => chord.sectionId === section.id && chord.scope !== "line");
           const lineChords = song.chords.filter((chord) => chord.sectionId === section.id && chord.scope === "line");
@@ -46,14 +47,22 @@ export default async function SongPage({ params }: { params: Promise<{ id: strin
             <div className={styles.lyricLines}>{lines.map((line, index) => {
               const chords = lineChords.filter((chord) => chord.lineNumber === index + 1);
               const lineAction = section.actionScope === "line" && section.actionLineNumber === index + 1;
-              return <div className={styles.lyricRow} key={`${index}-${line}`}>
+              const sourceActions = song.actions.filter((action) => action.sectionId === section.id && action.lineNumber === index + 1);
+              return <div className={styles.lyricRow} data-song-lyric-row key={`${index}-${line}`}>
                 <div>{chords.map((chord) => <span className={styles.lineChord} key={chord.id}>{chord.progression}</span>)}<p>{line || " "}</p></div>
-                {lineAction && section.actions && <aside><strong>{provenanceLabel(section.actionProvenance)}</strong>{section.actions}</aside>}
+                {(lineAction && section.actions || sourceActions.length > 0) && <aside className={styles.lineActions} data-song-line-actions>
+                  {lineAction && section.actions && <span><strong>{provenanceLabel(section.actionProvenance)}</strong>{section.actions}</span>}
+                  {sourceActions.map((action) => <span key={action.id}><strong>{provenanceLabel(action.provenance)}</strong>{action.wording}</span>)}
+                </aside>}
               </div>;
             })}</div>
             {section.actions && section.actionScope !== "line" && <aside className={styles.actionNote}><strong>{provenanceLabel(section.actionProvenance)}</strong><p>{section.actions}</p></aside>}
           </section>;
         })}
+        {songLevelActions.length > 0 && <aside className={styles.actionNote} data-song-level-actions aria-labelledby="song-actions-heading">
+          <strong id="song-actions-heading">Things to do with the music</strong>
+          {songLevelActions.map((action) => <p key={action.id}><strong>{provenanceLabel(action.provenance)}</strong>{action.wording}</p>)}
+        </aside>}
       </main>
 
       <aside className={styles.teacherRail}>

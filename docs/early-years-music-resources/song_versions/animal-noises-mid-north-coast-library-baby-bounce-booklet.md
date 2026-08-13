@@ -1,17 +1,11 @@
 ---
-activity_material: hands
-age_range: Infant/Toddler (0–3), baby bounce sessions
-confidence: 0.6
-educational_domain: Science/Nature
-evidence_quote: 'The little white duck says
-
-  “Quack Quack Quack!”
-
-  The donkey says'
-page_section: unknown
-review_status: pending_qc
-skill_objective: Explores the natural world and animal characteristics through musical
-  play
+activity_material: none
+confidence: 1.0
+developmental_context: Baby Bounce collection; the item itself gives no age placement.
+educational_domain: Language & Vocabulary
+evidence_quote: 'The little white duck says / "Quack Quack Quack!"'
+page_section: PDF page 67; printed page 67
+review_status: reviewed
 source_file: mid-north-coast-library-baby-bounce-booklet.pdf
 source_id: animal-noises-mid-north-coast-library-baby-bounce-booklet
 source_title: Baby Bounce Nursery Rhymes (booklet)
@@ -20,7 +14,13 @@ source_title: Baby Bounce Nursery Rhymes (booklet)
 # Animal Noises
 
 The little white duck says
-“Quack Quack Quack!”
+"Quack Quack Quack!"
+
 The donkey says
-“Eeyore!”
+"Eeyore!"
+
 The little pink pig says
+"Oink Oink Oink!"
+
+And the lion he says
+"ROAR!"

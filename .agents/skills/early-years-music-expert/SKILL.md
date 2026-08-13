@@ -44,6 +44,10 @@ files are evidence inputs, not a parallel content-management system.
   material batch where the added recovery point is justified.
 - After each import, check integrity, foreign keys, teacher-useful completeness,
   and the saved retrieval evaluation set.
+- Start with a calibration source, then scale to five independently reviewed
+  songs per import batch once source facts, database rows, retrieval, and the
+  rendered song pages are all correct. Increase to ten only after a clean
+  five-song batch. A defect returns the next batch to single-source repair.
 - Do not create closure ledgers, corpus inventories, review queues, or tracking
   spreadsheets outside the database unless the user explicitly requests one.
 - Do not use "Early Years Corpus" as a product or database concept. It may

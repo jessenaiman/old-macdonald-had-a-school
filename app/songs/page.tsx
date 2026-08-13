@@ -42,6 +42,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
         <div className={styles.badges}>{song.verified && <span>Reviewed</span>}{song.hasActions && <span>Actions</span>}{song.hasChords && <span>Chords</span>}</div>
         <h3><Link href={`/songs/${song.id}`}>{song.title}</Link></h3>
         {song.artist && <p className={styles.artist}>{song.artist}</p>}
+        {song.sourceTitle && <p className={styles.artist}>Source: {song.sourceTitle}</p>}
         {song.preview && <p className={styles.preview}>{song.preview}</p>}
         <div className={styles.meta}>{song.type && <span>{song.type}</span>}{song.grades.slice(0, 3).map((grade) => <span key={grade}>{grade}</span>)}</div>
         <Link className={styles.open} href={`/songs/${song.id}`}>Open teaching sheet →</Link>

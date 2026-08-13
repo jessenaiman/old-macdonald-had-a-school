@@ -21,6 +21,7 @@ export type SongbookSong = {
   id: number;
   title: string;
   artist: string | null;
+  sourceTitle: string | null;
   type: string | null;
   verified: boolean;
   hasActions: boolean;
@@ -81,14 +82,20 @@ export function listSongbookSongs(filters: SongbookFilters): SongbookSong[] {
       where.push(`s.type = ?`);
       parameters.push(filters.type);
     }
-    if (filters.actions) where.push(`(NULLIF(trim(s.actions), '') IS NOT NULL OR EXISTS (SELECT 1 FROM song_sections ss WHERE ss.song_id = s.id AND NULLIF(trim(ss.actions), '') IS NOT NULL))`);
+    if (filters.actions) where.push(`(
+      NULLIF(trim(s.actions), '') IS NOT NULL
+      OR EXISTS (SELECT 1 FROM song_sections ss WHERE ss.song_id = s.id AND NULLIF(trim(ss.actions), '') IS NOT NULL)
+      OR EXISTS (SELECT 1 FROM song_actions sa WHERE sa.song_id = s.id AND NULLIF(trim(COALESCE(sa.action_wording, '')), '') IS NOT NULL)
+    )`);
     if (filters.chords) where.push(`EXISTS (SELECT 1 FROM song_chord_guides cg WHERE cg.song_id = s.id)`);
     if (filters.verified) where.push(`s.verified = 1`);
 
     const rows = database.prepare(`
-      SELECT s.id, s.title, s.artist, s.type, s.verified,
+      SELECT s.id, s.title, s.artist, s.source_title, s.type, s.verified,
              CASE WHEN NULLIF(trim(s.actions), '') IS NOT NULL OR EXISTS (
                SELECT 1 FROM song_sections ss WHERE ss.song_id = s.id AND NULLIF(trim(ss.actions), '') IS NOT NULL
+             ) OR EXISTS (
+               SELECT 1 FROM song_actions sa WHERE sa.song_id = s.id AND NULLIF(trim(COALESCE(sa.action_wording, '')), '') IS NOT NULL
              ) THEN 1 ELSE 0 END has_actions,
              CASE WHEN EXISTS (SELECT 1 FROM song_chord_guides cg WHERE cg.song_id = s.id) THEN 1 ELSE 0 END has_chords,
              substr(s.lyrics, 1, 180) preview,
@@ -104,13 +111,14 @@ export function listSongbookSongs(filters: SongbookFilters): SongbookSong[] {
       ORDER BY s.verified DESC, s.title COLLATE NOCASE
       LIMIT 240
     `).all(...parameters) as Array<{
-      id: number; title: string; artist: string | null; type: string | null; verified: number;
+      id: number; title: string; artist: string | null; source_title: string | null; type: string | null; verified: number;
       has_actions: number; has_chords: number; grades: string | null; topics: string | null; preview: string | null;
     }>;
     return rows.map((row) => ({
       id: row.id,
       title: row.title,
       artist: row.artist,
+      sourceTitle: row.source_title,
       type: row.type,
       verified: row.verified === 1,
       hasActions: row.has_actions === 1,
@@ -141,6 +149,10 @@ export type SongDetail = {
     id: number; sectionId: number | null; scope: string; lineNumber: number | null; progression: string;
     musicalKey: string | null; capo: string | null; tuning: string | null; meter: string | null;
     startingPitch: string | null; provenance: string; sourceNote: string | null;
+  }>;
+  actions: Array<{
+    id: string; sectionId: number | null; lineNumber: number | null; wording: string;
+    classification: string | null; provenance: string | null; evidenceNote: string | null;
   }>;
   topics: Array<{ id: number; label: string; grades: string[]; rationale: string | null }>;
   sources: Array<{ path: string; kind: string; state: string; relationship: string; locator: string | null; note: string | null }>;
@@ -176,6 +188,12 @@ export function getSongbookSong(id: number): SongDetail | null {
       SELECT id, section_id, scope, line_number, progression, musical_key, capo, tuning, meter, starting_pitch, provenance, source_note
       FROM song_chord_guides WHERE song_id = ? ORDER BY sort_order, id
     `).all(id) as Array<Record<string, string | number | null>>;
+    const actions = database.prepare(`
+      SELECT id, section_id, line_number, action_wording, action_classification, provenance, evidence_note
+      FROM song_actions
+      WHERE song_id = ? AND NULLIF(trim(COALESCE(action_wording, '')), '') IS NOT NULL
+      ORDER BY COALESCE(section_id, 0), COALESCE(line_number, 0), id
+    `).all(id) as Array<Record<string, string | number | null>>;
     const topics = database.prepare(`
       SELECT t.id, t.topic label, tm.teacher_rationale rationale, GROUP_CONCAT(DISTINCT g.label) grades
       FROM topic_materials tm JOIN topics t ON t.id = tm.topic_id
@@ -200,6 +218,11 @@ export function getSongbookSong(id: number): SongDetail | null {
         musicalKey: chord.musical_key as string | null, capo: chord.capo as string | null,
         tuning: chord.tuning as string | null, meter: chord.meter as string | null,
         startingPitch: chord.starting_pitch as string | null, provenance: String(chord.provenance), sourceNote: chord.source_note as string | null,
+      })),
+      actions: actions.map((action) => ({
+        id: String(action.id), sectionId: action.section_id as number | null, lineNumber: action.line_number as number | null,
+        wording: String(action.action_wording), classification: action.action_classification as string | null,
+        provenance: action.provenance as string | null, evidenceNote: action.evidence_note as string | null,
       })),
       topics: topics.map((topic) => ({ ...topic, grades: topic.grades?.split(",").filter(Boolean) ?? [] })),
       sources,
