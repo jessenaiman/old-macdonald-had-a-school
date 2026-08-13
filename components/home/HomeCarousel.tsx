@@ -11,8 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { globalClassNames as legacyStyles } from "@/lib/global-class-names";
-import { globalClassNames as selectedStyles } from "@/lib/global-class-names";
+import styles from "./HomePage.module.css";
 import { Button } from "@/components/ui/button";
 
 const SLIDES = [
@@ -23,7 +22,6 @@ const SLIDES = [
 ] as const;
 
 export function HomeCarousel({ selected = false }: { selected?: boolean }) {
-  const styles = selected ? selectedStyles : legacyStyles;
   const [active, setActive] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
   const slide = SLIDES[active];

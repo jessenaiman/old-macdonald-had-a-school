@@ -5,7 +5,7 @@ This is the text companion to the live `#asset-patterns` section on `/branding`.
 There are two human-editable brand sources:
 
 - This file defines visual classes, component recipes, materials, typography, and asset usage.
-- [`public/CAST_AND_ROLES.md`](./CAST_AND_ROLES.md) defines character facts, roles, grades, colours, activities, and portrait sources. `/branding` reads that roster rather than copying character facts into TSX.
+- `content/pages/branding/cast.mdx` defines character facts, roles, grades, colours, activities, portrait sources, and rendered examples. `/branding#cast` renders that same source.
 
 The live `/branding` route is the single visual authority. Storybook stories are isolated viewers of components from that page; they are not additional brand definitions.
 

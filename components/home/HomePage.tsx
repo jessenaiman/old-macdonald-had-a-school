@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomeCarousel } from "./HomeCarousel";
 import { HOME_SUBJECTS, HOME_VIDEO_SONGS, type HomeLesson } from "./home-data";
 import { WeeklyLessonList } from "./WeeklyLessonList";
-import { globalClassNames as styles } from "@/lib/global-class-names";
+import styles from "./HomePage.module.css";
 import { ResponsiveFeatureSplit } from "@/components/layout/ResponsiveFeatureSplit";
 
 type HomePageProps = {
@@ -62,7 +62,7 @@ function HeroTitle({ title }: { title?: string }) {
 
 export function HomePage({ hero, lessons }: HomePageProps) {
   return (
-    <div className={styles.homePage} data-style-scope="bulletin-home-page">
+    <div className={styles.homePage}>
       <section className={`${styles.hero} mx-auto !w-[calc(100%_-_2rem)] !max-w-7xl sm:!w-[calc(100%_-_3rem)]`} aria-labelledby="home-title">
         <Card className={styles.heroCopyCard}>
           <CardHeader className={styles.heroCopy}>

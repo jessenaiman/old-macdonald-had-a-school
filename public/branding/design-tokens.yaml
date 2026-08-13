@@ -5,7 +5,7 @@ documents:
   palette_and_type: public/branding/PALETTE_AND_TYPOGRAPHY.md
   design_system: public/branding/DESIGN_SYSTEM.md
   asset_recipes: public/BRAND_ASSET_RECIPES.md
-  cast_data: public/CAST_AND_ROLES.md
+  cast_data: content/pages/branding/cast.mdx
 palette:
   navy: { css: --navy, light: "#0B1A33", role: primary-ink-and-navigation }
   blue: { css: --blue, light: "#3F78A4", role: supporting-school-surface }
@@ -25,7 +25,7 @@ typography:
   body: { class: font-body, role: paragraphs-labels-and-controls }
 identity:
   rule: Character colours are local cast contexts, never grade-wide themes.
-  source: public/CAST_AND_ROLES.md
+  source: content/pages/branding/cast.mdx
 theme_comparisons:
   current: { label: Current site palette, status: baseline }
   patchwork-day: { label: Patchwork - Farm Day, designer: A, page: "#7FA7B8", board: "#256C6B", note: "#F5E5BD", card: "#D9C18E" }

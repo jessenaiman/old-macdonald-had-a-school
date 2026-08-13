@@ -1,0 +1,30 @@
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+
+<header className="grid min-h-[32rem] overflow-hidden rounded-2xl border border-border bg-[#071a33] text-[#f8fbfd] shadow-xl lg:grid-cols-[1.15fr_.85fr] max-sm:min-h-0">
+  <div className="flex flex-col justify-center p-[clamp(2rem,6vw,5rem)] max-sm:p-6">
+    <p className="mb-3 font-body text-xs font-black uppercase tracking-[.14em] text-[#e8a227]">Working brand reference</p>
+    <h1 className="m-0 max-w-3xl font-heading text-[clamp(3rem,7vw,6.5rem)] !text-[#f8fbfd] leading-[.88] text-balance">Build the whole school <em className="block font-hand !text-[#c9527a]">in character.</em></h1>
+    <p className="mt-6 max-w-2xl text-base leading-7 text-[#e7f0f7]">Start with readable structure. Add approved materials where they behave like real objects. Keep each character’s assigned colour local and unmistakable.</p>
+    <div className="mt-7 flex flex-wrap gap-3"><Button asChild><a href="#page-recipe">See the complete recipe</a></Button><Button asChild variant="outline"><a href="#assets">Browse approved pieces</a></Button></div>
+  </div>
+  <div className="material-surface material-woven-fabric grid min-h-80 content-end overflow-hidden border-l border-border/40 px-5 pt-10 lg:min-h-full max-lg:border-l-0 max-lg:border-t">
+    <div className="material-surface material-felt relative mx-auto mb-10 w-[min(24rem,85%)] rounded-xl p-7 text-center text-white shadow-xl"><span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" /><strong className="font-heading text-3xl leading-none">Structure first.</strong><small className="mt-2 block font-body font-black uppercase tracking-wider">Then layer the real pieces.</small></div>
+    <div className="flex items-end justify-center [&_img]:-ml-10 [&_img]:h-auto [&_img]:w-[clamp(6.5rem,11vw,9.5rem)] [&_img:first-child]:ml-0">
+      <Image src="/staff_and_students/old-macdonald-transparent-circle.png" alt="Old MacDonald" width={150} height={150} />
+      <Image src="/staff_and_students/miss-puddles-transparent-circle.png" alt="Miss Puddles" width={150} height={150} />
+      <Image src="/staff_and_students/mr-rusty-transparent-circle.png" alt="Mr Rusty" width={150} height={150} />
+      <Image src="/staff_and_students/miss-hayley-transparent-circle.png" alt="Miss Hayley" width={150} height={150} />
+    </div>
+  </div>
+</header>
+
+<nav className="material-surface material-cardboard-paper my-5 grid grid-cols-2 gap-2 overflow-hidden rounded-xl border border-border p-2 shadow-md sm:grid-cols-4 xl:grid-cols-7" aria-label="Brand guide sections">
+  <a className="material-surface material-leather grid min-h-14 place-items-center rounded-lg border border-white/30 px-3 text-xs font-black text-white no-underline" href="#page-recipe">Page recipe</a>
+  <a className="material-surface material-woven-fabric grid min-h-14 place-items-center rounded-lg border border-border px-3 text-xs font-black text-[#071a33] no-underline" href="#assets">Materials</a>
+  <a className="material-surface material-construction-paper grid min-h-14 place-items-center rounded-lg border border-white/30 px-3 text-xs font-black text-white no-underline" href="#icons">Icons</a>
+  <a className="grid min-h-14 place-items-center rounded-lg bg-[#C9527A] px-3 text-xs font-black text-white no-underline" href="#cast">Cast</a>
+  <a className="grid min-h-14 place-items-center rounded-lg bg-[#1F6B6B] px-3 text-xs font-black text-white no-underline" href="#typography">Typography</a>
+  <a className="grid min-h-14 place-items-center rounded-lg bg-[#2C6C9B] px-3 text-xs font-black text-white no-underline" href="#controls">Controls</a>
+  <a className="grid min-h-14 place-items-center rounded-lg bg-[#4F5FA0] px-3 text-xs font-black text-white no-underline" href="#grades">Grades</a>
+</nav>

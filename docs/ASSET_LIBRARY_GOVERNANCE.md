@@ -29,7 +29,7 @@ the approval is invalid and a revised manifest line must be reviewed first.
 - Canva is the source for authored textures, patches, icons, fasteners, and separated visual pieces.
 - Figma defines typography, spacing, hierarchy, responsive layout, and component boundaries.
 - React and HTML provide semantic production implementation.
-- `public/CAST_AND_ROLES.md` locks character names, roles, grade ownership, and exact colors.
+- `content/pages/branding/cast.mdx` locks character names, roles, grade ownership, exact colors, and visible examples.
 - Locked assets cannot be substituted or recolored.
 - Reference sheets, atlases, page composites, and page-section crops cannot become flattened UI
   components.
@@ -43,7 +43,7 @@ the approval is invalid and a revised manifest line must be reviewed first.
 | `docs/DESIGN_ASSET_MASTER_LIST.md` | Human-readable asset index | Describes 350 raster files |
 | `docs/design-asset-master-list.csv` | Exhaustive development lookup | 350 records with dimensions, alpha bounds, status, and SHA-256 |
 | `docs/design-asset-master-list.json` | Machine-readable asset lookup | 350 asset records and duplicate groups |
-| `public/CAST_AND_ROLES.md` | Locked identities, roles, grades, and colors | Canonical source of truth |
+| `content/pages/branding/cast.mdx` | Locked identities, roles, grades, colors, and visible examples | Canonical source of truth |
 | `public/staff_and_students/` | Canonical transparent character portraits | 18 indexed assets |
 | `public/brand-kit-icon-sheets/individual-icons/` | Production grade and subject icons | 15 usable individuals |
 | `public/design-assets/classroom-fasteners-v1/individual-icons/` | Production fasteners and attachment cues | 16 individuals |

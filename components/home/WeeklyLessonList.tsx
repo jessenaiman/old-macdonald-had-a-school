@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { lessonHref } from "@/lib/grade-routes";
-import { globalClassNames as legacyStyles } from "@/lib/global-class-names";
-import { globalClassNames as selectedStyles } from "@/lib/global-class-names";
+import styles from "./HomePage.module.css";
 
 export type WeeklyLesson = {
   slug: string;
@@ -40,7 +39,6 @@ export function WeeklyLessonList({
   twoColumn?: boolean;
   selected?: boolean;
 }) {
-  const styles = selected ? selectedStyles : legacyStyles;
   return (
     <section className={`${styles.weeklyList} ${compact ? styles.weeklyListCompact : ""} ${participation ? styles.weeklyParticipation : ""} ${twoColumn ? styles.weeklyTwoColumn : ""}`} aria-label={title}>
       <header><h2>{title}</h2><span>Best for</span></header>

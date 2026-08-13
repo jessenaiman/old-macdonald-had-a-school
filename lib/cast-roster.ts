@@ -24,7 +24,7 @@ function rowsBetween(markdown: string, start: string, end: string) {
 }
 
 export async function getCastRoster() {
-  const markdown = await readFile(path.join(process.cwd(), "public", "CAST_AND_ROLES.md"), "utf8");
+  const markdown = await readFile(path.join(process.cwd(), "content", "pages", "branding", "cast.mdx"), "utf8");
   const staffRows = rowsBetween(markdown, "## Canonical staff", "### Staff rule");
   const studentRows = rowsBetween(markdown, "## Students: 8 Total", "# Cast");
 

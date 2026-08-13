@@ -23,7 +23,7 @@ Use the semantic token or its Tailwind utility. Do not introduce a new hex in a 
 
 ## Character colour boundary
 
-Character colours are not grade themes. A `cast-*` class supplies a local `--character-*` context only for that character's note, portrait panel, scene, or activity. The canonical staff and student colour values live in [`CAST_AND_ROLES.md`](../CAST_AND_ROLES.md).
+Character colours are not grade themes. A `cast-*` class supplies a local `--character-*` context only for that character's note, portrait panel, scene, or activity. Canonical staff and student values and visible examples live in `content/pages/branding/cast.mdx` and at `/branding#cast`.
 
 ## Typography roles
 

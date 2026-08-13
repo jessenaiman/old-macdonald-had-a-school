@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Copy, CopyCheck } from "lucide-react";
 import type { CastRosterMember } from "@/lib/cast-roster";
 import { globalClassNames as styles } from "@/lib/global-class-names";
@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Separator } from "@/components/ui/separator";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GradeInteractionLane } from "@/components/grades/GradeInteractionLane";
@@ -80,22 +79,6 @@ const PALETTE = [
   ["Orange", "--orange", "#D97A2B", "bg-brand-orange"],
   ["Paper", "--card", "#FDF8EC", "bg-card"],
 ] as const;
-
-const BRAND_THEME_OPTIONS = [
-  { value: "current", label: "Current site palette", description: "The existing site as a comparison baseline." },
-  { value: "patchwork-day", label: "Patchwork - Farm Day", description: "Schoolhouse blue, deep teal, paper, and cast-owned colour." },
-  { value: "patchwork-dusk", label: "Patchwork - Lullaby Dusk", description: "Deep blue and teal with quiet indigo notes and leather cards." },
-  { value: "schoolhouse-day", label: "Schoolhouse Dusk - Early Evening", description: "Cool blue-green classroom surfaces with pale readable notes." },
-  { value: "schoolhouse-dusk", label: "Schoolhouse Dusk - Storybook Night", description: "Blue-gray nighttime surfaces with gold limited to hardware." },
-  { value: "quiet-farm-day", label: "Quiet Farm Day", description: "Parchment, ivory paper, muted cork, and navy ink; character colours stay local." },
-  { value: "quiet-farm-night", label: "Quiet Farm Night", description: "Deep blue-green paper and softened hardware for a readable night comparison." },
-  { value: "quiet-workshop-day", label: "Quiet Workshop - Field Notebook", description: "Recycled cardboard, sage board, navy ink, and a restrained clay accent." },
-  { value: "quiet-workshop-night", label: "Quiet Workshop - Night Notebook", description: "Deep sage and paper surfaces with subdued clay reserved for emphasis." },
-  { value: "field-notes-day", label: "Field Notes - Linen Day", description: "Muted sage and linen with a deep navy reading system and restrained brass." },
-  { value: "field-notes-night", label: "Field Notes - Linen Night", description: "Deep blue-green and paper surfaces for a calm dark-mode comparison." },
-] as const;
-
-type BrandThemeValue = (typeof BRAND_THEME_OPTIONS)[number]["value"];
 
 const SITE_CONTROL_STORIES = [
   ["Site header", "Primary navigation, grade state, search, and desktop actions", "http://localhost:6006/?path=/story/site-controls-header--grade-one-active"],
@@ -266,51 +249,6 @@ function PaletteSpread() {
   </section>;
 }
 
-function BrandThemeChooser({ value, onValueChange }: { value: BrandThemeValue; onValueChange: (value: BrandThemeValue) => void }) {
-  const selected = BRAND_THEME_OPTIONS.find((option) => option.value === value) ?? BRAND_THEME_OPTIONS[0];
-
-  return <Card className="brandingThemeChooser">
-    <CardHeader>
-      <CardDescription>Whole-page theme comparison</CardDescription>
-      <CardTitle>Review the environment around the cast</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <label htmlFor="branding-theme-select">Theme proposal</label>
-      <Select value={value} onValueChange={(nextValue) => onValueChange(nextValue as BrandThemeValue)}>
-        <SelectTrigger id="branding-theme-select" className="brandingThemeSelect" aria-label="Theme proposal">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Current baseline</SelectLabel>
-            <SelectItem value="current">Current site palette</SelectItem>
-          </SelectGroup>
-          <SelectGroup>
-            <SelectLabel>Designer A - Schoolhouse Blue and Patchwork</SelectLabel>
-            <SelectItem value="patchwork-day">Patchwork - Farm Day</SelectItem>
-            <SelectItem value="patchwork-dusk">Patchwork - Lullaby Dusk</SelectItem>
-          </SelectGroup>
-          <SelectGroup>
-            <SelectLabel>Designer B - Schoolhouse Dusk</SelectLabel>
-            <SelectItem value="schoolhouse-day">Schoolhouse Dusk - Early Evening</SelectItem>
-            <SelectItem value="schoolhouse-dusk">Schoolhouse Dusk - Storybook Night</SelectItem>
-          </SelectGroup>
-          <SelectGroup>
-            <SelectLabel>New palette directions</SelectLabel>
-            <SelectItem value="quiet-farm-day">Quiet Farm Day</SelectItem>
-            <SelectItem value="quiet-farm-night">Quiet Farm Night</SelectItem>
-            <SelectItem value="quiet-workshop-day">Quiet Workshop - Field Notebook</SelectItem>
-            <SelectItem value="quiet-workshop-night">Quiet Workshop - Night Notebook</SelectItem>
-            <SelectItem value="field-notes-day">Field Notes - Linen Day</SelectItem>
-            <SelectItem value="field-notes-night">Field Notes - Linen Night</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <p aria-live="polite">{selected.description}</p>
-    </CardContent>
-  </Card>;
-}
-
 function BrandSourceDocuments() {
   return <section className={`${styles.section} ${styles.uiReference} brandingSources`} id="brand-sources">
     <header><span>Shareable source files</span><h2>Read the rules without reading this component</h2><p>The visual page is a working example. These files hold the edit-friendly information behind it, with the character roster remaining the live source for names, roles, colours, and activities.</p></header>
@@ -349,16 +287,7 @@ export function BrandingControls() {
 }
 
 export function CastShowcase({ staff, students }: { staff: CastRosterMember[]; students: CastRosterMember[] }) {
-  const [brandTheme, setBrandTheme] = useState<BrandThemeValue>("current");
-
-  useEffect(() => {
-    if (brandTheme === "current") delete document.documentElement.dataset.brandPreview;
-    else document.documentElement.dataset.brandPreview = brandTheme;
-
-    return () => { delete document.documentElement.dataset.brandPreview; };
-  }, [brandTheme]);
-
-  return <div className={`${styles.page} typeset-farm-reading`} data-style-scope="cast-showcase" data-brand-theme={brandTheme}>
+  return <div className={`${styles.page} typeset-farm-reading`} data-style-scope="cast-showcase">
     <ResponsiveFeatureSplit asChild ratio="primary" className={styles.hero}>
       <header>
         <div><span>Internal brand reference - source-led</span><h1>The whole school,<br/><em>in character.</em></h1><nav className="heroActions" aria-label="Brand guide shortcuts"><Button asChild className="brand-button brand-button--felt"><a href="#asset-toolkit">Browse assets</a></Button><Button asChild className="brand-button brand-button--cardboard" variant="outline"><a href="#site-controls">Inspect controls</a></Button><Button asChild className="brandTextLink" variant="link"><a href="#typography">Typography guide</a></Button></nav></div>
@@ -371,7 +300,6 @@ export function CastShowcase({ staff, students }: { staff: CastRosterMember[]; s
         </div>
       </header>
     </ResponsiveFeatureSplit>
-    <BrandThemeChooser value={brandTheme} onValueChange={setBrandTheme} />
     <NavigationMenu viewport={false} className="brandingSectionNav" aria-label="Brand guide section navigation">
       <NavigationMenuList className="brandingSectionNavList">
         <NavigationMenuItem><NavigationMenuLink asChild className="brandingSectionNavLink brandingSectionNavLink--foundations"><a href="#asset-toolkit">Foundations</a></NavigationMenuLink></NavigationMenuItem>

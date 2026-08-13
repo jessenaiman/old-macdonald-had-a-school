@@ -6,7 +6,7 @@ This document is the implementation contract behind `/branding`. It is written f
 
 1. `app/globals.css` owns global tokens, typography, materials, layout rules, and component styling.
 2. `app/brand-assets.css` maps a readable asset class to one approved public file.
-3. [`CAST_AND_ROLES.md`](../CAST_AND_ROLES.md) owns staff and student facts.
+3. `content/pages/branding/cast.mdx` owns staff and student facts and renders them at `/branding#cast`.
 4. [`BRAND_ASSET_RECIPES.md`](../BRAND_ASSET_RECIPES.md) owns asset names and production recipes.
 5. `/branding` shows the working visual examples and Storybook links.
 
