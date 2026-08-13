@@ -271,7 +271,7 @@ export default function SearchPage() {
 
         {!searched ? (
           <section className={styles.welcomeState}>
-            <Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={42} height={42} />
+            <span className="brand-asset fastener-push-pin icon-medium" aria-hidden="true" />
             <h2>Start with what you want to teach.</h2>
             <p>Search a topic, goal, song, rhyme, activity, story, or classroom resource.</p>
             <p className={styles.suggestions}>Try ...ponies lap rhymes..., ...fingerplay..., or ...word problems....</p>
@@ -361,7 +361,7 @@ export default function SearchPage() {
             </aside>
 
             <aside className={styles.learningCrew} aria-label="Puddles and Rusty are excited to explore the curriculum">
-              <Image className={styles.crewTape} src="/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" alt="" width={68} height={68} />
+              <span className={`${styles.crewTape} brand-asset fastener-washi-tape icon-medium`} aria-hidden="true" />
               <Image src="/staff_and_students/puddles-transparent-circle.png" alt="Puddles" width={118} height={118} />
               <Image src="/staff_and_students/rusty-transparent-circle.png" alt="Rusty" width={118} height={118} />
             </aside>
@@ -370,8 +370,8 @@ export default function SearchPage() {
               {selectedTopic || selectedLesson ? (
                 <>
                   <article className={styles.detailSheet}>
-                    <Image className={styles.tape} src="/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png" alt="" width={92} height={92} />
-                    <Image className={styles.paperclip} src="/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png" alt="" width={54} height={54} />
+                    <span className={`${styles.tape} brand-asset fastener-washi-tape icon-large`} aria-hidden="true" />
+                    <span className={`${styles.paperclip} brand-asset fastener-paperclip icon-medium`} aria-hidden="true" />
                     <header className={styles.detailHeader}>
                       <div>
                         <p>{selectedTopic ? "Selected curriculum topic" : "Selected database lesson draft"}</p>
@@ -467,7 +467,7 @@ export default function SearchPage() {
                 </>
               ) : (
                 <section className={styles.resourceOnlyState}>
-                  <Image src="/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.png" alt="" width={64} height={64} />
+                  <span className="brand-asset fastener-binder-clip icon-medium" aria-hidden="true" />
                   <h2>Related resources were found, but no curriculum topic matched.</h2>
                   <p>Use a grade filter or a broader teaching goal to find a curriculum starting point.</p>
                 </section>

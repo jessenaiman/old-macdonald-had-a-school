@@ -3,12 +3,10 @@ import Link from "next/link";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
-const brass = "/design-assets/classroom-fasteners-v1/individual-icons/17-brass-rivet-top-v01.png";
-
 export function SiteFooter() {
   return <footer className="site-footer material-site-leather">
-    <span className="site-footer-fastener site-footer-fastener-left" aria-hidden="true"><Image src={brass} width={96} height={96} alt="" /></span>
-    <span className="site-footer-fastener site-footer-fastener-right" aria-hidden="true"><Image src={brass} width={96} height={96} alt="" /></span>
+    <span className="site-footer-fastener site-footer-fastener-left brand-asset fastener-brass-rivet" aria-hidden="true" />
+    <span className="site-footer-fastener site-footer-fastener-right brand-asset fastener-brass-rivet" aria-hidden="true" />
     <Card className="site-footer-card typeset-farm-ui mx-auto max-w-7xl gap-0 border-0 bg-transparent px-5 py-0 text-inherit shadow-none sm:px-8">
       <CardHeader className="site-footer-main grid gap-6 px-0 py-7 md:grid-cols-[1.35fr_1fr_1fr] md:items-start md:gap-10">
         <div className="max-w-sm"><Link className="site-footer-brand" href="/" aria-label="Old MacDonald Had a School home"><Image src="/brand-emblem.png" alt="" width={48} height={48} /><span><strong>Old MacDonald Had a School</strong><small>Teacher lesson resources</small></span></Link><p className="site-footer-summary">Practical, playful lesson ideas organized for the grade and subject you teach.</p></div>

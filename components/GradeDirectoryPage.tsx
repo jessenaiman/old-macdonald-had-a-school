@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import { GradeLessonGrid, type GradeLesson } from "./GradeLessonGrid";
 import { CLUSTERS, clusterFor } from "./SubjectDiscovery";
 import type { GradeMeta } from "../lib/grades";
@@ -30,7 +29,7 @@ export function GradeDirectoryPage({
     <Tabs value={activeCluster ?? "all"} onValueChange={(value) => setActiveCluster(value === "all" ? null : value)} orientation="vertical" asChild>
     <section className={`gb-page gb-${meta.key}`}>
       <aside className="gb-rail" aria-label={`${meta.label} planning sections`}>
-        <Image className="gb-rail-grade-badge" src={`/brand-kit-icon-sheets/individual-icons/grade-${meta.key === "grade-one" ? "1" : "2"}.png`} alt="" width={64} height={64} />
+        <span className={`gb-rail-grade-badge brand-asset ${meta.key === "grade-one" ? "grade-one" : "grade-two"} icon-medium`} aria-hidden="true" />
         <p className="gb-rail-kicker">Old MacDonald’s<br />Farm School</p>
         <h2>{meta.label}</h2>
         <small>{meta.ageRange}</small>

@@ -11,15 +11,15 @@ import { globalClassNames as styles } from "@/lib/global-class-names";
 const GRADE_LESSON_DETAILS: Record<GradeKey, {
   label: string;
   age: string;
-  badge: string;
+  badgeClass: string;
   teacher: string;
   teacherName: string;
 }> = {
-  daycare: { label: "Daycare", age: "Ages 2-3", badge: "/brand-kit-icon-sheets/individual-icons/grade-daycare.png", teacher: "/staff_and_students/miss-puddles-transparent-circle.png", teacherName: "Miss Puddles" },
-  "pre-school": { label: "Pre-School", age: "Ages 3-4", badge: "/staff_and_students/miss-maisy-transparent-circle.png", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
-  kindergarten: { label: "Kindergarten", age: "Ages 4-6", badge: "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png", teacher: "/staff_and_students/mr-rusty-transparent-circle.png", teacherName: "Mr Rusty" },
-  "grade-one": { label: "Grade 1", age: "5-6 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-1.png", teacher: "/staff_and_students/miss-hayley-transparent-circle.png", teacherName: "Miss Hayley" },
-  "grade-two": { label: "Grade 2", age: "6-7 yrs", badge: "/brand-kit-icon-sheets/individual-icons/grade-2.png", teacher: "/staff_and_students/mr-maisy-transparent-circle.png", teacherName: "Mr Maisy" },
+  daycare: { label: "Daycare", age: "Ages 2-3", badgeClass: "grade-daycare", teacher: "/staff_and_students/miss-puddles-transparent-circle.png", teacherName: "Miss Puddles" },
+  "pre-school": { label: "Pre-School", age: "Ages 3-4", badgeClass: "grade-preschool", teacher: "/staff_and_students/miss-maisy-transparent-circle.png", teacherName: "Miss Maisy" },
+  kindergarten: { label: "Kindergarten", age: "Ages 4-6", badgeClass: "grade-kindergarten", teacher: "/staff_and_students/mr-rusty-transparent-circle.png", teacherName: "Mr Rusty" },
+  "grade-one": { label: "Grade 1", age: "5-6 yrs", badgeClass: "grade-one", teacher: "/staff_and_students/miss-hayley-transparent-circle.png", teacherName: "Miss Hayley" },
+  "grade-two": { label: "Grade 2", age: "6-7 yrs", badgeClass: "grade-two", teacher: "/staff_and_students/mr-maisy-transparent-circle.png", teacherName: "Mr Maisy" },
 };
 
 export async function GradeLessonPage({
@@ -43,7 +43,7 @@ export async function GradeLessonPage({
     <div className={`${styles.lessonPage} ${className}`} data-grade-template={grade} data-lesson-template={lesson?.metadata.template ?? "database-draft"} data-style-scope="grade-lesson-page">
         <aside className={styles.rail} aria-label={`${details.label} lesson sections`}>
           <div className={styles.railIdentity}>
-            <Image src={details.badge} alt="" width={68} height={68} className={styles.gradeBadge} priority />
+            <span className={`${styles.gradeBadge} brand-asset ${details.badgeClass} icon-medium`} aria-hidden="true" />
             <div><span>Farm School</span><strong>{details.label}</strong><small>{details.age}</small></div>
           </div>
           <nav className={styles.railNav}>
@@ -71,12 +71,12 @@ export async function GradeLessonPage({
             </header>
             <div className={styles.teacherNoteGrid}>
               {[
-                ["Before learners arrive", "Materials, room setup, or one reassuring reminder.", "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png"],
-                ["As we learn", "A child idea, an adaptation, or a question worth following.", "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png"],
-                ["For next time", "What to repeat, extend, or offer in another way.", "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png"],
+                ["Before learners arrive", "Materials, room setup, or one reassuring reminder.", "fastener-paperclip"],
+                ["As we learn", "A child idea, an adaptation, or a question worth following.", "fastener-masking-tape"],
+                ["For next time", "What to repeat, extend, or offer in another way.", "fastener-push-pin"],
               ].map(([title, prompt, fastener]) => (
                 <article className={styles.teacherNote} key={title}>
-                  <Image src={fastener} alt="" width={38} height={38} />
+                  <span className={`brand-asset ${fastener} icon-small`} aria-hidden="true" />
                   <h2>{title}</h2>
                   <p>{prompt}</p>
                   <span aria-hidden="true" />

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Copy, CopyCheck } from "lucide-react";
 import type { CastRosterMember } from "@/lib/cast-roster";
 import { globalClassNames as styles } from "@/lib/global-class-names";
@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Separator } from "@/components/ui/separator";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GradeInteractionLane } from "@/components/grades/GradeInteractionLane";
@@ -24,47 +25,47 @@ import { AssetPatternCatalogue, BrandSpecimenNav } from "@/components/cast/Asset
 import { CurriculumAssetGuide } from "@/components/cast/CurriculumAssetGuide";
 
 const MATERIALS = [
-  ["Felt", "/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png", "Buttons, rails, and soft panels"],
-  ["Woven fabric", "/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png", "Cloth fields and warm section backgrounds"],
-  ["Construction paper", "/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png", "Lesson cards and cut-paper accents"],
-  ["Cardboard", "/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png", "Readable notes and planning surfaces"],
-  ["Cork", "/design-assets/cork-board-kit-v1/seamless-cork-tile.png", "Pinboards and working walls"],
+  ["Felt", "material-surface material-felt", "Buttons, rails, and soft panels"],
+  ["Woven fabric", "material-surface material-woven-fabric", "Cloth fields and warm section backgrounds"],
+  ["Construction paper", "material-surface material-construction-paper", "Lesson cards and cut-paper accents"],
+  ["Cardboard", "material-surface material-cardboard-paper", "Readable notes and planning surfaces"],
+  ["Cork", "material-surface material-cork", "Pinboards and working walls"],
 ] as const;
 
 const FASTENERS = [
-  ["Push pin", "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png"],
-  ["Paper clip", "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png"],
-  ["Binder clip", "/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.png"],
-  ["Masking tape", "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png"],
-  ["Sewing button", "/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png"],
+  ["Push pin", "fastener-push-pin"],
+  ["Paper clip", "fastener-paperclip"],
+  ["Binder clip", "fastener-binder-clip"],
+  ["Masking tape", "fastener-masking-tape"],
+  ["Sewing button", "fastener-sewing-button"],
 ] as const;
 
 const CURRICULUM_ICONS = [
-  ["Daycare", "/brand-kit-icon-sheets/individual-icons/grade-daycare.png"],
-  ["Kindergarten", "/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png"],
-  ["Grade 1", "/brand-kit-icon-sheets/individual-icons/grade-1.png"],
-  ["Music & dance", "/brand-kit-icon-sheets/individual-icons/subject-music-dance.png"],
-  ["Math & building", "/brand-kit-icon-sheets/individual-icons/subject-math-building.png"],
-  ["Drama & storytelling", "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png"],
+  ["Daycare", "grade-daycare"],
+  ["Kindergarten", "grade-kindergarten"],
+  ["Grade 1", "grade-one"],
+  ["Music & dance", "music-icon"],
+  ["Math & building", "math-building-icon"],
+  ["Drama & storytelling", "drama-storytelling-icon"],
 ] as const;
 
 const MATCHED_CAST_ASSETS: Record<string, readonly [string, string][]> = {
-  "Old MacDonald": [["Kindergarten", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/13-kindergarten-schoolhouse.png"], ["Banjo", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/11-instrument-banjo-strap.png"], ["Community", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/03-community-schoolhouse-ribbon.png"]],
-  "Miss Puddles": [["Daycare", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/01-daycare-stacking-blocks.png"], ["Early learning", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/07-early-learning-shape-blocks.png"], ["First painting", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/05-painting-handprint-dots.png"]],
-  "Mr Rusty": [["Grade 1", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/04-grade-1-book-pencil.png"], ["Fiddle", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/01-instrument-fiddle-bow.png"], ["Dance", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/02-dance-turning-footprints.png"]],
-  "Miss Hayley": [["Grade 1", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/14-grade-1-writing-slate-books.png"], ["Acting", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/04-acting-theatre-masks.png"], ["Stage", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/09-acting-stage-curtains.png"]],
-  "Mr Sam": [["Math", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/13-math-abacus-ruler-block.png"], ["Measure", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/15-math-construction-measure.png"], ["Balance", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/14-math-balance-scale.png"]],
-  "Mr Maisy": [["Grade 2", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/10-grade-2-balance-scale.png"], ["Physical play", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/19-physical-play-ball-rope.png"], ["Movement", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/20-physical-stepping-spots-beanbag.png"]],
-  "Mr Puddles": [["Art", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/16-art-camera-brush.png"], ["Colour", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/18-art-color-wheel-frame.png"], ["Painting", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/20-painting-easel-brush-palette.png"]],
-  "Miss Maisy": [["Preschool", "/brand-kit-icon-sheets/grade-variations-v2/individual-icons/12-preschool-sprout-counting-beads.png"], ["Gardening", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/23-garden-seed-packet-trowel.png"], ["Health", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/24-health-gingham-lunch.png"]],
-  Hopper: [["Movement", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/02-dance-turning-footprints.png"], ["Physical play", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/20-physical-stepping-spots-beanbag.png"]],
-  Whiskers: [["Lacing", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/09-early-learning-lacing-card.png"], ["Observe", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/16-art-camera-brush.png"]],
-  Scout: [["Helping", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.png"], ["Discovery", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/22-garden-watering-can-produce.png"]],
-  Penny: [["Handbells", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/16-instrument-handbells-ribbon.png"], ["Music", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/03-music-note-single-eighth.png"]],
-  Maisy: [["Encourage", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.png"], ["Clap & move", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/07-dance-crossing-ribbons.png"]],
-  Puddles: [["Rhythm", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/18-music-note-rhythm-dots.png"], ["Move", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/17-dance-spiralling-scarves.png"]],
-  Sam: [["Count", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/13-math-abacus-ruler-block.png"], ["Build", "/brand-kit-icon-sheets/subject-variations-v2/individual-icons/15-math-construction-measure.png"]],
-  Rusty: [["Instrument", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/11-instrument-banjo-strap.png"], ["Steady beat", "/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/06-instrument-hand-drum.png"]],
+  "Old MacDonald": [["Kindergarten", "grade-kindergarten-schoolhouse"], ["Banjo", "music-banjo"], ["Community", "community-schoolhouse"]],
+  "Miss Puddles": [["Daycare", "grade-daycare-stacking-blocks"], ["Early learning", "early-learning-blocks"], ["First painting", "painting-handprint"]],
+  "Mr Rusty": [["Grade 1", "grade-one-book-pencil"], ["Fiddle", "music-fiddle"], ["Dance", "dance-turning-footprints"]],
+  "Miss Hayley": [["Grade 1", "grade-one-writing-slate"], ["Acting", "acting-theatre-masks"], ["Stage", "acting-stage-curtains"]],
+  "Mr Sam": [["Math", "math-abacus-ruler"], ["Measure", "math-construction-measure"], ["Balance", "math-balance-scale"]],
+  "Mr Maisy": [["Grade 2", "grade-two-balance-scale"], ["Physical play", "physical-ball-rope"], ["Movement", "physical-stepping-spots"]],
+  "Mr Puddles": [["Art", "art-camera-brush"], ["Colour", "art-color-wheel"], ["Painting", "painting-easel"]],
+  "Miss Maisy": [["Preschool", "grade-preschool-sprout-counting"], ["Gardening", "garden-seed-trowel"], ["Health", "health-gingham-lunch"]],
+  Hopper: [["Movement", "dance-turning-footprints"], ["Physical play", "physical-stepping-spots"]],
+  Whiskers: [["Lacing", "early-learning-lacing"], ["Observe", "art-camera-brush"]],
+  Scout: [["Helping", "community-helping"], ["Discovery", "garden-watering-produce"]],
+  Penny: [["Handbells", "music-handbells"], ["Music", "music-note-single"]],
+  Maisy: [["Encourage", "community-helping"], ["Clap & move", "dance-crossing-ribbons"]],
+  Puddles: [["Rhythm", "music-rhythm-dots"], ["Move", "dance-spiralling-scarves"]],
+  Sam: [["Count", "math-abacus-ruler"], ["Build", "math-construction-measure"]],
+  Rusty: [["Instrument", "music-banjo"], ["Steady beat", "music-hand-drum"]],
 };
 
 const PALETTE = [
@@ -80,6 +81,16 @@ const PALETTE = [
   ["Paper", "--card", "#FDF8EC", "bg-card"],
 ] as const;
 
+const BRAND_THEME_OPTIONS = [
+  { value: "current", label: "Current site palette", description: "The existing site as a comparison baseline." },
+  { value: "patchwork-day", label: "Patchwork - Farm Day", description: "Schoolhouse blue, deep teal, paper, and cast-owned colour." },
+  { value: "patchwork-dusk", label: "Patchwork - Lullaby Dusk", description: "Deep blue and teal with quiet indigo notes and leather cards." },
+  { value: "schoolhouse-day", label: "Schoolhouse Dusk - Early Evening", description: "Cool blue-green classroom surfaces with pale readable notes." },
+  { value: "schoolhouse-dusk", label: "Schoolhouse Dusk - Storybook Night", description: "Blue-gray nighttime surfaces with gold limited to hardware." },
+] as const;
+
+type BrandThemeValue = (typeof BRAND_THEME_OPTIONS)[number]["value"];
+
 const SITE_CONTROL_STORIES = [
   ["Site header", "Primary navigation, grade state, search, and desktop actions", "http://localhost:6006/?path=/story/site-controls-header--grade-one-active"],
   ["Mobile navigation", "The real Sheet, links, grade shortcuts, and close behaviour", "http://localhost:6006/?path=/story/site-controls-mobile-navigation--grade-one-active"],
@@ -90,10 +101,43 @@ const SITE_CONTROL_STORIES = [
   ["Print action", "The real lesson print action", "http://localhost:6006/?path=/story/lesson-controls-print-action--teacher-plan"],
 ] as const;
 
+const BRAND_SOURCE_DOCUMENTS = [
+  {
+    title: "Palette and typography",
+    type: "Markdown",
+    href: "/branding/PALETTE_AND_TYPOGRAPHY.md",
+    description: "Named UI colours, character-colour boundary, font jobs, and the selectors used in the live examples.",
+  },
+  {
+    title: "Design system rules",
+    type: "Markdown",
+    href: "/branding/DESIGN_SYSTEM.md",
+    description: "The component, material, attachment, spacing, and responsive rules that keep the site visually coherent.",
+  },
+  {
+    title: "Asset recipes",
+    type: "Markdown",
+    href: "/BRAND_ASSET_RECIPES.md",
+    description: "The named asset registry, approved material recipes, and the exact class combinations used in production.",
+  },
+  {
+    title: "Staff and students",
+    type: "Markdown data source",
+    href: "/CAST_AND_ROLES.md",
+    description: "The editable canonical roster read by the branding page. Correct character facts here, not in a TSX component.",
+  },
+  {
+    title: "Machine-readable tokens",
+    type: "YAML",
+    href: "/branding/design-tokens.yaml",
+    description: "A compact palette and selector index for quick reference, tooling, and structured review.",
+  },
+] as const;
+
 const BRANDING_GRADE_ITEMS = [
-  { title: "Addition & Subtraction Word Problems", kicker: "Mathematics", summary: "Grade 1 solves concrete one-step problems within 20.", href: "/grade/grade-one/addition-subtraction-word-problems", icon: "/brand-kit-icon-sheets/individual-icons/subject-math-building.png" },
-  { title: "Apply properties of operations", kicker: "Mathematics", summary: "Use counters and number sentences to explore addition.", href: "/grade/grade-one/properties-of-operations", icon: "/brand-kit-icon-sheets/individual-icons/subject-math-building.png" },
-  { title: "Distinguish long from short vowel sounds", kicker: "Literacy & phonics", summary: "Listen for vowel sounds in spoken single-syllable words.", href: "/grade/grade-one/distinguish-long-from-short-vowel-sounds-in-spoken-single-syllable-words-oral", icon: "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png" },
+  { title: "Addition & Subtraction Word Problems", kicker: "Mathematics", summary: "Grade 1 solves concrete one-step problems within 20.", href: "/grade/grade-one/addition-subtraction-word-problems", icon: "math-building-icon" },
+  { title: "Apply properties of operations", kicker: "Mathematics", summary: "Use counters and number sentences to explore addition.", href: "/grade/grade-one/properties-of-operations", icon: "math-building-icon" },
+  { title: "Distinguish long from short vowel sounds", kicker: "Literacy & phonics", summary: "Listen for vowel sounds in spoken single-syllable words.", href: "/grade/grade-one/distinguish-long-from-short-vowel-sounds-in-spoken-single-syllable-words-oral", icon: "drama-storytelling-icon" },
 ] as const;
 
 function BrandAssetDialog({ label, path, kind }: { label: string; path: string; kind: "portrait" | "texture" }) {
@@ -144,7 +188,7 @@ function CastCard({ member, featured = false }: { member: CastRosterMember; feat
   const castClass = `cast-${castKey}`;
   const matchedAssets = MATCHED_CAST_ASSETS[member.name] ?? [];
   return <article className={`${styles.card} cast-${castKey} ${featured ? styles.featured : ""}`} data-cast={castKey}>
-    <div className={`${styles.portrait} character-surface`}><Image className="castPortraitImage" src={member.portrait} alt={member.name} width={280} height={280} /><div className="portraitMatchedAssets" aria-label={`${member.name} matched grade and curriculum assets`}>{matchedAssets.map(([label,path])=><Image key={path} src={path} alt={label} title={label} width={58} height={58}/>)}</div></div>
+    <div className={`${styles.portrait} character-surface`}><Image className="castPortraitImage" src={member.portrait} alt={member.name} width={280} height={280} /><div className="portraitMatchedAssets" aria-label={`${member.name} matched grade and curriculum assets`}>{matchedAssets.map(([label,assetClass])=><span className={`brand-asset ${assetClass} icon-medium`} role="img" aria-label={label} title={label} key={assetClass} />)}</div></div>
     <div className={styles.cardCopy}>
       <span className={styles.species}>{member.species}</span><h3>{member.name}</h3>
       <p className={styles.role}>{member.descriptor}</p>
@@ -162,7 +206,7 @@ function CastCard({ member, featured = false }: { member: CastRosterMember; feat
       </div>
       <Collapsible className="matchedVisualKit">
         <CollapsibleTrigger className="matchedVisualKitTrigger">Matched visual kit <span aria-hidden="true">+</span></CollapsibleTrigger>
-        <CollapsibleContent><p>These curriculum signals match the canonical role, grade, or activities above. <a href="/CAST_AND_ROLES.md" target="_blank" rel="noreferrer">Open the character Markdown to correct this record.</a></p><div>{matchedAssets.map(([label,path])=><figure key={path}><Image src={path} alt="" width={72} height={72}/><figcaption>{label}</figcaption><BrandAssetDialog label="Preview & copy" path={path} kind="texture" /></figure>)}</div></CollapsibleContent>
+        <CollapsibleContent><p>These curriculum signals match the canonical role, grade, or activities above. <a href="/CAST_AND_ROLES.md" target="_blank" rel="noreferrer">Open the character Markdown to correct this record.</a></p><div>{matchedAssets.map(([label,assetClass])=><figure key={assetClass}><span className={`brand-asset ${assetClass} icon-medium`} aria-hidden="true" /><figcaption>{label}</figcaption><code>{assetClass}</code></figure>)}</div></CollapsibleContent>
       </Collapsible>
     </div>
   </article>;
@@ -178,7 +222,7 @@ function BrandingUiExamples() {
           <div className="flex flex-wrap gap-3"><Button className="brand-button brand-button--felt">Build this lesson</Button><Button className="brand-button brand-button--woven" variant="secondary">Browse paths</Button><Button className="brand-button brand-button--cardboard" variant="outline">Save for later</Button><Button className="brandTextLink" variant="link">View all resources</Button></div>
           <Separator />
           <div className="grid gap-3 sm:grid-cols-2"><Input aria-label="Example lesson search" placeholder="Search lessons" /><NativeSelect aria-label="Example grade filter" defaultValue="grade-one"><option value="daycare">Daycare</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option></NativeSelect></div>
-          <Tabs defaultValue="today"><TabsList className="grid w-full grid-cols-3 rounded-lg border border-border bg-background/75 p-1"><TabsTrigger value="today" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Today</TabsTrigger><TabsTrigger value="curriculum" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Curriculum</TabsTrigger><TabsTrigger value="planner" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Planner</TabsTrigger></TabsList><TabsContent value="today" className="pt-3 text-sm text-muted-foreground">A tab is a real navigational control, not a styled `div`.</TabsContent><TabsContent value="curriculum" className="pt-3 text-sm text-muted-foreground">Use it for switching related panel content.</TabsContent><TabsContent value="planner" className="pt-3 text-sm text-muted-foreground">Use forms and inputs only when the task genuinely needs them.</TabsContent></Tabs>
+          <Tabs defaultValue="today"><TabsList className="brandControlTabs"><TabsTrigger value="today">Today</TabsTrigger><TabsTrigger value="curriculum">Curriculum</TabsTrigger><TabsTrigger value="planner">Planner</TabsTrigger></TabsList><TabsContent value="today" className="pt-3 text-sm text-muted-foreground">A tab is a real navigational control, not a styled `div`.</TabsContent><TabsContent value="curriculum" className="pt-3 text-sm text-muted-foreground">Use it for switching related panel content.</TabsContent><TabsContent value="planner" className="pt-3 text-sm text-muted-foreground">Use forms and inputs only when the task genuinely needs them.</TabsContent></Tabs>
         </CardContent>
       </Card>
       <Card className="cast-miss-hayley character-surface gap-4 border-white/30 py-5 shadow-sm">
@@ -206,11 +250,60 @@ export function TypographySpread() {
 
 function PaletteSpread() {
   return <section className={`${styles.section} ${styles.uiReference}`} id="palette">
-    <header><span>Global palette</span><h2>Named tokens, not loose paint</h2><p>These are the existing global brand tokens. Use the semantic token or its Tailwind utility; do not paste a hex into a page. Cast colours remain supplied by the <code>cast-*</code> class shown on every character card below.</p></header>
+    <header><span>Global palette</span><h2>Named tokens, not loose paint</h2><p>These are the shared UI colours in <code>app/globals.css</code>. Use a token or Tailwind utility, never a new page hex. Character colours remain local to the <code>cast-*</code> class.</p><Button asChild variant="outline" size="sm"><a href="/branding/PALETTE_AND_TYPOGRAPHY.md" target="_blank" rel="noreferrer">Open palette Markdown</a></Button></header>
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
       {PALETTE.map(([name, token, value, swatchClass]) => <Card className="gap-0 overflow-hidden border-border bg-card py-0 shadow-sm" key={token}>
         <div className={`h-20 ${swatchClass}`} aria-hidden="true" />
         <CardContent className="grid gap-1 p-4"><strong className="font-heading text-xl text-foreground">{name}</strong><code className="text-xs text-muted-foreground">{token}</code><code className="text-xs text-foreground">{value}</code></CardContent>
+      </Card>)}
+    </div>
+  </section>;
+}
+
+function BrandThemeChooser({ value, onValueChange }: { value: BrandThemeValue; onValueChange: (value: BrandThemeValue) => void }) {
+  const selected = BRAND_THEME_OPTIONS.find((option) => option.value === value) ?? BRAND_THEME_OPTIONS[0];
+
+  return <Card className="brandingThemeChooser">
+    <CardHeader>
+      <CardDescription>Whole-page theme comparison</CardDescription>
+      <CardTitle>Review the environment around the cast</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <label htmlFor="branding-theme-select">Theme proposal</label>
+      <Select value={value} onValueChange={(nextValue) => onValueChange(nextValue as BrandThemeValue)}>
+        <SelectTrigger id="branding-theme-select" className="brandingThemeSelect" aria-label="Theme proposal">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Current baseline</SelectLabel>
+            <SelectItem value="current">Current site palette</SelectItem>
+          </SelectGroup>
+          <SelectGroup>
+            <SelectLabel>Designer A - Schoolhouse Blue and Patchwork</SelectLabel>
+            <SelectItem value="patchwork-day">Patchwork - Farm Day</SelectItem>
+            <SelectItem value="patchwork-dusk">Patchwork - Lullaby Dusk</SelectItem>
+          </SelectGroup>
+          <SelectGroup>
+            <SelectLabel>Designer B - Schoolhouse Dusk</SelectLabel>
+            <SelectItem value="schoolhouse-day">Schoolhouse Dusk - Early Evening</SelectItem>
+            <SelectItem value="schoolhouse-dusk">Schoolhouse Dusk - Storybook Night</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <p aria-live="polite">{selected.description}</p>
+    </CardContent>
+  </Card>;
+}
+
+function BrandSourceDocuments() {
+  return <section className={`${styles.section} ${styles.uiReference} brandingSources`} id="brand-sources">
+    <header><span>Shareable source files</span><h2>Read the rules without reading this component</h2><p>The visual page is a working example. These files hold the edit-friendly information behind it, with the character roster remaining the live source for names, roles, colours, and activities.</p></header>
+    <div className="brandingSourceGrid">
+      {BRAND_SOURCE_DOCUMENTS.map((document) => <Card className="brandingSourceCard material-surface material-cardboard-paper" key={document.href}>
+        <CardHeader><CardDescription>{document.type}</CardDescription><CardTitle>{document.title}</CardTitle></CardHeader>
+        <CardContent><p>{document.description}</p></CardContent>
+        <CardFooter><Button asChild className="brand-button brand-button--cardboard" variant="outline"><a href={document.href} target="_blank" rel="noreferrer">Open source file</a></Button></CardFooter>
       </Card>)}
     </div>
   </section>;
@@ -233,7 +326,7 @@ export function BrandingControls() {
     <div className="grid gap-5 xl:grid-cols-2">
       <Card className="material-surface material-cardboard-paper gap-4 border-border bg-transparent py-5 shadow-sm"><CardHeader className="px-5"><CardTitle className="font-heading text-3xl">Actions</CardTitle><CardDescription>Use Button for actions and links that look like actions.</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-3 px-5"><Button className="material-surface material-felt text-primary-foreground">Primary action</Button><Button className="material-surface material-cardboard-paper" variant="outline">Secondary action</Button><Button variant="ghost">Quiet action</Button><Button variant="link">Text link</Button><Button disabled>Unavailable</Button></CardContent></Card>
       <Card className="material-surface material-cardboard-paper gap-4 border-border bg-transparent py-5 shadow-sm"><CardHeader className="px-5"><CardTitle className="font-heading text-3xl">Inputs and selection</CardTitle><CardDescription>Use labels and native controls when a teacher must enter or choose something.</CardDescription></CardHeader><CardContent className="grid gap-3 px-5 sm:grid-cols-2"><label className="grid gap-2 text-sm font-bold text-foreground">Lesson search<Input placeholder="Search lessons" /></label><label className="grid gap-2 text-sm font-bold text-foreground">Grade<NativeSelect defaultValue="grade-one"><option value="daycare">Daycare</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option></NativeSelect></label></CardContent></Card>
-      <Card className="material-surface material-cardboard-paper gap-4 border-border bg-transparent py-5 shadow-sm"><CardHeader className="px-5"><CardTitle className="font-heading text-3xl">Menus, tabs, and disclosure</CardTitle><CardDescription>Use the component that matches the interaction. Do not turn a styled `div` into a control.</CardDescription></CardHeader><CardContent className="grid gap-5 px-5"><NavigationMenu viewport={false} className="justify-start"><NavigationMenuList className="justify-start"><NavigationMenuItem><NavigationMenuTrigger>Learning paths</NavigationMenuTrigger><NavigationMenuContent><ul className="grid w-64 gap-1 p-2"><li><NavigationMenuLink href="/grade/grade-one">Grade 1 resources</NavigationMenuLink></li><li><NavigationMenuLink href="/grade/grade-two">Grade 2 resources</NavigationMenuLink></li></ul></NavigationMenuContent></NavigationMenuItem></NavigationMenuList></NavigationMenu><Tabs defaultValue="today"><TabsList className="grid w-full grid-cols-3 rounded-lg border border-border bg-background/75 p-1"><TabsTrigger value="today" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Today</TabsTrigger><TabsTrigger value="curriculum" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Curriculum</TabsTrigger><TabsTrigger value="planner" className="rounded-md px-3 py-2 text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Planner</TabsTrigger></TabsList><TabsContent value="today" className="pt-3 text-sm text-muted-foreground">Use tabs for related panels in the same place.</TabsContent><TabsContent value="curriculum" className="pt-3 text-sm text-muted-foreground">Use a link for a different page.</TabsContent><TabsContent value="planner" className="pt-3 text-sm text-muted-foreground">Do not recreate tab keyboard behaviour manually.</TabsContent></Tabs><Collapsible className="rounded-lg border border-border bg-background/70 px-4"><CollapsibleTrigger className="flex min-h-11 w-full items-center justify-between text-left text-sm font-bold">When do I use this control?<span aria-hidden="true">+</span></CollapsibleTrigger><CollapsibleContent className="border-t border-border py-3 text-sm text-muted-foreground">Use a collapsible for optional supporting detail. Keep the trigger a real button.</CollapsibleContent></Collapsible></CardContent></Card>
+      <Card className="material-surface material-cardboard-paper gap-4 border-border bg-transparent py-5 shadow-sm"><CardHeader className="px-5"><CardTitle className="font-heading text-3xl">Menus, tabs, and disclosure</CardTitle><CardDescription>Use the component that matches the interaction. Do not turn a styled `div` into a control.</CardDescription></CardHeader><CardContent className="grid gap-5 px-5"><NavigationMenu viewport={false} className="justify-start"><NavigationMenuList className="justify-start"><NavigationMenuItem><NavigationMenuTrigger>Learning paths</NavigationMenuTrigger><NavigationMenuContent><ul className="grid w-64 gap-1 p-2"><li><NavigationMenuLink href="/grade/grade-one">Grade 1 resources</NavigationMenuLink></li><li><NavigationMenuLink href="/grade/grade-two">Grade 2 resources</NavigationMenuLink></li></ul></NavigationMenuContent></NavigationMenuItem></NavigationMenuList></NavigationMenu><Tabs defaultValue="today"><TabsList className="brandControlTabs"><TabsTrigger value="today">Today</TabsTrigger><TabsTrigger value="curriculum">Curriculum</TabsTrigger><TabsTrigger value="planner">Planner</TabsTrigger></TabsList><TabsContent value="today" className="pt-3 text-sm text-muted-foreground">Use tabs for related panels in the same place.</TabsContent><TabsContent value="curriculum" className="pt-3 text-sm text-muted-foreground">Use a link for a different page.</TabsContent><TabsContent value="planner" className="pt-3 text-sm text-muted-foreground">Do not recreate tab keyboard behaviour manually.</TabsContent></Tabs><Collapsible className="brandControlCollapsible"><CollapsibleTrigger className="flex min-h-11 w-full items-center justify-between text-left text-sm font-bold">When do I use this control?<span aria-hidden="true">+</span></CollapsibleTrigger><CollapsibleContent className="border-t border-border py-3 text-sm text-muted-foreground">Use a collapsible for optional supporting detail. Keep the trigger a real button.</CollapsibleContent></Collapsible></CardContent></Card>
       <Card className="material-surface material-cardboard-paper gap-4 border-border bg-transparent py-5 shadow-sm"><CardHeader className="px-5"><CardTitle className="font-heading text-3xl">Overlay and carousel</CardTitle><CardDescription>Use these only when content warrants them, not as decorative replacements for layout.</CardDescription></CardHeader><CardContent className="grid gap-5 px-5"><div className="flex flex-wrap gap-3"><DropdownMenu><DropdownMenuTrigger asChild><Button variant="outline">Resource actions</Button></DropdownMenuTrigger><DropdownMenuContent><DropdownMenuItem>Open lesson</DropdownMenuItem><DropdownMenuItem>Save for planning</DropdownMenuItem></DropdownMenuContent></DropdownMenu><Sheet><SheetTrigger asChild><Button className="material-surface material-leather text-[#fff4dc]">Open planning sheet</Button></SheetTrigger><SheetContent className="material-surface material-cardboard-paper"><SheetHeader><SheetTitle className="font-heading text-3xl">Planning sheet</SheetTitle><SheetDescription>Use a sheet for focused secondary work without leaving the current page.</SheetDescription></SheetHeader><div className="p-4"><Input placeholder="Add a planning note" /></div></SheetContent></Sheet></div><Carousel opts={{ align: "start" }} className="mx-10"><CarouselContent><CarouselItem className="basis-full sm:basis-1/2"><article className="material-surface material-felt min-h-32 rounded-lg p-5 text-primary-foreground"><strong className="font-heading text-2xl">Felt</strong><p className="mt-2 text-sm">For soft, active surfaces.</p></article></CarouselItem><CarouselItem className="basis-full sm:basis-1/2"><article className="material-surface material-cork min-h-32 rounded-lg p-5 text-foreground"><strong className="font-heading text-2xl">Cork</strong><p className="mt-2 text-sm">For working walls and pinboards.</p></article></CarouselItem><CarouselItem className="basis-full sm:basis-1/2"><article className="material-surface material-construction-paper min-h-32 rounded-lg p-5 text-primary-foreground"><strong className="font-heading text-2xl">Paper</strong><p className="mt-2 text-sm">For cut-paper accents.</p></article></CarouselItem></CarouselContent><CarouselPrevious /><CarouselNext /></Carousel></CardContent></Card>
     </div>
     <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,.7fr)_minmax(0,1.3fr)]"><article className="material-surface material-cork rounded-xl border border-[#5b391c38] p-6 text-foreground shadow-sm"><span className="text-xs font-extrabold uppercase tracking-[.12em] text-[#5b391c]">Pattern - grade rail</span><div className="mt-4 grid gap-2"><Button className="justify-start material-surface material-cardboard-paper text-left text-foreground" variant="outline">01 Today</Button><Button className="justify-start" variant="secondary">02 Curriculum</Button><Button className="justify-start" variant="ghost">03 Planner</Button><Button className="justify-start" variant="ghost">04 Resources</Button></div></article><article className="material-surface material-cardboard-paper rounded-xl border border-border p-6 text-foreground shadow-sm"><span className="text-xs font-extrabold uppercase tracking-[.12em] text-muted-foreground">Pattern - character note</span><div className="cast-miss-hayley character-surface mt-4 rounded-xl p-5"><p className="text-xs font-extrabold uppercase tracking-[.12em] text-[var(--character-foreground)]">A note from Miss Hayley</p><p className="mt-4 font-hand text-4xl leading-none text-[var(--character-foreground)]">What can they notice, explain, and share today?</p></div><p className="mt-4 text-sm leading-6 text-muted-foreground">A character identity belongs to its own note or activity. The surrounding grade shell remains neutral.</p></article></div>
@@ -241,44 +334,64 @@ export function BrandingControls() {
 }
 
 export function CastShowcase({ staff, students }: { staff: CastRosterMember[]; students: CastRosterMember[] }) {
-  return <div className={`${styles.page} typeset-farm-reading`} data-style-scope="cast-showcase">
+  const [brandTheme, setBrandTheme] = useState<BrandThemeValue>("current");
+
+  useEffect(() => {
+    if (brandTheme === "current") delete document.documentElement.dataset.brandPreview;
+    else document.documentElement.dataset.brandPreview = brandTheme;
+
+    return () => { delete document.documentElement.dataset.brandPreview; };
+  }, [brandTheme]);
+
+  return <div className={`${styles.page} typeset-farm-reading`} data-style-scope="cast-showcase" data-brand-theme={brandTheme}>
     <ResponsiveFeatureSplit asChild ratio="primary" className={styles.hero}>
       <header>
-        <div><span>Internal brand reference - source-led</span><h1>The whole school,<br/><em>in character.</em></h1><nav className="heroActions" aria-label="Brand guide shortcuts"><Button asChild><a href="#asset-toolkit">Browse assets</a></Button><Button asChild variant="outline"><a href="#site-controls">Inspect controls</a></Button><Button asChild variant="link"><a href="#typography">Typography guide</a></Button></nav></div>
+        <div><span>Internal brand reference - source-led</span><h1>The whole school,<br/><em>in character.</em></h1><nav className="heroActions" aria-label="Brand guide shortcuts"><Button asChild className="brand-button brand-button--felt"><a href="#asset-toolkit">Browse assets</a></Button><Button asChild className="brand-button brand-button--cardboard" variant="outline"><a href="#site-controls">Inspect controls</a></Button><Button asChild className="brandTextLink" variant="link"><a href="#typography">Typography guide</a></Button></nav></div>
         <div className={styles.heroCluster}>
           <div className="heroLayerSample" aria-label="Layered brand construction example">
-            <Image src="/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.png" alt="" width={512} height={512} />
+            <span className="brand-asset patch-old-macdonald-square" aria-hidden="true" />
             <div><strong>Layer the real pieces</strong><small>felt patch + stitching + type + portrait</small></div>
           </div>
           <div className="heroCast" aria-label="Old MacDonald, Miss Puddles, Mr Rusty, and Miss Hayley">{staff.slice(0,4).map((member)=><Image key={member.name} src={member.portrait} alt={member.name} width={180} height={180} sizes="(max-width: 600px) 110px, (max-width: 1050px) 150px, 180px" />)}</div>
         </div>
       </header>
     </ResponsiveFeatureSplit>
+    <BrandThemeChooser value={brandTheme} onValueChange={setBrandTheme} />
+    <NavigationMenu viewport={false} className="brandingSectionNav" aria-label="Brand guide section navigation">
+      <NavigationMenuList className="brandingSectionNavList">
+        <NavigationMenuItem><NavigationMenuLink asChild className="brandingSectionNavLink brandingSectionNavLink--foundations"><a href="#asset-toolkit">Foundations</a></NavigationMenuLink></NavigationMenuItem>
+        <NavigationMenuItem><NavigationMenuLink asChild className="brandingSectionNavLink brandingSectionNavLink--assets"><a href="#curriculum-assets">Assets</a></NavigationMenuLink></NavigationMenuItem>
+        <NavigationMenuItem><NavigationMenuLink asChild className="brandingSectionNavLink brandingSectionNavLink--cast"><a href="#cast-staff">Cast</a></NavigationMenuLink></NavigationMenuItem>
+        <NavigationMenuItem><NavigationMenuLink asChild className="brandingSectionNavLink brandingSectionNavLink--controls"><a href="#site-controls">Controls</a></NavigationMenuLink></NavigationMenuItem>
+        <NavigationMenuItem><NavigationMenuLink asChild className="brandingSectionNavLink brandingSectionNavLink--sources"><a href="#brand-sources">Sources</a></NavigationMenuLink></NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
     <BrandSpecimenNav />
     <section className={`${styles.section} ${styles.toolkit}`} id="asset-toolkit">
-      <header><span>Production-ready visual vocabulary</span><h2>Choose from the shelf, not the file tree</h2><p>These governed examples cover the project&apos;s main visual building blocks. Start here, copy the exact path, and inspect only that family when you need a nearby alternative. <a className="font-bold underline underline-offset-4" href="http://localhost:6006/?path=/story/branding-asset-atlas--repeatable-materials" target="_blank" rel="noreferrer">Open repeatable materials in Storybook</a>.</p></header>
-      <div className={styles.materialGrid}>{MATERIALS.map(([name, src, use])=><article className={styles.materialCard} data-material={name.toLowerCase().replaceAll(" ", "-")} key={name}><div /><h3>{name}</h3><p>{use}</p><code translate="no">{src}</code></article>)}</div>
+      <header><span>Production-ready visual vocabulary</span><h2>Choose from the shelf, not the file tree</h2><p>These governed examples cover the project&apos;s main visual building blocks. Use the named class recipe from the source files, then inspect only that approved family when a nearby alternative is needed. <a className="font-bold underline underline-offset-4" href="http://localhost:6006/?path=/story/branding-asset-atlas--repeatable-materials" target="_blank" rel="noreferrer">Open repeatable materials in Storybook</a>.</p></header>
+      <div className={styles.materialGrid}>{MATERIALS.map(([name, className, use])=><article className={styles.materialCard} data-material={name.toLowerCase().replaceAll(" ", "-")} key={name}><div /><h3>{name}</h3><p>{use}</p><code translate="no">{className}</code></article>)}</div>
       <div className={styles.assetRows}>
-        <article><header><span>Attachment details</span><h3>Classroom fasteners</h3></header><div className={styles.iconShelf}>{FASTENERS.map(([name,src])=><figure key={name}><Image src={src} alt="" width={72} height={72}/><figcaption>{name}</figcaption><code>{src}</code></figure>)}</div></article>
-        <article><header><span>Curriculum signals</span><h3>Grade &amp; subject icons</h3></header><div className={styles.iconShelf}>{CURRICULUM_ICONS.map(([name,src])=><figure key={name}><Image src={src} alt="" width={72} height={72}/><figcaption>{name}</figcaption><code>{src}</code></figure>)}</div></article>
+        <article><header><span>Attachment details</span><h3>Classroom fasteners</h3></header><div className={styles.iconShelf}>{FASTENERS.map(([name,assetClass])=><figure key={name}><span className={`brand-asset ${assetClass} icon-medium`} aria-hidden="true"/><figcaption>{name}</figcaption><code>brand-asset {assetClass} icon-medium</code></figure>)}</div></article>
+        <article><header><span>Curriculum signals</span><h3>Grade &amp; subject icons</h3></header><div className={styles.iconShelf}>{CURRICULUM_ICONS.map(([name,assetClass])=><figure key={name}><span className={`brand-asset ${assetClass} icon-medium`} aria-hidden="true"/><figcaption>{name}</figcaption><code>brand-asset {assetClass} icon-medium</code></figure>)}</div></article>
       </div>
     </section>
+    <PaletteSpread />
+    <TypographySpread />
     <CurriculumAssetGuide />
+    <AssetPatternCatalogue />
     <section className={`${styles.section} ${styles.badgeRecipe}`} id="badge-recipe">
       <header><span>Canonical character construction</span><h2>Build badges from 2 authored layers</h2><p>Use the unchanged transparent-circle portrait over the matching authored circle patch. Never recolour either layer or substitute an extracted face patch.</p></header>
       <div className={styles.recipeBody}>
-        <figure className={styles.badgeLayers} aria-label="Miss Puddles portrait layered over her matching yellow felt patch"><Image src="/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.png" alt="" width={240} height={240}/><Image src="/staff_and_students/miss-puddles-transparent-circle.png" alt="Miss Puddles" width={220} height={220}/></figure>
-        <ol><li><strong>Patch:</strong><code>/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.png</code></li><li><strong>Portrait:</strong><code>/staff_and_students/miss-puddles-transparent-circle.png</code></li><li><strong>Identity check:</strong><span>Miss Puddles - Daycare - yellow #E8A227</span></li></ol>
+        <figure className={styles.badgeLayers} aria-label="Miss Puddles portrait layered over her matching yellow felt patch"><span className="brand-asset patch-miss-puddles-circle" aria-hidden="true" /><Image src="/staff_and_students/miss-puddles-transparent-circle.png" alt="Miss Puddles" width={220} height={220}/></figure>
+        <ol><li><strong>Patch class:</strong><code>brand-asset patch-miss-puddles-circle</code></li><li><strong>Portrait source:</strong><code>CAST_AND_ROLES.md → Miss Puddles → portrait</code></li><li><strong>Identity check:</strong><span>Miss Puddles - Daycare - yellow #E8A227</span></li></ol>
       </div>
       <aside className={styles.statusKey}><p><strong>Production:</strong> separated tiles, portraits, circle patches, icons, and fasteners shown here.</p><p><strong>Reference only:</strong> contact sheets, atlases, page composites, design concepts, explorations, and Figma exports.</p><p><strong>Blocked:</strong> every blank-felt rectangle marked DO NOT USE and every extraction-damaged asset awaiting review.</p></aside>
     </section>
-    <AssetPatternCatalogue />
-    <PaletteSpread />
     <section className={styles.section} id="cast-staff"><header><span>Eight canonical staff</span><h2>Meet the teaching team</h2><p>Roles and grade ownership remain visible in plain text so this page can function as a practical brand check.</p><Button asChild variant="outline"><a href="/CAST_AND_ROLES.md" target="_blank" rel="noreferrer">Open character Markdown</a></Button></header><div className={styles.staffGrid}>{staff.map((member,index)=><CastCard key={member.name} member={member} featured={index < 2}/>)}</div></section>
     <section className={`${styles.section} ${styles.studentSection}`} id="cast-students"><header><span>Eight students - eight learning lenses</span><h2>The learners bring the school to life</h2><p>Students are optional teaching lenses, not substitute subjects. Their approved actions stay scene-dependent.</p><Button asChild variant="outline"><a href="/CAST_AND_ROLES.md" target="_blank" rel="noreferrer">Open character Markdown</a></Button></header><div className={styles.studentGrid}>{students.map((member)=><CastCard key={member.name} member={member}/>)}</div></section>
+    <aside className={styles.rule} id="cast-rule"><strong>Brand rule</strong><p>Use canonical portraits unchanged. Pair each character with the signature colour, role, grade, and activity listed here. Layout may be playful; identity data may not.</p></aside>
     <BrandingUiExamples />
     <BrandingControls />
-    <TypographySpread />
-    <aside className={styles.rule} id="cast-rule"><strong>Brand rule</strong><p>Use canonical portraits unchanged. Pair each character with the signature colour, role, grade, and activity listed here. Layout may be playful; identity data may not.</p></aside>
+    <BrandSourceDocuments />
   </div>;
 }

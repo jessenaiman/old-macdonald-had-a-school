@@ -46,6 +46,14 @@
 .music-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-music-dance.png'); }
 .math-building-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-math-building.png'); }
 .drama-storytelling-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png'); }
+.art-photography-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-art-photography.png'); }
+.gardening-health-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png'); }
+.physical-education-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-physical-education.png'); }
+.early-learning-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-early-learning.png'); }
+.grade-preschool { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/02-preschool-button-board.png'); }
+.theme-farm-day { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/sun-patch.png'); }
+.theme-lullaby-dusk { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/moon-patch.png'); }
+.fastener-brass-rivet { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/17-brass-rivet-top-v01.png'); }
 .community-helping { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.png'); }
 .community-schoolhouse { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/03-community-schoolhouse-ribbon.png'); }
 .early-learning-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/07-early-learning-shape-blocks.png'); }
@@ -115,3 +123,8 @@
 .fastener-apple-peg { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/06-apple-wood-clothes-peg.png'); }
 .fastener-kraft-pocket { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/11-kraft-corner-pocket.png'); }
 .fastener-quilted-tab { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/14-quilted-corner-tab.png'); }
+.fastener-washi-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png'); }
+
+/* Authored patch layers. These are decorative layers, never interaction targets. */
+.patch-old-macdonald-square { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.png'); }
+.patch-miss-puddles-circle { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.png'); }

@@ -12,7 +12,7 @@ import { ResponsiveFeatureSplit } from "@/components/layout/ResponsiveFeatureSpl
 
 export type GradeInteractionSection = "today" | "curriculum" | "planner" | "resources";
 export type GradeInteractionConfig = {
-  gradeKey: string; grade: string; age: string; badge: string; reminder: string;
+  gradeKey: string; grade: string; age: string; reminder: string;
   eyebrow: string; headline: string; accentHeadline: string; leadName: string;
   leadImage: string; leadQuote: string; teacherClass: string;
   variant?: "standard" | "daycare";
@@ -30,15 +30,15 @@ const sections: Array<{ id: GradeInteractionSection; number: string; label: stri
 ];
 const daycarePathways = [["Story & songs", "Books, songs, and rhymes"], ["Explore & discover", "Hands-on play, sensory fun"], ["Create & express", "Art, movement, pretend play"], ["Care & connect", "Feelings, friends, routines"]];
 const fallbackIcons = [
-  "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png",
-  "/brand-kit-icon-sheets/individual-icons/subject-math-building.png",
-  "/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png",
-  "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png",
+  "drama-storytelling-icon",
+  "math-building-icon",
+  "gardening-health-icon",
+  "art-photography-icon",
 ];
 const fasteners = [
-  "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png",
-  "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png",
-  "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png",
+  "fastener-paperclip",
+  "fastener-masking-tape",
+  "fastener-push-pin",
 ];
 const itemIcon = (item: GradePathItem | undefined, index: number) => item?.icon || fallbackIcons[index % fallbackIcons.length];
 
@@ -47,7 +47,7 @@ function PanelHeading({ eyebrow, title, summary }: { eyebrow: string; title: str
 }
 
 function LessonCard({ item, index, active, onChoose }: { item: GradePathItem; index: number; active: boolean; onChoose: (index: number) => void }) {
-  const body = <><span className={styles.cardNumber}>{String(index + 1).padStart(2, "0")}</span><Image src={itemIcon(item, index)} alt="" width={76} height={76} className={styles.cardIcon} /><span className={styles.cardKicker}>{item.kicker}</span><h3>{item.title}</h3><p>{item.summary}</p><span className={styles.cardAction}>{item.href ? "View lesson" : "Choose path"}</span></>;
+  const body = <><span className={styles.cardNumber}>{String(index + 1).padStart(2, "0")}</span><span className={`${styles.cardIcon} brand-asset ${itemIcon(item, index)} icon-medium`} aria-hidden="true" /><span className={styles.cardKicker}>{item.kicker}</span><h3>{item.title}</h3><p>{item.summary}</p><span className={styles.cardAction}>{item.href ? "View lesson" : "Choose path"}</span></>;
   const className = `${styles.lessonCard} ${active ? styles.lessonCardActive : ""}`;
   return item.href ? <Link href={item.href} className={className} onClick={() => onChoose(index)}>{body}</Link> : <Button variant="ghost" type="button" className={className} aria-pressed={active} onClick={() => onChoose(index)}>{body}</Button>;
 }
@@ -63,7 +63,7 @@ function TodayPanel({ config, summary, items, selectedIndex, onChoose, onSection
   const selected = items[selectedIndex] ?? items[0];
   return <>
     <GradeWelcomeControl config={config} summary={summary} primaryHref={selected?.href} onBrowse={() => onSection("curriculum")} onPreview={onPreview} />
-    {config.variant === "daycare" ? <div className={styles.daycareRibbon} aria-label="Daycare pathways">{daycarePathways.map(([label, detail], index) => <Button variant="ghost" type="button" key={label} className={styles.daycarePathway} onClick={() => { onChoose(index % Math.max(items.length, 1)); onSection("curriculum"); }}><Image src={itemIcon(items[index], index)} alt="" width={48} height={48} /><span><strong>{label}</strong><small>{detail}</small></span></Button>)}</div> : null}
+    {config.variant === "daycare" ? <div className={styles.daycareRibbon} aria-label="Daycare pathways">{daycarePathways.map(([label, detail], index) => <Button variant="ghost" type="button" key={label} className={styles.daycarePathway} onClick={() => { onChoose(index % Math.max(items.length, 1)); onSection("curriculum"); }}><span className={`brand-asset ${itemIcon(items[index], index)} icon-medium`} aria-hidden="true" /><span><strong>{label}</strong><small>{detail}</small></span></Button>)}</div> : null}
     <div className={styles.sectionHeader}><PanelHeading eyebrow="Pick a starting point" title={`Learning paths for ${config.grade}`} /><Button variant="ghost" type="button" className={styles.textButton} onClick={() => onSection("resources")}>{"See all resources ->"}</Button></div>
     <div className={styles.lessonGrid}>{items.slice(0, 4).map((item, index) => <LessonCard key={`${item.title}-${index}`} item={item} index={index} active={index === selectedIndex} onChoose={onChoose} />)}</div>
     <div className={styles.planningStrip}><span className={styles.eyebrow}>Today&apos;s planning board</span><strong>Invite a choice and notice the story.</strong><Button variant="ghost" type="button" className={styles.textButton} onClick={() => onSection("planner")}>{"Open planner ->"}</Button></div>
@@ -93,7 +93,7 @@ function CurriculumPanel({ config, items, selectedIndex, onChoose, onSection }: 
 
 function PlannerPanel({ config, item, onSection }: { config: GradeInteractionConfig; item?: GradePathItem; onSection: (section: GradeInteractionSection) => void }) {
   const notes = [["Set a goal", "Name the one thing learners might notice, try, or share."], ["Gather what helps", "Leave room for the materials, song, book, or visual support."], ["Prepare your plan", "Carry forward what children showed you and one next step."]];
-  return <><PanelHeading eyebrow="Planner" title="Prepare one helpful next step" summary={`A quiet place to gather what ${config.grade} learners need before the lesson begins.`} /><div className={styles.plannerGoal}><div><span className={styles.eyebrow}>Current lesson goal</span><h3>{item?.title ?? "Choose a lesson to begin"}</h3><p>{item?.summary ?? "Open a learning path above to load the current goal."}</p></div>{item?.href ? <Link href={item.href} className={styles.primaryAction}>Open lesson</Link> : <Button variant="ghost" type="button" className={styles.primaryAction} onClick={() => onSection("curriculum")}>Choose a lesson</Button>}</div><div className={styles.noteGrid} aria-label={`${config.grade} planning notes`}>{notes.map(([label, prompt], index) => <article className={styles.noteSheet} key={label}><Image src={fasteners[index]} width={30} height={30} alt="" className={styles.fastener} /><span>{label}</span><p>{prompt}</p><div className={styles.noteLines} aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /></div></article>)}</div><div className={styles.plannerFooter}><span>Planning reminder</span><strong>{config.reminder}</strong><Button variant="ghost" type="button" className={styles.textButton} onClick={() => onSection("today")}>{"Return to today ->"}</Button></div></>;
+  return <><PanelHeading eyebrow="Planner" title="Prepare one helpful next step" summary={`A quiet place to gather what ${config.grade} learners need before the lesson begins.`} /><div className={styles.plannerGoal}><div><span className={styles.eyebrow}>Current lesson goal</span><h3>{item?.title ?? "Choose a lesson to begin"}</h3><p>{item?.summary ?? "Open a learning path above to load the current goal."}</p></div>{item?.href ? <Link href={item.href} className={styles.primaryAction}>Open lesson</Link> : <Button variant="ghost" type="button" className={styles.primaryAction} onClick={() => onSection("curriculum")}>Choose a lesson</Button>}</div><div className={styles.noteGrid} aria-label={`${config.grade} planning notes`}>{notes.map(([label, prompt], index) => <article className={styles.noteSheet} key={label}><span className={`${styles.fastener} brand-asset ${fasteners[index]} icon-small`} aria-hidden="true" /><span>{label}</span><p>{prompt}</p><div className={styles.noteLines} aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /></div></article>)}</div><div className={styles.plannerFooter}><span>Planning reminder</span><strong>{config.reminder}</strong><Button variant="ghost" type="button" className={styles.textButton} onClick={() => onSection("today")}>{"Return to today ->"}</Button></div></>;
 }
 
 function ResourcesPanel({ config, items, onChoose }: { config: GradeInteractionConfig; items: GradePathItem[]; onChoose: (index: number) => void }) {
@@ -123,7 +123,7 @@ export function GradeInteractionLane({ config, summary, items, activeIndex = 0, 
   const panel = section === "today" ? <TodayPanel config={config} summary={summary} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} onPreview={onPreview} /> : section === "curriculum" ? <CurriculumPanel config={config} items={items} selectedIndex={selectedIndex} onChoose={chooseItem} onSection={setSection} /> : section === "planner" ? <PlannerPanel config={config} item={items[selectedIndex] ?? items[0]} onSection={setSection} /> : <ResourcesPanel config={config} items={items} onChoose={chooseItem} />;
   return <Tabs value={section} onValueChange={(value) => setSection(value as GradeInteractionSection)} orientation="vertical" asChild>
   <div className={`${styles.board} ${config.variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`} data-grade-template={config.gradeKey} data-style-scope="grade-interaction-lane">
-    <aside className={styles.rail} aria-label={`${config.grade} lesson workspace`}><div className={styles.identity}><span>Lesson workspace</span><strong>{config.grade}</strong><small>{config.age}</small></div><TabsList className={styles.railNav} aria-label={`${config.grade} lesson tools`} onKeyDown={moveSectionFocus} asChild><nav>{sections.map((entry) => <TabsTrigger key={entry.id} value={entry.id} id={`${config.gradeKey}-${entry.id}-tab`} className={`${styles.railButton} ${section === entry.id ? styles.railButtonActive : ""}`}><b>{entry.number}</b><span>{entry.label}</span></TabsTrigger>)}</nav></TabsList><div className={styles.reminder}><Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" width={28} height={28} alt="" /><span>Planning reminder</span><strong>{config.reminder}</strong></div></aside>
+    <aside className={styles.rail} aria-label={`${config.grade} lesson workspace`}><div className={styles.identity}><span>Lesson workspace</span><strong>{config.grade}</strong><small>{config.age}</small></div><TabsList className={styles.railNav} aria-label={`${config.grade} lesson tools`} onKeyDown={moveSectionFocus} asChild><nav>{sections.map((entry) => <TabsTrigger key={entry.id} value={entry.id} id={`${config.gradeKey}-${entry.id}-tab`} className={`${styles.railButton} ${section === entry.id ? styles.railButtonActive : ""}`}><b>{entry.number}</b><span>{entry.label}</span></TabsTrigger>)}</nav></TabsList><div className={styles.reminder}><span className="brand-asset fastener-push-pin icon-small" aria-hidden="true" /><span>Planning reminder</span><strong>{config.reminder}</strong></div></aside>
     <main className={styles.main}><div className={styles.panelFrame}><TabsContent value={section} asChild><section key={section} id={panelId} aria-label={`${config.grade} ${section} panel`} tabIndex={-1} className={styles.panel}>{panel}</section></TabsContent></div></main>
   </div>
   </Tabs>;

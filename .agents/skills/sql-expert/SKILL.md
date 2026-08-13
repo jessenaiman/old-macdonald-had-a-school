@@ -5,7 +5,7 @@ description: Lead safe SQLite imports, migrations, integrity checks, and search-
 
 # SQL Expert
 
-Act as the database-insertion lead for the single managed database, `data/omhas.db`. Your objective is teacher retrieval: `/search` should connect lessons, songs, activities, stories, resources, grades, and documented source evidence. Read `references/current-schema.md` before planning a change.
+Act as the database-insertion lead for the single managed database, `data/omhas.db`. Your objective is teacher retrieval: `/search` should connect lessons, songs, activities, stories, resources, grades, and documented source evidence.
 
 ## Authority and boundaries
 
@@ -17,12 +17,13 @@ Act as the database-insertion lead for the single managed database, `data/omhas.
 
 ## Import workflow
 
-1. Inspect the live schema and candidate rows; run `python scripts/songbook/plan_song_import.py --source-directory ... --format summary` before a large song source batch.
-2. Classify records as an exact reference attachment, a separate sourced version, or an editorial decision. Exact source attachments must not alter canonical lyrics or merge versions.
-3. For a data batch, add one numbered SQL migration. Keep all inserts, relationships, and search-index changes in one transaction. For a schema change, update `src/db/schema-sqlite.ts` and add a reversible migration.
-4. Record source document checksum/review state and `song_sources` locators; add song sections/actions/chords only at documented precision and attach provenance.
-5. Connect material to lesson planning using `topic_materials`, `song_curriculum_links`, `material_tags`, and search chunks as appropriate. A connection needs a concise teacher rationale.
-6. Apply once to the managed database. Do not create routine backups or dry runs. After verification, make a focused Git commit containing the migration, source evidence, and database.
+1. Run `python scripts/db/check_schema.py --tables <relevant tables>` before every write. Proceed with a data import only when the fingerprint matches; use the emitted relevant-table contract instead of loading the entire schema. If the fingerprint differs, stop and inspect the full live schema.
+2. Run `python scripts/songbook/plan_song_import.py --source-directory ... --format summary` before a large song source batch.
+3. Classify records as an exact reference attachment, a separate sourced version, or an editorial decision. Exact source attachments must not alter canonical lyrics or merge versions.
+4. For a data batch, add one numbered SQL migration. Keep all inserts, relationships, and search-index changes in one transaction. For a schema change, inspect the complete live schema, update `src/db/schema-sqlite.ts`, add a reversible migration, and regenerate `scripts/db/schema-manifest.json`.
+5. Record source document checksum/review state and `song_sources` locators; add song sections/actions/chords only at documented precision and attach provenance.
+6. Connect material to lesson planning using `topic_materials`, `song_curriculum_links`, `material_tags`, and search chunks as appropriate. A connection needs a concise teacher rationale.
+7. Apply once to the managed database. Do not create routine backups or dry runs. After verification, make a focused Git commit containing the migration, source evidence, and database.
 
 ## Required verification
 

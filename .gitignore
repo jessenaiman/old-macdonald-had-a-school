@@ -15,6 +15,11 @@ data/*.db-shm
 data/*.db-wal
 playwright-report/
 test-results/
+qa/
+.codex-tmp/
+__pycache__/
+*.py[cod]
+sqlite_mcp_server.db
 .claude-replay.*
 .tmp-*
 .codex-notes/
@@ -32,3 +37,9 @@ $null
 *storybook.log
 storybook-static
 /tmp
+
+# Local browser/shell scratch artifacts
+({text
+a.getAttribute('href')
+e.textContent).slice(0
+getComputedStyle(element).backgroundImage

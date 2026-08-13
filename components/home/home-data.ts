@@ -13,7 +13,7 @@ export type HomeSubject = {
   earlyYearsLabel: string;
   searchQuery: string;
   color: string;
-  icon: string;
+  iconClass: string;
   highlights: readonly string[];
   matches: (lesson: HomeLesson) => boolean;
 };
@@ -29,7 +29,7 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     title: "Language & literacy",
     searchQuery: "language literacy",
     color: "#C9527A",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png",
+    iconClass: "drama-storytelling-icon",
     highlights: ["Build vocabulary", "Explore phonics", "Tell and retell stories"],
     matches: (lesson) => /language|literacy|phonic|reading|vocabulary/i.test(lessonText(lesson)),
   },
@@ -39,7 +39,7 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     title: "Math",
     searchQuery: "math numeracy",
     color: "#1F6B6B",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-math-building.png",
+    iconClass: "math-building-icon",
     highlights: ["Count and compare", "Explore shapes", "Find patterns in songs"],
     matches: (lesson) => /math|numeracy/i.test(lessonText(lesson)),
   },
@@ -49,7 +49,7 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     title: "Nature & science",
     searchQuery: "science nature",
     color: "#55705A",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png",
+    iconClass: "gardening-health-icon",
     highlights: ["Observe and explore", "Seasons and weather", "Living things"],
     matches: (lesson) => /science|nature/i.test(lessonText(lesson)),
   },
@@ -59,7 +59,7 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     title: "Music",
     searchQuery: "music",
     color: "#2C6C9B",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-music-dance.png",
+    iconClass: "music-icon",
     highlights: ["Rhythm and beat", "Sing and move", "Create and perform"],
     matches: (lesson) => /music/i.test(lessonText(lesson)),
   },
@@ -69,7 +69,7 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     title: "The arts",
     searchQuery: "arts drama creativity",
     color: "#4F5FA0",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png",
+    iconClass: "art-photography-icon",
     highlights: ["Create and imagine", "Explore colour", "Draw and design"],
     matches: (lesson) => /\bart\b|arts|drama|creative/i.test(lessonText(lesson)),
   },
@@ -79,7 +79,7 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     title: "Health & physical education",
     searchQuery: "health physical education movement",
     color: "#B5272C",
-    icon: "/brand-kit-icon-sheets/individual-icons/subject-physical-education.png",
+    iconClass: "physical-education-icon",
     highlights: ["Move your body", "Play and cooperate", "Stay healthy"],
     matches: (lesson) => /gross motor|physical|health|routine|approaches to learning/i.test(lessonText(lesson)),
   },

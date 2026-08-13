@@ -54,10 +54,10 @@ export function EarlyYearsHub({
           summary: item.focus,
           href: `/grade/${item.grade}/${item.slug}`,
           icon: [
-            "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png",
-            "/brand-kit-icon-sheets/individual-icons/subject-math-building.png",
-            "/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png",
-            "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png",
+            "drama-storytelling-icon",
+            "math-building-icon",
+            "gardening-health-icon",
+            "art-photography-icon",
           ][index % 4],
         }))}
       />

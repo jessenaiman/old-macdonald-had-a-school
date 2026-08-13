@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { lessonHref } from "@/lib/grade-routes";
 import { globalClassNames as legacyStyles } from "@/lib/global-class-names";
 import { globalClassNames as selectedStyles } from "@/lib/global-class-names";
@@ -48,7 +47,7 @@ export function WeeklyLessonList({
       <ul>
         {lessons.slice(0, limit).map((lesson) => (
           <li key={lesson.slug}>
-            <Image className={styles.noteIcon} src="/brand-kit-icon-sheets/individual-icons/subject-music-dance.png" alt="" width={24} height={24} />
+            <span className={`${styles.noteIcon} brand-asset music-icon icon-micro`} aria-hidden="true" />
             <Link
               href={lesson.href ?? lessonHref(lesson)}
               target={lesson.href?.startsWith("https://") ? "_blank" : undefined}

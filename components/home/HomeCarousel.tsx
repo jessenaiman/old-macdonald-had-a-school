@@ -48,8 +48,8 @@ export function HomeCarousel({ selected = false }: { selected?: boolean }) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <Image className={styles.photoPinLeft} src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={36} height={36} aria-hidden="true" />
-        <Image className={styles.photoPinRight} src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={36} height={36} aria-hidden="true" />
+        <span className={`${styles.photoPinLeft} brand-asset fastener-push-pin`} aria-hidden="true" />
+        <span className={`${styles.photoPinRight} brand-asset fastener-push-pin`} aria-hidden="true" />
         <CarouselPrevious className={`${styles.carouselArrow} ${styles.carouselPrevious}`} />
         <CarouselNext className={`${styles.carouselArrow} ${styles.carouselNext}`} />
       </div>

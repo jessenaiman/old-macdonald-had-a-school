@@ -3,9 +3,9 @@ import { GradeInteractionLane } from "./GradeInteractionLane";
 import { GRADE_INTERACTION_CONFIGS } from "./grade-config";
 
 const items = [
-  { title: "Addition & Subtraction Word Problems", kicker: "Mathematics", summary: "Grade 1 solves concrete one-step problems within 20.", href: "/grade/grade-one/addition-subtraction-word-problems", icon: "/brand-kit-icon-sheets/individual-icons/subject-math-building.png" },
-  { title: "Apply properties of operations", kicker: "Mathematics", summary: "Use counters and number sentences to explore addition.", href: "/grade/grade-one/properties-of-operations", icon: "/brand-kit-icon-sheets/individual-icons/subject-math-building.png" },
-  { title: "Distinguish long from short vowel sounds", kicker: "Literacy & phonics", summary: "Listen for vowel sounds in spoken single-syllable words.", href: "/grade/grade-one/distinguish-long-from-short-vowel-sounds-in-spoken-single-syllable-words-oral", icon: "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png" },
+  { title: "Addition & Subtraction Word Problems", kicker: "Mathematics", summary: "Grade 1 solves concrete one-step problems within 20.", href: "/grade/grade-one/addition-subtraction-word-problems", icon: "math-building-icon" },
+  { title: "Apply properties of operations", kicker: "Mathematics", summary: "Use counters and number sentences to explore addition.", href: "/grade/grade-one/properties-of-operations", icon: "math-building-icon" },
+  { title: "Distinguish long from short vowel sounds", kicker: "Literacy & phonics", summary: "Listen for vowel sounds in spoken single-syllable words.", href: "/grade/grade-one/distinguish-long-from-short-vowel-sounds-in-spoken-single-syllable-words-oral", icon: "drama-storytelling-icon" },
 ];
 
 const meta = {

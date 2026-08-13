@@ -2,12 +2,23 @@
 
 This is the text companion to the live `#asset-patterns` section on `/branding`. Start here instead of scanning `public/`.
 
+There are two human-editable brand sources:
+
+- This file defines visual classes, component recipes, materials, typography, and asset usage.
+- [`public/CAST_AND_ROLES.md`](./CAST_AND_ROLES.md) defines character facts, roles, grades, colours, activities, and portrait sources. `/branding` reads that roster rather than copying character facts into TSX.
+
+The live `/branding` route is the single visual authority. Storybook stories are isolated viewers of components from that page; they are not additional brand definitions.
+
 ## Rules
 
 - Use the real shadcn component for behavior, then add only the approved global material or patch class shown below.
 - Keep labels, headings, links, and buttons as semantic HTML. Raster assets are visible layers, not controls.
 - Never use `blank-felt-patches-v1/individual-patches/*-rectangle.png`; all sixteen rectangle exports are `DO NOT USE`.
 - Do not use contact sheets, atlases, composites, Figma exports, design concepts, or review-only extractions in production.
+- A grade is a curriculum hub, not a character theme. Character colour belongs only to a character-specific component, scene, or activity.
+- A `cast-*` class exposes one character identity locally. It must not recolour a whole grade page.
+- Use authored repeat tiles for paper, felt, cork, leather, thread, and fabric. Do not imitate them with gradients or generated noise.
+- Preserve canonical portraits unchanged; do not recolour them or substitute a generated portrait.
 
 ## Named asset registry
 
@@ -52,7 +63,11 @@ The dimensional class is for medium and large use. Add `-flat` to the asset clas
 
 ### Fastener names
 
-Use `fastener-push-pin`, `fastener-paperclip`, `fastener-binder-clip`, `fastener-masking-tape`, `fastener-sewing-button`, `fastener-gingham-tape`, `fastener-apple-peg`, `fastener-kraft-pocket`, or `fastener-quilted-tab`. The fastener element belongs inside the button, note, or card that it attaches to so its positioning remains responsive.
+Use `fastener-push-pin`, `fastener-paperclip`, `fastener-binder-clip`, `fastener-masking-tape`, `fastener-washi-tape`, `fastener-sewing-button`, `fastener-gingham-tape`, `fastener-apple-peg`, `fastener-kraft-pocket`, or `fastener-quilted-tab`. The fastener element belongs inside the button, note, or card that it attaches to so its positioning remains responsive.
+
+### Authored patch layers
+
+Use `patch-old-macdonald-square` and `patch-miss-puddles-circle` as decorative `brand-asset` layers. The semantic control or figure owns the layout; the patch does not become a clickable image.
 
 ## Patch-shaped shadcn buttons
 
@@ -73,12 +88,49 @@ Use `fastener-push-pin`, `fastener-paperclip`, `fastener-binder-clip`, `fastener
 
 ## Semantic asset composition
 
-Use `article + material-surface material-cardboard-paper` for the lesson-card example, then add these unchanged decorative images with `next/image`:
+Use `article + material-surface material-cardboard-paper` for a lesson-card surface. Add a named semantic asset class instead of a public filepath:
 
-- `public/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png`
-- `public/brand-kit-icon-sheets/individual-icons/subject-music-dance.png`
+```html
+<article class="material-surface material-cardboard-paper">
+  <span class="brand-asset fastener-masking-tape icon-medium" aria-hidden="true"></span>
+  <span class="brand-asset music-icon icon-medium" role="img" aria-label="Music and dance"></span>
+</article>
+```
 
-The live implementation is `components/cast/AssetPatternCatalogue.tsx`. Global selectors live only in `app/globals.css`.
+Static public paths belong only in `app/brand-assets.css`. Layout and component selectors belong in `app/globals.css`.
+
+## Character and material class contract
+
+```html
+<aside class="cast-miss-hayley material-surface material-felt">
+  <!-- Only content about Miss Hayley belongs here. -->
+</aside>
+```
+
+`cast-miss-hayley` supplies local character variables. Other approved character keys follow the same `cast-<name>` convention.
+
+Approved material recipes include `material-cardboard-paper`, `material-felt`, `material-woven-fabric`, `material-construction-paper`, `material-cork`, and `material-leather`, always paired with `material-surface`.
+
+## Typography contract
+
+- `type-display` / the farm display face: short branded headings.
+- `type-hand` / the farm hand face: occasional expressive emphasis and teacher voice.
+- `type-body` / the farm body face: paragraphs, labels, controls, and readable UI.
+- The live typography specimens on `/branding#typography` show the actual selector, face, size role, and usage. Do not infer a font from appearance.
+
+## Component contract
+
+Use shadcn primitives for behavior and accessibility. Brand classes supply the visual material; they do not replace the primitive.
+
+| Primitive | Use it for | Do not use it for |
+| --- | --- | --- |
+| `Button` | Actions, action-like links, state changes | A generic clickable `div` |
+| `Dialog` | Focused asset recipes and copy actions | Permanent page content |
+| `Tabs` | Related panels in one place | Unrelated route navigation |
+| `NavigationMenu` / `DropdownMenu` | Related destinations or actions | A permanent grade rail |
+| `Collapsible` | Optional supporting detail | Required primary content |
+| `Sheet` | Focused mobile or secondary work | A full page replacement |
+| `Card` / `Separator` | Grouped content and meaningful boundaries | Decorating every item with an arbitrary box |
 
 ## Branding guide specimen shelf
 

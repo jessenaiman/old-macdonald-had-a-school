@@ -31,10 +31,10 @@ export type GradeTemplateProps = {
 };
 
 const activityIcons = [
-  "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png",
-  "/brand-kit-icon-sheets/individual-icons/subject-math-building.png",
-  "/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png",
-  "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png",
+  "drama-storytelling-icon",
+  "math-building-icon",
+  "gardening-health-icon",
+  "art-photography-icon",
 ];
 
 export function GradeRail({ grade, age, badge, reminder }: { grade: string; age: string; badge: string; reminder: string }) {
@@ -51,7 +51,7 @@ export function GradeRail({ grade, age, badge, reminder }: { grade: string; age:
         <a href="#resources"><b>04</b><span>Resources</span></a>
       </nav>
       <div className={styles.reminder}>
-        <Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" width={30} height={30} alt="" />
+        <span className="brand-asset fastener-push-pin icon-small" aria-hidden="true" />
         <span>Planning reminder</span><strong>{reminder}</strong>
       </div>
     </aside>
@@ -79,8 +79,8 @@ export function GradePathways({ grade, items, activeIndex = 0, onSelect }: { gra
       <div className={styles.pathGrid}>
         {items.map((item, index) => {
           const body = <>
-            <Image src="/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png" width={22} height={22} alt="" className={styles.pathPin} />
-            <Image src={item.icon || activityIcons[index % activityIcons.length]} width={112} height={112} alt="" className={styles.pathIcon} />
+            <span className={`${styles.pathPin} brand-asset fastener-sewing-button icon-small`} aria-hidden="true" />
+            <span className={`${styles.pathIcon} brand-asset ${item.icon || activityIcons[index % activityIcons.length]} icon-large`} aria-hidden="true" />
             <span>{item.kicker}</span><h3>{item.title}</h3><p>{item.summary}</p><b>{"View path ->"}</b>
           </>;
           return item.href ? <Link href={item.href} className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} key={item.title}>{body}</Link> : <Button variant="ghost" type="button" className={`${styles.pathCard} ${index === activeIndex ? styles.pathCardActive : ""}`} aria-pressed={index === activeIndex} onClick={() => onSelect?.(index)} key={item.title}>{body}</Button>;
@@ -92,9 +92,9 @@ export function GradePathways({ grade, items, activeIndex = 0, onSelect }: { gra
 
 export function GradePlanningNotes({ grade, item, href }: { grade: string; item?: GradePathItem; href?: string }) {
   const notes = [
-    ["Today's intention", "Name the one thing learners might notice, try, or share.", "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png"],
-    ["Gather before you begin", "Leave room for the materials, song, book, or visual support.", "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png"],
-    ["Notice and carry forward", "Jot what children showed you and one possible next step.", "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png"],
+    ["Today's intention", "Name the one thing learners might notice, try, or share.", "fastener-paperclip"],
+    ["Gather before you begin", "Leave room for the materials, song, book, or visual support.", "fastener-masking-tape"],
+    ["Notice and carry forward", "Jot what children showed you and one possible next step.", "fastener-push-pin"],
   ];
   return (
     <section className={styles.planningReference} id="planner" aria-label={`${grade} planning notes`}>
@@ -110,7 +110,7 @@ export function GradePlanningNotes({ grade, item, href }: { grade: string; item?
       </div>
       <div className={styles.planningNoteGrid} aria-label="Printable planning notes">
         {notes.map(([label, prompt, fastener]) => <article className={styles.planningNote} key={label}>
-          <Image src={fastener} width={34} height={34} alt="" className={styles.planningNoteFastener} />
+          <span className={`${styles.planningNoteFastener} brand-asset ${fastener} icon-small`} aria-hidden="true" />
           <span>{label}</span><p>{prompt}</p><div className={styles.planningLines} aria-hidden="true"><i /><i /><i /></div>
         </article>)}
       </div>

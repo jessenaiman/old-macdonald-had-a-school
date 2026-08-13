@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 
 const THEMES = [
-  { value: "light", label: "Farm day", icon: "/design-assets/theme-toggle-patches-v1/sun-patch.png" },
-  { value: "dark", label: "Lullaby dusk", icon: "/design-assets/theme-toggle-patches-v1/moon-patch.png" },
+  { value: "light", label: "Farm day", iconClass: "theme-farm-day" },
+  { value: "dark", label: "Lullaby dusk", iconClass: "theme-lullaby-dusk" },
 ] as const;
 
 export function ThemeSwitcher() {
@@ -28,7 +27,7 @@ export function ThemeSwitcher() {
       aria-label={`Switch to ${next.label}`}
       title={`Switch to ${next.label}`}
     >
-      <Image src={current.icon} alt="" width={34} height={34} loading="eager" aria-hidden="true" />
+      <span className={`brand-asset ${current.iconClass} icon-small`} aria-hidden="true" />
       <span className="sr-only">{current.label}</span>
     </Button>
   );

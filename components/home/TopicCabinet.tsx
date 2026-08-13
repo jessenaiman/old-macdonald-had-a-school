@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { HOME_SUBJECTS } from "./home-data";
@@ -24,7 +23,7 @@ export function TopicCabinet() {
       </TabsList>
       <TabsContent value={subject.key} className={styles.cabinetNote} asChild>
       <article>
-        <Image src={subject.icon} alt="" width={58} height={58} />
+        <span className={`brand-asset ${subject.iconClass} icon-medium`} aria-hidden="true" />
         <h3>{subject.title}</h3>
         <Link className={styles.topicMore} href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}>{"Explore this subject ->"}</Link>
       </article>

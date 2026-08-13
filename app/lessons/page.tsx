@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,13 +31,13 @@ function textScore(query: string, values: string[]) {
 
 function subjectIcon(subject: string) {
   const value = subject.toLocaleLowerCase();
-  if (value.includes("math") || value.includes("numer")) return "/brand-kit-icon-sheets/individual-icons/subject-math-building.png";
-  if (value.includes("music") || value.includes("movement") || value.includes("motor")) return "/brand-kit-icon-sheets/individual-icons/subject-music-dance.png";
-  if (value.includes("art") || value.includes("photo")) return "/brand-kit-icon-sheets/individual-icons/subject-art-photography.png";
-  if (value.includes("health") || value.includes("garden") || value.includes("science")) return "/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png";
-  if (value.includes("physical") || value.includes("dance")) return "/brand-kit-icon-sheets/individual-icons/subject-physical-education.png";
-  if (value.includes("story") || value.includes("drama") || value.includes("literacy") || value.includes("language")) return "/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png";
-  return "/brand-kit-icon-sheets/individual-icons/subject-early-learning.png";
+  if (value.includes("math") || value.includes("numer")) return "math-building-icon";
+  if (value.includes("music") || value.includes("movement") || value.includes("motor")) return "music-icon";
+  if (value.includes("art") || value.includes("photo")) return "art-photography-icon";
+  if (value.includes("health") || value.includes("garden") || value.includes("science")) return "gardening-health-icon";
+  if (value.includes("physical") || value.includes("dance")) return "physical-education-icon";
+  if (value.includes("story") || value.includes("drama") || value.includes("literacy") || value.includes("language")) return "drama-storytelling-icon";
+  return "early-learning-icon";
 }
 
 export default async function LessonsIndexPage({ searchParams }: { searchParams: SearchParams }) {
@@ -107,7 +106,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
         <section className={styles.grid} aria-label="Available lessons">
           {markdownLessons.map(({ lesson }) => (
             <article className={styles.card} data-source="markdown" key={lesson.metadata.slug}>
-              <div className={styles.cardIcon}><Image src={subjectIcon(lesson.metadata.subject)} alt="" width={86} height={86} /></div>
+              <div className={styles.cardIcon}><span className={`brand-asset ${subjectIcon(lesson.metadata.subject)} icon-medium`} aria-hidden="true" /></div>
               <div className={styles.cardBody}>
                 <div className={styles.cardTop}><span>Teacher-ready lesson</span><strong>{lesson.metadata.grade}</strong></div>
                 <h2><Link href={lessonHref(lesson.metadata)}>{lesson.metadata.title}</Link></h2>
@@ -118,7 +117,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
           ))}
           {databaseResults.map(({ topic, href, markdownLesson }) => (
             <article className={styles.card} data-source={markdownLesson ? "markdown" : "database"} key={topic.id}>
-              <div className={styles.cardIcon}><Image src={subjectIcon(markdownLesson?.metadata.subject ?? topic.subject)} alt="" width={86} height={86} /></div>
+              <div className={styles.cardIcon}><span className={`brand-asset ${subjectIcon(markdownLesson?.metadata.subject ?? topic.subject)} icon-medium`} aria-hidden="true" /></div>
               <div className={styles.cardBody}>
                 <div className={styles.cardTop}><span>{markdownLesson ? "Teacher-ready lesson" : "Planning record"}</span><strong>{topic.grade}</strong></div>
                 <h2><Link href={href}>{markdownLesson?.metadata.title ?? topic.title}</Link></h2>

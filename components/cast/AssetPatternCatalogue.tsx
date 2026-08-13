@@ -49,7 +49,7 @@ const NAV_SPECIMENS = [
 
 const LINK_SPECIMENS = [
   { label: "Read the cast source", href: "/CAST_AND_ROLES.md", kind: "taped-note", path: "/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png" },
-  { label: "Open the guide source", href: "/branding/guide", kind: "stitched-tab", path: "/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.png" },
+  { label: "Open the guide source", href: "/BRAND_ASSET_RECIPES.md", kind: "stitched-tab", path: "/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.png" },
   { label: "Meet the teaching team", href: "#cast-staff", kind: "portrait-link", path: "/staff_and_students/old-macdonald-transparent-circle.png" },
   { label: "See the brand rule", href: "#cast-rule", kind: "pinned-label", path: "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" },
 ] as const;
@@ -170,7 +170,7 @@ export function AssetPatternCatalogue() {
         <CardContent className="assetCompositionList">
           {COMPOSITIONS.map((item) => <article key={item.path}>
             {item.name === "Cork notice" ? <aside className={`${item.className} assetCorkNotice`}>
-              <Image src="/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png" alt="" width={30} height={30} />
+              <span className="brand-asset fastener-push-pin icon-small" aria-hidden="true" />
               <strong>Planning reminder</strong><span>Pin information; do not fake the cork or fastener.</span>
             </aside> : <Button className={item.className} variant={item.name === "Paper action" ? "outline" : "default"}>{item.name}</Button>}
             <p>{item.use}</p>
@@ -187,8 +187,8 @@ export function AssetPatternCatalogue() {
         </CardHeader>
         <CardContent className="semanticAssetExamples">
           <article className="material-surface material-cardboard-paper assetPinnedCard">
-            <Image className="assetFastener" src="/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png" alt="" width={92} height={46} />
-            <Image src="/brand-kit-icon-sheets/individual-icons/subject-music-dance.png" alt="" width={72} height={72} />
+            <span className="assetFastener brand-asset fastener-masking-tape icon-large" aria-hidden="true" />
+            <span className="brand-asset music-icon icon-medium" aria-hidden="true" />
             <div><small>Music &amp; dance</small><h3>Keep the steady beat</h3><p>A semantic lesson card with approved tape and curriculum icon assets.</p></div>
           </article>
           <div className="assetReferenceStack">

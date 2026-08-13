@@ -1,6 +1,9 @@
 ﻿# Current teacher-resource database map
 
-Inspect `data/omhas.db` before mutation; this map identifies the relationships that matter to teacher search as of migration `0013`.
+This is a relationship guide, not a live schema snapshot. Before mutation, run
+`python scripts/db/check_schema.py --tables <relevant tables>`. The generated
+`scripts/db/schema-manifest.json` is authoritative for schema fingerprinting;
+regenerate it only after schema migrations.
 
 ## Curriculum and teacher resources
 

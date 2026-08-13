@@ -1,0 +1,3753 @@
+{
+  "database": "data/omhas.db",
+  "manifest_version": 1,
+  "migration_state": {
+    "checked_in_sql": [
+      "src/db/migrations-sqlite/0000_baseline_sqlite_schema.sql",
+      "src/db/migrations-sqlite/0001_restructure_lesson_assets.sql",
+      "src/db/migrations-sqlite/0002_normalize_table_names.sql",
+      "src/db/migrations-sqlite/0003_normalize_field_names.sql",
+      "src/db/migrations-sqlite/0004_more_field_renames.sql",
+      "src/db/migrations-sqlite/0005_add_frames_column.sql",
+      "src/db/migrations-sqlite/0006_remove_grades_age_range.sql",
+      "src/db/migrations-sqlite/0007_repair_pony_ride_source.sql",
+      "src/db/migrations-sqlite/0008_add_retrieval_evaluation.sql",
+      "src/db/migrations-sqlite/0009_add_practical_songbook.sql",
+      "src/db/migrations-sqlite/0010_improve_pony_fingerplay_retrieval.sql",
+      "src/db/migrations-sqlite/0011_review_mid_north_baby_bounce_animal_songs.sql",
+      "src/db/migrations-sqlite/0012_review_mid_north_baby_bounce_follow_up_songs.sql",
+      "src/db/migrations-sqlite/0013_rebuild_search_chunks_fts.sql"
+    ],
+    "drizzle": [
+      {
+        "created_at": "2026-08-11 13:00:09",
+        "hash": "0000_baseline_sqlite_schema",
+        "id": 1
+      },
+      {
+        "created_at": "2026-08-11 13:02:49",
+        "hash": "0001_restructure_lesson_assets",
+        "id": 2
+      },
+      {
+        "created_at": "2026-08-11 13:37:25",
+        "hash": "0002_normalize_table_names",
+        "id": 3
+      },
+      {
+        "created_at": "2026-08-11 13:38:06",
+        "hash": "0003_normalize_field_names",
+        "id": 4
+      },
+      {
+        "created_at": "2026-08-11 13:39:26",
+        "hash": "0004_more_field_renames",
+        "id": 5
+      },
+      {
+        "created_at": "2026-08-11 15:38:41",
+        "hash": "0005_add_frames_column",
+        "id": 6
+      }
+    ],
+    "legacy": [
+      {
+        "applied_at": "2026-08-10T18:19:14.476Z",
+        "migration_id": "20260810_001_unify_curriculum_lessons_into_omhas"
+      },
+      {
+        "applied_at": "2026-08-11T06:28:15.168Z",
+        "migration_id": "20260811_002_add_lesson_assets"
+      }
+    ]
+  },
+  "object_counts": {
+    "index": 6,
+    "table": 43,
+    "trigger": 3,
+    "view": 0
+  },
+  "objects": [
+    {
+      "name": "retrieval_evaluation_runs_query_idx",
+      "sql": "CREATE INDEX retrieval_evaluation_runs_query_idx\n  ON retrieval_evaluation_runs(query_id, executed_at)",
+      "tbl_name": "retrieval_evaluation_runs",
+      "type": "index"
+    },
+    {
+      "name": "scl_song_id_idx",
+      "sql": "CREATE INDEX scl_song_id_idx ON song_curriculum_links(song_id)",
+      "tbl_name": "song_curriculum_links",
+      "type": "index"
+    },
+    {
+      "name": "scl_subject_idx",
+      "sql": "CREATE INDEX scl_subject_idx ON song_curriculum_links(subject)",
+      "tbl_name": "song_curriculum_links",
+      "type": "index"
+    },
+    {
+      "name": "song_chord_guides_song_idx",
+      "sql": "CREATE INDEX song_chord_guides_song_idx ON song_chord_guides(song_id, scope, sort_order)",
+      "tbl_name": "song_chord_guides",
+      "type": "index"
+    },
+    {
+      "name": "song_sections_song_idx",
+      "sql": "CREATE INDEX song_sections_song_idx ON song_sections(song_id, sort_order)",
+      "tbl_name": "song_sections",
+      "type": "index"
+    },
+    {
+      "name": "song_sources_song_idx",
+      "sql": "CREATE INDEX song_sources_song_idx ON song_sources(song_id)",
+      "tbl_name": "song_sources",
+      "type": "index"
+    },
+    {
+      "name": "__drizzle_migrations",
+      "sql": "CREATE TABLE __drizzle_migrations (id INTEGER PRIMARY KEY, hash TEXT NOT NULL, created_at TEXT NOT NULL)",
+      "tbl_name": "__drizzle_migrations",
+      "type": "table"
+    },
+    {
+      "name": "action_vocabulary",
+      "sql": "CREATE TABLE `action_vocabulary` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`normalized_action_family` text NOT NULL,\n\t`examples` text,\n\t`do_not_use_as_proof` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "action_vocabulary",
+      "type": "table"
+    },
+    {
+      "name": "activities",
+      "sql": "CREATE TABLE \"activities\" (id INTEGER PRIMARY KEY, name TEXT, type TEXT, instructions TEXT, materials_needed TEXT, age_range TEXT, duration_minutes INTEGER, source_id INTEGER)",
+      "tbl_name": "activities",
+      "type": "table"
+    },
+    {
+      "name": "book_suggestions",
+      "sql": "CREATE TABLE \"book_suggestions\" (id INTEGER PRIMARY KEY, title TEXT, author TEXT, description TEXT, age_range TEXT, isbn TEXT, url TEXT)",
+      "tbl_name": "book_suggestions",
+      "type": "table"
+    },
+    {
+      "name": "curriculum_topic_songs",
+      "sql": "CREATE TABLE `curriculum_topic_songs` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`curriculum_topic_id` text NOT NULL,\n\t`search_chunk_id` text NOT NULL,\n\t`link_type` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP, topic_id INTEGER REFERENCES \"topics\"(id),\n\tFOREIGN KEY (`curriculum_topic_id`) REFERENCES `curriculum_topics`(`id`) ON UPDATE no action ON DELETE cascade,\n\tFOREIGN KEY (`search_chunk_id`) REFERENCES `search_chunks`(`id`) ON UPDATE no action ON DELETE cascade\n)",
+      "tbl_name": "curriculum_topic_songs",
+      "type": "table"
+    },
+    {
+      "name": "curriculum_topics",
+      "sql": "CREATE TABLE `curriculum_topics` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`grade_key` text NOT NULL,\n\t`grade` text NOT NULL,\n\t`early_years` integer NOT NULL,\n\t`subject` text NOT NULL,\n\t`category` text,\n\t`seq_number` integer,\n\t`lesson_topic` text NOT NULL,\n\t`skill_statement` text,\n\t`standards` text,\n\t`song_count` integer DEFAULT 0,\n\t`linked_songs` text,\n\t`linked_resources` text,\n\t`tags` text,\n\t`circle_time_slot` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "curriculum_topics",
+      "type": "table"
+    },
+    {
+      "name": "grades",
+      "sql": "CREATE TABLE \"grades\" (\n    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n    key         TEXT NOT NULL UNIQUE\n                    CHECK (key IN ('daycare', 'preschool', 'kindergarten',\n                                   'grade-1', 'grade-2', 'grade-3')),\n    label       TEXT NOT NULL,\n    sort_order  INTEGER\n)",
+      "tbl_name": "grades",
+      "type": "table"
+    },
+    {
+      "name": "import_batches",
+      "sql": "CREATE TABLE import_batches (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        migration_id TEXT NOT NULL,\n        source_name TEXT NOT NULL,\n        source_path TEXT NOT NULL,\n        source_sha256 TEXT NOT NULL,\n        imported_at TEXT NOT NULL,\n        FOREIGN KEY (migration_id) REFERENCES schema_migrations(migration_id)\n      )",
+      "tbl_name": "import_batches",
+      "type": "table"
+    },
+    {
+      "name": "lesson_assets",
+      "sql": "CREATE TABLE \"lesson_assets\" (\n  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n  topic_id INTEGER NOT NULL REFERENCES \"topics\"(id),\n  asset_type TEXT DEFAULT 'worksheet' NOT NULL,\n  title TEXT NOT NULL,\n  description TEXT,\n  file_path TEXT,\n  format TEXT,\n  generation_prompt TEXT,\n  visual_notes TEXT,\n  status TEXT DEFAULT 'draft' NOT NULL,\n  created_at TEXT DEFAULT CURRENT_TIMESTAMP,\n  updated_at TEXT DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "lesson_assets",
+      "type": "table"
+    },
+    {
+      "name": "material_relations",
+      "sql": "CREATE TABLE \"material_relations\" (\n    id             INTEGER PRIMARY KEY AUTOINCREMENT,\n    from_kind      TEXT NOT NULL CHECK (from_kind IN ('song', 'activity', 'book', 'resource')),\n    from_id        INTEGER NOT NULL,\n    relation_type  TEXT CHECK (relation_type IN ('has_song_version', 'has_video',\n                                                   'has_lyrics_source', 'same_song',\n                                                   'similar_activity', 'same_artist')),\n    to_kind        TEXT NOT NULL CHECK (to_kind IN ('song', 'activity', 'book', 'resource')),\n    to_id          INTEGER NOT NULL,\n    UNIQUE (from_kind, from_id, relation_type, to_kind, to_id)\n)",
+      "tbl_name": "material_relations",
+      "type": "table"
+    },
+    {
+      "name": "material_tags",
+      "sql": "CREATE TABLE \"material_tags\" (\n    id             INTEGER PRIMARY KEY AUTOINCREMENT,\n    material_kind  TEXT NOT NULL CHECK (material_kind IN ('song','activity','resource','book')),\n    material_id    INTEGER NOT NULL,\n    tag_id         INTEGER NOT NULL,\n    FOREIGN KEY (tag_id) REFERENCES \"tags\" (id) ON DELETE CASCADE,\n    UNIQUE (material_kind, material_id, tag_id)\n)",
+      "tbl_name": "material_tags",
+      "type": "table"
+    },
+    {
+      "name": "research_queue",
+      "sql": "CREATE TABLE `research_queue` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`priority` integer NOT NULL,\n\t`resource` text NOT NULL,\n\t`why_it_matters` text,\n\t`source_url` text,\n\t`download_filename` text,\n\t`assigned_to` text,\n\t`status` text DEFAULT 'Download needed',\n\t`notes` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "research_queue",
+      "type": "table"
+    },
+    {
+      "name": "research_sources",
+      "sql": "CREATE TABLE `research_sources` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`educator_org` text NOT NULL,\n\t`source_title` text NOT NULL,\n\t`source_type` text NOT NULL,\n\t`age_setting` text,\n\t`songs_covered` text,\n\t`direct_url` text,\n\t`local_pdf_filename` text,\n\t`download_status` text DEFAULT 'Download needed',\n\t`research_notes` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "research_sources",
+      "type": "table"
+    },
+    {
+      "name": "resources",
+      "sql": "CREATE TABLE \"resources\" (\n    id           INTEGER PRIMARY KEY AUTOINCREMENT,\n    name         TEXT NOT NULL,\n    type         TEXT CHECK (type IN ('worksheet', 'video', 'activity', 'game',\n                                       'app', 'web')),\n    description  TEXT,\n    url          TEXT,\n    free         INTEGER CHECK (free IN (0, 1)),\n    paywalled    INTEGER CHECK (paywalled IN (0, 1)),\n    verified     INTEGER CHECK (verified IN (0, 1)),\n    source_id    INTEGER,\n    FOREIGN KEY (source_id) REFERENCES \"sources\" (id) ON DELETE SET NULL\n)",
+      "tbl_name": "resources",
+      "type": "table"
+    },
+    {
+      "name": "retrieval_evaluation_queries",
+      "sql": "CREATE TABLE retrieval_evaluation_queries (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  category TEXT NOT NULL,\n  query_text TEXT NOT NULL UNIQUE,\n  teacher_intent TEXT NOT NULL,\n  expected_title_contains TEXT,\n  expected_result_kind TEXT,\n  active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),\n  source_note TEXT,\n  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "retrieval_evaluation_queries",
+      "type": "table"
+    },
+    {
+      "name": "retrieval_evaluation_results",
+      "sql": "CREATE TABLE retrieval_evaluation_results (\n  run_id INTEGER NOT NULL REFERENCES retrieval_evaluation_runs(id) ON DELETE CASCADE,\n  rank INTEGER NOT NULL CHECK (rank > 0),\n  result_kind TEXT NOT NULL,\n  result_id TEXT NOT NULL,\n  title TEXT NOT NULL,\n  match_scope TEXT,\n  score REAL,\n  PRIMARY KEY (run_id, rank)\n)",
+      "tbl_name": "retrieval_evaluation_results",
+      "type": "table"
+    },
+    {
+      "name": "retrieval_evaluation_runs",
+      "sql": "CREATE TABLE retrieval_evaluation_runs (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  query_id INTEGER NOT NULL REFERENCES retrieval_evaluation_queries(id) ON DELETE CASCADE,\n  engine_kind TEXT NOT NULL,\n  engine_version TEXT,\n  duration_ms INTEGER NOT NULL CHECK (duration_ms >= 0),\n  result_count INTEGER NOT NULL CHECK (result_count >= 0),\n  expectation_met INTEGER CHECK (expectation_met IN (0, 1)),\n  evaluator_note TEXT,\n  executed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "retrieval_evaluation_runs",
+      "type": "table"
+    },
+    {
+      "name": "schema_migrations",
+      "sql": "CREATE TABLE schema_migrations (\n        migration_id TEXT PRIMARY KEY,\n        applied_at TEXT NOT NULL,\n        omhas_sha256 TEXT NOT NULL,\n        curriculum_sha256 TEXT NOT NULL,\n        generated_sha256 TEXT NOT NULL\n      )",
+      "tbl_name": "schema_migrations",
+      "type": "table"
+    },
+    {
+      "name": "search_chunk_sources",
+      "sql": "CREATE TABLE search_chunk_sources (\n        search_chunk_id TEXT NOT NULL,\n        source_document_id INTEGER NOT NULL,\n        PRIMARY KEY (search_chunk_id, source_document_id),\n        FOREIGN KEY (search_chunk_id) REFERENCES search_chunks(id) ON DELETE CASCADE,\n        FOREIGN KEY (source_document_id) REFERENCES source_documents(id) ON DELETE CASCADE\n      )",
+      "tbl_name": "search_chunk_sources",
+      "type": "table"
+    },
+    {
+      "name": "search_chunks",
+      "sql": "CREATE TABLE `search_chunks` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`kind` text NOT NULL,\n\t`source_path` text NOT NULL,\n\t`url` text NOT NULL,\n\t`title` text NOT NULL,\n\t`chunk_text` text NOT NULL,\n\t`lyrics` text,\n\t`instructions` text,\n\t`embedding` text,\n\t`meta` text DEFAULT '{}',\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n)",
+      "tbl_name": "search_chunks",
+      "type": "table"
+    },
+    {
+      "name": "search_chunks_fts",
+      "sql": "CREATE VIRTUAL TABLE search_chunks_fts USING fts5(\n    id UNINDEXED,\n    kind UNINDEXED,\n    title,\n    chunk_text,\n    lyrics,\n    instructions,\n    source_path UNINDEXED,\n    content='search_chunks',\n    content_rowid='rowid'\n  )",
+      "tbl_name": "search_chunks_fts",
+      "type": "table"
+    },
+    {
+      "name": "search_chunks_fts_config",
+      "sql": "CREATE TABLE 'search_chunks_fts_config'(k PRIMARY KEY, v) WITHOUT ROWID",
+      "tbl_name": "search_chunks_fts_config",
+      "type": "table"
+    },
+    {
+      "name": "search_chunks_fts_data",
+      "sql": "CREATE TABLE 'search_chunks_fts_data'(id INTEGER PRIMARY KEY, block BLOB)",
+      "tbl_name": "search_chunks_fts_data",
+      "type": "table"
+    },
+    {
+      "name": "search_chunks_fts_docsize",
+      "sql": "CREATE TABLE 'search_chunks_fts_docsize'(id INTEGER PRIMARY KEY, sz BLOB)",
+      "tbl_name": "search_chunks_fts_docsize",
+      "type": "table"
+    },
+    {
+      "name": "search_chunks_fts_idx",
+      "sql": "CREATE TABLE 'search_chunks_fts_idx'(segid, term, pgno, PRIMARY KEY(segid, term)) WITHOUT ROWID",
+      "tbl_name": "search_chunks_fts_idx",
+      "type": "table"
+    },
+    {
+      "name": "song_action_chunks",
+      "sql": "CREATE TABLE song_action_chunks (id TEXT PRIMARY KEY, song_action_id TEXT, search_chunk_id TEXT, created_at TEXT)",
+      "tbl_name": "song_action_chunks",
+      "type": "table"
+    },
+    {
+      "name": "song_actions",
+      "sql": "CREATE TABLE `song_actions` (\n\t`id` text PRIMARY KEY NOT NULL,\n\t`song_title` text NOT NULL,\n\t`alternate_title` text,\n\t`tradition_performer` text,\n\t`action_wording` text,\n\t`normalized_action` text,\n\t`action_sequence` text,\n\t`song_cue` text,\n\t`action_classification` text,\n\t`core_or_optional` text,\n\t`age_range_stated` text,\n\t`educator_org` text,\n\t`source_title` text,\n\t`source_type` text,\n\t`page_timestamp` text,\n\t`source_url` text,\n\t`evidence_note` text,\n\t`research_status` text DEFAULT 'Not started',\n\t`reviewer_notes` text,\n\t`created_at` text DEFAULT CURRENT_TIMESTAMP,\n\t`updated_at` text DEFAULT CURRENT_TIMESTAMP\n, song_id INTEGER REFERENCES songs(id) ON DELETE CASCADE, section_id INTEGER REFERENCES song_sections(id) ON DELETE SET NULL, line_number INTEGER, provenance TEXT\n  CHECK (provenance IN ('source-documented', 'expert-suggested', 'community-legacy')))",
+      "tbl_name": "song_actions",
+      "type": "table"
+    },
+    {
+      "name": "song_chord_guides",
+      "sql": "CREATE TABLE song_chord_guides (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  song_id INTEGER NOT NULL REFERENCES songs(id) ON DELETE CASCADE,\n  section_id INTEGER REFERENCES song_sections(id) ON DELETE CASCADE,\n  scope TEXT NOT NULL CHECK (scope IN ('song', 'section', 'line')),\n  line_number INTEGER,\n  progression TEXT NOT NULL,\n  musical_key TEXT,\n  capo TEXT,\n  tuning TEXT,\n  meter TEXT,\n  starting_pitch TEXT,\n  provenance TEXT NOT NULL CHECK (provenance IN ('source-documented', 'expert-suggested', 'community-legacy')),\n  source_note TEXT,\n  sort_order INTEGER NOT NULL DEFAULT 1\n)",
+      "tbl_name": "song_chord_guides",
+      "type": "table"
+    },
+    {
+      "name": "song_curriculum_links",
+      "sql": "CREATE TABLE song_curriculum_links (id INTEGER PRIMARY KEY AUTOINCREMENT, song_id INTEGER NOT NULL REFERENCES \"songs\"(id) ON DELETE CASCADE, subject TEXT NOT NULL, description TEXT NOT NULL, relevance TEXT, link_type TEXT NOT NULL DEFAULT \"curriculum\")",
+      "tbl_name": "song_curriculum_links",
+      "type": "table"
+    },
+    {
+      "name": "song_sections",
+      "sql": "CREATE TABLE song_sections (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  song_id INTEGER NOT NULL REFERENCES songs(id) ON DELETE CASCADE,\n  label TEXT,\n  section_type TEXT NOT NULL DEFAULT 'verse'\n    CHECK (section_type IN ('verse', 'chorus', 'refrain', 'bridge', 'intro', 'outro', 'other')),\n  sort_order INTEGER NOT NULL,\n  lyrics TEXT NOT NULL,\n  actions TEXT,\n  action_scope TEXT CHECK (action_scope IN ('line', 'section', 'song')),\n  action_line_number INTEGER,\n  action_provenance TEXT CHECK (action_provenance IN ('source-documented', 'expert-suggested', 'community-legacy')),\n  UNIQUE (song_id, sort_order)\n)",
+      "tbl_name": "song_sections",
+      "type": "table"
+    },
+    {
+      "name": "song_sources",
+      "sql": "CREATE TABLE song_sources (\n  song_id INTEGER NOT NULL REFERENCES songs(id) ON DELETE CASCADE,\n  source_document_id INTEGER NOT NULL REFERENCES source_documents(id) ON DELETE CASCADE,\n  relationship TEXT NOT NULL CHECK (relationship IN ('primary', 'transcription', 'arrangement', 'teaching-guidance')),\n  locator TEXT,\n  evidence_note TEXT,\n  PRIMARY KEY (song_id, source_document_id, relationship)\n)",
+      "tbl_name": "song_sources",
+      "type": "table"
+    },
+    {
+      "name": "songs",
+      "sql": "CREATE TABLE \"songs\" (\n    id           INTEGER PRIMARY KEY AUTOINCREMENT,\n    title    TEXT NOT NULL,\n    artist       TEXT, -- added during migration prep: real data on all 561 live rows, doc's\n                        -- own note said this should exist and it didn't yet\n    catalog      TEXT, -- reviewed: doc gave these as examples, not a closed enum (research\n                        -- tier + other artists like Raffi/Seeger will add more), so left open\n    lyrics       TEXT,\n    url          TEXT,\n    instructions TEXT, -- added during migration prep: symmetric with ACTIVITIES.instructions\n    actions      TEXT,\n    age_range   TEXT,\n    source_id   INTEGER,\n    verified    INTEGER NOT NULL DEFAULT 0 CHECK (verified IN (0, 1)), type TEXT, educational_domain TEXT, materials_needed TEXT, tags TEXT, creator_artist TEXT, source_title TEXT, curriculum_links TEXT, early_years_links TEXT, markdown_path TEXT,\n    FOREIGN KEY (source_id) REFERENCES \"sources\" (id) ON DELETE SET NULL\n)",
+      "tbl_name": "songs",
+      "type": "table"
+    },
+    {
+      "name": "source_documents",
+      "sql": "CREATE TABLE source_documents (\n        id INTEGER PRIMARY KEY AUTOINCREMENT,\n        source_path TEXT NOT NULL UNIQUE,\n        source_kind TEXT NOT NULL,\n        review_state TEXT NOT NULL DEFAULT 'research_wip',\n        checksum TEXT,\n        imported_at TEXT NOT NULL\n      )",
+      "tbl_name": "source_documents",
+      "type": "table"
+    },
+    {
+      "name": "sources",
+      "sql": "CREATE TABLE \"sources\" (id INTEGER PRIMARY KEY, path_or_url TEXT, type TEXT, checksum TEXT)",
+      "tbl_name": "sources",
+      "type": "table"
+    },
+    {
+      "name": "standards",
+      "sql": "CREATE TABLE \"standards\" (\n    id                  INTEGER PRIMARY KEY AUTOINCREMENT,\n    parent_standard_id  INTEGER,\n    framework           TEXT NOT NULL,\n    code                TEXT,\n    full_text           TEXT,\n    source              TEXT,\n    external_id         TEXT, frames TEXT,\n    FOREIGN KEY (parent_standard_id) REFERENCES \"standards\" (id) ON DELETE SET NULL,\n    UNIQUE (framework, external_id)\n)",
+      "tbl_name": "standards",
+      "type": "table"
+    },
+    {
+      "name": "subjects",
+      "sql": "CREATE TABLE \"subjects\" (\n    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n    key         TEXT NOT NULL UNIQUE,\n    label       TEXT NOT NULL,\n    sort_order  INTEGER\n)",
+      "tbl_name": "subjects",
+      "type": "table"
+    },
+    {
+      "name": "tags",
+      "sql": "CREATE TABLE \"tags\" (\n    id             INTEGER PRIMARY KEY AUTOINCREMENT,\n    parent_tag_id  INTEGER,\n    name           TEXT NOT NULL,\n    definition     TEXT,\n    FOREIGN KEY (parent_tag_id) REFERENCES \"tags\" (id) ON DELETE SET NULL,\n    UNIQUE (parent_tag_id, name) -- reviewed: prevents two \"Ponies\" under the same\n                                  -- parent; same name under a different parent is fine\n)",
+      "tbl_name": "tags",
+      "type": "table"
+    },
+    {
+      "name": "topic_grades",
+      "sql": "CREATE TABLE \"topic_grades\" (\n    id        INTEGER PRIMARY KEY AUTOINCREMENT,\n    topic_id  INTEGER NOT NULL,\n    grade_id  INTEGER NOT NULL,\n    FOREIGN KEY (topic_id) REFERENCES \"topics\" (id) ON DELETE CASCADE,\n    FOREIGN KEY (grade_id) REFERENCES \"grades\" (id) ON DELETE RESTRICT,\n    UNIQUE (topic_id, grade_id)\n)",
+      "tbl_name": "topic_grades",
+      "type": "table"
+    },
+    {
+      "name": "topic_materials",
+      "sql": "CREATE TABLE \"topic_materials\" (\n    id                 INTEGER PRIMARY KEY AUTOINCREMENT,\n    topic_id           INTEGER NOT NULL,\n    material_kind      TEXT NOT NULL CHECK (material_kind IN ('song', 'activity',\n                                                               'book', 'resource')),\n    material_id        INTEGER NOT NULL,\n    role               TEXT CHECK (role IN ('focus', 'supporting')),\n    use_in_phase       TEXT CHECK (use_in_phase IN ('opening', 'direct-instruction',\n                                                      'guided-practice',\n                                                      'independent-practice', 'closing')),\n    routine_slot       TEXT CHECK (routine_slot IS NULL OR routine_slot IN\n                                    ('circle-time-core', 'greeting', 'transition',\n                                     'calm-down', 'goodbye')),\n    teacher_rationale  TEXT,\n    FOREIGN KEY (topic_id) REFERENCES \"topics\" (id) ON DELETE CASCADE,\n    UNIQUE (topic_id, material_kind, material_id)\n)",
+      "tbl_name": "topic_materials",
+      "type": "table"
+    },
+    {
+      "name": "topic_standards",
+      "sql": "CREATE TABLE \"topic_standards\" (\n    id                INTEGER PRIMARY KEY AUTOINCREMENT,\n    topic_id          INTEGER NOT NULL,\n    standard_id       INTEGER NOT NULL,\n    alignment_notes   TEXT,\n    FOREIGN KEY (topic_id) REFERENCES \"topics\" (id) ON DELETE CASCADE,\n    FOREIGN KEY (standard_id) REFERENCES \"standards\" (id) ON DELETE RESTRICT,\n    UNIQUE (topic_id, standard_id)\n)",
+      "tbl_name": "topic_standards",
+      "type": "table"
+    },
+    {
+      "name": "topic_tags",
+      "sql": "CREATE TABLE \"topic_tags\" (\n    id        INTEGER PRIMARY KEY AUTOINCREMENT,\n    topic_id  INTEGER NOT NULL,\n    tag_id    INTEGER NOT NULL,\n    FOREIGN KEY (topic_id) REFERENCES \"topics\" (id) ON DELETE CASCADE,\n    FOREIGN KEY (tag_id) REFERENCES \"tags\" (id) ON DELETE CASCADE,\n    UNIQUE (topic_id, tag_id)\n)",
+      "tbl_name": "topic_tags",
+      "type": "table"
+    },
+    {
+      "name": "topics",
+      "sql": "CREATE TABLE \"topics\" (\n    id               INTEGER PRIMARY KEY AUTOINCREMENT,\n    subject_id       INTEGER NOT NULL,\n    category         TEXT,\n    topic     TEXT NOT NULL,\n    skill  TEXT,\n    sequence          REAL,\n    taught_status           TEXT, merged_into INTEGER REFERENCES \"topics\"(id), circle_time TEXT,\n    FOREIGN KEY (subject_id) REFERENCES \"subjects\" (id) ON DELETE RESTRICT\n)",
+      "tbl_name": "topics",
+      "type": "table"
+    },
+    {
+      "name": "weekly_pacing",
+      "sql": "CREATE TABLE \"weekly_pacing\" (\n    id              INTEGER PRIMARY KEY AUTOINCREMENT,\n    topic_grade_id  INTEGER NOT NULL,\n    week_number     INTEGER,\n    month           TEXT,\n    notes           TEXT,\n    FOREIGN KEY (topic_grade_id) REFERENCES \"topic_grades\" (id) ON DELETE CASCADE,\n    UNIQUE (topic_grade_id, week_number) -- reviewed: not in the doc's required-UNIQUE\n                                          -- list, but same duplicate-row bug class the\n                                          -- redesign exists to fix; added deliberately\n)",
+      "tbl_name": "weekly_pacing",
+      "type": "table"
+    },
+    {
+      "name": "search_chunks_ad",
+      "sql": "CREATE TRIGGER search_chunks_ad AFTER DELETE ON search_chunks BEGIN\n    DELETE FROM search_chunks_fts WHERE rowid = old.rowid;\n  END",
+      "tbl_name": "search_chunks",
+      "type": "trigger"
+    },
+    {
+      "name": "search_chunks_ai",
+      "sql": "CREATE TRIGGER search_chunks_ai AFTER INSERT ON search_chunks BEGIN\n    INSERT INTO search_chunks_fts (rowid, id, kind, title, chunk_text, lyrics, instructions, source_path)\n    VALUES (new.rowid, new.id, new.kind, new.title, new.chunk_text, new.lyrics, new.instructions, new.source_path);\n  END",
+      "tbl_name": "search_chunks",
+      "type": "trigger"
+    },
+    {
+      "name": "search_chunks_au",
+      "sql": "CREATE TRIGGER search_chunks_au AFTER UPDATE ON search_chunks BEGIN\n    UPDATE search_chunks_fts\n    SET id = new.id,\n        kind = new.kind,\n        title = new.title,\n        chunk_text = new.chunk_text,\n        lyrics = new.lyrics,\n        instructions = new.instructions,\n        source_path = new.source_path\n    WHERE rowid = new.rowid;\n  END",
+      "tbl_name": "search_chunks",
+      "type": "trigger"
+    }
+  ],
+  "schema_fingerprint": "58a54daba9226e64880b2eca728559dfb873c0783cfe51ca47f1209349cc3226",
+  "tables": {
+    "__drizzle_migrations": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "hash",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "created_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "action_vocabulary": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "normalized_action_family",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "examples",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "do_not_use_as_proof",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_action_vocabulary_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "activities": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "name",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "type",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "instructions",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "materials_needed",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "age_range",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "duration_minutes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "source_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "book_suggestions": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "title",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "author",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "description",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "age_range",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "isbn",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "curriculum_topic_songs": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "curriculum_topic_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "search_chunk_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "link_type",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "topic_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "search_chunk_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "search_chunks",
+          "to": "id"
+        },
+        {
+          "from": "curriculum_topic_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "curriculum_topics",
+          "to": "id"
+        },
+        {
+          "from": "topic_id",
+          "id": 2,
+          "match": "NONE",
+          "on_delete": "NO ACTION",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topics",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_curriculum_topic_songs_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "curriculum_topics": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "grade_key",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "grade",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "early_years",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "subject",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "category",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "seq_number",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "lesson_topic",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "skill_statement",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "standards",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": "0",
+          "name": "song_count",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 11,
+          "dflt_value": null,
+          "name": "linked_songs",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 12,
+          "dflt_value": null,
+          "name": "linked_resources",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 13,
+          "dflt_value": null,
+          "name": "tags",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 14,
+          "dflt_value": null,
+          "name": "circle_time_slot",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 15,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 16,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "updated_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_curriculum_topics_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "grades": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "key",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "label",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "sort_order",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_grades_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "import_batches": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "migration_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "source_name",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "source_path",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "source_sha256",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "imported_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "migration_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "NO ACTION",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "schema_migrations",
+          "to": "migration_id"
+        }
+      ],
+      "indexes": []
+    },
+    "lesson_assets": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "topic_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": "'worksheet'",
+          "name": "asset_type",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "title",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "description",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "file_path",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "format",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "generation_prompt",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "visual_notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": "'draft'",
+          "name": "status",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 11,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "updated_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "topic_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "NO ACTION",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topics",
+          "to": "id"
+        }
+      ],
+      "indexes": []
+    },
+    "material_relations": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "from_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "from_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "relation_type",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "to_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "to_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_material_relations_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "material_tags": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "material_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "material_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "tag_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "tag_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "tags",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_material_tags_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "research_queue": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "priority",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "resource",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "why_it_matters",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "source_url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "download_filename",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "assigned_to",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": "'Download needed'",
+          "name": "status",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "updated_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_research_queue_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "research_sources": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "educator_org",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "source_title",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "source_type",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "age_setting",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "songs_covered",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "direct_url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "local_pdf_filename",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": "'Download needed'",
+          "name": "download_status",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "research_notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 11,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "updated_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_research_sources_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "resources": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "name",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "type",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "description",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "free",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "paywalled",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "verified",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "source_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "source_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "SET NULL",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "sources",
+          "to": "id"
+        }
+      ],
+      "indexes": []
+    },
+    "retrieval_evaluation_queries": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "category",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "query_text",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "teacher_intent",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "expected_title_contains",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "expected_result_kind",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": "1",
+          "name": "active",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "source_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_retrieval_evaluation_queries_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "retrieval_evaluation_results": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "run_id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "rank",
+          "notnull": 1,
+          "pk": 2,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "result_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "result_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "title",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "match_scope",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "score",
+          "notnull": 0,
+          "pk": 0,
+          "type": "REAL"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "run_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "retrieval_evaluation_runs",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_retrieval_evaluation_results_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "retrieval_evaluation_runs": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "query_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "engine_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "engine_version",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "duration_ms",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "result_count",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "expectation_met",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "evaluator_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "executed_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "query_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "retrieval_evaluation_queries",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "retrieval_evaluation_runs_query_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        }
+      ]
+    },
+    "schema_migrations": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "migration_id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "applied_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "omhas_sha256",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "curriculum_sha256",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "generated_sha256",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_schema_migrations_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "search_chunk_sources": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "search_chunk_id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "source_document_id",
+          "notnull": 1,
+          "pk": 2,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "source_document_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "source_documents",
+          "to": "id"
+        },
+        {
+          "from": "search_chunk_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "search_chunks",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_search_chunk_sources_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "search_chunks": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "source_path",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "url",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "title",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "chunk_text",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "lyrics",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "instructions",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "embedding",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": "'{}'",
+          "name": "meta",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 11,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "updated_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_search_chunks_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "search_chunks_fts": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "kind",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "title",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "chunk_text",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "lyrics",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "instructions",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "source_path",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "search_chunks_fts_config": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "k",
+          "notnull": 1,
+          "pk": 1,
+          "type": ""
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "v",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_search_chunks_fts_config_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "search_chunks_fts_data": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "block",
+          "notnull": 0,
+          "pk": 0,
+          "type": "BLOB"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "search_chunks_fts_docsize": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "sz",
+          "notnull": 0,
+          "pk": 0,
+          "type": "BLOB"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "search_chunks_fts_idx": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "segid",
+          "notnull": 1,
+          "pk": 1,
+          "type": ""
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "term",
+          "notnull": 1,
+          "pk": 2,
+          "type": ""
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "pgno",
+          "notnull": 0,
+          "pk": 0,
+          "type": ""
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_search_chunks_fts_idx_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "song_action_chunks": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "song_action_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "search_chunk_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_song_action_chunks_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "song_actions": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "TEXT"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "song_title",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "alternate_title",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "tradition_performer",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "action_wording",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "normalized_action",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "action_sequence",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "song_cue",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "action_classification",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "core_or_optional",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": null,
+          "name": "age_range_stated",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 11,
+          "dflt_value": null,
+          "name": "educator_org",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 12,
+          "dflt_value": null,
+          "name": "source_title",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 13,
+          "dflt_value": null,
+          "name": "source_type",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 14,
+          "dflt_value": null,
+          "name": "page_timestamp",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 15,
+          "dflt_value": null,
+          "name": "source_url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 16,
+          "dflt_value": null,
+          "name": "evidence_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 17,
+          "dflt_value": "'Not started'",
+          "name": "research_status",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 18,
+          "dflt_value": null,
+          "name": "reviewer_notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 19,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "created_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 20,
+          "dflt_value": "CURRENT_TIMESTAMP",
+          "name": "updated_at",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 21,
+          "dflt_value": null,
+          "name": "song_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 22,
+          "dflt_value": null,
+          "name": "section_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 23,
+          "dflt_value": null,
+          "name": "line_number",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 24,
+          "dflt_value": null,
+          "name": "provenance",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "section_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "SET NULL",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "song_sections",
+          "to": "id"
+        },
+        {
+          "from": "song_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "songs",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_song_actions_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "song_chord_guides": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "song_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "section_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "scope",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "line_number",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "progression",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "musical_key",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "capo",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "tuning",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "meter",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 10,
+          "dflt_value": null,
+          "name": "starting_pitch",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 11,
+          "dflt_value": null,
+          "name": "provenance",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 12,
+          "dflt_value": null,
+          "name": "source_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 13,
+          "dflt_value": "1",
+          "name": "sort_order",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "section_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "song_sections",
+          "to": "id"
+        },
+        {
+          "from": "song_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "songs",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "song_chord_guides_song_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        }
+      ]
+    },
+    "song_curriculum_links": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "song_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "subject",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "description",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "relevance",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": "\"curriculum\"",
+          "name": "link_type",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "song_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "songs",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "scl_subject_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        },
+        {
+          "name": "scl_song_id_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 1,
+          "unique": 0
+        }
+      ]
+    },
+    "song_sections": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "song_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "label",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": "'verse'",
+          "name": "section_type",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "sort_order",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "lyrics",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "actions",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "action_scope",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "action_line_number",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "action_provenance",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "song_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "songs",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "song_sections_song_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        },
+        {
+          "name": "sqlite_autoindex_song_sections_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 1,
+          "unique": 1
+        }
+      ]
+    },
+    "song_sources": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "song_id",
+          "notnull": 1,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "source_document_id",
+          "notnull": 1,
+          "pk": 2,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "relationship",
+          "notnull": 1,
+          "pk": 3,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "locator",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "evidence_note",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "source_document_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "source_documents",
+          "to": "id"
+        },
+        {
+          "from": "song_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "songs",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "song_sources_song_idx",
+          "origin": "c",
+          "partial": 0,
+          "seq": 0,
+          "unique": 0
+        },
+        {
+          "name": "sqlite_autoindex_song_sources_1",
+          "origin": "pk",
+          "partial": 0,
+          "seq": 1,
+          "unique": 1
+        }
+      ]
+    },
+    "songs": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "title",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "artist",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "catalog",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "lyrics",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "instructions",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "actions",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "age_range",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 9,
+          "dflt_value": null,
+          "name": "source_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 10,
+          "dflt_value": "0",
+          "name": "verified",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 11,
+          "dflt_value": null,
+          "name": "type",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 12,
+          "dflt_value": null,
+          "name": "educational_domain",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 13,
+          "dflt_value": null,
+          "name": "materials_needed",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 14,
+          "dflt_value": null,
+          "name": "tags",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 15,
+          "dflt_value": null,
+          "name": "creator_artist",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 16,
+          "dflt_value": null,
+          "name": "source_title",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 17,
+          "dflt_value": null,
+          "name": "curriculum_links",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 18,
+          "dflt_value": null,
+          "name": "early_years_links",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 19,
+          "dflt_value": null,
+          "name": "markdown_path",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "source_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "SET NULL",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "sources",
+          "to": "id"
+        }
+      ],
+      "indexes": []
+    },
+    "source_documents": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "source_path",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "source_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": "'research_wip'",
+          "name": "review_state",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "checksum",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "imported_at",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_source_documents_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "sources": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "path_or_url",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "type",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "checksum",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "standards": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "parent_standard_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "framework",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "code",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "full_text",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "source",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "external_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "frames",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "parent_standard_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "SET NULL",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "standards",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_standards_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "subjects": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "key",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "label",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "sort_order",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_subjects_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "tags": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "parent_tag_id",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "name",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "definition",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "parent_tag_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "SET NULL",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "tags",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_tags_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "topic_grades": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "topic_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "grade_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "grade_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "RESTRICT",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "grades",
+          "to": "id"
+        },
+        {
+          "from": "topic_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topics",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_topic_grades_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "topic_materials": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "topic_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "material_kind",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "material_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "role",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "use_in_phase",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "routine_slot",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "teacher_rationale",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "topic_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topics",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_topic_materials_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "topic_standards": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "topic_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "standard_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "alignment_notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "standard_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "RESTRICT",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "standards",
+          "to": "id"
+        },
+        {
+          "from": "topic_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topics",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_topic_standards_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "topic_tags": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "topic_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "tag_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "tag_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "tags",
+          "to": "id"
+        },
+        {
+          "from": "topic_id",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topics",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_topic_tags_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    },
+    "topics": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "subject_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "category",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "topic",
+          "notnull": 1,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "skill",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 5,
+          "dflt_value": null,
+          "name": "sequence",
+          "notnull": 0,
+          "pk": 0,
+          "type": "REAL"
+        },
+        {
+          "cid": 6,
+          "dflt_value": null,
+          "name": "taught_status",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 7,
+          "dflt_value": null,
+          "name": "merged_into",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 8,
+          "dflt_value": null,
+          "name": "circle_time",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "subject_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "RESTRICT",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "subjects",
+          "to": "id"
+        },
+        {
+          "from": "merged_into",
+          "id": 1,
+          "match": "NONE",
+          "on_delete": "NO ACTION",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topics",
+          "to": "id"
+        }
+      ],
+      "indexes": []
+    },
+    "weekly_pacing": {
+      "columns": [
+        {
+          "cid": 0,
+          "dflt_value": null,
+          "name": "id",
+          "notnull": 0,
+          "pk": 1,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 1,
+          "dflt_value": null,
+          "name": "topic_grade_id",
+          "notnull": 1,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 2,
+          "dflt_value": null,
+          "name": "week_number",
+          "notnull": 0,
+          "pk": 0,
+          "type": "INTEGER"
+        },
+        {
+          "cid": 3,
+          "dflt_value": null,
+          "name": "month",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        },
+        {
+          "cid": 4,
+          "dflt_value": null,
+          "name": "notes",
+          "notnull": 0,
+          "pk": 0,
+          "type": "TEXT"
+        }
+      ],
+      "foreign_keys": [
+        {
+          "from": "topic_grade_id",
+          "id": 0,
+          "match": "NONE",
+          "on_delete": "CASCADE",
+          "on_update": "NO ACTION",
+          "seq": 0,
+          "table": "topic_grades",
+          "to": "id"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_weekly_pacing_1",
+          "origin": "u",
+          "partial": 0,
+          "seq": 0,
+          "unique": 1
+        }
+      ]
+    }
+  },
+  "user_version": 0
+}

@@ -15,39 +15,32 @@ type HomePageProps = {
 type SubjectLearner = {
   name: string;
   portrait: string;
-  texture: string;
 };
 
 const SUBJECT_LEARNERS: Record<string, SubjectLearner> = {
   language: {
     name: "Whiskers",
     portrait: "/staff_and_students/whiskers-transparent-circle.png",
-    texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-10-whiskers-tile.png",
   },
   math: {
     name: "Sam",
     portrait: "/staff_and_students/sam-transparent-circle.png",
-    texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-15-sam-tile.png",
   },
   science: {
     name: "Scout",
     portrait: "/staff_and_students/scout-transparent-circle.png",
-    texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-11-scout-tile.png",
   },
   music: {
     name: "Penny",
     portrait: "/staff_and_students/penny-transparent-circle.png",
-    texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-12-penny-tile.png",
   },
   arts: {
     name: "Puddles",
     portrait: "/staff_and_students/puddles-transparent-circle.png",
-    texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-14-puddles-tile.png",
   },
   health: {
     name: "Hopper",
     portrait: "/staff_and_students/hopper-transparent-circle.png",
-    texture: "/design-assets/web-material-library-v1/construction-paper/construction-paper-09-hopper-tile.png",
   },
 };
 
@@ -99,18 +92,10 @@ export function HomePage({ hero, lessons }: HomePageProps) {
 
             return (
               <article className={styles.subjectCard} data-subject={subject.key} key={subject.key}>
-                <Image
-                  className={styles.cardFastener}
-                  src={index % 3 === 1
-                    ? "/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png"
-                    : "/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png"}
-                  alt=""
-                  width={38}
-                  height={38}
-                />
+                <span className={`${styles.cardFastener} brand-asset ${index % 3 === 1 ? "fastener-push-pin" : "fastener-paperclip"} icon-small`} aria-hidden="true" />
                 <Link href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}>
                   <span className={styles.subjectMain}>
-                    <Image className={styles.subjectIcon} src={subject.icon} alt="" width={112} height={112} />
+                    <span className={`${styles.subjectIcon} brand-asset ${subject.iconClass} icon-large`} aria-hidden="true" />
                     <span className={styles.subjectCopy}>
                       <h3>{subject.title}</h3>
                       <ul aria-label={`${subject.title} learning ideas`}>
