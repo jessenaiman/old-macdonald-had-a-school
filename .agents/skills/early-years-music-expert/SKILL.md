@@ -1,153 +1,27 @@
 ---
 name: early-years-music-expert
-description: >
-  On-demand expertise in early childhood music education, grounded in the
-  project's reviewed research sources and database records (228+
-  library, educator, performer, and historical public-domain sources plus
-  1,405 extracted song versions). Use whenever the user asks about early-years
-  music, why we sing to babies, fingerplays, nursery rhymes, nursery-rhyme or
-  song history, steady beat, movement songs, music and early literacy,
-  self-regulation songs, storytime or circle-time structure, or wants to
-  design, justify, or write music lessons and song content for the Old
-  MacDonald Had a School curriculum — even if they do not mention the
-  source files by name. Use this skill for evidence and
-  expert judgment; use data/omhas.db as the managed curriculum system.
+description: Early-years music education, source interpretation, and teacher-useful song and lesson connections for Old MacDonald Had a School. Use for educational rationale, song actions, music lesson design, source review, or curriculum links. Use sql-expert for database writes and migrations.
 ---
 
 # Early-Years Music Expert
 
-This skill turns the project's reviewed research sources into instant,
-citable expertise. Source evidence lives at
-`docs/early-years-music-resources/`; a synthesized knowledge layer lives in
-`docs/early-years-music-resources/knowledge/`. Your job: answer with the
-collection's evidence, not with generic training-data vibes.
+Use the smallest relevant mode. Source evidence lives at `docs/early-years-music-resources/`; the managed system is `data/omhas.db`. Do not load the entire knowledge layer for a narrow task.
 
-## Database-first operating model
+## Choose one mode
 
-`data/omhas.db` is the single managed system for curriculum topics, materials,
-provenance, review state, relationships, and retrieval evaluation. Source
-files are evidence inputs, not a parallel content-management system.
+- Educational explanation or lesson design: read `references/teaching.md`.
+- Original-source review, song versions, actions, lyrics, or history: read `references/source-review.md` and only the needed local source.
+- Import planning or database relationships: use `sql-expert` and read `references/import-contract.md`; this skill supplies educational judgment, not SQL execution.
 
-- Process one source file at a time and inspect the original source before an
-  extract or derivative.
-- Match identity using source locator, creator, content, and checksum; never
-  merge records by title alone.
-- Separate source facts from expert suggestions. Store both in the database
-  with provenance and an explicit rationale for curriculum links.
-- Promote usable songs, activities, stories, books, resources, tags, and topic
-  relationships directly into normalized database tables.
-- If the schema cannot represent an important fact or relationship, create a
-  reversible migration instead of inventing a sidecar workflow.
-- For ordinary source imports, use one SQLite transaction and verify the
-  committed rows. Do not copy the database for every inserted record or source.
-  This is not a live production database: after a verified batch, make a
-  focused Git commit containing the migration, source evidence, and database;
-  that commit is the normal rollback point. Do not create routine backups or
-  dry runs for ordinary data batches.
-- Before assigning source review in a song booklet, run
-  `python scripts/songbook/plan_song_import.py <song-version.md> ...` against
-  the managed database. It mechanically normalizes Unicode/whitespace only and
-  classifies each item as already imported, exact duplicate, potential material
-  variation, title variation, or unique. Its report is stdout only; it creates
-  no corpus, queue, or sidecar tracking file.
-- Use `--apply-exact-sources` only after a reviewer has marked the local
-  transcription `reviewed`, supplied a real page locator, and the planner finds
-  exactly one local source PDF and one canonical title-and-lyrics match. That
-  guarded mode adds PDF/transcription provenance only; it never changes lyrics,
-  merges title-only matches, or inserts a song.
-- Normalize deterministic formatting (UTF-8, LF line endings, leading/trailing
-  whitespace, and a separately stored tune/action heading) before the first
-  import. Do not use a later cleanup to guess lyric boundaries, whether a verse
-  is a variation, or whether a printed prompt belongs in lyrics versus a song
-  action; return those questions to the original source review.
-- After each import, check integrity, foreign keys, teacher-useful completeness,
-  and the saved retrieval evaluation set.
-- Start with a calibration source, then scale to five independently reviewed
-  songs per import batch once source facts, database rows, retrieval, and the
-  rendered song pages are all correct. Increase to ten only after a clean
-  five-song batch. A defect returns the next batch to single-source repair.
-- Do not create closure ledgers, corpus inventories, review queues, or tracking
-  spreadsheets outside the database unless the user explicitly requests one.
-- Do not use "Early Years Corpus" as a product or database concept. It may
-  appear only when identifying a legacy source filename.
+## Shared rules
 
-A teacher-useful record should identify what the material is, its verified
-source, suitable grade or developmental context, practical teaching use,
-actions or procedure when applicable, and multiple relevant curriculum links
-that a teacher can follow.
+- Inspect the original source before trusting an extract or derivative.
+- Match identity using locator, creator, content, and checksum; never merge by title alone.
+- Separate documented facts from expert suggestions and label provenance.
+- Preserve real LF line breaks. Treat continuation prompts as song actions, not lyrics.
+- Treat `age_range` as developmental context; grade organizes curriculum.
+- End substantive answers with the practical implication for a teacher.
 
-## Load the knowledge layer first
+## Evidence discipline
 
-Before answering anything substantive, read (in this order, skipping what the
-question clearly doesn't need):
-
-1. `docs/early-years-music-resources/knowledge/core-lessons.md` — the five
-   durable lessons; this is your crash course and your default framework.
-2. `docs/early-years-music-resources/knowledge/retrieval-guide.md` — the
-   topic → source map with locators, when the question needs primary evidence.
-3. `docs/early-years-music-resources/knowledge/history-fingerplays.md` — for
-   any history question (fingerplays, nursery rhymes, songbooks, lineages).
-4. `docs/early-years-music-resources/knowledge/knowledge-index.json` — flat
-   fact index for fast grep-style lookup by topic (`rg -i "thumbkin"
-   knowledge-index.json` style searches are fine).
-
-## The crash course (what the field actually knows)
-
-1. **The body is the first instrument.** Songs are scores for physical
-   action; steady beat and movement are taught physically before notation.
-2. **Singing is reading instruction.** Singing slows language down so
-   syllables and rhymes become audible — phonological awareness in disguise.
-3. **Songs are versions, not fixed texts.** The folk process (local mutation
-   of words, actions, purpose) is how the repertoire survives; expect and
-   invite variation.
-4. **Repetition and ritual are the curriculum, and the adult is the real
-   student.** Small repertoires repeated deeply; programs train caregivers so
-   songs reach the home daily.
-5. **Music serves the whole child and includes everyone.** Regulation,
-   emotional literacy, belonging, graduated participation, and — as the
-   highest milestone — the child composing their own songs.
-
-Use these as lenses, not as a script. `core-lessons.md` has the mechanisms,
-evidence, and design implications for each.
-
-## The collection at a glance
-
-- `01-`, `05-`, `08-` — public libraries & agencies (baby bounce, rhyme time,
-  storytime handouts; ECRR framework).
-- `02-`, `06-`, `09-` — educators, publishers, performers (Feierabend,
-  Kodály, curricula, standards, children's musicians).
-- `03-` — performers/programs (Raffi, Berkner, Wiggles, Learning Station…).
-- `04-`, `07-` — historical public-domain songbooks (1843–1929: Mother Goose,
-  Froebel, Poulsson, Jenks, Gaynor, Gomme, Quigley…).
-- `metadata/` — per-folder provenance records (title, creator, year, era,
-  region, url). `MASTER_LIST.md` — retrieval logs and statuses.
-- `song_versions/` — 1,405 extracted song versions; filename = song + source;
-  frontmatter carries `source_file`, `confidence`, `review_status`.
-
-## Answering rules
-
-- **Ground every claim.** Pull at least one primary source per substantive
-  point via the retrieval guide or index. Quote briefly and cite as
-  *creator + year + local filename*.
-- **Verify before citing.** Quotes in the knowledge layer were checked on
-  2026-08-07; re-check against the file when you quote. Scanned historical
-  PDFs have no text layer: grep fails on them — use read_file with a `pages`
-  range instead.
-- **Respect quality flags.** Most `song_versions` entries are
-  `review_status: pending_qc`: good leads, not verified lyrics. Say so if you
-  rely on one.
-- **Stay inside the evidence.** For historical claims, prefer what the
-  collection documents. If you bring in outside facts (e.g., earliest printed
-  Pat-a-cake references), label them as such and hedge.
-- **Never invent versions or lyrics.** If the collection doesn't contain it,
-  say so and offer the closest documented relative.
-- **Teach, don't dump.** The user is building a curriculum; end substantive
-  answers with the practical implication ("what this means for a lesson").
-
-## Good moves
-
-- Trace a song's lineage across eras by globbing `song_versions/<slug>*.md`
-  and ordering by source year (see history-fingerplays.md lineages table).
-- For "why does X work" questions, answer from two eras (e.g., Froebel 1844
-  and Head Start/ECRR modern) — the contrast between old and new rationales
-  is itself one of the collection's best lessons.
+Ground substantive claims in the local knowledge layer or a primary source. Mark pending or extracted material as unverified. Never invent versions, lyrics, actions, chords, or curriculum links. Keep materially different versions separate.
