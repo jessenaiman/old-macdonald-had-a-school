@@ -15,6 +15,7 @@ original-source review described by the early-years music skill.
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import json
 import re
@@ -277,18 +278,76 @@ def render_text(candidates: list[Candidate], attachments: list[dict[str, Any]]) 
     return "\n".join(lines)
 
 
+def render_summary(
+    candidates: list[Candidate], attachments: list[dict[str, Any]], project_root: Path
+) -> str:
+    """Report batch triage without emitting one token-heavy record per source."""
+    classifications = collections.Counter(candidate.classification for candidate in candidates)
+    sources: dict[str, list[Candidate]] = collections.defaultdict(list)
+    for candidate in candidates:
+        sources[candidate.source_file or "(missing source file)"].append(candidate)
+
+    lines = [f"planned={len(candidates)}", "classification="]
+    lines.extend(
+        f"  {classification}={count}"
+        for classification, count in sorted(classifications.items())
+    )
+    lines.append(
+        "reviewed_exact_attachable=" + str(sum(
+            1 for candidate in candidates if safe_to_attach(candidate, project_root)
+        ))
+    )
+    lines.append("highest-priority-source-files=")
+    for source_file, grouped in sorted(
+        sources.items(),
+        key=lambda item: sum(candidate.classification != "already-imported" for candidate in item[1]),
+        reverse=True,
+    )[:20]:
+        not_imported = sum(candidate.classification != "already-imported" for candidate in grouped)
+        if not_imported:
+            grouped_classes = collections.Counter(candidate.classification for candidate in grouped)
+            breakdown = ", ".join(
+                f"{classification}={count}"
+                for classification, count in sorted(grouped_classes.items())
+                if classification != "already-imported"
+            )
+            lines.append(
+                f"  {source_file}: total={len(grouped)}, decision={not_imported}; {breakdown}"
+            )
+    if attachments:
+        lines.append(f"attached_exact_reviewed_sources={len(attachments)}")
+    return "\n".join(lines)
+
+
+def collect_source_paths(explicit_paths: list[Path], source_directories: list[Path]) -> list[Path]:
+    """Expand local directory input without an OS command-line-length limit."""
+    source_paths = list(explicit_paths)
+    for directory in source_directories:
+        if not directory.is_dir():
+            raise ValueError(f"Source directory does not exist: {directory}")
+        source_paths.extend(directory.rglob("*.md"))
+    unique_paths = {path.resolve() for path in source_paths}
+    if not unique_paths:
+        raise ValueError("Provide at least one Markdown source or --source-directory")
+    return sorted(unique_paths)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("sources", nargs="+", type=Path, help="Reviewed song-transcription Markdown file(s) inside this project")
+    parser.add_argument("sources", nargs="*", type=Path, help="Reviewed song-transcription Markdown file(s) inside this project")
+    parser.add_argument(
+        "--source-directory", action="append", type=Path, default=[],
+        help="Directory of local transcription Markdown files to classify without shell argument-length limits",
+    )
     parser.add_argument("--db", type=Path, default=Path("data/omhas.db"), help="Managed SQLite database")
     parser.add_argument("--project-root", type=Path, default=Path.cwd(), help="Repository root used for relative source paths")
     parser.add_argument("--apply-exact-sources", action="store_true", help="Attach only safe, reviewed exact duplicates as source references; never creates or edits songs")
-    parser.add_argument("--format", choices=("text", "json"), default="text")
+    parser.add_argument("--format", choices=("text", "json", "summary"), default="text")
     args = parser.parse_args()
 
     project_root = args.project_root.resolve()
     database_path = args.db.resolve()
-    source_paths = [path.resolve() for path in args.sources]
+    source_paths = collect_source_paths(args.sources, args.source_directory)
     for path in source_paths:
         if not path.is_file():
             parser.error(f"Source file does not exist: {path}")
@@ -313,6 +372,8 @@ def main() -> int:
                     raise RuntimeError(f"Foreign-key check failed: {violations}")
         if args.format == "json":
             print(json.dumps({"candidates": [asdict(item) for item in candidates], "attachments": attachments}, indent=2))
+        elif args.format == "summary":
+            print(render_summary(candidates, attachments, project_root))
         else:
             print(render_text(candidates, attachments))
     finally:

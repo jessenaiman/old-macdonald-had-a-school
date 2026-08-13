@@ -40,8 +40,10 @@ files are evidence inputs, not a parallel content-management system.
   reversible migration instead of inventing a sidecar workflow.
 - For ordinary source imports, use one SQLite transaction and verify the
   committed rows. Do not copy the database for every inserted record or source.
-  Reserve a backup or disposable migration dry run for a schema change or a
-  material batch where the added recovery point is justified.
+  This is not a live production database: after a verified batch, make a
+  focused Git commit containing the migration, source evidence, and database;
+  that commit is the normal rollback point. Do not create routine backups or
+  dry runs for ordinary data batches.
 - Before assigning source review in a song booklet, run
   `python scripts/songbook/plan_song_import.py <song-version.md> ...` against
   the managed database. It mechanically normalizes Unicode/whitespace only and
