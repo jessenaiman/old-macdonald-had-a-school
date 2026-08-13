@@ -1,37 +1,26 @@
 ---
-activity_material: hands, books
-age_range: Infant/Toddler (0–3), baby bounce sessions
+activity_material: none
 confidence: 1.0
-educational_domain: Physical Development
-evidence_quote: 'This is Baby ready for a nap
-
-  Lay her down in her mother’s lap
-
-  Cover her up so she won’t peep'
-page_section: unknown
-review_status: pending_qc
-skill_objective: Develops fine motor skills and hand coordination through fingerplay
-  movements
+developmental_context: Baby Bounce collection; the item itself gives no grade placement.
+educational_domain: Music & Movement; Language & Vocabulary
+evidence_quote: 'This is Baby ready for a nap (hold up index finger)'
+page_section: PDF page 47; printed page 47
+review_status: reviewed
 source_file: mid-north-coast-library-baby-bounce-booklet.pdf
 source_id: babys-nap-mid-north-coast-library-baby-bounce-booklet
 source_title: Baby Bounce Nursery Rhymes (booklet)
 ---
 
-# Baby’s Nap
+# Baby's Nap
 
 This is Baby ready for a nap
-Lay her down in her mother’s lap
-Cover her up so she won’t peep
-Rock her ‘til she’s fast asleep
-Pat-A-Cake
-Pat-a-cake, pat-a-cake, Baker’s man
-Bake me a cake as fast as you can
-Pat it and prick it and mark it with ‘B’
-And put it in the oven for Baby and me
-
+Lay her down in her mother's lap
+Cover her up so she won't peep
+Rock her 'til she's fast asleep
 
 **Printed actions:**
-hold up index finger
-place index finger on open palm of other hand
-wrap fingers around index finger
-rock hands back and forth
+
+- Line 1: hold up index finger.
+- Line 2: place index finger on open palm of other hand.
+- Line 3: wrap fingers around index finger.
+- Line 4: rock hands back and forth.

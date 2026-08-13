@@ -1,17 +1,11 @@
 ---
-activity_material: hands
-age_range: Infant/Toddler (0–3), baby bounce sessions
-confidence: 0.9
-educational_domain: Physical Development
-evidence_quote: 'A smooth road, a smooth road
-
-  A smooth road, a smooth road
-
-  A bumpy road, a bumpy road'
-page_section: unknown
-review_status: pending_qc
-skill_objective: Develops fine motor skills and hand coordination through fingerplay
-  movements
+activity_material: none
+confidence: 1.0
+developmental_context: Baby Bounce collection; the item itself gives no grade placement.
+educational_domain: Music & Movement
+evidence_quote: 'A smooth road, a smooth road'
+page_section: PDF page 54; printed page 54
+review_status: reviewed
 source_file: mid-north-coast-library-baby-bounce-booklet.pdf
 source_id: a-smooth-road-mid-north-coast-library-baby-bounce-booklet
 source_title: Baby Bounce Nursery Rhymes (booklet)
@@ -27,9 +21,9 @@ A rough road, a rough road!
 A rough road, a rough road!
 A hole!
 
-
 **Printed actions:**
-smooth hands down baby’s legs
-bounce baby lightly on knees
-lift baby up in the air on each ‘rough’
-baby falls through gap between legs
+
+- Line 2: smooth hands down baby's legs.
+- Line 4: bounce baby lightly on knees.
+- Line 6: lift baby up in the air on each 'rough'.
+- Line 7: baby falls through gap between legs.

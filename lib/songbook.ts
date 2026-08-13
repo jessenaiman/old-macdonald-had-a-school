@@ -152,7 +152,7 @@ export type SongDetail = {
   }>;
   actions: Array<{
     id: string; sectionId: number | null; lineNumber: number | null; wording: string;
-    classification: string | null; provenance: string | null; evidenceNote: string | null;
+    sequence: number | null; classification: string | null; provenance: string | null; evidenceNote: string | null;
   }>;
   topics: Array<{ id: number; label: string; grades: string[]; rationale: string | null }>;
   sources: Array<{ path: string; kind: string; state: string; relationship: string; locator: string | null; note: string | null }>;
@@ -189,10 +189,11 @@ export function getSongbookSong(id: number): SongDetail | null {
       FROM song_chord_guides WHERE song_id = ? ORDER BY sort_order, id
     `).all(id) as Array<Record<string, string | number | null>>;
     const actions = database.prepare(`
-      SELECT id, section_id, line_number, action_wording, action_classification, provenance, evidence_note
+      SELECT id, section_id, line_number, action_wording, action_sequence, action_classification, provenance, evidence_note
       FROM song_actions
       WHERE song_id = ? AND NULLIF(trim(COALESCE(action_wording, '')), '') IS NOT NULL
-      ORDER BY COALESCE(section_id, 0), COALESCE(line_number, 0), id
+      ORDER BY COALESCE(section_id, 0), COALESCE(line_number, 0),
+               CAST(COALESCE(action_sequence, '9999') AS INTEGER), id
     `).all(id) as Array<Record<string, string | number | null>>;
     const topics = database.prepare(`
       SELECT t.id, t.topic label, tm.teacher_rationale rationale, GROUP_CONCAT(DISTINCT g.label) grades
@@ -221,7 +222,7 @@ export function getSongbookSong(id: number): SongDetail | null {
       })),
       actions: actions.map((action) => ({
         id: String(action.id), sectionId: action.section_id as number | null, lineNumber: action.line_number as number | null,
-        wording: String(action.action_wording), classification: action.action_classification as string | null,
+        wording: String(action.action_wording), sequence: action.action_sequence === null ? null : Number(action.action_sequence), classification: action.action_classification as string | null,
         provenance: action.provenance as string | null, evidenceNote: action.evidence_note as string | null,
       })),
       topics: topics.map((topic) => ({ ...topic, grades: topic.grades?.split(",").filter(Boolean) ?? [] })),

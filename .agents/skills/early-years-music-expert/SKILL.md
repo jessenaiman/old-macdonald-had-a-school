@@ -42,6 +42,22 @@ files are evidence inputs, not a parallel content-management system.
   committed rows. Do not copy the database for every inserted record or source.
   Reserve a backup or disposable migration dry run for a schema change or a
   material batch where the added recovery point is justified.
+- Before assigning source review in a song booklet, run
+  `python scripts/songbook/plan_song_import.py <song-version.md> ...` against
+  the managed database. It mechanically normalizes Unicode/whitespace only and
+  classifies each item as already imported, exact duplicate, potential material
+  variation, title variation, or unique. Its report is stdout only; it creates
+  no corpus, queue, or sidecar tracking file.
+- Use `--apply-exact-sources` only after a reviewer has marked the local
+  transcription `reviewed`, supplied a real page locator, and the planner finds
+  exactly one local source PDF and one canonical title-and-lyrics match. That
+  guarded mode adds PDF/transcription provenance only; it never changes lyrics,
+  merges title-only matches, or inserts a song.
+- Normalize deterministic formatting (UTF-8, LF line endings, leading/trailing
+  whitespace, and a separately stored tune/action heading) before the first
+  import. Do not use a later cleanup to guess lyric boundaries, whether a verse
+  is a variation, or whether a printed prompt belongs in lyrics versus a song
+  action; return those questions to the original source review.
 - After each import, check integrity, foreign keys, teacher-useful completeness,
   and the saved retrieval evaluation set.
 - Start with a calibration source, then scale to five independently reviewed
