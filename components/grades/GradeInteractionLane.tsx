@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { type GradeKey } from "@/lib/grade-routes";
 import { CAST, type CastKey } from "@/lib/cast";
-import type { GradePathItem } from "../builder/CurriculumTemplates";
+import type { GradePathItem } from "./types";
 import styles from "./GradeInteractionLane.module.css";
 import {
   GradeCurriculumPanel,
@@ -69,7 +69,7 @@ export function GradeWorkspace({
       data-grade-template={grade}
       data-style-scope="grade-workspace"
     >
-      <aside className={`${styles.rail} material-surface material-cork`} aria-label={`${gradeLabel} lesson workspace`}>
+      <aside className={`${styles.rail} grade-surface`} aria-label={`${gradeLabel} lesson workspace`}>
         <div className={`${styles.identity} grade-surface`}>
           <span className={`${styles.identityFastener} brand-asset fastener-sewing-button icon-micro`} aria-hidden="true" />
           <span>Lesson workspace</span>

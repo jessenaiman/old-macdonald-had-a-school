@@ -14,6 +14,7 @@
   flex-direction: column;
   padding: 1.25rem;
   color: var(--theme-ink);
+  background-image: var(--grade-texture);
   background-size: 24rem;
   box-shadow: .3rem 0 color-mix(in srgb, var(--workspace-ink) 15%, transparent);
 }

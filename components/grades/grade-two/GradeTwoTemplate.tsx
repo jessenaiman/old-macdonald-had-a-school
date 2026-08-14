@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import type { GradePathItem } from "../../builder/CurriculumTemplates";
+import type { GradePathItem } from "../types";
 import { GradeInteractionLane } from "../GradeInteractionLane";
 import { GRADE_INTERACTION_CONFIGS } from "../grade-config";
 

@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import type { GradeTemplateProps } from "../../builder/CurriculumTemplates";
+import type { GradeTemplateProps } from "../types";
 import { GradeInteractionLane } from "../GradeInteractionLane";
 import { GRADE_INTERACTION_CONFIGS } from "../grade-config";
 
