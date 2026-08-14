@@ -35,7 +35,7 @@ export function HomeCarousel({ selected = false }: { selected?: boolean }) {
 
   return (
     <Carousel className="min-w-0" opts={{ loop: true }} setApi={setApi} aria-label="Explore the farm school">
-      <div className="relative aspect-video w-full rotate-[0.35deg] border-8 border-card bg-primary shadow-lg">
+      <div className="relative aspect-video w-full rotate-[0.35deg] border-8 border-card bg-primary shadow-lg [&_[data-slot=carousel-content]]:h-full">
         <CarouselContent className="ml-0 h-full">
           {SLIDES.map((item, index) => (
             <CarouselItem className="relative h-full pl-0" key={item.src}>

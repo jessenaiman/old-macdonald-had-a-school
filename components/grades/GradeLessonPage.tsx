@@ -7,7 +7,8 @@ import { getCurriculumTopic } from "../../lib/curriculum-db";
 import { getCurriculumLessonByTitleAndGrade } from "../../lib/curriculum-lesson";
 import { gradeKeysForLabel, type GradeKey } from "../../lib/grade-routes";
 import { DatabaseLessonDocument } from "./DatabaseLessonDocument";
-import styles from "./GradeLessonPage.module.css";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const GRADE_LESSON_DETAILS: Record<
   GradeKey,
@@ -83,55 +84,76 @@ export async function GradeLessonPage({
 
   return (
     <div
-      className={styles.lessonPage}
+      className="material-surface material-cardboard-paper mx-auto my-4 grid w-[calc(100%-1rem)] max-w-7xl grid-cols-1 overflow-hidden rounded-2xl border shadow-sm lg:my-8 lg:grid-cols-[14rem_minmax(0,1fr)] print:block print:w-full print:border-0 print:shadow-none"
       data-grade={grade}
       data-grade-template={grade}
       data-lesson-template={lesson?.metadata.template ?? "database-draft"}
       data-style-scope="grade-lesson-page"
     >
       <aside
-        className={styles.rail}
+        className="grade-surface flex min-w-0 flex-col gap-4 p-4 lg:min-h-[60rem] print:hidden"
         aria-label={`${details.label} lesson sections`}
       >
-        <div className={styles.railIdentity}>
+        <div className="grid grid-cols-[3.5rem_minmax(0,1fr)] items-center gap-3">
           <span
-            className={`${styles.gradeBadge} brand-asset grade-icon icon-medium`}
+            className="brand-asset grade-icon icon-medium"
             data-grade-icon={grade}
             aria-hidden="true"
           />
-          <div>
-            <span>Farm School</span>
-            <strong>{details.label}</strong>
-            <small>{details.age}</small>
+          <div className="flex min-w-0 flex-col">
+            <span className="text-xs font-black uppercase tracking-widest">
+              Farm School
+            </span>
+            <strong className="font-heading text-xl leading-none">
+              {details.label}
+            </strong>
+            <small className="text-xs font-bold">{details.age}</small>
           </div>
         </div>
-        <nav className={styles.railNav}>
-          <a href="#lesson-overview">
-            <span>Overview</span>
-          </a>
-          <a href="#lesson-plan">
-            <span>Lesson plan</span>
-          </a>
-          <a href="#lesson-notes">
-            <span>Teacher notes</span>
-          </a>
-          <Link href={`/grade/${grade}`}>
-            <span>All {details.label}</span>
-          </Link>
+        <nav
+          className="grid grid-cols-2 gap-1 sm:grid-cols-4 lg:mt-4 lg:grid-cols-1"
+          aria-label={`${details.label} lesson navigation`}
+        >
+          <Button asChild variant="ghost" className="justify-start">
+            <a href="#lesson-overview">
+              <span>Overview</span>
+            </a>
+          </Button>
+          <Button asChild variant="ghost" className="justify-start">
+            <a href="#lesson-plan">
+              <span>Lesson plan</span>
+            </a>
+          </Button>
+          <Button asChild variant="ghost" className="justify-start">
+            <a href="#lesson-notes">
+              <span>Teacher notes</span>
+            </a>
+          </Button>
+          <Button asChild variant="ghost" className="justify-start">
+            <Link href={`/grade/${grade}`}>
+              <span>All {details.label}</span>
+            </Link>
+          </Button>
         </nav>
-        <div className={styles.teacherPatch}>
+        <Card className="material-surface material-cardboard-paper relative mt-auto hidden overflow-hidden lg:block">
           <Image
             src={details.teacher}
             alt={details.teacherName}
             width={150}
             height={150}
           />
-          <span>Your {details.label} guide</span>
-          <strong>{details.teacherName}</strong>
-        </div>
+          <CardHeader>
+            <span className="text-xs font-black uppercase tracking-widest">
+              Your {details.label} guide
+            </span>
+            <CardTitle className="font-hand text-2xl">
+              {details.teacherName}
+            </CardTitle>
+          </CardHeader>
+        </Card>
       </aside>
-      <div className={styles.lessonStage}>
-        <div className={styles.lessonCrumb}>
+      <div className="min-w-0 p-4 sm:p-6 lg:p-8 print:p-0">
+        <div className="mb-4 flex flex-wrap gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
           <Link href={`/grade/${grade}`}>{details.label}</Link>
           <span aria-hidden="true">&gt;</span>
           <span>{subject}</span>
@@ -153,14 +175,16 @@ export async function GradeLessonPage({
           )}
         </div>
         <section
-          className={styles.teacherNotes}
+          className="material-surface material-cork-board mt-8 rounded-xl border p-4 print:break-before-page"
           id="lesson-notes"
           aria-label="Teacher planning notes"
         >
-          <header>
-            <p>Three quiet places to make the lesson your own.</p>
+          <header className="mb-5 text-center">
+            <p className="font-hand text-2xl">
+              Three quiet places to make the lesson your own.
+            </p>
           </header>
-          <div className={styles.teacherNoteGrid}>
+          <div className="grid gap-5 md:grid-cols-3">
             {[
               [
                 "Before learners arrive",
@@ -178,28 +202,39 @@ export async function GradeLessonPage({
                 "fastener-push-pin",
               ],
             ].map(([title, prompt, fastener]) => (
-              <article className={styles.teacherNote} key={title}>
+              <Card
+                className="material-surface material-cardboard-paper relative min-h-48 print:min-h-[5.8in] print:break-inside-avoid"
+                key={title}
+              >
                 <span
                   className={`brand-asset ${fastener} icon-small`}
                   aria-hidden="true"
                 />
-                <h2>{title}</h2>
-                <p>{prompt}</p>
-                <span aria-hidden="true" />
-                <span aria-hidden="true" />
-                <span aria-hidden="true" />
-                <span aria-hidden="true" />
-                <span aria-hidden="true" />
-                <span aria-hidden="true" />
-                <span aria-hidden="true" />
-              </article>
+                <CardHeader className="pt-8">
+                  <CardTitle>{title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{prompt}</p>
+                  <div className="mt-3 grid gap-7">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <span
+                        className="border-b"
+                        aria-hidden="true"
+                        key={index}
+                      />
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </section>
-        <div className={styles.bottomAction}>
-          <Link
-            href={`/grade/${grade}`}
-          >{`<- Back to ${details.label} lessons`}</Link>
+        <div className="mt-6 flex justify-end print:hidden">
+          <Button asChild>
+            <Link
+              href={`/grade/${grade}`}
+            >{`← Back to ${details.label} lessons`}</Link>
+          </Button>
         </div>
       </div>
     </div>

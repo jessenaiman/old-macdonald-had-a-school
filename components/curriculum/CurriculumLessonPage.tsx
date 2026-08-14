@@ -63,7 +63,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
                 ))
               ) : lesson.pacing.length > 0 ? (
                 <Badge variant="outline">
-                  Legacy pacing: {lesson.pacing.map((placement) => placement.month).filter((value, index, values) => values.indexOf(value) === index).join(", ")}
+                  Recorded pacing: {lesson.pacing.map((placement) => placement.month).filter((value, index, values) => values.indexOf(value) === index).join(", ")}
                 </Badge>
               ) : null}
             </div>

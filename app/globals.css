@@ -19,6 +19,7 @@
   --theme-cream: #f7edda;
   --theme-paper: #fffaf0;
   --theme-paper-muted: #eee1c9;
+  --theme-paper-rose: color-mix(in srgb, var(--curriculum-red) 18%, var(--theme-paper));
   --theme-denim: #244f70;
   --theme-navy: #142d42;
   --theme-wood: #8a603d;
@@ -224,12 +225,15 @@
   ::selection { color: var(--primary-foreground); background: var(--primary); }
 }
 
-.material-surface { background-color: var(--material-color); background-image: var(--material-image); background-repeat: repeat; background-size: var(--material-size, 220px); }
+.material-surface { background-color: var(--material-color); background-image: var(--material-image); background-position: var(--material-position, 0 0); background-repeat: repeat; background-size: var(--material-size, 220px); }
 .material-cardboard-paper { --foreground: var(--theme-ink); --muted-foreground: var(--theme-copy); --material-color: var(--theme-paper); --material-image: var(--asset-cardboard-ivory); --material-size: 320px; color: var(--theme-ink); }
 .material-cardboard-kraft { --material-color: var(--theme-paper-muted); --material-image: var(--asset-cardboard-kraft); --material-size: 320px; }
 .material-felt { --material-color: var(--character-color); --material-image: var(--character-texture); --material-size: 180px; color: var(--character-foreground); }
 .material-felt [data-slot='card-description'] { color: color-mix(in srgb, currentColor 78%, transparent); }
 .material-woven-fabric { --material-color: var(--theme-wood-light); --material-image: var(--asset-woven-old-macdonald); --material-size: 190px; color: var(--theme-ink); }
+.material-denim-indigo { --material-color: var(--theme-navy); --material-image: var(--asset-denim-indigo); --material-size: 256px; color: var(--theme-white); }
+.material-paper-ruled { --material-color: var(--paper-color, var(--theme-paper)); --material-image: var(--asset-paper-ruled-repeat); --material-position: 0 1.3rem; --material-size: 336px; color: var(--paper-ink, var(--theme-ink)); background-blend-mode: multiply; }
+.material-paper-grid { --material-color: var(--paper-color, var(--theme-paper)); --material-image: var(--asset-paper-grid-repeat); --material-size: 512px; color: var(--paper-ink, var(--theme-ink)); background-blend-mode: multiply; }
 .material-woven-fabric [data-slot='card-description'],
 .material-construction-paper [data-slot='card-description'],
 .material-leather [data-slot='card-description'] { color: currentColor; opacity: .78; }

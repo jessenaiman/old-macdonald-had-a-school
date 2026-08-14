@@ -46,12 +46,24 @@
   --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png');
   --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.png');
   --asset-woven-old-macdonald: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png');
+  --asset-denim-indigo: url('/design-assets/web-material-library-v1/denim/denim-dark-indigo-tile-v01.png');
   --asset-construction-mr-sam: url('/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png');
   --asset-thread-old-macdonald: url('/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.png');
   --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png');
   --asset-leather-blue: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png');
   --asset-leather-indigo: url('/design-assets/web-material-library-v1/leather/individual-tiles/07-mr-puddles-leather-tile-v01.png');
   --asset-cork-board: url('/design-assets/cork-board-kit-v2/seamless-cork-tile.png');
+  --asset-paper-ruled-repeat: url('/design-assets/classroom-paper-notes-v1/repeat-tiles/paper-ruled-neutral-repeat-v01.webp');
+  --asset-paper-grid-repeat: url('/design-assets/classroom-paper-notes-v1/repeat-tiles/paper-grid-blue-repeat-v01.webp');
+  --asset-cork-repeat-web: url('/design-assets/cork-board-kit-v2/seamless-cork-tile-web.webp');
+  --asset-cork-board-landscape: url('/design-assets/cork-board-kit-v2/medium-board.png');
+  --asset-cork-board-portrait: url('/design-assets/cork-board-kit-v2/vertical-board.png');
+  --asset-cork-planning-strip: url('/design-assets/cork-board-kit-v2/wide-planning-strip.png');
+  --asset-brand-emblem-review: url('/design-assets/brand-emblem-v1-review/brand-emblem-family-contact-sheet.png');
+  --asset-brand-emblem-flat-micro: url('/design-assets/brand-emblem-v1/candidate-flat-marks/brand-emblem-flat-32.png');
+  --asset-brand-emblem-screen-nav: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-nav-44.png');
+  --asset-brand-emblem-screen-card: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.png');
+  --asset-brand-emblem-detail-media: url('/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.png');
   --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png');
   --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png');
   --subject-science-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.png');
@@ -66,6 +78,53 @@
 [data-subject='music'] { --subject-note-paper: var(--subject-music-paper); }
 [data-subject='arts'] { --subject-note-paper: var(--subject-arts-paper); }
 [data-subject='health'] { --subject-note-paper: var(--subject-health-paper); }
+
+/* Compact cast artwork. Character keys select assets; consumers never carry URLs. */
+[data-character='old-macdonald'] { --character-face-patch:url('/icons/early-years/face-patches/old-macdonald-yellow.png'); --character-face-bust:url('/icons/early-years/face-busts/old-macdonald-yellow.png'); }
+[data-character='miss-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/miss-puddles-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-puddles-purple.png'); }
+[data-character='mr-rusty'] { --character-face-patch:url('/icons/early-years/face-patches/mr-rusty-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-rusty-blue.png'); }
+[data-character='miss-hayley'] { --character-face-patch:url('/icons/early-years/face-patches/miss-hayley-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-hayley-purple.png'); }
+[data-character='mr-sam'] { --character-face-patch:url('/icons/early-years/face-patches/mr-sam-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-sam-blue.png'); }
+[data-character='mr-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/mr-maisy-orange.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-maisy-orange.png'); }
+[data-character='mr-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/mr-puddles-green.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-puddles-green.png'); }
+[data-character='miss-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/miss-maisy-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-maisy-purple.png'); }
+[data-character='hopper'] { --character-face-patch:url('/icons/early-years/face-patches/hopper-red.png'); --character-face-bust:url('/icons/early-years/face-busts/hopper-red.png'); }
+[data-character='whiskers'] { --character-face-patch:url('/icons/early-years/face-patches/whiskers-orange.png'); --character-face-bust:url('/icons/early-years/face-busts/whiskers-orange.png'); }
+[data-character='scout'] { --character-face-patch:url('/icons/early-years/face-patches/scout-green.png'); --character-face-bust:url('/icons/early-years/face-busts/scout-green.png'); }
+[data-character='penny'] { --character-face-patch:url('/icons/early-years/face-patches/penny-orange.png'); --character-face-bust:url('/icons/early-years/face-busts/penny-orange.png'); }
+[data-character='maisy'] { --character-face-patch:url('/icons/early-years/face-patches/maisy-yellow.png'); --character-face-bust:url('/icons/early-years/face-busts/maisy-yellow.png'); }
+[data-character='puddles'] { --character-face-patch:url('/icons/early-years/face-patches/puddles-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/puddles-blue.png'); }
+[data-character='sam'] { --character-face-patch:url('/icons/early-years/face-patches/sam-red.png'); --character-face-bust:url('/icons/early-years/face-busts/sam-red.png'); }
+[data-character='rusty'] { --character-face-patch:url('/icons/early-years/face-patches/rusty-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/rusty-blue.png'); }
+
+[data-character='miss-puddles'] { --character-embroidered-badge:url('/patches/miss_puddles_badge.png'); }
+[data-character='mr-rusty'] { --character-embroidered-badge:url('/patches/mr_rusty_badge.png'); }
+[data-character='miss-hayley'] { --character-embroidered-badge:url('/patches/miss_hayley_badge.png'); }
+[data-character='mr-sam'] { --character-embroidered-badge:url('/patches/mr_sam_badge.png'); }
+[data-character='mr-maisy'] { --character-embroidered-badge:url('/patches/mr_maisy_badge.png'); }
+[data-character='mr-puddles'] { --character-embroidered-badge:url('/patches/mr_puddles_badge.png'); }
+[data-character='miss-maisy'] { --character-embroidered-badge:url('/patches/miss_maisy_badge.png'); }
+[data-character='hopper'] { --character-embroidered-badge:url('/patches/hopper_badge.png'); }
+[data-character='whiskers'] { --character-embroidered-badge:url('/patches/whiskers_badge.png'); }
+[data-character='scout'] { --character-embroidered-badge:url('/patches/scout_badge.png'); }
+[data-character='penny'] { --character-embroidered-badge:url('/patches/penny_badge.png'); }
+[data-character='maisy'] { --character-embroidered-badge:url('/patches/maisy_badge.png'); }
+[data-character='puddles'] { --character-embroidered-badge:url('/patches/puddles_badge.png'); }
+[data-character='sam'] { --character-embroidered-badge:url('/patches/sam_badge.png'); }
+[data-character='rusty'] { --character-embroidered-badge:url('/patches/rusty_badge.png'); }
+
+.character-face-patch { --brand-asset-image:var(--character-face-patch); }
+.character-face-bust { --brand-asset-image:var(--character-face-bust); }
+.character-embroidered-badge { --brand-asset-image:var(--character-embroidered-badge); }
+.cork-repeat-preview { --brand-asset-image:var(--asset-cork-repeat-web); }
+.cork-board-landscape { --brand-asset-image:var(--asset-cork-board-landscape); }
+.cork-board-portrait { --brand-asset-image:var(--asset-cork-board-portrait); }
+.cork-planning-strip { --brand-asset-image:var(--asset-cork-planning-strip); }
+.brand-emblem-review-sheet { --brand-asset-image:var(--asset-brand-emblem-review); }
+.brand-emblem-flat-micro { --brand-asset-image:var(--asset-brand-emblem-flat-micro); }
+.brand-emblem-screen-nav { --brand-asset-image:var(--asset-brand-emblem-screen-nav); }
+.brand-emblem-screen-card { --brand-asset-image:var(--asset-brand-emblem-screen-card); }
+.brand-emblem-detail-media { --brand-asset-image:var(--asset-brand-emblem-detail-media); }
 
 /* Size roles */
 .icon-micro { --brand-asset-size: 1rem; }

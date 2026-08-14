@@ -1,0 +1,32 @@
+<section id="icon-sizes" className="material-surface material-cardboard-paper mt-5 rounded-2xl border border-border p-5 text-foreground sm:p-8 lg:p-12">
+
+## One icon, three working sizes
+
+Sizing is a component rule, not a second asset catalogue. Find the semantic asset name in [Curriculum signals already available](#icons), then apply the size that matches its production role.
+
+| Role | Class | Use |
+| --- | --- | --- |
+| Large | `icon-large` | Subject introductions, feature cards, and empty states |
+| Medium | `icon-medium` | Lesson cards, grade pathways, and curriculum panels |
+| Small | `icon-small` with the matching `-flat` asset | Navigation, compact metadata, and filters |
+
+### Representative sizing specimen
+
+<div className="mt-5 grid gap-4 rounded-xl border border-border bg-card p-5 text-card-foreground shadow-md sm:grid-cols-3">
+  <figure className="m-0 grid justify-items-center gap-3 text-center">
+    <span className="brand-asset music-fiddle icon-large" aria-hidden="true" />
+    <figcaption><strong className="block">Large</strong><code>music-fiddle icon-large</code></figcaption>
+  </figure>
+  <figure className="m-0 grid justify-items-center gap-3 text-center">
+    <span className="brand-asset music-fiddle icon-medium" aria-hidden="true" />
+    <figcaption><strong className="block">Medium</strong><code>music-fiddle icon-medium</code></figcaption>
+  </figure>
+  <figure className="m-0 grid justify-items-center gap-3 text-center">
+    <span className="brand-asset music-fiddle-flat icon-small" aria-hidden="true" />
+    <figcaption><strong className="block">Small</strong><code>music-fiddle-flat icon-small</code></figcaption>
+  </figure>
+</div>
+
+Use dimensional felt artwork at large and medium sizes. Use the governed compact export with its `-flat` suffix at small size. Do not shrink detailed felt artwork into navigation or metadata.
+
+</section>

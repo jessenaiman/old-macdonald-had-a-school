@@ -383,7 +383,7 @@ export default function SearchPage() {
                             <span className="text-sm text-muted-foreground">{teacherFacingTopicSummary(topic) || "No topic summary has been reviewed yet."}</span>
                             {topic.why_match ? <small>{topic.why_match}</small> : null}
                           </span>
-                          <span className="col-start-2 text-xs text-muted-foreground sm:col-auto sm:text-right">{topic.grade}<br />{topic.subject}{topic.suggested_plan ? <><br />Suggested: {topic.suggested_plan}</> : topic.pacing ? <><br />Legacy: {topic.pacing}</> : null}</span>
+                          <span className="col-start-2 text-xs text-muted-foreground sm:col-auto sm:text-right">{topic.grade}<br />{topic.subject}{topic.suggested_plan ? <><br />Suggested: {topic.suggested_plan}</> : topic.pacing ? <><br />Recorded pacing: {topic.pacing}</> : null}</span>
                         </Link>
                       </li>
                     );
@@ -447,7 +447,7 @@ export default function SearchPage() {
                       </section>
                       <section className="flex flex-col gap-2">
                         <h3 className="font-heading text-lg">{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
-                        <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}${selectedTopic.suggested_plan ? ` ... Suggested in ${selectedTopic.suggested_plan}` : selectedTopic.pacing ? ` ... Legacy pacing: ${selectedTopic.pacing}` : ""}` : selectedLesson?.purpose || "No purpose is available."}</p>
+                        <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}${selectedTopic.suggested_plan ? ` ... Suggested in ${selectedTopic.suggested_plan}` : selectedTopic.pacing ? ` ... Recorded pacing: ${selectedTopic.pacing}` : ""}` : selectedLesson?.purpose || "No purpose is available."}</p>
                       </section>
                       <section className="flex flex-col gap-2">
                         <h3 className="font-heading text-lg">Curriculum reference</h3>

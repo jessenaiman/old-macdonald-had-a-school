@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default:
+          "material-surface material-paper-ruled border border-border shadow-xs hover:brightness-95",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
         outline:
@@ -19,6 +20,12 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        grid:
+          "material-surface material-paper-grid border border-border shadow-xs hover:brightness-95",
+        note:
+          "border-0 bg-transparent bg-[image:var(--subject-note-paper)] bg-[length:100%_100%] bg-center bg-no-repeat text-foreground shadow-none hover:brightness-95",
+        construction:
+          "material-surface material-construction-paper border border-border shadow-xs hover:brightness-95",
       },
       size: {
         default: "min-h-11 px-4 py-2 has-[>svg]:px-3",
@@ -30,10 +37,19 @@ const buttonVariants = cva(
         "icon-sm": "size-8",
         "icon-lg": "size-11",
       },
+      shape: {
+        default: "rounded-md",
+        pill: "rounded-full",
+        square: "rounded-none",
+        soft: "rounded-xl",
+        tab: "rounded-t-xl rounded-b-sm",
+        label: "rounded-l-2xl rounded-r-sm",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      shape: "default",
     },
   }
 )
@@ -42,6 +58,7 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  shape = "default",
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> &
@@ -55,7 +72,7 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, shape, className }))}
       {...props}
     />
   )

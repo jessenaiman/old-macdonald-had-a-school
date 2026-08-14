@@ -15,7 +15,6 @@ const eslintConfig = defineConfig([
     ".codex-tmp/**",
     ".agents/**",
     ".figma/**",
-    "archive/**",
     "data/**",
     "docker/**",
     "docs/**",

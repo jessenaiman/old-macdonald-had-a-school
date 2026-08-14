@@ -455,7 +455,7 @@ export async function GET(req: NextRequest) {
         linked_materials: linkedMaterialsByTopic.get(row.id) ?? [],
         matched_terms: match.matched.slice(0, 6),
         why_match: [
-          row.suggested_plan ? `Suggested in ${row.suggested_plan}.` : planningMatches.length ? `Legacy pacing matches ${planningMatches.map((item) => item.label).join(", ")}${row.pacing ? ` (${row.pacing})` : ""}.` : "",
+          row.suggested_plan ? `Suggested in ${row.suggested_plan}.` : planningMatches.length ? `Recorded pacing matches ${planningMatches.map((item) => item.label).join(", ")}${row.pacing ? ` (${row.pacing})` : ""}.` : "",
           match.matched.length
             ? `Matched ${match.matched.slice(0, 3).join(", ")} in the curriculum topic, skill, tags, or standards.`
             : planningMatches.length ? "" : "Related curriculum wording matched this search.",

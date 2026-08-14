@@ -65,7 +65,7 @@ These sources have different jobs; `/branding` is visual evidence, not a substit
 | --- | --- | --- |
 | Which material or asset pattern fits? | `/branding#assets` or the relevant anchor | `public/BRAND_ASSET_RECIPES.md` |
 | What exact public file does a class use? | `public/BRAND_ASSET_RECIPES.md` | `app/brand-assets.css` |
-| What may a character do or teach? | `/branding#cast` | `content/pages/branding/cast.mdx` or the relevant `public/CAST_AND_ROLES.md` row |
+| What may a character do or teach? | `/branding#cast` | `content/pages/branding/cast.mdx`, the portable canonical roster |
 | What is the palette/type role? | `/branding#typography` | `public/branding/PALETTE_AND_TYPOGRAPHY.md`, then `app/globals.css` |
 | How should a component behave? | `/branding#controls` | `public/branding/DESIGN_SYSTEM.md`, then the owning component |
 | Is an asset approved, excluded, or ambiguous? | `/branding#governance` | the relevant section of `docs/ASSET_LIBRARY_GOVERNANCE.md` |
@@ -108,6 +108,23 @@ If a required role is not registered, search all of `public/design-assets/` befo
 For a visual change, capture the current target first, render the same target at the controlling desktop width plus 390px and 320px when dense, and check overflow, clipping, overlap, readability, asset loading, focus, reduced motion, and the affected interaction. Run focused lint/typecheck; run a production build when shared routing, root layout UI, or global tokens changed. Automated checks do not replace visual inspection.
 
 For a documentation-only review, report the rendered route and source evidence without running unrelated checks.
+
+### Required anti-regression counts
+
+Before and after a cleanup, report these counts in chat and drive every applicable violation to zero:
+
+- active CSS Module files and imports, excluding explicitly documented raster-safe-area, print, or animation exceptions;
+- `site-shell`, `site-chrome`, `chrome-*`, and equivalent invented wrapper or presentation-layer aliases;
+- raw runtime asset URLs in pages, MDX, and ordinary components outside `app/brand-assets.css` and canonical semantic identity components;
+- broken stylesheet imports and imports of another page's private stylesheet;
+- redundant material nesting where a board contains another identical board, or a paper workspace contains another paper wrapper with no physical meaning;
+- production grade, topic, and lesson structures missing from their matching `/branding` working examples.
+
+Folder paths may appear in a clearly labelled discovery inventory. Production examples must show the semantic component, prop, data attribute, or registered class that consumers actually use, never encourage copying a filename.
+
+An App Router layout must provide real shared UI or behavior for its route segment. A pass-through element with an invented wrapper class is not a layout contract; return `children` directly when no segment-level UI exists.
+
+Do not declare success from a zero text match alone. Run typecheck and focused lint, start exactly one project-local development server, inspect the rendered routes at the controlling desktop width plus 390px and 320px, and verify interactions, assets, computed overflow, and keyboard focus.
 
 ## Rejection checklist
 
