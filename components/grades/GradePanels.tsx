@@ -105,25 +105,27 @@ function LessonCard({
     </>
   );
   const className =
-    "material-surface material-cardboard-paper relative grid min-h-36 min-w-0 grid-cols-[4.75rem_minmax(0,1fr)] grid-rows-[auto_auto_1fr_auto] gap-x-4 gap-y-1 rounded-xl border p-4 text-left shadow-sm transition-transform hover:-translate-y-1 focus-visible:-translate-y-1";
+    "material-surface material-cardboard-paper relative grid h-auto min-h-36 min-w-0 grid-cols-[4.75rem_minmax(0,1fr)] grid-rows-[auto_auto_1fr_auto] gap-x-4 gap-y-1 whitespace-normal rounded-xl border p-4 text-left shadow-sm transition-transform hover:-translate-y-1 focus-visible:-translate-y-1";
   return item.href ? (
-    <Link
-      href={item.href}
-      onClick={() => onChoose(index)}
-      className={className}
-      data-active={active || undefined}
-    >
-      {content}
-    </Link>
+    <Button asChild className={className} variant="ghost">
+      <Link
+        href={item.href}
+        onClick={() => onChoose(index)}
+        data-active={active || undefined}
+      >
+        {content}
+      </Link>
+    </Button>
   ) : (
-    <button
-      type="button"
-      onClick={() => onChoose(index)}
+    <Button
       className={className}
+      variant="ghost"
+      onClick={() => onChoose(index)}
       data-active={active || undefined}
+      type="button"
     >
       {content}
-    </button>
+    </Button>
   );
 }
 
