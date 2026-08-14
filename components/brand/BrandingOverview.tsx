@@ -3,7 +3,7 @@ import { CharacterPortrait } from "@/components/brand/CharacterPortrait"
 import type { CastKey } from "@/lib/cast"
 
 const guideSections = [
-  ["Page recipe", "#page-recipe"], ["Materials", "#assets"], ["Icons", "#icons"],
+  ["Page recipe", "#page-recipe"], ["Materials", "#assets"], ["Fabrics", "#fabrics"], ["Homepage surface", "#homepage-surface"], ["Icons", "#icons"],
   ["Logo family", "#logo-family"], ["Icon sizing", "#icon-sizes"],
   ["Cast", "#cast"], ["Subjects", "#subject-cards"], ["Badge recipe", "#badge-recipe"],
   ["Typography", "#typography"], ["Actions", "#buttons"], ["Controls", "#controls"],
@@ -45,15 +45,15 @@ type BrandingOverviewProps = {
 
 export function BrandingOverview({ eyebrow, title, emphasis, description, primaryLabel, primaryHref, secondaryLabel, secondaryHref, patchTitle, patchCaption }: BrandingOverviewProps) {
   return <>
-    <header className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-site-chrome text-site-chrome-foreground shadow-xl">
+    <header className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-primary text-primary-foreground shadow-xl">
       <div className="flex min-w-[min(100%,32rem)] flex-[1.15_1_38rem] flex-col justify-center p-[clamp(1.5rem,4vw,4rem)]">
-        <p className="mb-3 font-body text-xs font-black uppercase tracking-widest text-site-chrome-accent">{eyebrow}</p>
-        <h1 className="m-0 max-w-3xl text-balance font-heading text-[clamp(3rem,7vw,6rem)] leading-[.88] text-site-chrome-foreground">{title} <em className="block font-hand text-brand-pink">{emphasis}</em></h1>
-        <p className="mt-6 max-w-2xl text-base leading-7 text-site-chrome-foreground">Start with readable structure. Add approved materials where they behave like real objects. Keep each character’s assigned colour local and unmistakable.</p>
+        <p className="mb-3 font-body text-xs font-black uppercase tracking-widest text-accent">{eyebrow}</p>
+        <h1 className="m-0 max-w-3xl text-balance font-heading text-[clamp(3rem,7vw,6rem)] leading-[.88] text-primary-foreground">{title} <em className="block font-hand text-brand-pink">{emphasis}</em></h1>
+        <p className="type-body-copy mt-6 max-w-2xl text-primary-foreground">{description}</p>
         <div className="mt-7 flex flex-wrap gap-3"><Button asChild><a href={primaryHref}>{primaryLabel}</a></Button><Button asChild variant="outline"><a href={secondaryHref}>{secondaryLabel}</a></Button></div>
       </div>
       <div className="material-surface material-cork grid min-h-80 min-w-[min(100%,24rem)] flex-[.85_1_30rem] content-end overflow-hidden border border-border px-5 pt-10">
-        <div className="material-surface material-felt relative mx-auto mb-10 w-full max-w-sm rounded-xl p-7 text-center text-site-chrome-foreground shadow-xl"><span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" /><strong className="font-heading text-3xl leading-none">{patchTitle}</strong><small className="mt-2 block font-body font-black uppercase tracking-wider">{patchCaption}</small></div>
+        <div className="cast-old-macdonald material-surface material-felt relative mx-auto mb-10 w-full max-w-sm rounded-xl p-7 text-center shadow-xl"><span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" /><strong className="type-section-title">{patchTitle}</strong><small className="type-eyebrow mt-2 block">{patchCaption}</small></div>
         <div className="flex items-end justify-center">{cast.map((character, index) => <CharacterPortrait key={character} character={character} className={index === 0 ? "h-auto w-[clamp(6rem,12vw,8rem)]" : "-ml-8 h-auto w-[clamp(6rem,12vw,8rem)]"} />)}</div>
       </div>
     </header>

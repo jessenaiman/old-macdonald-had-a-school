@@ -9,13 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "rounded-xl border-primary bg-primary text-primary-foreground [background-image:var(--site-chrome-fabric)] [background-size:180px] hover:bg-primary/90",
+        default: "control-fabric rounded-xl border-current hover:brightness-95",
         destructive:
-          "rounded-xl border-destructive bg-destructive text-destructive-foreground [background-image:var(--cast-mr-maisy-texture)] [background-size:180px] hover:bg-destructive/90 focus-visible:ring-destructive/20",
+          "rounded-xl border-destructive bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/20",
         outline:
           "rounded-md border-input bg-background text-foreground [background-image:var(--brand-paper-texture)] [background-size:260px] before:border-solid hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "rounded-full border-secondary bg-secondary text-secondary-foreground [background-image:var(--asset-woven-old-macdonald)] [background-size:180px] hover:bg-secondary/80",
+          "rounded-full border-secondary bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
           "rounded-lg border-transparent shadow-none before:hidden hover:bg-accent hover:text-accent-foreground",
         link: "rounded-none border-transparent text-primary shadow-none before:hidden underline-offset-4 hover:translate-y-0 hover:underline",

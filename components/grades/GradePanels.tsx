@@ -32,12 +32,13 @@ type SearchResult = {
 type SearchResponse = { results?: SearchResult[]; error?: string };
 
 function PanelHeading({ eyebrow, title, summary }: { eyebrow: string; title: string; summary?: string }) {
-  return <header className="flex min-w-0 flex-col gap-2 md:flex-row md:items-end md:justify-between"><div><p className="font-body text-xs font-black uppercase tracking-widest text-muted-foreground">{eyebrow}</p><h2 className="font-hand text-4xl leading-none text-foreground md:text-5xl">{title}</h2></div>{summary ? <p className="max-w-md text-sm text-muted-foreground">{summary}</p> : null}</header>;
+  return <header className={`${styles.panelHeading} flex min-w-0 flex-col gap-2 md:flex-row md:items-end md:justify-between`}><div><p className="font-body text-xs font-black uppercase tracking-widest">{eyebrow}</p><h2 className="font-hand text-4xl leading-none md:text-5xl">{title}</h2></div>{summary ? <p className="max-w-md text-sm">{summary}</p> : null}</header>;
 }
 
 function LessonCard({ item, index, active, onChoose }: { item: GradePathItem; index: number; active: boolean; onChoose: (index: number) => void }) {
-  const content = <><span className={`${styles.pathFastener} brand-asset fastener-sewing-button icon-micro`} aria-hidden="true" /><span className={`${styles.pathIcon} brand-asset ${item.icon} icon-medium`} aria-hidden="true" /><span className={styles.pathKicker}>{item.kicker}</span><strong className={styles.pathTitle}>{item.title}</strong><span className={styles.pathSummary}>{item.summary}</span><span className={styles.pathAction}>View path →</span></>;
-  return item.href ? <Link href={item.href} onClick={() => onChoose(index)} className={styles.pathCard} data-active={active || undefined}>{content}</Link> : <button type="button" onClick={() => onChoose(index)} className={styles.pathCard} data-active={active || undefined}>{content}</button>;
+  const content = <><span className={`${styles.pathFastener} brand-asset fastener-push-pin icon-small`} aria-hidden="true" /><span className={`${styles.pathIcon} brand-asset ${item.icon} icon-medium`} aria-hidden="true" /><span className={`${styles.pathKicker} grade-surface`}>{item.kicker}</span><strong className={styles.pathTitle}>{item.title}</strong><span className={styles.pathSummary}>{item.summary}</span><span className={styles.pathAction}>View path →</span></>;
+  const className = `${styles.pathCard} material-surface material-cardboard-paper`;
+  return item.href ? <Link href={item.href} onClick={() => onChoose(index)} className={className} data-active={active || undefined}>{content}</Link> : <button type="button" onClick={() => onChoose(index)} className={className} data-active={active || undefined}>{content}</button>;
 }
 
 export function GradeTodayPanel({ config, items, selectedIndex, onChoose, onSection, welcome }: SharedProps & { summary: string; welcome: React.ReactNode; headingLevel: "h1" | "h2" }) {

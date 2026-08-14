@@ -52,7 +52,7 @@ export function HomeCarousel({ selected = false }: { selected?: boolean }) {
         <CarouselNext className={`${styles.carouselArrow} ${styles.carouselNext}`} />
       </div>
       {selected ? (
-        <div className={styles.carouselNav}>
+        <div className={`${styles.carouselNav} grid-cols-1 md:grid-cols-[1fr_auto]`}>
           <div role="group" aria-label="Choose a featured scene">
             {SLIDES.map((item, index) => (
               <Button variant="ghost" size="icon" className={index === active ? styles.carouselLinkActive : undefined} type="button" aria-label={`Show ${item.label}`} aria-pressed={index === active} onClick={() => api?.scrollTo(index)} key={item.label}>
@@ -64,7 +64,7 @@ export function HomeCarousel({ selected = false }: { selected?: boolean }) {
           <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">Showing {slide.label}</span>
         </div>
       ) : (
-        <nav className={styles.carouselNav} aria-label="Farm school features">
+        <nav className={`${styles.carouselNav} grid-cols-1 md:grid-cols-[1fr_auto]`} aria-label="Farm school features">
           {SLIDES.map((item, index) => (
             <Link className={index === active ? styles.carouselLinkActive : undefined} href={item.href} key={item.label} onMouseEnter={() => api?.scrollTo(index)} onFocus={() => api?.scrollTo(index)}>
               <span aria-hidden="true" />{item.label}

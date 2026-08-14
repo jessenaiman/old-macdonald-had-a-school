@@ -27,10 +27,6 @@
   --grain-fine: var(--asset-cardboard-ivory);
   --grain-coarse: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-13-maisy-tile.png');
   --grain-soft: var(--asset-cardboard-ivory);
-  --site-chrome-fabric: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png');
-  --site-chrome-leather: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png');
-  --home-surface-texture: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-03-mr-rusty-tile.png');
-  --home-board-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png');
   --home-paper-texture: var(--asset-cardboard-ivory);
   --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.png');
   --brand-paper-texture: var(--home-paper-texture);
@@ -56,8 +52,11 @@
   --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png');
   --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.png');
   --asset-woven-old-macdonald: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png');
+  --control-fabric-texture: var(--asset-woven-old-macdonald);
   --asset-construction-mr-sam: url('/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png');
+  --asset-thread-old-macdonald: url('/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.png');
   --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png');
+  --asset-leather-blue: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png');
   --asset-cork-board: url('/design-assets/cork-board-kit-v2/seamless-cork-tile.png');
   --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png');
   --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png');
@@ -104,7 +103,7 @@
 .grade-one-writing-slate { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/14-grade-1-writing-slate-books.png'); }
 
 /* General subject signals */
-.music-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-music-dance.png'); }
+.music-icon { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/08-music-notes-paired-beam.png'); }
 .math-building-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-math-building.png'); }
 .drama-storytelling-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png'); }
 .art-photography-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-art-photography.png'); }

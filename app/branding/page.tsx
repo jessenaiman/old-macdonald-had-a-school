@@ -1,6 +1,8 @@
 import Overview from "../../content/pages/branding/overview.mdx";
 import PageRecipe from "../../content/pages/branding/page-recipe.mdx";
 import Assets from "../../content/pages/branding/assets.mdx";
+import HomepageSurface from "../../content/pages/branding/homepage-surface.mdx";
+import Fabrics from "../../content/pages/branding/fabrics.mdx";
 import LogoFamily from "../../content/pages/branding/logo-family.mdx";
 import Icons from "../../content/pages/branding/icons.mdx";
 import IconSizes from "../../content/pages/branding/icon-sizes.mdx";
@@ -27,6 +29,8 @@ export default function BrandingPage() {
         <Overview />
             <PageRecipe />
             <Assets />
+            <Fabrics />
+            <HomepageSurface />
             <LogoFamily />
             <Icons />
             <IconSizes />

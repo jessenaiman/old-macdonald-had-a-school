@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { lessonHref } from "../lib/grade-routes";
+import { BrandIcon } from "./brand-icon";
 
 type SlimLesson = {
   slug: string;
@@ -11,15 +11,11 @@ type SlimLesson = {
   grade: string;
 };
 
-const SubjectIcon = ({ src, alt }: { src: string; alt: string }) => (
-  <Image src={src} alt={alt} width={44} height={44} />
-);
-
 export const CLUSTERS = [
-  { key: "words", title: "Words & Stories", tone: "words", icon: <SubjectIcon src="/icons/old-macdonald-icon-pack/topic-language.png" alt="" />, match: /literacy|phonics|language|reading|vocabulary/i },
-  { key: "numbers", title: "Numbers & Making", tone: "numbers", icon: <SubjectIcon src="/icons/old-macdonald-icon-pack/topic-math.png" alt="" />, match: /math|numeracy|fine motor/i },
-  { key: "music", title: "Music, Movement & Nature", tone: "music", icon: <SubjectIcon src="/icons/old-macdonald-icon-pack/topic-music-movement.png" alt="" />, match: /music|science|nature|motor|movement/i },
-  { key: "heart", title: "Heart & Home", tone: "heart", icon: <SubjectIcon src="/icons/old-macdonald-icon-pack/topic-routines-regulation.png" alt="" />, match: /sel|social|emotional|routine|regulation/i },
+  { key: "words", title: "Words & Stories", tone: "words", icon: <BrandIcon icon="acting-theatre-masks" size="small" />, match: /literacy|phonics|language|reading|vocabulary/i },
+  { key: "numbers", title: "Numbers & Making", tone: "numbers", icon: <BrandIcon icon="math-abacus-ruler" size="small" />, match: /math|numeracy|fine motor/i },
+  { key: "music", title: "Music, Movement & Nature", tone: "music", icon: <BrandIcon icon="music-banjo" size="small" />, match: /music|science|nature|motor|movement/i },
+  { key: "heart", title: "Heart & Home", tone: "heart", icon: <BrandIcon icon="health-gingham-lunch" size="small" />, match: /sel|social|emotional|routine|regulation/i },
 ] as const;
 
 export function clusterFor(subject: string) {

@@ -3,9 +3,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
+import { BrandIcon } from "@/components/brand-icon";
 import { getAllLessons } from "../../lib/content";
 import { searchCurriculumTopics } from "../../lib/curriculum-db";
-import { GRADE_KEYS, gradeKeysForLabel, lessonHref, type GradeKey } from "../../lib/grade-routes";
+import { GRADE_KEYS, gradeKeysForLabel, lessonHref, lessonIcon, type GradeKey } from "../../lib/grade-routes";
 import styles from "./LessonsPage.module.css";
 
 export const metadata: Metadata = {
@@ -14,6 +15,22 @@ export const metadata: Metadata = {
 };
 
 type SearchParams = Promise<{ q?: string | string[]; grade?: string | string[] }>;
+
+const activityFilters = [
+  ["Acting", "acting-stage-curtains", "drama performance"],
+  ["Role play", "acting-theatre-masks", "role play"],
+  ["Colour", "art-color-wheel", "colour art"],
+  ["Ribbon dance", "dance-crossing-ribbons", "ribbon dance"],
+  ["Early learning", "early-learning-blocks", "early learning blocks"],
+  ["Garden", "garden-watering-produce", "garden plants"],
+  ["Balance", "grade-two-balance-scale", "balance scale"],
+  ["Healthy food", "health-gingham-lunch", "healthy food"],
+  ["Counting", "math-abacus-ruler", "counting numbers"],
+  ["Banjo", "music-banjo", "banjo"],
+  ["Painting", "painting-easel", "painting"],
+  ["Handprints", "painting-handprint", "handprint art"],
+  ["Physical play", "physical-ball-rope", "physical play"],
+] as const;
 
 function one(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] ?? "" : value ?? "";
@@ -27,17 +44,6 @@ function textScore(query: string, values: string[]) {
   const terms = query.toLocaleLowerCase().split(/[^a-z0-9]+/).filter((term) => term.length > 1);
   const haystack = values.join(" ").toLocaleLowerCase();
   return terms.reduce((score, term) => score + (haystack.includes(term) ? 1 : 0), 0);
-}
-
-function subjectIcon(subject: string) {
-  const value = subject.toLocaleLowerCase();
-  if (value.includes("math") || value.includes("numer")) return "math-building-icon";
-  if (value.includes("music") || value.includes("movement") || value.includes("motor")) return "music-icon";
-  if (value.includes("art") || value.includes("photo")) return "art-photography-icon";
-  if (value.includes("health") || value.includes("garden") || value.includes("science")) return "gardening-health-icon";
-  if (value.includes("physical") || value.includes("dance")) return "physical-education-icon";
-  if (value.includes("story") || value.includes("drama") || value.includes("literacy") || value.includes("language")) return "drama-storytelling-icon";
-  return "early-learning-icon";
 }
 
 export default async function LessonsIndexPage({ searchParams }: { searchParams: SearchParams }) {
@@ -103,10 +109,19 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
           {databaseUnavailable ? <p className={styles.warning}>The curriculum database is unavailable; finished Markdown lessons are still shown.</p> : null}
         </div>
 
+        <nav className="material-surface material-cardboard-paper grid gap-4 rounded-xl border border-border p-5 shadow-sm" aria-label="Browse lessons by classroom activity">
+          <div><h2 className="type-card-title m-0">Browse by classroom activity</h2><p className="type-body-copy mb-0 mt-2">Each approved classroom icon opens the matching lesson-library search.</p></div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {activityFilters.map(([label, icon, cue]) => <Button asChild className="justify-start" key={icon} variant="outline">
+              <Link href={`/lessons?q=${encodeURIComponent(cue)}`}><BrandIcon icon={icon} size="small" /><span>{label}</span></Link>
+            </Button>)}
+          </div>
+        </nav>
+
         <section className={styles.grid} aria-label="Available lessons">
           {markdownLessons.map(({ lesson }) => (
             <article className={styles.card} data-source="markdown" key={lesson.metadata.slug}>
-              <div className={styles.cardIcon}><span className={`brand-asset ${subjectIcon(lesson.metadata.subject)} icon-medium`} aria-hidden="true" /></div>
+              <div className={styles.cardIcon}><span className={`brand-asset ${lessonIcon(lesson.metadata.title, lesson.metadata.subject, lesson.metadata.category, lesson.metadata.focus, lesson.metadata.summary, lesson.metadata.grade)} icon-medium`} aria-hidden="true" /></div>
               <div className={styles.cardBody}>
                 <div className={styles.cardTop}><span>Teacher-ready lesson</span><strong>{lesson.metadata.grade}</strong></div>
                 <h2><Link href={lessonHref(lesson.metadata)}>{lesson.metadata.title}</Link></h2>
@@ -117,7 +132,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
           ))}
           {databaseResults.map(({ topic, href, markdownLesson }) => (
             <article className={styles.card} data-source={markdownLesson ? "markdown" : "database"} key={topic.id}>
-              <div className={styles.cardIcon}><span className={`brand-asset ${subjectIcon(markdownLesson?.metadata.subject ?? topic.subject)} icon-medium`} aria-hidden="true" /></div>
+              <div className={styles.cardIcon}><span className={`brand-asset ${lessonIcon(markdownLesson?.metadata.title ?? topic.title, markdownLesson?.metadata.subject ?? topic.subject, markdownLesson?.metadata.category ?? topic.category ?? "", markdownLesson?.metadata.focus ?? topic.skillStatement ?? "", topic.grade)} icon-medium`} aria-hidden="true" /></div>
               <div className={styles.cardBody}>
                 <div className={styles.cardTop}><span>{markdownLesson ? "Teacher-ready lesson" : "Planning record"}</span><strong>{topic.grade}</strong></div>
                 <h2><Link href={href}>{markdownLesson?.metadata.title ?? topic.title}</Link></h2>

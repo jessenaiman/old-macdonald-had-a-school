@@ -6,7 +6,7 @@ const siteRoles = [
   ["Readable paper", "material-surface material-cardboard-paper"],
   ["Supporting cloth", "material-surface material-woven-fabric"],
   ["Working board", "material-surface material-cork"],
-  ["Durable patch", "material-surface material-felt text-white"],
+  ["Durable identity patch", "cast-old-macdonald material-surface material-felt"],
 ] as const
 const curriculumRoles = [
   ["Red", "cast-mr-maisy"], ["Yellow", "cast-miss-puddles"], ["Blue", "cast-mr-rusty"],

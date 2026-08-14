@@ -10,10 +10,10 @@ const FOLK_ARTS_LINKS = [
 
 export function FolkArtsSection() {
   return (
-    <section className={styles.folkArts} aria-labelledby="folk-arts-title">
+    <section className={`${styles.folkArts} material-surface material-cardboard-paper`} aria-labelledby="folk-arts-title">
       <span className={`${styles.folkArtsFastener} brand-asset fastener-masking-tape`} aria-hidden="true" />
       <h2 id="folk-arts-title">Music and Folk Arts Education</h2>
-      <div className={styles.folkArtsGrid}>
+      <div className={`${styles.folkArtsGrid} grid-cols-1 md:grid-cols-2 xl:grid-cols-4`}>
         {FOLK_ARTS_LINKS.map((item) => (
           <Link key={item.title} href={item.href} className={styles.folkArtsCard} data-tone={item.tone}>
             <span className={`${styles.folkArtsIcon} brand-asset ${item.icon}`} aria-hidden="true" />

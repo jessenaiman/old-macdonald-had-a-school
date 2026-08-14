@@ -32,13 +32,30 @@ export function lessonHref(lesson: { slug: string; grade: string }) {
   return grade ? `/grade/${grade}/${lesson.slug}` : `/lessons/${lesson.slug}`;
 }
 
-export function lessonIcon(subject: string, category: string) {
-  const label = `${subject} ${category}`;
-  if (/math|number|stem/i.test(label)) return "math-building-icon";
-  if (/literacy|phonic|reading|writing|language|story/i.test(label)) return "drama-storytelling-icon";
-  if (/music|movement|dance/i.test(label)) return "music-icon";
-  if (/art|photo|visual/i.test(label)) return "art-photography-icon";
-  if (/garden|health|nature/i.test(label)) return "gardening-health-icon";
-  if (/physical|sport/i.test(label)) return "physical-education-icon";
+export function lessonIcon(...values: string[]) {
+  const label = values.join(" ");
+  if (/balance|equal weight|scale/i.test(label)) return "grade-two-balance-scale";
+  if (/abacus|count|number|numeracy/i.test(label)) return "math-abacus-ruler";
+  if (/measure|build|construction|stem|math/i.test(label)) return "math-building-icon";
+  if (/curtain|stage|performance/i.test(label)) return "acting-stage-curtains";
+  if (/mask|role.?play|character/i.test(label)) return "acting-theatre-masks";
+  if (/puppet|story/i.test(label)) return "acting-pocket-puppets";
+  if (/literacy|phonic|reading|writing|language|vocabulary/i.test(label)) return "drama-storytelling-icon";
+  if (/banjo|string instrument/i.test(label)) return "music-banjo";
+  if (/fiddle|violin/i.test(label)) return "music-fiddle";
+  if (/drum|steady beat|rhythm/i.test(label)) return "music-hand-drum";
+  if (/ribbon|crossing|folk danc/i.test(label)) return "dance-crossing-ribbons";
+  if (/turn|circle danc/i.test(label)) return "dance-turning-footprints";
+  if (/dance|movement|motor/i.test(label)) return "physical-ball-rope";
+  if (/music|song|sing/i.test(label)) return "music-icon";
+  if (/easel|brush|palette/i.test(label)) return "painting-easel";
+  if (/handprint|finger paint|paint dot/i.test(label)) return "painting-handprint";
+  if (/color|colour|visual art/i.test(label)) return "art-color-wheel";
+  if (/art|photo|camera|drawing/i.test(label)) return "art-photography-icon";
+  if (/watering|produce|vegetable|garden/i.test(label)) return "garden-watering-produce";
+  if (/lunch|food|nutrition|healthy eating/i.test(label)) return "health-gingham-lunch";
+  if (/health|nature|plant|science/i.test(label)) return "gardening-health-icon";
+  if (/physical|sport|ball|rope/i.test(label)) return "physical-education-icon";
+  if (/block|shape|early learning|fine motor/i.test(label)) return "early-learning-blocks";
   return "early-learning-icon";
 }

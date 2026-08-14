@@ -18,7 +18,7 @@ const COMPOSITIONS = [
   {
     name: "Felt action",
     use: "Primary action on a durable school surface",
-    className: "material-surface material-felt",
+    className: "cast-old-macdonald material-surface material-felt",
     path: "/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png",
   },
   {

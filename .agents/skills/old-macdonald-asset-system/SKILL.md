@@ -17,7 +17,7 @@ Use this skill before selecting an asset or changing visual code. Treat the curr
 
 ## Non-negotiable ownership
 
-- `app/layout.tsx` owns the single site shell, `ThemeProvider`, shared header, shared footer, and global main. Pages and nested layouts must not duplicate or visually replace them.
+- `app/layout.tsx` is the root layout. It owns `ThemeProvider`, shared header, shared footer, and the global `<main>`. Pages and nested layouts must not duplicate or visually replace them.
 - `app/theme.css` is the only palette owner. Raw HEX, RGB, HSL, named presentation colors, and component-local dark palettes are forbidden outside it. Literal HEX is allowed only as printed reference content on the matching live semantic surface.
 - `app/brand-assets.css` maps approved asset paths and textures; it must not own palette values.
 - Shared shadcn primitives own control appearance and behavior. Pages may compose and position them; pages must not recolor or redesign them.
@@ -92,7 +92,7 @@ If a required asset is missing or ambiguous, report the gap and follow the named
 
 ## Verification
 
-For a visual change, capture the current target first, render the same target at the controlling desktop width plus 390px and 320px when dense, and check overflow, clipping, overlap, readability, asset loading, focus, reduced motion, and the affected interaction. Run focused lint/typecheck; run a production build when shared routing, shell, or global tokens changed. Automated checks do not replace visual inspection.
+For a visual change, capture the current target first, render the same target at the controlling desktop width plus 390px and 320px when dense, and check overflow, clipping, overlap, readability, asset loading, focus, reduced motion, and the affected interaction. Run focused lint/typecheck; run a production build when shared routing, root layout UI, or global tokens changed. Automated checks do not replace visual inspection.
 
 For a documentation-only review, report the rendered route and source evidence without running unrelated checks.
 
@@ -100,7 +100,7 @@ For a documentation-only review, report the rendered route and source evidence w
 
 Stop before editing if the proposed approach would add:
 
-- another header, footer, page shell, theme provider, or root main;
+- another header, footer, root layout UI, theme provider, or root `<main>`;
 - raw color values outside `theme.css`;
 - runtime asset URLs outside `brand-assets.css` or a canonical identity mapping;
 - private button/control appearance outside the shared primitive;

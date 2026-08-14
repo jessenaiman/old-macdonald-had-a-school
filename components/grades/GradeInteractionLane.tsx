@@ -64,13 +64,14 @@ export function GradeWorkspace({
 }: GradeWorkspaceProps) {
   return (
     <div
-      className={`${styles.board} ${variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`}
+      className={`${styles.board} material-surface material-cardboard-paper ${variant === "daycare" ? styles.daycareBoard : styles.standardBoard}`}
       data-grade={grade}
       data-grade-template={grade}
       data-style-scope="grade-workspace"
     >
-      <aside className={styles.rail} aria-label={`${gradeLabel} lesson workspace`}>
-        <div className={styles.identity}>
+      <aside className={`${styles.rail} material-surface material-cork`} aria-label={`${gradeLabel} lesson workspace`}>
+        <div className={`${styles.identity} grade-surface`}>
+          <span className={`${styles.identityFastener} brand-asset fastener-sewing-button icon-micro`} aria-hidden="true" />
           <span>Lesson workspace</span>
           <strong>{gradeLabel}</strong>
           <small>{age}</small>
@@ -122,21 +123,21 @@ export function GradeWelcomeControl({
         <p>{summary}</p>
         <div className={styles.actions}>
           {primaryHref ? (
-            <Link href={primaryHref} className={styles.primaryAction}>
-              Build this lesson
-            </Link>
+            <Button asChild className={`${styles.primaryAction} grade-surface`}>
+              <Link href={primaryHref}>Build this lesson</Link>
+            </Button>
           ) : onPreview ? (
             <Button
-              variant="ghost"
+              variant="default"
               type="button"
-              className={styles.primaryAction}
+              className={`${styles.primaryAction} grade-surface`}
               onClick={onPreview}
             >
               Preview the story
             </Button>
           ) : null}
           <Button
-            variant="ghost"
+            variant="outline"
             type="button"
             className={styles.paperAction}
             onClick={onBrowse}
@@ -170,6 +171,7 @@ export function TeacherNote({
       <Card
         className={`${styles.teacherCard} cast-${character} character-surface`}
       >
+        <span className={`${styles.teacherFastener} brand-asset fastener-binder-clip icon-small`} aria-hidden="true" />
         <CardHeader className={styles.teacherCardHeader}>
           <CardTitle className={styles.teacherCardTitle}>
             A note from {teacher.name}
@@ -298,8 +300,9 @@ export function GradeInteractionLane({
                   key={entry.id}
                   value={entry.id}
                   id={`${config.gradeKey}-${entry.id}-tab`}
-                  className={`${styles.railButton} ${section === entry.id ? styles.railButtonActive : ""}`}
+                  className={`${styles.railButton} material-surface material-cardboard-paper ${section === entry.id ? styles.railButtonActive : ""}`}
                 >
+                  <span className={`${styles.railFastener} brand-asset fastener-sewing-button icon-micro`} aria-hidden="true" />
                   <span>{entry.label}</span>
                 </TabsTrigger>
               ))}

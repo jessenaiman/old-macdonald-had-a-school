@@ -3,8 +3,8 @@ import { CharacterActionExample, LessonTypographyExample } from "../../../compon
 
 <section id="typography" className="material-surface material-cork mt-5 rounded-2xl border border-border p-5 sm:p-8 lg:p-12">
 
-<p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-primary">Production type pattern</p>
-<h2 className="m-0 font-heading text-3xl sm:text-5xl">Typography inside a real lesson</h2>
+<p className="type-eyebrow mb-2 text-primary">Production type pattern</p>
+<h2 className="type-section-title m-0">Typography inside a real lesson</h2>
 
 The three type roles work together inside a production composition. Copy the role and hierarchy—not an isolated font specimen. <Link className="font-bold underline underline-offset-4" href="/branding/PALETTE_AND_TYPOGRAPHY.md">Open the focused rules</Link>.
 
@@ -13,15 +13,15 @@ The three type roles work together inside a production composition. Copy the rol
 ### Exact reusable roles
 
 <div className="material-surface material-cork mt-5 grid gap-4 rounded-2xl border border-border p-5 md:grid-cols-3">
-  <article className="material-surface material-cardboard-paper rounded-xl border border-border p-5 shadow-md"><strong className="font-heading text-3xl">Lilita One</strong><code className="mt-3 block">font-heading</code><p>Learning invitations, page and section headings, card titles, and short action labels. Do not use it for paragraphs.</p></article>
-  <article className="material-surface material-cardboard-paper rounded-xl border border-border p-5 shadow-md"><strong className="font-hand text-3xl">Caveat</strong><code className="mt-3 block">font-hand</code><p>One short teacher quote, handwritten reminder, or human emphasis. Never use it for instructions, form labels, or long passages.</p></article>
-  <article className="material-surface material-cardboard-paper rounded-xl border border-border p-5 shadow-md"><strong className="font-body text-2xl font-black">Nunito</strong><code className="mt-3 block">font-body</code><p>Paragraphs, instructions, metadata, labels, form fields, tables, and controls. This is the default body role.</p></article>
+  <article className="material-surface material-cardboard-paper rounded-xl border border-border p-5 shadow-md"><strong className="type-section-title">Page and section title</strong><code className="mt-3 block">type-page-title · type-section-title</code><p>Learning invitations and section headings. Do not set font family or size at the call site.</p></article>
+  <article className="material-surface material-cardboard-paper rounded-xl border border-border p-5 shadow-md"><strong className="type-hand-note">One handwritten cue</strong><code className="mt-3 block">type-hand-note</code><p>One short teacher quote, reminder, or human emphasis. Never use it for instructions, labels, controls, or long passages.</p></article>
+  <article className="material-surface material-cardboard-paper rounded-xl border border-border p-5 shadow-md"><strong className="type-card-title">Readable interface copy</strong><code className="mt-3 block">type-card-title · type-eyebrow · type-body-copy</code><p className="type-body-copy">Paragraphs, instructions, metadata, labels, fields, tables, and controls use the shared body roles.</p></article>
 </div>
 
 ```tsx
-<h1 className="font-heading">Build a story together.</h1>
-<p className="font-hand">Then make room to perform it.</p>
-<p className="font-body">Readable teaching instructions belong here.</p>
+<h1 className="type-page-title">Build a story together.</h1>
+<p className="type-hand-note">Then make room to perform it.</p>
+<p className="type-body-copy">Readable teaching instructions belong here.</p>
 ```
 
 ### A teacher note is a classroom artifact, not a dashboard card

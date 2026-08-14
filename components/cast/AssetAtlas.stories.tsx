@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const assets = [
   ["Cardboard paper", "material-cardboard-paper", "Readable planning and lesson surfaces"],
-  ["Felt", "material-felt", "Soft active panels and character notes"],
+  ["Old MacDonald felt", "cast-old-macdonald material-felt", "Character-owned patches and notes"],
   ["Woven fabric", "material-woven-fabric", "Warm cloth fields"],
   ["Construction paper", "material-construction-paper", "Cut-paper accents"],
   ["Cork", "material-cork", "Working walls and pinboards"],

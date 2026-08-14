@@ -56,7 +56,7 @@ export default function RootLayout({
           themes={["light", "dark"]}
           disableTransitionOnChange
         >
-          <div className={styles.shell}>
+          <div className={styles.layout}>
             <SiteHeader />
             <main className={styles.page}>{children}</main>
             <SiteFooter />

@@ -130,9 +130,9 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
 const VIDEO_CHANNEL = "https://www.youtube.com/channel/UC_THbKUe6o-K64vh7gWCPyQ/search?query=";
 
 export const HOME_VIDEO_SONGS = [
-  { slug: "find-the-steady-beat", title: "Find the Steady Beat", summary: "Feel and clap the heartbeat of songs.", grade: "All grades", href: `${VIDEO_CHANNEL}steady%20beat` },
-  { slug: "animal-action-march", title: "Animal Action March", summary: "Move like the animals in the song.", grade: "All grades", href: `${VIDEO_CHANNEL}animal%20action%20march` },
-  { slug: "old-macdonald-orchestra", title: "Old MacDonald Orchestra", summary: "Explore classroom instruments.", grade: "All grades", href: `${VIDEO_CHANNEL}Old%20MacDonald%20Orchestra` },
+  { slug: "find-the-steady-beat", title: "Find the Steady Beat", summary: "Feel and clap the heartbeat of songs.", grade: "All grades", icon: "music-hand-drum", href: `${VIDEO_CHANNEL}steady%20beat` },
+  { slug: "animal-action-march", title: "Animal Action March", summary: "Move like the animals in the song.", grade: "All grades", icon: "dance-turning-footprints", href: `${VIDEO_CHANNEL}animal%20action%20march` },
+  { slug: "old-macdonald-orchestra", title: "Old MacDonald Orchestra", summary: "Explore classroom instruments.", grade: "All grades", icon: "music-fiddle", href: `${VIDEO_CHANNEL}Old%20MacDonald%20Orchestra` },
   { slug: "the-itsy-bitsy-spider", title: "The Itsy Bitsy Spider", summary: "", grade: "Daycare, Preschool, Kindergarten", href: `${VIDEO_CHANNEL}Itsy%20Bitsy%20Spider` },
 ] as const;
 

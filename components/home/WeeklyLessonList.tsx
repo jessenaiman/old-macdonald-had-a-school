@@ -8,6 +8,7 @@ export type WeeklyLesson = {
   summary: string;
   grade: string;
   href?: string;
+  icon?: string;
 };
 
 export function WeeklyLessonList({
@@ -33,7 +34,7 @@ export function WeeklyLessonList({
       <ul>
         {lessons.slice(0, limit).map((lesson) => (
           <li key={lesson.slug}>
-            <span className={`${styles.noteIcon} brand-asset music-icon icon-micro`} aria-hidden="true" />
+            <span className={`${styles.noteIcon} brand-asset ${lesson.icon ?? "music-icon"} icon-micro`} aria-hidden="true" />
             <Link
               href={lesson.href ?? lessonHref(lesson)}
               target={lesson.href?.startsWith("https://") ? "_blank" : undefined}

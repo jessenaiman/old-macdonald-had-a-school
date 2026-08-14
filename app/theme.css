@@ -20,11 +20,11 @@
   --theme-wood-light: #cbb28c;
   --theme-ink: #182b39;
   --theme-copy: #46535b;
+  --control-fabric-color: var(--theme-wood);
+  --control-fabric-foreground: var(--theme-white);
+  --control-fabric-edge: color-mix(in srgb, var(--theme-wood) 72%, black);
   --theme-white: #fffdf7;
   --brand-cork-color: #b8906a;
-  --site-chrome-texture-size: 230px;
-  --site-chrome-blend: multiply;
-  --home-surface-color: var(--curriculum-blue);
   --home-board-color: var(--theme-navy);
   --brand-ink: var(--theme-ink);
   --brand-copy: var(--theme-copy);
@@ -121,12 +121,6 @@
   --line: var(--theme-wood-light);
   --page-bg: var(--theme-cream);
   --card-bg: var(--theme-paper);
-
-  /* Site chrome is structural denim, not a seventh curriculum colour. */
-  --site-chrome-background: var(--theme-navy);
-  --site-chrome-foreground: var(--theme-white);
-  --site-chrome-accent: var(--curriculum-yellow);
-  --site-chrome-border: #a9824d;
 
   /* Grade navigation aliases. Grade leads own these colours below. */
   --grade-early-years-color: var(--curriculum-green);
@@ -230,14 +224,5 @@
   --line: #587080;
   --page-bg: #101c26;
   --card-bg: #192c3a;
-  --site-chrome-background: #0a1721;
-  --site-chrome-foreground: #fffaf0;
-
-  --workspace-paper: #192c3a;
-  --workspace-paper-soft: #213543;
-  --workspace-paper-bright: #263947;
-  --workspace-paper-overlay: color-mix(in srgb, var(--workspace-paper) 88%, transparent);
-  --workspace-ink: #f7edda;
-  --workspace-muted: #cbd5d9;
   --workspace-rail-foreground: #fffaf0;
 }

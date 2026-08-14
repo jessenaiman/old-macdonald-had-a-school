@@ -1,9 +1,9 @@
 import { GradeControlsReference } from "../../../components/grades/GradeControlsReference"
 
-<section id="grades" className="mt-5 rounded-2xl border border-border bg-site-chrome p-5 text-site-chrome-foreground sm:p-8 lg:p-12">
-  <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-site-chrome-accent">Grade workspace reference</p>
+<section id="grades" className="mt-5 rounded-2xl border border-border bg-primary p-5 text-primary-foreground sm:p-8 lg:p-12">
+  <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-accent">Grade workspace reference</p>
   <h2 className="m-0 font-heading text-3xl sm:text-5xl">One workroom structure, distinct grade ownership</h2>
-  <p className="max-w-3xl leading-7 text-site-chrome-foreground">Every grade route composes the same workroom: a grade-owned identity and navigation rail beside a paper work stage. The route provides its curriculum, grade owner, and teacher note; the shared control provides accessible tabs, actions, and responsive geometry. Search remains one state within this rail—it does not restyle the standalone search route.</p>
+  <p className="max-w-3xl leading-7 text-primary-foreground">Every grade route composes the same workroom: a grade-owned identity and navigation rail beside a paper work stage. The route provides its curriculum, grade owner, and teacher note; the shared control provides accessible tabs, actions, and responsive geometry. Search remains one state within this rail—it does not restyle the standalone search route.</p>
 
   <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
     <article data-grade-group="early-years" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Early Years</strong><p className="text-sm">Umbrella · teal</p><code>data-grade-group=&quot;early-years&quot;</code></article>
@@ -22,6 +22,6 @@ import { GradeControlsReference } from "../../../components/grades/GradeControls
 
   </div>
 
-  <p className="mt-6 mb-0 text-sm leading-6 text-site-chrome-foreground"><strong>Use the catalogues, do not copy asset instructions:</strong> choose semantic colours from <a href="#palette">Palette</a>, the grade owner from <a href="#cast">Cast</a>, and the exact approved signal from <a href="#icons">Icons</a>. The shared asset registry resolves the approved texture and icon file.</p>
-  <p className="mt-3 mb-0 text-sm leading-6 text-site-chrome-foreground"><strong>Working-wall materials:</strong> the reusable grade workspace requests <code>var(--grade-texture)</code> for its rail, <code>var(--asset-cardboard-ivory)</code> for paper, and <code>var(--asset-cork-board)</code> for planning and sequence boards. Those registered names resolve in <code>app/brand-assets.css</code>; page components never search for or paste asset URLs.</p>
+  <p className="mt-6 mb-0 text-sm leading-6 text-primary-foreground"><strong>Use the catalogues, do not copy asset instructions:</strong> choose semantic colours from <a href="#palette">Palette</a>, the grade owner from <a href="#cast">Cast</a>, and the exact approved signal from <a href="#icons">Icons</a>. The shared asset registry resolves the approved texture and icon file.</p>
+  <p className="mt-3 mb-0 text-sm leading-6 text-primary-foreground"><strong>Working-wall materials:</strong> the reusable grade workspace requests <code>var(--grade-texture)</code> for its rail, <code>var(--asset-cardboard-ivory)</code> for paper, and <code>var(--asset-cork-board)</code> for planning and sequence boards. Those registered names resolve in <code>app/brand-assets.css</code>; page components never search for or paste asset URLs.</p>
 </section>
