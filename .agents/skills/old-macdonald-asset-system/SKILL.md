@@ -7,17 +7,27 @@ description: Learn the visual design rules for this project.
 
 Use this skill before selecting an asset or changing visual code. Treat the current site as an established system. Do not reconstruct project history or carry assumptions from an earlier task: the rendered `/branding` route and its focused Markdown chapters are the current visual contract.
 
+## User-authored implementation rules
+
+- Only requirements the user actually states are rules. Do not invent additional prohibitions, approval gates, architectural layers, or historical compatibility requirements.
+- Unless the user explicitly requests a custom component, reuse or extend an existing production component or installed shadcn primitive.
+- When the user requests a texture, select the authored texture whose palette and material role match the requested grade, curriculum area, topic, or surrounding composition. Do not treat the currently registered class as the complete set of choices.
+- Grade, curriculum, topic, and cast colors share an identity system. A component may use the matching color or texture without displaying the associated character portrait.
+- When the useful source is a large contact sheet and no suitable individual export exists, use Canva Magic Layers to separate the needed asset, export a web-ready file, inspect the result for clipping, broken transparency, edge damage, and responsive legibility, and fix defects before connecting it to production.
+
 ## Non-negotiable ownership
 
 - `app/layout.tsx` is the root layout. It owns `ThemeProvider`, shared header, shared footer, and the global `<main>`. Pages and nested layouts must not duplicate or visually replace them.
-- `app/theme.css` is the only palette owner. Raw HEX, RGB, HSL, named presentation colors, and component-local dark palettes are forbidden outside it. Literal HEX is allowed only as printed reference content on the matching live semantic surface.
+- `app/globals.css` is the single Tailwind/shadcn theme entrypoint and palette owner. Raw HEX, RGB, HSL, named presentation colors, and component-local dark palettes are forbidden outside it. Literal HEX is allowed only as printed reference content on the matching live semantic surface.
 - `app/brand-assets.css` maps approved asset paths and textures; it must not own palette values.
 - Shared shadcn primitives own control behavior. Pages may compose and position them; pages must not recolor or redesign them.
-- All responsive breakpoints 
+- Use Tailwind's configured responsive breakpoints unless an approved raster asset requires a documented exception.
 - Components receive semantic identities such as `character="miss-puddles"`, `data-grade="grade-two"`, or a subject key—never color, ink, portrait URL, texture URL, or breakpoint props.
 - One reusable component represents one behavior. Variants are semantic props or data attributes, not copied components.
 
 ## Tailwind and responsive contract
+
+CSS Modules are forbidden by default. Use Tailwind utilities, shared shadcn primitives, and reusable material recipes first. A CSS Module is allowed only when a small, component-specific mechanism cannot be expressed clearly with Tailwind and is not reusable elsewhere—for example authored raster safe-area geometry, a complex pseudo-element, print-only document mechanics, or tightly coupled animation geometry. The owning file must document the reason beside the import. CSS Modules must never own palette values, breakpoints, ordinary grid/flex layout, typography, spacing, shared control states, or a whole page composition.
 
 Use intrinsic layout first: normal flow, `flex-wrap`, `min-w-0`, `max-w-full`, flexible tracks, and `minmax(0, 1fr)`. Let the parent determine available space.
 
@@ -30,16 +40,22 @@ Never hide overflow at a page or section boundary to conceal a responsive failur
 ## Fast path
 
 1. Identify the decision: material/surface, character, icon/fastener, typography/theme, or component/layout.
-2. Open only the matching `/branding` anchor:
+2. Search the asset inventory before concluding that an asset is missing:
+   - human lookup: `docs/DESIGN_ASSET_MASTER_LIST.md`
+   - filterable lookup: `docs/design-asset-master-list.csv`
+   - machine lookup: `docs/design-asset-master-list.json`
+   - targeted filename discovery: `rg --files public | rg -i "<role-or-material>"`
+3. Read the candidate's status and plain-language role as implementation guidance, not a ban on discovery or use. Everything under `public/design-assets/` is part of the allowed design library. Prefer an individual export over a contact sheet when the component needs one separate piece.
+4. Open the matching `/branding` anchor:
    - `#assets` — materials, fasteners, and registered asset classes
    - `#icons` — curriculum and music/arts signals
    - `#cast` — canonical character facts and visible pairings
    - `#page-recipe` or `#subject-cards` — composed board/card examples
    - `#typography` — type roles in a real composition
    - `#controls` or `#grades` — interaction and grade composition
-3. Use the source file named by the page for the exact class, path, fact, or status. Do not recursively scan `public/` to discover options.
-4. Inspect the owning component and local styles before editing.
-5. Reuse the existing class, primitive, token, or approved asset. If the page, recipe, and implementation disagree, stop and report the conflict.
+5. Use the source file named by the page for the exact registered class or current consumer. Registration describes current use; omission from `brand-assets.css` does not prove that the asset does not exist.
+6. Inspect the owning component and local styles before editing.
+7. Reuse the existing class, primitive, token, or allowed asset. If a suitable asset exists but is not registered for the requested role, report that concrete candidate and connect it through `brand-assets.css` and the asset recipe. If the page, inventory, recipe, and implementation disagree, report the conflict with all four states.
 
 ## Source hierarchy
 
@@ -50,13 +66,17 @@ These sources have different jobs; `/branding` is visual evidence, not a substit
 | Which material or asset pattern fits? | `/branding#assets` or the relevant anchor | `public/BRAND_ASSET_RECIPES.md` |
 | What exact public file does a class use? | `public/BRAND_ASSET_RECIPES.md` | `app/brand-assets.css` |
 | What may a character do or teach? | `/branding#cast` | `content/pages/branding/cast.mdx` or the relevant `public/CAST_AND_ROLES.md` row |
-| What is the palette/type role? | `/branding#typography` | `public/branding/PALETTE_AND_TYPOGRAPHY.md`, then `app/theme.css` or `app/globals.css` |
+| What is the palette/type role? | `/branding#typography` | `public/branding/PALETTE_AND_TYPOGRAPHY.md`, then `app/globals.css` |
 | How should a component behave? | `/branding#controls` | `public/branding/DESIGN_SYSTEM.md`, then the owning component |
 | Is an asset approved, excluded, or ambiguous? | `/branding#governance` | the relevant section of `docs/ASSET_LIBRARY_GOVERNANCE.md` |
 
-Do not read a full governance, cast, inventory, or global stylesheet file for an ordinary component choice. Use the already-selected path or class to query exact details.
+Use targeted inventory queries for ordinary choices; do not dump an entire inventory or global stylesheet into context. A targeted discovery search is required whenever the requested role is absent from the branding page, the user asks what else exists, or the current registered asset is rejected.
 
-## Approved production boundary
+## Allowed design library
+
+Everything under `public/design-assets/` is allowed for design discovery and production use. Registration in `brand-assets.css` records a current semantic consumer; it is not an allowlist and omission is not rejection. Choose the individual asset that fits the component role. Source sheets and contact sheets may guide selection; use a separated individual when interactive or responsive composition requires independent pieces.
+
+Common families include:
 
 - Canonical portraits: `public/staff_and_students/`
 - Repeatable materials: `public/design-assets/web-material-library-v1/`
@@ -64,9 +84,9 @@ Do not read a full governance, cast, inventory, or global stylesheet file for an
 - Fasteners: `public/design-assets/classroom-fasteners-v1/individual-icons/`
 - Blank paper notes: `public/design-assets/classroom-paper-notes-v1/individual-notes/`
 - Grade and subject icons: `public/brand-kit-icon-sheets/individual-icons/`
-- Approved blank patches: `public/design-assets/blank-felt-patches-v1/`
+- Blank patches: `public/design-assets/blank-felt-patches-v1/`
 
-Contact sheets, atlases, composites, page crops, `figma-copy-design/`, `public/design-concepts/`, `public/design-explorations-v5/`, and anything marked `DO NOT USE` are references or review material, not production components.
+Do not confuse “allowed asset” with “embed the entire sheet.” Contact sheets, atlases, composites, and page crops are useful discovery or composition references; select separated pieces for semantic, responsive production components when those pieces exist. `figma-copy-design/`, `public/design-concepts/`, and `public/design-explorations-v5/` are outside `public/design-assets/` and remain composition references.
 
 ## Material and composition rules
 
@@ -81,7 +101,7 @@ Contact sheets, atlases, composites, page crops, `figma-copy-design/`, `public/d
 
 Before showing a character, verify the current name, filename, signature color, staff/student status, grade ownership, role, and scene suitability. Use the canonical portrait unchanged. Do not recolor portraits, invent a TypeScript character registry, or associate staff with an unassigned teaching topic. Build badges from the matching portrait and approved patch/material.
 
-If a required asset is missing or ambiguous, report the gap and follow the named approval gate in `docs/ASSET_LIBRARY_GOVERNANCE.md`. Do not generate, recolor, export, move, or replace an asset before approval.
+If a required role is not registered, search all of `public/design-assets/` before reporting a gap. Connecting an existing asset for use is allowed. Moving, deleting, overwriting, recoloring, or generating files remains a separate mutation decision.
 
 ## Verification
 
@@ -94,7 +114,7 @@ For a documentation-only review, report the rendered route and source evidence w
 Stop before editing if the proposed approach would add:
 
 - another header, footer, root layout UI, theme provider, or root `<main>`;
-- raw color values outside `theme.css`;
+- raw color values outside `app/globals.css`;
 - runtime asset URLs outside `brand-assets.css` or a canonical identity mapping;
 - private button/control appearance outside the shared primitive;
 - arbitrary `w-[...]`, `max-w-[...]`, viewport calculations, or undocumented breakpoints used to force a screenshot match;

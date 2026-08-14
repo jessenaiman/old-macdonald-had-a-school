@@ -50,6 +50,7 @@
   --asset-thread-old-macdonald: url('/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.png');
   --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png');
   --asset-leather-blue: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png');
+  --asset-leather-indigo: url('/design-assets/web-material-library-v1/leather/individual-tiles/07-mr-puddles-leather-tile-v01.png');
   --asset-cork-board: url('/design-assets/cork-board-kit-v2/seamless-cork-tile.png');
   --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png');
   --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png');
@@ -70,6 +71,7 @@
 .icon-micro { --brand-asset-size: 1rem; }
 .icon-small { --brand-asset-size: 2rem; }
 .icon-medium { --brand-asset-size: 4.25rem; }
+.icon-control { --brand-asset-size: 3rem; }
 .icon-large { --brand-asset-size: 7rem; }
 
 /* Grade textures only. Theme routing for grade colour and ink lives in globals.css. */

@@ -2,6 +2,8 @@
 
 Status: Phase 1 inventory complete; all asset mutations paused.
 
+Design-use authorization: everything under `public/design-assets/` is allowed for discovery and production use. The mutation gate below applies to moving, renaming, deleting, overwriting, exporting, uploading, archiving, reorganizing, or editing files; it does not prohibit connecting an existing asset to a component. Inventory lifecycle labels describe provenance and known limitations rather than forming an asset allowlist.
+
 This document records the verified asset locations, naming rules, exclusions, duplicate findings,
 and proposed future actions for the Old MacDonald Had a School design library. It does not authorize
 any action in the proposed-action manifest.
@@ -29,12 +31,11 @@ the approval is invalid and a revised manifest line must be reviewed first.
 - Canva is the source for authored textures, patches, icons, fasteners, and separated visual pieces.
 - Figma defines typography, spacing, hierarchy, responsive layout, and component boundaries.
 - React and HTML provide semantic production implementation.
-- `content/pages/branding/cast.mdx` locks character names, roles, grade ownership, exact colors, and visible examples.
+- `lib/cast.ts` owns the character keys, names, portrait paths, families, species, and student personality data consumed by production components.
 - Locked assets cannot be substituted or recolored.
 - Reference sheets, atlases, page composites, and page-section crops cannot become flattened UI
   components.
-- Files marked `DO NOT USE` cannot enter production.
-- Files marked for review cannot enter production until visually cleared.
+- Inventory warnings must be surfaced when selecting an asset. They do not hide files from discovery or override the repository-wide permission to use `public/design-assets/`.
 
 ## Verified local location map
 
@@ -43,7 +44,7 @@ the approval is invalid and a revised manifest line must be reviewed first.
 | `docs/DESIGN_ASSET_MASTER_LIST.md` | Human-readable asset index | Describes 350 raster files |
 | `docs/design-asset-master-list.csv` | Exhaustive development lookup | 350 records with dimensions, alpha bounds, status, and SHA-256 |
 | `docs/design-asset-master-list.json` | Machine-readable asset lookup | 350 asset records and duplicate groups |
-| `content/pages/branding/cast.mdx` | Locked identities, roles, grades, colors, and visible examples | Canonical source of truth |
+| `lib/cast.ts` | Character keys, names, portrait paths, families, species, and student personality data | Production source of truth |
 | `public/staff_and_students/` | Canonical transparent character portraits | 18 indexed assets |
 | `public/brand-kit-icon-sheets/individual-icons/` | Production grade and subject icons | 15 usable individuals |
 | `public/design-assets/classroom-fasteners-v1/individual-icons/` | Production fasteners and attachment cues | 16 individuals |
@@ -131,14 +132,14 @@ its exact manifest line and a current reference scan.
 
 ## Do-not-use and review rules
 
-### DO NOT USE
+### Known damaged exports
 
 All 16 files matching:
 
 `public/design-assets/blank-felt-patches-v1/individual-patches/*-rectangle.png`
 
-These local exports are known to be clipped at the left and right canvas edges. They remain preserved
-for provenance but cannot be used in production.
+These local exports are known to be clipped at the left and right canvas edges. They remain available,
+but developers should prefer the intact circle or square exports unless the clipped edge is intentionally required.
 
 ### Review for extraction damage
 

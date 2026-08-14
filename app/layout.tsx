@@ -34,8 +34,11 @@ export const metadata: Metadata = {
   description:
     "Curriculum-organized lesson starting points for individual grades, with clear teaching sequences and practical resources.",
   icons: {
-    icon: "/brand-emblem.png",
-    shortcut: "/brand-emblem.png",
+    icon: [
+      { url: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-micro-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-favicon-32.png",
   },
 };
 
@@ -56,7 +59,7 @@ export default function RootLayout({
         >
           <div className="flex min-h-dvh flex-col bg-background text-foreground">
             <SiteHeader />
-            <main className="flex min-h-0 min-w-0 flex-1 flex-col">{children}</main>
+            <main className="material-surface material-cardboard-kraft flex min-h-0 min-w-0 flex-1 flex-col">{children}</main>
             <SiteFooter />
           </div>
         </ThemeProvider>

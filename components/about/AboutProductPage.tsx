@@ -1,217 +1,34 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { ReactNode } from "react";
-import styles from "./AboutProductPage.module.css";
+import Image from "next/image"
+import Link from "next/link"
+import type { ReactNode } from "react"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+
+const strengths = [
+  ["Curriculum thinking", "I organize standards, learning goals, lesson structures, and source material without flattening the educational intent."],
+  ["Content systems", "I turn scattered research and editable source files into traceable content models that support real publishing workflows."],
+  ["Product design", "I design interfaces around the next useful decision, then build and verify the responsive experience in code."],
+] as const
+const workflow = [
+  ["Understand the source", "Research before decoration.", "Map the curriculum, audience, evidence, constraints, and provenance that the product must preserve."],
+  ["Shape the system", "Make the structure teachable.", "Create content boundaries, reusable templates, and workflows that can grow without becoming opaque."],
+  ["Prove the experience", "Build, compare, and refine.", "Use real content and assets, responsive browser evidence, accessibility checks, and honest product language."],
+] as const
+const paths = [["Teacher experience", "Planning-first information architecture", "/"], ["Brand system", "Canonical characters, roles, and visual governance", "/branding"], ["Content design", "Reusable lesson structures and editorial clarity", "/lessons"], ["Resource discovery", "Helping teachers find a useful starting point", "/search"]] as const
 
 export function AboutProductPage({ story }: { story: ReactNode }) {
-  return (
-    <div className={styles.page} data-style-scope="about-product-page">
-      <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <span>Educational product design - curriculum systems</span>
-          <h1>
-            I make complex learning content
-            <br />
-            <em>clear enough to use.</em>
-          </h1>
-          <p>
-            Old MacDonald Had a School is both my company-s teacher-resource
-            product and a working demonstration of how I combine curriculum
-            thinking, research, content architecture, visual storytelling, and
-            frontend design.
-          </p>
-          <div className={styles.actions}>
-            <Link href="/#browse-by-subject">Explore the product</Link>
-            <Link href="/branding">See the brand system</Link>
-          </div>
-        </div>
-        <div className={styles.heroVisual}>
-          <Image
-            src="/scenes/home-schoolhouse-classroom-hero-v1.png"
-            alt="Old MacDonald and the farm-school class learning together"
-            width={1200}
-            height={800}
-            priority
-          />
-          <div className={styles.pinnedNote}>
-            <span>The work</span>
-            <strong>Research becomes a system.</strong>
-            <small>A system becomes something teachers can actually use.</small>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.promise}>
-        <header>
-          <span>What I bring to a team</span>
-          <h2>I connect educational substance with product execution.</h2>
-        </header>
-        <div className={styles.promiseGrid}>
-          <article>
-            <strong>Curriculum thinking</strong>
-            <p>
-              I organize standards, learning goals, lesson structures, and
-              source material without flattening the educational intent.
-            </p>
-          </article>
-          <article>
-            <strong>Content systems</strong>
-            <p>
-              I turn scattered research and editable source files into traceable
-              content models that support real publishing workflows.
-            </p>
-          </article>
-          <article>
-            <strong>Product design</strong>
-            <p>
-              I design interfaces around the next useful decision, then build
-              and verify the responsive experience in code.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section className={styles.workflow}>
-        <header>
-          <span>How I work</span>
-          <h2>From ambiguity to a usable product</h2>
-        </header>
-        <ol>
-          <li>
-            <b>Understand the source</b>
-            <strong>Research before decoration.</strong>
-            <p>
-              Map the curriculum, audience, evidence, constraints, and
-              provenance that the product must preserve.
-            </p>
-          </li>
-          <li>
-            <b>Shape the system</b>
-            <strong>Make the structure teachable.</strong>
-            <p>
-              Create content boundaries, reusable templates, and workflows that
-              can grow without becoming opaque.
-            </p>
-          </li>
-          <li>
-            <b>Prove the experience</b>
-            <strong>Build, compare, and refine.</strong>
-            <p>
-              Use real content and assets, responsive browser evidence,
-              accessibility checks, and honest product language.
-            </p>
-          </li>
-        </ol>
-      </section>
-
-      <section className={styles.showcase}>
-        <header>
-          <span>Selected work - presentation blocks</span>
-          <h2>Show the thinking and the finished system</h2>
-        </header>
-        <div className={styles.showcaseGrid}>
-          <article className={styles.showcaseWide}>
-            <div>
-              <Image
-                src="/scenes/home-schoolhouse-classroom-hero-v1.png"
-                alt="Old MacDonald Had a School classroom product artwork"
-                width={900}
-                height={600}
-              />
-            </div>
-            <section>
-              <span>Featured case study</span>
-              <h3>Lead with one strong project story.</h3>
-              <p>
-                Replace this with the problem, your contribution, and the
-                outcome you want an employer to remember.
-              </p>
-            </section>
-          </article>
-          <article>
-            <div className={styles.assetGroup}>
-              <Image
-                src="/staff_and_students/miss-hayley-transparent-circle.png"
-                alt="Miss Hayley character artwork"
-                width={160}
-                height={160}
-              />
-              <span className="brand-asset math-building-icon icon-large" role="img" aria-label="Mathematics subject icon" />
-            </div>
-            <section>
-              <span>System evidence</span>
-              <h3>Brand and content working together.</h3>
-              <p>
-                A compact block for design-system, asset-governance, or
-                curriculum examples.
-              </p>
-            </section>
-          </article>
-          <article>
-            <div className={styles.materialGroup}>
-              <i />
-              <i />
-              <i />
-            </div>
-            <section>
-              <span>Process evidence</span>
-              <h3>Show the materials behind the interface.</h3>
-              <p>
-                A flexible block for research, prototypes, responsive
-                comparisons, or implementation proof.
-              </p>
-            </section>
-          </article>
-        </div>
-      </section>
-
-      <section className={styles.gradePaths}>
-        <header>
-          <span>Old MacDonald Had a School</span>
-          <h2>One product, several disciplines working together</h2>
-        </header>
-        <div>
-          <Link href="/">
-            <strong>Teacher experience</strong>
-            <small>Planning-first information architecture</small>
-          </Link>
-          <Link href="/branding">
-            <strong>Brand system</strong>
-            <small>Canonical characters, roles, and visual governance</small>
-          </Link>
-          <Link href="/lessons">
-            <strong>Content design</strong>
-            <small>Reusable lesson structures and editorial clarity</small>
-          </Link>
-          <Link href="/search">
-            <strong>Resource discovery</strong>
-            <small>Helping teachers find a useful starting point</small>
-          </Link>
-        </div>
-      </section>
-
-      <section className={styles.story}>
-        <header>
-          <span>About the company and its creator</span>
-          <h2>
-            Research, curriculum thinking, and product design in one system
-          </h2>
-        </header>
-        <div className={styles.storyBody}>{story}</div>
-        <aside>
-          <span>For collaborators and employers</span>
-          <h3>
-            I can carry educational work from messy source material to a
-            coherent product.
-          </h3>
-          <p>
-            I am interested in roles and collaborations where curriculum
-            organization, resource research, content modelling, educational UX,
-            and thoughtful visual design need to work together.
-          </p>
-          <Link href="/branding">Explore the brand and asset guide ?</Link>
-        </aside>
-      </section>
-    </div>
-  );
+  return <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-12 px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+    <section className="grid overflow-hidden rounded-2xl border border-border bg-card shadow-lg lg:grid-cols-2" aria-labelledby="about-title">
+      <div className="flex flex-col justify-center gap-5 p-6 sm:p-10 lg:p-14"><p className="text-xs font-black uppercase tracking-widest text-primary">Educational product design · curriculum systems</p><h1 id="about-title" className="font-heading text-5xl leading-none text-balance sm:text-6xl">I make complex learning content <em className="mt-2 block font-hand text-primary">clear enough to use.</em></h1><p className="max-w-2xl leading-7 text-muted-foreground">Old MacDonald Had a School is both my company&apos;s teacher-resource product and a working demonstration of how I combine curriculum thinking, research, content architecture, visual storytelling, and frontend design.</p><div className="flex flex-wrap gap-3"><Button asChild><Link href="/#browse-by-subject">Explore the product</Link></Button><Button asChild variant="outline"><Link href="/branding">See the brand system</Link></Button></div></div>
+      <div className="material-surface material-cork relative min-h-80 p-4 sm:p-8"><Image className="h-full w-full rounded-xl border-8 border-card object-cover shadow-md" src="/scenes/home-schoolhouse-classroom-hero-v1.png" alt="Old MacDonald and the farm-school class learning together" width={1200} height={800} priority /><Card className="absolute bottom-6 right-6 max-w-xs"><CardHeader><CardDescription>The work</CardDescription><CardTitle>Research becomes a system.</CardTitle></CardHeader><CardContent className="text-sm">A system becomes something teachers can actually use.</CardContent></Card></div>
+    </section>
+    <section aria-labelledby="strengths-title"><p className="text-xs font-black uppercase tracking-widest text-primary">What I bring to a team</p><h2 id="strengths-title" className="mt-2 font-hand text-4xl sm:text-5xl">I connect educational substance with product execution.</h2><div className="mt-6 grid gap-4 md:grid-cols-3">{strengths.map(([title, copy]) => <Card key={title}><CardHeader><CardTitle>{title}</CardTitle></CardHeader><CardContent className="leading-7 text-muted-foreground">{copy}</CardContent></Card>)}</div></section>
+    <section className="material-surface material-felt cast-mr-rusty rounded-2xl p-6 text-card-foreground sm:p-10" aria-labelledby="workflow-title"><p className="text-xs font-black uppercase tracking-widest">How I work</p><h2 id="workflow-title" className="mt-2 font-hand text-4xl sm:text-5xl">From ambiguity to a usable product</h2><ol className="mt-6 grid gap-4 md:grid-cols-3">{workflow.map(([label, title, copy], index) => <li key={label}><Card className="h-full"><CardHeader><CardDescription>{index + 1}. {label}</CardDescription><CardTitle>{title}</CardTitle></CardHeader><CardContent className="leading-7 text-muted-foreground">{copy}</CardContent></Card></li>)}</ol></section>
+    <section aria-labelledby="evidence-title"><p className="text-xs font-black uppercase tracking-widest text-primary">Selected work · presentation blocks</p><h2 id="evidence-title" className="mt-2 font-hand text-4xl sm:text-5xl">Show the thinking and the finished system</h2><div className="mt-6 grid gap-4 lg:grid-cols-2"><Card className="lg:col-span-2"><div className="grid lg:grid-cols-2"><div className="material-surface material-cork p-4"><Image className="h-full w-full rounded-lg object-cover" src="/scenes/home-schoolhouse-classroom-hero-v1.png" alt="Old MacDonald Had a School classroom product artwork" width={900} height={600} /></div><CardHeader className="self-center"><CardDescription>Featured case study</CardDescription><CardTitle>Lead with one strong project story.</CardTitle><p className="text-muted-foreground">Replace this with the problem, your contribution, and the outcome you want an employer to remember.</p></CardHeader></div></Card><Card><CardHeader><div className="flex items-end gap-4"><Image className="size-28 object-contain" src="/staff_and_students/miss-hayley-transparent-circle.png" alt="Miss Hayley character artwork" width={160} height={160} /><span className="brand-asset math-building-icon icon-large" role="img" aria-label="Mathematics subject icon" /></div><CardDescription>System evidence</CardDescription><CardTitle>Brand and content working together.</CardTitle></CardHeader><CardContent className="text-muted-foreground">A compact block for design-system, asset-governance, or curriculum examples.</CardContent></Card><Card><CardHeader><CardDescription>Process evidence</CardDescription><CardTitle>Show the materials behind the interface.</CardTitle></CardHeader><CardContent className="text-muted-foreground">A flexible block for research, prototypes, responsive comparisons, or implementation proof.</CardContent></Card></div></section>
+    <section aria-labelledby="paths-title"><p className="text-xs font-black uppercase tracking-widest text-primary">Old MacDonald Had a School</p><h2 id="paths-title" className="mt-2 font-hand text-4xl sm:text-5xl">One product, several disciplines working together</h2><div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{paths.map(([title, copy, href]) => <Card key={href}><CardHeader><CardTitle>{title}</CardTitle><CardDescription>{copy}</CardDescription></CardHeader><CardContent><Button asChild variant="outline"><Link href={href}>Open</Link></Button></CardContent></Card>)}</div></section>
+    <Separator />
+    <section aria-labelledby="story-title"><p className="text-xs font-black uppercase tracking-widest text-primary">About the company and its creator</p><h2 id="story-title" className="mt-2 font-hand text-4xl sm:text-5xl">Research, curriculum thinking, and product design in one system</h2><div className="mt-6 grid items-start gap-6 lg:grid-cols-3"><Card className="lg:col-span-2"><CardContent className="p-6 [&_h2]:mt-6 [&_h2]:font-heading [&_h2]:text-2xl [&_li]:leading-7 [&_p]:leading-7 [&_p]:text-muted-foreground">{story}</CardContent></Card><Card><CardHeader><CardDescription>For collaborators and employers</CardDescription><CardTitle>I can carry educational work from messy source material to a coherent product.</CardTitle></CardHeader><CardContent className="flex flex-col gap-4 text-muted-foreground"><p>I am interested in roles and collaborations where curriculum organization, resource research, content modelling, educational UX, and thoughtful visual design need to work together.</p><Button asChild variant="outline"><Link href="/branding">Explore the brand and asset guide</Link></Button></CardContent></Card></div></section>
+  </div>
 }

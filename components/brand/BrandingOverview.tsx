@@ -1,74 +1,127 @@
+import Link from "next/link"
+
+import { ResponsiveBrandEmblem } from "@/components/brand/ResponsiveBrandEmblem"
 import { Button } from "@/components/ui/button"
-import { CharacterPortrait } from "@/components/brand/CharacterPortrait"
-import type { CastKey } from "@/lib/cast"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 
-const guideSections = [
-  ["Page recipe", "#page-recipe"], ["Materials", "#assets"], ["Fabrics", "#fabrics"], ["Homepage surface", "#homepage-surface"], ["Icons", "#icons"],
-  ["Logo family", "#logo-family"], ["Icon sizing", "#icon-sizes"],
-  ["Cast", "#cast"], ["Subjects", "#subject-cards"], ["Badge recipe", "#badge-recipe"],
-  ["Typography", "#typography"], ["Actions", "#buttons"], ["Controls", "#controls"],
-  ["Grades", "#grades"], ["Palette", "#palette"], ["Governance", "#governance"],
+const assetFamilies = [
+  ["Blank felt patches", "public/design-assets/blank-felt-patches-v1/", "Blank shapes for badges, portraits, labels, and attached objects."],
+  ["Brand emblem exports", "public/design-assets/brand-emblem-v1/", "Size-specific emblem files for metadata, navigation, cards, and larger media."],
+  ["Brand emblem review", "public/design-assets/brand-emblem-v1-review/", "Comparison sheets and review material for discovering the emblem family."],
+  ["Classroom fasteners v1", "public/design-assets/classroom-fasteners-v1/", "Pins, clips, tape, buttons, and separated attachment pieces."],
+  ["Classroom fasteners v2", "public/design-assets/classroom-fasteners-v2/", "Additional attachment artwork and separated exports."],
+  ["Fastener review", "public/design-assets/classroom-fasteners-v2-review/", "Review sheets for comparing the second fastener family."],
+  ["Classroom paper notes", "public/design-assets/classroom-paper-notes-v1/", "Blank note shapes for live HTML headings, copy, and links."],
+  ["Paper-note review", "public/design-assets/classroom-paper-notes-v1-review/", "Review sheets for finding and comparing paper-note shapes."],
+  ["Cork board kit v1", "public/design-assets/cork-board-kit-v1/", "Earlier cork-board tiles and board references."],
+  ["Cork board kit v2", "public/design-assets/cork-board-kit-v2/", "Current repeatable cork tiles and board-sized derivatives."],
+  ["Homepage reference parts", "public/design-assets/homepage-reference-parts-v1/", "Separated pieces and references used to inspect homepage composition."],
+  ["Homepage v2", "public/design-assets/homepage-v2/", "Homepage artwork and composition references from the second family."],
+  ["Theme-toggle patches", "public/design-assets/theme-toggle-patches-v1/", "The full sun and moon felt artwork used by the shared theme control."],
+  ["Web material library", "public/design-assets/web-material-library-v1/", "Cardboard, construction paper, felt, woven cloth, thread, and leather tiles. Cork is stored in the cork-board kits."],
 ] as const
 
-const cast: readonly CastKey[] = ["old-macdonald", "miss-puddles", "mr-rusty", "miss-hayley"]
-
-const rules = [
-  ["Palette", "globals.css is the only theme and colour owner. Components consume semantic tokens; printed HEX values sit on their live semantic surface.", "fastener-push-pin"],
-  ["Assets", "brand-assets.css maps approved paths. Components request named classes or semantic character keys—never URLs.", "fastener-paperclip"],
-  ["Layout", "Prefer intrinsic flex/grid sizing and standard Tailwind utilities. A page must not declare a private breakpoint system.", "fastener-masking-tape"],
-  ["Identity", "Use character=\"miss-puddles\", data-grade, or a semantic subject key. Never pass colour, portrait, texture, or ink props.", "fastener-binder-clip"],
-  ["Materials", "Paper carries readable information. Fasteners cross both attached edges. Character colour remains local to character identity.", "fastener-gingham-tape"],
-  ["Verification", "Check light and dark at 1900, 1440, 768, 390, and 320px. Reject overflow, clipping, unused container space, unreadable text, detached fasteners, or extra page headings.", "fastener-brass-rivet"],
+const productionReferences = [
+  ["Homepage composition", "/", "components/home/HomePage.tsx", "Hero, lesson notes, subject board, and folk-arts links."],
+  ["Grade workspace", "/grade/grade-one", "components/grades/", "Shared grade navigation, teacher note, lesson controls, and work stage."],
+  ["Lessons", "/lessons", "app/lessons/page.tsx", "Production cards, empty states, and lesson navigation."],
+  ["Topics", "/topics", "app/topics/TopicsClient.tsx", "Production topic browsing and topic-card composition."],
+  ["Songs", "/songs", "app/songs/page.tsx", "Production song catalogue, cards, filters, and detail navigation."],
+  ["Search", "/search", "app/search/page.tsx", "Production fields, tabs, results, and actions."],
+  ["About", "/about", "components/about/AboutProductPage.tsx", "Production explanatory content and calls to action."],
+  ["Shared navigation", "/", "components/SiteHeader.tsx + components/MobileNavigation.tsx", "Desktop and mobile navigation, responsive emblem, grade access, and search entry."],
+  ["Shared footer", "/", "components/SiteFooter.tsx", "Production footer links and material treatment."],
+  ["Theme control", "/", "components/ThemeSwitcher.tsx", "Production day and dusk control using the authored felt sun and moon patches."],
 ] as const
-
-const decisions = [
-  ["Material, board, or fastener", "#assets", "Materials and attachment examples", "public/BRAND_ASSET_RECIPES.md"],
-  ["Icon or curriculum signal", "#icons", "Icon catalogue and size roles", "public/BRAND_ASSET_RECIPES.md"],
-  ["Character identity or teaching role", "#cast", "Canonical cast examples", "content/pages/branding/cast.mdx"],
-  ["Typography or palette role", "#typography", "Typography in context", "public/branding/PALETTE_AND_TYPOGRAPHY.md"],
-  ["Component behavior or responsive pattern", "#controls", "Shared controls and page recipe", "public/branding/DESIGN_SYSTEM.md"],
-  ["Approval, exclusion, or ambiguity", "#governance", "Production boundary", "docs/ASSET_LIBRARY_GOVERNANCE.md"],
-] as const
-
-type BrandingOverviewProps = {
-  eyebrow: string
-  title: string
-  emphasis: string
-  description: string
-  primaryLabel: string
-  primaryHref: string
-  secondaryLabel: string
-  secondaryHref: string
-  patchTitle: string
-  patchCaption: string
-}
-
-export function BrandingOverview({ eyebrow, title, emphasis, description, primaryLabel, primaryHref, secondaryLabel, secondaryHref, patchTitle, patchCaption }: BrandingOverviewProps) {
-  return <>
-    <header className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-primary text-primary-foreground shadow-xl">
-      <div className="flex min-w-[min(100%,32rem)] flex-[1.15_1_38rem] flex-col justify-center p-[clamp(1.5rem,4vw,4rem)]">
-        <p className="mb-3 font-body text-xs font-black uppercase tracking-widest text-accent">{eyebrow}</p>
-        <h1 className="m-0 max-w-3xl text-balance font-heading text-[clamp(3rem,7vw,6rem)] leading-[.88] text-primary-foreground">{title} <em className="block font-hand text-brand-pink">{emphasis}</em></h1>
-        <p className="mt-6 max-w-2xl font-body text-base font-semibold leading-[1.7] text-primary-foreground">{description}</p>
-        <div className="mt-7 flex flex-wrap gap-3"><Button asChild><a href={primaryHref}>{primaryLabel}</a></Button><Button asChild variant="outline"><a href={secondaryHref}>{secondaryLabel}</a></Button></div>
-      </div>
-      <div className="material-surface material-cork grid min-h-80 min-w-[min(100%,24rem)] flex-[.85_1_30rem] content-end overflow-hidden border border-border px-5 pt-10">
-        <div className="cast-old-macdonald material-surface material-felt relative mx-auto mb-10 w-full max-w-sm rounded-xl p-7 text-center shadow-xl"><span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" /><strong className="font-heading text-[clamp(1.875rem,4vw,3rem)] font-normal leading-none text-balance">{patchTitle}</strong><small className="mt-2 block font-body text-xs font-black leading-none tracking-[.13em] uppercase">{patchCaption}</small></div>
-        <div className="flex items-end justify-center">{cast.map((character, index) => <CharacterPortrait key={character} character={character} className={index === 0 ? "h-auto w-[clamp(6rem,12vw,8rem)]" : "-ml-8 h-auto w-[clamp(6rem,12vw,8rem)]"} />)}</div>
-      </div>
-    </header>
-    <nav className="material-surface material-cardboard-paper my-5 rounded-xl border border-border p-3 shadow-md" aria-label="Brand guide contents">
-      <strong className="mb-2 block font-hand text-xl">Brand guide contents</strong>
-      <div className="flex flex-wrap gap-2">{guideSections.map(([label, href]) => <a className="min-h-11 flex-[1_1_9rem] rounded-lg border border-border bg-primary px-4 py-3 text-center text-sm font-black text-primary-foreground no-underline shadow-[0_3px_0_var(--border)] transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" href={href} key={href}>{label}</a>)}</div>
-    </nav>
-  </>
-}
 
 export function BrandingLookup() {
-  return <section id="fast-lookup" className="material-surface material-cardboard-paper mt-5 rounded-2xl border border-border p-[clamp(1rem,3vw,2rem)] shadow-md">
-    <div className="max-w-3xl"><p className="mb-2 text-xs font-black uppercase tracking-widest text-primary">Production contract</p><h2 className="m-0 font-heading text-[clamp(1.875rem,4vw,3rem)]">Rules every page must obey</h2><p className="mb-0 mt-2 leading-7">Read this before copying a visual example. Pages compose semantic components; they do not invent their own palette, asset paths, identity data, or breakpoint system.</p></div>
-    <div className="mt-5 flex flex-wrap gap-4">{rules.map(([title, copy, fastener]) => <article className="material-surface material-cardboard-paper relative min-w-[min(100%,16rem)] flex-[1_1_18rem] border border-border p-5 pt-7 text-foreground shadow-md" key={title}><span className={`brand-asset ${fastener} icon-small absolute -top-5 left-1/2 -translate-x-1/2`} aria-hidden="true" /><strong className="font-heading text-xl">{title}</strong><p className="mb-0 mt-2 text-base leading-7">{copy}</p></article>)}</div>
-    <h3 className="mt-8 font-heading text-2xl">Open the exact source only when needed</h3>
-    <div className="mt-4 flex flex-wrap gap-3">{decisions.map(([decision, href, example, source]) => <article className="min-w-[min(100%,20rem)] flex-[1_1_25rem] rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm" key={decision}><span className="text-xs font-black uppercase tracking-wider text-muted-foreground">If you need to decide</span><strong className="mt-1 block font-heading text-xl">{decision}</strong><a className="mt-3 inline-block font-bold text-primary underline underline-offset-4" href={href}>{example}</a><code className="mt-3 block break-all rounded bg-muted p-2 text-xs">{source}</code></article>)}</div>
-  </section>
+  return (
+    <div className="flex flex-col gap-6 py-6">
+      <section aria-labelledby="start-here" className="flex flex-col gap-4">
+        <div>
+          <p className="text-sm font-bold text-muted-foreground">Start here</p>
+          <h2 id="start-here" className="font-heading text-3xl sm:text-4xl">Build from the existing website</h2>
+          <p className="mt-2 max-w-3xl text-pretty leading-7">
+            Check the asset library, open the real production component, then compose it with Tailwind and the installed shadcn primitives. Everything under <code>public/design-assets/</code> is available for discovery and use. <code>brand-assets.css</code> records a current connection; it is not a permission list.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild><Link href="#assets">Find an asset</Link></Button>
+          <Button asChild variant="secondary"><Link href="#production">Reuse a production pattern</Link></Button>
+          <Button asChild variant="outline"><Link href="/branding/DESIGN_SYSTEM.md">Read component rules</Link></Button>
+        </div>
+      </section>
+
+      <Separator />
+
+      <section id="assets" aria-labelledby="assets-title" className="scroll-mt-24">
+        <h2 id="assets-title" className="font-heading text-3xl">Asset families</h2>
+        <p className="mt-2 max-w-3xl leading-7">Use the folder descriptions to discover what exists. For a filterable inventory, use <code>docs/design-asset-master-list.csv</code> or <code>.json</code>; for human browsing, use <code>docs/DESIGN_ASSET_MASTER_LIST.md</code>.</p>
+        <p className="mt-2 max-w-3xl leading-7">Contact sheets and review sheets are discovery sources, not forbidden files. When only a large sheet contains the needed piece, use Canva Magic Layers to separate it, export a web-ready individual, then inspect and correct clipping and transparency before connecting it to production.</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {assetFamilies.map(([title, path, description]) => (
+            <Card key={path}>
+              <CardHeader><CardTitle>{title}</CardTitle><CardDescription>{description}</CardDescription></CardHeader>
+              <CardContent><code className="break-all text-xs">{path}</code></CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <Separator />
+
+      <section id="production" aria-labelledby="production-title" className="scroll-mt-24">
+        <h2 id="production-title" className="font-heading text-3xl">Production patterns to reuse</h2>
+        <p className="mt-2 max-w-3xl leading-7">These routes are the visual references. Reuse their owning components; do not rebuild a branding-only imitation.</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {productionReferences.map(([title, href, source, description]) => (
+            <Card key={href}>
+              <CardHeader><CardTitle>{title}</CardTitle><CardDescription>{description}</CardDescription></CardHeader>
+              <CardContent className="flex flex-col gap-3">
+                <code className="break-all text-xs">{source}</code>
+                <Button asChild variant="outline"><Link href={href}>Open the real page</Link></Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <Separator />
+
+      <section id="logo" aria-labelledby="logo-title" className="scroll-mt-24">
+        <h2 id="logo-title" className="font-heading text-3xl">Responsive logo and browser icons</h2>
+        <Card className="mt-4">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3"><ResponsiveBrandEmblem /> One emblem, size-specific exports</CardTitle>
+            <CardDescription>The shared header uses the 44px mark and switches to the simplified 32px mark below Tailwind&apos;s <code>sm</code> breakpoint. Browser metadata uses dedicated 16px and 32px exports instead of shrinking the detailed artwork.</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-2 text-sm">
+            <code className="break-all">components/brand/ResponsiveBrandEmblem.tsx</code>
+            <code className="break-all">public/design-assets/brand-emblem-v1/</code>
+            <code className="break-all">app/layout.tsx → metadata.icons</code>
+          </CardContent>
+        </Card>
+      </section>
+
+      <Separator />
+
+      <section id="ownership" aria-labelledby="ownership-title">
+        <h2 id="ownership-title" className="font-heading text-3xl">Where each decision belongs</h2>
+        <ul className="mt-3 grid gap-2 leading-7">
+          <li><code>app/globals.css</code> — Tailwind/shadcn theme tokens and reusable material recipes.</li>
+          <li><code>app/brand-assets.css</code> — public asset paths connected to semantic classes or tokens.</li>
+          <li><code>components/ui/</code> — shared interactive behavior and variants.</li>
+          <li><code>components/home/</code>, <code>components/grades/</code>, and route components — real compositions reused across the site.</li>
+          <li><code>public/design-assets/</code> — the allowed design library, including assets not connected yet.</li>
+        </ul>
+      </section>
+    </div>
+  )
 }

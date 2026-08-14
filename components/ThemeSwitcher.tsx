@@ -21,13 +21,13 @@ export function ThemeSwitcher() {
     <Button
       type="button"
       variant="ghost"
-      size="icon"
-      className="rounded-full"
+      size="icon-lg"
+      className="size-16"
       onClick={() => setTheme(next.value)}
       aria-label={`Switch to ${next.label}`}
       title={`Switch to ${next.label}`}
     >
-      <span className={`brand-asset ${current.iconClass} icon-small`} aria-hidden="true" />
+      <span className={`brand-asset ${current.iconClass} icon-control`} aria-hidden="true" />
       <span className="sr-only">{current.label}</span>
     </Button>
   );

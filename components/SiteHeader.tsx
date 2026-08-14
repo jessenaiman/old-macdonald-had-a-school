@@ -1,58 +1,52 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import { Search } from "lucide-react";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { MobileNavigation } from "./MobileNavigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { activePageFromPathname } from "./site-navigation";
-import styles from "./SiteHeader.module.css";
+import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
+import { activePageFromPathname, TEACHER_GRADE_ITEMS } from "./site-navigation";
 
 export function SiteHeader() {
   const active = activePageFromPathname(usePathname());
 
   return (
-    <header className={`${styles.header} material-surface material-leather-blue`}>
-      <div className={styles.headerInner}>
+    <header className="material-surface material-leather-indigo relative z-40 mb-3 border-b-2 border-border shadow-lg before:pointer-events-none before:absolute before:-bottom-3 before:left-2 before:right-2 before:-z-10 before:h-5 before:rounded-b-xl before:border before:border-t-0 before:border-border before:bg-[image:var(--material-image)] before:bg-[length:var(--material-size)] before:content-[''] after:pointer-events-none after:absolute after:-bottom-1 after:inset-x-2 after:top-2 after:z-0 after:rounded-xl after:border after:border-dashed after:border-accent/60 after:content-['']">
+      <div className="relative z-10 mx-auto flex min-h-20 w-full max-w-screen-2xl items-center gap-3 px-3 sm:px-4 lg:gap-6">
         <Link
-          className={styles.brand}
+          className="inline-flex min-h-11 min-w-0 flex-1 items-center gap-2 lg:max-w-xs lg:gap-3"
           href="/"
           aria-label="Old MacDonald Had a School home"
         >
-          <Image
-            src="/brand-emblem.png"
-            alt=""
-            width={44}
-            height={44}
-            priority
-          />
-          <span>
-            <strong>
-              <span className={styles.brandFull}>
+          <ResponsiveBrandEmblem className="shrink-0" />
+          <span className="min-w-0">
+            <strong className="block font-heading text-sm leading-none sm:text-base">
+              <span className="hidden xl:inline">
                 Old MacDonald Had a School
               </span>
-              <span className={styles.brandShort}>Old MacDonald</span>
+              <span className="xl:hidden">Old MacDonald</span>
             </strong>
-            <small>Had a School</small>
+            <small className="mt-1 block text-xs font-black uppercase tracking-wider text-accent">Had a School</small>
           </span>
         </Link>
         <NavigationMenu
-          className={styles.desktopNav}
+          className="hidden min-w-0 flex-1 lg:flex"
           aria-label="Primary navigation"
           viewport={false}
         >
-          <NavigationMenuList className={styles.primaryList}>
+          <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild active={active === "lessons"}>
+              <NavigationMenuLink asChild>
                 <Link
-                  className={styles.navLink}
                   href="/lessons"
                   aria-current={active === "lessons" ? "page" : undefined}
                 >
@@ -61,9 +55,8 @@ export function SiteHeader() {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild active={active === "topics"}>
+              <NavigationMenuLink asChild>
                 <Link
-                  className={styles.navLink}
                   href="/#browse-by-subject"
                   aria-current={active === "topics" ? "page" : undefined}
                 >
@@ -72,9 +65,24 @@ export function SiteHeader() {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild active={active === "songs"}>
+              <NavigationMenuTrigger>Grades</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-64 gap-1 p-1">
+                  {TEACHER_GRADE_ITEMS.map((grade) => (
+                    <li key={grade.key}>
+                      <NavigationMenuLink asChild>
+                        <Link href={grade.href} aria-current={active === grade.key ? "page" : undefined}>
+                          <span className="font-medium">{grade.label}</span>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
                 <Link
-                  className={styles.navLink}
                   href="/songs"
                   aria-current={active === "songs" ? "page" : undefined}
                 >
@@ -83,9 +91,8 @@ export function SiteHeader() {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild active={active === "about"}>
+              <NavigationMenuLink asChild>
                 <Link
-                  className={styles.navLink}
                   href="/about"
                   aria-current={active === "about" ? "page" : undefined}
                 >
@@ -94,24 +101,24 @@ export function SiteHeader() {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild active={active === "search"}>
+              <NavigationMenuLink asChild>
                 <Link
-                  className={styles.searchLink}
+                  className="flex-row gap-2 whitespace-nowrap"
                   href="/search"
                   aria-label="Search lessons"
                   aria-current={active === "search" ? "page" : undefined}
                 >
-                  <FaMagnifyingGlass aria-hidden="true" />
+                  <Search aria-hidden="true" />
                   <span>Search</span>
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className={styles.desktopTheme}>
+        <div className="hidden items-center lg:flex">
           <ThemeSwitcher />
         </div>
-        <div className={styles.mobileActions}>
+        <div className="flex items-center gap-1 lg:hidden">
           <MobileNavigation active={active} />
           <ThemeSwitcher />
         </div>

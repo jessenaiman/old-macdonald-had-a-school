@@ -119,6 +119,8 @@
   --subject-arts-color: var(--cast-mr-puddles-color);
   --subject-health-color: var(--cast-mr-maisy-color);
 
+  --subject-color: var(--primary);
+
   /* Grade workspace functional surfaces. */
   --workspace-paper: #fbf2df;
   --workspace-paper-soft: #fff9eb;
@@ -146,12 +148,6 @@
   --grade-accent: var(--grade-color);
   --grade-dark: var(--grade-edge);
   --grade-felt: var(--grade-texture);
-  --identity-color: var(--grade-color);
-  --identity-ink: var(--grade-ink);
-  --identity-texture: var(--grade-texture);
-  --nav-grade-color: var(--grade-color);
-  --nav-grade-edge: var(--grade-edge);
-  --nav-grade-texture: var(--grade-texture);
 }
 [data-grade-group='early-years'] { --grade-color:var(--grade-early-years-color); --grade-edge:var(--grade-early-years-edge); --grade-ink:var(--grade-early-years-ink); }
 [data-grade='daycare'] { --grade-color:var(--grade-daycare-color); --grade-edge:var(--grade-daycare-edge); --grade-ink:var(--grade-daycare-ink); }
@@ -159,6 +155,12 @@
 [data-grade='kindergarten'] { --grade-color:var(--grade-kindergarten-color); --grade-edge:var(--grade-kindergarten-edge); --grade-ink:var(--grade-kindergarten-ink); }
 [data-grade='grade-one'] { --grade-color:var(--grade-one-color); --grade-edge:var(--grade-one-edge); --grade-ink:var(--grade-one-ink); }
 [data-grade='grade-two'] { --grade-color:var(--grade-two-color); --grade-edge:var(--grade-two-edge); --grade-ink:var(--grade-two-ink); }
+[data-subject='language'] { --subject-color:var(--subject-language-color); }
+[data-subject='math'] { --subject-color:var(--subject-math-color); }
+[data-subject='science'] { --subject-color:var(--subject-science-color); }
+[data-subject='music'] { --subject-color:var(--subject-music-color); }
+[data-subject='arts'] { --subject-color:var(--subject-arts-color); }
+[data-subject='health'] { --subject-color:var(--subject-health-color); }
 
 .dark {
   color-scheme: dark;
@@ -224,6 +226,7 @@
 
 .material-surface { background-color: var(--material-color); background-image: var(--material-image); background-repeat: repeat; background-size: var(--material-size, 220px); }
 .material-cardboard-paper { --foreground: var(--theme-ink); --muted-foreground: var(--theme-copy); --material-color: var(--theme-paper); --material-image: var(--asset-cardboard-ivory); --material-size: 320px; color: var(--theme-ink); }
+.material-cardboard-kraft { --material-color: var(--theme-paper-muted); --material-image: var(--asset-cardboard-kraft); --material-size: 320px; }
 .material-felt { --material-color: var(--character-color); --material-image: var(--character-texture); --material-size: 180px; color: var(--character-foreground); }
 .material-felt [data-slot='card-description'] { color: color-mix(in srgb, currentColor 78%, transparent); }
 .material-woven-fabric { --material-color: var(--theme-wood-light); --material-image: var(--asset-woven-old-macdonald); --material-size: 190px; color: var(--theme-ink); }
@@ -234,6 +237,7 @@
 .material-cork { --material-color: var(--brand-cork-color); --material-image: var(--brand-cork-texture); --material-size: 300px; color: var(--theme-ink); }
 .material-leather { --material-color: var(--theme-wood); --material-image: var(--asset-leather-old-macdonald); --material-size: 240px; color: var(--theme-ink); }
 .material-leather-blue { --material-color: var(--theme-navy); --material-image: var(--asset-leather-blue); --material-size: 240px; color: var(--theme-white); }
+.material-leather-indigo { --background: var(--theme-navy); --foreground: var(--theme-white); --accent: var(--curriculum-yellow); --accent-foreground: var(--theme-navy); --popover: var(--theme-navy); --popover-foreground: var(--theme-white); --material-color: var(--theme-navy); --material-image: var(--asset-leather-indigo); --material-size: 240px; color: var(--foreground); }
 
 .cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-texture: var(--cast-old-macdonald-texture); --character-foreground: var(--cast-old-macdonald-foreground); }
 .cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-texture: var(--cast-miss-puddles-texture); --character-foreground: var(--cast-miss-puddles-foreground); }

@@ -2,33 +2,34 @@
 
 This is the text companion to the live `#asset-patterns` section on `/branding`. Start here instead of scanning `public/`.
 
-There are two human-editable brand sources:
+The human-editable brand sources have separate jobs:
 
 - This file defines visual classes, component recipes, materials, typography, and asset usage.
-- `content/pages/branding/cast.mdx` defines character facts, roles, grades, colours, activities, portrait sources, and rendered examples. `/branding#cast` renders that same source.
+- `lib/cast.ts` defines the character keys, names, portrait paths, families, species, and student personality data consumed by production components.
+- `/branding` is the quick visual index for asset discovery, source ownership, and links to real production routes.
 
-The live `/branding` route is the single visual authority. Storybook stories are isolated viewers of components from that page; they are not additional brand definitions.
+The production routes linked from `/branding` are the visual authority. Storybook stories are isolated component viewers; they are not additional brand definitions.
 
 ## Logo family
 
-The active logo remains `public/brand-emblem.png`. Review candidates are documented at `/branding#logo-family`; they are not approved replacements yet.
+The 1254px master remains the composition authority. Production UI uses the size-specific exports documented at `/branding#logo`.
 
 - Composition authority: `public/brand-emblem.png` (1254x1254 RGB PNG).
 - Simplified 2D style reference: `public/icons/farm_school_character_face_patch_sheet_primary_secondary_16.png`.
-- Tiny 2D candidates: `public/design-assets/brand-emblem-v1/candidate-flat-marks/`.
-- Sharp screen candidates: `public/design-assets/brand-emblem-v1/individual-marks/`.
+- Tiny 2D navigation mark: `public/design-assets/brand-emblem-v1/candidate-flat-marks/brand-emblem-flat-32.png`.
+- Metadata and sharp screen marks: `public/design-assets/brand-emblem-v1/individual-marks/`.
 - High-detail candidates: `public/design-assets/brand-emblem-v1/candidate-detail-marks/`.
 - Review-only sheet: `public/design-assets/brand-emblem-v1-review/brand-emblem-family-contact-sheet.png`.
 - Deterministic derivation: `scripts/build-brand-emblem-family.js` removes the source matte, adds safe padding, resamples, and applies restrained target-size sharpening.
 
-Do not use the contact sheet at runtime. Do not replace the active header, mobile-navigation, metadata, or search emblem until the user approves a specific candidate tier. No authentic green-tree alternative was found in the repository or Git history as of 2026-08-13.
+Use the individual exports—not the entire contact sheet—when a component needs one responsive mark. The shared header and mobile navigation use the 32px compact and 44px navigation exports; metadata uses the 16px and 32px metadata exports. No authentic green-tree alternative was found in the repository or Git history as of 2026-08-13.
 
 ## Rules
 
 - Use the real shadcn component for behavior, then add only the approved global material or patch class shown below.
 - Keep labels, headings, links, and buttons as semantic HTML. Raster assets are visible layers, not controls.
-- Never use `blank-felt-patches-v1/individual-patches/*-rectangle.png`; all sixteen rectangle exports are `DO NOT USE`.
-- Do not use contact sheets, atlases, composites, Figma exports, design concepts, or review-only extractions in production.
+- The sixteen `blank-felt-patches-v1/individual-patches/*-rectangle.png` exports have clipped side edges. They remain allowed; prefer intact circle or square exports unless the clipped edge is intentionally useful.
+- Everything under `public/design-assets/` is allowed. Contact sheets, atlases, and composites are useful discovery references; prefer separated individual exports when a responsive component needs independent pieces.
 - A grade is a curriculum hub, not a character theme. Character colour belongs only to a character-specific component, scene, or activity.
 - A `cast-*` class exposes one character identity locally. It must not recolour a whole grade page.
 - Use authored repeat tiles for paper, felt, cork, leather, thread, and fabric. Do not imitate them with gradients or generated noise.
@@ -98,6 +99,7 @@ Use `patch-old-macdonald-square` and `patch-miss-puddles-circle` as decorative `
 | --- | --- | --- |
 | Felt action | `material-surface material-felt` | `public/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png` |
 | Paper action | `material-surface material-cardboard-paper` | `public/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png` |
+| Hard classroom backing | `material-surface material-cardboard-kraft` | `public/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png` |
 | Cork notice | `material-surface material-cork` | `public/design-assets/cork-board-kit-v2/seamless-cork-tile.png` |
 
 ## Semantic asset composition
@@ -123,14 +125,14 @@ Static public paths belong only in `app/brand-assets.css`. Layout and component 
 
 `cast-miss-hayley` supplies local character variables. Other approved character keys follow the same `cast-<name>` convention.
 
-Approved material recipes include `material-cardboard-paper`, `material-felt`, `material-woven-fabric`, `material-construction-paper`, `material-cork`, and `material-leather`, always paired with `material-surface`.
+Approved material recipes include `material-cardboard-paper`, `material-cardboard-kraft`, `material-felt`, `material-woven-fabric`, `material-construction-paper`, `material-cork`, and `material-leather`, always paired with `material-surface`.
 
 ## Typography contract
 
 - `type-display` / the farm display face: short branded headings.
 - `type-hand` / the farm hand face: occasional expressive emphasis and teacher voice.
 - `type-body` / the farm body face: paragraphs, labels, controls, and readable UI.
-- The live typography specimens on `/branding#typography` show the actual selector, face, size role, and usage. Do not infer a font from appearance.
+- `app/globals.css` owns the `font-heading`, `font-hand`, and `font-body` Tailwind theme utilities. Check their use in the production routes linked from `/branding#production`; do not infer a font from appearance.
 
 ## Component contract
 
@@ -146,10 +148,8 @@ Use shadcn primitives for behavior and accessibility. Brand classes supply the v
 | `Sheet` | Focused mobile or secondary work | A full page replacement |
 | `Card` / `Separator` | Grouped content and meaningful boundaries | Decorating every item with an arbitrary box |
 
-## Branding guide specimen shelf
+## Branding index
 
-The horizontal shelf immediately below the `/branding` hero is navigation and a working control reference at the same time. Each shadcn `Button` uses a distinct approved background family and exposes its exact asset path beneath the control. On narrow screens the shelf scrolls horizontally; do not replace it with uniform pills or flatten the examples into one generic button style.
-
-The second shelf demonstrates semantic `<a>` elements that are deliberately not styled like buttons: a taped note, stitched tab, portrait-led link, and pinned label. They keep native link behavior and visible focus while using governed image assets as decorative layers.
+`/branding` is a quick lookup, not a second implementation of the website. It links each asset family to its source folder and each layout or control decision to a real production route and owning component.
 
 Every specimen also demonstrates an attachment rule. Push pins belong on cork, tape belongs across a paper edge, clips grip an edge, and thread or sewing details belong with felt. The hover/focus information panel lists both the surface path and attachment path.
