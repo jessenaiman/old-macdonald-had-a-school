@@ -13,7 +13,7 @@ import {
 import { MobileNavigation } from "./MobileNavigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { activePageFromPathname } from "./site-navigation";
-import styles from "./NavigationAndFooter.module.css";
+import styles from "./SiteHeader.module.css";
 
 export function SiteHeader() {
   const active = activePageFromPathname(usePathname());

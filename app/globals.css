@@ -30,17 +30,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-brand-navy: var(--navy);
-  --color-brand-blue: var(--blue);
-  --color-brand-sky: var(--sky);
-  --color-brand-gold: var(--gold);
-  --color-brand-red: var(--red);
-  --color-brand-coral: var(--coral);
-  --color-brand-pink: var(--pink);
-  --color-brand-plum: var(--plum);
-  --color-brand-orange: var(--orange);
-  --color-brand-paper: var(--paper);
-  --color-brand-line: var(--line);
+  --color-brand-pink: var(--cast-miss-hayley-color);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

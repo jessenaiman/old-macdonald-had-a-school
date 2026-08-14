@@ -15,7 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { ActivePage } from "./site-navigation";
-import styles from "./NavigationAndFooter.module.css";
+import styles from "./MobileNavigation.module.css";
 
 export function MobileNavigation({ active }: { active?: ActivePage }) {
   const [open, setOpen] = useState(false);

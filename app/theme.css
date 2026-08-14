@@ -98,30 +98,6 @@
   --ring: var(--curriculum-blue);
   --shadow-character: 0 3px 1px color-mix(in srgb, var(--theme-ink) 24%, transparent);
 
-  /* Compatibility aliases for legacy selectors during cleanup. */
-  --navy: var(--theme-navy);
-  --blue: var(--curriculum-blue);
-  --sky: color-mix(in srgb, var(--curriculum-blue) 36%, var(--theme-paper));
-  --cool-white: var(--theme-paper);
-  --sunlit: var(--curriculum-yellow);
-  --gold: var(--curriculum-yellow);
-  --red: var(--curriculum-red);
-  --coral: color-mix(in srgb, var(--curriculum-red) 76%, var(--theme-paper));
-  --pink: var(--cast-miss-hayley-color);
-  --plum: var(--curriculum-purple);
-  --orange: var(--curriculum-orange);
-  --brown: var(--theme-wood);
-  --green: var(--curriculum-green);
-  --ink: var(--theme-ink);
-  --heading: var(--theme-navy);
-  --muted: var(--theme-copy);
-  --surface-soft: #fbf3e4;
-  --hero-text: var(--theme-white);
-  --paper: var(--theme-paper);
-  --line: var(--theme-wood-light);
-  --page-bg: var(--theme-cream);
-  --card-bg: var(--theme-paper);
-
   /* Grade navigation aliases. Grade leads own these colours below. */
   --grade-early-years-color: var(--curriculum-green);
   --grade-early-years-edge: color-mix(in srgb, var(--grade-early-years-color) 72%, black);
@@ -216,13 +192,5 @@
   --input: #718795;
   --ring: #8fc1dd;
 
-  --ink: #f7edda;
-  --heading: #fffaf0;
-  --muted: #cbd5d9;
-  --surface-soft: #213543;
-  --paper: #192c3a;
-  --line: #587080;
-  --page-bg: #101c26;
-  --card-bg: #192c3a;
   --workspace-rail-foreground: #fffaf0;
 }

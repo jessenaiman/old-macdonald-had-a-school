@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./NavigationAndFooter.module.css";
+import styles from "./SiteFooter.module.css";
 
 export function SiteFooter() {
   return (

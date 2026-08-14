@@ -1,0 +1,15 @@
+.mobileMenu { display: none; }
+.menuSheet { width: min(390px, 100vw); max-width: none; border-left: 1px solid var(--theme-wood-light); padding: 1rem; overflow-y: auto; overscroll-behavior: contain; color: var(--theme-white); background-color: var(--theme-navy); }
+.menuSheetHeader { display: grid; grid-template-columns: 48px minmax(0, 1fr) 44px; gap: .75rem; align-items: center; padding-bottom: 1rem; }
+.menuSheetHeading { min-width: 0; }
+.menuSheetHeading > :first-child { color: var(--theme-white); font-family: var(--font-farm-display), Georgia, serif; font-size: 1.15rem; line-height: 1; }
+.menuSheetHeading > :last-child { margin-top: .35rem; color: color-mix(in srgb, var(--theme-white) 70%, transparent); font-size: .72rem; }
+.menuTrigger, .menuClose { color: var(--theme-white); background: transparent; }
+.menuTrigger:hover, .menuClose:hover { background: rgb(255 255 255 / 12%); }
+.menuLinks { display: grid; gap: .35rem; }
+.menuLinks a { width: 100%; min-height: 44px; justify-content: flex-start; color: var(--theme-white); }
+.menuLinks a:hover, .menuLinks a[aria-current="page"] { background: rgb(255 255 255 / 12%); }
+
+@media (max-width: 767px) {
+  .mobileMenu { display: flex; }
+}

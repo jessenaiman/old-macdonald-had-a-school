@@ -21,14 +21,14 @@
 .heroCopy { width: fit-content; max-width: 62rem; margin: 0 auto clamp(1rem, 2vw, 1.75rem); padding: 1rem clamp(1.5rem, 4vw, 3rem); text-align: center; box-shadow: 0 .2rem .45rem rgb(0 0 0 / 14%); transform: rotate(-.12deg); }
 .heroTitleFastener { position: absolute; top: -1.8rem; left: 50%; transform: translateX(-50%) rotate(-2deg); }
 .heroCopy h1 { max-width: 58rem; margin: 0 auto; color: var(--theme-ink); font: 700 clamp(2rem, 4vw, 3.8rem)/1.02 var(--font-farm-display), Georgia, serif; text-wrap: balance; }
-.heroCopy h1 em { color: var(--red); font-style: normal; }
+.heroCopy h1 em { color: var(--curriculum-red); font-style: normal; }
 .heroFeatureGrid { display: grid; gap: clamp(1.25rem, 3vw, 3rem); align-items: center; }
 
 .heroWeeklyLessons { position: relative; border: 1px solid var(--border); border-radius: .55rem; color: var(--theme-ink); box-shadow: 0 .2rem .45rem rgb(0 0 0 / 14%); transform: rotate(-.18deg); }
 .weeklyFastener { position: absolute; z-index: 2; top: -1.5rem; left: 1rem; width: 3.35rem; height: 3.35rem; filter: drop-shadow(var(--shadow-character)); transform: rotate(9deg); pointer-events: none; }
 .weeklyList { display: grid; overflow: hidden; border-radius: inherit; color: var(--foreground); }
 .weeklyList > header { display: flex; min-height: 2.7rem; align-items: center; justify-content: space-between; gap: 1rem; padding: .5rem 1rem; border-bottom: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent); }
-.weeklyList h2 { margin: 0; color: var(--red); font: 700 1.35rem/1 var(--font-farm-hand), cursive; }
+.weeklyList h2 { margin: 0; color: var(--curriculum-red); font: 700 1.35rem/1 var(--font-farm-hand), cursive; }
 .weeklyList > header > a { color: var(--muted-foreground); font-size: .72rem; font-weight: 800; text-decoration: underline; text-underline-offset: .2rem; }
 .weeklyList ul { display: grid; margin: 0; padding: 0; list-style: none; }
 .weeklyList li { display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); grid-template-rows: auto auto; gap: .1rem .55rem; align-items: center; min-height: 4.5rem; padding: .55rem .9rem; border-bottom: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent); }
@@ -37,7 +37,7 @@
 .weeklyList li:last-child { border-bottom: 0; }
 .weeklyList li > a { min-width: 0; color: var(--foreground); font-size: .78rem; font-weight: 850; line-height: 1.2; }
 .weeklyList li > p { margin: 0; font-size: .76rem; line-height: 1.3; }
-.noteIcon { color: var(--red); }
+.noteIcon { color: var(--curriculum-red); }
 .participationWays { display: flex; flex-wrap: wrap; gap: .35rem; }
 .participationWays span { color: var(--muted-foreground); font-size: .56rem; font-weight: 800; }
 .lessonAction { display: none; }
