@@ -74,7 +74,11 @@ export default function RootLayout({
         >
           <div className="flex min-h-dvh flex-col bg-background text-foreground">
             <SiteHeader />
-            <main className="material-surface material-cardboard-kraft flex min-h-0 min-w-0 flex-1 flex-col">{children}</main>
+            <main className="material-surface material-leather-indigo flex min-h-0 min-w-0 flex-1 flex-col">
+              <div className="flex w-full min-w-0 flex-1 flex-col">
+                {children}
+              </div>
+            </main>
             <SiteFooter />
           </div>
         </ThemeProvider>

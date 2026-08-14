@@ -86,6 +86,15 @@ export interface CurriculumTopicSummary {
   teacherTitleState: string | null;
 }
 
+interface CurriculumLessonTopicRow {
+  id: number;
+  topic: string;
+  skill: string | null;
+  category: string | null;
+  circle_time: string | null;
+  subject: string | null;
+}
+
 function topicSlug(value: string) {
   return value
     .toLowerCase()
@@ -107,7 +116,7 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
     FROM topics t
     LEFT JOIN subjects s ON s.id = t.subject_id
     WHERE t.id = ?
-  `).get(topicId) as any;
+  `).get(topicId) as CurriculumLessonTopicRow | undefined;
 
   if (!topic) return null;
 
@@ -204,7 +213,7 @@ export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
     topic: topic.topic,
     skill: topic.skill,
     category: topic.category,
-    subject: topic.subject,
+    subject: topic.subject ?? 'Unassigned subject',
     grades,
     circleTime: topic.circle_time,
     standards: standards.map(s => ({

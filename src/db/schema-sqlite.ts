@@ -25,7 +25,7 @@ export const topics = sqliteTable('topics', {
   skill: text('skill'),
   sequence: real('sequence'),
   taughtStatus: text('taught_status'),
-  mergedInto: integer('merged_into').references((): any => topics.id),
+  mergedInto: integer('merged_into').references(() => topics.id),
   circleTime: text('circle_time'),
   teacherTitle: text('teacher_title'),
   teacherSummary: text('teacher_summary'),
@@ -101,7 +101,7 @@ export const suggestedCurriculumPlanPlacements = sqliteTable('suggested_curricul
 
 export const standards = sqliteTable('standards', {
   id: integer('id').primaryKey(),
-  parentStandardId: integer('parent_standard_id').references((): any => standards.id),
+  parentStandardId: integer('parent_standard_id').references(() => standards.id),
   framework: text('framework'),
   code: text('code'),
   fullText: text('full_text'),
@@ -112,7 +112,7 @@ export const standards = sqliteTable('standards', {
 
 export const tags = sqliteTable('tags', {
   id: integer('id').primaryKey(),
-  parentTagId: integer('parent_tag_id').references((): any => tags.id),
+  parentTagId: integer('parent_tag_id').references(() => tags.id),
   name: text('name').notNull(),
   definition: text('definition'),
 });
