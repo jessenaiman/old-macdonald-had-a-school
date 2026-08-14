@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lilita_One, Nunito } from "next/font/google";
+import { Boogaloo, Lilita_One, Nunito, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { SiteFooter } from "../components/SiteFooter";
