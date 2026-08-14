@@ -20,7 +20,7 @@ export function SiteHeader() {
   const active = activePageFromPathname(usePathname());
 
   return (
-    <header className="material-surface material-leather-indigo relative z-40 mb-3 border-b-2 border-border shadow-lg before:pointer-events-none before:absolute before:-bottom-3 before:left-2 before:right-2 before:-z-10 before:h-5 before:rounded-b-xl before:border before:border-t-0 before:border-border before:bg-[image:var(--material-image)] before:bg-[length:var(--material-size)] before:content-[''] after:pointer-events-none after:absolute after:-bottom-1 after:inset-x-2 after:top-2 after:z-0 after:rounded-xl after:border after:border-dashed after:border-accent/60 after:content-['']">
+    <header className="material-surface material-leather-indigo relative z-40 border-b-2 border-border shadow-lg after:pointer-events-none after:absolute after:inset-2 after:z-0 after:rounded-xl after:border after:border-dashed after:border-accent/60 after:content-['']">
       <div className="relative z-10 mx-auto flex min-h-20 w-full max-w-screen-2xl items-center gap-3 px-3 sm:px-4 lg:gap-6">
         <Link
           className="inline-flex min-h-11 min-w-0 flex-1 items-center gap-2 lg:max-w-xs lg:gap-3"

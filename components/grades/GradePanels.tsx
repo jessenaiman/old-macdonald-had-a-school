@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -14,20 +13,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
+import { SearchWorkspace } from "@/components/search/SearchWorkspace";
 import type { GradePathItem } from "./types";
 import type {
   GradeInteractionConfig,
@@ -42,18 +34,6 @@ type SharedProps = {
   onSection: (section: GradeInteractionSection) => void;
 };
 
-type SearchResult = {
-  id: string;
-  kind: string;
-  title: string;
-  excerpt?: string;
-  instructions?: string;
-  lyrics?: string;
-  url?: string;
-  href?: string;
-};
-
-type SearchResponse = { results?: SearchResult[]; error?: string };
 
 function PanelHeading({
   eyebrow,
@@ -413,153 +393,15 @@ export function GradeResourcesPanel({
   );
 }
 
-function embedUrl(url?: string) {
-  if (!url) return null;
-  try {
-    const parsed = new URL(url);
-    if (parsed.hostname.includes("youtube.com"))
-      return `https://www.youtube-nocookie.com/embed/${parsed.searchParams.get("v")}`;
-    if (parsed.hostname === "youtu.be")
-      return `https://www.youtube-nocookie.com/embed/${parsed.pathname.slice(1)}`;
-    if (parsed.hostname.includes("spotify.com"))
-      return `https://open.spotify.com/embed${parsed.pathname}`;
-  } catch {
-    return null;
-  }
-  return null;
-}
-
 export function GradeSearchPanel({
   config,
   onSection,
 }: Pick<SharedProps, "config" | "onSection">) {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [selected, setSelected] = useState<SearchResult | null>(null);
-  const [status, setStatus] = useState("Search within this grade.");
-  async function search(event: FormEvent) {
-    event.preventDefault();
-    const term = query.trim();
-    if (term.length < 2) return setStatus("Enter at least two characters.");
-    setStatus("Searching…");
-    try {
-      const response = await fetch(
-        `/api/search?q=${encodeURIComponent(term)}&grade=${encodeURIComponent(config.gradeKey)}`,
-      );
-      const data = (await response.json()) as SearchResponse;
-      if (!response.ok) throw new Error(data.error ?? "Search failed");
-      setResults(data.results ?? []);
-      setStatus(`${data.results?.length ?? 0} ${config.grade} results.`);
-    } catch {
-      setResults([]);
-      setStatus("Search is temporarily unavailable.");
-    }
-  }
-  const media = embedUrl(selected?.url ?? selected?.href);
   return (
-    <div className="flex min-h-96 min-w-0 flex-col gap-6">
-      <PanelHeading
-        eyebrow="Search this grade"
-        title={`Find ${config.grade} lessons`}
-        summary="Search stays inside this workspace and keeps the current grade applied."
-      />
-      <form
-        className="flex min-w-0 flex-col gap-3 sm:flex-row"
-        onSubmit={search}
-      >
-        <Input
-          name="grade-search"
-          autoComplete="off"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try rhythm, counting, plants…"
-          aria-label={`Search ${config.grade}`}
-        />
-        <Button type="submit">Search</Button>
-      </form>
-      <p role="status" className="text-sm text-muted-foreground">
-        {status}
-      </p>
-      {results.length ? (
-        <div className="grid min-w-0 gap-4 md:grid-cols-2">
-          {results.map((result) => (
-            <Card
-              className="material-surface material-cardboard-paper"
-              key={`${result.kind}:${result.id}`}
-            >
-              <CardHeader>
-                <p className="text-xs font-black uppercase tracking-wider text-muted-foreground">
-                  {result.kind}
-                </p>
-                <CardTitle>{result.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="line-clamp-4 text-sm text-muted-foreground">
-                  {result.excerpt ??
-                    result.instructions ??
-                    result.lyrics ??
-                    "Preview available."}
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Button variant="secondary" onClick={() => setSelected(result)}>
-                  Preview
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <Card className="material-surface material-cardboard-paper relative max-w-3xl">
-          <span
-            className="brand-asset fastener-paperclip icon-small"
-            aria-hidden="true"
-          />
-          <CardHeader className="pt-8"><CardTitle>Search this workroom</CardTitle></CardHeader>
-          <CardContent><p>
-            Try a curriculum word, classroom material, song, movement, or
-            teaching goal. Results remain connected to {config.grade}.
-          </p></CardContent>
-        </Card>
-      )}
-      <Button variant="link" onClick={() => onSection("today")}>
-        ← Back to today
-      </Button>
-      <Dialog
-        open={Boolean(selected)}
-        onOpenChange={(open) => !open && setSelected(null)}
-      >
-        <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>{selected?.title}</DialogTitle>
-            <DialogDescription>
-              {selected?.kind} preview for {config.grade}
-            </DialogDescription>
-          </DialogHeader>
-          {media ? (
-            <iframe
-              className="aspect-video w-full rounded-lg border"
-              src={media}
-              title={selected?.title}
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            />
-          ) : (
-            <div className="whitespace-pre-wrap text-sm leading-6">
-              {selected?.instructions ??
-                selected?.lyrics ??
-                selected?.excerpt ??
-                "No inline preview is available."}
-            </div>
-          )}
-          {selected?.href ? (
-            <Button asChild>
-              <a href={selected.href} target="_blank" rel="noreferrer">
-                Open full resource
-              </a>
-            </Button>
-          ) : null}
-        </DialogContent>
-      </Dialog>
-    </div>
+    <SearchWorkspace
+      lockedGrade={config.gradeKey}
+      gradeLabel={config.grade}
+      onBack={() => onSection("today")}
+    />
   );
 }

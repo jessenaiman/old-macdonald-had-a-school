@@ -18,8 +18,10 @@
  * - Hard surfaces are the background so foreground elements can be pinned,
  *   taped, or stuck to them.
  * - Writable surfaces use paper-like textures: lesson notes, sticky notes,
- *   and presentation sheets.
- * - Patches, pins, tape, clips, and tabs hold those surfaces in place.
+ *   and presentation sheets, or patches, pins, tape, clips, and tabs hold those surfaces in place.
+ * RULES:
+ * - Cardboard background can have patches or pins
+ * - Cork can only have tape and pins
  * - The menu and footer form the edges of a folder holding the board.
  *
  * Preserve visible breathing room around attached objects. Empty space is
@@ -257,7 +259,7 @@
 }
 
 .material-surface { background-color: var(--material-color); background-image: var(--material-image); background-position: var(--material-position, 0 0); background-repeat: repeat; background-size: var(--material-size, 220px); }
-.material-cardboard-paper { --foreground: var(--theme-ink); --muted-foreground: var(--theme-copy); --material-color: var(--theme-paper); --material-image: var(--asset-cardboard-ivory); --material-size: 320px; color: var(--theme-ink); }
+.material-cardboard-paper { --background:var(--theme-paper); --foreground:var(--theme-ink); --accent:var(--theme-paper-muted); --accent-foreground:var(--theme-ink); --muted-foreground:var(--theme-copy); --material-color:var(--theme-paper); --material-image:var(--asset-cardboard-ivory); --material-size:320px; color:var(--theme-ink); }
 .material-cardboard-kraft { --material-color: var(--theme-paper-muted); --material-image: var(--asset-cardboard-kraft); --material-size: 320px; }
 .material-felt { --material-color: var(--character-color); --material-image: var(--character-texture); --material-size: 180px; color: var(--character-foreground); }
 .material-felt [data-slot='card-description'] { color: color-mix(in srgb, currentColor 78%, transparent); }
@@ -274,6 +276,110 @@
 .material-leather-blue { --material-color: var(--theme-navy); --material-image: var(--asset-leather-blue); --material-size: 240px; color: var(--theme-white); }
 .material-leather-indigo { --background: var(--theme-navy); --foreground: var(--theme-white); --accent: var(--curriculum-yellow); --accent-foreground: var(--theme-navy); --popover: var(--theme-navy); --popover-foreground: var(--theme-white); --material-color: var(--theme-navy); --material-image: var(--asset-leather-indigo); --material-size: 240px; color: var(--foreground); }
 .material-thread-overlay::after { pointer-events: none; position: absolute; inset: 0; background-image: var(--asset-thread-old-macdonald); background-repeat: repeat; background-size: 190px; content: ""; }
+
+/* Shared shadcn Card physical-surface recipe. BrandPatchCard owns the
+ * composition; these semantic tokens own the material, stitch, and ink. */
+.brand-patch-card {
+  --background: var(--theme-navy);
+  --foreground: var(--theme-white);
+  --card: var(--theme-navy);
+  --card-foreground: var(--theme-white);
+  --popover: var(--theme-navy);
+  --popover-foreground: var(--theme-white);
+  --primary: var(--curriculum-yellow);
+  --primary-foreground: var(--theme-navy);
+  --secondary: color-mix(in srgb, var(--theme-white) 14%, var(--theme-navy));
+  --secondary-foreground: var(--theme-white);
+  --muted-foreground: color-mix(in srgb, var(--theme-white) 74%, transparent);
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --border: color-mix(in srgb, var(--theme-white) 58%, transparent);
+  --input: color-mix(in srgb, var(--theme-white) 58%, transparent);
+  --ring: var(--curriculum-yellow);
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  border: .125rem solid var(--border);
+  color: var(--card-foreground);
+  background-color: var(--theme-navy);
+  background-image: var(--asset-denim-indigo);
+  background-repeat: repeat;
+  background-size: 16rem;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--theme-navy) 72%, transparent), 0 1rem 1.5rem color-mix(in srgb, var(--theme-ink) 16%, transparent);
+}
+
+.brand-patch-card::before {
+  pointer-events: none;
+  position: absolute;
+  inset: .55rem;
+  z-index: 0;
+  border: .1rem dashed color-mix(in srgb, var(--theme-white) 62%, transparent);
+  border-radius: calc(var(--radius) - .15rem);
+  content: "";
+}
+
+.brand-patch-card[data-brand-card="pinned"] {
+  --background: var(--theme-paper);
+  --foreground: var(--theme-ink);
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --popover: var(--theme-paper);
+  --popover-foreground: var(--theme-ink);
+  --primary: var(--theme-denim);
+  --primary-foreground: var(--theme-white);
+  --secondary: var(--theme-paper-muted);
+  --secondary-foreground: var(--theme-navy);
+  --muted-foreground: var(--theme-copy);
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --border: var(--theme-wood-light);
+  --input: var(--theme-wood-light);
+  --ring: var(--curriculum-blue);
+  color: var(--card-foreground);
+  background-color: var(--theme-paper);
+  background-image: none;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--theme-wood) 44%, transparent), 0 1rem 1.5rem color-mix(in srgb, var(--theme-ink) 13%, transparent);
+}
+
+.brand-patch-card[data-brand-card="pinned"]::before {
+  inset: .45rem;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--theme-wood-light) 62%, transparent);
+}
+
+.brand-patch-card > :not(.brand-patch-fastener) {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-patch-fastener {
+  pointer-events: none;
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 .15rem .15rem color-mix(in srgb, var(--theme-ink) 28%, transparent));
+}
+
+.brand-hero-media-frame {
+  display: block;
+  min-block-size: 15rem;
+  overflow: hidden;
+  border: .25rem solid color-mix(in srgb, var(--theme-white) 88%, transparent);
+  border-radius: var(--radius);
+  background: var(--theme-navy);
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--theme-ink) 38%, transparent);
+}
+
+.brand-hero-media {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: 15rem;
+  background-position: center;
+  background-size: cover;
+}
 
 .cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-texture: var(--cast-old-macdonald-texture); --character-foreground: var(--cast-old-macdonald-foreground); }
 .cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-texture: var(--cast-miss-puddles-texture); --character-foreground: var(--cast-miss-puddles-foreground); }

@@ -72,6 +72,32 @@ export interface CurriculumLesson {
   suggestedPlacements: SuggestedCurriculumPlacement[];
 }
 
+export interface CurriculumTopicSummary {
+  id: number;
+  slug: string;
+  title: string;
+  canonicalTitle: string;
+  summary: string | null;
+  subject: string;
+  category: string | null;
+  grades: string[];
+  materialCount: number;
+  standardCount: number;
+  teacherTitleState: string | null;
+}
+
+function topicSlug(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 80);
+}
+
+export function curriculumTopicHref(topic: Pick<CurriculumTopicSummary, 'id' | 'slug'>) {
+  return `/topics/${topic.id}-${topic.slug}`;
+}
+
 export function getCurriculumLesson(topicId: number): CurriculumLesson | null {
   const db = getDb();
 
@@ -260,27 +286,19 @@ export function appendCurriculumMaterialsToMarkdown(markdown: string, lesson: Cu
 export function getCurriculumLessonBySlug(slug: string): CurriculumLesson | null {
   const db = getDb();
 
-  const words = slug.split('-').filter(w => w.length > 2);
-  if (words.length === 0) return null;
-
-  // Exact slug match first (skip merged topics), then partial word match
-  const exact = db.prepare(`
-    SELECT id FROM topics
-    WHERE merged_into IS NULL AND topic LIKE ?
-    LIMIT 1
-  `).get(`%${words.join(' ')}%`) as any;
-  if (exact) return getCurriculumLesson(exact.id);
-
-  const trails = words.map((_, i) => words.slice(i).join(' '));
-  for (const pattern of trails.map(t => `%${t.charAt(0).toUpperCase()}${t.slice(1)}%`)) {
+  const idMatch = /^(\d+)-/.exec(slug);
+  if (idMatch) {
     const topic = db.prepare(`
       SELECT id FROM topics
-      WHERE merged_into IS NULL AND topic LIKE ?
-      LIMIT 1
-    `).get(pattern) as any;
-    if (topic) return getCurriculumLesson(topic.id);
+      WHERE id = ? AND merged_into IS NULL
+    `).get(Number(idMatch[1])) as { id: number } | undefined;
+    return topic ? getCurriculumLesson(topic.id) : null;
   }
-  return null;
+
+  // Compatibility for old title-only links is intentionally exact and unique.
+  // Fuzzy LIKE matching could silently open the wrong curriculum record.
+  const matches = getAllCurriculumLessons().filter((topic) => topic.slug === slug);
+  return matches.length === 1 ? getCurriculumLesson(matches[0].id) : null;
 }
 
 export function getAllCurriculumLessons(): Array<{ id: number; topic: string; slug: string }> {
@@ -296,10 +314,63 @@ export function getAllCurriculumLessons(): Array<{ id: number; topic: string; sl
   return topics.map(t => ({
     id: t.id,
     topic: t.topic,
-    slug: t.topic
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '')
-      .slice(0, 80),
+    slug: topicSlug(t.topic),
+  }));
+}
+
+export function listCurriculumTopics(): CurriculumTopicSummary[] {
+  const db = getDb();
+  const rows = db.prepare(`
+    SELECT
+      t.id,
+      t.topic AS canonical_title,
+      COALESCE(NULLIF(TRIM(t.teacher_title), ''), t.topic) AS title,
+      COALESCE(NULLIF(TRIM(t.teacher_summary), ''), NULLIF(TRIM(t.skill), '')) AS summary,
+      s.label AS subject,
+      t.category,
+      t.teacher_title_state,
+      GROUP_CONCAT(DISTINCT g.label) AS grade_labels,
+      (
+        SELECT COUNT(*) FROM topic_materials tm
+        WHERE tm.topic_id = t.id
+          AND (tm.role = 'focus' OR NULLIF(TRIM(tm.teacher_rationale), '') IS NOT NULL)
+      ) AS material_count,
+      (
+        SELECT COUNT(*) FROM topic_standards ts
+        JOIN standards st ON st.id = ts.standard_id
+        WHERE ts.topic_id = t.id AND st.code IS NOT NULL
+      ) AS standard_count
+    FROM topics t
+    LEFT JOIN subjects s ON s.id = t.subject_id
+    LEFT JOIN topic_grades tg ON tg.topic_id = t.id
+    LEFT JOIN grades g ON g.id = tg.grade_id
+    WHERE t.merged_into IS NULL
+    GROUP BY t.id
+    ORDER BY COALESCE(s.sort_order, 999), COALESCE(t.sequence, 999), title
+  `).all() as Array<{
+    id: number;
+    canonical_title: string;
+    title: string;
+    summary: string | null;
+    subject: string | null;
+    category: string | null;
+    teacher_title_state: string | null;
+    grade_labels: string | null;
+    material_count: number;
+    standard_count: number;
+  }>;
+
+  return rows.map((row) => ({
+    id: row.id,
+    slug: topicSlug(row.canonical_title),
+    title: row.title,
+    canonicalTitle: row.canonical_title,
+    summary: row.summary,
+    subject: row.subject ?? 'Curriculum',
+    category: row.category,
+    grades: row.grade_labels?.split(',').filter(Boolean) ?? [],
+    materialCount: row.material_count,
+    standardCount: row.standard_count,
+    teacherTitleState: row.teacher_title_state,
   }));
 }

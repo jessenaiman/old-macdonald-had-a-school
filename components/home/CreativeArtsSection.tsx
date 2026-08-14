@@ -18,7 +18,7 @@ export function CreativeArtsSection() {
       </header>
       <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {CREATIVE_AREAS.map((item) => (
-          <Card className={`${item.material} character-surface material-surface material-felt h-full min-w-0 border-2 shadow-sm`} key={item.title}>
+          <Card className={`${item.material} character-surface material-surface material-felt relative h-full min-w-0 border-2 shadow-[0_0.35rem_0_color-mix(in_srgb,var(--character-color)_55%,var(--foreground))] after:pointer-events-none after:absolute after:inset-2 after:rounded-[calc(var(--radius)-0.25rem)] after:border after:border-dashed after:border-current after:opacity-45`} key={item.title}>
             <CardHeader className="flex flex-col items-center text-center">
               <span className={`brand-asset ${item.icon} icon-medium`} aria-hidden="true" />
               <CardTitle>{item.title}</CardTitle>

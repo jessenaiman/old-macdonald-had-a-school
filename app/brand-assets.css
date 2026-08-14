@@ -68,6 +68,8 @@
   --asset-home-scene-growing-together: url('/scenes/hero/home-journey-reflect-v1.png');
   --asset-home-scene-music-landscape: url('/scenes/hero/old-mac-branding-where-did-the-folder-go.png');
   --asset-home-scene-schoolhouse: url('/scenes/hero/oldmac-school.png');
+  --asset-about-classroom-hero: url('/scenes/home-schoolhouse-classroom-hero-v1.png');
+  --asset-about-miss-hayley-profile: url('/staff_and_students/miss-hayley-transparent-circle.png');
   --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png');
   --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png');
   --subject-science-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.png');
@@ -81,6 +83,8 @@
 .home-scene-growing-together { --brand-asset-image: var(--asset-home-scene-growing-together); }
 .home-scene-music-landscape { --brand-asset-image: var(--asset-home-scene-music-landscape); }
 .home-scene-schoolhouse { --brand-asset-image: var(--asset-home-scene-schoolhouse); }
+.about-classroom-hero { --brand-asset-image: var(--asset-about-classroom-hero); }
+.about-miss-hayley-profile { --brand-asset-image: var(--asset-about-miss-hayley-profile); }
 
 [data-subject='language'] { --subject-note-paper: var(--subject-language-paper); }
 [data-subject='math'] { --subject-note-paper: var(--subject-math-paper); }
