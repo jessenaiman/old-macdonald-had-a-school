@@ -1,6 +1,16 @@
-import { BrandingLookup } from "@/components/brand/BrandingOverview"
-import { HomeHero } from "@/components/home/HomePage"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-<HomeHero title="The whole school, in character." />
-
-<BrandingLookup />
+<Card className="material-surface material-cardboard-paper mt-5 overflow-hidden">
+  <CardHeader className="border-b">
+    <p className="text-xs font-black uppercase tracking-widest text-primary">Brand and teaching system</p>
+    <CardTitle className="font-heading text-[clamp(2.5rem,7vw,5.5rem)] leading-none">The whole school, in character.</CardTitle>
+    <CardDescription className="max-w-3xl text-base leading-7">This guide explains how educational purpose becomes visual design. Start with who is teaching or learning, why they belong in the lesson, and what the page must communicate. Then choose the character surface, material, icon, and shadcn component that express that reason.</CardDescription>
+  </CardHeader>
+  <CardContent className="grid gap-4 pt-6 md:grid-cols-5">
+    <p><strong className="block font-heading text-xl">Portrait</strong>Identifies who is present.</p>
+    <p><strong className="block font-heading text-xl">Color</strong>Marks character ownership.</p>
+    <p><strong className="block font-heading text-xl">Fabric</strong>Explains construction.</p>
+    <p><strong className="block font-heading text-xl">Icon</strong>Names the learning action.</p>
+    <p><strong className="block font-heading text-xl">Curriculum</strong>Explains why the choice belongs.</p>
+  </CardContent>
+</Card>

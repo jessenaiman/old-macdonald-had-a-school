@@ -35,19 +35,22 @@ export function lessonHref(lesson: { slug: string; grade: string }) {
 export function lessonIcon(...values: string[]) {
   const label = values.join(" ");
   if (/balance|equal weight|scale/i.test(label)) return "grade-two-balance-scale";
+  if (/counted movement|freeze cue|stop and go|stepping/i.test(label)) return "physical-stepping-spots";
+  if (/seed|sprout|growing pattern|plant/i.test(label)) return "garden-seed-trowel";
+  if (/sort|sorting|classif|group by/i.test(label)) return "early-learning-blocks";
   if (/abacus|count|number|numeracy/i.test(label)) return "math-abacus-ruler";
   if (/measure|build|construction|stem|math/i.test(label)) return "math-building-icon";
   if (/curtain|stage|performance/i.test(label)) return "acting-stage-curtains";
   if (/mask|role.?play|character/i.test(label)) return "acting-theatre-masks";
   if (/puppet|story/i.test(label)) return "acting-pocket-puppets";
-  if (/literacy|phonic|reading|writing|language|vocabulary/i.test(label)) return "drama-storytelling-icon";
+  if (/literacy|phonic|reading|writing|language|vocabulary|letter|vowel/i.test(label)) return "drama-storytelling-icon";
   if (/banjo|string instrument/i.test(label)) return "music-banjo";
   if (/fiddle|violin/i.test(label)) return "music-fiddle";
-  if (/drum|steady beat|rhythm/i.test(label)) return "music-hand-drum";
+  if (/barn band|instruments?, sound|drum|steady beat|rhythm/i.test(label)) return "music-hand-drum";
   if (/ribbon|crossing|folk danc/i.test(label)) return "dance-crossing-ribbons";
   if (/turn|circle danc/i.test(label)) return "dance-turning-footprints";
   if (/dance|movement|motor/i.test(label)) return "physical-ball-rope";
-  if (/music|song|sing/i.test(label)) return "music-icon";
+  if (/music|song|\bsing(?:ing)?\b/i.test(label)) return "music-icon";
   if (/easel|brush|palette/i.test(label)) return "painting-easel";
   if (/handprint|finger paint|paint dot/i.test(label)) return "painting-handprint";
   if (/color|colour|visual art/i.test(label)) return "art-color-wheel";

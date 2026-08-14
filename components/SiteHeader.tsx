@@ -29,7 +29,7 @@ export function SiteHeader() {
         >
           <ResponsiveBrandEmblem className="shrink-0" />
           <span className="min-w-0">
-            <strong className="block font-heading text-sm leading-none sm:text-base">
+            <strong className="block font-brand text-sm leading-none sm:text-base">
               <span className="hidden xl:inline">
                 Old MacDonald Had a School
               </span>
@@ -39,7 +39,7 @@ export function SiteHeader() {
           </span>
         </Link>
         <NavigationMenu
-          className="hidden min-w-0 flex-1 lg:flex"
+          className="hidden min-w-0 flex-1 font-display lg:flex"
           aria-label="Primary navigation"
           viewport={false}
         >

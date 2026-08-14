@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 
 import type { EarlyYearsGradeKey, EarlyYearsTopic } from "../lib/early-years"
+import { lessonIcon } from "../lib/grade-routes"
 import { DaycareTemplate } from "./grades/daycare/DaycareTemplate"
 import { KindergartenTemplate } from "./grades/kindergarten/KindergartenTemplate"
 import { PreschoolTemplate } from "./grades/pre-school/PreschoolTemplate"
@@ -23,7 +24,7 @@ export function EarlyYearsHub({ grade, title, tagline, lead, topics }: { grade: 
   const GradePageTemplate = grade === "daycare" ? DaycareTemplate : grade === "pre-school" ? PreschoolTemplate : KindergartenTemplate
 
   return <div className="min-w-0" data-grade={grade}>
-    <GradePageTemplate grade={title} age={grade === "daycare" ? "Ages 0–2" : grade === "pre-school" ? "Ages 3–4" : "Ages 4–6"} leadName={lead.name} leadImage={leadImage} leadQuote={leadQuote} headline={headline} accentHeadline={accentHeadline} summary={tagline} activeIndex={active} onSelect={setActive} onPreview={topic.image ? () => setPreview(true) : undefined} items={topics.map((item, index) => ({ title: item.title, kicker: index === 0 ? "Story circle" : index === 1 ? "Mix & measure" : index === 2 ? "Explore together" : "Make & explain", summary: item.focus, href: `/grade/${item.grade}/${item.slug}`, icon: ["drama-storytelling-icon", "math-building-icon", "gardening-health-icon", "art-photography-icon"][index % 4] }))} />
+    <GradePageTemplate grade={title} age={grade === "daycare" ? "Ages 0–2" : grade === "pre-school" ? "Ages 3–4" : "Ages 4–6"} leadName={lead.name} leadImage={leadImage} leadQuote={leadQuote} headline={headline} accentHeadline={accentHeadline} summary={tagline} activeIndex={active} onSelect={setActive} onPreview={topic.image ? () => setPreview(true) : undefined} items={topics.map((item, index) => ({ title: item.title, kicker: index === 0 ? "Story circle" : index === 1 ? "Mix & measure" : index === 2 ? "Explore together" : "Make & explain", summary: item.focus, href: `/grade/${item.grade}/${item.slug}`, icon: lessonIcon(item.title, item.focus) }))} />
     <Sheet open={Boolean(topic.image) && preview} onOpenChange={setPreview}>
       <SheetContent className="min-h-screen bg-background p-2 text-foreground sm:p-4" side="bottom" showCloseButton={false}>
         <SheetTitle className="sr-only">Preview: {topic.title}</SheetTitle><SheetDescription className="sr-only">{topic.focus}</SheetDescription>

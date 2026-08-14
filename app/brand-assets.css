@@ -64,6 +64,10 @@
   --asset-brand-emblem-screen-nav: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-nav-44.png');
   --asset-brand-emblem-screen-card: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.png');
   --asset-brand-emblem-detail-media: url('/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.png');
+  --asset-home-scene-class-gathering: url('/scenes/hero/old-macs-open-circle-gathering.png');
+  --asset-home-scene-growing-together: url('/scenes/hero/home-journey-reflect-v1.png');
+  --asset-home-scene-music-landscape: url('/scenes/hero/old-mac-branding-where-did-the-folder-go.png');
+  --asset-home-scene-schoolhouse: url('/scenes/hero/oldmac-school.png');
   --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png');
   --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png');
   --subject-science-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.png');
@@ -71,6 +75,12 @@
   --subject-arts-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/05-gold-scalloped-note.png');
   --subject-health-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/06-lavender-folded-note.png');
 }
+
+/* Homepage scenes. Carousel markup selects meaning; this registry owns files. */
+.home-scene-class-gathering { --brand-asset-image: var(--asset-home-scene-class-gathering); }
+.home-scene-growing-together { --brand-asset-image: var(--asset-home-scene-growing-together); }
+.home-scene-music-landscape { --brand-asset-image: var(--asset-home-scene-music-landscape); }
+.home-scene-schoolhouse { --brand-asset-image: var(--asset-home-scene-schoolhouse); }
 
 [data-subject='language'] { --subject-note-paper: var(--subject-language-paper); }
 [data-subject='math'] { --subject-note-paper: var(--subject-math-paper); }
@@ -84,7 +94,7 @@
 [data-character='miss-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/miss-puddles-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-puddles-purple.png'); }
 [data-character='mr-rusty'] { --character-face-patch:url('/icons/early-years/face-patches/mr-rusty-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-rusty-blue.png'); }
 [data-character='miss-hayley'] { --character-face-patch:url('/icons/early-years/face-patches/miss-hayley-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-hayley-purple.png'); }
-[data-character='mr-sam'] { --character-face-patch:url('/icons/early-years/face-patches/mr-sam-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-sam-blue.png'); }
+[data-character='mr-sam'] { --character-face-patch:url('/icons/early-years/face-patches/mr-sam-clean-v2.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-sam-clean-v2.png'); }
 [data-character='mr-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/mr-maisy-orange.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-maisy-orange.png'); }
 [data-character='mr-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/mr-puddles-green.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-puddles-green.png'); }
 [data-character='miss-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/miss-maisy-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-maisy-purple.png'); }
@@ -97,16 +107,17 @@
 [data-character='sam'] { --character-face-patch:url('/icons/early-years/face-patches/sam-red.png'); --character-face-bust:url('/icons/early-years/face-busts/sam-red.png'); }
 [data-character='rusty'] { --character-face-patch:url('/icons/early-years/face-patches/rusty-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/rusty-blue.png'); }
 
+[data-character='old-macdonald'] { --character-embroidered-badge:url('/patches/old_macdonald_badge_v1.png'); }
 [data-character='miss-puddles'] { --character-embroidered-badge:url('/patches/miss_puddles_badge.png'); }
-[data-character='mr-rusty'] { --character-embroidered-badge:url('/patches/mr_rusty_badge.png'); }
+[data-character='mr-rusty'] { --character-embroidered-badge:url('/patches/mr_rusty_badge_clean_v2.png'); }
 [data-character='miss-hayley'] { --character-embroidered-badge:url('/patches/miss_hayley_badge.png'); }
-[data-character='mr-sam'] { --character-embroidered-badge:url('/patches/mr_sam_badge.png'); }
+[data-character='mr-sam'] { --character-embroidered-badge:url('/patches/mr_sam_clean_v2.png'); }
 [data-character='mr-maisy'] { --character-embroidered-badge:url('/patches/mr_maisy_badge.png'); }
 [data-character='mr-puddles'] { --character-embroidered-badge:url('/patches/mr_puddles_badge.png'); }
 [data-character='miss-maisy'] { --character-embroidered-badge:url('/patches/miss_maisy_badge.png'); }
 [data-character='hopper'] { --character-embroidered-badge:url('/patches/hopper_badge.png'); }
 [data-character='whiskers'] { --character-embroidered-badge:url('/patches/whiskers_badge.png'); }
-[data-character='scout'] { --character-embroidered-badge:url('/patches/scout_badge.png'); }
+[data-character='scout'] { --character-embroidered-badge:url('/patches/scout_badge_clean_v2.png'); }
 [data-character='penny'] { --character-embroidered-badge:url('/patches/penny_badge.png'); }
 [data-character='maisy'] { --character-embroidered-badge:url('/patches/maisy_badge.png'); }
 [data-character='puddles'] { --character-embroidered-badge:url('/patches/puddles_badge.png'); }
@@ -164,7 +175,7 @@
 .gardening-health-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png'); }
 .physical-education-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-physical-education.png'); }
 .early-learning-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-early-learning.png'); }
-.theme-farm-day { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/sun-patch.png'); }
+.theme-farm-day { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/sun-moon-patches.png'); }
 .theme-lullaby-dusk { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/moon-patch.png'); }
 .fastener-brass-rivet { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/17-brass-rivet-top-v01.png'); }
 .community-helping { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.png'); }

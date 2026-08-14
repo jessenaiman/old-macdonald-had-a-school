@@ -13,10 +13,25 @@ const bodyFont = Nunito({
   display: "swap",
 });
 
-const displayFont = Lilita_One({
+const displayFont = Boogaloo({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-farm-display",
+  display: "swap",
+});
+
+const sectionFont = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-farm-section",
+  display: "swap",
+});
+
+const brandFont = Playfair_Display({
+  subsets: ["latin"],
+  weight: "700",
+  style: "italic",
+  variable: "--font-farm-brand",
   display: "swap",
 });
 
@@ -48,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${handFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${sectionFont.variable} ${brandFont.variable} ${handFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"

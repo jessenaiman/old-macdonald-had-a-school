@@ -1,86 +1,63 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CreativeArtsSection } from "./CreativeArtsSection";
 import { HomeCarousel } from "./HomeCarousel";
-import { FolkArtsSection } from "./FolkArtsSection";
 import { HomeSubjectNote } from "./HomeSubjectNote";
 import { HOME_SUBJECTS, HOME_VIDEO_SONGS, SUBJECT_LEARNERS, type HomeLesson } from "./home-data";
 import { WeeklyLessonList } from "./WeeklyLessonList";
-import { Card } from "@/components/ui/card";
 
-type HomePageProps = {
-  hero: { title?: string };
-  lessons: HomeLesson[];
-};
+type HomePageProps = { hero: { title?: string }; lessons: HomeLesson[] };
 
 export function pickLessons(lessons: HomeLesson[], slugs: readonly string[]) {
-  return slugs
-    .map((slug) => lessons.find((lesson) => lesson.slug === slug))
-    .filter((lesson): lesson is HomeLesson => Boolean(lesson));
+  return slugs.map((slug) => lessons.find((lesson) => lesson.slug === slug)).filter((lesson): lesson is HomeLesson => Boolean(lesson));
 }
 
 function HeroTitle({ title }: { title?: string }) {
   const resolvedTitle = title ?? "Where familiar songs become new places to learn.";
-
   if (resolvedTitle === "Where familiar songs become new places to learn.") {
-    return <h1 className="mx-auto max-w-4xl text-balance font-heading text-4xl leading-none text-foreground sm:text-5xl lg:text-6xl" id="home-title">Where familiar songs become <em className="not-italic text-destructive">new places</em> to learn.</h1>;
+    return <h1 className="text-balance font-heading text-3xl leading-none sm:text-4xl" id="home-title">Where familiar songs become <em className="not-italic text-destructive">new places</em> to learn.</h1>;
   }
-
-  if (resolvedTitle === "The whole school, in character.") {
-    return <h1 className="mx-auto max-w-4xl text-balance font-heading text-4xl leading-none text-foreground sm:text-5xl lg:text-6xl" id="home-title">The whole school, <em className="not-italic text-destructive">in character.</em></h1>;
-  }
-
-  return <h1 className="mx-auto max-w-4xl text-balance font-heading text-4xl leading-none text-foreground sm:text-5xl lg:text-6xl" id="home-title">{resolvedTitle}</h1>;
+  return <h1 className="text-balance font-heading text-3xl leading-none sm:text-4xl" id="home-title">{resolvedTitle}</h1>;
 }
 
 export function HomeHero({ title }: { title?: string }) {
   return (
-    <div className="material-surface material-leather-blue py-4 sm:py-6">
-      <section className="relative mx-auto w-full max-w-screen-2xl rounded-2xl border border-border p-5 shadow-lg after:pointer-events-none after:absolute after:inset-3 after:rounded-xl after:border after:border-dashed after:border-accent/60 sm:p-8" aria-labelledby="home-title">
-        <Card className="material-surface material-cardboard-paper relative z-10 mx-auto mb-5 w-fit max-w-4xl rotate-[-0.12deg] px-6 py-4 text-center shadow-md sm:px-10">
-          <span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2 -rotate-2" aria-hidden="true" />
-          <HeroTitle title={title} />
+    <section className="material-surface material-leather-blue relative mx-4 rounded-xl border border-border p-4 shadow-lg sm:p-6" aria-labelledby="home-title">
+      <div className="grid min-w-0 items-center gap-4 md:grid-cols-2 md:gap-6">
+        <Card className="material-surface material-cardboard-paper min-w-0 gap-0 overflow-hidden py-0 shadow-sm">
+          <CardHeader className="border-b border-border py-4">
+            <CardTitle><HeroTitle title={title} /></CardTitle>
+            <CardDescription>Choose a classroom starting point, then move straight into teaching.</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-2 py-3">
+            <Button asChild size="sm"><Link href="#browse-by-subject">Browse subjects</Link></Button>
+            <Button asChild size="sm" variant="outline"><Link href="/lessons">All lessons</Link></Button>
+          </CardContent>
+          <WeeklyLessonList lessons={HOME_VIDEO_SONGS} title="New this week" limit={3} />
         </Card>
-        <div className="relative z-10 grid grid-cols-1 items-center gap-5 lg:grid-cols-2 lg:gap-10">
-          <Card className="material-surface material-cardboard-paper relative rotate-[-0.18deg] overflow-visible p-0 shadow-md">
-            <span className="brand-asset fastener-paperclip icon-medium absolute -left-2 -top-6 z-20 rotate-6 drop-shadow-md" aria-hidden="true" />
-            <WeeklyLessonList lessons={HOME_VIDEO_SONGS.slice(0, 3)} title="New this week" limit={3} participation selected />
-          </Card>
-          <HomeCarousel selected />
-        </div>
-      </section>
-    </div>
+        <HomeCarousel />
+      </div>
+    </section>
   );
 }
 
 export function HomePage({ hero }: HomePageProps) {
   return (
-    <div className="grid min-w-0 gap-4 pb-6">
-      <div className="-mt-3"><HomeHero title={hero.title} /></div>
-
-      <section className="material-surface material-cork relative mx-4 rounded-2xl border-8 border-[var(--theme-wood)] px-4 pb-6 pt-16 shadow-lg sm:px-8" id="browse-by-subject" aria-labelledby="subjects-title">
-        <header className="absolute left-1/2 top-4 -translate-x-1/2">
-          <span className="brand-asset fastener-masking-tape absolute -top-5 left-1/2 z-10 -translate-x-1/2" aria-hidden="true" />
-          <h2 className="material-surface material-cardboard-paper w-max max-w-[calc(100vw-4rem)] px-5 py-2 text-center font-hand text-2xl" id="subjects-title">Find a lesson by subject.</h2>
+    <div className="grid min-w-0 gap-5 py-5">
+      <HomeHero title={hero.title} />
+      <section className="mx-4 rounded-xl border-2 bg-background p-4 shadow-sm sm:p-6" id="browse-by-subject" aria-labelledby="subjects-title">
+        <header className="mb-5 flex flex-col gap-1 border-b border-border pb-4 sm:flex-row sm:items-end sm:justify-between">
+          <div><p className="text-sm font-bold text-muted-foreground">Direct curriculum links</p><h2 className="font-heading text-3xl" id="subjects-title">Find a lesson by subject</h2></div>
+          <p className="text-sm text-muted-foreground">Choose a subject, then go straight to a classroom focus.</p>
         </header>
-        <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid auto-rows-fr items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3">
           {HOME_SUBJECTS.map((subject) => (
-              <HomeSubjectNote
-                key={subject.key}
-                subject={subject.key}
-                title={subject.title}
-                href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}
-                  iconClass={subject.iconClass}
-                  teacherReason={subject.teacherReason}
-                  highlights={subject.highlights}
-                fastenerClass={subject.fastenerClass}
-                noteShape={subject.noteShape}
-                rotation={subject.rotation}
-                guideCharacter={SUBJECT_LEARNERS[subject.key]?.character}
-              />
+            <HomeSubjectNote key={subject.key} subject={subject.key} title={subject.title} href={`/search?q=${encodeURIComponent(subject.searchQuery)}`} iconClass={subject.iconClass} teacherReason={subject.teacherReason} highlights={subject.highlights} fastenerClass={subject.fastenerClass} guideCharacter={SUBJECT_LEARNERS[subject.key].character} />
           ))}
         </div>
       </section>
-
-      <FolkArtsSection />
-
+      <CreativeArtsSection />
     </div>
   );
 }

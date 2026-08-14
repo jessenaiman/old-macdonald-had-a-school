@@ -8,7 +8,7 @@ export type HomeLesson = {
 };
 
 export type HomeSubject = {
-  key: "language" | "math" | "science" | "music" | "arts" | "health";
+  key: "language" | "math" | "science" | "health" | "sel" | "fine-motor";
   title: string;
   earlyYearsLabel: string;
   searchQuery: string;
@@ -16,8 +16,6 @@ export type HomeSubject = {
   teacherReason: string;
   highlights: readonly string[];
   fastenerClass: SubjectFastener;
-  noteShape: "torn" | "grid" | "deckled" | "ruled" | "scalloped" | "folded";
-  rotation: "left" | "none" | "right";
   matches: (lesson: HomeLesson) => boolean;
 };
 
@@ -33,13 +31,13 @@ export type SubjectLearner = {
   character: "whiskers" | "sam" | "scout" | "penny" | "puddles" | "hopper";
 };
 
-export const SUBJECT_LEARNERS: Record<string, SubjectLearner> = {
+export const SUBJECT_LEARNERS: Record<HomeSubject["key"], SubjectLearner> = {
   language: { character: "whiskers" },
   math: { character: "sam" },
   science: { character: "scout" },
-  music: { character: "penny" },
-  arts: { character: "puddles" },
   health: { character: "hopper" },
+  sel: { character: "penny" },
+  "fine-motor": { character: "puddles" },
 };
 
 function lessonText(lesson: HomeLesson) {
@@ -54,8 +52,6 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     searchQuery: "language literacy",
     iconClass: "drama-storytelling-icon",
     fastenerClass: "fastener-paperclip",
-    noteShape: "torn",
-    rotation: "left",
     teacherReason: "Build confident talk, reading, and storytelling.",
     highlights: ["Build vocabulary", "Explore phonics", "Tell and retell stories"],
     matches: (lesson) => /language|literacy|phonic|reading|vocabulary/i.test(lessonText(lesson)),
@@ -67,8 +63,6 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     searchQuery: "math numeracy",
     iconClass: "math-building-icon",
     fastenerClass: "fastener-push-pin",
-    noteShape: "grid",
-    rotation: "none",
     teacherReason: "Make counting, shape, and patterns visible.",
     highlights: ["Count and compare", "Explore shapes", "Find patterns in songs"],
     matches: (lesson) => /math|numeracy/i.test(lessonText(lesson)),
@@ -80,50 +74,42 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     searchQuery: "science nature",
     iconClass: "gardening-health-icon",
     fastenerClass: "fastener-binder-clip",
-    noteShape: "deckled",
-    rotation: "right",
     teacherReason: "Explore seasons, weather, and living things.",
     highlights: ["Observe and explore", "Seasons and weather", "Living things"],
     matches: (lesson) => /science|nature/i.test(lessonText(lesson)),
   },
   {
-    key: "music",
-    earlyYearsLabel: "Songs & movement",
-    title: "Music",
-    searchQuery: "music",
-    iconClass: "music-icon",
-    fastenerClass: "fastener-masking-tape",
-    noteShape: "ruled",
-    rotation: "left",
-    teacherReason: "Teach rhythm, listening, and movement through songs.",
-    highlights: ["Rhythm and beat", "Sing and move", "Create and perform"],
-    matches: (lesson) => /music/i.test(lessonText(lesson)),
-  },
-  {
-    key: "arts",
-    earlyYearsLabel: "Making & imagining",
-    title: "The arts",
-    searchQuery: "arts drama creativity",
-    iconClass: "art-photography-icon",
-    fastenerClass: "fastener-gingham-tape",
-    noteShape: "scalloped",
-    rotation: "none",
-    teacherReason: "Invite children to create, imagine, and express ideas.",
-    highlights: ["Create and imagine", "Explore colour", "Draw and design"],
-    matches: (lesson) => /\bart\b|arts|drama|creative/i.test(lessonText(lesson)),
-  },
-  {
     key: "health",
     earlyYearsLabel: "Movement & wellbeing",
     title: "Health & physical education",
-    searchQuery: "health physical education movement",
+    searchQuery: "physical health development",
     iconClass: "physical-education-icon",
-    fastenerClass: "fastener-apple-peg",
-    noteShape: "folded",
-    rotation: "right",
+    fastenerClass: "fastener-masking-tape",
     teacherReason: "Practise movement, cooperation, and healthy routines.",
     highlights: ["Move your body", "Play and cooperate", "Stay healthy"],
     matches: (lesson) => /gross motor|physical|health|routine|approaches to learning/i.test(lessonText(lesson)),
+  },
+  {
+    key: "sel",
+    earlyYearsLabel: "Feelings & friendship",
+    title: "Social-emotional learning",
+    searchQuery: "social emotional learning SEL",
+    iconClass: "community-helping",
+    fastenerClass: "fastener-gingham-tape",
+    teacherReason: "Build belonging, empathy, and confident participation.",
+    highlights: ["Name feelings", "Practise kindness", "Learn together"],
+    matches: (lesson) => /social-emotional|\bsel\b|feelings|friendship/i.test(lessonText(lesson)),
+  },
+  {
+    key: "fine-motor",
+    earlyYearsLabel: "Hands-on learning",
+    title: "Fine motor skills",
+    searchQuery: "fine motor skills",
+    iconClass: "early-learning-lacing",
+    fastenerClass: "fastener-apple-peg",
+    teacherReason: "Strengthen the hands children use to make, draw, and write.",
+    highlights: ["Pinch and place", "Thread and build", "Draw and prepare to write"],
+    matches: (lesson) => /fine motor/i.test(lessonText(lesson)),
   },
 ] as const;
 

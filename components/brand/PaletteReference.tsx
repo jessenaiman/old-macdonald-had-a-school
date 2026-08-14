@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { CAST, STAFF_KEYS, STUDENT_KEYS, type CastKey } from "@/lib/cast"
 
 const siteRoles = [
   ["Readable paper", "material-surface material-cardboard-paper"],
@@ -9,28 +10,20 @@ const siteRoles = [
   ["Durable identity patch", "cast-old-macdonald material-surface material-felt"],
 ] as const
 const curriculumRoles = [
-  ["Red", "cast-mr-maisy"], ["Yellow", "cast-miss-puddles"], ["Blue", "cast-mr-rusty"],
-  ["Orange", "cast-hopper"], ["Green", "cast-miss-maisy"], ["Purple", "cast-mr-puddles"],
-] as const
-const staff = [
-  ["Old MacDonald", "cast-old-macdonald"], ["Miss Puddles", "cast-miss-puddles"],
-  ["Mr Rusty", "cast-mr-rusty"], ["Miss Hayley", "cast-miss-hayley"],
-  ["Mr Sam", "cast-mr-sam"], ["Mr Maisy", "cast-mr-maisy"],
-  ["Mr Puddles", "cast-mr-puddles"], ["Miss Maisy", "cast-miss-maisy"],
-] as const
-const students = [
-  ["Hopper", "cast-hopper"], ["Whiskers", "cast-whiskers"],
-  ["Scout", "cast-scout"], ["Penny", "cast-penny"],
-  ["Maisy", "cast-maisy"], ["Puddles", "cast-puddles"],
-  ["Sam", "cast-sam"], ["Rusty", "cast-rusty"],
+  ["Physical education", "mr-maisy"], ["Early learning", "miss-puddles"], ["Music and rhythm", "mr-rusty"],
+  ["Ready participation", "hopper"], ["Growing and food", "miss-maisy"], ["Art and observation", "mr-puddles"],
 ] as const
 
-function IdentityPatches({ items }: { items: readonly (readonly [string, string])[] }) {
+function IdentityPatches({ characters }: { characters: readonly CastKey[] }) {
   return <ul className="mt-3 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
-    {items.map(([label, semanticClass]) => <li className={`${semanticClass} character-surface relative min-w-0 rounded-xl border border-current p-4 shadow-md after:pointer-events-none after:absolute after:inset-1 after:rounded-lg after:border after:border-dashed after:border-current after:opacity-35`} key={label}>
-      <strong className="relative block font-heading text-xl leading-none">{label}</strong>
-      <code className="relative mt-2 block truncate text-xs">.{semanticClass}</code>
-    </li>)}
+    {characters.map((character) => {
+      const identity = CAST[character]
+      const semanticClass = `cast-${character}`
+      return <li className={`${semanticClass} character-surface relative min-w-0 rounded-xl border border-current p-4 shadow-md after:pointer-events-none after:absolute after:inset-1 after:rounded-lg after:border after:border-dashed after:border-current after:opacity-35`} key={character}>
+        <strong className="relative block font-heading text-xl leading-none">{identity.name}</strong>
+        <span className="relative mt-2 block text-xs font-bold">Live identity token</span>
+      </li>
+    })}
   </ul>
 }
 
@@ -44,9 +37,9 @@ export function PaletteReference() {
     </header>
     <div className="mt-5 grid gap-5 lg:grid-cols-2">
       <section className="material-surface material-cardboard-paper rounded-xl border border-border p-5"><Link className="font-heading text-2xl underline underline-offset-4" href="#assets">Named material combinations</Link><div className="mt-3 grid grid-cols-2 gap-3">{siteRoles.map(([label, className]) => <div className={`${className} min-h-24 rounded-lg border border-border p-3`} key={label}><strong className="block">{label}</strong><code className="mt-2 block text-xs">{className}</code></div>)}</div></section>
-      <section className="material-surface material-cork rounded-xl border border-border p-5"><Link className="font-heading text-2xl underline underline-offset-4" href="#icons">Curriculum identity fabric</Link><div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">{curriculumRoles.map(([label, semanticClass]) => <div className={`${semanticClass} character-surface relative min-h-20 rounded-lg border border-current p-3 after:absolute after:inset-1 after:rounded-md after:border after:border-dashed after:border-current after:opacity-40`} key={label}><strong className="relative block font-heading text-lg">{label}</strong><code className="relative mt-2 block text-xs">{semanticClass} character-surface</code></div>)}</div></section>
+      <section className="material-surface material-cork rounded-xl border border-border p-5"><Link className="font-heading text-2xl underline underline-offset-4" href="#icons">Curriculum identity fabric</Link><div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">{curriculumRoles.map(([label, character]) => <div className={`cast-${character} character-surface relative min-h-20 rounded-lg border border-current p-3 after:absolute after:inset-1 after:rounded-md after:border after:border-dashed after:border-current after:opacity-40`} key={label}><strong className="relative block font-heading text-lg">{label}</strong><span className="relative mt-2 block text-xs font-bold">{CAST[character].name}</span></div>)}</div></section>
     </div>
-    <section className="mt-6"><Link className="font-heading text-2xl underline underline-offset-4" href="#cast">Staff identity fabric</Link><IdentityPatches items={staff} /></section>
-    <section className="mt-6"><Link className="font-heading text-2xl underline underline-offset-4" href="#cast">Student identity fabric</Link><IdentityPatches items={students} /></section>
+    <section className="mt-6"><Link className="font-heading text-2xl underline underline-offset-4" href="#cast">Staff identity fabric</Link><IdentityPatches characters={STAFF_KEYS} /></section>
+    <section className="mt-6"><Link className="font-heading text-2xl underline underline-offset-4" href="#cast">Student identity fabric</Link><IdentityPatches characters={STUDENT_KEYS} /></section>
   </section>
 }

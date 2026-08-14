@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
+  CardAction,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -18,6 +21,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Textarea } from "@/components/ui/textarea";
 import type { GradePathItem } from "./types";
 import type {
   GradeInteractionConfig,
@@ -224,39 +234,56 @@ export function GradeCurriculumPanel({
   return (
     <div className="flex min-h-96 min-w-0 flex-col gap-6">
       <PanelHeading
-        eyebrow="Curriculum · topic overview"
+        eyebrow={`Curriculum · ${config.grade}`}
         title={`${config.grade} learning paths`}
-        summary="Choose a topic, then shape the lesson around the learners who will meet it."
+        summary="Start with the grade goal, follow the teaching sequence, then open the path that fits your learners."
       />
-      <Card className="material-surface material-cardboard-paper">
-        <CardHeader>
-          <p className="text-xs font-black uppercase tracking-wider text-muted-foreground">
-            Featured topic goal
-          </p>
-          <CardTitle>{selected?.title ?? "Choose a lesson to begin"}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>
-            {selected?.summary ??
-              "Open a learning path to load the current goal."}
-          </p>
-        </CardContent>
-        <CardFooter>
-          <Button variant="secondary" onClick={() => onSection("planner")}>
-            Plan this topic
-          </Button>
-        </CardFooter>
-      </Card>
-      <section className="material-surface material-cork-board rounded-xl border p-4" aria-label="Lesson sequence">
-        <div className="grid min-w-0 gap-4 md:grid-cols-2">
+      <div className="min-w-0">
+        <Card className="material-surface material-cardboard-paper relative gap-3 overflow-hidden py-4">
+          <span className="brand-asset fastener-masking-tape icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
+          <CardHeader className="px-4 pt-7">
+            <Badge variant="secondary">Featured learning goal</Badge>
+            <CardTitle>{selected?.title ?? "Choose a lesson to begin"}</CardTitle>
+          </CardHeader>
+          <CardContent className="grid grid-cols-[4.25rem_minmax(0,1fr)] items-center gap-4 px-4">
+            {selected ? <span className={`brand-asset ${selected.icon} icon-medium`} aria-hidden="true" /> : null}
+            <p className="m-0">{selected?.summary ?? "Open a learning path to load the current goal."}</p>
+          </CardContent>
+          <CardFooter className="px-4">
+            <Button onClick={() => onSection("planner")}>Plan this path</Button>
+          </CardFooter>
+        </Card>
+      </div>
+      <section className="material-surface material-cork relative rounded-xl border p-4 sm:p-5" aria-label="Learning path sequence">
+        <span className="brand-asset fastener-push-pin icon-small absolute -top-3 right-5" aria-hidden="true" />
+        <header className="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div><p className="text-xs font-black uppercase tracking-widest">Learning path sequence</p><h3 className="font-heading text-3xl">Choose the next teaching path</h3></div>
+          <p className="text-sm text-muted-foreground">{items.length} paths</p>
+        </header>
+        <div className="flex min-w-0 flex-col gap-3">
           {items.map((item, index) => (
-            <LessonCard
-              key={`${item.title}-${index}`}
-              item={item}
-              index={index}
-              active={index === selectedIndex}
-              onChoose={onChoose}
-            />
+            <Card className="material-surface material-cardboard-paper relative gap-0 py-3" key={`${item.title}-${index}`}>
+              <CardHeader className="gap-0 px-4 has-data-[slot=card-action]:grid-cols-1 sm:has-data-[slot=card-action]:grid-cols-[1fr_auto]">
+                <div className="flex min-w-0 items-center gap-3">
+                  <Badge className="size-7 shrink-0 justify-center rounded-full p-0" variant="secondary" aria-label={`Path ${index + 1}`}>{index + 1}</Badge>
+                  <span className={`brand-asset ${item.icon} icon-medium shrink-0`} aria-hidden="true" />
+                  <div className="min-w-0">
+                    <p className="text-xs font-black uppercase tracking-widest text-muted-foreground">{item.kicker}</p>
+                    <CardTitle>{item.title}</CardTitle>
+                    <CardDescription>{item.summary}</CardDescription>
+                  </div>
+                </div>
+                <CardAction className="relative col-start-1 row-start-3 mt-2 justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:mt-0 sm:justify-self-end">
+                  {index === selectedIndex ? (
+                    <Badge>Current path</Badge>
+                  ) : (
+                    <Button type="button" variant="outline" onClick={() => onChoose(index)}>
+                      Choose path
+                    </Button>
+                  )}
+                </CardAction>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>
@@ -277,16 +304,10 @@ export function GradePlannerPanel({
   onSection: (section: GradeInteractionSection) => void;
 }) {
   const notes = [
-    ["Set a goal", "Name the one thing learners might notice, try, or share."],
-    [
-      "Gather what helps",
-      "Leave room for the materials, song, book, or visual support.",
-    ],
-    [
-      "Prepare your plan",
-      "Carry forward what children showed you and one next step.",
-    ],
-  ];
+    ["planner-goal", "Set a goal", "What is the one thing learners might notice, try, or share?"],
+    ["planner-supports", "Gather what helps", "Which materials, songs, books, visuals, or supports belong close at hand?"],
+    ["planner-next-step", "Prepare the next step", "What will you watch for, and what could happen next?"],
+  ] as const;
   return (
     <div className="flex min-h-96 min-w-0 flex-col gap-6">
       <PanelHeading
@@ -294,8 +315,10 @@ export function GradePlannerPanel({
         title="Prepare one helpful next step"
         summary={`A quiet place to gather what ${config.grade} learners need before the lesson begins.`}
       />
-      <Card className="material-surface material-cardboard-paper">
+      <Card className="material-surface material-cardboard-paper relative">
+        <span className="brand-asset fastener-paperclip icon-small absolute -top-4 right-5" aria-hidden="true" />
         <CardHeader>
+          <Badge variant="secondary">Current planning focus</Badge>
           <CardTitle>{item?.title ?? "Choose a lesson to begin"}</CardTitle>
         </CardHeader>
         <CardContent>
@@ -316,19 +339,39 @@ export function GradePlannerPanel({
           )}
         </CardFooter>
       </Card>
-      <section className="material-surface material-cork-board rounded-xl border p-4">
-        <div className="grid gap-4 md:grid-cols-3">
-          {notes.map(([title, prompt], index) => (
-            <Card className="material-surface material-cardboard-paper relative" key={title}>
-              <span
-                className={`brand-asset ${["fastener-paperclip", "fastener-masking-tape", "fastener-push-pin"][index]} icon-small absolute -top-4 left-1/2 -translate-x-1/2`}
-                aria-hidden="true"
-              />
-              <CardHeader className="pt-8"><CardTitle>{title}</CardTitle></CardHeader>
-              <CardContent><p className="font-hand text-lg">{prompt}</p></CardContent>
-            </Card>
+      <section className="material-surface material-cork rounded-xl border p-4 sm:p-5" aria-labelledby="planning-board-title">
+        <header className="mb-5"><p className="text-xs font-black uppercase tracking-widest">Working board</p><h3 className="font-heading text-3xl" id="planning-board-title">Prepare the lesson</h3></header>
+        <FieldGroup className="grid gap-4 lg:grid-cols-3">
+          {notes.map(([id, title, prompt], index) => (
+            <Field key={id}>
+              <Card className="material-surface material-cardboard-paper relative w-full">
+                <span
+                  className={`brand-asset ${["fastener-paperclip", "fastener-masking-tape", "fastener-push-pin"][index]} icon-small absolute -top-4 left-1/2 -translate-x-1/2`}
+                  aria-hidden="true"
+                />
+                <CardHeader className="pt-8">
+                  <Badge variant="outline">Step {index + 1}</Badge>
+                  <FieldLabel htmlFor={id}>{title}</FieldLabel>
+                </CardHeader>
+                <CardContent>
+                  <FieldDescription>{prompt}</FieldDescription>
+                  <Textarea id={id} className="min-h-32 resize-y" placeholder="Add your planning notes…" />
+                </CardContent>
+              </Card>
+            </Field>
           ))}
-        </div>
+        </FieldGroup>
+        <Field className="mt-5">
+          <Card className="material-surface material-paper-ruled w-full">
+            <CardHeader>
+              <FieldLabel htmlFor="planner-teacher-notes">Notes for this lesson</FieldLabel>
+            </CardHeader>
+            <CardContent>
+              <FieldDescription>Plan, jot observations, or record what to carry into the next lesson.</FieldDescription>
+              <Textarea id="planner-teacher-notes" className="min-h-40 resize-y" placeholder="Write a note for your future self…" />
+            </CardContent>
+          </Card>
+        </Field>
       </section>
       <Button variant="link" onClick={() => onSection("today")}>
         Return to today →

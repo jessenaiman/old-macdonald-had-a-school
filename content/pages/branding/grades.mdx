@@ -1,17 +1,39 @@
 import { GradeControlsReference } from "../../../components/grades/GradeControlsReference"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 <section id="grades" className="mt-5 rounded-2xl border border-border bg-primary p-5 text-primary-foreground sm:p-8 lg:p-12">
   <p className="mb-2 text-xs font-black uppercase tracking-[.13em] text-accent">Grade workspace reference</p>
   <h2 className="m-0 font-heading text-3xl sm:text-5xl">One workroom structure, distinct grade ownership</h2>
   <p className="max-w-3xl leading-7 text-primary-foreground">Every grade route composes the same workroom: a grade-owned identity and navigation rail beside a paper work stage. The route provides its curriculum, grade owner, and teacher note; the shared control provides accessible tabs, actions, and responsive geometry. Search remains one state within this rail—it does not restyle the standalone search route.</p>
 
+  <Card data-grade="pre-school" className="material-surface material-cardboard-paper mt-7 text-card-foreground">
+    <CardHeader>
+      <CardTitle>Grade workspace anatomy</CardTitle>
+      <CardDescription>Copy the semantic ownership chain, not an asset URL or a screenshot.</CardDescription>
+    </CardHeader>
+    <CardContent className="grid min-w-0 gap-4 lg:grid-cols-[12rem_minmax(0,1fr)]">
+      <aside className="grade-surface rounded-xl p-4"><strong>Grade-owned felt rail</strong><code className="mt-2 block break-all">data-grade + grade-surface</code></aside>
+      <div className="material-surface material-cardboard-paper min-w-0 rounded-xl border border-border p-4">
+        <strong>Readable work stage</strong><code className="mt-2 block break-all">material-surface material-cardboard-paper</code>
+        <div className="material-surface material-cork mt-4 rounded-xl border border-border p-4">
+          <strong>Working board</strong><code className="mt-2 block break-all">material-surface material-cork</code>
+          <Card className="material-surface material-paper-ruled relative mt-5">
+            <span className="brand-asset fastener-push-pin icon-small absolute -top-4 right-4" aria-hidden="true" />
+            <CardHeader><CardTitle>Attached teaching note</CardTitle></CardHeader>
+            <CardContent className="grid gap-3 sm:grid-cols-[auto_minmax(0,1fr)]"><span className="brand-asset music-hand-drum icon-medium" aria-hidden="true" /><p>Paper carries readable content. The registered icon names the learning action, and the fastener crosses the paper edge into cork.</p></CardContent>
+          </Card>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+
   <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-    <article data-grade-group="early-years" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Early Years</strong><p className="text-sm">Umbrella · teal</p><code>data-grade-group=&quot;early-years&quot;</code></article>
-    <article data-grade="daycare" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Daycare</strong><p className="text-sm">Miss Puddles · yellow</p><code>data-grade=&quot;daycare&quot;</code><span data-grade="daycare" className="grade-surface mt-3 inline-flex rounded px-2 py-1 text-xs"><code>#E3AD27</code></span></article>
-    <article data-grade="pre-school" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Pre-School</strong><p className="text-sm">Miss Maisy · green</p><code>data-grade=&quot;pre-school&quot;</code><span data-grade="pre-school" className="grade-surface mt-3 inline-flex rounded px-2 py-1 text-xs"><code>#55705A</code></span></article>
-    <article data-grade="kindergarten" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Kindergarten</strong><p className="text-sm">Mr Rusty · blue</p><code>data-grade=&quot;kindergarten&quot;</code><span data-grade="kindergarten" className="grade-surface mt-3 inline-flex rounded px-2 py-1 text-xs"><code>#2C6C9B</code></span></article>
-    <article data-grade="grade-one" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Grade 1</strong><p className="text-sm">Miss Hayley · pink</p><code>data-grade=&quot;grade-one&quot;</code><span data-grade="grade-one" className="grade-surface mt-3 inline-flex rounded px-2 py-1 text-xs"><code>#C9527A</code></span></article>
-    <article data-grade="grade-two" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Grade 2</strong><p className="text-sm">Mr Maisy · red</p><code>data-grade=&quot;grade-two&quot;</code><span data-grade="grade-two" className="grade-surface mt-3 inline-flex rounded px-2 py-1 text-xs"><code>#B5272C</code></span></article>
+    <article data-grade-group="early-years" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Early Years</strong><p className="text-sm">Shared early-years identity</p><code>data-grade-group=&quot;early-years&quot;</code></article>
+    <article data-grade="daycare" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Daycare</strong><p className="text-sm">Miss Puddles</p><code>data-grade=&quot;daycare&quot;</code></article>
+    <article data-grade="pre-school" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Pre-School</strong><p className="text-sm">Miss Maisy</p><code>data-grade=&quot;pre-school&quot;</code></article>
+    <article data-grade="kindergarten" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Kindergarten</strong><p className="text-sm">Mr Rusty</p><code>data-grade=&quot;kindergarten&quot;</code></article>
+    <article data-grade="grade-one" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Grade 1</strong><p className="text-sm">Miss Hayley</p><code>data-grade=&quot;grade-one&quot;</code></article>
+    <article data-grade="grade-two" className="grade-surface rounded-xl p-4"><strong className="font-heading text-2xl">Grade 2</strong><p className="text-sm">Mr Maisy</p><code>data-grade=&quot;grade-two&quot;</code></article>
   </div>
 
   <div className="material-surface material-cardboard-paper mt-8 rounded-xl border border-border p-4 text-card-foreground sm:p-6">
@@ -23,5 +45,5 @@ import { GradeControlsReference } from "../../../components/grades/GradeControls
   </div>
 
   <p className="mt-6 mb-0 text-sm leading-6 text-primary-foreground"><strong>Use the catalogues, do not copy asset instructions:</strong> choose semantic colours from <a href="#palette">Palette</a>, the grade owner from <a href="#cast">Cast</a>, and the exact approved signal from <a href="#icons">Icons</a>. The shared asset registry resolves the approved texture and icon file.</p>
-  <p className="mt-3 mb-0 text-sm leading-6 text-primary-foreground"><strong>Working-wall materials:</strong> the reusable grade workspace requests <code>var(--grade-texture)</code> for its rail, <code>var(--asset-cardboard-ivory)</code> for paper, and <code>var(--asset-cork-board)</code> for planning and sequence boards. Those registered names resolve in <code>app/brand-assets.css</code>; page components never search for or paste asset URLs.</p>
+  <p className="mt-3 mb-0 text-sm leading-6 text-primary-foreground"><strong>Working-wall materials:</strong> components request <code>grade-surface</code>, <code>material-cardboard-paper</code>, <code>material-cork</code>, and <code>material-paper-ruled</code>. Those semantic recipes consume assets registered in <code>app/brand-assets.css</code>; page components never request an asset variable or paste a URL.</p>
 </section>

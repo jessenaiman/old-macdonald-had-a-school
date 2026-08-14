@@ -13,7 +13,6 @@ export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
   const currentTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "light";
-
   const current = THEMES.find((item) => item.value === currentTheme) ?? THEMES[0];
   const next = THEMES.find((item) => item.value !== current.value) ?? THEMES[0];
 
@@ -21,14 +20,12 @@ export function ThemeSwitcher() {
     <Button
       type="button"
       variant="ghost"
-      size="icon-lg"
-      className="size-16"
+      className="h-12 w-20 p-0"
       onClick={() => setTheme(next.value)}
-      aria-label={`Switch to ${next.label}`}
+      aria-label={`Current theme: ${current.label}. Switch to ${next.label}`}
       title={`Switch to ${next.label}`}
     >
-      <span className={`brand-asset ${current.iconClass} icon-control`} aria-hidden="true" />
-      <span className="sr-only">{current.label}</span>
+      <span className="brand-asset theme-farm-day [--brand-asset-size:4.5rem]" aria-hidden="true" />
     </Button>
   );
 }

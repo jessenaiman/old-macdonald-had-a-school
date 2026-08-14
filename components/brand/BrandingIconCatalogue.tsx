@@ -14,11 +14,50 @@ const gradeIcons: IconEntry[] = [
 ]
 
 const subjectIcons: IconEntry[] = [
-  { label: "Music", className: "music-icon icon-medium" }, { label: "Math and building", className: "math-building-icon icon-medium" }, { label: "Drama", className: "drama-storytelling-icon icon-medium" }, { label: "Art", className: "art-photography-icon icon-medium" }, { label: "Garden and health", className: "gardening-health-icon icon-medium" }, { label: "Physical education", className: "physical-education-icon icon-medium" }, { label: "Early learning", className: "early-learning-blocks icon-medium" }, { label: "Measure", className: "math-abacus-ruler icon-medium" }, { label: "Colour", className: "art-color-wheel icon-medium" }, { label: "Physical play", className: "physical-ball-rope icon-medium" }, { label: "Garden", className: "garden-watering-produce icon-medium" }, { label: "Health", className: "health-gingham-lunch icon-medium" },
+  { label: "Music", className: "music-icon icon-medium" },
+  { label: "Math and building", className: "math-building-icon icon-medium" },
+  { label: "Drama and storytelling", className: "drama-storytelling-icon icon-medium" },
+  { label: "Art and photography", className: "art-photography-icon icon-medium" },
+  { label: "Garden and health", className: "gardening-health-icon icon-medium" },
+  { label: "Physical education", className: "physical-education-icon icon-medium" },
+  { label: "Early learning", className: "early-learning-icon icon-medium" },
+  { label: "Community helping", className: "community-helping icon-medium" },
+  { label: "Community schoolhouse", className: "community-schoolhouse icon-medium" },
+  { label: "Early learning blocks", className: "early-learning-blocks icon-medium" },
+  { label: "Early learning lacing", className: "early-learning-lacing icon-medium" },
+  { label: "Abacus and ruler", className: "math-abacus-ruler icon-medium" },
+  { label: "Balance scale", className: "math-balance-scale icon-medium" },
+  { label: "Construction and measure", className: "math-construction-measure icon-medium" },
+  { label: "Camera and brush", className: "art-camera-brush icon-medium" },
+  { label: "Colour wheel", className: "art-color-wheel icon-medium" },
+  { label: "Physical play", className: "physical-ball-rope icon-medium" },
+  { label: "Stepping spots", className: "physical-stepping-spots icon-medium" },
+  { label: "Garden produce", className: "garden-watering-produce icon-medium" },
+  { label: "Seeds and trowel", className: "garden-seed-trowel icon-medium" },
+  { label: "Healthy lunch", className: "health-gingham-lunch icon-medium" },
 ]
 
 const artsIcons: IconEntry[] = [
-  { label: "Fiddle", className: "music-fiddle icon-medium" }, { label: "Turning", className: "dance-turning-footprints icon-medium" }, { label: "Acting", className: "acting-theatre-masks icon-medium" }, { label: "Painting", className: "painting-handprint icon-medium" }, { label: "Drum", className: "music-hand-drum icon-medium" }, { label: "Ribbons", className: "dance-crossing-ribbons icon-medium" }, { label: "Stage", className: "acting-stage-curtains icon-medium" }, { label: "Banjo", className: "music-banjo icon-medium" }, { label: "Puppets", className: "acting-pocket-puppets icon-medium" }, { label: "Easel", className: "painting-easel icon-medium" },
+  { label: "Fiddle", className: "music-fiddle icon-medium" },
+  { label: "Turning footprints", className: "dance-turning-footprints icon-medium" },
+  { label: "Single music note", className: "music-note-single icon-medium" },
+  { label: "Theatre masks", className: "acting-theatre-masks icon-medium" },
+  { label: "Painted handprint", className: "painting-handprint icon-medium" },
+  { label: "Hand drum", className: "music-hand-drum icon-medium" },
+  { label: "Crossing ribbons", className: "dance-crossing-ribbons icon-medium" },
+  { label: "Paired music notes", className: "music-notes-paired icon-medium" },
+  { label: "Stage curtains", className: "acting-stage-curtains icon-medium" },
+  { label: "Sponge shapes", className: "painting-sponge-shapes icon-medium" },
+  { label: "Banjo", className: "music-banjo icon-medium" },
+  { label: "Tap shoes", className: "dance-tap-shoes icon-medium" },
+  { label: "Ascending notes", className: "music-notes-ascending icon-medium" },
+  { label: "Pocket puppets", className: "acting-pocket-puppets icon-medium" },
+  { label: "Crayon swatches", className: "painting-crayon-swatches icon-medium" },
+  { label: "Handbells", className: "music-handbells icon-medium" },
+  { label: "Spiralling scarves", className: "dance-spiralling-scarves icon-medium" },
+  { label: "Rhythm dots", className: "music-rhythm-dots icon-medium" },
+  { label: "Spotlight star", className: "acting-spotlight-star icon-medium" },
+  { label: "Painting easel", className: "painting-easel icon-medium" },
 ]
 
 function IconGrid({ entries, className }: { entries: IconEntry[]; className: string }) {

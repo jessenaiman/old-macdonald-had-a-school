@@ -9,6 +9,28 @@
  * This is the single Tailwind/shadcn theme entrypoint. Palette values,
  * semantic application tokens, dark-mode overrides, and identity routing
  * live here. Approved asset paths and textures remain in brand-assets.css.
+ *
+ * DESIGN INTENT
+ *
+ * The interface is a teacher's planning board: notes, classroom planning,
+ * and found objects arranged on a physical presentation surface.
+ *
+ * - Hard surfaces are the background so foreground elements can be pinned,
+ *   taped, or stuck to them.
+ * - Writable surfaces use paper-like textures: lesson notes, sticky notes,
+ *   and presentation sheets.
+ * - Patches, pins, tape, clips, and tabs hold those surfaces in place.
+ * - The menu and footer form the edges of a folder holding the board.
+ *
+ * Preserve visible breathing room around attached objects. Empty space is
+ * part of the physical composition, not automatically missing content.
+* BRAND OWNERSHIP
+ *
+ * Cast colors in content/pages/branding/cast.mdx are canonical identity colors.
+ * Matching grades and subjects route through those cast tokens.
+ * Before changing visual roles, stop and read app/brand-assets.css and the
+ * matching branding MDX. Use semantic asset classes and CSS variables—never
+ * invent raw colors or asset URLs in components.
  */
 
 :root {
@@ -34,7 +56,7 @@
   --cast-old-macdonald-foreground: var(--theme-white);
   --cast-miss-puddles-color: #e8a227;
   --cast-miss-puddles-foreground: var(--theme-navy);
-  --cast-miss-maisy-color: #55705a;
+  --cast-miss-maisy-color: #7b4fa8;
   --cast-miss-maisy-foreground: var(--theme-white);
   --cast-mr-rusty-color: #2c6c9b;
   --cast-mr-rusty-foreground: var(--theme-white);
@@ -190,6 +212,8 @@
 @theme inline {
   --font-display: var(--font-farm-display);
   --font-heading: var(--font-farm-display);
+  --font-section: var(--font-farm-section);
+  --font-brand: var(--font-farm-brand);
   --font-body: var(--font-farm-body);
   --font-hand: var(--font-farm-hand);
   --font-sans: var(--font-farm-body);
@@ -212,6 +236,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-character: var(--character-color);
+  --color-character-foreground: var(--character-foreground);
   --color-brand-pink: var(--cast-miss-hayley-color);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -222,9 +248,8 @@
 @layer base {
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background font-body text-foreground; }
-  :where(h1, h2, h3, h4, h5, h6) {
-    @apply font-heading font-normal text-balance;
-  }
+  :where(h1) { @apply font-display font-normal text-balance; }
+  :where(h2, h3, h4, h5, h6) { @apply font-section font-normal text-balance; }
   :where(button, input, select, textarea, option) {
     @apply font-body;
   }
@@ -248,6 +273,7 @@
 .material-leather { --material-color: var(--theme-wood); --material-image: var(--asset-leather-old-macdonald); --material-size: 240px; color: var(--theme-ink); }
 .material-leather-blue { --material-color: var(--theme-navy); --material-image: var(--asset-leather-blue); --material-size: 240px; color: var(--theme-white); }
 .material-leather-indigo { --background: var(--theme-navy); --foreground: var(--theme-white); --accent: var(--curriculum-yellow); --accent-foreground: var(--theme-navy); --popover: var(--theme-navy); --popover-foreground: var(--theme-white); --material-color: var(--theme-navy); --material-image: var(--asset-leather-indigo); --material-size: 240px; color: var(--foreground); }
+.material-thread-overlay::after { pointer-events: none; position: absolute; inset: 0; background-image: var(--asset-thread-old-macdonald); background-repeat: repeat; background-size: 190px; content: ""; }
 
 .cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-texture: var(--cast-old-macdonald-texture); --character-foreground: var(--cast-old-macdonald-foreground); }
 .cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-texture: var(--cast-miss-puddles-texture); --character-foreground: var(--cast-miss-puddles-foreground); }
@@ -265,9 +291,9 @@
 .cast-puddles { --character-color: var(--cast-puddles-color); --character-texture: var(--cast-puddles-texture); --character-foreground: var(--cast-puddles-foreground); }
 .cast-sam { --character-color: var(--cast-sam-color); --character-texture: var(--cast-sam-texture); --character-foreground: var(--cast-sam-foreground); }
 .cast-rusty { --character-color: var(--cast-rusty-color); --character-texture: var(--cast-rusty-texture); --character-foreground: var(--cast-rusty-foreground); }
-.character-surface { color: var(--character-foreground); background-color: var(--character-color); background-image: var(--character-texture); background-repeat: repeat; background-size: 180px; }
+.character-surface { color: var(--character-foreground); background-color: var(--character-color); background-image: linear-gradient(var(--character-color), var(--character-color)), var(--character-texture); background-blend-mode: color, normal; background-repeat: repeat; background-size: auto, 180px; }
 
-.grade-surface { color: var(--grade-ink); background-color: var(--grade-color); box-shadow: 0 .25rem 0 var(--grade-edge); }
+.grade-surface { color: var(--grade-ink); background-color: var(--grade-color); background-image: linear-gradient(var(--grade-color), var(--grade-color)), var(--grade-texture); background-blend-mode: color, normal; background-repeat: repeat; background-size: auto, 180px; box-shadow: 0 .25rem 0 var(--grade-edge); }
 
 :is(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }

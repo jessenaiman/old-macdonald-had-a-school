@@ -1,36 +1,34 @@
 import { CharacterPortrait } from "@/components/brand/CharacterPortrait"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 <section id="badge-recipe" className="material-surface material-cork mt-5 min-w-0 rounded-2xl border border-border p-5 sm:p-8 lg:p-12">
 
 ## Character badge recipe
 
-A character badge has three independent layers: an authored blank patch, the matching canonical portrait, and a real attachment only when the badge is physically attached to another surface. Never recolour the portrait or replace the patch with a CSS circle.
+A character badge has three independent layers: a live semantic character surface, the matching transparent portrait, and a real attachment only when the badge is physically attached to another surface. Never recolour the portrait or store another colored-circle image for a theme variation.
 
-<ol className="list-inside space-y-1 break-words pl-0">
+<ol className="flex list-inside flex-col gap-1 break-words pl-0">
   <li>Choose the character from <code>cast.mdx</code>.</li>
-  <li>Use the matching approved blank patch.</li>
+  <li>Apply the matching <code>cast-*</code> class and <code>character-surface</code>.</li>
   <li>Place the unchanged transparent portrait over it.</li>
   <li>Keep readable text outside the portrait silhouette.</li>
   <li>Add a fastener only where it crosses the badge and its supporting surface.</li>
 </ol>
 
-<div className="material-surface material-cork mt-7 grid min-w-0 gap-6 rounded-2xl p-[clamp(.75rem,3vw,1.5rem)] md:grid-cols-2">
-  <article className="material-surface material-cardboard-paper relative grid min-w-0 min-h-80 place-items-center rounded-xl border border-border p-[clamp(1rem,4vw,1.75rem)] text-center shadow-lg">
-    <span className="brand-asset fastener-push-pin icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
-    <div className="relative grid aspect-square w-[min(11rem,70vw)] place-items-center">
-      <span className="brand-asset patch-old-macdonald-square absolute inset-0 h-full w-full" aria-hidden="true" />
-      <CharacterPortrait className="relative z-10 h-36 w-36 object-contain" character="old-macdonald" />
-    </div>
-    <div className="min-w-0"><strong className="font-heading text-2xl">Old MacDonald</strong><p className="mb-0 flex flex-wrap items-center justify-center gap-2">Brown <code className="cast-old-macdonald character-surface rounded-md px-2 py-1 font-black">#8B5E34</code> · Kindergarten music</p></div>
-  </article>
-  <article className="material-surface material-cardboard-paper relative grid min-w-0 min-h-80 place-items-center rounded-xl border border-border p-[clamp(1rem,4vw,1.75rem)] text-center shadow-lg">
-    <span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" />
-    <div className="relative grid aspect-square w-[min(11rem,70vw)] place-items-center">
-      <span className="brand-asset patch-miss-puddles-circle absolute inset-0 h-full w-full" aria-hidden="true" />
-      <CharacterPortrait className="relative z-10 h-36 w-36 object-contain" character="miss-puddles" />
-    </div>
-    <div className="min-w-0"><strong className="font-heading text-2xl">Miss Puddles</strong><p className="mb-0 flex flex-wrap items-center justify-center gap-2">Yellow <code className="cast-miss-puddles character-surface rounded-md px-2 py-1 font-black">#E8A227</code> · Daycare</p></div>
-  </article>
-</div>
+<Card className="material-surface material-cardboard-paper mt-7" data-character="miss-maisy">
+  <CardHeader>
+    <CardTitle>One character, five production forms</CardTitle>
+    <CardDescription>Miss Maisy demonstrates which forms stay canonical and which forms inherit the live character token.</CardDescription>
+  </CardHeader>
+  <CardContent className="grid min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-5">
+    <figure className="m-0 grid justify-items-center gap-3 text-center"><CharacterPortrait className="size-28 object-contain" character="miss-maisy" /><figcaption><strong className="block">Transparent profile</strong><span className="text-sm text-muted-foreground">Introductions and full character cards</span></figcaption></figure>
+    <figure className="m-0 grid justify-items-center gap-3 text-center"><span className="brand-asset character-face-bust size-28" data-character="miss-maisy" role="img" aria-label="Miss Maisy transparent cartoon face" /><figcaption><strong className="block">Transparent face</strong><span className="text-sm text-muted-foreground">Compact identity without a stored background</span></figcaption></figure>
+    <figure className="m-0 grid justify-items-center gap-3 text-center"><span className="cast-miss-maisy character-surface grid size-28 place-items-center rounded-full"><span className="brand-asset character-face-bust size-24" data-character="miss-maisy" aria-hidden="true" /></span><figcaption><strong className="block">Live circle badge</strong><span className="text-sm text-muted-foreground">Transparent face over the current theme surface</span></figcaption></figure>
+    <figure className="m-0 grid justify-items-center gap-3 text-center"><span className="brand-asset character-embroidered-badge size-28" data-character="miss-maisy" role="img" aria-label="Miss Maisy large felt badge" /><figcaption><strong className="block">Large felt badge</strong><span className="text-sm text-muted-foreground">Canonical full-screen or print artwork</span></figcaption></figure>
+    <figure className="m-0 grid justify-items-center gap-3 text-center"><span className="cast-miss-maisy character-surface grid size-28 place-items-center rounded-full"><CharacterPortrait className="size-24 object-contain" character="miss-maisy" decorative /></span><figcaption><strong className="block">Profile on owned surface</strong><span className="text-sm text-muted-foreground">Full portrait over the same live token</span></figcaption></figure>
+  </CardContent>
+</Card>
+
+The transparent face and profile compositions change when the character token changes. The canonical portrait and large felt badge remain unchanged artwork; never recolor their pixels.
 
 </section>

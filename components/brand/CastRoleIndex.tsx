@@ -1,70 +1,84 @@
 import Image from "next/image"
 
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { CAST, type CastKey } from "@/lib/cast"
 
-export function CastRoleIndex({ title, children }: { title: string; children: React.ReactNode }) {
+function CharacterForms({ character }: { character: CastKey }) {
+  const member = CAST[character]
+
   return (
-    <section className="material-surface material-cork mt-8 rounded-2xl border border-border p-4 sm:p-6" aria-labelledby={`cast-${title.toLowerCase().replaceAll(" ", "-")}`}>
-      <h3 className="font-heading text-3xl" id={`cast-${title.toLowerCase().replaceAll(" ", "-")}`}>{title}</h3>
-      <div className="mt-4 grid gap-4 lg:grid-cols-2">{children}</div>
+    <div className="flex items-end justify-between gap-2" aria-label={`${member.name} governed artwork forms`}>
+      <figure className="m-0 grid justify-items-center gap-1">
+        <span className="brand-asset character-face-bust icon-small" data-character={character} role="img" aria-label={`${member.name} transparent 2D face`} />
+        <figcaption className="text-center text-[0.625rem] leading-tight text-muted-foreground">Face</figcaption>
+      </figure>
+      <figure className="m-0 grid justify-items-center gap-1">
+        <span className="brand-asset character-face-patch icon-small" data-character={character} role="img" aria-label={`${member.name} 2D face with backing`} />
+        <figcaption className="text-center text-[0.625rem] leading-tight text-muted-foreground">Backed</figcaption>
+      </figure>
+      <figure className="m-0 grid justify-items-center gap-1">
+        <Image className="size-10 object-contain" src={member.portrait} alt={`${member.name} transparent full character`} width={40} height={40} />
+        <figcaption className="text-center text-[0.625rem] leading-tight text-muted-foreground">Full</figcaption>
+      </figure>
+      <figure className="m-0 grid justify-items-center gap-1">
+        <span className="brand-asset character-embroidered-badge icon-medium" data-character={character} role="img" aria-label={`${member.name} large felt embroidered patch`} />
+        <figcaption className="text-center text-[0.625rem] leading-tight text-muted-foreground">Felt</figcaption>
+      </figure>
+    </div>
+  )
+}
+
+export function CastRoleIndex({ title, children }: { title: string; children: React.ReactNode }) {
+  const id = `cast-${title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-").replaceAll(/(^-|-$)/g, "")}`
+
+  return (
+    <section className="grid gap-3" aria-labelledby={id}>
+      <div className="flex flex-wrap items-end justify-between gap-2">
+        <h2 className="font-heading text-3xl leading-none" id={id}>{title}</h2>
+        <Badge variant="secondary">8 identities</Badge>
+      </div>
+      <div className="hidden items-end gap-4 border-b border-border px-4 pb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground lg:grid lg:grid-cols-[2fr_2fr_3fr_5fr]" aria-hidden="true">
+        <span>Identity</span><span>Role or personality</span><span>Level and permitted action</span><span>Governed artwork forms</span>
+      </div>
+      <div className="grid gap-3">{children}</div>
     </section>
   )
 }
 
-export function CastCompactIdentity({ character }: { character: CastKey }) {
+export function CastRoleIndexItem({ character, role, level, permitted, interests }: { character: CastKey; role: string; level: string; permitted: string; interests?: string }) {
   const member = CAST[character]
 
   return (
-    <span className="inline-flex items-center gap-2 align-middle">
-      <span className="brand-asset character-face-patch icon-medium" data-character={character} role="img" aria-label={`${member.name} face patch`} />
-      <span className="brand-asset character-face-bust icon-medium" data-character={character} role="img" aria-label={`${member.name} face bust`} />
-    </span>
-  )
-}
-
-export function CastRoleIndexItem({
-  character,
-  role,
-  level,
-  permitted,
-  interests,
-  colorReference,
-}: {
-  character: CastKey
-  role: string
-  level: string
-  permitted: string
-  colorReference: string
-  interests?: string
-}) {
-  const member = CAST[character]
-
-  return (
-    <Card className={`material-surface material-cardboard-paper cast-${character} relative overflow-visible border-border py-0 text-foreground shadow-md`}>
-      <span className="brand-asset fastener-paperclip icon-small absolute -top-4 right-4 z-10" aria-hidden="true" />
-      <div className="grid min-w-0 grid-cols-[7rem_minmax(0,1fr)]">
-        <div className="material-surface material-felt grid min-h-32 place-items-center rounded-l-xl border-r border-border p-2">
-          <Image className="size-20 object-contain" src={member.portrait} alt="" width={80} height={80} />
+    <Card className={`cast-${character} grid min-w-0 gap-4 px-4 py-4 lg:grid-cols-[2fr_2fr_3fr_5fr] lg:items-center`}>
+      <CardHeader className="gap-1 px-0">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="character-surface grid size-12 shrink-0 place-items-center rounded-full border border-current/20">
+            <Image className="size-10 object-contain" src={member.portrait} alt="" width={40} height={40} />
+          </span>
+          <div className="min-w-0">
+            <CardTitle>{member.name}</CardTitle>
+            <CardDescription className="mt-1"><code>cast-{character}</code></CardDescription>
+          </div>
         </div>
-        <CardHeader className="min-w-0 gap-1 px-4 py-4">
-          <CardTitle className="font-heading text-xl">{member.name}</CardTitle>
-          <p className="m-0 flex flex-wrap items-center gap-2 text-sm font-bold text-muted-foreground">
-            <span>{member.family}</span>
-            <code className={`cast-${character} character-surface rounded-md border border-current/20 px-2 py-1 font-mono text-xs font-black`}>{colorReference}</code>
-          </p>
-          <div className="mt-3 border-t border-border pt-3 font-body text-sm leading-6">
-            <strong className="block text-xs uppercase tracking-wider text-muted-foreground">Role or personality</strong>
-            <span>{role}</span>
-          </div>
-          <div className="mt-3 border-t border-border pt-3 font-body text-sm leading-6">
-            <strong className="block text-xs uppercase tracking-wider text-muted-foreground">Level / permitted action</strong>
-            <span className="font-bold">{level}</span>
-            <small className="mt-1 block text-sm text-muted-foreground">{permitted}</small>
-          </div>
-          {interests ? <div className="mt-3 border-t border-border pt-3 font-body text-sm leading-6"><strong className="block text-xs uppercase tracking-wider text-muted-foreground">Learning interests</strong><span>{interests}</span></div> : null}
-        </CardHeader>
-      </div>
+      </CardHeader>
+      <CardContent className="grid gap-1 px-0">
+        <strong className="text-xs uppercase tracking-wider text-muted-foreground lg:sr-only">Role or personality</strong>
+        <span>{role}</span>
+        {interests ? <span className="text-sm text-muted-foreground">{interests}</span> : null}
+      </CardContent>
+      <CardContent className="grid gap-1 px-0">
+        <strong className="text-xs uppercase tracking-wider text-muted-foreground lg:sr-only">Level and permitted action</strong>
+        <span className="font-semibold">{level}</span>
+        <span className="text-sm text-muted-foreground">{permitted}</span>
+      </CardContent>
+      <CardContent className="px-0"><CharacterForms character={character} /></CardContent>
     </Card>
   )
 }

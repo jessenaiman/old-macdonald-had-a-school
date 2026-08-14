@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { HomeHero } from "@/components/home/HomePage"
 import { HomeSubjectNote } from "@/components/home/HomeSubjectNote"
 
 <section id="homepage-surface" className="material-surface material-leather-blue mt-5 rounded-2xl border border-border p-5 sm:p-8 lg:p-12">
@@ -6,6 +7,12 @@ import { HomeSubjectNote } from "@/components/home/HomeSubjectNote"
 <h2 className="m-0 font-heading text-[clamp(1.875rem,4vw,3rem)] font-normal leading-none text-balance text-primary-foreground">Homepage structural surface</h2>
 
 The menu, hero, and homepage base use the registered `material-surface material-leather-blue` recipe backed by the repeating `--asset-leather-blue` tile. Paper lesson lists and headings are clipped or taped to leather. The subject area is a cork bulletin board holding the six authored paper-note assets. Grade and folk links are locally identified repeating cloth badges.
+
+<div className="mt-6">
+  <HomeHero />
+</div>
+
+<p className="mt-4 text-primary-foreground"><strong>One production component, two purposes.</strong> On the homepage this compact row gets teachers into lessons. Here it teaches the recipe: the component owns the content-left/media-right layout and carousel behavior; theme recipes own colour, border, foreground, paper, and textile; `brand-assets.css` owns the four scene files. Change those semantic sources and both rendered instances update.</p>
 
 <div className="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,.72fr)_minmax(18rem,1fr)]">
   <article className="material-surface material-cardboard-paper relative rounded-xl border border-border p-6 pt-10 text-card-foreground shadow-lg">
@@ -28,13 +35,13 @@ The menu, hero, and homepage base use the registered `material-surface material-
       teacherReason="Build confident talk, reading, and storytelling."
       highlights={["Build vocabulary", "Explore phonics", "Tell and retell stories"]}
       fastenerClass="fastener-paperclip"
-      noteShape="torn"
+      guideCharacter="whiskers"
     />
   </div>
 </div>
 
 <h3 className="mt-8 font-heading text-xl font-normal leading-none text-balance text-primary-foreground">Extension rule</h3>
 
-Palette values, semantic theme tokens, and reusable global utilities belong in `globals.css`. Approved asset paths belong in `brand-assets.css`. `HomePage`, `WeeklyLessonList`, `HomeCarousel`, `HomeSubjectNote`, and `FolkArtsSection` own the production composition. This page documents those components and their registered classes; it must not introduce an alternate homepage control.
+Palette values, semantic theme tokens, and reusable global utilities belong in `globals.css`. Approved asset paths belong in `brand-assets.css`. `HomePage`, `WeeklyLessonList`, `HomeCarousel`, `HomeSubjectNote`, and `CreativeArtsSection` own the production composition. This page documents those components and their registered classes; it must not introduce an alternate homepage control.
 
 </section>

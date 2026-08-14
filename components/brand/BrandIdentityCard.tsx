@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +20,7 @@ export type BrandIdentityCardProps = {
 export function BrandIdentityCard({ label, title, identityClass, children, href, badge, media, attachment, footer, variant = "character" }: BrandIdentityCardProps) {
   const contents = <>
     <div className="relative grid min-h-44 justify-items-center items-end overflow-hidden border-b border-dashed border-[color-mix(in_srgb,var(--character-foreground,var(--card-foreground))_58%,transparent)] bg-[linear-gradient(180deg,color-mix(in_srgb,var(--card)_15%,transparent),transparent_72%)] group-data-[card-variant=character]:min-h-28 group-data-[card-variant=character]:self-stretch group-data-[card-variant=character]:border-r-[0.45rem] group-data-[card-variant=character]:border-b-0 group-data-[card-variant=character]:border-r-[var(--character-color)] group-data-[card-variant=character]:bg-[image:var(--character-texture)] group-data-[card-variant=student]:min-h-24 group-data-[card-variant=student]:self-stretch group-data-[card-variant=student]:border-r-[0.45rem] group-data-[card-variant=student]:border-b-0 group-data-[card-variant=student]:border-r-[var(--character-color)] group-data-[card-variant=student]:bg-[image:var(--character-texture)] group-data-[card-variant=subject]:min-h-32 group-data-[card-variant=subject]:border-b-0 group-data-[card-variant=subject]:bg-transparent">
-      {label ? <span className="absolute top-3 left-3 z-2 max-w-[calc(100%-1.4rem)] rounded-full border px-2 py-1 text-[0.62rem] leading-none font-black tracking-[0.08em] uppercase backdrop-blur-sm group-data-[card-variant=character]:hidden group-data-[card-variant=student]:hidden">{label}</span> : null}
+      {label ? <Badge className="absolute top-3 left-3 z-2 max-w-[calc(100%-1.4rem)] backdrop-blur-sm group-data-[card-variant=character]:hidden group-data-[card-variant=student]:hidden" variant="outline">{label}</Badge> : null}
       {badge}
       {media}
     </div>
