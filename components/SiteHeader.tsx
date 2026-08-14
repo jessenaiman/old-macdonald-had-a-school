@@ -19,7 +19,7 @@ export function SiteHeader() {
   const active = activePageFromPathname(usePathname());
 
   return (
-    <header className={`${styles.header} site-leather-surface`}>
+    <header className={`${styles.header} material-surface material-leather-blue`}>
       <div className={styles.headerInner}>
         <Link
           className={styles.brand}

@@ -56,7 +56,7 @@ The strongest correction came from treating supplied planning boards as structur
 The strict side-by-side review worked because the approved board was treated as a measurable composition while the site's canonical curriculum copy and shared header stayed explicit product constraints.
 
 - Audit asset paths before visual tuning; the missing v4 icon directory was the largest apparent design failure.
-- Compare the working-wall crop separately from shared site chrome so page-template fidelity remains measurable.
+- Compare the working-wall crop separately from the header and footer so page-template fidelity remains measurable.
 - Use supplied material images for texture and quiet inset edges for construction; avoid decorative CSS stitch simulations.
 - Stop duplicate asset generation as soon as an existing production texture proves suitable.
 - Keep one combined reference/implementation image for every final visual verdict.

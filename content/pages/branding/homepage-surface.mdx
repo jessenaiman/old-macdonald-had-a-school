@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { HomeSubjectNote } from "@/components/home/HomeSubjectNote"
 
-<section id="homepage-surface" className="home-structural-surface mt-5 rounded-2xl border border-border p-5 sm:p-8 lg:p-12">
+<section id="homepage-surface" className="material-surface material-leather-blue mt-5 rounded-2xl border border-border p-5 sm:p-8 lg:p-12">
 
-<h2 className="type-section-title m-0 text-primary-foreground">Homepage structural surface</h2>
+<h2 className="m-0 font-heading text-[clamp(1.875rem,4vw,3rem)] font-normal leading-none text-balance text-primary-foreground">Homepage structural surface</h2>
 
-The menu and hero are hard blue leather made from the registered repeating `--asset-leather-blue` tile. `site-leather-surface` is the shared menu/hero material; `home-structural-surface` applies the same physical surface to the homepage base. Paper lesson lists and headings are clipped or taped to leather. The subject area is a cork bulletin board holding the six authored paper-note assets. Grade and folk links are locally identified repeating cloth badges.
+The menu, hero, and homepage base use the registered `material-surface material-leather-blue` recipe backed by the repeating `--asset-leather-blue` tile. Paper lesson lists and headings are clipped or taped to leather. The subject area is a cork bulletin board holding the six authored paper-note assets. Grade and folk links are locally identified repeating cloth badges.
 
 <div className="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,.72fr)_minmax(18rem,1fr)]">
   <article className="material-surface material-cardboard-paper relative rounded-xl border border-border p-6 pt-10 text-card-foreground shadow-lg">
     <span className="brand-asset fastener-paperclip icon-small absolute -top-4 left-6" aria-hidden="true" />
-    <h3 className="type-card-title m-0">Controls stay semantic</h3>
+    <h3 className="m-0 font-heading text-xl font-normal leading-none text-balance">Controls stay semantic</h3>
     <p className="mt-3 leading-7">Shared buttons use semantic control tokens. Character textures belong only to character-owned compositions.</p>
     <div className="mt-5 flex flex-wrap gap-3">
       <Button>Find lessons</Button>
@@ -33,8 +33,8 @@ The menu and hero are hard blue leather made from the registered repeating `--as
   </div>
 </div>
 
-<h3 className="type-card-title mt-8 text-primary-foreground">Extension rule</h3>
+<h3 className="mt-8 font-heading text-xl font-normal leading-none text-balance text-primary-foreground">Extension rule</h3>
 
-Palette values belong in `theme.css`. Approved asset paths belong in `brand-assets.css`. Reusable material or structural classes belong in `globals.css`. `HomePage`, `WeeklyLessonList`, `HomeCarousel`, `HomeSubjectNote`, and `FolkArtsSection` own the production composition. This page documents those components and their registered classes; it must not introduce an alternate homepage control.
+Palette values, semantic theme tokens, and reusable global utilities belong in `globals.css`. Approved asset paths belong in `brand-assets.css`. `HomePage`, `WeeklyLessonList`, `HomeCarousel`, `HomeSubjectNote`, and `FolkArtsSection` own the production composition. This page documents those components and their registered classes; it must not introduce an alternate homepage control.
 
 </section>

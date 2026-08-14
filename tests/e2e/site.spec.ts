@@ -168,7 +168,7 @@ test.describe("responsive layout", () => {
 });
 
 test.describe("print media", () => {
-  test("print media hides site chrome and exposes the printable lesson plan", async ({ page }, testInfo) => {
+  test("print media hides navigation and exposes the printable lesson plan", async ({ page }, testInfo) => {
     const route = markRoute(testInfo, VIDEO_ROUTE);
     await openRoute(page, route);
     await page.emulateMedia({ media: "print" });

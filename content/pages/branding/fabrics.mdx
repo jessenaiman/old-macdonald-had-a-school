@@ -3,11 +3,11 @@ import { FabricReference } from "@/components/brand/FabricReference"
 
 <section id="fabrics" className="material-surface material-cork mt-5 rounded-2xl border border-border p-5 text-foreground sm:p-8 lg:p-12">
 
-<p className="type-eyebrow mb-2 text-primary">Approved textile vocabulary</p>
-<h2 className="type-section-title m-0">Felt and fabric need an owner</h2>
-<p className="type-body-copy max-w-3xl">Material describes construction. Semantic identity chooses the color and matching authored tile. Never use “blue felt” as a default, and never borrow a cast texture for site chrome, generic controls, subjects, or unrelated curriculum.</p>
+<p className="mb-2 font-body text-xs font-black leading-none tracking-[.13em] text-primary uppercase">Approved textile vocabulary</p>
+<h2 className="m-0 font-heading text-[clamp(1.875rem,4vw,3rem)] font-normal leading-none text-balance">Felt and fabric need an owner</h2>
+<p className="max-w-3xl font-body text-base font-semibold leading-[1.7]">Material describes construction. Semantic identity chooses the color and matching authored tile. Never use “blue felt” as a default, and never borrow a cast texture for navigation, generic controls, subjects, or unrelated curriculum.</p>
 
-<h3 className="type-card-title mt-8">Selection rules</h3>
+<h3 className="mt-8 font-heading text-xl font-normal leading-none text-balance">Selection rules</h3>
 
 - Character or portrait object: use its matching `cast-* material-felt` combination.
 - Grade patch: use the documented `data-grade` mapping; do not choose a cast class manually.
@@ -16,7 +16,7 @@ import { FabricReference } from "@/components/brand/FabricReference"
 - Working wall: use cork only for the board holding attached pieces.
 - Generic page chrome or shared control: use semantic color tokens and shadcn variants, with no cast texture.
 
-<h3 className="type-card-title mt-8">Production boundary</h3>
+<h3 className="mt-8 font-heading text-xl font-normal leading-none text-balance">Production boundary</h3>
 
 The library contains 76 individual repeat tiles across six families. Availability is not automatic approval. A production component may request only a semantic class or variable already registered in `brand-assets.css`. Unregistered identity varieties remain source assets until a real component need establishes their semantic owner and usage.
 
@@ -29,6 +29,6 @@ The library contains 76 individual repeat tiles across six families. Availabilit
 
 <FabricReference />
 
-<p className="type-body-copy mt-8">Typography on every sample follows the reusable roles from <Link className="font-bold underline underline-offset-4" href="#typography">the typography chapter</Link>. Asset paths remain centralized in <code>brand-assets.css</code>; palette values remain in <code>theme.css</code>.</p>
+<p className="mt-8 font-body text-base font-semibold leading-[1.7]">Typography on every sample follows the Tailwind theme utilities shown in <Link className="font-bold underline underline-offset-4" href="#typography">the typography chapter</Link>. Asset paths remain centralized in <code>brand-assets.css</code>; palette values and semantic theme tokens remain in <code>globals.css</code>.</p>
 
 </section>

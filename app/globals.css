@@ -3,13 +3,192 @@
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Old MacDonald Had a School theme
+ *
+ * This is the single Tailwind/shadcn theme entrypoint. Palette values,
+ * semantic application tokens, dark-mode overrides, and identity routing
+ * live here. Approved asset paths and textures remain in brand-assets.css.
+ */
+
+:root {
+  color-scheme: light;
+  --radius: .625rem;
+
+  /* Foundation colours stay quiet so character colours remain meaningful. */
+  --theme-cream: #f7edda;
+  --theme-paper: #fffaf0;
+  --theme-paper-muted: #eee1c9;
+  --theme-denim: #244f70;
+  --theme-navy: #142d42;
+  --theme-wood: #8a603d;
+  --theme-wood-light: #cbb28c;
+  --theme-ink: #182b39;
+  --theme-copy: #46535b;
+  --theme-white: #fffdf7;
+  --brand-cork-color: #b8906a;
+
+  /* Canonical identity palette. Curriculum, grade, and subject roles reuse it. */
+  --cast-old-macdonald-color: #8b5e34;
+  --cast-old-macdonald-foreground: var(--theme-white);
+  --cast-miss-puddles-color: #e8a227;
+  --cast-miss-puddles-foreground: var(--theme-navy);
+  --cast-miss-maisy-color: #55705a;
+  --cast-miss-maisy-foreground: var(--theme-white);
+  --cast-mr-rusty-color: #2c6c9b;
+  --cast-mr-rusty-foreground: var(--theme-white);
+  --cast-miss-hayley-color: #c9527a;
+  --cast-miss-hayley-foreground: var(--theme-navy);
+  --cast-mr-maisy-color: #b5272c;
+  --cast-mr-maisy-foreground: var(--theme-white);
+  --cast-mr-sam-color: #1f6b6b;
+  --cast-mr-sam-foreground: var(--theme-white);
+  --cast-mr-puddles-color: #4f5fa0;
+  --cast-mr-puddles-foreground: var(--theme-white);
+  --cast-hopper-color: #d9713c;
+  --cast-hopper-foreground: var(--theme-white);
+  --cast-whiskers-color: #7b4fa8;
+  --cast-whiskers-foreground: var(--theme-white);
+  --cast-scout-color: #4a7a3a;
+  --cast-scout-foreground: var(--theme-white);
+  --cast-penny-color: #c9962e;
+  --cast-penny-foreground: var(--theme-navy);
+  --cast-maisy-color: #1f4e5f;
+  --cast-maisy-foreground: var(--theme-white);
+  --cast-puddles-color: #4fa0c9;
+  --cast-puddles-foreground: var(--theme-white);
+  --cast-sam-color: #7a9a3d;
+  --cast-sam-foreground: var(--theme-white);
+  --cast-rusty-color: #8b5030;
+  --cast-rusty-foreground: var(--theme-white);
+
+  --curriculum-red: var(--cast-mr-maisy-color);
+  --curriculum-yellow: var(--cast-miss-puddles-color);
+  --curriculum-blue: var(--cast-mr-rusty-color);
+  --curriculum-orange: var(--cast-hopper-color);
+  --curriculum-green: var(--cast-miss-maisy-color);
+  --curriculum-purple: var(--cast-mr-puddles-color);
+
+  /* Semantic shadcn/application tokens. */
+  --background: var(--theme-cream);
+  --foreground: var(--theme-ink);
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --popover: var(--theme-paper);
+  --popover-foreground: var(--theme-ink);
+  --primary: var(--theme-denim);
+  --primary-foreground: var(--theme-white);
+  --secondary: var(--theme-paper-muted);
+  --secondary-foreground: var(--theme-navy);
+  --muted-surface: #eadfc9;
+  --muted-foreground: #5b554c;
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --destructive: var(--curriculum-red);
+  --destructive-foreground: var(--theme-white);
+  --border: var(--theme-wood-light);
+  --input: #9f8b6d;
+  --ring: var(--curriculum-blue);
+  --shadow-character: 0 3px 1px color-mix(in srgb, var(--theme-ink) 24%, transparent);
+
+  /* Grade navigation roles. */
+  --grade-early-years-color: var(--curriculum-green);
+  --grade-early-years-edge: color-mix(in srgb, var(--grade-early-years-color) 72%, black);
+  --grade-early-years-ink: var(--theme-white);
+  --grade-daycare-color: var(--cast-miss-puddles-color);
+  --grade-daycare-edge: color-mix(in srgb, var(--grade-daycare-color) 72%, black);
+  --grade-daycare-ink: var(--cast-miss-puddles-foreground);
+  --grade-pre-school-color: var(--cast-miss-maisy-color);
+  --grade-pre-school-edge: color-mix(in srgb, var(--grade-pre-school-color) 72%, black);
+  --grade-pre-school-ink: var(--cast-miss-maisy-foreground);
+  --grade-kindergarten-color: var(--cast-mr-rusty-color);
+  --grade-kindergarten-edge: color-mix(in srgb, var(--grade-kindergarten-color) 72%, black);
+  --grade-kindergarten-ink: var(--cast-mr-rusty-foreground);
+  --grade-one-color: var(--cast-miss-hayley-color);
+  --grade-one-edge: color-mix(in srgb, var(--grade-one-color) 72%, black);
+  --grade-one-ink: var(--cast-miss-hayley-foreground);
+  --grade-two-color: var(--cast-mr-maisy-color);
+  --grade-two-edge: color-mix(in srgb, var(--grade-two-color) 72%, black);
+  --grade-two-ink: var(--cast-mr-maisy-foreground);
+
+  /* Subject identities reuse the staff member who owns that teaching role. */
+  --subject-language-color: var(--cast-miss-hayley-color);
+  --subject-math-color: var(--cast-mr-sam-color);
+  --subject-science-color: var(--cast-miss-maisy-color);
+  --subject-music-color: var(--cast-mr-rusty-color);
+  --subject-arts-color: var(--cast-mr-puddles-color);
+  --subject-health-color: var(--cast-mr-maisy-color);
+
+  /* Grade workspace functional surfaces. */
+  --workspace-paper: #fbf2df;
+  --workspace-paper-soft: #fff9eb;
+  --workspace-paper-bright: #fffdf3;
+  --workspace-paper-overlay: #fcf3dfc7;
+  --workspace-ink: #173552;
+  --workspace-muted: #655846;
+  --workspace-kraft: #b66f2b;
+  --workspace-kraft-daycare: #d39a32;
+  --workspace-board: #ae6b29;
+  --workspace-cork: #b8906a;
+  --workspace-cork-edge: #9a632f;
+  --workspace-wood-pocket: #c48949;
+  --workspace-rail-foreground: #f8f0dc;
+  --workspace-note: #f5df9e;
+  --workspace-note-ink: #4d3b26;
+  --workspace-note-accent: #a0661e;
+  --workspace-rail-active: #0f312a59;
+  --workspace-alert: #7d2e52;
+  --workspace-focus: #f4cb68;
+}
+
+/* Shared grade identity routing. Asset textures are assigned separately. */
+:is([data-grade],[data-grade-group]) {
+  --grade-accent: var(--grade-color);
+  --grade-dark: var(--grade-edge);
+  --grade-felt: var(--grade-texture);
+  --identity-color: var(--grade-color);
+  --identity-ink: var(--grade-ink);
+  --identity-texture: var(--grade-texture);
+  --nav-grade-color: var(--grade-color);
+  --nav-grade-edge: var(--grade-edge);
+  --nav-grade-texture: var(--grade-texture);
+}
+[data-grade-group='early-years'] { --grade-color:var(--grade-early-years-color); --grade-edge:var(--grade-early-years-edge); --grade-ink:var(--grade-early-years-ink); }
+[data-grade='daycare'] { --grade-color:var(--grade-daycare-color); --grade-edge:var(--grade-daycare-edge); --grade-ink:var(--grade-daycare-ink); }
+[data-grade='pre-school'] { --grade-color:var(--grade-pre-school-color); --grade-edge:var(--grade-pre-school-edge); --grade-ink:var(--grade-pre-school-ink); }
+[data-grade='kindergarten'] { --grade-color:var(--grade-kindergarten-color); --grade-edge:var(--grade-kindergarten-edge); --grade-ink:var(--grade-kindergarten-ink); }
+[data-grade='grade-one'] { --grade-color:var(--grade-one-color); --grade-edge:var(--grade-one-edge); --grade-ink:var(--grade-one-ink); }
+[data-grade='grade-two'] { --grade-color:var(--grade-two-color); --grade-edge:var(--grade-two-edge); --grade-ink:var(--grade-two-ink); }
+
+.dark {
+  color-scheme: dark;
+  --background: #101c26;
+  --foreground: #f7edda;
+  --card: #192c3a;
+  --card-foreground: #fffaf0;
+  --popover: #192c3a;
+  --popover-foreground: #fffaf0;
+  --primary: #8fc1dd;
+  --primary-foreground: #102333;
+  --secondary: #2b4050;
+  --secondary-foreground: #fffaf0;
+  --muted-surface: #263947;
+  --muted-foreground: #cbd5d9;
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: #142d42;
+  --destructive: var(--curriculum-red);
+  --destructive-foreground: var(--theme-white);
+  --border: #587080;
+  --input: #718795;
+  --ring: #8fc1dd;
+  --workspace-rail-foreground: #fffaf0;
+}
+
 @theme inline {
   --font-display: var(--font-farm-display);
   --font-heading: var(--font-farm-display);
   --font-body: var(--font-farm-body);
   --font-hand: var(--font-farm-hand);
-  --font-button: var(--font-farm-display);
-  --font-serif-italic: Georgia, "Times New Roman", serif;
   --font-sans: var(--font-farm-body);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -38,54 +217,23 @@
 }
 
 @layer base {
-  * { box-sizing: border-box; @apply border-border outline-ring/50; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; @apply bg-background text-foreground; font-family: var(--font-farm-body), sans-serif; line-height: 1.5; }
-  :where(h1, h2, h3, h4, h5, h6) { color: var(--foreground); font-family: var(--font-farm-display), Georgia, serif; font-weight: 400; text-wrap: balance; }
-  :where(button, input, select, textarea) { font: inherit; }
-  button { color: inherit; }
-  a { color: inherit; text-decoration: none; }
-  :where(input, select, textarea) { border: 1px solid var(--input); color: var(--foreground); background: var(--card); }
-  :where(input, textarea)::placeholder { color: var(--muted-foreground); opacity: 1; }
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background font-body text-foreground; }
   ::selection { color: var(--primary-foreground); background: var(--primary); }
 }
 
-.dark { color-scheme: dark; }
-
-body::before { position: fixed; z-index: -1; inset: 0; background: var(--grain-fine) repeat; background-size: 400px; content: ""; opacity: .16; pointer-events: none; mix-blend-mode: multiply; }
-.dark body::before { opacity: .06; }
-
-.typeset-farm-ui { --typeset-font-body: var(--font-farm-body); --typeset-font-heading: var(--font-farm-display); --typeset-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace; --typeset-size: 14px; --typeset-leading: 1.55; --typeset-flow: 1em; font-family: var(--typeset-font-body), sans-serif; font-size: var(--typeset-size); line-height: var(--typeset-leading); }
-.typeset-farm-reading { --typeset-font-body: var(--font-farm-body); --typeset-font-heading: var(--font-farm-display); --typeset-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace; --typeset-size: 16px; --typeset-leading: 1.75; --typeset-flow: 1.35em; font-family: var(--typeset-font-body), sans-serif; font-size: var(--typeset-size); line-height: var(--typeset-leading); }
-.typeset-farm-reading :where(h1, h2, h3, h4) { font-family: var(--typeset-font-heading), sans-serif; text-wrap: balance; }
-.typeset-farm-reading :where(p, ul, ol, blockquote, table):not(:first-child) { margin-block-start: var(--typeset-flow); }
-
-@utility type-page-title { font-family: var(--font-farm-display), Georgia, serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: .92; text-wrap: balance; }
-@utility type-section-title { font-family: var(--font-farm-display), Georgia, serif; font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 400; line-height: 1; text-wrap: balance; }
-@utility type-card-title { font-family: var(--font-farm-display), Georgia, serif; font-size: var(--text-xl); font-weight: 400; line-height: 1; text-wrap: balance; }
-@utility type-eyebrow { font-family: var(--font-farm-body), sans-serif; font-size: var(--text-xs); font-weight: 900; line-height: 1; letter-spacing: .13em; text-transform: uppercase; }
-@utility type-hand-note { font-family: var(--font-farm-hand), cursive; font-size: var(--text-2xl); font-weight: 700; line-height: 1.1; }
-@utility type-body-copy { font-family: var(--font-farm-body), sans-serif; font-size: var(--text-base); font-weight: 600; line-height: 1.7; }
-
-.home-structural-surface { color: var(--theme-white); background: var(--theme-navy) var(--asset-leather-blue) repeat; background-size: 240px; }
-.site-leather-surface { color: var(--theme-white); background: var(--theme-navy) var(--asset-leather-blue) repeat; background-size: 240px; }
 .material-surface { background-color: var(--material-color); background-image: var(--material-image); background-repeat: repeat; background-size: var(--material-size, 220px); }
-.material-cardboard-paper { --foreground: var(--theme-ink); --muted-foreground: var(--theme-copy); --material-color: var(--theme-paper); --material-image: var(--home-paper-texture); --material-size: 320px; color: var(--theme-ink); }
+.material-cardboard-paper { --foreground: var(--theme-ink); --muted-foreground: var(--theme-copy); --material-color: var(--theme-paper); --material-image: var(--asset-cardboard-ivory); --material-size: 320px; color: var(--theme-ink); }
 .material-felt { --material-color: var(--character-color); --material-image: var(--character-texture); --material-size: 180px; color: var(--character-foreground); }
 .material-felt [data-slot='card-description'] { color: color-mix(in srgb, currentColor 78%, transparent); }
 .material-woven-fabric { --material-color: var(--theme-wood-light); --material-image: var(--asset-woven-old-macdonald); --material-size: 190px; color: var(--theme-ink); }
-.control-fabric { color: var(--control-fabric-foreground); background-color: var(--control-fabric-color); background-image: var(--control-fabric-texture); background-repeat: repeat; background-size: 190px; box-shadow: 0 .25rem 0 var(--control-fabric-edge); }
 .material-woven-fabric [data-slot='card-description'],
 .material-construction-paper [data-slot='card-description'],
 .material-leather [data-slot='card-description'] { color: currentColor; opacity: .78; }
 .material-construction-paper { --material-color: var(--curriculum-green); --material-image: var(--asset-construction-mr-sam); --material-size: 190px; color: var(--theme-navy); }
-.material-thread-overlay { background-image: var(--asset-thread-old-macdonald); background-repeat: repeat; background-size: 190px; }
 .material-cork { --material-color: var(--brand-cork-color); --material-image: var(--brand-cork-texture); --material-size: 300px; color: var(--theme-ink); }
 .material-leather { --material-color: var(--theme-wood); --material-image: var(--asset-leather-old-macdonald); --material-size: 240px; color: var(--theme-ink); }
-
-.material-specimen { position: relative; min-height: 7rem; overflow: hidden; border: 1px solid color-mix(in srgb, currentColor 20%, var(--border)); border-radius: calc(var(--radius) - 2px); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 12%, transparent); }
-.material-specimen-thread::after { position: absolute; inset: 0; background: var(--asset-thread-old-macdonald) repeat / 190px; content: ""; pointer-events: none; }
-
+.material-leather-blue { --material-color: var(--theme-navy); --material-image: var(--asset-leather-blue); --material-size: 240px; color: var(--theme-white); }
 
 .cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-texture: var(--cast-old-macdonald-texture); --character-foreground: var(--cast-old-macdonald-foreground); }
 .cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-texture: var(--cast-miss-puddles-texture); --character-foreground: var(--cast-miss-puddles-foreground); }
@@ -105,16 +253,7 @@ body::before { position: fixed; z-index: -1; inset: 0; background: var(--grain-f
 .cast-rusty { --character-color: var(--cast-rusty-color); --character-texture: var(--cast-rusty-texture); --character-foreground: var(--cast-rusty-foreground); }
 .character-surface { color: var(--character-foreground); background-color: var(--character-color); background-image: var(--character-texture); background-repeat: repeat; background-size: 180px; }
 
-/* MDX code examples scroll inside their paper instead of widening the page. */
-pre { max-width: 100%; overflow-x: auto; }
 .grade-surface { color: var(--grade-ink); background-color: var(--grade-color); box-shadow: 0 .25rem 0 var(--grade-edge); }
 
-.char-badge { position: relative; display: inline-flex; flex: 0 0 auto; align-items: flex-end; justify-content: center; overflow: hidden; filter: drop-shadow(var(--shadow-character)); }
-.char-badge--circle { border-radius: 50%; }
-.char-badge--square { border-radius: 18%; }
-.char-badge--empty { opacity: .55; }
-.char-badge img { object-fit: contain; object-position: center bottom; user-select: none; pointer-events: none; }
-
-.theme-switcher { min-width: 44px; min-height: 44px; border-radius: 50%; }
 :is(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }

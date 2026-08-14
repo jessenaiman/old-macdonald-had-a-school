@@ -41,7 +41,7 @@ export function DatabaseLessonDocument({
           <div><dt>Standards</dt><dd>{available(topic.standards)}</dd></div>
         </dl>
       </header>
-      <div className="lesson-markdown lesson-document-content typeset typeset-farm-reading" id="lesson-plan">
+      <div className="lesson-markdown lesson-document-content prose prose-lg max-w-none font-body leading-7 prose-headings:font-heading prose-headings:text-balance" id="lesson-plan">
         <h2>Curriculum focus</h2>
         <p>{available(topic.skillStatement)}</p>
         <h2>Teaching sequence</h2>

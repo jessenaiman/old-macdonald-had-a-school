@@ -30,8 +30,8 @@ function HeroTitle({ title }: { title?: string }) {
 
 export function HomePage({ hero }: HomePageProps) {
   return (
-    <div className={`${styles.homePage} home-structural-surface`}>
-      <section className={`${styles.hero} site-leather-surface`} aria-labelledby="home-title">
+    <div className={`${styles.homePage} material-surface material-leather-blue`}>
+      <section className={`${styles.hero} material-surface material-leather-blue`} aria-labelledby="home-title">
         <div className={`${styles.heroCopy} material-surface material-cardboard-paper`}>
           <span className={`${styles.heroTitleFastener} brand-asset fastener-masking-tape icon-medium`} aria-hidden="true" />
           <HeroTitle title={hero.title} />

@@ -24,13 +24,7 @@
 
 /* Repeatable material sources. Components consume these names, never raw URLs. */
 :root {
-  --grain-fine: var(--asset-cardboard-ivory);
-  --grain-coarse: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-13-maisy-tile.png');
-  --grain-soft: var(--asset-cardboard-ivory);
-  --home-paper-texture: var(--asset-cardboard-ivory);
   --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.png');
-  --brand-paper-texture: var(--home-paper-texture);
-  --brand-kraft-texture: var(--asset-cardboard-kraft);
   --brand-cork-texture: var(--asset-cork-board);
   --cast-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png');
   --cast-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png');
@@ -52,7 +46,6 @@
   --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png');
   --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.png');
   --asset-woven-old-macdonald: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png');
-  --control-fabric-texture: var(--asset-woven-old-macdonald);
   --asset-construction-mr-sam: url('/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png');
   --asset-thread-old-macdonald: url('/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.png');
   --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png');
@@ -79,7 +72,7 @@
 .icon-medium { --brand-asset-size: 4.25rem; }
 .icon-large { --brand-asset-size: 7rem; }
 
-/* Grade textures only. Theme routing for grade colour and ink lives in theme.css. */
+/* Grade textures only. Theme routing for grade colour and ink lives in globals.css. */
 [data-grade-group='early-years'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png'); }
 [data-grade='daycare'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png'); }
 [data-grade='pre-school'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png'); }

@@ -1,15 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GRADE_SEARCH_VALUES, lessonHref } from "@/lib/grade-routes";
+import { cn } from "@/lib/utils";
 import { TEACHER_GRADE_ITEMS } from "@/components/site-navigation";
 import Link from "next/link";
-import styles from "./SearchPage.module.css";
 
 interface SearchResult {
   id: string;
@@ -279,27 +281,25 @@ export default function SearchPage() {
   const selectedTitle = selectedTopic ? teacherFacingTopicTitle(selectedTopic) : selectedLesson?.title ?? "";
   const topicFigure = topicGuide(selectedTopic, selectedLesson);
 
-  const materialPool = useMemo(
-    () => selectedTopic ? topicMaterialResults(selectedTopic) : results,
-    [results, selectedTopic],
-  );
-  const songs = useMemo(() => materialPool.filter(isSong), [materialPool]);
-  const videos = useMemo(() => materialPool.filter((result) => isVideo(result) || result.meta.contentKind === "activity"), [materialPool]);
-  const printouts = useMemo(() => materialPool.filter(isPrintout), [materialPool]);
+  const materialPool = selectedTopic ? topicMaterialResults(selectedTopic) : results;
+  const songs = materialPool.filter(isSong);
+  const videos = materialPool.filter((result) => isVideo(result) || result.meta.contentKind === "activity");
+  const printouts = materialPool.filter(isPrintout);
   const totalCurriculum = curriculum.length + lessons.length;
 
   const activeResources = activeTab === "video" ? videos : activeTab === "printouts" ? printouts : songs;
 
   return (
-    <div className={styles.page} data-style-scope="search-page">
-        <section className={styles.searchSheet} aria-labelledby="search-title">
-          <Image className={styles.emblem} src="/brand-emblem.png" alt="" width={86} height={86} priority />
-          <div className={styles.headingCopy}>
-            <p>Old MacDonald Had a School</p>
-            <h1 id="search-title">Curriculum workroom</h1>
+    <div className="material-surface material-cork flex flex-col gap-6 px-3 py-6 text-foreground sm:px-6 lg:px-10" data-style-scope="search-page">
+        <Card className="material-surface material-cardboard-paper mx-auto w-full max-w-screen-2xl">
+          <CardContent className="grid items-center gap-4 md:grid-cols-2 lg:grid-cols-[auto_1fr_2fr_auto]">
+          <Image className="size-16 rounded-full object-cover" src="/brand-emblem.png" alt="" width={86} height={86} priority />
+          <div className="min-w-0">
+            <p className="font-heading text-lg">Old MacDonald Had a School</p>
+            <h1 className="type-eyebrow text-muted-foreground" id="search-title">Curriculum workroom</h1>
           </div>
-          <form className={styles.searchForm} onSubmit={submitSearch} role="search" aria-busy={loading}>
-            <label className={styles.srOnly} htmlFor="curriculum-search">Search curriculum and teaching resources</label>
+          <form className="flex min-w-0 flex-col gap-2 sm:flex-row" onSubmit={submitSearch} role="search" aria-busy={loading}>
+            <label className="sr-only" htmlFor="curriculum-search">Search curriculum and teaching resources</label>
             <Input
               id="curriculum-search"
               type="search"
@@ -315,15 +315,15 @@ export default function SearchPage() {
               {loading ? "Searching..." : "Search"}
             </Button>
           </form>
-          <div className={styles.filters} aria-label="Search filters">
-            <label>
-              <span>Grade</span>
+          <div className="flex flex-wrap gap-3" aria-label="Search filters">
+            <label className="flex min-w-32 flex-1 flex-col gap-1 text-xs font-bold">
+              <span className="text-muted-foreground">Grade</span>
               <NativeSelect name="grade" value={gradeFilter} onChange={(event) => setGradeFilter(event.target.value)}>
                 {GRADE_OPTIONS.map((grade) => <option key={grade.value} value={grade.value}>{grade.label}</option>)}
               </NativeSelect>
             </label>
-            <label>
-              <span>Resource type</span>
+            <label className="flex min-w-32 flex-1 flex-col gap-1 text-xs font-bold">
+              <span className="text-muted-foreground">Resource type</span>
               <NativeSelect name="kind" value={kindFilter} onChange={(event) => setKindFilter(event.target.value)}>
                 <option value="">All resources</option>
                 <option value="song">Songs</option>
@@ -331,39 +331,32 @@ export default function SearchPage() {
               </NativeSelect>
             </label>
           </div>
-        </section>
+          </CardContent>
+        </Card>
 
         {!searched ? (
-          <section className={styles.welcomeState}>
+          <Empty className="material-surface material-cardboard-paper mx-auto w-full max-w-3xl border">
             <span className="brand-asset fastener-push-pin icon-medium" aria-hidden="true" />
-            <h2>Start with what you want to teach.</h2>
-            <p>Search a topic, goal, song, rhyme, activity, story, or classroom resource.</p>
-            <p className={styles.suggestions}>Try ...ponies lap rhymes..., ...fingerplay..., or ...word problems....</p>
-          </section>
+            <EmptyHeader><EmptyTitle>Start with what you want to teach.</EmptyTitle><EmptyDescription>Search a topic, goal, song, rhyme, activity, story, or classroom resource.</EmptyDescription></EmptyHeader>
+            <EmptyDescription>Try ponies lap rhymes, fingerplay, or word problems.</EmptyDescription>
+          </Empty>
         ) : loading ? (
-          <div className={styles.loadingState} role="status">Searching the curriculum collection...</div>
+          <Card className="mx-auto w-full max-w-3xl"><CardContent className="py-10 text-center font-bold" role="status">Searching the curriculum collection...</CardContent></Card>
         ) : error ? (
-          <section className={styles.errorState} role="alert">
-            <h2>The search could not be completed.</h2>
-            <p>{error}</p>
-            <Button type="button" onClick={() => void search()}>Try again</Button>
-          </section>
+          <Empty className="mx-auto w-full max-w-3xl border" role="alert"><EmptyHeader><EmptyTitle>The search could not be completed.</EmptyTitle><EmptyDescription>{error}</EmptyDescription></EmptyHeader><Button type="button" onClick={() => void search()}>Try again</Button></Empty>
         ) : totalCurriculum === 0 && results.length === 0 ? (
-          <section className={styles.emptyState}>
-            <h2>No matching curriculum or resources were found.</h2>
-            <p>Try a shorter phrase, another grade, or a broader resource type.</p>
-          </section>
+          <Empty className="mx-auto w-full max-w-3xl border"><EmptyHeader><EmptyTitle>No matching curriculum or resources were found.</EmptyTitle><EmptyDescription>Try a shorter phrase, another grade, or a broader resource type.</EmptyDescription></EmptyHeader></Empty>
         ) : (
-          <div className={styles.workspace}>
-            <aside className={styles.resultsPanel} aria-label="Curriculum search results">
-              <div className={styles.resultsHeading}>
+          <div className="mx-auto grid w-full max-w-screen-2xl items-start gap-6 lg:grid-cols-[minmax(20rem,27rem)_minmax(0,1fr)]">
+            <Card className="material-surface material-cardboard-paper overflow-hidden lg:sticky lg:top-24" aria-label="Curriculum search results">
+              <CardHeader className="flex-row items-end justify-between gap-4 border-b">
                 <div>
-                  <p>Curriculum first</p>
-                  <h2>{totalCurriculum} curriculum {totalCurriculum === 1 ? "result" : "results"}</h2>
+                  <p className="type-eyebrow text-muted-foreground">Curriculum first</p>
+                  <CardTitle>{totalCurriculum} curriculum {totalCurriculum === 1 ? "result" : "results"}</CardTitle>
                 </div>
-                <span>{results.length} related {results.length === 1 ? "resource" : "resources"}</span>
-              </div>
-              <p className={styles.searchProvenance} role="status">
+                <span className="text-right text-xs text-muted-foreground">{results.length} related {results.length === 1 ? "resource" : "resources"}</span>
+              </CardHeader>
+              <p className="border-b px-6 py-2 text-xs font-bold text-muted-foreground" role="status">
                 {searchStatus.database === "omhas.db" ? "Curriculum database connected" : "Curriculum index connected"}
                 {searchStatus.searchMode === "hybrid-keyword-semantic"
                   ? " ... keyword + meaning search"
@@ -371,7 +364,7 @@ export default function SearchPage() {
               </p>
 
               {totalCurriculum > 0 ? (
-                <ol className={styles.resultList}>
+                <ol className="flex max-h-[calc(100vh-14rem)] flex-col gap-2 overflow-y-auto p-2">
                   {curriculum.map((topic) => {
                     const key = `topic:${topic.id}:${topic.grade_key}`;
                     const detailHref = curriculumResultHref(topic);
@@ -379,18 +372,18 @@ export default function SearchPage() {
                       <li key={key}>
                         <Link
                           href={detailHref}
-                          className={selectedKey === key ? `${styles.selectedResult}` : styles.resultButton}
+                          className={cn("grid min-h-20 grid-cols-[auto_minmax(0,1fr)] gap-3 rounded-lg border p-3 text-left transition-colors hover:bg-accent hover:text-accent-foreground sm:grid-cols-[auto_minmax(0,1fr)_auto]", selectedKey === key && "border-primary bg-accent text-accent-foreground")}
                           onClick={() => {
                             setSelectedKey(key);
                           }}
                         >
-                          <span className={styles.resultType}>Topic</span>
-                          <span className={styles.resultBody}>
-                            <strong>{teacherFacingTopicTitle(topic)}</strong>
-                            <span>{teacherFacingTopicSummary(topic) || "No topic summary has been reviewed yet."}</span>
+                          <span className="type-eyebrow text-muted-foreground">Topic</span>
+                          <span className="flex min-w-0 flex-col gap-1">
+                            <strong className="font-heading text-lg">{teacherFacingTopicTitle(topic)}</strong>
+                            <span className="text-sm text-muted-foreground">{teacherFacingTopicSummary(topic) || "No topic summary has been reviewed yet."}</span>
                             {topic.why_match ? <small>{topic.why_match}</small> : null}
                           </span>
-                          <span className={styles.resultMeta}>{topic.grade}<br />{topic.subject}{topic.suggested_plan ? <><br />Suggested: {topic.suggested_plan}</> : topic.pacing ? <><br />Legacy: {topic.pacing}</> : null}</span>
+                          <span className="col-start-2 text-xs text-muted-foreground sm:col-auto sm:text-right">{topic.grade}<br />{topic.subject}{topic.suggested_plan ? <><br />Suggested: {topic.suggested_plan}</> : topic.pacing ? <><br />Legacy: {topic.pacing}</> : null}</span>
                         </Link>
                       </li>
                     );
@@ -402,73 +395,62 @@ export default function SearchPage() {
                       <li key={key}>
                         <Link
                           href={detailHref}
-                          className={selectedKey === key ? `${styles.selectedResult}` : styles.resultButton}
+                          className={cn("grid min-h-20 grid-cols-[auto_minmax(0,1fr)] gap-3 rounded-lg border p-3 text-left transition-colors hover:bg-accent hover:text-accent-foreground sm:grid-cols-[auto_minmax(0,1fr)_auto]", selectedKey === key && "border-primary bg-accent text-accent-foreground")}
                           onClick={() => {
                             setSelectedKey(key);
                           }}
                         >
-                          <span className={styles.resultType}>Lesson draft</span>
-                          <span className={styles.resultBody}>
-                            <strong>{lesson.title}</strong>
-                            <span>{lesson.summary || "No lesson summary is available."}</span>
+                          <span className="type-eyebrow text-muted-foreground">Lesson draft</span>
+                          <span className="flex min-w-0 flex-col gap-1">
+                            <strong className="font-heading text-lg">{lesson.title}</strong>
+                            <span className="text-sm text-muted-foreground">{lesson.summary || "No lesson summary is available."}</span>
                           </span>
-                          <span className={styles.resultMeta}>{lesson.grade_band}<br />{lesson.subject}</span>
+                          <span className="col-start-2 text-xs text-muted-foreground sm:col-auto sm:text-right">{lesson.grade_band}<br />{lesson.subject}</span>
                         </Link>
                       </li>
                     );
                   })}
                 </ol>
               ) : (
-                <div className={styles.noCurriculum}>
-                  <strong>No curriculum topic matched this phrase.</strong>
-                  <span>The related resource matches below may still help you refine the search.</span>
-                </div>
+                <Empty><EmptyHeader><EmptyTitle>No curriculum topic matched this phrase.</EmptyTitle><EmptyDescription>The related resource matches below may still help you refine the search.</EmptyDescription></EmptyHeader></Empty>
               )}
-            </aside>
+            </Card>
 
-            <aside className={styles.learningCrew} aria-label="Puddles and Rusty are excited to explore the curriculum">
-              <span className={`${styles.crewTape} brand-asset fastener-washi-tape icon-medium`} aria-hidden="true" />
-              <Image src="/staff_and_students/puddles-transparent-circle.png" alt="Puddles" width={118} height={118} />
-              <Image src="/staff_and_students/rusty-transparent-circle.png" alt="Rusty" width={118} height={118} />
-            </aside>
-
-            <main className={styles.detailColumn}>
+            <div className="min-w-0">
               {selectedTopic || selectedLesson ? (
                 <>
-                  <article className={styles.detailSheet}>
-                    <span className={`${styles.tape} brand-asset fastener-washi-tape icon-large`} aria-hidden="true" />
-                    <span className={`${styles.paperclip} brand-asset fastener-paperclip icon-medium`} aria-hidden="true" />
-                    <header className={styles.detailHeader}>
+                  <Card className="material-surface material-cardboard-paper">
+                    <CardHeader className="flex-row flex-wrap items-end justify-between gap-6 border-b">
                       <div>
-                        <p>{selectedTopic ? "Selected curriculum topic" : "Selected database lesson draft"}</p>
-                        <h2>{selectedTitle}</h2>
-                        <div className={styles.detailTags}>
-                          <span>{selectedTopic?.grade ?? selectedLesson?.grade_band}</span>
-                          <span>{selectedTopic?.subject ?? selectedLesson?.subject}</span>
-                          {selectedLesson ? <span>{selectedLesson.duration_minutes} minutes</span> : null}
+                        <p className="type-eyebrow text-muted-foreground">{selectedTopic ? "Selected curriculum topic" : "Selected database lesson draft"}</p>
+                        <CardTitle className="mt-2 text-3xl">{selectedTitle}</CardTitle>
+                        <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                          <span className="rounded-full border px-3 py-1">{selectedTopic?.grade ?? selectedLesson?.grade_band}</span>
+                          <span className="rounded-full border px-3 py-1">{selectedTopic?.subject ?? selectedLesson?.subject}</span>
+                          {selectedLesson ? <span className="rounded-full border px-3 py-1">{selectedLesson.duration_minutes} minutes</span> : null}
                         </div>
                       </div>
                       {selectedTopic ? (
-                        <Link href={curriculumResultHref(selectedTopic)} className={styles.primaryCtaLink}>Open topic</Link>
+                        <Button asChild variant="outline"><Link href={curriculumResultHref(selectedTopic)}>Open topic</Link></Button>
                       ) : selectedLesson ? (
-                        <Link href={lessonResultHref(selectedLesson)} className={styles.primaryCtaLink}>Open lesson</Link>
+                        <Button asChild variant="outline"><Link href={lessonResultHref(selectedLesson)}>Open lesson</Link></Button>
                       ) : null}
                       {topicFigure ? (
-                        <Image className={styles.topicFigure} src={topicFigure.src} alt={topicFigure.alt} width={154} height={154} />
+                        <Image className="size-28 object-contain object-bottom" src={topicFigure.src} alt={topicFigure.alt} width={154} height={154} />
                       ) : null}
-                    </header>
+                    </CardHeader>
 
-                    <div className={styles.factGrid}>
-                      <section>
-                        <h3>{selectedTopic ? "Topic overview" : "Lesson summary"}</h3>
+                    <CardContent className="grid gap-6 py-6 md:grid-cols-2 xl:grid-cols-4">
+                      <section className="flex flex-col gap-2">
+                        <h3 className="font-heading text-lg">{selectedTopic ? "Topic overview" : "Lesson summary"}</h3>
                         <p>{selectedTopic ? teacherFacingTopicSummary(selectedTopic) || "No reviewed overview is available for this record." : selectedLesson?.summary || "No reviewed overview is available for this record."}</p>
                       </section>
-                      <section>
-                        <h3>{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
+                      <section className="flex flex-col gap-2">
+                        <h3 className="font-heading text-lg">{selectedTopic ? "Curriculum placement" : "Teaching purpose"}</h3>
                         <p>{selectedTopic ? `${selectedTopic.grade} ... ${selectedTopic.subject}${selectedTopic.suggested_plan ? ` ... Suggested in ${selectedTopic.suggested_plan}` : selectedTopic.pacing ? ` ... Legacy pacing: ${selectedTopic.pacing}` : ""}` : selectedLesson?.purpose || "No purpose is available."}</p>
                       </section>
-                      <section>
-                        <h3>Curriculum reference</h3>
+                      <section className="flex flex-col gap-2">
+                        <h3 className="font-heading text-lg">Curriculum reference</h3>
                         {selectedTopic ? (
                           <details>
                             <summary>Read the official curriculum wording</summary>
@@ -476,83 +458,79 @@ export default function SearchPage() {
                           </details>
                         ) : <p>No standard is attached to this result.</p>}
                       </section>
-                    <section>
-                        <h3>Linked lesson materials</h3>
-                        <ul>
+                    <section className="flex flex-col gap-2">
+                        <h3 className="font-heading text-lg">Linked lesson materials</h3>
+                        <ul className="list-disc pl-5">
                           <li>{videos.length} video or activity {videos.length === 1 ? "link" : "links"}</li>
                           <li>{songs.length} song or rhyme {songs.length === 1 ? "match" : "matches"}</li>
                           <li>{printouts.length} printable {printouts.length === 1 ? "match" : "matches"}</li>
                         </ul>
                       </section>
-                    </div>
+                    </CardContent>
 
-                    <section className={styles.reviewStatus}>
-                      <h3>Source and review status</h3>
+                    <CardFooter className="flex-col items-start gap-2 border-t">
+                      <h3 className="font-heading text-lg">Source and review status</h3>
                       {selectedLesson ? (
                         <p>Editorial status: {readableStatus(selectedLesson.editorial_status)}. Review state: {readableStatus(selectedLesson.review_state)}.</p>
                       ) : (
                         <p>Review status is not stored on this curriculum topic record. Confirm the source and standard before classroom use.</p>
                       )}
-                    </section>
-                  </article>
+                    </CardFooter>
+                  </Card>
 
-                  <Tabs className={styles.resourceShelf} value={activeTab} onValueChange={(value) => setActiveTab(value as ResourceTab)}>
-                    <TabsList className={styles.tabList} aria-label="Teaching material previews">
+                  <Tabs className="mt-6" value={activeTab} onValueChange={(value) => setActiveTab(value as ResourceTab)}>
+                    <TabsList aria-label="Teaching material previews">
                       {(["video", "songs", "printouts"] as const).map((tab) => (
                         <TabsTrigger
                           key={tab}
-                          className={activeTab === tab ? styles.activeTab : styles.tab}
                           value={tab}
                         >
                           {tab === "songs" ? "Songs & Spotify" : tab === "video" ? "Videos & activities" : "Printouts"}
                         </TabsTrigger>
                       ))}
                     </TabsList>
-                    <TabsContent className={styles.resourceContent} value={activeTab}>
-                      <h2 id="resources-title" className={styles.srOnly}>Search-related teaching materials</h2>
+                    <TabsContent value={activeTab}>
+                      <h2 id="resources-title" className="sr-only">Search-related teaching materials</h2>
                       {activeResources.length > 0 ? (
-                    <div className={styles.resourceGrid}>
+                    <div className="grid gap-3 md:grid-cols-2">
                       {activeResources.slice(0, 6).map((resource) => (
-                        <article key={resource.id} className={styles.resourceCard}>
-                          <p>{resource.kind}</p>
-                          <h3>{readableResourceTitle(resource.title)}</h3>
+                        <Card key={resource.id}>
+                          <CardHeader><p className="type-eyebrow text-muted-foreground">{resource.kind}</p><CardTitle>{readableResourceTitle(resource.title)}</CardTitle></CardHeader>
+                          <CardContent className="flex flex-col gap-3 text-sm text-muted-foreground">
                           <span>{plainText(resource.excerpt) || "No preview is available."}</span>
                           {resource.meta.ageRange || resource.meta.domain ? (
                             <span>{[readableMetadata(resource.meta.ageRange), readableMetadata(resource.meta.domain)].filter(Boolean).join(" ... ")}</span>
                           ) : null}
                           {activeTab === "songs" && resource.lyrics ? (
-                            <details>
+                            <details className="text-foreground">
                               <summary>Preview lyrics</summary>
-                              <pre>{resource.lyrics}</pre>
+                              <pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap text-xs">{resource.lyrics}</pre>
                             </details>
                           ) : null}
                           {resource.href ? (
-                            <a href={resource.href} target="_blank" rel="noreferrer">
+                            <a className="font-bold text-primary underline underline-offset-4" href={resource.href} target="_blank" rel="noreferrer">
                               {activeTab === "songs" ? "Open song page" : "Open source"}
                             </a>
                           ) : activeTab === "songs" && resource.meta.spotifyUrl?.startsWith("https://") ? (
-                            <a href={resource.meta.spotifyUrl} target="_blank" rel="noreferrer">Open Spotify source</a>
+                            <a className="font-bold text-primary underline underline-offset-4" href={resource.meta.spotifyUrl} target="_blank" rel="noreferrer">Open Spotify source</a>
                           ) : null}
-                        </article>
+                          </CardContent>
+                        </Card>
                       ))}
                         </div>
                       ) : (
-                        <div className={styles.resourceEmpty}>
-                          <strong>No {activeTab === "songs" ? "song or Spotify" : activeTab === "video" ? "video or activity" : activeTab} link is attached.</strong>
-                          <span>This lesson currently has no reviewed link for this material type.</span>
-                        </div>
+                        <Empty><EmptyHeader><EmptyTitle>No {activeTab === "songs" ? "song or Spotify" : activeTab === "video" ? "video or activity" : activeTab} link is attached.</EmptyTitle><EmptyDescription>This lesson currently has no reviewed link for this material type.</EmptyDescription></EmptyHeader></Empty>
                       )}
                     </TabsContent>
                   </Tabs>
                 </>
               ) : (
-                <section className={styles.resourceOnlyState}>
+                <Empty className="material-surface material-cardboard-paper border">
                   <span className="brand-asset fastener-binder-clip icon-medium" aria-hidden="true" />
-                  <h2>Related resources were found, but no curriculum topic matched.</h2>
-                  <p>Use a grade filter or a broader teaching goal to find a curriculum starting point.</p>
-                </section>
+                  <EmptyHeader><EmptyTitle>Related resources were found, but no curriculum topic matched.</EmptyTitle><EmptyDescription>Use a grade filter or a broader teaching goal to find a curriculum starting point.</EmptyDescription></EmptyHeader>
+                </Empty>
               )}
-            </main>
+            </div>
           </div>
         )}
     </div>

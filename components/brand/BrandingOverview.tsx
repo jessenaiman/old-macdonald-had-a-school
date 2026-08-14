@@ -13,7 +13,7 @@ const guideSections = [
 const cast: readonly CastKey[] = ["old-macdonald", "miss-puddles", "mr-rusty", "miss-hayley"]
 
 const rules = [
-  ["Palette", "theme.css is the only colour owner. Components consume semantic tokens; printed HEX values sit on their live semantic surface.", "fastener-push-pin"],
+  ["Palette", "globals.css is the only theme and colour owner. Components consume semantic tokens; printed HEX values sit on their live semantic surface.", "fastener-push-pin"],
   ["Assets", "brand-assets.css maps approved paths. Components request named classes or semantic character keys—never URLs.", "fastener-paperclip"],
   ["Layout", "Prefer intrinsic flex/grid sizing and standard Tailwind utilities. A page must not declare a private breakpoint system.", "fastener-masking-tape"],
   ["Identity", "Use character=\"miss-puddles\", data-grade, or a semantic subject key. Never pass colour, portrait, texture, or ink props.", "fastener-binder-clip"],
@@ -49,11 +49,11 @@ export function BrandingOverview({ eyebrow, title, emphasis, description, primar
       <div className="flex min-w-[min(100%,32rem)] flex-[1.15_1_38rem] flex-col justify-center p-[clamp(1.5rem,4vw,4rem)]">
         <p className="mb-3 font-body text-xs font-black uppercase tracking-widest text-accent">{eyebrow}</p>
         <h1 className="m-0 max-w-3xl text-balance font-heading text-[clamp(3rem,7vw,6rem)] leading-[.88] text-primary-foreground">{title} <em className="block font-hand text-brand-pink">{emphasis}</em></h1>
-        <p className="type-body-copy mt-6 max-w-2xl text-primary-foreground">{description}</p>
+        <p className="mt-6 max-w-2xl font-body text-base font-semibold leading-[1.7] text-primary-foreground">{description}</p>
         <div className="mt-7 flex flex-wrap gap-3"><Button asChild><a href={primaryHref}>{primaryLabel}</a></Button><Button asChild variant="outline"><a href={secondaryHref}>{secondaryLabel}</a></Button></div>
       </div>
       <div className="material-surface material-cork grid min-h-80 min-w-[min(100%,24rem)] flex-[.85_1_30rem] content-end overflow-hidden border border-border px-5 pt-10">
-        <div className="cast-old-macdonald material-surface material-felt relative mx-auto mb-10 w-full max-w-sm rounded-xl p-7 text-center shadow-xl"><span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" /><strong className="type-section-title">{patchTitle}</strong><small className="type-eyebrow mt-2 block">{patchCaption}</small></div>
+        <div className="cast-old-macdonald material-surface material-felt relative mx-auto mb-10 w-full max-w-sm rounded-xl p-7 text-center shadow-xl"><span className="brand-asset fastener-masking-tape icon-medium absolute -top-7 left-1/2 -translate-x-1/2" aria-hidden="true" /><strong className="font-heading text-[clamp(1.875rem,4vw,3rem)] font-normal leading-none text-balance">{patchTitle}</strong><small className="mt-2 block font-body text-xs font-black leading-none tracking-[.13em] uppercase">{patchCaption}</small></div>
         <div className="flex items-end justify-center">{cast.map((character, index) => <CharacterPortrait key={character} character={character} className={index === 0 ? "h-auto w-[clamp(6rem,12vw,8rem)]" : "-ml-8 h-auto w-[clamp(6rem,12vw,8rem)]"} />)}</div>
       </div>
     </header>

@@ -22,7 +22,7 @@ export function ThemeSwitcher() {
       type="button"
       variant="ghost"
       size="icon"
-      className="theme-switcher"
+      className="rounded-full"
       onClick={() => setTheme(next.value)}
       aria-label={`Switch to ${next.label}`}
       title={`Switch to ${next.label}`}

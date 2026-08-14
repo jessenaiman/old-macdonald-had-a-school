@@ -1,26 +1,19 @@
 ---
 name: old-macdonald-asset-system
-description: Mandatory for Old MacDonald visual work involving branding, pages, components, layout, characters, colors, textures, paper, fasteners, icons, or responsive behavior. Read the current rendered /branding guide and its focused MDX source first; reuse the established Tailwind, theme, shadcn, and governed-asset contract without inventing palettes, viewports, or parallel components.
+description: Learn the visual design rules for this project.
 ---
 
 # Old MacDonald asset system
 
 Use this skill before selecting an asset or changing visual code. Treat the current site as an established system. Do not reconstruct project history or carry assumptions from an earlier task: the rendered `/branding` route and its focused Markdown chapters are the current visual contract.
 
-## Mandatory preflight
-
-1. Identify the active route, owning component, and exact requested change.
-2. Open the current rendered `/branding` page at the closest matching anchor and viewport. Source inspection alone is insufficient for visual work.
-3. Read only the matching file in `content/pages/branding/`: page recipe, assets, icons, cast, subject cards, typography, buttons, controls, grades, or palette.
-4. Follow links in that chapter to the owning component or focused source. Do not recursively scan `public/`, a giant stylesheet, or unrelated chapters.
-5. Compare the live production component with the branding example. If they differ, stop and identify which is a fixture, fork, or stale reference before editing.
-
 ## Non-negotiable ownership
 
 - `app/layout.tsx` is the root layout. It owns `ThemeProvider`, shared header, shared footer, and the global `<main>`. Pages and nested layouts must not duplicate or visually replace them.
 - `app/theme.css` is the only palette owner. Raw HEX, RGB, HSL, named presentation colors, and component-local dark palettes are forbidden outside it. Literal HEX is allowed only as printed reference content on the matching live semantic surface.
 - `app/brand-assets.css` maps approved asset paths and textures; it must not own palette values.
-- Shared shadcn primitives own control appearance and behavior. Pages may compose and position them; pages must not recolor or redesign them.
+- Shared shadcn primitives own control behavior. Pages may compose and position them; pages must not recolor or redesign them.
+- All responsive breakpoints 
 - Components receive semantic identities such as `character="miss-puddles"`, `data-grade="grade-two"`, or a subject key—never color, ink, portrait URL, texture URL, or breakpoint props.
 - One reusable component represents one behavior. Variants are semantic props or data attributes, not copied components.
 

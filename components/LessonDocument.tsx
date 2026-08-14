@@ -41,7 +41,7 @@ export function LessonDocument({
           </ol>
         ) : null}
       </header>
-      <div className="lesson-markdown lesson-document-content typeset typeset-farm-reading" id="lesson-plan">
+      <div className="lesson-markdown lesson-document-content prose prose-lg max-w-none font-body leading-7 prose-headings:font-heading prose-headings:text-balance" id="lesson-plan">
         <Content />
         {(curriculumMaterials.length > 0 || curriculumAssets.length > 0) ? (
           <section>

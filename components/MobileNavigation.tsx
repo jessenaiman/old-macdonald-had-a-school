@@ -36,7 +36,7 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
         </SheetTrigger>
 
         <SheetContent
-          className={`${styles.menuSheet} site-leather-surface`}
+          className={`${styles.menuSheet} material-surface material-leather-blue`}
           side="right"
           showCloseButton={false}
         >

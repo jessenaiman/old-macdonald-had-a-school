@@ -43,7 +43,7 @@
 .lessonAction { display: none; }
 
 .carousel { min-width: 0; }
-.carouselPhoto { position: relative; width: 100%; aspect-ratio: 16 / 9; border: .45rem solid transparent; border-image: var(--home-paper-texture) 22 round; background: var(--home-board-color); box-shadow: 0 .55rem 0 rgb(0 0 0 / 28%); transform: rotate(.35deg); }
+.carouselPhoto { position: relative; width: 100%; aspect-ratio: 16 / 9; border: .45rem solid transparent; border-image: var(--home-paper-texture) 22 round; background: var(--theme-navy); box-shadow: 0 .55rem 0 rgb(0 0 0 / 28%); transform: rotate(.35deg); }
 .carouselTrack, .carouselPhoto > :global([data-slot="carousel-content"]) { height: 100%; margin-left: 0; }
 .carouselSlide { position: relative; height: 100%; padding-left: 0; }
 .carouselImageLink { position: absolute; inset: 0; }

@@ -3,7 +3,7 @@ import styles from "./SiteFooter.module.css";
 
 export function SiteFooter() {
   return (
-    <footer className={`${styles.footer} site-leather-surface`}>
+    <footer className={`${styles.footer} material-surface material-leather-blue`}>
       <div className={styles.footerInner}>
         <nav className={styles.footerPrimary} aria-label="Site links">
           <Link href="/lessons">Browse all lessons</Link>

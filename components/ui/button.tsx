@@ -9,11 +9,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "control-fabric rounded-xl border-current hover:brightness-95",
+        default:
+          "rounded-xl border-primary bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "rounded-xl border-destructive bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/20",
         outline:
-          "rounded-md border-input bg-background text-foreground [background-image:var(--brand-paper-texture)] [background-size:260px] before:border-solid hover:bg-accent hover:text-accent-foreground",
+          "rounded-md border-input bg-background text-foreground before:border-solid hover:bg-accent hover:text-accent-foreground",
         secondary:
           "rounded-full border-secondary bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:

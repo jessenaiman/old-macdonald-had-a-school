@@ -5,8 +5,6 @@ import { ThemeProvider } from "../components/ThemeProvider";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
-import "./theme.css";
-import styles from "./Layout.module.css";
 
 const bodyFont = Nunito({
   subsets: ["latin"],
@@ -56,9 +54,9 @@ export default function RootLayout({
           themes={["light", "dark"]}
           disableTransitionOnChange
         >
-          <div className={styles.layout}>
+          <div className="flex min-h-dvh flex-col bg-background text-foreground">
             <SiteHeader />
-            <main className={styles.page}>{children}</main>
+            <main className="flex min-h-0 min-w-0 flex-1 flex-col">{children}</main>
             <SiteFooter />
           </div>
         </ThemeProvider>
