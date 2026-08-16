@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -41,8 +42,8 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
   const nextLimit = Math.min(resultLimit + 30, songs.length);
 
   return (
-    <div className="material-surface material-cardboard-paper min-h-dvh px-4 py-8 text-foreground sm:px-6 lg:px-[max(1.5rem,calc((100vw-73.75rem)/2))] lg:py-14">
-      <section className="mx-auto flex max-w-6xl flex-col gap-8" aria-labelledby="songbook-heading">
+    <div className="material-surface material-cardboard-paper min-h-dvh px-4 py-8 text-foreground sm:px-6 lg:px-8 lg:py-14">
+      <section className="flex flex-col gap-8" aria-labelledby="songbook-heading">
         <header className="max-w-3xl">
           <p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Practical teacher songbook</p>
           <h1 className="mt-2 font-heading text-5xl leading-[0.95] text-balance sm:text-7xl" id="songbook-heading">Songs worth singing tomorrow</h1>
@@ -67,7 +68,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
                   <FieldLegend variant="label">Include</FieldLegend>
                   <FieldDescription>Limit results to songs with the teaching support you need.</FieldDescription>
                   <FieldGroup className="flex-row flex-wrap gap-4" data-slot="checkbox-group">
-                    {[["actions", filters.actions, "Actions"], ["chords", filters.chords, "Chords"], ["verified", filters.verified, "Reviewed sources"]].map(([name, checked, label]) => <Field key={String(name)} orientation="horizontal" className="w-auto"><input className="size-4 accent-primary" defaultChecked={Boolean(checked)} id={`song-${name}`} name={String(name)} type="checkbox" value="1" /><FieldLabel htmlFor={`song-${name}`}>{label}</FieldLabel></Field>)}
+                    {[["actions", filters.actions, "Actions"], ["chords", filters.chords, "Chords"], ["verified", filters.verified, "Reviewed sources"]].map(([name, checked, label]) => <Field key={String(name)} orientation="horizontal" className="w-auto"><Checkbox defaultChecked={Boolean(checked)} id={`song-${name}`} name={String(name)} value="1" /><FieldLabel htmlFor={`song-${name}`}>{label}</FieldLabel></Field>)}
                   </FieldGroup>
                 </FieldSet>
               </FieldGroup>
@@ -77,7 +78,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
         </Card>
       </section>
 
-      <section className="mx-auto mt-10 max-w-6xl" aria-labelledby="song-results-heading">
+      <section className="mt-10" aria-labelledby="song-results-heading">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Teaching sheets</p><h2 className="mt-1 font-heading text-4xl" id="song-results-heading">{songs.length} songs</h2></div><p className="text-sm text-muted-foreground">Showing {visibleSongs.length} of {songs.length}</p></div>
         {songs.length === 0 ? <Empty className="material-surface material-paper-ruled mt-5"><EmptyHeader><EmptyTitle>No matching songs</EmptyTitle><EmptyDescription>Try removing a filter or using a broader search phrase.</EmptyDescription></EmptyHeader><EmptyContent><Button asChild variant="outline"><Link href="/songs">View all songs</Link></Button></EmptyContent></Empty> : <>
           <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -86,7 +87,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
                 <div className="flex flex-wrap gap-2">{song.verified && <Badge>Reviewed</Badge>}{song.hasActions && <Badge variant="secondary">Actions</Badge>}{song.hasChords && <Badge variant="secondary">Chords</Badge>}</div>
                 <CardTitle><Link className="underline-offset-4 hover:underline" data-song-navigation href={`/songs/${song.id}`}>{song.title}</Link></CardTitle>
                 {song.artist && <CardDescription>{song.artist}</CardDescription>}{song.sourceTitle && <CardDescription>Source citation: {song.sourceTitle}</CardDescription>}
-                <CardAction>{song.type && <Badge variant="outline">{song.type}</Badge>}</CardAction>
+                <CardAction className="min-w-0 max-w-full">{song.type && <Badge className="max-w-full whitespace-normal text-right" variant="outline">{song.type}</Badge>}</CardAction>
               </CardHeader>
               <CardContent className="flex flex-1 flex-col gap-4">{song.preview ? <p className="line-clamp-4 whitespace-pre-line leading-relaxed">{song.preview}</p> : <p className="text-sm text-muted-foreground">Lyrics have not been transcribed into the teaching sheet yet.</p>}{song.grades.length > 0 && <div className="flex flex-wrap gap-2" role="group" aria-label="Related grades">{song.grades.slice(0, 3).map((grade) => <Badge key={grade} variant="outline">{grade}</Badge>)}</div>}</CardContent>
               <CardFooter><Button asChild><Link data-song-navigation href={`/songs/${song.id}`}>Open teaching sheet →</Link></Button></CardFooter>

@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function BrandingIconsPage() {
-  return <main><Icons /></main>
+  return <Icons />
 }

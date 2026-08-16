@@ -6,6 +6,7 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { BrandIcon } from "@/components/brand-icon";
+import { cn } from "@/lib/utils";
 import { getAllLessons } from "../../lib/content";
 import { searchCurriculumTopics } from "../../lib/curriculum-db";
 import { GRADE_KEYS, gradeKeysForLabel, lessonHref, lessonIcon, type GradeKey } from "../../lib/grade-routes";
@@ -85,7 +86,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
   const resultCount = markdownLessons.length + databaseResults.length;
 
   return (
-    <section className="mx-auto my-7 w-[min(1240px,calc(100%-28px))] text-foreground max-sm:my-3 max-sm:w-[calc(100%-12px)]" aria-labelledby="lessons-index-title">
+    <section className="my-7 w-full text-foreground max-sm:my-3" aria-labelledby="lessons-index-title">
         <header className="material-surface material-cardboard-paper relative overflow-hidden rounded-2xl border border-border p-[clamp(1.625rem,4vw,3rem)] shadow-[0_8px_0_color-mix(in_srgb,var(--border)_28%,transparent)] max-sm:px-4 max-sm:py-6">
           <div className="max-w-[850px]">
             <p className="m-0 font-body text-xs font-black leading-tight tracking-[.12em] text-primary uppercase">Teacher planning library</p>
@@ -127,7 +128,13 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
             </Card>
           ))}
           {databaseResults.map(({ topic, href, markdownLesson }) => (
-            <Card className={`material-surface material-cardboard-paper grid grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 p-0 max-[360px]:grid-cols-1 ${markdownLesson ? "border-t-[var(--curriculum-green)]" : "border-t-accent"}`} key={topic.id}>
+            <Card
+              className={cn(
+                "material-surface material-cardboard-paper grid grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 p-0 max-[360px]:grid-cols-1",
+                markdownLesson ? "border-t-[var(--curriculum-green)]" : "border-t-accent"
+              )}
+              key={topic.id}
+            >
               <div className="material-surface material-woven-fabric grid items-start justify-items-center p-5 max-[360px]:place-items-center max-[360px]:p-3"><span className={`brand-asset ${lessonIcon(markdownLesson?.metadata.title ?? topic.title, markdownLesson?.metadata.subject ?? topic.subject, markdownLesson?.metadata.category ?? topic.category ?? "", markdownLesson?.metadata.focus ?? topic.skillStatement ?? "", topic.grade)} icon-medium`} aria-hidden="true" /></div>
               <div className="grid min-w-0 gap-3 p-5"><CardHeader className="p-0"><div className="flex justify-between gap-3 text-xs font-black tracking-wider text-muted-foreground uppercase"><span>{markdownLesson ? "Teacher-ready lesson" : "Planning record"}</span><strong>{topic.grade}</strong></div><CardTitle className="font-heading text-3xl font-normal leading-none"><Link href={href}>{markdownLesson?.metadata.title ?? topic.title}</Link></CardTitle></CardHeader><CardContent className="p-0 text-sm font-semibold leading-6 text-muted-foreground">{markdownLesson?.metadata.summary ?? topic.skillStatement ?? "Open the grade-scoped curriculum record and review what is available."}</CardContent><CardFooter className="flex justify-between gap-3 border-t border-dashed border-border p-0 pt-3 text-xs font-black uppercase"><span>{markdownLesson?.metadata.subject ?? topic.subject}</span><Link className="text-primary" href={href}>{markdownLesson ? "Open lesson" : "Review record"} →</Link></CardFooter></div>
             </Card>

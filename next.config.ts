@@ -24,7 +24,7 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [
       "remark-frontmatter",
-      ["remark-mdx-frontmatter", { name: "metadata" }],
+      ["remark-mdx-frontmatter", { name: "frontmatter" }],
       "remark-gfm",
     ],
     rehypePlugins: [],

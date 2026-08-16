@@ -34,7 +34,7 @@ const paths = [
 export function AboutProductPage({ story }: { story: ReactNode }) {
   return (
     <div className="w-full bg-background">
-      <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-12 px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+      <div className="flex w-full flex-col gap-12 px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
       <BrandPatchCard
         aria-labelledby="about-title"
         className="grid gap-0 p-0 lg:grid-cols-2 lg:grid-rows-[1fr_auto]"

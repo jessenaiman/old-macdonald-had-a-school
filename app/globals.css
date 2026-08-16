@@ -6,11 +6,8 @@
 /*
  * Old MacDonald Had a School theme
  *
- * This is the single Tailwind/shadcn theme entrypoint. Palette values,
- * semantic application tokens, dark-mode overrides, and identity routing
- * live here. Approved asset paths and textures remain in brand-assets.css.
- *
- * DESIGN INTENT
+ * @shadcn rules must be read.
+ *  
  *
  * The interface is a teacher's planning board: notes, classroom planning,
  * and found objects arranged on a physical presentation surface.
@@ -22,13 +19,9 @@
  * RULES:
  * - Cardboard background can have patches or pins
  * - Cork can only have tape and pins
- * - The menu and footer form the edges of a folder holding the board.
  *
- * Preserve visible breathing room around attached objects. Empty space is
- * part of the physical composition, not automatically missing content.
-* BRAND OWNERSHIP
  *
- * Cast colors in content/pages/branding/cast.mdx are canonical identity colors.
+ * Cast colors in content/pages/branding/cast.mdx are canonical identity colors. DO NOT CHANGE UNLESS USER REQUESTED
  * Matching grades and subjects route through those cast tokens.
  * Before changing visual roles, stop and read app/brand-assets.css and the
  * matching branding MDX. Use semantic asset classes and CSS variables—never

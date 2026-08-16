@@ -19,6 +19,7 @@ export type LessonMetadata = Record<string, string> & {
 export type LessonModule = {
   default: ComponentType;
   metadata?: Record<string, unknown>;
+  frontmatter?: Record<string, unknown>;
 };
 
 export type Lesson = {
@@ -117,7 +118,7 @@ export async function getLesson(slug: string): Promise<Lesson | undefined> {
   const lessonModule = await importLesson(file.relativePath);
   return {
     Content: lessonModule.default,
-    metadata: normalizeMetadata(file, lessonModule.metadata),
+    metadata: normalizeMetadata(file, { ...lessonModule.frontmatter, ...lessonModule.metadata }),
     sourcePath: file.sourcePath,
   };
 }

@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
 const bodyFont = Nunito({
@@ -63,7 +64,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${sectionFont.variable} ${brandFont.variable} ${handFont.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(bodyFont.variable, displayFont.variable, sectionFont.variable, brandFont.variable, handFont.variable)}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <body>
         <ThemeProvider
           attribute="class"
@@ -75,7 +81,7 @@ export default function RootLayout({
           <div className="flex min-h-dvh flex-col bg-background text-foreground">
             <SiteHeader />
             <main className="material-surface material-leather-indigo flex min-h-0 min-w-0 flex-1 flex-col">
-              <div className="flex w-full min-w-0 flex-1 flex-col">
+              <div className="mx-auto w-full min-w-0 flex-1 flex-col px-3 py-5 sm:px-6 lg:px-8">
                 {children}
               </div>
             </main>

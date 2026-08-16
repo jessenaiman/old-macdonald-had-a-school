@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { lessonHref } from "@/lib/grade-routes";
+import { cn } from "@/lib/utils";
 
 export type WeeklyLesson = { slug: string; title: string; summary: string; grade: string; href?: string; icon?: string };
 
@@ -13,10 +14,10 @@ export function WeeklyLessonList({ lessons, title, limit = 3 }: { lessons: reado
       <ul className="grid list-none">
         {lessons.slice(0, limit).map((lesson) => {
           const href = lesson.href ?? lessonHref(lesson);
-          const external = lesson.href?.startsWith("https://");
+            const external = lesson.href?.startsWith("https://");
           return (
             <li className="grid min-h-14 grid-cols-[1.25rem_minmax(0,1fr)] items-center gap-x-3 border-t border-border px-4 py-2" key={lesson.slug}>
-              <span className={`brand-asset ${lesson.icon ?? "music-icon"} icon-micro row-span-2`} aria-hidden="true" />
+              <span className={cn("brand-asset", "icon-micro", "row-span-2", lesson.icon ?? "music-icon")} aria-hidden="true" />
               <Link className="min-w-0 text-sm font-extrabold leading-tight" href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>{lesson.title}</Link>
               <p className="col-start-2 text-xs leading-snug text-muted-foreground">{lesson.summary}</p>
             </li>

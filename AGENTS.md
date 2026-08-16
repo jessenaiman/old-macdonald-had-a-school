@@ -10,9 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # This is shadcn
 
-What is shadcn? Use the @shadcn skill and read the rules. Report 3 assumptions you would have made that you will never do now that you've reviewed the documentation. 
-
-You must review the online current documentation. If you provided in memory or past converation knowledge you must repeat the steps and read the documentation.
+use @shadcn and read the rules markdown file and explain to the user how it works with nextjs and uses tailwindcss 4. Identify any report all instances where shadcn would not work as expected unless the user gives authorization. 
 
 # Project contract
 

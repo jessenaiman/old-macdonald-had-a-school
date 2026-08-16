@@ -38,7 +38,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
 
   return (
     <div className="material-surface material-cork min-h-screen px-3 py-6 sm:px-6 lg:px-12" data-style-scope="curriculum-lesson-page">
-      <article className="material-surface material-cardboard-paper mx-auto flex w-full max-w-5xl flex-col gap-8 rounded-xl border p-5 shadow-lg sm:p-8 lg:p-10">
+      <article className="material-surface material-cardboard-paper flex w-full flex-col gap-8 rounded-xl border p-5 shadow-lg sm:p-8 lg:p-10">
         <header className="flex flex-col gap-5">
           <nav className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground" aria-label="Breadcrumb">
             <Link className="text-primary underline-offset-4 hover:underline" href="/topics">Curriculum</Link>

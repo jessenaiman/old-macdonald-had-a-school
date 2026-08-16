@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function BrandingCastPage() {
-  return <main><Cast /></main>
+  return <Cast />
 }

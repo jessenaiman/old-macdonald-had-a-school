@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function BrandingPage() {
   return (
-    <main>
+    <div>
       <Overview />
       <BrandingLookup />
       <PageRecipe />
@@ -39,6 +39,6 @@ export default function BrandingPage() {
       <Governance />
       <Sources />
       <Palette />
-    </main>
+    </div>
   )
 }

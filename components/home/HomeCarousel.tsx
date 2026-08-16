@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 const SLIDES = [
   { assetClass: "home-scene-class-gathering", alt: "Old MacDonald and the farm-school class gathered for outdoor music", label: "Browse curriculum topics", href: "/topics" },
@@ -47,7 +48,16 @@ export function HomeCarousel() {
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
         <div className="flex gap-1" role="group" aria-label="Choose a featured scene">
           {SLIDES.map((item, index) => (
-            <Button className={index === active ? undefined : "text-primary-foreground hover:text-foreground"} variant={index === active ? "secondary" : "ghost"} size="icon-sm" type="button" aria-label={`Show ${item.label}`} aria-pressed={index === active} onClick={() => api?.scrollTo(index)} key={item.label}>
+            <Button
+              className={cn(index !== active && "text-primary-foreground hover:text-foreground")}
+              variant={index === active ? "secondary" : "ghost"}
+              size="icon-sm"
+              type="button"
+              aria-label={`Show ${item.label}`}
+              aria-pressed={index === active}
+              onClick={() => api?.scrollTo(index)}
+              key={item.label}
+            >
               <span className="h-1 w-5 rounded-full bg-current" aria-hidden="true" />
             </Button>
           ))}

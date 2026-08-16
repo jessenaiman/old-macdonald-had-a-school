@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { GradeLessonGrid, type GradeLesson } from "./GradeLessonGrid";
 import { CLUSTERS, clusterFor } from "./SubjectDiscovery";
 import type { GradeMeta } from "../lib/grades";
@@ -34,10 +36,10 @@ export function GradeDirectoryPage({
         <h2>{meta.label}</h2>
         <small>{meta.ageRange}</small>
         <nav className="gb-rail-nav">
-          <a href="#grade-today"><b>01</b> Today</a>
-          <a href="#grade-curriculum"><b>02</b> Curriculum</a>
-          <a href="#grade-planner"><b>03</b> Planner</a>
-          <a href="#grade-resources"><b>04</b> Resources</a>
+          <Link href="#grade-today"><b>01</b> Today</Link>
+          <Link href="#grade-curriculum"><b>02</b> Curriculum</Link>
+          <Link href="#grade-planner"><b>03</b> Planner</Link>
+          <Link href="#grade-resources"><b>04</b> Resources</Link>
         </nav>
         <div className="gb-rail-note">
           <span>Planning reminder</span>
@@ -75,7 +77,7 @@ export function GradeDirectoryPage({
             <TabsList className="gb-subjects-list" aria-label="Filter by subject">
                 <TabsTrigger
                   value="all"
-                  className={`gb-subject-row${!activeCluster ? " active" : ""}`}
+                  className={cn("gb-subject-row", !activeCluster && "active")}
                 >
                   <span className="gb-subject-icon gb-subject-icon-all">{"•"}</span>
                   <span>All subjects</span>
@@ -83,7 +85,7 @@ export function GradeDirectoryPage({
               {CLUSTERS.map((c) => (
                   <TabsTrigger
                     value={c.key}
-                    className={`gb-subject-row tone-${c.tone}${activeCluster === c.key ? " active" : ""}`}
+                    className={cn("gb-subject-row", `tone-${c.tone}`, activeCluster === c.key && "active")}
                     key={c.key}
                   >
                     <span className="gb-subject-icon">{c.icon}</span>

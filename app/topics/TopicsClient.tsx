@@ -24,7 +24,7 @@ export default function TopicsClient({ lessons }: { lessons: LessonMetadata[] })
   const clusterInfo = cluster ? CLUSTERS.find((item) => item.key === cluster) : undefined;
 
   return (
-    <div className="mx-auto w-[min(1180px,calc(100%-2rem))] py-[clamp(1.5rem,4vw,3.5rem)] pb-16 max-sm:w-[min(100%-1rem,42rem)] max-sm:pt-4">
+    <div className="w-full py-[clamp(1.5rem,4vw,3.5rem)] pb-16 max-sm:pt-4">
       <header className="material-surface material-cardboard-paper relative mx-auto mb-8 max-w-[840px] rounded-xl border border-border p-[clamp(1.75rem,4vw,3rem)] text-center shadow-[5px_7px_0_color-mix(in_srgb,var(--border)_75%,transparent)] max-sm:px-5 max-sm:pb-6 max-sm:pt-8">
         <span className="brand-asset fastener-push-pin icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
         <div className="font-body text-[.68rem] font-black leading-none tracking-[.12em] text-primary uppercase">Curriculum-organized starting points</div>

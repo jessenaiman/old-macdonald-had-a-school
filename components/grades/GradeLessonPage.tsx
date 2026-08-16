@@ -84,7 +84,7 @@ export async function GradeLessonPage({
 
   return (
     <div
-      className="material-surface material-cardboard-paper mx-auto my-4 grid w-[calc(100%-1rem)] max-w-7xl grid-cols-1 overflow-hidden rounded-2xl border shadow-sm lg:my-8 lg:grid-cols-[14rem_minmax(0,1fr)] print:block print:w-full print:border-0 print:shadow-none"
+      className="material-surface material-cardboard-paper my-4 grid w-full grid-cols-1 overflow-hidden rounded-2xl border shadow-sm lg:my-8 lg:grid-cols-[14rem_minmax(0,1fr)] print:block print:w-full print:border-0 print:shadow-none"
       data-grade={grade}
       data-grade-template={grade}
       data-lesson-template={lesson?.metadata.template ?? "database-draft"}
@@ -115,19 +115,19 @@ export async function GradeLessonPage({
           aria-label={`${details.label} lesson navigation`}
         >
           <Button asChild variant="ghost" className="justify-start">
-            <a href="#lesson-overview">
+            <Link href="#lesson-overview">
               <span>Overview</span>
-            </a>
+            </Link>
           </Button>
           <Button asChild variant="ghost" className="justify-start">
-            <a href="#lesson-plan">
+            <Link href="#lesson-plan">
               <span>Lesson plan</span>
-            </a>
+            </Link>
           </Button>
           <Button asChild variant="ghost" className="justify-start">
-            <a href="#lesson-notes">
+            <Link href="#lesson-notes">
               <span>Teacher notes</span>
-            </a>
+            </Link>
           </Button>
           <Button asChild variant="ghost" className="justify-start">
             <Link href={`/grade/${grade}`}>
