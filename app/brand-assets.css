@@ -24,58 +24,58 @@
 
 /* Repeatable material sources. Components consume these names, never raw URLs. */
 :root {
-  --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.png');
+  --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.webp');
   --brand-cork-texture: var(--asset-cork-board);
-  --cast-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.png');
-  --cast-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png');
-  --cast-mr-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png');
-  --cast-miss-hayley-texture: url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png');
-  --cast-mr-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png');
-  --cast-mr-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.png');
-  --cast-mr-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.png');
-  --cast-miss-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png');
-  --cast-hopper-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.png');
-  --cast-whiskers-texture: url('/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.png');
-  --cast-scout-texture: url('/design-assets/web-material-library-v1/felt/felt-11-scout-tile.png');
-  --cast-penny-texture: url('/design-assets/web-material-library-v1/felt/felt-12-penny-tile.png');
-  --cast-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.png');
-  --cast-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-14-puddles-tile.png');
-  --cast-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-15-sam-tile.png');
-  --cast-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.png');
-  --asset-cardboard-kraft: url('/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png');
-  --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.png');
-  --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.png');
-  --asset-woven-old-macdonald: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.png');
-  --asset-denim-indigo: url('/design-assets/web-material-library-v1/denim/denim-dark-indigo-tile-v01.png');
-  --asset-construction-mr-sam: url('/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png');
-  --asset-thread-old-macdonald: url('/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.png');
-  --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.png');
-  --asset-leather-blue: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.png');
-  --asset-leather-indigo: url('/design-assets/web-material-library-v1/leather/individual-tiles/07-mr-puddles-leather-tile-v01.png');
-  --asset-cork-board: url('/design-assets/cork-board-kit-v2/seamless-cork-tile.png');
+  --cast-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.webp');
+  --cast-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.webp');
+  --cast-mr-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp');
+  --cast-miss-hayley-texture: url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp');
+  --cast-mr-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.webp');
+  --cast-mr-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.webp');
+  --cast-mr-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.webp');
+  --cast-miss-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp');
+  --cast-hopper-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.webp');
+  --cast-whiskers-texture: url('/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.webp');
+  --cast-scout-texture: url('/design-assets/web-material-library-v1/felt/felt-11-scout-tile.webp');
+  --cast-penny-texture: url('/design-assets/web-material-library-v1/felt/felt-12-penny-tile.webp');
+  --cast-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.webp');
+  --cast-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-14-puddles-tile.webp');
+  --cast-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-15-sam-tile.webp');
+  --cast-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.webp');
+  --asset-cardboard-kraft: url('/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.webp');
+  --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.webp');
+  --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.webp');
+  --asset-woven-old-macdonald: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.webp');
+  --asset-denim-indigo: url('/design-assets/web-material-library-v1/denim/denim-dark-indigo-tile-v01.webp');
+  --asset-construction-mr-sam: url('/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.webp');
+  --asset-thread-old-macdonald: url('/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.webp');
+  --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.webp');
+  --asset-leather-blue: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.webp');
+  --asset-leather-indigo: url('/design-assets/web-material-library-v1/leather/individual-tiles/07-mr-puddles-leather-tile-v01.webp');
+  --asset-cork-board: url('/design-assets/cork-board-kit-v2/seamless-cork-tile.webp');
   --asset-paper-ruled-repeat: url('/design-assets/classroom-paper-notes-v1/repeat-tiles/paper-ruled-neutral-repeat-v01.webp');
   --asset-paper-grid-repeat: url('/design-assets/classroom-paper-notes-v1/repeat-tiles/paper-grid-blue-repeat-v01.webp');
   --asset-cork-repeat-web: url('/design-assets/cork-board-kit-v2/seamless-cork-tile-web.webp');
-  --asset-cork-board-landscape: url('/design-assets/cork-board-kit-v2/medium-board.png');
-  --asset-cork-board-portrait: url('/design-assets/cork-board-kit-v2/vertical-board.png');
-  --asset-cork-planning-strip: url('/design-assets/cork-board-kit-v2/wide-planning-strip.png');
-  --asset-brand-emblem-review: url('/design-assets/brand-emblem-v1-review/brand-emblem-family-contact-sheet.png');
+  --asset-cork-board-landscape: url('/design-assets/cork-board-kit-v2/medium-board.webp');
+  --asset-cork-board-portrait: url('/design-assets/cork-board-kit-v2/vertical-board.webp');
+  --asset-cork-planning-strip: url('/design-assets/cork-board-kit-v2/wide-planning-strip.webp');
+  --asset-brand-emblem-review: url('/design-assets/brand-emblem-v1-review/brand-emblem-family-contact-sheet.webp');
   --asset-brand-emblem-flat-micro: url('/design-assets/brand-emblem-v1/candidate-flat-marks/brand-emblem-flat-32.png');
   --asset-brand-emblem-screen-nav: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-nav-44.png');
-  --asset-brand-emblem-screen-card: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.png');
-  --asset-brand-emblem-detail-media: url('/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.png');
-  --asset-home-scene-class-gathering: url('/scenes/hero/old-macs-open-circle-gathering.png');
-  --asset-home-scene-growing-together: url('/scenes/hero/home-journey-reflect-v1.png');
-  --asset-home-scene-music-landscape: url('/scenes/hero/old-mac-branding-where-did-the-folder-go.png');
-  --asset-home-scene-schoolhouse: url('/scenes/hero/oldmac-school.png');
-  --asset-about-classroom-hero: url('/scenes/home-schoolhouse-classroom-hero-v1.png');
-  --asset-about-miss-hayley-profile: url('/staff_and_students/miss-hayley-transparent-circle.png');
-  --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.png');
-  --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.png');
-  --subject-science-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.png');
-  --subject-music-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/04-rose-ruled-note.png');
-  --subject-arts-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/05-gold-scalloped-note.png');
-  --subject-health-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/06-lavender-folded-note.png');
+  --asset-brand-emblem-screen-card: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.webp');
+  --asset-brand-emblem-detail-media: url('/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.webp');
+  --asset-home-scene-class-gathering: url('/scenes/hero/old-macs-open-circle-gathering.webp');
+  --asset-home-scene-growing-together: url('/scenes/hero/home-journey-reflect-v1.webp');
+  --asset-home-scene-music-landscape: url('/scenes/hero/old-mac-branding-where-did-the-folder-go.webp');
+  --asset-home-scene-schoolhouse: url('/scenes/hero/oldmac-school.webp');
+  --asset-about-classroom-hero: url('/scenes/home-schoolhouse-classroom-hero-v1.webp');
+  --asset-about-miss-hayley-profile: url('/staff_and_students/miss-hayley-transparent-circle.webp');
+  --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.webp');
+  --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.webp');
+  --subject-science-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.webp');
+  --subject-music-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/04-rose-ruled-note.webp');
+  --subject-arts-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/05-gold-scalloped-note.webp');
+  --subject-health-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/06-lavender-folded-note.webp');
   --subject-sel-paper: url('/design-assets/classroom-paper-notes-v2/individual-notes/01-reminder-square.webp');
   --subject-fine-motor-paper: url('/design-assets/classroom-paper-notes-v2/individual-notes/06-board-instruction-card.webp');
   --asset-paper-note-reminder: url('/design-assets/classroom-paper-notes-v2/individual-notes/01-reminder-square.webp');
@@ -86,6 +86,14 @@
   --asset-paper-note-board: url('/design-assets/classroom-paper-notes-v2/individual-notes/06-board-instruction-card.webp');
   --asset-paper-note-mobile: url('/design-assets/classroom-paper-notes-v2/individual-notes/07-mobile-list-note.webp');
   --asset-paper-note-reflection: url('/design-assets/classroom-paper-notes-v2/individual-notes/08-ruled-reflection-sheet.webp');
+  --asset-working-wall-rail-horizontal: url('/design-assets/homepage-working-wall-v1/individual-parts/01-wood-rail-horizontal.webp');
+  --asset-working-wall-post-left: url('/design-assets/homepage-working-wall-v1/individual-parts/02-turned-wood-post-left.webp');
+  --asset-working-wall-post-right: url('/design-assets/homepage-working-wall-v1/individual-parts/03-turned-wood-post-right.webp');
+  --asset-working-wall-corner-top-left: url('/design-assets/homepage-working-wall-v1/individual-parts/04-wood-frame-corner-top-left.webp');
+  --asset-working-wall-corner-top-right: url('/design-assets/homepage-working-wall-v1/individual-parts/05-wood-frame-corner-top-right.webp');
+  --asset-working-wall-corner-bottom-left: url('/design-assets/homepage-working-wall-v1/individual-parts/06-wood-frame-corner-bottom-left.webp');
+  --asset-working-wall-corner-bottom-right: url('/design-assets/homepage-working-wall-v1/individual-parts/07-wood-frame-corner-bottom-right.webp');
+  --asset-working-wall-chalkboard: url('/design-assets/homepage-working-wall-v1/individual-parts/08-chalkboard-panel.webp');
 }
 
 /* Homepage scenes. Carousel markup selects meaning; this registry owns files. */
@@ -106,39 +114,39 @@
 [data-subject='fine-motor'] { --subject-note-paper: var(--subject-fine-motor-paper); }
 
 /* Compact cast artwork. Character keys select assets; consumers never carry URLs. */
-[data-character='old-macdonald'] { --character-face-patch:url('/icons/early-years/face-patches/old-macdonald-yellow.png'); --character-face-bust:url('/icons/early-years/face-busts/old-macdonald-yellow.png'); }
-[data-character='miss-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/miss-puddles-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-puddles-purple.png'); }
-[data-character='mr-rusty'] { --character-face-patch:url('/icons/early-years/face-patches/mr-rusty-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-rusty-blue.png'); }
-[data-character='miss-hayley'] { --character-face-patch:url('/icons/early-years/face-patches/miss-hayley-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-hayley-purple.png'); }
-[data-character='mr-sam'] { --character-face-patch:url('/icons/early-years/face-patches/mr-sam-clean-v2.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-sam-clean-v2.png'); }
-[data-character='mr-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/mr-maisy-orange.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-maisy-orange.png'); }
-[data-character='mr-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/mr-puddles-green.png'); --character-face-bust:url('/icons/early-years/face-busts/mr-puddles-green.png'); }
-[data-character='miss-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/miss-maisy-purple.png'); --character-face-bust:url('/icons/early-years/face-busts/miss-maisy-purple.png'); }
-[data-character='hopper'] { --character-face-patch:url('/icons/early-years/face-patches/hopper-red.png'); --character-face-bust:url('/icons/early-years/face-busts/hopper-red.png'); }
-[data-character='whiskers'] { --character-face-patch:url('/icons/early-years/face-patches/whiskers-orange.png'); --character-face-bust:url('/icons/early-years/face-busts/whiskers-orange.png'); }
-[data-character='scout'] { --character-face-patch:url('/icons/early-years/face-patches/scout-green.png'); --character-face-bust:url('/icons/early-years/face-busts/scout-green.png'); }
-[data-character='penny'] { --character-face-patch:url('/icons/early-years/face-patches/penny-orange.png'); --character-face-bust:url('/icons/early-years/face-busts/penny-orange.png'); }
-[data-character='maisy'] { --character-face-patch:url('/icons/early-years/face-patches/maisy-yellow.png'); --character-face-bust:url('/icons/early-years/face-busts/maisy-yellow.png'); }
-[data-character='puddles'] { --character-face-patch:url('/icons/early-years/face-patches/puddles-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/puddles-blue.png'); }
-[data-character='sam'] { --character-face-patch:url('/icons/early-years/face-patches/sam-red.png'); --character-face-bust:url('/icons/early-years/face-busts/sam-red.png'); }
-[data-character='rusty'] { --character-face-patch:url('/icons/early-years/face-patches/rusty-blue.png'); --character-face-bust:url('/icons/early-years/face-busts/rusty-blue.png'); }
+[data-character='old-macdonald'] { --character-face-patch:url('/icons/early-years/face-patches/old-macdonald-yellow.webp'); --character-face-bust:url('/icons/early-years/face-busts/old-macdonald-yellow.webp'); }
+[data-character='miss-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/miss-puddles-purple.webp'); --character-face-bust:url('/icons/early-years/face-busts/miss-puddles-purple.webp'); }
+[data-character='mr-rusty'] { --character-face-patch:url('/icons/early-years/face-patches/mr-rusty-blue.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-rusty-blue.webp'); }
+[data-character='miss-hayley'] { --character-face-patch:url('/icons/early-years/face-patches/miss-hayley-purple.webp'); --character-face-bust:url('/icons/early-years/face-busts/miss-hayley-purple.webp'); }
+[data-character='mr-sam'] { --character-face-patch:url('/icons/early-years/face-patches/mr-sam-clean-v2.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-sam-clean-v2.webp'); }
+[data-character='mr-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/mr-maisy-orange.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-maisy-orange.webp'); }
+[data-character='mr-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/mr-puddles-green.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-puddles-green.webp'); }
+[data-character='miss-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/miss-maisy-purple.webp'); --character-face-bust:url('/icons/early-years/face-busts/miss-maisy-purple.webp'); }
+[data-character='hopper'] { --character-face-patch:url('/icons/early-years/face-patches/hopper-red.webp'); --character-face-bust:url('/icons/early-years/face-busts/hopper-red.webp'); }
+[data-character='whiskers'] { --character-face-patch:url('/icons/early-years/face-patches/whiskers-orange.webp'); --character-face-bust:url('/icons/early-years/face-busts/whiskers-orange.webp'); }
+[data-character='scout'] { --character-face-patch:url('/icons/early-years/face-patches/scout-green.webp'); --character-face-bust:url('/icons/early-years/face-busts/scout-green.webp'); }
+[data-character='penny'] { --character-face-patch:url('/icons/early-years/face-patches/penny-orange.webp'); --character-face-bust:url('/icons/early-years/face-busts/penny-orange.webp'); }
+[data-character='maisy'] { --character-face-patch:url('/icons/early-years/face-patches/maisy-yellow.webp'); --character-face-bust:url('/icons/early-years/face-busts/maisy-yellow.webp'); }
+[data-character='puddles'] { --character-face-patch:url('/icons/early-years/face-patches/puddles-blue.webp'); --character-face-bust:url('/icons/early-years/face-busts/puddles-blue.webp'); }
+[data-character='sam'] { --character-face-patch:url('/icons/early-years/face-patches/sam-red.webp'); --character-face-bust:url('/icons/early-years/face-busts/sam-red.webp'); }
+[data-character='rusty'] { --character-face-patch:url('/icons/early-years/face-patches/rusty-blue.webp'); --character-face-bust:url('/icons/early-years/face-busts/rusty-blue.webp'); }
 
-[data-character='old-macdonald'] { --character-embroidered-badge:url('/patches/old_macdonald_badge_v1.png'); }
-[data-character='miss-puddles'] { --character-embroidered-badge:url('/patches/miss_puddles_badge.png'); }
-[data-character='mr-rusty'] { --character-embroidered-badge:url('/patches/mr_rusty_badge_clean_v2.png'); }
-[data-character='miss-hayley'] { --character-embroidered-badge:url('/patches/miss_hayley_badge.png'); }
-[data-character='mr-sam'] { --character-embroidered-badge:url('/patches/mr_sam_clean_v2.png'); }
-[data-character='mr-maisy'] { --character-embroidered-badge:url('/patches/mr_maisy_badge.png'); }
-[data-character='mr-puddles'] { --character-embroidered-badge:url('/patches/mr_puddles_badge.png'); }
-[data-character='miss-maisy'] { --character-embroidered-badge:url('/patches/miss_maisy_badge.png'); }
-[data-character='hopper'] { --character-embroidered-badge:url('/patches/hopper_badge.png'); }
-[data-character='whiskers'] { --character-embroidered-badge:url('/patches/whiskers_badge.png'); }
-[data-character='scout'] { --character-embroidered-badge:url('/patches/scout_badge_clean_v2.png'); }
-[data-character='penny'] { --character-embroidered-badge:url('/patches/penny_badge.png'); }
-[data-character='maisy'] { --character-embroidered-badge:url('/patches/maisy_badge.png'); }
-[data-character='puddles'] { --character-embroidered-badge:url('/patches/puddles_badge.png'); }
-[data-character='sam'] { --character-embroidered-badge:url('/patches/sam_badge.png'); }
-[data-character='rusty'] { --character-embroidered-badge:url('/patches/rusty_badge.png'); }
+[data-character='old-macdonald'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/01-old-macdonald-badge.webp'); }
+[data-character='miss-puddles'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/02-miss-puddles-badge.webp'); }
+[data-character='mr-rusty'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/03-mr-rusty-badge.webp'); }
+[data-character='miss-hayley'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/04-miss-hayley-badge.webp'); }
+[data-character='mr-sam'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/05-mr-sam-badge.webp'); }
+[data-character='mr-maisy'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/06-mr-maisy-badge.webp'); }
+[data-character='mr-puddles'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/07-mr-puddles-badge.webp'); }
+[data-character='miss-maisy'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/08-miss-maisy-badge.webp'); }
+[data-character='hopper'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/09-hopper-badge.webp'); }
+[data-character='whiskers'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/10-whiskers-badge.webp'); }
+[data-character='scout'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/11-scout-badge.webp'); }
+[data-character='penny'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/12-penny-badge.webp'); }
+[data-character='maisy'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/13-maisy-badge.webp'); }
+[data-character='puddles'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/14-puddles-badge.webp'); }
+[data-character='sam'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/15-sam-badge.webp'); }
+[data-character='rusty'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/16-rusty-badge.webp'); }
 
 .character-face-patch { --brand-asset-image:var(--character-face-patch); }
 .character-face-bust { --brand-asset-image:var(--character-face-bust); }
@@ -161,111 +169,111 @@
 .icon-large { --brand-asset-size: 7rem; }
 
 /* Grade textures only. Theme routing for grade colour and ink lives in globals.css. */
-[data-grade-group='early-years'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.png'); }
-[data-grade='daycare'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.png'); }
-[data-grade='pre-school'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png'); }
-[data-grade='kindergarten'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.png'); }
-[data-grade='grade-one'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.png'); }
+[data-grade-group='early-years'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.webp'); }
+[data-grade='daycare'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.webp'); }
+[data-grade='pre-school'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp'); }
+[data-grade='kindergarten'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp'); }
+[data-grade='grade-one'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp'); }
 [data-grade='grade-two'] { --grade-texture:var(--cast-mr-maisy-texture); }
 
 /* Grade signals: asset selection is separate from grade colour. */
-.grade-icon[data-grade-icon='daycare'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-daycare.png'); }
-.grade-icon[data-grade-icon='pre-school'] { --brand-asset-image:url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/02-preschool-apron-crayon-leaf.png'); }
-.grade-icon[data-grade-icon='kindergarten'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-kindergarten.png'); }
-.grade-icon[data-grade-icon='grade-one'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-1.png'); }
-.grade-icon[data-grade-icon='grade-two'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-2.png'); }
-.grade-two-ruler-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/05-grade-2-ruler-blocks.png'); }
-.grade-two-balance-scale { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/10-grade-2-balance-scale.png'); }
-.grade-two-measuring-patterns { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/15-grade-2-measuring-patterns-thread.png'); }
-.grade-daycare-stacking-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/01-daycare-stacking-blocks.png'); }
-.grade-preschool-sprout-counting { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/12-preschool-sprout-counting-beads.png'); }
-.grade-kindergarten-schoolhouse { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/13-kindergarten-schoolhouse.png'); }
-.grade-one-book-pencil { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/04-grade-1-book-pencil.png'); }
-.grade-one-writing-slate { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/14-grade-1-writing-slate-books.png'); }
+.grade-icon[data-grade-icon='daycare'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-daycare.webp'); }
+.grade-icon[data-grade-icon='pre-school'] { --brand-asset-image:url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/02-preschool-apron-crayon-leaf.webp'); }
+.grade-icon[data-grade-icon='kindergarten'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-kindergarten.webp'); }
+.grade-icon[data-grade-icon='grade-one'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-1.webp'); }
+.grade-icon[data-grade-icon='grade-two'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-2.webp'); }
+.grade-two-ruler-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/05-grade-2-ruler-blocks.webp'); }
+.grade-two-balance-scale { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/10-grade-2-balance-scale.webp'); }
+.grade-two-measuring-patterns { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/15-grade-2-measuring-patterns-thread.webp'); }
+.grade-daycare-stacking-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/01-daycare-stacking-blocks.webp'); }
+.grade-preschool-sprout-counting { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/12-preschool-sprout-counting-beads.webp'); }
+.grade-kindergarten-schoolhouse { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/13-kindergarten-schoolhouse.webp'); }
+.grade-one-book-pencil { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/04-grade-1-book-pencil.webp'); }
+.grade-one-writing-slate { --brand-asset-image: url('/brand-kit-icon-sheets/grade-variations-v2/individual-icons/14-grade-1-writing-slate-books.webp'); }
 
 /* General subject signals */
-.music-icon { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/08-music-notes-paired-beam.png'); }
-.math-building-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-math-building.png'); }
-.drama-storytelling-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.png'); }
-.art-photography-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-art-photography.png'); }
-.gardening-health-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-gardening-health.png'); }
-.physical-education-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-physical-education.png'); }
-.early-learning-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-early-learning.png'); }
-.theme-farm-day { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/sun-moon-patches.png'); }
-.theme-lullaby-dusk { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/moon-patch.png'); }
-.fastener-brass-rivet { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/17-brass-rivet-top-v01.png'); }
-.community-helping { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.png'); }
-.community-schoolhouse { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/03-community-schoolhouse-ribbon.png'); }
-.early-learning-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/07-early-learning-shape-blocks.png'); }
-.early-learning-lacing { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/09-early-learning-lacing-card.png'); }
-.math-abacus-ruler { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/13-math-abacus-ruler-block.png'); }
-.math-balance-scale { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/14-math-balance-scale.png'); }
-.math-construction-measure { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/15-math-construction-measure.png'); }
-.art-camera-brush { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/16-art-camera-brush.png'); }
-.art-color-wheel { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/18-art-color-wheel-frame.png'); }
-.physical-ball-rope { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/19-physical-play-ball-rope.png'); }
-.physical-stepping-spots { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/20-physical-stepping-spots-beanbag.png'); }
-.garden-watering-produce { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/22-garden-watering-can-produce.png'); }
-.garden-seed-trowel { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/23-garden-seed-packet-trowel.png'); }
-.health-gingham-lunch { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/24-health-gingham-lunch.png'); }
+.music-icon { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/08-music-notes-paired-beam.webp'); }
+.math-building-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-math-building.webp'); }
+.drama-storytelling-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.webp'); }
+.art-photography-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-art-photography.webp'); }
+.gardening-health-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-gardening-health.webp'); }
+.physical-education-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-physical-education.webp'); }
+.early-learning-icon { --brand-asset-image: url('/brand-kit-icon-sheets/individual-icons/subject-early-learning.webp'); }
+.theme-farm-day { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/sun-moon-patches.webp'); }
+.theme-lullaby-dusk { --brand-asset-image: url('/design-assets/theme-toggle-patches-v1/moon-patch.webp'); }
+.fastener-brass-rivet { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/17-brass-rivet-top-v01.webp'); }
+.community-helping { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/02-community-helping-hands-heart.webp'); }
+.community-schoolhouse { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/03-community-schoolhouse-ribbon.webp'); }
+.early-learning-blocks { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/07-early-learning-shape-blocks.webp'); }
+.early-learning-lacing { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/09-early-learning-lacing-card.webp'); }
+.math-abacus-ruler { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/13-math-abacus-ruler-block.webp'); }
+.math-balance-scale { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/14-math-balance-scale.webp'); }
+.math-construction-measure { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/15-math-construction-measure.webp'); }
+.art-camera-brush { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/16-art-camera-brush.webp'); }
+.art-color-wheel { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/18-art-color-wheel-frame.webp'); }
+.physical-ball-rope { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/19-physical-play-ball-rope.webp'); }
+.physical-stepping-spots { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/20-physical-stepping-spots-beanbag.webp'); }
+.garden-watering-produce { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/22-garden-watering-can-produce.webp'); }
+.garden-seed-trowel { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/23-garden-seed-packet-trowel.webp'); }
+.health-gingham-lunch { --brand-asset-image: url('/brand-kit-icon-sheets/subject-variations-v2/individual-icons/24-health-gingham-lunch.webp'); }
 
 /* Music and arts, dimensional felt for medium and large display */
-.music-fiddle { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/01-instrument-fiddle-bow.png'); }
-.dance-turning-footprints { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/02-dance-turning-footprints.png'); }
-.music-note-single { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/03-music-note-single-eighth.png'); }
-.acting-theatre-masks { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/04-acting-theatre-masks.png'); }
-.painting-handprint { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/05-painting-handprint-dots.png'); }
-.music-hand-drum { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/06-instrument-hand-drum.png'); }
-.dance-crossing-ribbons { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/07-dance-crossing-ribbons.png'); }
-.music-notes-paired { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/08-music-notes-paired-beam.png'); }
-.acting-stage-curtains { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/09-acting-stage-curtains.png'); }
-.painting-sponge-shapes { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/10-painting-sponge-shapes-tray.png'); }
-.music-banjo { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/11-instrument-banjo-strap.png'); }
-.dance-tap-shoes { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/12-dance-tap-shoes.png'); }
-.music-notes-ascending { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/13-music-notes-ascending.png'); }
-.acting-pocket-puppets { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/14-acting-pocket-puppets.png'); }
-.painting-crayon-swatches { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/15-painting-crayon-swatches.png'); }
-.music-handbells { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/16-instrument-handbells-ribbon.png'); }
-.dance-spiralling-scarves { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/17-dance-spiralling-scarves.png'); }
-.music-rhythm-dots { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/18-music-note-rhythm-dots.png'); }
-.acting-spotlight-star { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/19-acting-spotlight-star.png'); }
-.painting-easel { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/20-painting-easel-brush-palette.png'); }
+.music-fiddle { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/01-instrument-fiddle-bow.webp'); }
+.dance-turning-footprints { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/02-dance-turning-footprints.webp'); }
+.music-note-single { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/03-music-note-single-eighth.webp'); }
+.acting-theatre-masks { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/04-acting-theatre-masks.webp'); }
+.painting-handprint { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/05-painting-handprint-dots.webp'); }
+.music-hand-drum { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/06-instrument-hand-drum.webp'); }
+.dance-crossing-ribbons { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/07-dance-crossing-ribbons.webp'); }
+.music-notes-paired { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/08-music-notes-paired-beam.webp'); }
+.acting-stage-curtains { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/09-acting-stage-curtains.webp'); }
+.painting-sponge-shapes { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/10-painting-sponge-shapes-tray.webp'); }
+.music-banjo { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/11-instrument-banjo-strap.webp'); }
+.dance-tap-shoes { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/12-dance-tap-shoes.webp'); }
+.music-notes-ascending { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/13-music-notes-ascending.webp'); }
+.acting-pocket-puppets { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/14-acting-pocket-puppets.webp'); }
+.painting-crayon-swatches { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/15-painting-crayon-swatches.webp'); }
+.music-handbells { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/16-instrument-handbells-ribbon.webp'); }
+.dance-spiralling-scarves { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/17-dance-spiralling-scarves.webp'); }
+.music-rhythm-dots { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/18-music-note-rhythm-dots.webp'); }
+.acting-spotlight-star { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/19-acting-spotlight-star.webp'); }
+.painting-easel { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/20-painting-easel-brush-palette.webp'); }
 
 /* Compact music and arts review family. The -flat suffix is mandatory until approved. */
-.music-fiddle-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/01-instrument-fiddle-bow.png'); }
-.dance-turning-footprints-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/02-dance-turning-footprints.png'); }
-.music-note-single-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/03-music-note-single-eighth.png'); }
-.acting-theatre-masks-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/04-acting-theatre-masks.png'); }
-.painting-handprint-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/05-painting-handprint-dots.png'); }
-.music-hand-drum-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/06-instrument-hand-drum.png'); }
-.dance-crossing-ribbons-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/07-dance-crossing-ribbons.png'); }
-.music-notes-paired-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/08-music-notes-paired-beam.png'); }
-.acting-stage-curtains-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/09-acting-stage-curtains.png'); }
-.painting-sponge-shapes-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/10-painting-sponge-shapes-tray.png'); }
-.music-banjo-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/11-instrument-banjo-strap.png'); }
-.dance-tap-shoes-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/12-dance-tap-shoes.png'); }
-.music-notes-ascending-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/13-music-notes-ascending.png'); }
-.acting-pocket-puppets-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/14-acting-pocket-puppets.png'); }
-.painting-crayon-swatches-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/15-painting-crayon-swatches.png'); }
-.music-handbells-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/16-instrument-handbells-ribbon.png'); }
-.dance-spiralling-scarves-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/17-dance-spiralling-scarves.png'); }
-.music-rhythm-dots-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/18-music-note-rhythm-dots.png'); }
-.acting-spotlight-star-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/19-acting-spotlight-star.png'); }
-.painting-easel-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/20-painting-easel-brush-palette.png'); }
+.music-fiddle-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/01-instrument-fiddle-bow.webp'); }
+.dance-turning-footprints-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/02-dance-turning-footprints.webp'); }
+.music-note-single-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/03-music-note-single-eighth.webp'); }
+.acting-theatre-masks-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/04-acting-theatre-masks.webp'); }
+.painting-handprint-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/05-painting-handprint-dots.webp'); }
+.music-hand-drum-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/06-instrument-hand-drum.webp'); }
+.dance-crossing-ribbons-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/07-dance-crossing-ribbons.webp'); }
+.music-notes-paired-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/08-music-notes-paired-beam.webp'); }
+.acting-stage-curtains-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/09-acting-stage-curtains.webp'); }
+.painting-sponge-shapes-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/10-painting-sponge-shapes-tray.webp'); }
+.music-banjo-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/11-instrument-banjo-strap.webp'); }
+.dance-tap-shoes-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/12-dance-tap-shoes.webp'); }
+.music-notes-ascending-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/13-music-notes-ascending.webp'); }
+.acting-pocket-puppets-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/14-acting-pocket-puppets.webp'); }
+.painting-crayon-swatches-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/15-painting-crayon-swatches.webp'); }
+.music-handbells-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/16-instrument-handbells-ribbon.webp'); }
+.dance-spiralling-scarves-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/17-dance-spiralling-scarves.webp'); }
+.music-rhythm-dots-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/18-music-note-rhythm-dots.webp'); }
+.acting-spotlight-star-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/19-acting-spotlight-star.webp'); }
+.painting-easel-flat { --brand-asset-image: url('/brand-kit-icon-sheets/music-arts-flat-v3-small-review/individual-icons/20-painting-easel-brush-palette.webp'); }
 
 /* Classroom fasteners. Use inside the component they visually attach. */
-.fastener-push-pin { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.png'); }
-.fastener-paperclip { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.png'); }
-.fastener-binder-clip { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.png'); }
-.fastener-masking-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.png'); }
-.fastener-sewing-button { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.png'); }
-.fastener-gingham-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/04-gingham-fabric-tape.png'); }
-.fastener-apple-peg { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/06-apple-wood-clothes-peg.png'); }
-.fastener-kraft-pocket { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/11-kraft-corner-pocket.png'); }
-.fastener-quilted-tab { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/14-quilted-corner-tab.png'); }
-.fastener-washi-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.png'); }
+.fastener-push-pin { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.webp'); }
+.fastener-paperclip { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/03-paperclip-double-loop.webp'); }
+.fastener-binder-clip { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/04-binder-clip.webp'); }
+.fastener-masking-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/05-masking-tape.webp'); }
+.fastener-sewing-button { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/14-sewing-button.webp'); }
+.fastener-gingham-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/04-gingham-fabric-tape.webp'); }
+.fastener-apple-peg { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/06-apple-wood-clothes-peg.webp'); }
+.fastener-kraft-pocket { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/11-kraft-corner-pocket.webp'); }
+.fastener-quilted-tab { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/14-quilted-corner-tab.webp'); }
+.fastener-washi-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.webp'); }
 
 /* Authored patch layers. These are decorative layers, never interaction targets. */
-.patch-old-macdonald-square { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.png'); }
-.patch-miss-puddles-circle { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.png'); }
+.patch-old-macdonald-square { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.webp'); }
+.patch-miss-puddles-circle { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.webp'); }
 
