@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { Search } from "lucide-react";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
@@ -88,7 +89,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
 
   return (
     <section className="my-7 w-full text-foreground max-sm:my-3" aria-labelledby="lessons-index-title">
-        <header className="material-surface material-cardboard-paper relative overflow-hidden rounded-2xl border border-border p-[clamp(1.625rem,4vw,3rem)] shadow-[0_8px_0_color-mix(in_srgb,var(--border)_28%,transparent)] max-sm:px-4 max-sm:py-6">
+        <header className="card-paper relative overflow-hidden rounded-2xl border border-border p-[clamp(1.625rem,4vw,3rem)] shadow-[0_8px_0_color-mix(in_srgb,var(--border)_28%,transparent)] max-sm:px-4 max-sm:py-6">
           <div className="max-w-[850px]">
             <p className="m-0 font-body text-xs font-black leading-tight tracking-[.12em] text-primary uppercase">Teacher planning library</p>
             <h1 className="my-3 max-w-3xl font-heading text-[clamp(2.7rem,6vw,4.75rem)] font-normal leading-[.9] tracking-tight text-balance" id="lessons-index-title">What do you need to teach?</h1>
@@ -98,7 +99,19 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
             <FieldGroup className="items-end gap-3 md:grid-cols-[minmax(260px,1fr)_220px_auto]">
               <Field>
                 <FieldLabel htmlFor="lesson-search">What are you planning?</FieldLabel>
-                <Input id="lesson-search" name="q" type="search" autoComplete="off" defaultValue={query} placeholder="Try steady beat, rhyming, plants, or calming songs..." />
+                <InputGroup>
+                  <InputGroupAddon>
+                    <Search className="size-4 text-muted-foreground" aria-hidden="true" />
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    id="lesson-search"
+                    name="q"
+                    type="search"
+                    autoComplete="off"
+                    defaultValue={query}
+                    placeholder="Try steady beat, rhyming, plants, or calming songs..."
+                  />
+                </InputGroup>
               </Field>
               <Field>
                 <FieldLabel htmlFor="lesson-grade">Teaching group</FieldLabel>
@@ -117,7 +130,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
           {databaseUnavailable ? <p className="font-extrabold text-destructive">The curriculum database is unavailable; finished Markdown lessons are still shown.</p> : null}
         </div>
 
-        <nav className="material-surface material-cardboard-paper grid gap-4 rounded-xl border border-border p-5 shadow-sm" aria-label="Browse lessons by classroom activity">
+        <nav className="card-paper grid gap-4 rounded-xl border border-border p-5 shadow-sm" aria-label="Browse lessons by classroom activity">
           <div><h2 className="m-0 font-heading text-xl font-normal leading-none text-balance">Browse by classroom activity</h2><p className="mb-0 mt-2 font-body text-base font-semibold leading-[1.7]">Each approved classroom icon opens the matching lesson-library search.</p></div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {activityFilters.map(([label, icon, cue]) => <Button asChild className="justify-start" key={icon} variant="outline">
@@ -128,7 +141,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
 
         <section className="grid gap-5 md:grid-cols-2" aria-label="Available lessons">
           {markdownLessons.map(({ lesson }) => (
-            <Card className="material-surface material-cardboard-paper grid grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 border-t-[var(--curriculum-green)] p-0 max-[360px]:grid-cols-1" key={lesson.metadata.slug}>
+            <Card className="card-paper grid grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 border-t-[var(--curriculum-green)] p-0 max-[360px]:grid-cols-1" key={lesson.metadata.slug}>
               <div className="material-surface material-woven-fabric grid items-start justify-items-center p-5 max-[360px]:place-items-center max-[360px]:p-3"><span className={`brand-asset ${lessonIcon(lesson.metadata.title, lesson.metadata.subject, lesson.metadata.category, lesson.metadata.focus, lesson.metadata.summary, lesson.metadata.grade)} icon-medium`} aria-hidden="true" /></div>
               <div className="grid min-w-0 gap-3 p-5"><CardHeader className="p-0"><div className="flex justify-between gap-3 text-xs font-black tracking-wider text-muted-foreground uppercase"><span>Teacher-ready lesson</span><strong>{lesson.metadata.grade}</strong></div><CardTitle className="font-heading text-3xl font-normal leading-none"><Link href={lessonHref(lesson.metadata)}>{lesson.metadata.title}</Link></CardTitle></CardHeader><CardContent className="p-0 text-sm font-semibold leading-6 text-muted-foreground">{lesson.metadata.summary}</CardContent><CardFooter className="flex justify-between gap-3 border-t border-dashed border-border p-0 pt-3 text-xs font-black uppercase"><span>{lesson.metadata.subject}</span><Link className="text-primary" href={lessonHref(lesson.metadata)}>Open lesson →</Link></CardFooter></div>
             </Card>

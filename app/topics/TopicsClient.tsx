@@ -25,7 +25,7 @@ export default function TopicsClient({ lessons }: { lessons: LessonMetadata[] })
 
   return (
     <div className="w-full py-[clamp(1.5rem,4vw,3.5rem)] pb-16 max-sm:pt-4">
-      <header className="material-surface material-cardboard-paper relative mx-auto mb-8 max-w-[840px] rounded-xl border border-border p-[clamp(1.75rem,4vw,3rem)] text-center shadow-[5px_7px_0_color-mix(in_srgb,var(--border)_75%,transparent)] max-sm:px-5 max-sm:pb-6 max-sm:pt-8">
+      <header className="card-paper relative mx-auto mb-8 max-w-[840px] rounded-xl border border-border p-[clamp(1.75rem,4vw,3rem)] text-center shadow-[5px_7px_0_color-mix(in_srgb,var(--border)_75%,transparent)] max-sm:px-5 max-sm:pb-6 max-sm:pt-8">
         <span className="brand-asset fastener-push-pin icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
         <div className="font-body text-[.68rem] font-black leading-none tracking-[.12em] text-primary uppercase">Curriculum-organized starting points</div>
         <h1 className="my-3 font-heading text-[clamp(2.5rem,6vw,4rem)] font-normal leading-[.95] text-balance text-foreground max-sm:text-[clamp(2.25rem,12vw,3.25rem)]">Browse lesson topics</h1>
@@ -39,7 +39,7 @@ export default function TopicsClient({ lessons }: { lessons: LessonMetadata[] })
       </header>
       <section className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 max-sm:gap-3" aria-label="Lesson topics">
         {filtered.map((lesson) => (
-          <Card className="material-surface material-cardboard-paper min-h-60 gap-0 p-0 shadow-[4px_6px_0_color-mix(in_srgb,var(--border)_75%,transparent)] [contain-intrinsic-size:auto_240px] [content-visibility:auto] print:[contain-intrinsic-size:none] print:[content-visibility:visible] max-sm:min-h-0" key={lesson.slug}>
+          <Card className="card-paper min-h-60 gap-0 p-0 shadow-[4px_6px_0_color-mix(in_srgb,var(--border)_75%,transparent)] [contain-intrinsic-size:auto_240px] [content-visibility:auto] print:[contain-intrinsic-size:none] print:[content-visibility:visible] max-sm:min-h-0" key={lesson.slug}>
             <Link className="flex min-h-full flex-1 flex-col p-6 max-sm:p-5" href={lessonHref(lesson)}>
               <CardHeader className="p-0">
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm text-muted-foreground"><span>{lesson.subject}</span><strong>{lesson.category}</strong></div>

@@ -9,7 +9,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { NativeSelect } from "@/components/ui/native-select";
+import { Search } from "lucide-react";
 import { GRADE_SEARCH_VALUES, lessonHref, type GradeKey } from "@/lib/grade-routes";
 
 type SearchResult = { id: string; kind: string; title: string; excerpt: string | null; lyrics: string | null; instructions: string | null; meta: Record<string, string>; href: string | null };
@@ -80,13 +82,31 @@ export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGr
 
   return (
     <div className="flex min-w-0 flex-col gap-6" data-search-scope={lockedGrade ? "grade" : "all"}>
-      <Card className="material-surface material-cardboard-paper relative overflow-visible py-0">
+      <Card className="card-paper relative overflow-visible py-0">
         <span className="brand-asset fastener-paperclip icon-small pointer-events-none absolute -top-3 right-6" aria-hidden="true" />
         <CardHeader className="pt-8"><Badge className="w-fit" variant="secondary">{lockedGrade ? `${gradeLabel} search` : "Curriculum workroom"}</Badge><CardTitle className="font-heading text-3xl leading-none sm:text-4xl">{heading}</CardTitle><CardDescription>{summary}</CardDescription></CardHeader>
         <CardContent>
           <form onSubmit={submitSearch} role="search" aria-busy={loading}>
             <FieldGroup className="gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_12rem_12rem_auto] lg:items-end">
-              <Field><FieldLabel htmlFor={lockedGrade ? `search-${lockedGrade}` : "search-all"}>Search words</FieldLabel><Input id={lockedGrade ? `search-${lockedGrade}` : "search-all"} type="search" value={query} onChange={(event) => setQuery(event.target.value)} name="q" autoComplete="off" placeholder="Try ponies, counting, or a lesson goal" minLength={2} required /></Field>
+              <Field>
+                <FieldLabel htmlFor={lockedGrade ? `search-${lockedGrade}` : "search-all"}>Search words</FieldLabel>
+                <InputGroup>
+                  <InputGroupAddon>
+                    <Search className="size-4 text-muted-foreground" aria-hidden="true" />
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    id={lockedGrade ? `search-${lockedGrade}` : "search-all"}
+                    type="search"
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    name="q"
+                    autoComplete="off"
+                    placeholder="Try ponies, counting, or a lesson goal"
+                    minLength={2}
+                    required
+                  />
+                </InputGroup>
+              </Field>
               {lockedGrade ? null : <Field><FieldLabel htmlFor="search-grade">Grade</FieldLabel><NativeSelect id="search-grade" name="grade" value={grade} onChange={(event) => setGrade(event.target.value)}>{GRADE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</NativeSelect></Field>}
               <Field><FieldLabel htmlFor={lockedGrade ? `kind-${lockedGrade}` : "search-kind"}>Resource type</FieldLabel><NativeSelect id={lockedGrade ? `kind-${lockedGrade}` : "search-kind"} name="kind" value={kind} onChange={(event) => setKind(event.target.value)}><option value="">All resources</option><option value="song">Songs</option><option value="knowledge">Knowledge</option></NativeSelect></Field>
               <Field className="lg:w-auto"><Button type="submit" disabled={loading}>{loading ? "Searching…" : "Search"}</Button></Field>
@@ -94,10 +114,10 @@ export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGr
           </form>
         </CardContent>
       </Card>
-      {!searched ? <Empty className="material-surface material-cardboard-paper border"><EmptyHeader><EmptyTitle>Start with what you want to teach.</EmptyTitle><EmptyDescription>{lockedGrade ? `Try a classroom word, song, activity, or learning goal for ${gradeLabel}.` : "Try ponies, fingerplay, steady beat, or a learning goal."}</EmptyDescription></EmptyHeader></Empty> : loading ? <Card className="material-surface material-cardboard-paper"><CardHeader><CardTitle>Searching the curriculum collection…</CardTitle><CardDescription role="status">Finding curriculum topics, lesson drafts, and linked resources.</CardDescription></CardHeader></Card> : error ? <Empty className="material-surface material-cardboard-paper border" role="alert"><EmptyHeader><EmptyTitle>The search could not be completed.</EmptyTitle><EmptyDescription>{error}</EmptyDescription></EmptyHeader><Button type="button" onClick={() => void search()}>Try again</Button></Empty> : resultCount === 0 ? <Empty className="material-surface material-cardboard-paper border"><EmptyHeader><EmptyTitle>No matching curriculum or resources were found.</EmptyTitle><EmptyDescription>Try a shorter phrase or a broader teaching goal.</EmptyDescription></EmptyHeader></Empty> : <section className="flex min-w-0 flex-col gap-4" aria-live="polite"><header className="flex flex-wrap items-baseline justify-between gap-2"><div><Badge variant="outline">{searchMode === "hybrid-keyword-semantic" ? "Keyword + meaning search" : "Keyword search"}</Badge><h2 className="mt-2 font-heading text-3xl">{resultCount} matches</h2></div>{lockedGrade ? <p className="text-sm text-muted-foreground">Filtered to {gradeLabel}</p> : null}</header><div className="grid min-w-0 gap-4 lg:grid-cols-2">
-        {curriculum.map((topic) => <Card className="material-surface material-cardboard-paper relative overflow-visible" key={`topic:${topic.id}:${topic.grade_key}`}><span className="brand-asset fastener-push-pin icon-small pointer-events-none absolute -top-3 right-6" aria-hidden="true" /><CardHeader><Badge className="w-fit" variant="outline">Curriculum topic</Badge><CardTitle>{topicTitle(topic)}</CardTitle><CardDescription>{topicSummary(topic)}</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge variant="secondary">{topic.grade}</Badge><Badge variant="secondary">{topic.subject}</Badge>{topic.why_match ? <p className="w-full text-sm text-muted-foreground">{topic.why_match}</p> : null}</CardContent><CardFooter><Button asChild variant="outline"><Link href={topicHref(topic)}>Open topic</Link></Button></CardFooter></Card>)}
-        {lessons.map((lesson) => <Card className="material-surface material-cardboard-paper" key={`lesson:${lesson.id}`}><CardHeader><Badge className="w-fit" variant="outline">Lesson draft</Badge><CardTitle>{lesson.title}</CardTitle><CardDescription>{lesson.summary || lesson.purpose || "No lesson summary is available."}</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge variant="secondary">{lesson.grade_band}</Badge><Badge variant="secondary">{lesson.subject}</Badge></CardContent><CardFooter><Button asChild variant="outline"><Link href={lessonHref({ slug: lesson.slug, grade: lesson.grade_band || "" })}>Open lesson</Link></Button></CardFooter></Card>)}
-        {results.map((result) => <Card className="material-surface material-cardboard-paper" key={`resource:${result.kind}:${result.id}`}><CardHeader><Badge className="w-fit" variant="outline">{result.kind}</Badge><CardTitle>{result.title}</CardTitle><CardDescription>{resourcePreview(result)}</CardDescription></CardHeader>{result.href ? <CardFooter><Button asChild variant="outline"><a href={result.href} target="_blank" rel="noreferrer">Open resource</a></Button></CardFooter> : null}</Card>)}
+      {!searched ? <Empty className="card-paper border"><EmptyHeader><EmptyTitle>Start with what you want to teach.</EmptyTitle><EmptyDescription>{lockedGrade ? `Try a classroom word, song, activity, or learning goal for ${gradeLabel}.` : "Try ponies, fingerplay, steady beat, or a learning goal."}</EmptyDescription></EmptyHeader></Empty> : loading ? <Card className="card-paper"><CardHeader><CardTitle>Searching the curriculum collection…</CardTitle><CardDescription role="status">Finding curriculum topics, lesson drafts, and linked resources.</CardDescription></CardHeader></Card> : error ? <Empty className="card-paper border" role="alert"><EmptyHeader><EmptyTitle>The search could not be completed.</EmptyTitle><EmptyDescription>{error}</EmptyDescription></EmptyHeader><Button type="button" onClick={() => void search()}>Try again</Button></Empty> : resultCount === 0 ? <Empty className="card-paper border"><EmptyHeader><EmptyTitle>No matching curriculum or resources were found.</EmptyTitle><EmptyDescription>Try a shorter phrase or a broader teaching goal.</EmptyDescription></EmptyHeader></Empty> : <section className="flex min-w-0 flex-col gap-4" aria-live="polite"><header className="flex flex-wrap items-baseline justify-between gap-2"><div><Badge variant="outline">{searchMode === "hybrid-keyword-semantic" ? "Keyword + meaning search" : "Keyword search"}</Badge><h2 className="mt-2 font-heading text-3xl">{resultCount} matches</h2></div>{lockedGrade ? <p className="text-sm text-muted-foreground">Filtered to {gradeLabel}</p> : null}</header><div className="grid min-w-0 gap-4 lg:grid-cols-2">
+        {curriculum.map((topic) => <Card className="card-paper relative overflow-visible" key={`topic:${topic.id}:${topic.grade_key}`}><span className="brand-asset fastener-push-pin icon-small pointer-events-none absolute -top-3 right-6" aria-hidden="true" /><CardHeader><Badge className="w-fit" variant="outline">Curriculum topic</Badge><CardTitle>{topicTitle(topic)}</CardTitle><CardDescription>{topicSummary(topic)}</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge variant="secondary">{topic.grade}</Badge><Badge variant="secondary">{topic.subject}</Badge>{topic.why_match ? <p className="w-full text-sm text-muted-foreground">{topic.why_match}</p> : null}</CardContent><CardFooter><Button asChild variant="outline"><Link href={topicHref(topic)}>Open topic</Link></Button></CardFooter></Card>)}
+        {lessons.map((lesson) => <Card className="card-paper" key={`lesson:${lesson.id}`}><CardHeader><Badge className="w-fit" variant="outline">Lesson draft</Badge><CardTitle>{lesson.title}</CardTitle><CardDescription>{lesson.summary || lesson.purpose || "No lesson summary is available."}</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge variant="secondary">{lesson.grade_band}</Badge><Badge variant="secondary">{lesson.subject}</Badge></CardContent><CardFooter><Button asChild variant="outline"><Link href={lessonHref({ slug: lesson.slug, grade: lesson.grade_band || "" })}>Open lesson</Link></Button></CardFooter></Card>)}
+        {results.map((result) => <Card className="card-paper" key={`resource:${result.kind}:${result.id}`}><CardHeader><Badge className="w-fit" variant="outline">{result.kind}</Badge><CardTitle>{result.title}</CardTitle><CardDescription>{resourcePreview(result)}</CardDescription></CardHeader>{result.href ? <CardFooter><Button asChild variant="outline"><a href={result.href} target="_blank" rel="noreferrer">Open resource</a></Button></CardFooter> : null}</Card>)}
       </div></section>}
       {onBack ? <Button type="button" variant="link" onClick={onBack}>← Back to today</Button> : null}
     </div>

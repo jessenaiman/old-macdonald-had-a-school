@@ -1,2 +1,0 @@
-ALTER TABLE "search_chunks" ADD COLUMN "tsv" text GENERATED ALWAYS AS (setweight(to_tsvector('english', coalesce(title, '')), 'A') || setweight(to_tsvector('english', coalesce(chunk_text, '')), 'B')) STORED;--> statement-breakpoint
-CREATE INDEX "search_chunks_tsv_idx" ON "search_chunks" USING gin ("tsv");

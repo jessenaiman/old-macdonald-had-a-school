@@ -52,7 +52,7 @@ const SUBJECT_CARDS: readonly SubjectCardType[] = [
 function SubjectCard({ subject, guideKey }: { subject: SubjectCardType; guideKey: CastKey }) {
   const guide = CAST[guideKey];
   return (
-    <Card className="group h-full flex flex-col transition-transform hover:-translate-y-1 hover:shadow-lg">
+    <Card className="group h-full flex flex-col transition-transform hover:-translate-y-1 hover:shadow-lg card-paper">
       <CardHeader className="flex flex-col items-center text-center pb-4">
         <div className="relative mb-4">
           <Avatar className="size-20 ring-4 ring-background shadow-lg">
@@ -178,7 +178,7 @@ export default function Home() {
       </section>
 
       {/* Subjects Section */}
-      <section className="py-16 sm:py-24 bg-muted/30 border-y border-border">
+      <section className="py-16 sm:py-24 bg-paper-ivory border-y border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <header className="text-center max-w-2xl mx-auto mb-12">
             <Badge variant="outline" className="mb-4">Find a teaching thread</Badge>
@@ -213,7 +213,7 @@ export default function Home() {
               <Link href="/songs">View all songs <ArrowRight className="ml-2 size-4" aria-hidden="true" /></Link>
             </Button>
           </header>
-          <div className="space-y-3" role="list" aria-label="Songs to repeat">
+          <div className="flex flex-col gap-3" role="list" aria-label="Songs to repeat">
             {HOME_VIDEO_SONGS.slice(0, 3).map((song): React.ReactElement => (
               <SongRow key={song.slug} song={song} />
             ))}
@@ -222,7 +222,7 @@ export default function Home() {
       </section>
 
       {/* New This Week */}
-      <section className="py-16 sm:py-24 bg-muted/30 border-y border-border">
+      <section className="py-16 sm:py-24 bg-paper-ivory border-y border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
             <div>
@@ -242,7 +242,7 @@ export default function Home() {
               { title: "Plant Your Seeds", summary: "A growing pattern song for spring.", subject: "Nature & science", grade: "Pre-School, Kindergarten" },
               { title: "Seven Jumps", summary: "Movement game with musical cues.", subject: "Health & PE", grade: "Kindergarten, Grade 1, Grade 2" },
             ].map((song, i) => (
-              <Card key={i} className="h-full flex flex-col">
+              <Card key={i} className="h-full flex flex-col card-paper">
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <Badge variant="secondary">{song.subject}</Badge>

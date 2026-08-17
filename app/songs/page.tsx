@@ -42,7 +42,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
   const nextLimit = Math.min(resultLimit + 30, songs.length);
 
   return (
-    <div className="material-surface material-cardboard-paper min-h-dvh px-4 py-8 text-foreground sm:px-6 lg:px-8 lg:py-14">
+    <div className="min-h-dvh px-4 py-8 text-foreground sm:px-6 lg:px-8 lg:py-14">
       <section className="flex flex-col gap-8" aria-labelledby="songbook-heading">
         <header className="max-w-3xl">
           <p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Practical teacher songbook</p>
