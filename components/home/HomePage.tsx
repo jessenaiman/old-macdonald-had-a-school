@@ -6,14 +6,10 @@ import { CreativeArtsSection } from "./CreativeArtsSection";
 import { HomeCarousel } from "./HomeCarousel";
 import { HomeGradeNav } from "./HomeGradeNav";
 import { HomeSubjectNote } from "./HomeSubjectNote";
-import { HOME_SUBJECTS, HOME_VIDEO_SONGS, SUBJECT_LEARNERS, type HomeLesson } from "./home-data";
+import { HOME_SUBJECTS, HOME_VIDEO_SONGS, SUBJECT_LEARNERS } from "./home-data";
 import { WeeklyLessonList } from "./WeeklyLessonList";
 
-type HomePageProps = { hero: { title?: string }; lessons: HomeLesson[] };
-
-export function pickLessons(lessons: HomeLesson[], slugs: readonly string[]) {
-  return slugs.map((slug) => lessons.find((lesson) => lesson.slug === slug)).filter((lesson): lesson is HomeLesson => Boolean(lesson));
-}
+type HomePageProps = { hero: { title?: string } };
 
 function HeroTitle({ title, as: Heading = "h1", id = "home-title" }: { title?: string; as?: ElementType; id?: string }) {
   const resolvedTitle = title ?? "Where familiar songs become new places to learn.";
