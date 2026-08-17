@@ -69,16 +69,16 @@ function SubjectCard({ subject, guideKey }: { subject: SubjectCardType; guideKey
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 flex flex-col justify-end">
-        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1">
+        <div className="flex items-center justify-center">
+          <Badge variant="secondary" className="gap-2 py-1 pl-1 pr-2.5">
             <Avatar className="size-6">
               <AvatarImage src={guide?.portrait} alt={guide?.name} />
               <AvatarFallback className="bg-primary/10 text-primary text-xs">
                 {guide?.name?.charAt(0)}
               </AvatarFallback>
             </Avatar>
-            Guided by {guide?.name}
-          </span>
+            <span>Guided by {guide?.name}</span>
+          </Badge>
         </div>
       </CardContent>
       <CardFooter className="pt-0">

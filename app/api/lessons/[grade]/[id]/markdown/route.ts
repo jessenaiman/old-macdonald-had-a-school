@@ -1,7 +1,7 @@
 import { getCurriculumTopic } from "../../../../../../lib/curriculum-db";
-import { appendCurriculumMaterialsToMarkdown, getCurriculumLessonByTitleAndGrade } from "../../../../../../lib/curriculum-lesson";
+import { getCurriculumLessonByTitleAndGrade } from "../../../../../../lib/curriculum-lesson";
 import { GRADE_KEYS, type GradeKey } from "../../../../../../lib/grade-routes";
-import { serializeCurriculumTopicAsMarkdown } from "../../../../../../lib/lesson-model";
+import { renderTopicHybridMarkdown } from "../../../../../../lib/hybrid-lessons";
 
 export const runtime = "nodejs";
 
@@ -30,7 +30,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ gra
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-  return new Response(appendCurriculumMaterialsToMarkdown(serializeCurriculumTopicAsMarkdown(topic), curriculumLesson), {
+  return new Response(renderTopicHybridMarkdown(topic, curriculumLesson), {
     headers: {
       "Content-Disposition": `attachment; filename="${filename || topic.id}.md"`,
       "Content-Type": "text/markdown; charset=utf-8",

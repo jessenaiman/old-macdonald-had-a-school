@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
     // format if neither matches.
     formats: ["image/avif", "image/webp"],
   },
+  // Hide the dev-only on-screen route indicator that otherwise appears in every
+  // visual QA capture (bottom-left by default). Errors still surface normally.
+  devIndicators: false,
 };
 
 const withMDX = createMDX({
