@@ -17,8 +17,8 @@ import { TEACHER_GRADE_ITEMS, type ActivePage } from "./site-navigation";
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
 
 /**
- * Responsive navigation composition using the installed shadcn Sheet. Custom
- * code is limited to this site's route list and closing the sheet after navigation.
+ * Responsive navigation composition using the installed shadcn Sheet.
+ * Navigation order: Grades → Subjects → Search → About (matching header)
  */
 export function MobileNavigation({ active }: { active?: ActivePage }) {
   const [open, setOpen] = useState(false);
@@ -27,14 +27,14 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
     <div>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-lg"
-              aria-label="Open navigation menu"
-            >
-              <Menu data-icon="inline-start" aria-hidden="true" />
-              <span className="sr-only">Open navigation menu</span>
-            </Button>
+          <Button
+            variant="ghost"
+            size="icon-lg"
+            aria-label="Open navigation menu"
+          >
+            <Menu data-icon="inline-start" aria-hidden="true" />
+            <span className="sr-only">Open navigation menu</span>
+          </Button>
         </SheetTrigger>
 
         <SheetContent
@@ -62,21 +62,8 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
           </SheetHeader>
 
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link
-                href="/lessons"
-                aria-current={active === "lessons" ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                Lessons
-              </Link>
-            </Button>
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link href="/#browse-by-subject" aria-current={active === "topics" ? "page" : undefined} onClick={() => setOpen(false)}>
-                Subjects
-              </Link>
-            </Button>
-            <div className="my-2 border-t pt-3">
+            {/* Grades - first */}
+            <div className="border-b pb-3">
               <p className="px-4 pb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">Grades</p>
               <div className="flex flex-col gap-1">
                 {TEACHER_GRADE_ITEMS.map((grade) => (
@@ -88,31 +75,25 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
                 ))}
               </div>
             </div>
+
+            {/* Subjects */}
             <Button asChild variant="ghost" className="w-full justify-start">
-              <Link
-                href="/songs"
-                aria-current={active === "songs" ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                For Teachers
+              <Link href="/#browse-by-subject" aria-current={active === "topics" ? "page" : undefined} onClick={() => setOpen(false)}>
+                Subjects
               </Link>
             </Button>
+
+            {/* Search */}
             <Button asChild variant="ghost" className="w-full justify-start">
-              <Link
-                href="/about"
-                aria-current={active === "about" ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
+              <Link href="/search" aria-current={active === "search" ? "page" : undefined} onClick={() => setOpen(false)}>
+                Search lessons
+              </Link>
+            </Button>
+
+            {/* About */}
+            <Button asChild variant="ghost" className="w-full justify-start">
+              <Link href="/about" aria-current={active === "about" ? "page" : undefined} onClick={() => setOpen(false)}>
                 About
-              </Link>
-            </Button>
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link
-                href="/search"
-                aria-current={active === "search" ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                Search
               </Link>
             </Button>
           </nav>

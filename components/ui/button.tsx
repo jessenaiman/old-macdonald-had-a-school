@@ -9,10 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "material-surface material-paper-ruled border border-border shadow-xs hover:brightness-95",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
+          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
         outline:
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -20,36 +19,21 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
-        grid:
-          "material-surface material-paper-grid border border-border shadow-xs hover:brightness-95",
-        note:
-          "border-0 bg-transparent bg-[image:var(--subject-note-paper)] bg-[length:100%_100%] bg-center bg-no-repeat text-foreground shadow-none hover:brightness-95",
-        construction:
-          "material-surface material-construction-paper border border-border shadow-xs hover:brightness-95",
       },
       size: {
-        default: "min-h-11 px-4 py-2 has-[>svg]:px-3",
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
         xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5",
-        lg: "min-h-11 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-11",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-9",
         "icon-xs": "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
         "icon-sm": "size-8",
-        "icon-lg": "size-11",
-      },
-      shape: {
-        default: "rounded-md",
-        pill: "rounded-full",
-        square: "rounded-none",
-        soft: "rounded-xl",
-        tab: "rounded-t-xl rounded-b-sm",
-        label: "rounded-l-2xl rounded-r-sm",
+        "icon-lg": "size-10",
       },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
-      shape: "default",
     },
   }
 )
@@ -58,7 +42,6 @@ function Button({
   className,
   variant = "default",
   size = "default",
-  shape = "default",
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> &
@@ -72,7 +55,7 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
-      className={cn(buttonVariants({ variant, size, shape, className }))}
+      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
   )

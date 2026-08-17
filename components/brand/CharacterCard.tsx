@@ -12,7 +12,7 @@ export function CharacterCard({ character, role, meta, activities, variant = "st
       {role ? <p className="m-0 text-base leading-[1.35] font-black">{role}</p> : null}
       {meta ? <p className="m-0 text-sm leading-[1.45] text-muted-foreground">{meta}</p> : null}
       {activities ? <p className="mt-0.5 mb-0 border-t border-dashed pt-2 text-sm leading-[1.5]"><strong className="mb-0.5 block text-xs tracking-[0.08em] uppercase">Use in</strong>{activities}</p> : null}
-      <Badge aria-label={`${identity.name} uses the current character theme color`} variant="character">Identity colour</Badge>
+      <Badge aria-label={`${identity.name} uses the current character theme color`} variant="secondary">Identity colour</Badge>
     </div>
   </BrandIdentityCard>;
 }

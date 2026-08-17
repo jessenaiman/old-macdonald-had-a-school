@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,64 +19,44 @@ import { activePageFromPathname, TEACHER_GRADE_ITEMS } from "./site-navigation";
 /**
  * Site-specific header that composes the installed NavigationMenu and mobile
  * Sheet navigation around the project route configuration.
+ * Navigation order: Grades → Subjects → Search → About
  */
 export function SiteHeader() {
   const active = activePageFromPathname(usePathname());
 
   return (
-    <header className="material-surface material-leather-indigo relative z-40 border-b-2 border-border shadow-lg after:pointer-events-none after:absolute after:inset-2 after:z-0 after:rounded-xl after:border after:border-dashed after:border-accent/60 after:content-['']">
-      <div className="relative z-10 mx-auto flex min-h-20 w-full max-w-screen-2xl items-center gap-3 px-3 sm:px-4 lg:gap-6">
+    <header className="bg-primary/5 border-b border-border sticky top-0 z-40">
+      <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link
-          className="inline-flex min-h-11 min-w-0 flex-1 items-center gap-2 lg:max-w-xs lg:gap-3"
+          className="inline-flex items-center gap-2 shrink-0"
           href="/"
           aria-label="Old MacDonald Had a School home"
         >
-          <ResponsiveBrandEmblem className="shrink-0" />
-          <span className="min-w-0">
-            <strong className="block font-brand text-sm leading-none sm:text-base">
-              <span className="hidden xl:inline">
-                Old MacDonald Had a School
-              </span>
-              <span className="xl:hidden">Old MacDonald</span>
-            </strong>
-            <small className="mt-1 block text-xs font-black uppercase tracking-wider text-accent">Had a School</small>
-          </span>
+          <ResponsiveBrandEmblem className="h-8 w-auto" />
         </Link>
+
         <NavigationMenu
-          className="hidden min-w-0 flex-1 font-display lg:flex"
+          className="hidden flex-1 font-display lg:flex"
           aria-label="Primary navigation"
           viewport={false}
         >
-          <NavigationMenuList>
+          <NavigationMenuList className="flex items-center gap-1">
+            {/* Grades - first, as teachers navigate by grade level */}
             <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link
-                  href="/lessons"
-                  aria-current={active === "lessons" ? "page" : undefined}
-                >
-                  Lessons
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link
-                  href="/#browse-by-subject"
-                  aria-current={active === "topics" ? "page" : undefined}
-                >
-                  Subjects
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Grades</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-64 gap-1 p-1">
+              <NavigationMenuTrigger className="px-3 py-2 text-sm font-medium transition-colors hover:text-foreground">
+                Grades
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="w-56">
+                <ul className="grid gap-1 p-1">
                   {TEACHER_GRADE_ITEMS.map((grade) => (
                     <li key={grade.key}>
                       <NavigationMenuLink asChild>
-                        <Link href={grade.href} aria-current={active === grade.key ? "page" : undefined}>
-                          <span className="font-medium">{grade.label}</span>
+                        <Link
+                          href={grade.href}
+                          aria-current={active === grade.key ? "page" : undefined}
+                          className="flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors hover:bg-accent hover:text-accent-foreground"
+                        >
+                          {grade.label}
                         </Link>
                       </NavigationMenuLink>
                     </li>
@@ -84,45 +64,54 @@ export function SiteHeader() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
+
+            {/* Subjects */}
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
-                  href="/songs"
-                  aria-current={active === "songs" ? "page" : undefined}
+                  href="/#browse-by-subject"
+                  aria-current={active === "topics" ? "page" : undefined}
+                  className="px-3 py-2 text-sm font-medium transition-colors hover:text-foreground"
                 >
-                  For Teachers
+                  Subjects
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
+
+            {/* Search */}
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link
+                  href="/search"
+                  aria-label="Search lessons"
+                  aria-current={active === "search" ? "page" : undefined}
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors hover:text-foreground"
+                >
+                  <Search className="size-4" aria-hidden="true" />
+                  <span>Search</span>
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            {/* About */}
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
                   href="/about"
                   aria-current={active === "about" ? "page" : undefined}
+                  className="px-3 py-2 text-sm font-medium transition-colors hover:text-foreground"
                 >
                   About
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link
-                  className="flex-row gap-2 whitespace-nowrap"
-                  href="/search"
-                  aria-label="Search lessons"
-                  aria-current={active === "search" ? "page" : undefined}
-                >
-                  <Search aria-hidden="true" />
-                  <span>Search</span>
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="hidden items-center lg:flex">
+
+        <div className="hidden items-center gap-4 lg:flex">
           <ThemeSwitcher />
         </div>
-        <div className="flex items-center gap-1 lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <MobileNavigation active={active} />
           <ThemeSwitcher />
         </div>
