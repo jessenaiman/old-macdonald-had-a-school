@@ -5,13 +5,12 @@ description: Early-years music education, source interpretation, and teacher-use
 
 # Early-Years Music Expert
 
-Use the smallest relevant mode. Source evidence lives at `docs/early-years-music-resources/`; the managed system is `data/omhas.db`. Do not load the entire knowledge layer for a narrow task.
+Source evidence lives at `docs/early-years-music-resources/`;
 
 ## Choose one mode
 
-- Educational explanation or lesson design: read `references/teaching.md`.
+- Educational refresher starter course: read `references/teaching.md,
 - Original-source review, song versions, actions, lyrics, or history: read `references/source-review.md` and only the needed local source.
-- Import planning or database relationships: use `sql-expert` and read `references/import-contract.md`; this skill supplies educational judgment, not SQL execution.
 
 ## Shared rules
 
