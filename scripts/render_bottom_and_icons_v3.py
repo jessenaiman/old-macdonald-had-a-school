@@ -4,6 +4,7 @@ import math
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
+SOURCE_IMAGES = ROOT / "assets" / "source-images" / "public"
 OUT = PUBLIC / "design-explorations-v3"
 FONTS = Path(r"C:\Users\jesse\.agents\skills\canvas-design\canvas-fonts")
 OUT.mkdir(parents=True, exist_ok=True)
@@ -37,6 +38,11 @@ def tiled(path, size):
     return out
 
 
+def source_asset(relative):
+    archived = SOURCE_IMAGES / relative
+    return archived if archived.exists() else PUBLIC / relative
+
+
 def text(draw, xy, value, font, fill=NAVY, anchor=None):
     draw.text(xy, value, font=font, fill=fill, anchor=anchor)
 
@@ -65,21 +71,21 @@ def shadow(im, box, radius=5, offset=(7, 8), alpha=45):
 
 def paste_patch(im, box, asset, label):
     x0,y0,x1,y1=box
-    patch=Image.open(PUBLIC/"design-assets/blank-felt-patches-v1/individual-patches"/asset).convert("RGBA")
+    patch=Image.open(source_asset(Path("design-assets/blank-felt-patches-v1/individual-patches")/asset)).convert("RGBA")
     patch=patch.crop(patch.getchannel("A").getbbox()).resize((x1-x0,y1-y0),Image.Resampling.LANCZOS)
     im.alpha_composite(patch,(x0,y0))
     text(ImageDraw.Draw(im),((x0+x1)//2,(y0+y1)//2-2),label,DISPLAY(17),"white","mm")
 
 
 def fastener(im, name, box):
-    asset=Image.open(PUBLIC/"design-assets/classroom-fasteners-v1/individual-icons"/name).convert("RGBA")
+    asset=Image.open(source_asset(Path("design-assets/classroom-fasteners-v1/individual-icons")/name)).convert("RGBA")
     asset.thumbnail((box[2]-box[0],box[3]-box[1]),Image.Resampling.LANCZOS)
     im.alpha_composite(asset,(box[0],box[1]))
 
 
 def base_bottom(title, subtitle):
     w,h=1400,700
-    kraft=tiled(PUBLIC/"design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png",(w,h)).convert("RGBA")
+    kraft=tiled(source_asset("design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png"),(w,h)).convert("RGBA")
     kraft.alpha_composite(Image.new("RGBA",(w,h),(95,54,22,24)))
     d=ImageDraw.Draw(kraft)
     text(d,(55,38),title,DISPLAY(27),"#fff8e9")
@@ -247,11 +253,11 @@ def render_icon_sheet():
     sheet.save(OUT/"small-activity-icons-transparent.png")
 
     w,h=1600,1040
-    kraft=tiled(PUBLIC/"design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png",(w,h)).convert("RGBA")
+    kraft=tiled(source_asset("design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png"),(w,h)).convert("RGBA")
     d=ImageDraw.Draw(kraft)
     text(d,(60,40),"Matte sticker activity markers",DISPLAY(30),"#fff9e9")
     text(d,(60,82),"24 LOW-DETAIL ICONS · TRANSPARENT MASTER SHEET INCLUDED",MONO(11),"#f3ce70")
-    felt=tiled(PUBLIC/"design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png",(1480,860)).convert("RGBA")
+    felt=tiled(source_asset("design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png"),(1480,860)).convert("RGBA")
     mask=Image.new("L",felt.size);ImageDraw.Draw(mask).rounded_rectangle((0,0,1479,859),24,fill=255);felt.putalpha(mask);kraft.alpha_composite(felt,(60,130))
     d=ImageDraw.Draw(kraft)
     for i,(kind,label) in enumerate(zip(KINDS,LABELS)):

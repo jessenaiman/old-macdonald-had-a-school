@@ -6,6 +6,7 @@ import render_bottom_and_icons_v3 as v3
 
 ROOT=Path(__file__).resolve().parents[1]
 PUBLIC=ROOT/"public"
+SOURCE_IMAGES=ROOT/"assets"/"source-images"/"public"
 OUT=PUBLIC/"design-explorations-v4"
 INDIVIDUAL=OUT/"individual-felt-icons"
 FONTS=Path(r"C:\Users\jesse\.agents\skills\canvas-design\canvas-fonts")
@@ -27,8 +28,13 @@ def tile(path,size):
     return out
 
 
+def source_asset(relative):
+    archived=SOURCE_IMAGES/relative
+    return archived if archived.exists() else PUBLIC/relative
+
+
 def cork_surface(size):
-    random.seed(44);im=tile(PUBLIC/"design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png",size).convert("RGBA")
+    random.seed(44);im=tile(source_asset("design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png"),size).convert("RGBA")
     d=ImageDraw.Draw(im,"RGBA")
     for _ in range(3500):
         x=random.randrange(size[0]);y=random.randrange(size[1]);r=random.choice((1,1,1,2,3));c=random.choice(((76,42,18,35),(239,202,139,35),(110,65,31,28)))
@@ -45,7 +51,7 @@ def whiteboard_surface(size):
 
 
 def presentation_surface(size):
-    im=tile(PUBLIC/"design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png",size).convert("RGBA")
+    im=tile(source_asset("design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.png"),size).convert("RGBA")
     im.alpha_composite(Image.new("RGBA",size,(8,35,53,45)))
     return im
 
@@ -57,7 +63,7 @@ def shadow(im,box,radius=8,alpha=52,offset=(7,9)):
 
 
 def fastener(im,name,xy,maxsize):
-    icon=Image.open(PUBLIC/"design-assets/classroom-fasteners-v1/individual-icons"/name).convert("RGBA");icon.thumbnail(maxsize,Image.Resampling.LANCZOS);im.alpha_composite(icon,xy)
+    icon=Image.open(source_asset(Path("design-assets/classroom-fasteners-v1/individual-icons")/name)).convert("RGBA");icon.thumbnail(maxsize,Image.Resampling.LANCZOS);im.alpha_composite(icon,xy)
 
 
 def note(im,box,eyebrow,title,attachment,board_kind,index):
@@ -89,7 +95,7 @@ def note(im,box,eyebrow,title,attachment,board_kind,index):
 
 def board_mockup(kind,title,subtitle):
     w,h=1400,800
-    base=tile(PUBLIC/"design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png",(w,h)).convert("RGBA")
+    base=tile(source_asset("design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png"),(w,h)).convert("RGBA")
     base.alpha_composite(Image.new("RGBA",(w,h),(76,44,20,30)));d=ImageDraw.Draw(base)
     text(d,(48,31),title,DISPLAY(27),"#fff8e8");text(d,(48,70),subtitle.upper(),MONO(11),"#f2ce70");d.line((48,103,1352,103),fill="#edca71",width=2)
     boardbox=(35,125,1365,765);shadow(base,boardbox,14,70,(8,11))
@@ -130,13 +136,13 @@ def felt_icon(kind,index,size=156):
     mask=irregular_mask(size,index+100,12)
     sh=Image.new("RGBA",(size,size),(28,23,17,0));sh.putalpha(mask.filter(ImageFilter.GaussianBlur(5)));canvas.alpha_composite(sh,(3,5))
     felt_name="felt-12-penny-tile.png" if kind=="count" else FELTS[index%len(FELTS)]
-    felt=tile(PUBLIC/"design-assets/web-material-library-v1/felt"/felt_name,(size,size)).convert("RGBA")
+    felt=tile(source_asset(Path("design-assets/web-material-library-v1/felt")/felt_name),(size,size)).convert("RGBA")
     felt.putalpha(mask);canvas.alpha_composite(felt)
     # simplified appliqué glyph; its colors remain bold, then receive fiber grain
     glyph_layer=Image.new("RGBA",(size,size),(0,0,0,0));gd=ImageDraw.Draw(glyph_layer)
     v3.glyph(gd,(size//2,size//2),kind,(size/128)*.78)
     alpha=glyph_layer.getchannel("A")
-    grain=tile(PUBLIC/"design-assets/web-material-library-v1/felt/felt-12-penny-tile.png",(size,size)).convert("RGBA")
+    grain=tile(source_asset("design-assets/web-material-library-v1/felt/felt-12-penny-tile.png"),(size,size)).convert("RGBA")
     grain=ImageEnhance.Contrast(grain).enhance(1.25);grain.putalpha(alpha.point(lambda a:int(a*.24)))
     canvas.alpha_composite(glyph_layer);canvas.alpha_composite(grain)
     return canvas
@@ -149,7 +155,7 @@ def icon_assets():
         icon.save(INDIVIDUAL/f"{i+1:02d}-{label.lower().replace(' ','-')}.png")
     sheet.save(OUT/"small-felt-activity-icons-transparent.png")
 
-    preview=tile(PUBLIC/"design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png",(1600,1050)).convert("RGBA")
+    preview=tile(source_asset("design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png"),(1600,1050)).convert("RGBA")
     preview.alpha_composite(Image.new("RGBA",preview.size,(86,49,20,28)));d=ImageDraw.Draw(preview)
     text(d,(60,39),"Small felt activity appliqués",DISPLAY(30),"#fff8e8");text(d,(60,81),"24 HAND-CUT, TEXTURED SYMBOLS · NO MICRO-STITCHING",MONO(11),"#f2ce70")
     d.rounded_rectangle((60,126,1540,1000),24,fill="#f4ead2")

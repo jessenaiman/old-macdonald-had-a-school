@@ -22,9 +22,9 @@ Mode: built-in image generation, one call per distinct asset family, followed by
 Style-reference inputs:
 
 - `public/staff_and_students/old-macdonald-transparent.png`
-- `public/staff_and_students/miss-hayley-transparent-circle.png`
-- `public/staff_and_students/rusty-transparent-circle.png`
-- `public/staff_and_students/maisy-transparent-circle.png`
+- `public/staff_and_students/miss-hayley-transparent-circle.webp`
+- `public/staff_and_students/rusty-transparent-circle.webp`
+- `public/staff_and_students/maisy-transparent-circle.webp`
 
 Shared constraints: original symbols only; use tactile felt, denim/navy, mustard, barn red, cream thread, and warm brown from the references; real sewn-thread cues rather than a graphic dashed border; no character likeness, people, animals, faces, mascots, words, numerals, watermark, cast shadow, or green inside the artwork; isolate every asset on flat `#00ff00` for background removal.
 

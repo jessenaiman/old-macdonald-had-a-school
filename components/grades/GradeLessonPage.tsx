@@ -22,31 +22,31 @@ const GRADE_LESSON_DETAILS: Record<
   daycare: {
     label: "Daycare",
     age: "Ages 2-3",
-    teacher: "/staff_and_students/miss-puddles-transparent-circle.png",
+    teacher: "/staff_and_students/miss-puddles-transparent-circle.webp",
     teacherName: "Miss Puddles",
   },
   "pre-school": {
     label: "Pre-School",
     age: "Ages 3-4",
-    teacher: "/staff_and_students/miss-maisy-transparent-circle.png",
+    teacher: "/staff_and_students/miss-maisy-transparent-circle.webp",
     teacherName: "Miss Maisy",
   },
   kindergarten: {
     label: "Kindergarten",
     age: "Ages 4-6",
-    teacher: "/staff_and_students/mr-rusty-transparent-circle.png",
+    teacher: "/staff_and_students/mr-rusty-transparent-circle.webp",
     teacherName: "Mr Rusty",
   },
   "grade-one": {
     label: "Grade 1",
     age: "5-6 yrs",
-    teacher: "/staff_and_students/miss-hayley-transparent-circle.png",
+    teacher: "/staff_and_students/miss-hayley-transparent-circle.webp",
     teacherName: "Miss Hayley",
   },
   "grade-two": {
     label: "Grade 2",
     age: "6-7 yrs",
-    teacher: "/staff_and_students/mr-maisy-transparent-circle.png",
+    teacher: "/staff_and_students/mr-maisy-transparent-circle.webp",
     teacherName: "Mr Maisy",
   },
 };

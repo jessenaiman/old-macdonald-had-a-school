@@ -212,7 +212,8 @@ export function TeacherNote({
             height={220}
             alt={teacher.name}
             className="absolute bottom-0 left-1 h-full w-24 object-contain object-bottom sm:w-40"
-            priority
+            preload
+            sizes="(min-width: 640px) 10rem, 6rem"
           />
         </CardContent>
       </Card>
@@ -317,8 +318,11 @@ export function GradeInteractionLane({
               <TabsTrigger
                 key={entry.id}
                 value={entry.id}
-                className="grow justify-start lg:w-full"
+                className="grow justify-start gap-2 lg:w-full"
               >
+                <span className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[.625rem] font-black tabular-nums" aria-hidden="true">
+                  {String(sections.indexOf(entry) + 1).padStart(2, "0")}
+                </span>
                 <span>{entry.label}</span>
               </TabsTrigger>
             ))}

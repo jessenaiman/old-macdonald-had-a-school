@@ -5,6 +5,7 @@ import random
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "public" / "design-explorations-v2"
 ASSETS = ROOT / "public"
+SOURCE_IMAGES = ROOT / "assets" / "source-images" / "public"
 FONTS = Path(r"C:\Users\jesse\.agents\skills\canvas-design\canvas-fonts")
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -35,6 +36,11 @@ def tiled(path, size):
         for x in range(0, size[0], tile.width):
             canvas.paste(tile, (x, y))
     return canvas
+
+
+def source_asset(relative):
+    archived = SOURCE_IMAGES / relative
+    return archived if archived.exists() else ASSETS / relative
 
 
 def text(draw, xy, value, fnt, fill=NAVY, anchor=None):
@@ -121,7 +127,7 @@ def checkbox(draw, x, y, label, checked=False, width=310):
 
 def felt_button(im, draw, box, label, patch_name):
     x0, y0, x1, y1 = box
-    patch_path = ASSETS / "design-assets/blank-felt-patches-v1/individual-patches" / patch_name
+    patch_path = source_asset(Path("design-assets/blank-felt-patches-v1/individual-patches") / patch_name)
     patch = Image.open(patch_path).convert("RGBA")
     alpha_box = patch.getchannel("A").getbbox()
     patch = patch.crop(alpha_box).resize((x1 - x0, y1 - y0), Image.Resampling.LANCZOS)
@@ -137,7 +143,7 @@ def tape(draw, xy, angle=0):
 
 
 def base_canvas(title, subtitle):
-    kraft_path = ASSETS / "design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png"
+    kraft_path = source_asset("design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.png")
     base = tiled(kraft_path, (W, H)).convert("RGBA")
     overlay = Image.new("RGBA", base.size, (112, 66, 28, 28))
     base.alpha_composite(overlay)
@@ -178,7 +184,7 @@ def render_concept_a():
     for i, (eyebrow, label) in enumerate(resources):
         y = 320 + i * 170
         draw.rounded_rectangle((1214, y, 1476, y + 138), 6, fill="#fffdf5", outline="#ddcfb3", width=2)
-        icon = Image.open(ASSETS / "design-assets/classroom-fasteners-v1/individual-icons" / fasteners[i]).convert("RGBA")
+        icon = Image.open(source_asset(Path("design-assets/classroom-fasteners-v1/individual-icons") / fasteners[i])).convert("RGBA")
         icon.thumbnail((60, 60))
         im.alpha_composite(icon, (1432, y - 22))
         text(draw, (1236, y + 28), eyebrow, MONO(10), GREEN)
@@ -277,7 +283,7 @@ def render_icons():
         ("B", "SOFT ENAMEL PINS", "Premium", "enamel", "A tactile object that genuinely pins to felt; slightly more visual weight."),
         ("C", "PRINTED PAPER TOKENS", "Most crafty", "paper", "Low-detail ink symbols with a tiny tape edge; warmest print behavior."),
     ]
-    felt_path = ASSETS / "design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png"
+    felt_path = source_asset("design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.png")
     felt = tiled(felt_path, (1450, 230)).resize((1450,230))
     kinds = ["story","count","make","move","explore","music"]
     labels = ["STORY","COUNT","MAKE","MOVE","EXPLORE","MUSIC"]

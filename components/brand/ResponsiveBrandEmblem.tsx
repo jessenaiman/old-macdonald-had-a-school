@@ -33,8 +33,8 @@ export function ResponsiveBrandEmblem({
         height={variant === "card" ? 128 : 512}
         sizes={variant === "card" ? "128px" : "(max-width: 639px) 100vw, 512px"}
         src={variant === "card"
-          ? "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.png"
-          : "/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.png"}
+          ? "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.webp"
+          : "/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.webp"}
         width={variant === "card" ? 128 : 512}
       />
     );

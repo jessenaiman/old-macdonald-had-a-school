@@ -20,13 +20,11 @@ export type HomeCarouselSlide = {
 export function HomeCarousel({
   slides,
   title,
-  description,
   ariaLabel,
   pickerLabel,
 }: {
   slides: readonly HomeCarouselSlide[];
   title: string;
-  description: string;
   ariaLabel: string;
   pickerLabel: string;
 }) {
@@ -44,9 +42,8 @@ export function HomeCarousel({
 
   return (
     <Carousel className="min-w-0 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-sm" opts={{ loop: true }} setApi={setApi} aria-label={ariaLabel}>
-      <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+      <div className="mb-4">
         <p className="font-heading text-2xl">{title}</p>
-        <p className="text-sm text-muted-foreground">{description}</p>
       </div>
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-muted [&_[data-slot=carousel-content]]:h-full">
         <CarouselContent className="ml-0 h-full">
@@ -78,7 +75,7 @@ export function HomeCarousel({
             </Button>
           ))}
         </div>
-        {slide ? <Link className="text-sm font-bold text-primary underline underline-offset-4" href={slide.href}>{slide.label} <span aria-hidden="true">→</span></Link> : null}
+        <span aria-hidden="true" />
         {slide ? <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">Showing {slide.label}</span> : null}
       </div>
     </Carousel>

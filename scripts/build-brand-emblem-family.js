@@ -4,13 +4,14 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SOURCE = path.join(ROOT, "public", "brand-emblem.png");
+const SOURCE_IMAGES = path.join(ROOT, "assets", "source-images", "public");
+const SOURCE = path.join(SOURCE_IMAGES, "brand-emblem.png");
 const FAMILY = path.join(ROOT, "public", "design-assets", "brand-emblem-v1");
 const INDIVIDUALS = path.join(FAMILY, "individual-marks");
 const FLAT = path.join(FAMILY, "candidate-flat-marks");
 const DETAIL = path.join(FAMILY, "candidate-detail-marks");
 const REVIEW = path.join(ROOT, "public", "design-assets", "brand-emblem-v1-review");
-const FLAT_SOURCE = path.join(REVIEW, "brand-emblem-flat-source-v01.png");
+const FLAT_SOURCE = path.join(SOURCE_IMAGES, "design-assets", "brand-emblem-v1-review", "brand-emblem-flat-source-v01.png");
 
 const exports = [
   [16, "brand-emblem-micro-16.png"],

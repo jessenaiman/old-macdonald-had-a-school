@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { MaterialSwatch } from "@/components/working-wall/WorkingWallComponents"
 import { CAST, STAFF_KEYS, STUDENT_KEYS, type CastKey } from "@/data/brand/cast-registry"
 
 const siteRoles = [
@@ -36,7 +37,7 @@ export function PaletteReference() {
       <div className="mt-5 flex flex-wrap gap-3"><Button>Primary action</Button><Button variant="secondary">Woven patch</Button><Button variant="outline">Paper label</Button></div>
     </header>
     <div className="mt-5 grid gap-5 lg:grid-cols-2">
-      <section className="material-surface material-cardboard-paper rounded-xl border border-border p-5"><Link className="font-heading text-2xl underline underline-offset-4" href="#assets">Named material combinations</Link><div className="mt-3 grid grid-cols-2 gap-3">{siteRoles.map(([label, className]) => <div className={`${className} min-h-24 rounded-lg border border-border p-3`} key={label}><strong className="block">{label}</strong><code className="mt-2 block text-xs">{className}</code></div>)}</div></section>
+      <section className="material-surface material-cardboard-paper rounded-xl border border-border p-5"><Link className="font-heading text-2xl underline underline-offset-4" href="#assets">Named material combinations</Link><div className="mt-3 grid grid-cols-2 gap-3">{siteRoles.map(([label, className]) => <div className="grid gap-2" key={label}><MaterialSwatch label={label} materialClass={className} /><code className="block text-xs">{className}</code></div>)}</div></section>
       <section className="material-surface material-cork rounded-xl border border-border p-5"><Link className="font-heading text-2xl underline underline-offset-4" href="#icons">Curriculum identity fabric</Link><div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">{curriculumRoles.map(([label, character]) => <div className={`cast-${character} character-surface relative min-h-20 rounded-lg border border-current p-3 after:absolute after:inset-1 after:rounded-md after:border after:border-dashed after:border-current after:opacity-40`} key={label}><strong className="relative block font-heading text-lg">{label}</strong><span className="relative mt-2 block text-xs font-bold">{CAST[character].name}</span></div>)}</div></section>
     </div>
     <section className="mt-6"><Link className="font-heading text-2xl underline underline-offset-4" href="#cast">Staff identity fabric</Link><IdentityPatches characters={STAFF_KEYS} /></section>

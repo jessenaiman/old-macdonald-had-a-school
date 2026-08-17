@@ -32,7 +32,7 @@ export default function Home() {
               <h1 className="max-w-3xl font-heading text-5xl leading-[.9] tracking-tight sm:text-6xl" id="home-title">Start where children already feel at home.</h1>
               <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">Familiar songs, practical lessons, and playful learning for every grade.</p>
             </div>
-            <HomeCarousel slides={CAROUSEL_SLIDES} title="Choose a place to begin" description="Four paths into today’s planning" ariaLabel="Featured teaching resources" pickerLabel="Choose a featured scene" />
+            <HomeCarousel slides={CAROUSEL_SLIDES} title="Choose a place to begin" ariaLabel="Featured teaching resources" pickerLabel="Choose a featured scene" />
             <div className="flex flex-wrap gap-3"><Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90"><Link href="/topics">Browse lesson topics <ArrowRight /></Link></Button><Button asChild variant="outline" className="bg-background"><Link href="/search">Search lessons</Link></Button></div>
           </div>
 

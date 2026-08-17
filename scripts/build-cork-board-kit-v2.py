@@ -12,7 +12,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 KIT = ROOT / "public" / "design-assets" / "cork-board-kit-v2"
-SOURCE = KIT / "muted-natural-cork-tile-v01.png"
+SOURCE_KIT = ROOT / "assets" / "source-images" / "public" / "design-assets" / "cork-board-kit-v2"
+SOURCE = SOURCE_KIT / "muted-natural-cork-tile-v01.png"
 
 
 def seamless_tile(source: Image.Image, size: int = 1024) -> Image.Image:
@@ -117,10 +118,11 @@ def contact_sheet(tile: Image.Image, assets: dict[str, Image.Image]) -> Image.Im
 
 
 def main() -> None:
+    SOURCE_KIT.mkdir(parents=True, exist_ok=True)
     source = Image.open(SOURCE).convert("RGB")
     tile = seamless_tile(source)
-    tile.save(KIT / "seamless-cork-tile-source.png", optimize=True)
-    tile.convert("RGBA").save(KIT / "seamless-cork-tile.png", optimize=True)
+    tile.save(SOURCE_KIT / "seamless-cork-tile-source.png", optimize=True)
+    tile.convert("RGBA").save(KIT / "seamless-cork-tile.webp", "WEBP", quality=82, method=6)
 
     sizes = {
         "medium-board.png": (1324, 972),
@@ -131,13 +133,14 @@ def main() -> None:
     for name, size in sizes.items():
         rendered = board(tile, size)
         assets[name] = rendered
-        rendered.save(KIT / name, optimize=True)
-        flattened_source(rendered).save(KIT / name.replace(".png", "-source.png"), optimize=True)
+        rendered.save(SOURCE_KIT / name, optimize=True)
+        rendered.save(KIT / name.replace(".png", ".webp"), "WEBP", quality=82, method=6)
+        flattened_source(rendered).save(SOURCE_KIT / name.replace(".png", "-source.png"), optimize=True)
 
     review = contact_sheet(tile, assets)
-    review.save(KIT / "cork-board-contact-sheet-2048.png", optimize=True)
+    review.save(SOURCE_KIT / "cork-board-contact-sheet-2048.png", optimize=True)
     review.resize((1254, 1254), Image.Resampling.LANCZOS).save(
-        KIT / "cork-board-contact-sheet-source.png", optimize=True
+        SOURCE_KIT / "cork-board-contact-sheet-source.png", optimize=True
     )
 
 

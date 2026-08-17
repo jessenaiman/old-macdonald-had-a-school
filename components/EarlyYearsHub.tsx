@@ -17,7 +17,7 @@ export function EarlyYearsHub({ grade, title, tagline, lead, topics }: { grade: 
   const [active, setActive] = useState(0)
   const [preview, setPreview] = useState(false)
   const topic = topics[active]
-  const leadImage = `/staff_and_students/${lead.patch}-transparent-circle.png`
+  const leadImage = `/staff_and_students/${lead.patch}-transparent-circle.webp`
   const headline = grade === "daycare" ? "Plan for little hands," : grade === "pre-school" ? "Grow confidence through" : "Turn curiosity into"
   const accentHeadline = grade === "daycare" ? "big feelings." : grade === "pre-school" ? "story and sensation." : "a day of discovery."
   const leadQuote = grade === "daycare" ? "What will make joining in feel safe today?" : grade === "pre-school" ? "What can they choose, try, and tell us about?" : "Where can one good question take us?"

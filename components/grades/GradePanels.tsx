@@ -20,6 +20,12 @@ import {
 } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 import { SearchWorkspace } from "@/components/search/SearchWorkspace";
+import {
+  WorkingWallBoard,
+  WorkingWallNote,
+  WorkingWallPathCard,
+  type WorkingWallFastener,
+} from "@/components/working-wall/WorkingWallComponents";
 import type { GradePathItem } from "./types";
 import type {
   GradeInteractionConfig,
@@ -61,64 +67,6 @@ function PanelHeading({
   );
 }
 
-function LessonCard({
-  item,
-  index,
-  active,
-  onChoose,
-}: {
-  item: GradePathItem;
-  index: number;
-  active: boolean;
-  onChoose: (index: number) => void;
-}) {
-  const content = (
-    <>
-      <span
-        className="brand-asset fastener-push-pin icon-small absolute -top-2 right-2"
-        aria-hidden="true"
-      />
-      <span
-        className={`brand-asset ${item.icon} icon-medium row-span-4 self-start`}
-        aria-hidden="true"
-      />
-      <span className="grade-surface w-fit rounded-md px-2 py-1 text-xs font-black uppercase tracking-widest">
-        {item.kicker}
-      </span>
-      <strong className="font-heading text-xl leading-none text-balance">
-        {item.title}
-      </strong>
-      <span className="text-sm text-muted-foreground">{item.summary}</span>
-      <span className="self-end text-sm font-bold underline underline-offset-4">
-        View path →
-      </span>
-    </>
-  );
-  const className =
-    "material-surface material-cardboard-paper relative grid h-auto min-h-36 min-w-0 grid-cols-[4.75rem_minmax(0,1fr)] grid-rows-[auto_auto_1fr_auto] gap-x-4 gap-y-1 whitespace-normal rounded-xl border p-4 text-left shadow-sm transition-transform hover:-translate-y-1 focus-visible:-translate-y-1";
-  return item.href ? (
-    <Button asChild className={className} variant="ghost">
-      <Link
-        href={item.href}
-        onClick={() => onChoose(index)}
-        data-active={active || undefined}
-      >
-        {content}
-      </Link>
-    </Button>
-  ) : (
-    <Button
-      className={className}
-      variant="ghost"
-      onClick={() => onChoose(index)}
-      data-active={active || undefined}
-      type="button"
-    >
-      {content}
-    </Button>
-  );
-}
-
 export function GradeTodayPanel({
   config,
   items,
@@ -131,21 +79,23 @@ export function GradeTodayPanel({
   welcome: React.ReactNode;
   headingLevel: "h1" | "h2";
 }) {
-  const notes = [
+  const notes: ReadonlyArray<
+    readonly [string, string, WorkingWallFastener]
+  > = [
     [
       "Set a goal",
       "Follow one clear sequence and make one meaningful choice.",
-      "fastener-paperclip",
+      "clip",
     ],
     [
       "Gather what helps",
       "Pick resources, prompts, and supports.",
-      "fastener-masking-tape",
+      "tape",
     ],
     [
       "Prepare your plan",
       "Map the lesson steps and learner needs.",
-      "fastener-push-pin",
+      "pin",
     ],
   ];
   return (
@@ -163,20 +113,20 @@ export function GradeTodayPanel({
         </div>
         <div className="grid min-w-0 gap-4 md:grid-cols-2">
           {items.slice(0, 4).map((item, index) => (
-            <LessonCard
+            <WorkingWallPathCard
               key={`${item.title}-${index}`}
-              item={item}
-              index={index}
+              title={item.title}
+              description={item.summary}
+              href={item.href}
+              iconClass={item.icon}
+              kicker={item.kicker}
               active={index === selectedIndex}
-              onChoose={onChoose}
+              onSelect={() => onChoose(index)}
             />
           ))}
         </div>
       </section>
-      <section
-        className="working-wall-board flex min-w-0 flex-col gap-5 p-4"
-        aria-label="Today's planning board"
-      >
+      <WorkingWallBoard aria-label="Today's planning board">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p>Today&apos;s planning board</p>
@@ -188,17 +138,16 @@ export function GradeTodayPanel({
         </header>
         <div className="grid gap-4 md:grid-cols-3">
           {notes.map(([title, prompt, fastener]) => (
-            <Card className="working-wall-note relative" key={title}>
-              <span
-                className={`brand-asset ${fastener} icon-small absolute -top-4 left-1/2 -translate-x-1/2`}
-                aria-hidden="true"
-              />
-              <CardHeader className="pt-8"><CardTitle>{title}</CardTitle></CardHeader>
-              <CardContent><p className="font-hand text-lg">{prompt}</p></CardContent>
-            </Card>
+            <WorkingWallNote
+              fastener={fastener}
+              heading={title}
+              key={title}
+            >
+              <p className="font-hand text-lg">{prompt}</p>
+            </WorkingWallNote>
           ))}
         </div>
-      </section>
+      </WorkingWallBoard>
     </div>
   );
 }
@@ -375,12 +324,15 @@ export function GradeResourcesPanel({
       <section className="material-surface material-cork-board rounded-xl border p-4">
         <div className="grid min-w-0 gap-4 md:grid-cols-2">
           {items.map((item, index) => (
-            <LessonCard
+            <WorkingWallPathCard
               key={`${item.title}-${index}`}
-              item={item}
-              index={index}
+              title={item.title}
+              description={item.summary}
+              href={item.href}
+              iconClass={item.icon}
+              kicker={item.kicker}
               active={false}
-              onChoose={onChoose}
+              onSelect={() => onChoose(index)}
             />
           ))}
         </div>

@@ -15,7 +15,6 @@ const meta = {
       },
     ],
     title: "From the school to your lesson plan",
-    description: "Choose a classroom path",
     ariaLabel: "Featured teaching resources",
     pickerLabel: "Choose a featured scene",
   },
