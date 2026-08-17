@@ -72,7 +72,7 @@ export function SiteFooter() {
             <Link href="/" className="inline-flex items-center" aria-label="Old MacDonald Had a School home">
               <ResponsiveBrandEmblem className="h-8 w-auto" />
             </Link>
-            <p className="text-sm text-primary-foreground/70 hidden sm:block">
+            <p className="font-hand hidden text-lg text-primary-foreground/80 sm:block">
               Songs teachers know. Lessons children love.
             </p>
           </div>
