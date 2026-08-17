@@ -13,6 +13,10 @@ export type HomeCarouselSlide = {
   href: string;
 };
 
+/**
+ * Home-page composition of the installed shadcn Carousel. It owns only the
+ * home-specific slide metadata and accessible scene picker.
+ */
 export function HomeCarousel({
   slides,
   title,
@@ -54,8 +58,8 @@ export function HomeCarousel({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="-left-4" />
-        <CarouselNext className="-right-4" />
+        <CarouselPrevious className="left-2 sm:-left-4" />
+        <CarouselNext className="right-2 sm:-right-4" />
       </div>
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
         <div className="flex gap-1" role="group" aria-label={pickerLabel}>

@@ -88,7 +88,6 @@ export async function GradeLessonPage({
       data-grade={grade}
       data-grade-template={grade}
       data-lesson-template={lesson?.metadata.template ?? "database-draft"}
-      data-style-scope="grade-lesson-page"
     >
       <aside
         className="grade-surface flex min-w-0 flex-col gap-4 p-4 lg:min-h-[60rem] print:hidden"

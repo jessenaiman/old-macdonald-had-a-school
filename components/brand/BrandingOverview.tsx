@@ -28,7 +28,7 @@ const groups = [
   {
     title: "Check production rules",
     description: "Confirm ownership, approved assets, accessibility, and responsive behavior.",
-    links: [["Asset governance", "#governance"], ["Source files", "#sources"], ["Focused design rules", "/branding/DESIGN_SYSTEM.md"]],
+    links: [["Asset governance", "#assets"], ["Source files", "#sources"], ["Focused design rules", "/branding#controls"]],
   },
 ] as const
 
@@ -62,3 +62,4 @@ export function BrandingLookup() {
     </Card>
   )
 }
+

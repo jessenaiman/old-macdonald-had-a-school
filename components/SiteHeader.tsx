@@ -16,6 +16,10 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
 import { activePageFromPathname, TEACHER_GRADE_ITEMS } from "./site-navigation";
 
+/**
+ * Site-specific header that composes the installed NavigationMenu and mobile
+ * Sheet navigation around the project route configuration.
+ */
 export function SiteHeader() {
   const active = activePageFromPathname(usePathname());
 

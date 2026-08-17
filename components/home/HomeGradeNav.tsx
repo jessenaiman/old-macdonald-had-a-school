@@ -10,6 +10,10 @@ const HOME_GRADES: readonly { key: GradeKey; label: string }[] = [
   { key: "grade-two", label: "Grade 2" },
 ] as const;
 
+/**
+ * Grade-route index for the home page. It is custom only for the project’s
+ * grade metadata and approved grade artwork; each item composes a shadcn Card.
+ */
 export function HomeGradeNav() {
   return (
     <section className="mt-5 border-t border-dashed border-current/50 pt-4" aria-labelledby="home-grades-title">

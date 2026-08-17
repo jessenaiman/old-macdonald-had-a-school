@@ -7,7 +7,7 @@
  * Usage:
  * <span class="brand-asset music-fiddle icon-small" role="img" aria-label="Fiddle"></span>
  *
- * Source and status notes: /BRAND_ASSET_RECIPES.md
+ * Source and status notes: /branding#assets
  */
 
 .brand-asset {
@@ -256,3 +256,4 @@
 /* Authored patch layers. These are decorative layers, never interaction targets. */
 .patch-old-macdonald-square { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.png'); }
 .patch-miss-puddles-circle { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.png'); }
+

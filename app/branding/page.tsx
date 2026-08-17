@@ -1,6 +1,7 @@
 import Overview from "../../content/pages/branding/overview.mdx"
 import PageRecipe from "../../content/pages/branding/page-recipe.mdx"
 import Assets from "../../content/pages/branding/assets.mdx"
+import Fabrics from "../../content/pages/branding/fabrics.mdx"
 import HomepageSurface from "../../content/pages/branding/homepage-surface.mdx"
 import LogoFamily from "../../content/pages/branding/logo-family.mdx"
 import IconSizes from "../../content/pages/branding/icon-sizes.mdx"
@@ -10,7 +11,6 @@ import Typography from "../../content/pages/branding/typography.mdx"
 import Buttons from "../../content/pages/branding/buttons.mdx"
 import Controls from "../../content/pages/branding/controls.mdx"
 import Grades from "../../content/pages/branding/grades.mdx"
-import Governance from "../../content/pages/branding/governance.mdx"
 import Sources from "../../content/pages/branding/sources.mdx"
 import Palette from "../../content/pages/branding/palette.mdx"
 import { BrandingLookup } from "@/components/brand/BrandingOverview"
@@ -27,6 +27,7 @@ export default function BrandingPage() {
       <BrandingLookup />
       <PageRecipe />
       <Assets />
+      <Fabrics />
       <HomepageSurface />
       <LogoFamily />
       <IconSizes />
@@ -36,7 +37,6 @@ export default function BrandingPage() {
       <Buttons />
       <Controls />
       <Grades />
-      <Governance />
       <Sources />
       <Palette />
     </div>

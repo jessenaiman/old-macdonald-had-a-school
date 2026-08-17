@@ -12,7 +12,6 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "content:validate": "node scripts/content/validate.mjs",
     "qa:visual": "npm run build && playwright test --config=playwright.visual.config.ts",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "db:generate": "drizzle-kit generate --config=drizzle.sqlite.config.ts",

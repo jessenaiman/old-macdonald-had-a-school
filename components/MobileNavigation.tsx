@@ -16,6 +16,10 @@ import {
 import { TEACHER_GRADE_ITEMS, type ActivePage } from "./site-navigation";
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
 
+/**
+ * Responsive navigation composition using the installed shadcn Sheet. Custom
+ * code is limited to this site's route list and closing the sheet after navigation.
+ */
 export function MobileNavigation({ active }: { active?: ActivePage }) {
   const [open, setOpen] = useState(false);
 

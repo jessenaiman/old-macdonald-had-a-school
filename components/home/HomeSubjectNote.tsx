@@ -18,6 +18,10 @@ const SUBJECT_PAPER: Record<HomeSubject["key"], string> = {
   "fine-motor": "material-cardboard-paper material-cardboard-kraft",
 };
 
+/**
+ * Subject-specific card content for the home page. The custom data maps a
+ * subject to approved farm-school assets while the surface uses shadcn Card parts.
+ */
 export function HomeSubjectNote({ title, href, iconClass, teacherReason, highlights, subject, guideCharacter, fastenerClass }: HomeSubjectNoteProps) {
   return (
     <Card className={`cast-${guideCharacter} material-surface ${SUBJECT_PAPER[subject]} relative h-full min-w-0 gap-0 overflow-visible border-2 py-0 pt-8 shadow-[0_0.35rem_0_color-mix(in_srgb,var(--foreground)_18%,transparent)]`} data-subject={subject}>

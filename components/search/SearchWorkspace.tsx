@@ -27,6 +27,10 @@ function topicTitle(topic: CurriculumResult) { return topic.teacher_title || top
 function topicSummary(topic: CurriculumResult) { return topic.teacher_summary || topic.skill_statement || "No reviewed topic summary is available yet."; }
 function resourcePreview(result: SearchResult) { return result.excerpt || result.instructions || result.lyrics || "A resource preview is available."; }
 
+/**
+ * Search-domain workspace. It composes the installed shadcn Field, Button,
+ * Card, Badge, and Empty primitives; the custom logic coordinates this site's API and URL state.
+ */
 export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGrade, gradeLabel, onBack }: SearchWorkspaceProps) {
   const lockedGradeValue = lockedGrade ? GRADE_SEARCH_VALUES[lockedGrade] : "";
   const initialResolvedGrade = lockedGradeValue || (GRADE_OPTIONS.some((option) => option.value === initialGrade) ? initialGrade : "");

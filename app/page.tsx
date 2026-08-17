@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { HomeCarousel, type HomeCarouselSlide } from "@/components/home/HomeCarousel";
+import { CreativeArtsSection } from "@/components/home/CreativeArtsSection";
+import { HomeSubjectNote } from "@/components/home/HomeSubjectNote";
+import { HOME_SUBJECTS, SUBJECT_LEARNERS } from "@/components/home/home-data";
 
 const CAROUSEL_SLIDES = [
   {
@@ -55,106 +56,6 @@ const NEW_THIS_WEEK = [
     summary: "Explore classroom instruments.",
     href: "https://www.youtube.com/channel/UC_THbKUe6o-K64vh7gWCPyQ/search?query=Old%20MacDonald%20Orchestra",
     icon: "music-fiddle",
-  },
-] as const;
-
-const SUBJECTS = [
-  {
-    key: "language",
-    title: "Language & literacy",
-    href: "/search?q=language%20literacy",
-    icon: "drama-storytelling-icon",
-    reason: "Build confident talk, reading, and storytelling.",
-    highlights: ["Build vocabulary", "Explore phonics", "Tell and retell stories"],
-    fastener: "fastener-paperclip",
-    owner: "cast-whiskers",
-    paper: "material-cardboard-paper",
-  },
-  {
-    key: "math",
-    title: "Math",
-    href: "/search?q=math%20numeracy",
-    icon: "math-building-icon",
-    reason: "Make counting, shape, and patterns visible.",
-    highlights: ["Count and compare", "Explore shapes", "Find patterns in songs"],
-    fastener: "fastener-push-pin",
-    owner: "cast-sam",
-    paper: "material-cardboard-paper material-cardboard-kraft",
-  },
-  {
-    key: "science",
-    title: "Nature & science",
-    href: "/search?q=science%20nature",
-    icon: "gardening-health-icon",
-    reason: "Explore seasons, weather, and living things.",
-    highlights: ["Observe and explore", "Seasons and weather", "Living things"],
-    fastener: "fastener-binder-clip",
-    owner: "cast-scout",
-    paper: "material-cardboard-paper",
-  },
-  {
-    key: "health",
-    title: "Health & physical education",
-    href: "/search?q=physical%20health%20development",
-    icon: "physical-education-icon",
-    reason: "Practise movement, cooperation, and healthy routines.",
-    highlights: ["Move your body", "Play and cooperate", "Stay healthy"],
-    fastener: "fastener-masking-tape",
-    owner: "cast-hopper",
-    paper: "material-cardboard-paper material-cardboard-kraft",
-  },
-  {
-    key: "sel",
-    title: "Social-emotional learning",
-    href: "/search?q=social%20emotional%20learning%20SEL",
-    icon: "community-helping",
-    reason: "Build belonging, empathy, and confident participation.",
-    highlights: ["Name feelings", "Practise kindness", "Learn together"],
-    fastener: "fastener-gingham-tape",
-    owner: "cast-penny",
-    paper: "material-cardboard-paper",
-  },
-  {
-    key: "fine-motor",
-    title: "Fine motor skills",
-    href: "/search?q=fine%20motor%20skills",
-    icon: "early-learning-lacing",
-    reason: "Strengthen the hands children use to make, draw, and write.",
-    highlights: ["Pinch and place", "Thread and build", "Draw and prepare to write"],
-    fastener: "fastener-apple-peg",
-    owner: "cast-puddles",
-    paper: "material-cardboard-paper material-cardboard-kraft",
-  },
-] as const;
-
-const CREATIVE_AREAS = [
-  {
-    title: "Music",
-    description: "Sing, listen, play, and find the beat.",
-    href: "/search?q=music",
-    icon: "music-hand-drum",
-    owner: "cast-mr-rusty",
-  },
-  {
-    title: "Art",
-    description: "Make marks, mix colour, and create.",
-    href: "/search?q=art",
-    icon: "painting-easel",
-    owner: "cast-mr-puddles",
-  },
-  {
-    title: "Drama",
-    description: "Pretend, tell stories, and perform.",
-    href: "/search?q=drama",
-    icon: "acting-theatre-masks",
-    owner: "cast-miss-hayley",
-  },
-  {
-    title: "Dancing",
-    description: "Move, turn, travel, and dance together.",
-    href: "/search?q=dance",
-    icon: "dance-spiralling-scarves",
-    owner: "cast-mr-rusty",
   },
 ] as const;
 
@@ -217,55 +118,23 @@ export default function Home() {
           <h2 className="font-heading text-3xl" id="subjects-title">Find a lesson by subject</h2>
         </header>
         <div className="grid auto-rows-fr items-stretch gap-3 md:grid-cols-2 xl:grid-cols-6">
-          {SUBJECTS.map((subject) => (
-            <Card className={`${subject.owner} material-surface ${subject.paper} relative h-full min-w-0 gap-0 overflow-visible border-2 py-0 pt-8 shadow-[0_0.35rem_0_color-mix(in_srgb,var(--foreground)_18%,transparent)]`} data-subject={subject.key} key={subject.key}>
-              <span className={`brand-asset ${subject.fastener} icon-small pointer-events-none absolute -top-4 left-1/2 z-10 -translate-x-1/2 drop-shadow-sm`} aria-hidden="true" />
-              <CardHeader className="character-surface material-surface material-felt mx-2 flex min-h-28 flex-row items-center gap-3 rounded-lg border border-current p-3 shadow-sm">
-                <span className={`brand-asset ${subject.icon} icon-medium shrink-0`} aria-hidden="true" />
-                <div className="min-w-0">
-                  <CardTitle><Link href={subject.href}>{subject.title}</Link></CardTitle>
-                  <CardDescription className="mt-1 leading-5 text-inherit">{subject.reason}</CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent className="mt-4 flex-1 p-0">
-                <nav className="grid" aria-label={`${subject.title} lesson topics`}>
-                  {subject.highlights.map((highlight) => (
-                    <Link className="border-b border-border px-3 py-3 text-sm font-semibold last:border-b-0 hover:bg-accent focus-visible:bg-accent" href={`/search?q=${encodeURIComponent(`${subject.title} ${highlight}`)}`} key={highlight}>
-                      {highlight} <span aria-hidden="true">→</span>
-                    </Link>
-                  ))}
-                </nav>
-              </CardContent>
-              <CardFooter className="min-h-16 border-t border-border px-3 py-3">
-                <Link className="text-sm font-bold underline underline-offset-4" href={subject.href}>View all {subject.title.toLowerCase()} lessons <span aria-hidden="true">→</span></Link>
-              </CardFooter>
-            </Card>
+          {HOME_SUBJECTS.map((subject) => (
+            <HomeSubjectNote
+              fastenerClass={subject.fastenerClass}
+              guideCharacter={SUBJECT_LEARNERS[subject.key].character}
+              highlights={subject.highlights}
+              href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}
+              iconClass={subject.iconClass}
+              key={subject.key}
+              subject={subject.key}
+              teacherReason={subject.teacherReason}
+              title={subject.title}
+            />
           ))}
         </div>
       </section>
 
-      <section className="material-surface material-cardboard-paper mx-4 rounded-xl border-2 border-border p-5 shadow-sm sm:p-6" aria-labelledby="creative-arts-title">
-        <header className="mx-auto mb-6 max-w-2xl text-center">
-          <p className="font-hand text-xl">Make some noise. Make something new.</p>
-          <h2 className="font-heading text-3xl sm:text-4xl" id="creative-arts-title">Creative Arts</h2>
-          <p className="mt-2 text-muted-foreground">Music, art, drama, and dancing turn imagination into something children can share.</p>
-        </header>
-        <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {CREATIVE_AREAS.map((area) => (
-            <Card className={`${area.owner} character-surface material-surface material-felt relative h-full min-w-0 border-2 shadow-[0_0.35rem_0_color-mix(in_srgb,var(--character-color)_55%,var(--foreground))] after:pointer-events-none after:absolute after:inset-2 after:rounded-[calc(var(--radius)-0.25rem)] after:border after:border-dashed after:border-current after:opacity-45`} key={area.title}>
-              <CardHeader className="flex flex-col items-center text-center">
-                <span className={`brand-asset ${area.icon} icon-medium`} aria-hidden="true" />
-                <CardTitle>{area.title}</CardTitle>
-                <CardDescription className="w-full max-w-xs text-balance text-inherit">{area.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1" />
-              <CardFooter className="justify-center">
-                <Link className="font-bold underline underline-offset-4" href={area.href}>Explore {area.title.toLowerCase()} <span aria-hidden="true">→</span></Link>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </section>
+      <CreativeArtsSection />
     </div>
   );
 }

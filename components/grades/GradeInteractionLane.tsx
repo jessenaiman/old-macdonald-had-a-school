@@ -49,6 +49,10 @@ const sections: Array<{ id: GradeInteractionSection; label: string }> = [
   { id: "search", label: "Search" },
 ];
 
+/**
+ * Grade-workspace shell. It combines grade metadata with shadcn Card and Tabs
+ * compositions; the custom portion is the educational planning structure.
+ */
 export function GradeWorkspace({
   grade,
   gradeLabel,
@@ -110,6 +114,9 @@ export function GradeWorkspace({
   );
 }
 
+/**
+ * Grade-specific welcome content built from standard Button and Card primitives.
+ */
 export function GradeWelcomeControl({
   config,
   summary,
@@ -158,6 +165,9 @@ export function GradeWelcomeControl({
   );
 }
 
+/**
+ * Displays a governed teacher identity and teaching note using a shadcn Card.
+ */
 export function TeacherNote({
   character,
   quote,
@@ -210,6 +220,10 @@ export function TeacherNote({
   );
 }
 
+/**
+ * Coordinates grade tabs and content panels. It retains custom state only for
+ * the selected grade path and panel; layout and controls are shadcn compositions.
+ */
 export function GradeInteractionLane({
   config,
   summary,
