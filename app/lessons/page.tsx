@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -93,15 +94,20 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
             <h1 className="my-3 max-w-3xl font-heading text-[clamp(2.7rem,6vw,4.75rem)] font-normal leading-[.9] tracking-tight text-balance" id="lessons-index-title">What do you need to teach?</h1>
             <p className="m-0 max-w-3xl font-body text-sm font-semibold leading-relaxed text-muted-foreground">Start with a skill, song, or classroom moment. Teacher-ready lessons appear first, with planning records clearly marked for further review.</p>
           </div>
-          <form className="mt-7 grid items-end gap-3 rounded-xl border border-border bg-card/70 p-4 md:grid-cols-[minmax(260px,1fr)_220px_auto]" method="get" action="/lessons" role="search">
-            <label className="grid gap-2 font-body text-xs font-black tracking-wider uppercase"><span>What are you planning?</span><Input name="q" type="search" autoComplete="off" defaultValue={query} placeholder="Try steady beat, rhyming, plants, or calming songs..." /></label>
-            <label className="grid gap-2 font-body text-xs font-black tracking-wider uppercase">
-              <span>Teaching group</span>
-              <NativeSelect name="grade" defaultValue={grade ?? ""}>
+          <form className="mt-7 rounded-xl border border-border bg-card/70 p-4" method="get" action="/lessons" role="search">
+            <FieldGroup className="items-end gap-3 md:grid-cols-[minmax(260px,1fr)_220px_auto]">
+              <Field>
+                <FieldLabel htmlFor="lesson-search">What are you planning?</FieldLabel>
+                <Input id="lesson-search" name="q" type="search" autoComplete="off" defaultValue={query} placeholder="Try steady beat, rhyming, plants, or calming songs..." />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="lesson-grade">Teaching group</FieldLabel>
+              <NativeSelect id="lesson-grade" name="grade" defaultValue={grade ?? ""}>
                 <option value="">All supported grades</option><option value="daycare">Daycare</option><option value="pre-school">Pre-School</option><option value="kindergarten">Kindergarten</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option>
               </NativeSelect>
-            </label>
-            <Button type="submit">Search lessons</Button>
+              </Field>
+              <Button type="submit">Search lessons</Button>
+            </FieldGroup>
           </form>
         </header>
 

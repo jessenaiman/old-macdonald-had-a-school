@@ -27,14 +27,14 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
     <div>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon-lg"
-            aria-label="Open navigation menu"
-          >
-            <Menu aria-hidden="true" />
-            <span className="sr-only">Open navigation menu</span>
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon-lg"
+              aria-label="Open navigation menu"
+            >
+              <Menu data-icon="inline-start" aria-hidden="true" />
+              <span className="sr-only">Open navigation menu</span>
+            </Button>
         </SheetTrigger>
 
         <SheetContent
@@ -56,7 +56,7 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
                 size="icon"
                 aria-label="Close navigation menu"
               >
-                <X aria-hidden="true" />
+                <X data-icon="inline-start" aria-hidden="true" />
               </Button>
             </SheetClose>
           </SheetHeader>

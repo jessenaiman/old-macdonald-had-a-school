@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CAST, type CastKey } from "../../data/brand/cast-registry";
 import { LessonDocument } from "../LessonDocument";
 import { getLesson, getLessonByTitleAndGrade } from "../../lib/content";
 import { getCurriculumTopic } from "../../lib/curriculum-db";
@@ -15,38 +16,38 @@ const GRADE_LESSON_DETAILS: Record<
   {
     label: string;
     age: string;
-    teacher: string;
+    teacher: CastKey;
     teacherName: string;
   }
 > = {
   daycare: {
     label: "Daycare",
     age: "Ages 2-3",
-    teacher: "/staff_and_students/miss-puddles-transparent-circle.webp",
+    teacher: "miss-puddles",
     teacherName: "Miss Puddles",
   },
   "pre-school": {
     label: "Pre-School",
     age: "Ages 3-4",
-    teacher: "/staff_and_students/miss-maisy-transparent-circle.webp",
+    teacher: "miss-maisy",
     teacherName: "Miss Maisy",
   },
   kindergarten: {
     label: "Kindergarten",
     age: "Ages 4-6",
-    teacher: "/staff_and_students/mr-rusty-transparent-circle.webp",
+    teacher: "mr-rusty",
     teacherName: "Mr Rusty",
   },
   "grade-one": {
     label: "Grade 1",
     age: "5-6 yrs",
-    teacher: "/staff_and_students/miss-hayley-transparent-circle.webp",
+    teacher: "miss-hayley",
     teacherName: "Miss Hayley",
   },
   "grade-two": {
     label: "Grade 2",
     age: "6-7 yrs",
-    teacher: "/staff_and_students/mr-maisy-transparent-circle.webp",
+    teacher: "mr-maisy",
     teacherName: "Mr Maisy",
   },
 };
@@ -136,7 +137,7 @@ export async function GradeLessonPage({
         </nav>
         <Card className="material-surface material-cardboard-paper relative mt-auto hidden overflow-hidden lg:block">
           <Image
-            src={details.teacher}
+            src={CAST[details.teacher].portrait}
             alt={details.teacherName}
             width={150}
             height={150}

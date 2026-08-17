@@ -1,157 +1,53 @@
----
-title: "Cast and learning roles"
-description: "Choose among all 16 characters by teaching role, learning behavior, and visual identity."
----
+# Cast & Teaching Roles — Single Source of Truth
 
-import { CastRoleIndex, CastRoleIndexItem } from "@/components/brand/CastRoleIndex"
+This Markdown file is the source of truth for cast identity, approved colors, roles, personalities, artwork meaning, and permitted actions.
 
-# Cast and learning roles
+`app/globals.css` is the implementation layer for those approved colors. It may expose them as CSS variables and shadcn theme tokens, but it must not invent, derive, remap, or optimize them.
 
-Every page in this system starts with **who** is teaching or learning, **why** they belong in the lesson, and **what** the page must communicate. The cast defines 16 canonical identities — 8 staff and 8 students — each with a specific educational responsibility, learning behavior, and permitted actions.
+The root layout applies the theme. Components consume the theme. No TypeScript file, registry, database, or component may define cast identity or design meaning.
 
-> **Principle:** Choose by educational responsibility, learning behavior, and permitted action — not decoration.
+## Old MacDonald had a School - Characters
 
-## Staff · Teaching responsibility
+- There is a color mapped only through design in the global.css and through assets and the design (not code based) that links subjects, topics and grades to colors and specific characters
+- Each character has a subject, grade, and color. 
+- The most important details when designing a page is to respect the color first, and always show the academic text over the chracter name first
 
-These are the adults who anchor the school's educational structure. Each has a defined role, level, and specific permitted actions.
+### Staff
 
-<CastRoleIndex title="Staff · teaching responsibility">
-  <CastRoleIndexItem 
-    character="old-macdonald" 
-    role="Principal and music teacher" 
-    level="Kindergarten · whole-school anchor" 
-    permitted="Gatherings, assembly, storytime, whole-school singing, banjo, and guitar."
-  />
-  <CastRoleIndexItem 
-    character="miss-puddles" 
-    role="Daycare teacher and swim instructor" 
-    level="Daycare · early learning and swimming" 
-    permitted="Circle time, fingerplays, art, simple movement, sharing, turn-taking, and swimming."
-  />
-  <CastRoleIndexItem 
-    character="mr-rusty" 
-    role="Dance teacher" 
-    level="Kindergarten and Grade 1 · rhythm" 
-    permitted="Fiddle, steady beat, rhythm games, dance circles, and movement transitions."
-  />
-  <CastRoleIndexItem 
-    character="miss-hayley" 
-    role="Music, singing, and drama teacher" 
-    level="Grades 1 and 2 · stories and performance" 
-    permitted="Stories, songs, imagination games, drama, class adventures, and creative movement."
-  />
-  <CastRoleIndexItem 
-    character="mr-sam" 
-    role="Math, science, and building teacher" 
-    level="Whole school · careful thinking" 
-    permitted="Counting, measuring, sorting, patterns, engineering, and building."
-  />
-  <CastRoleIndexItem 
-    character="mr-maisy" 
-    role="Physical education and healthy-eating teacher" 
-    level="Grade 2 · active participation" 
-    permitted="Outdoor games, warm-ups, gross-motor play, health, and teamwork."
-  />
-  <CastRoleIndexItem 
-    character="mr-puddles" 
-    role="Art and photography teacher" 
-    level="Whole school · creativity" 
-    permitted="Bird studies, painting, photography, exhibitions, and visual observation."
-  />
-  <CastRoleIndexItem 
-    character="miss-maisy" 
-    role="Secretary, gardening lead, and cooking teacher" 
-    level="Preschool · growing, food, and science" 
-    permitted="Family welcome, gardening, food preparation, healthy habits, and seasonal observation."
-  />
-</CastRoleIndex>
+Staff signature colour is subject-coded, matching the role they teach, not species- or outfit-based. These colors are approved design choices and must be preserved consistently across the website. Code may implement the approved colors, but it must not define, reinterpret, substitute, or optimize them.
 
-## Students · Learning behavior
-
-These are the learners, each with a distinct personality, learning level, interests, and permitted actions that define how they participate.
-
-<CastRoleIndex title="Students · learning behavior">
-  <CastRoleIndexItem 
-    character="hopper" 
-    role="Energetic, optimistic, and ready to join" 
-    level="Movement and participation" 
-    interests="Joining and trying" 
-    permitted="Hop, walk, sit, listen, and imitate."
-  />
-  <CastRoleIndexItem 
-    character="whiskers" 
-    role="Curious, gentle, and thoughtful" 
-    level="Questions and observation" 
-    interests="Questions and imagination" 
-    permitted="Inspect, listen, wonder, and participate."
-  />
-  <CastRoleIndexItem 
-    character="scout" 
-    role="Adventurous, observant, and dependable" 
-    level="Discovery and teamwork" 
-    interests="Outdoor discovery" 
-    permitted="Lead discovery, point, listen, and help."
-  />
-  <CastRoleIndexItem 
-    character="penny" 
-    role="Young, earnest, and growing in confidence" 
-    level="First attempts" 
-    interests="Optimism and practice" 
-    permitted="Stand, step, sing, listen, and try an instrument."
-  />
-  <CastRoleIndexItem 
-    character="maisy" 
-    role="Warm, confident, and encouraging" 
-    level="Patterns and modelling" 
-    interests="Demonstrating an action" 
-    permitted="Stand, clap, sing, listen, and model."
-  />
-  <CastRoleIndexItem 
-    character="puddles" 
-    role="Expressive, sociable, and enthusiastic" 
-    level="Storytelling and music" 
-    interests="Expressive participation" 
-    permitted="Waddle, gesture, sing, listen, and join rhythm play."
-  />
-  <CastRoleIndexItem 
-    character="sam" 
-    role="Thoughtful, inventive, and cheerful" 
-    level="Building and explanation" 
-    interests="Problem-solving" 
-    permitted="Examine, count, build, listen, and explain."
-  />
-  <CastRoleIndexItem 
-    character="rusty" 
-    role="Calm, reliable, and quietly courageous" 
-    level="Rhythm and sequencing" 
-    interests="Teamwork" 
-    permitted="Walk, gallop, listen, help, and play an instrument."
-  />
-</CastRoleIndex>
-
-## Teach the system
-
-**Identity → role → allowed action → governed asset.**
-
-| Use | Avoid |
-|-----|-------|
-| Unchanged portraits | Recolouring artwork |
-| Exact semantic identity | Invented roles |
-| Documented facts | Decorative icons |
-| Purposeful materials | Generic felt substitutes |
-
-## Quick reference
-
-Each character has a semantic colour token (`cast-old-macdonald`, `cast-hopper`, etc.) that must be used for any coloured element representing that character. Never invent a colour or repurpose another character's token.
-
-Each character has governed artwork forms:
-- **Face** — transparent 2D face
-- **Backed** — 2D face with backing
-- **Full** — transparent full character portrait
-- **Felt** — large felt embroidered patch (badge)
-
-These are referenced via the `brand-asset` utility classes, never by raw asset URLs.
+| Name | Species | Role | Grade/Level | Colour | Activities |
+| --- | --- | --- | --- | --- | --- |
+| **Old MacDonald** | Human adult | principal, music teacher | Kindergarten | Brown `#8B5E34` | gatherings, processions, assembly, storytime, whole-school singing, banjo or guitar |
+| **Miss Puddles** | Duck adult | Daycare teacher, swim instructor | Daycare | Yellow `#E8A227` | Circle time, fingerplay songs, art table, simple movement games, sharing and turn-taking, swim instructor |
+| **Mr Rusty** | Horse adult | dance teacher | Kindergarten & Grade 1 | Blue `#2C6C9B` | Fiddle, steady beat, rhythm games, barn-dance circle, movement transitions |
+| **Miss Hayley** | Human adult | music, singing, drama | Grade 1/2 | Pink `#C9527A` | Storytime, songs, imagination games, drama, class adventures, creative movement |
+| **Mr Sam** | Pig adult | Math, science, building | Whole school | Teal `#1F6B6B` | Counting, measuring, sorting, patterns, simple engineering, build table |
+| **Mr Maisy** | Cow adult | Physical education teacher, healthy eating, body positivity | Grade 2 | Red `#B5272C` | Outdoor games, movement warm-ups, gross-motor play |
+| **Mr Puddles** | Duck adult | Art & photography teacher | Whole school | Indigo `#4F5FA0` | Bird studies, painting, photography, exhibitions |
+| **Miss Maisy** | Cow adult | School secretary & gardening lead; cooking | Preschool | Sage green `#55705A` | Family welcome, office support, gardening, simple food preparation, healthy habits and seasonal displays |
 
 ---
 
-Continue to the [page recipe](/branding#page-recipe), [asset registry](/branding#assets), or [icon catalogue](/branding/icons).
+## Students: 8 Total
+
+These are approved visual identities. Preserve the character artwork and signature colors as designed. Do not derive, alter, or assign colors in code.
+
+| # | Name | Species | Personality | Signature colour | Can be shown (scene-dependent) |
+|---|---|---|---|---|---|
+| 1 | **Hopper** | Rabbit | Energetic, optimistic, ready to join | Orange / coral `#D9713C` | Hop, walk, sit, listen, imitate |
+| 2 | **Whiskers** | Cat | Curious, gentle, thoughtful | Purple `#7B4FA8` | Tilt head, inspect, listen, sit, participate |
+| 3 | **Scout** | Dog | Adventurous, observant, dependable | Forest green `#4A7A3A` | Lead discovery, point, listen, help a classmate |
+| 4 | **Penny** | Chick | Young, earnest, growing in confidence | Gold / amber `#C9962E` | Stand, step, sing, listen, play a small instrument |
+| 5 | **Maisy** | Cow | Warm, confident, encouraging | Dark teal / navy `#1F4E5F` | Stand, clap, sing, listen, model an action |
+| 6 | **Puddles** | Duck | Expressive, sociable, enthusiastic | Light blue `#4FA0C9` | Waddle, gesture, sing, listen, join rhythm play |
+| 7 | **Sam** | Pig | Thoughtful, inventive, cheerful | Olive green `#7A9A3D` | Examine, count, build, listen, explain |
+| 8 | **Rusty** | Horse | Calm, reliable, quietly courageous | Brown / rust `#8B5030` | Walk, gallop, listen, help, play an instrument |
+
+### Design rule
+
+Scout and Sam are visually distinct characters. Their approved character artwork and design colors are part of the brand identity. Preserve those choices consistently across the website.
+
+##### NOTE
+
+The staff roster is **eight**. Mr Puddles, Mr Maisy and Miss Maisy are staff. Mr Maisy and Miss Maisy are also Maisy's parents. Sam's Mom is not in the canonical cast unless added here.

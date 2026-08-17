@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Boogaloo, Lilita_One, Nunito, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
+import { BRAND_IMAGE_ASSETS } from "../data/brand/image-registry";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
@@ -51,10 +52,10 @@ export const metadata: Metadata = {
     "Curriculum-organized lesson starting points for individual grades, with clear teaching sequences and practical resources.",
   icons: {
     icon: [
-      { url: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-micro-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: BRAND_IMAGE_ASSETS.emblem.micro, sizes: "16x16", type: "image/png" },
+      { url: BRAND_IMAGE_ASSETS.emblem.favicon, sizes: "32x32", type: "image/png" },
     ],
-    shortcut: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-favicon-32.png",
+    shortcut: BRAND_IMAGE_ASSETS.emblem.favicon,
   },
 };
 

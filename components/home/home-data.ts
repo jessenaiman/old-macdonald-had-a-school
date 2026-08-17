@@ -8,7 +8,7 @@ export type HomeLesson = {
 };
 
 export type HomeSubject = {
-  key: "language" | "math" | "science" | "health" | "sel" | "fine-motor";
+  key: "language" | "math" | "science" | "health" | "sel" | "fine-motor" | "music" | "arts";
   title: string;
   earlyYearsLabel: string;
   searchQuery: string;
@@ -38,6 +38,8 @@ export const SUBJECT_LEARNERS: Record<HomeSubject["key"], SubjectLearner> = {
   health: { character: "hopper" },
   sel: { character: "penny" },
   "fine-motor": { character: "puddles" },
+  music: { character: "penny" },
+  arts: { character: "puddles" },
 };
 
 function lessonText(lesson: HomeLesson) {
@@ -111,6 +113,28 @@ export const HOME_SUBJECTS: readonly HomeSubject[] = [
     highlights: ["Pinch and place", "Thread and build", "Draw and prepare to write"],
     matches: (lesson) => /fine motor/i.test(lessonText(lesson)),
   },
+  {
+    key: "music",
+    earlyYearsLabel: "Songs & rhythm",
+    title: "Music",
+    searchQuery: "music rhythm songs",
+    iconClass: "music-hand-drum",
+    fastenerClass: "fastener-masking-tape",
+    teacherReason: "Sing, listen, play, and find the beat.",
+    highlights: ["Sing and move", "Explore instruments", "Feel the steady beat"],
+    matches: (lesson) => /music|song|rhythm|beat/i.test(lessonText(lesson)),
+  },
+  {
+    key: "arts",
+    earlyYearsLabel: "Creative expression",
+    title: "Arts",
+    searchQuery: "art creative expression",
+    iconClass: "painting-easel",
+    fastenerClass: "fastener-gingham-tape",
+    teacherReason: "Make marks, mix colour, and create.",
+    highlights: ["Draw and paint", "Explore materials", "Express ideas visually"],
+    matches: (lesson) => /art|creative|draw|paint|colour|color/i.test(lessonText(lesson)),
+  },
 ] as const;
 
 const VIDEO_CHANNEL = "https://www.youtube.com/channel/UC_THbKUe6o-K64vh7gWCPyQ/search?query=";
@@ -119,7 +143,7 @@ export const HOME_VIDEO_SONGS = [
   { slug: "find-the-steady-beat", title: "Find the Steady Beat", summary: "Feel and clap the heartbeat of songs.", grade: "All grades", icon: "music-hand-drum", href: `${VIDEO_CHANNEL}steady%20beat` },
   { slug: "animal-action-march", title: "Animal Action March", summary: "Move like the animals in the song.", grade: "All grades", icon: "dance-turning-footprints", href: `${VIDEO_CHANNEL}animal%20action%20march` },
   { slug: "old-macdonald-orchestra", title: "Old MacDonald Orchestra", summary: "Explore classroom instruments.", grade: "All grades", icon: "music-fiddle", href: `${VIDEO_CHANNEL}Old%20MacDonald%20Orchestra` },
-  { slug: "the-itsy-bitsy-spider", title: "The Itsy Bitsy Spider", summary: "", grade: "Daycare, Preschool, Kindergarten", href: `${VIDEO_CHANNEL}Itsy%20Bitsy%20Spider` },
+  { slug: "the-itsy-bitsy-spider", title: "The Itsy Bitsy Spider", summary: "", grade: "Daycare, Preschool, Kindergarten", icon: "music-hand-drum", href: `${VIDEO_CHANNEL}Itsy%20Bitsy%20Spider` },
 ] as const;
 
 export const SONG_SLUGS = [
