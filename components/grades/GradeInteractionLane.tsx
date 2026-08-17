@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CAST, type CastKey } from "@/lib/cast";
+import { CAST, type CastKey } from "@/data/brand/cast-registry";
 import { type GradeKey } from "@/lib/grade-routes";
 import {
   GradeCurriculumPanel,

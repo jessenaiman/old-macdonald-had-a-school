@@ -21,7 +21,7 @@ Source evidence lives at `docs/early-years-music-resources/`;
 - Treat `age_range` as developmental context; grade organizes curriculum.
 - End substantive answers with the practical implication for a teacher.
 
-## Teacher-facing curriculum language
+## Teacher-facing curriculum language (not for web development)
 
 - Preserve the official curriculum wording verbatim as the curriculum reference. It is evidence and a link to the full standard, not a lesson-page headline.
 - Every curriculum record intended for teacher navigation needs a separate `teacher_title`: short, concrete, classroom-recognizable, and written around what children will do or practise. Never repeat or lightly shorten a standards sentence as the title.
@@ -33,3 +33,9 @@ Source evidence lives at `docs/early-years-music-resources/`;
 ## Evidence discipline
 
 Ground substantive claims in the local knowledge layer or a primary source. Mark pending or extracted material as unverified. Never invent versions, lyrics, actions, chords, or curriculum links. Keep materially different versions separate.
+
+## Homepage and navigation safeguards
+
+- Treat subject cards, search filters, menu labels, and visual categories as discovery aids only. They do not establish curriculum scope, grade alignment, sequence, standards coverage, or lesson completeness. Use the recorded curriculum source for those claims; otherwise label the connection as discovery or pending.
+- Design early-years music participation as graduated and embodied: listen, move, gesture, hum, sing, then invent. Include valid non-verbal and motor-diverse participation instead of reducing learning to a uniform read, watch, or complete interaction.
+- Never infer an educational connection from a familiar title, farm theme, character, colour, or image. Require a source-reviewed song or material version plus a clear rationale, grade, routine, materials, and observable teacher action before presenting it as a lesson or curriculum connection.

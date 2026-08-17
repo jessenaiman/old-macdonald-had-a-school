@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CAST, type CastKey } from "@/lib/cast"
+import { CAST, type CastKey } from "@/data/brand/cast-registry"
 import { cn } from "@/lib/utils"
 
 const staff: readonly CastKey[] = [

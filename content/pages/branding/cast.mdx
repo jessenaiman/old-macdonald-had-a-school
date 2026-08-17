@@ -1,59 +1,176 @@
+---
+title: "Cast and learning roles"
+description: "Choose among all 16 characters by teaching role, learning behavior, and visual identity."
+---
+
+export const CAST_ENTRIES = [
+  { key: "old-macdonald", name: "Old MacDonald", group: "staff", portrait: "/staff_and_students/old-macdonald-transparent-circle.png" },
+  { key: "miss-puddles", name: "Miss Puddles", group: "staff", portrait: "/staff_and_students/miss-puddles-transparent-circle.png" },
+  { key: "mr-rusty", name: "Mr Rusty", group: "staff", portrait: "/staff_and_students/mr-rusty-transparent-circle.png" },
+  { key: "miss-hayley", name: "Miss Hayley", group: "staff", portrait: "/staff_and_students/miss-hayley-transparent-circle.png" },
+  { key: "mr-sam", name: "Mr Sam", group: "staff", portrait: "/staff_and_students/mr-sam-clean-v2.png" },
+  { key: "mr-maisy", name: "Mr Maisy", group: "staff", portrait: "/staff_and_students/mr-maisy-transparent-circle.png" },
+  { key: "mr-puddles", name: "Mr Puddles", group: "staff", portrait: "/staff_and_students/mr-puddles-transparent-circle.png" },
+  { key: "miss-maisy", name: "Miss Maisy", group: "staff", portrait: "/staff_and_students/miss-maisy-transparent-circle.png" },
+  { key: "hopper", name: "Hopper", group: "students", portrait: "/staff_and_students/hopper-transparent-circle.png" },
+  { key: "whiskers", name: "Whiskers", group: "students", portrait: "/staff_and_students/whiskers-transparent-circle.png" },
+  { key: "scout", name: "Scout", group: "students", portrait: "/staff_and_students/scout-transparent-circle.png" },
+  { key: "penny", name: "Penny", group: "students", portrait: "/staff_and_students/penny-transparent-circle.png" },
+  { key: "maisy", name: "Maisy", group: "students", portrait: "/staff_and_students/maisy-transparent-circle.png" },
+  { key: "puddles", name: "Puddles", group: "students", portrait: "/staff_and_students/puddles-transparent-circle.png" },
+  { key: "sam", name: "Sam", group: "students", portrait: "/staff_and_students/sam-transparent-circle.png" },
+  { key: "rusty", name: "Rusty", group: "students", portrait: "/staff_and_students/rusty-transparent-circle.png" },
+] as const
+
 import { CastRoleIndex, CastRoleIndexItem } from "@/components/brand/CastRoleIndex"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import Link from "next/link"
 
-<section id="cast" className="material-surface material-cork mt-5 grid min-w-0 gap-8 rounded-2xl border border-border p-4 text-foreground sm:p-8 lg:p-10">
+# Cast and learning roles
 
-<Card className="material-surface material-cardboard-paper">
-  <CardHeader>
-    <div className="flex flex-wrap items-center gap-2">
-      <Badge variant="secondary">Role Studio</Badge>
-      <Badge variant="outline">16 canonical identities</Badge>
-    </div>
-    <CardTitle>Cast / role studio index</CardTitle>
-    <CardDescription>Choose by educational responsibility, learning behavior, and permitted action—not decoration.</CardDescription>
-  </CardHeader>
-  <CardContent className="grid gap-3 md:grid-cols-3">
-    <p><strong>Portrait identifies who.</strong><br />Keep canonical artwork unchanged.</p>
-    <p><strong>Colour identifies ownership.</strong><br />Use the semantic <code>cast-*</code> identity.</p>
-    <p><strong>Icons explain learning.</strong><br />Select curriculum meaning independently.</p>
-  </CardContent>
-</Card>
+Every page in this system starts with **who** is teaching or learning, **why** they belong in the lesson, and **what** the page must communicate. The cast defines 16 canonical identities — 8 staff and 8 students — each with a specific educational responsibility, learning behavior, and permitted actions.
+
+> **Principle:** Choose by educational responsibility, learning behavior, and permitted action — not decoration.
+
+## Staff · Teaching responsibility
+
+These are the adults who anchor the school's educational structure. Each has a defined role, level, and specific permitted actions.
 
 <CastRoleIndex title="Staff · teaching responsibility">
-  <CastRoleIndexItem character="old-macdonald" role="Principal and music teacher" level="Kindergarten · whole-school anchor" permitted="Gatherings, assembly, storytime, whole-school singing, banjo, and guitar." />
-  <CastRoleIndexItem character="miss-puddles" role="Daycare teacher and swim instructor" level="Daycare · early learning and swimming" permitted="Circle time, fingerplays, art, simple movement, sharing, turn-taking, and swimming." />
-  <CastRoleIndexItem character="mr-rusty" role="Dance teacher" level="Kindergarten and Grade 1 · rhythm" permitted="Fiddle, steady beat, rhythm games, dance circles, and movement transitions." />
-  <CastRoleIndexItem character="miss-hayley" role="Music, singing, and drama teacher" level="Grades 1 and 2 · stories and performance" permitted="Stories, songs, imagination games, drama, class adventures, and creative movement." />
-  <CastRoleIndexItem character="mr-sam" role="Math, science, and building teacher" level="Whole school · careful thinking" permitted="Counting, measuring, sorting, patterns, engineering, and building." />
-  <CastRoleIndexItem character="mr-maisy" role="Physical education and healthy-eating teacher" level="Grade 2 · active participation" permitted="Outdoor games, warm-ups, gross-motor play, health, and teamwork." />
-  <CastRoleIndexItem character="mr-puddles" role="Art and photography teacher" level="Whole school · creativity" permitted="Bird studies, painting, photography, exhibitions, and visual observation." />
-  <CastRoleIndexItem character="miss-maisy" role="Secretary, gardening lead, and cooking teacher" level="Preschool · growing, food, and science" permitted="Family welcome, gardening, food preparation, healthy habits, and seasonal observation." />
+  <CastRoleIndexItem 
+    character="old-macdonald" 
+    role="Principal and music teacher" 
+    level="Kindergarten · whole-school anchor" 
+    permitted="Gatherings, assembly, storytime, whole-school singing, banjo, and guitar."
+  />
+  <CastRoleIndexItem 
+    character="miss-puddles" 
+    role="Daycare teacher and swim instructor" 
+    level="Daycare · early learning and swimming" 
+    permitted="Circle time, fingerplays, art, simple movement, sharing, turn-taking, and swimming."
+  />
+  <CastRoleIndexItem 
+    character="mr-rusty" 
+    role="Dance teacher" 
+    level="Kindergarten and Grade 1 · rhythm" 
+    permitted="Fiddle, steady beat, rhythm games, dance circles, and movement transitions."
+  />
+  <CastRoleIndexItem 
+    character="miss-hayley" 
+    role="Music, singing, and drama teacher" 
+    level="Grades 1 and 2 · stories and performance" 
+    permitted="Stories, songs, imagination games, drama, class adventures, and creative movement."
+  />
+  <CastRoleIndexItem 
+    character="mr-sam" 
+    role="Math, science, and building teacher" 
+    level="Whole school · careful thinking" 
+    permitted="Counting, measuring, sorting, patterns, engineering, and building."
+  />
+  <CastRoleIndexItem 
+    character="mr-maisy" 
+    role="Physical education and healthy-eating teacher" 
+    level="Grade 2 · active participation" 
+    permitted="Outdoor games, warm-ups, gross-motor play, health, and teamwork."
+  />
+  <CastRoleIndexItem 
+    character="mr-puddles" 
+    role="Art and photography teacher" 
+    level="Whole school · creativity" 
+    permitted="Bird studies, painting, photography, exhibitions, and visual observation."
+  />
+  <CastRoleIndexItem 
+    character="miss-maisy" 
+    role="Secretary, gardening lead, and cooking teacher" 
+    level="Preschool · growing, food, and science" 
+    permitted="Family welcome, gardening, food preparation, healthy habits, and seasonal observation."
+  />
 </CastRoleIndex>
+
+## Students · Learning behavior
+
+These are the learners, each with a distinct personality, learning level, interests, and permitted actions that define how they participate.
 
 <CastRoleIndex title="Students · learning behavior">
-  <CastRoleIndexItem character="hopper" role="Energetic, optimistic, and ready to join" level="Movement and participation" interests="Joining and trying" permitted="Hop, walk, sit, listen, and imitate." />
-  <CastRoleIndexItem character="whiskers" role="Curious, gentle, and thoughtful" level="Questions and observation" interests="Questions and imagination" permitted="Inspect, listen, wonder, and participate." />
-  <CastRoleIndexItem character="scout" role="Adventurous, observant, and dependable" level="Discovery and teamwork" interests="Outdoor discovery" permitted="Lead discovery, point, listen, and help." />
-  <CastRoleIndexItem character="penny" role="Young, earnest, and growing in confidence" level="First attempts" interests="Optimism and practice" permitted="Stand, step, sing, listen, and try an instrument." />
-  <CastRoleIndexItem character="maisy" role="Warm, confident, and encouraging" level="Patterns and modelling" interests="Demonstrating an action" permitted="Stand, clap, sing, listen, and model." />
-  <CastRoleIndexItem character="puddles" role="Expressive, sociable, and enthusiastic" level="Storytelling and music" interests="Expressive participation" permitted="Waddle, gesture, sing, listen, and join rhythm play." />
-  <CastRoleIndexItem character="sam" role="Thoughtful, inventive, and cheerful" level="Building and explanation" interests="Problem-solving" permitted="Examine, count, build, listen, and explain." />
-  <CastRoleIndexItem character="rusty" role="Calm, reliable, and quietly courageous" level="Rhythm and sequencing" interests="Teamwork" permitted="Walk, gallop, listen, help, and play an instrument." />
+  <CastRoleIndexItem 
+    character="hopper" 
+    role="Energetic, optimistic, and ready to join" 
+    level="Movement and participation" 
+    interests="Joining and trying" 
+    permitted="Hop, walk, sit, listen, and imitate."
+  />
+  <CastRoleIndexItem 
+    character="whiskers" 
+    role="Curious, gentle, and thoughtful" 
+    level="Questions and observation" 
+    interests="Questions and imagination" 
+    permitted="Inspect, listen, wonder, and participate."
+  />
+  <CastRoleIndexItem 
+    character="scout" 
+    role="Adventurous, observant, and dependable" 
+    level="Discovery and teamwork" 
+    interests="Outdoor discovery" 
+    permitted="Lead discovery, point, listen, and help."
+  />
+  <CastRoleIndexItem 
+    character="penny" 
+    role="Young, earnest, and growing in confidence" 
+    level="First attempts" 
+    interests="Optimism and practice" 
+    permitted="Stand, step, sing, listen, and try an instrument."
+  />
+  <CastRoleIndexItem 
+    character="maisy" 
+    role="Warm, confident, and encouraging" 
+    level="Patterns and modelling" 
+    interests="Demonstrating an action" 
+    permitted="Stand, clap, sing, listen, and model."
+  />
+  <CastRoleIndexItem 
+    character="puddles" 
+    role="Expressive, sociable, and enthusiastic" 
+    level="Storytelling and music" 
+    interests="Expressive participation" 
+    permitted="Waddle, gesture, sing, listen, and join rhythm play."
+  />
+  <CastRoleIndexItem 
+    character="sam" 
+    role="Thoughtful, inventive, and cheerful" 
+    level="Building and explanation" 
+    interests="Problem-solving" 
+    permitted="Examine, count, build, listen, and explain."
+  />
+  <CastRoleIndexItem 
+    character="rusty" 
+    role="Calm, reliable, and quietly courageous" 
+    level="Rhythm and sequencing" 
+    interests="Teamwork" 
+    permitted="Walk, gallop, listen, help, and play an instrument."
+  />
 </CastRoleIndex>
 
-<Card>
-  <CardHeader>
-    <CardTitle>Teach the system</CardTitle>
-    <CardDescription>Identity → role → allowed action → governed asset.</CardDescription>
-  </CardHeader>
-  <CardContent className="grid gap-3 sm:grid-cols-2">
-    <p><strong>Use:</strong> unchanged portraits, exact semantic identity, documented facts, and purposeful materials.</p>
-    <p><strong>Avoid:</strong> recolouring artwork, invented roles, decorative icons, and generic felt substitutes.</p>
-  </CardContent>
-</Card>
+## Teach the system
 
-<p className="text-center">Continue to the <Link className="font-bold text-primary underline underline-offset-4" href="/branding#page-recipe">page recipe</Link>, <Link className="font-bold text-primary underline underline-offset-4" href="/branding#assets">asset registry</Link>, or <Link className="font-bold text-primary underline underline-offset-4" href="/branding/icons">icon catalogue</Link>.</p>
+**Identity → role → allowed action → governed asset.**
 
-</section>
+| Use | Avoid |
+|-----|-------|
+| Unchanged portraits | Recolouring artwork |
+| Exact semantic identity | Invented roles |
+| Documented facts | Decorative icons |
+| Purposeful materials | Generic felt substitutes |
+
+## Quick reference
+
+Each character has a semantic colour token (`cast-old-macdonald`, `cast-hopper`, etc.) that must be used for any coloured element representing that character. Never invent a colour or repurpose another character's token.
+
+Each character has governed artwork forms:
+- **Face** — transparent 2D face
+- **Backed** — 2D face with backing
+- **Full** — transparent full character portrait
+- **Felt** — large felt embroidered patch (badge)
+
+These are referenced via the `brand-asset` utility classes, never by raw asset URLs.
+
+---
+
+Continue to the [page recipe](/branding#page-recipe), [asset registry](/branding#assets), or [icon catalogue](/branding/icons).

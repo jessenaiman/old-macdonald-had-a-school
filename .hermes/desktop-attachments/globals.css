@@ -33,19 +33,18 @@
   --radius: .625rem;
 
   /* Foundation colours stay quiet so character colours remain meaningful. */
-  --theme-cream: #efe3c4;
-  --theme-paper: #fff9e9;
-  --theme-paper-muted: #dcc79f;
+  --theme-cream: #f7edda;
+  --theme-paper: #fffaf0;
+  --theme-paper-muted: #eee1c9;
   --theme-paper-rose: color-mix(in srgb, var(--curriculum-red) 18%, var(--theme-paper));
-  --theme-denim: #35634f;
-  --theme-navy: #173d33;
-  --theme-wood: #84552f;
-  --theme-wood-light: #c8aa78;
-  --theme-ink: #203129;
-  --theme-copy: #536057;
-  --theme-white: #fffdf4;
-  --brand-cork-color: #bd8f58;
-  --site-fabric-color: #315f4c;
+  --theme-denim: #244f70;
+  --theme-navy: #142d42;
+  --theme-wood: #8a603d;
+  --theme-wood-light: #cbb28c;
+  --theme-ink: #182b39;
+  --theme-copy: #46535b;
+  --theme-white: #fffdf7;
+  --brand-cork-color: #b8906a;
 
   /* Canonical identity palette. Curriculum, grade, and subject roles reuse it. */
   --cast-old-macdonald-color: #8b5e34;
@@ -99,15 +98,15 @@
   --primary-foreground: var(--theme-white);
   --secondary: var(--theme-paper-muted);
   --secondary-foreground: var(--theme-navy);
-  --muted-surface: #e4d5b4;
-  --muted-foreground: #5d594c;
+  --muted-surface: #eadfc9;
+  --muted-foreground: #5b554c;
   --accent: var(--curriculum-yellow);
   --accent-foreground: var(--theme-navy);
   --destructive: var(--curriculum-red);
   --destructive-foreground: var(--theme-white);
   --border: var(--theme-wood-light);
-  --input: #927b57;
-  --ring: var(--curriculum-yellow);
+  --input: #9f8b6d;
+  --ring: var(--curriculum-blue);
   --shadow-character: 0 3px 1px color-mix(in srgb, var(--theme-ink) 24%, transparent);
 
   /* Grade navigation roles. */
@@ -183,34 +182,26 @@
 
 .dark {
   color-scheme: dark;
-  --theme-navy: #102f35;
-  --theme-denim: #397572;
-  --theme-paper: #f3e7ca;
-  --theme-paper-muted: #d9c59c;
-  --theme-ink: #172d2e;
-  --theme-copy: #506163;
-  --theme-white: #fff9e8;
-  --site-fabric-color: #153c43;
-  --background: #0d2429;
-  --foreground: #f3e7ca;
-  --card: #17353a;
-  --card-foreground: #fff9e8;
-  --popover: #17353a;
-  --popover-foreground: #fff9e8;
-  --primary: #e8a227;
-  --primary-foreground: #142d30;
-  --secondary: #294a4e;
-  --secondary-foreground: #fff9e8;
-  --muted-surface: #243f43;
-  --muted-foreground: #c9d5d1;
+  --background: #101c26;
+  --foreground: #f7edda;
+  --card: #192c3a;
+  --card-foreground: #fffaf0;
+  --popover: #192c3a;
+  --popover-foreground: #fffaf0;
+  --primary: #8fc1dd;
+  --primary-foreground: #102333;
+  --secondary: #2b4050;
+  --secondary-foreground: #fffaf0;
+  --muted-surface: #263947;
+  --muted-foreground: #cbd5d9;
   --accent: var(--curriculum-yellow);
-  --accent-foreground: #142d30;
+  --accent-foreground: #142d42;
   --destructive: var(--curriculum-red);
   --destructive-foreground: var(--theme-white);
-  --border: #66817f;
-  --input: #7d9692;
-  --ring: #e8a227;
-  --workspace-rail-foreground: #fff9e8;
+  --border: #587080;
+  --input: #718795;
+  --ring: #8fc1dd;
+  --workspace-rail-foreground: #fffaf0;
 }
 
 @theme inline {
@@ -276,7 +267,7 @@
 .material-cork { --material-color: var(--brand-cork-color); --material-image: var(--brand-cork-texture); --material-size: 300px; color: var(--theme-ink); }
 .material-leather { --material-color: var(--theme-wood); --material-image: var(--asset-leather-old-macdonald); --material-size: 240px; color: var(--theme-ink); }
 .material-leather-blue { --material-color: var(--theme-navy); --material-image: var(--asset-leather-blue); --material-size: 240px; color: var(--theme-white); }
-.material-leather-indigo { --background: var(--site-fabric-color); --foreground: var(--theme-white); --accent: var(--curriculum-yellow); --accent-foreground: var(--theme-navy); --popover: var(--theme-navy); --popover-foreground: var(--theme-white); --material-color: var(--site-fabric-color); --material-image: linear-gradient(var(--site-fabric-color), var(--site-fabric-color)), var(--asset-leather-indigo); --material-size: auto, 240px; color: var(--foreground); background-blend-mode: color, normal; }
+.material-leather-indigo { --background: var(--theme-navy); --foreground: var(--theme-white); --accent: var(--curriculum-yellow); --accent-foreground: var(--theme-navy); --popover: var(--theme-navy); --popover-foreground: var(--theme-white); --material-color: var(--theme-navy); --material-image: var(--asset-leather-indigo); --material-size: 240px; color: var(--foreground); }
 .material-thread-overlay::after { pointer-events: none; position: absolute; inset: 0; background-image: var(--asset-thread-old-macdonald); background-repeat: repeat; background-size: 190px; content: ""; }
 
 /* Shared shadcn Card physical-surface recipe. BrandPatchCard owns the

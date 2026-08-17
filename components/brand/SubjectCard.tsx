@@ -1,6 +1,6 @@
 import { BrandIdentityCard } from "./BrandIdentityCard";
 import { CharacterPortrait } from "./CharacterPortrait";
-import { CAST, type CastKey } from "@/lib/cast";
+import { CAST, type CastKey } from "@/data/brand/cast-registry";
 
 export type SubjectCardProps = { title: string; href: string; character: CastKey; iconClass: string; highlights: readonly string[]; lessonCount: number; fastenerClass?: "fastener-paperclip" | "fastener-push-pin" | "fastener-binder-clip" | "fastener-masking-tape" | "fastener-gingham-tape" | "fastener-apple-peg"; };
 

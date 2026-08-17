@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import type { CastKey } from "@/lib/cast";
+import type { CastKey } from "@/data/brand/cast-registry";
 import type { HomeSubject } from "./home-data";
 
 type HomeSubjectNoteProps = Pick<HomeSubject, "title" | "iconClass" | "teacherReason" | "fastenerClass" | "highlights"> & {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { CAST, type CastKey } from "@/lib/cast";
+import { CAST, type CastKey } from "@/data/brand/cast-registry";
 
 type CharacterPortraitProps = {
   character: CastKey;

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
-import { HomeHero } from "@/components/home/HomePage"
 import { HomeSubjectNote } from "@/components/home/HomeSubjectNote"
+import Link from "next/link"
 
 <section id="homepage-surface" className="material-surface material-leather-blue mt-5 rounded-2xl border border-border p-5 sm:p-8 lg:p-12">
 
@@ -9,10 +9,10 @@ import { HomeSubjectNote } from "@/components/home/HomeSubjectNote"
 The menu, hero, and homepage base use the registered `material-surface material-leather-blue` recipe backed by the repeating `--asset-leather-blue` tile. Paper lesson lists and headings are clipped or taped to leather. The subject area is a cork bulletin board holding the six authored paper-note assets. Grade and folk links are locally identified repeating cloth badges.
 
 <div className="mt-6">
-  <HomeHero headingLevel="h2" />
+  <Button asChild><Link href="/">Open the production homepage</Link></Button>
 </div>
 
-<p className="mt-4 text-primary-foreground"><strong>One production component, two purposes.</strong> On the homepage this compact row gets teachers into lessons. Here it teaches the recipe: the component owns the content-left/media-right layout and carousel behavior; theme recipes own colour, border, foreground, paper, and textile; `brand-assets.css` owns the four scene files. Change those semantic sources and both rendered instances update.</p>
+<p className="mt-4 text-primary-foreground"><strong>One production route, one source of homepage content.</strong> <code>app/page.tsx</code> owns the homepage headings, labels, links, and content-left/media-right composition. The small client carousel owns interaction only; theme recipes own colour, border, foreground, paper, and textile; <code>brand-assets.css</code> owns the four scene files.</p>
 
 <div className="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,.72fr)_minmax(18rem,1fr)]">
   <article className="material-surface material-cardboard-paper relative rounded-xl border border-border p-6 pt-10 text-card-foreground shadow-lg">
@@ -42,6 +42,6 @@ The menu, hero, and homepage base use the registered `material-surface material-
 
 <h3 className="mt-8 font-heading text-xl font-normal leading-none text-balance text-primary-foreground">Extension rule</h3>
 
-Palette values, semantic theme tokens, and reusable global utilities belong in `globals.css`. Approved asset paths belong in `brand-assets.css`. `HomePage`, `WeeklyLessonList`, `HomeCarousel`, `HomeSubjectNote`, and `CreativeArtsSection` own the production composition. This page documents those components and their registered classes; it must not introduce an alternate homepage control.
+Palette values, semantic theme tokens, and reusable global utilities belong in `globals.css`. Approved asset paths belong in `brand-assets.css`. `app/page.tsx` owns the production homepage composition and content; `HomeCarousel` owns only the required client-side carousel behavior. This page documents the registered classes; it must not introduce an alternate homepage control.
 
 </section>

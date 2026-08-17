@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
-import { CAST, STAFF_KEYS, STUDENT_KEYS, type CastKey } from "@/lib/cast"
+import { CAST, STAFF_KEYS, STUDENT_KEYS, type CastKey } from "@/data/brand/cast-registry"
 
 const siteRoles = [
   ["Readable paper", "material-surface material-cardboard-paper"],

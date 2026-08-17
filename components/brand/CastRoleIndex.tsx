@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { CAST, type CastKey } from "@/lib/cast"
+import { CAST, type CastKey } from "@/data/brand/cast-registry"
 
 function CharacterForms({ character }: { character: CastKey }) {
   const member = CAST[character]
