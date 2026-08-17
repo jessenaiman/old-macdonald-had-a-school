@@ -76,6 +76,16 @@
   --subject-music-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/04-rose-ruled-note.png');
   --subject-arts-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/05-gold-scalloped-note.png');
   --subject-health-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/06-lavender-folded-note.png');
+  --subject-sel-paper: url('/design-assets/classroom-paper-notes-v2/individual-notes/01-reminder-square.webp');
+  --subject-fine-motor-paper: url('/design-assets/classroom-paper-notes-v2/individual-notes/06-board-instruction-card.webp');
+  --asset-paper-note-reminder: url('/design-assets/classroom-paper-notes-v2/individual-notes/01-reminder-square.webp');
+  --asset-paper-note-planning: url('/design-assets/classroom-paper-notes-v2/individual-notes/02-planning-slip.webp');
+  --asset-paper-note-standard: url('/design-assets/classroom-paper-notes-v2/individual-notes/03-standard-task-note.webp');
+  --asset-paper-note-checklist: url('/design-assets/classroom-paper-notes-v2/individual-notes/04-narrow-checklist.webp');
+  --asset-paper-note-teacher: url('/design-assets/classroom-paper-notes-v2/individual-notes/05-wide-teacher-note.webp');
+  --asset-paper-note-board: url('/design-assets/classroom-paper-notes-v2/individual-notes/06-board-instruction-card.webp');
+  --asset-paper-note-mobile: url('/design-assets/classroom-paper-notes-v2/individual-notes/07-mobile-list-note.webp');
+  --asset-paper-note-reflection: url('/design-assets/classroom-paper-notes-v2/individual-notes/08-ruled-reflection-sheet.webp');
 }
 
 /* Homepage scenes. Carousel markup selects meaning; this registry owns files. */
@@ -92,6 +102,8 @@
 [data-subject='music'] { --subject-note-paper: var(--subject-music-paper); }
 [data-subject='arts'] { --subject-note-paper: var(--subject-arts-paper); }
 [data-subject='health'] { --subject-note-paper: var(--subject-health-paper); }
+[data-subject='sel'] { --subject-note-paper: var(--subject-sel-paper); }
+[data-subject='fine-motor'] { --subject-note-paper: var(--subject-fine-motor-paper); }
 
 /* Compact cast artwork. Character keys select assets; consumers never carry URLs. */
 [data-character='old-macdonald'] { --character-face-patch:url('/icons/early-years/face-patches/old-macdonald-yellow.png'); --character-face-bust:url('/icons/early-years/face-busts/old-macdonald-yellow.png'); }

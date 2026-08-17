@@ -10,15 +10,15 @@ const CREATIVE_AREAS = [
 
 export function CreativeArtsSection() {
   return (
-    <section className="material-surface material-cardboard-paper mx-4 rounded-xl border-2 border-border p-5 shadow-sm sm:p-6" aria-labelledby="creative-arts-title">
+    <section className="working-wall-board p-5 sm:p-8" aria-labelledby="creative-arts-title">
       <header className="mx-auto mb-6 max-w-2xl text-center">
-        <p className="font-hand text-xl">Make some noise. Make something new.</p>
+        <p className="text-xs font-extrabold uppercase tracking-[.18em] text-primary">Make some noise. Make something new.</p>
         <h2 className="font-heading text-3xl sm:text-4xl" id="creative-arts-title">Creative Arts</h2>
         <p className="mt-2 text-muted-foreground">Music, art, drama, and dancing turn imagination into something children can share.</p>
       </header>
       <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {CREATIVE_AREAS.map((item) => (
-          <Card className={`${item.material} character-surface material-surface material-felt relative h-full min-w-0 border-2 shadow-[0_0.35rem_0_color-mix(in_srgb,var(--character-color)_55%,var(--foreground))] after:pointer-events-none after:absolute after:inset-2 after:rounded-[calc(var(--radius)-0.25rem)] after:border after:border-dashed after:border-current after:opacity-45`} key={item.title}>
+          <Card className={`${item.material} character-surface working-wall-patch relative h-full min-w-0 transition-transform hover:-translate-y-0.5`} key={item.title}>
             <CardHeader className="flex flex-col items-center text-center">
               <span className={`brand-asset ${item.icon} icon-medium`} aria-hidden="true" />
               <CardTitle>{item.title}</CardTitle>

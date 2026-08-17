@@ -80,7 +80,7 @@ export default function RootLayout({
         >
           <div className="flex min-h-dvh flex-col bg-background text-foreground">
             <SiteHeader />
-            <main className="material-surface material-leather-indigo flex min-h-0 min-w-0 flex-1 flex-col">
+            <main className="working-wall-shell flex min-h-0 min-w-0 flex-1 flex-col">
               <div className="mx-auto w-full min-w-0 flex-1 flex-col px-3 py-5 sm:px-6 lg:px-8">
                 {children}
               </div>

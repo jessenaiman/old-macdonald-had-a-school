@@ -174,7 +174,7 @@ export function GradeTodayPanel({
         </div>
       </section>
       <section
-        className="material-surface material-cork-board flex min-w-0 flex-col gap-5 rounded-xl border p-4"
+        className="working-wall-board flex min-w-0 flex-col gap-5 p-4"
         aria-label="Today's planning board"
       >
         <header className="flex flex-wrap items-center justify-between gap-4">
@@ -188,7 +188,7 @@ export function GradeTodayPanel({
         </header>
         <div className="grid gap-4 md:grid-cols-3">
           {notes.map(([title, prompt, fastener]) => (
-            <Card className="material-surface material-cardboard-paper relative" key={title}>
+            <Card className="working-wall-note relative" key={title}>
               <span
                 className={`brand-asset ${fastener} icon-small absolute -top-4 left-1/2 -translate-x-1/2`}
                 aria-hidden="true"

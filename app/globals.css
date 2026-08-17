@@ -279,6 +279,66 @@
 .material-leather-indigo { --background: var(--site-fabric-color); --foreground: var(--theme-white); --accent: var(--curriculum-yellow); --accent-foreground: var(--theme-navy); --popover: var(--theme-navy); --popover-foreground: var(--theme-white); --material-color: var(--site-fabric-color); --material-image: linear-gradient(var(--site-fabric-color), var(--site-fabric-color)), var(--asset-leather-indigo); --material-size: auto, 240px; color: var(--foreground); background-blend-mode: color, normal; }
 .material-thread-overlay::after { pointer-events: none; position: absolute; inset: 0; background-image: var(--asset-thread-old-macdonald); background-repeat: repeat; background-size: 190px; content: ""; }
 
+/* Working-wall composition. These recipes decorate semantic shadcn primitives;
+ * components continue to own layout, content, state, and accessibility. */
+.working-wall-shell {
+  background-color: var(--theme-wood-light);
+  background-image: var(--asset-woven-old-macdonald);
+  background-repeat: repeat;
+  background-size: 190px;
+}
+.working-wall-stage {
+  position: relative;
+  border: .18rem solid color-mix(in srgb, var(--theme-wood) 68%, var(--border));
+  border-radius: 1rem;
+  color: var(--theme-ink);
+  background-color: var(--theme-paper);
+  background-image: var(--asset-cardboard-ivory);
+  background-repeat: repeat;
+  background-size: 320px;
+  box-shadow: inset 0 0 0 .35rem color-mix(in srgb, var(--theme-paper) 72%, transparent), 0 .65rem 1.25rem color-mix(in srgb, var(--theme-ink) 18%, transparent);
+}
+.working-wall-board {
+  position: relative;
+  border: .22rem solid color-mix(in srgb, var(--theme-wood) 78%, var(--border));
+  border-radius: .9rem;
+  color: var(--theme-ink);
+  background-color: var(--brand-cork-color);
+  background-image: var(--brand-cork-texture);
+  background-repeat: repeat;
+  background-size: 300px;
+  box-shadow: inset 0 0 0 .28rem color-mix(in srgb, var(--theme-wood-light) 62%, transparent), 0 .45rem .8rem color-mix(in srgb, var(--theme-ink) 18%, transparent);
+}
+.working-wall-patch {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: .14rem solid color-mix(in srgb, currentColor 42%, transparent);
+  box-shadow: 0 .28rem 0 var(--grade-edge, color-mix(in srgb, var(--theme-ink) 36%, transparent)), 0 .55rem .8rem color-mix(in srgb, var(--theme-ink) 15%, transparent);
+}
+.working-wall-patch::after {
+  pointer-events: none;
+  position: absolute;
+  inset: .42rem;
+  z-index: 0;
+  border: .08rem dashed color-mix(in srgb, currentColor 55%, transparent);
+  border-radius: calc(var(--radius) - .1rem);
+  content: "";
+}
+.working-wall-patch > * { position: relative; z-index: 1; }
+.working-wall-note {
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --muted-foreground: var(--theme-copy);
+  --border: color-mix(in srgb, var(--theme-wood-light) 74%, var(--theme-ink));
+  background-color: var(--theme-paper);
+  background-image: var(--subject-note-paper, var(--asset-paper-note-standard));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: 0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent);
+}
+
 /* Shared shadcn Card physical-surface recipe. BrandPatchCard owns the
  * composition; these semantic tokens own the material, stitch, and ink. */
 .brand-patch-card {

@@ -43,12 +43,12 @@ export function HomeCarousel({
   }, [api]);
 
   return (
-    <Carousel className="material-surface material-denim-indigo min-w-0 rotate-[0.6deg] rounded-xl border border-dashed border-current p-4 shadow-[0_0_0_0.45rem_color-mix(in_srgb,var(--theme-denim)_60%,transparent),0_0.75rem_1.5rem_color-mix(in_srgb,var(--theme-navy)_38%,transparent)] motion-reduce:rotate-0" opts={{ loop: true }} setApi={setApi} aria-label={ariaLabel}>
-      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-        <p className="font-heading text-lg">{title}</p>
-        <p className="text-xs text-foreground/80">{description}</p>
+    <Carousel className="min-w-0 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-sm" opts={{ loop: true }} setApi={setApi} aria-label={ariaLabel}>
+      <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+        <p className="font-heading text-2xl">{title}</p>
+        <p className="text-sm text-muted-foreground">{description}</p>
       </div>
-      <div className="relative aspect-video w-full border-4 border-card bg-primary shadow-sm [&_[data-slot=carousel-content]]:h-full">
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-muted [&_[data-slot=carousel-content]]:h-full">
         <CarouselContent className="ml-0 h-full">
           {slides.map((item) => (
             <CarouselItem className="relative h-full pl-0" key={item.assetClass}>
@@ -58,14 +58,14 @@ export function HomeCarousel({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="left-2 sm:-left-4" />
-        <CarouselNext className="right-2 sm:-right-4" />
+        <CarouselPrevious className="left-3 border-border bg-background shadow-sm" />
+        <CarouselNext className="right-3 border-border bg-background shadow-sm" />
       </div>
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex gap-1" role="group" aria-label={pickerLabel}>
           {slides.map((item, index) => (
             <Button
-              className={cn(index !== active && "text-foreground hover:text-foreground")}
+              className={cn(index !== active && "text-muted-foreground hover:text-foreground")}
               variant={index === active ? "secondary" : "ghost"}
               size="icon-sm"
               type="button"
@@ -78,7 +78,7 @@ export function HomeCarousel({
             </Button>
           ))}
         </div>
-        {slide ? <Link className="text-sm font-bold text-foreground underline underline-offset-4" href={slide.href}>{slide.label} <span aria-hidden="true">→</span></Link> : null}
+        {slide ? <Link className="text-sm font-bold text-primary underline underline-offset-4" href={slide.href}>{slide.label} <span aria-hidden="true">→</span></Link> : null}
         {slide ? <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">Showing {slide.label}</span> : null}
       </div>
     </Carousel>

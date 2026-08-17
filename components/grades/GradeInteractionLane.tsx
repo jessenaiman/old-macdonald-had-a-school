@@ -71,7 +71,7 @@ export function GradeWorkspace({
 }) {
   return (
     <div
-      className="material-surface material-cardboard-paper grid min-h-[calc(100dvh-5rem)] min-w-0 grid-cols-1 text-foreground lg:grid-cols-[14rem_minmax(0,1fr)] print:block"
+      className="working-wall-stage grid min-h-[calc(100dvh-5rem)] min-w-0 grid-cols-1 overflow-hidden text-foreground lg:grid-cols-[14rem_minmax(0,1fr)] print:block"
       data-grade={grade}
       data-grade-template={grade}
       data-style-scope="grade-workspace"
@@ -329,7 +329,7 @@ export function GradeInteractionLane({
           <section
             key={section}
             aria-label={`${config.grade} ${section} panel`}
-            className="material-surface material-cardboard-paper flex min-h-full min-w-0 flex-col rounded-xl border p-3 shadow-sm sm:p-5"
+          className="material-surface material-cardboard-paper flex min-h-full min-w-0 flex-col rounded-xl border p-3 shadow-sm sm:p-5"
           >
             {panel}
           </section>
