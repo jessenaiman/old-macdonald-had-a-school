@@ -40,3 +40,5 @@ storybook-static
 
 # Local browser/shell scratch artifacts
 open-code-review/
+.hermes/
+.claude/

@@ -39,8 +39,8 @@ const brandFont = Playfair_Display({
 
 const handFont = localFont({
   src: [
-    { path: "../public/background-textures/Caveat-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../public/background-textures/Caveat-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/design-assets/background-textures/Caveat-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/design-assets/background-textures/Caveat-Bold.ttf", weight: "700", style: "normal" },
   ],
   variable: "--font-farm-hand",
   display: "swap",

@@ -11,12 +11,12 @@
  */
 export const BRAND_IMAGE_ASSETS = {
   emblem: {
-    micro: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-micro-16.png",
-    favicon: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-favicon-32.png",
-    flat: "/design-assets/brand-emblem-v1/candidate-flat-marks/brand-emblem-flat-32.png",
-    navigation: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-nav-44.png",
-    card: "/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.webp",
-    detail: "/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.webp",
+    micro: "/design-assets/logo/individual-marks/brand-emblem-micro-16.png",
+    favicon: "/design-assets/logo/individual-marks/brand-emblem-favicon-32.png",
+    flat: "/design-assets/logo/candidate-flat-marks/brand-emblem-flat-32.png",
+    navigation: "/design-assets/logo/individual-marks/brand-emblem-nav-44.png",
+    card: "/design-assets/logo/individual-marks/brand-emblem-card-128.webp",
+    detail: "/design-assets/logo/candidate-detail-marks/brand-emblem-detail-512.webp",
   },
   portraits: {
     "old-macdonald": "/staff_and_students/old-macdonald-transparent-circle.webp",

@@ -37,6 +37,11 @@
    * (which the .dark block redefines to cream). */
   --brand-navy: #1e2a38;
   --brand-navy-foreground: #fefce8;
+  /* pinned light paper surface — deliberate sibling of --brand-navy: does NOT
+     invert in .dark, so the hero "New this week" card stays cream in both themes */
+  --brand-paper: #fdf8e3;
+  --brand-paper-foreground: #1e2a2e;
+  --brand-paper-muted: #6b6152;
 
   --wood-warm: #c4a07a;
   --wood-muted: #d4b896;
