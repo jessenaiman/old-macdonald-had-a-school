@@ -303,7 +303,7 @@ export function TeacherHeroCard({
           {action && (
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <a href={action.href}>{action.label}</a>
+                <Link href={action.href}>{action.label}</Link>
               </Button>
             </div>
           )}
@@ -337,5 +337,3 @@ export function TeacherHeroCard({
     </Card>
   );
 }
-
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };

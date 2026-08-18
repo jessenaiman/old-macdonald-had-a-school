@@ -22,14 +22,14 @@ import { cn } from "@/lib/utils";
 
 const HEADER_LINK_CLASS = cn(
   navigationMenuTriggerStyle(),
-  "bg-transparent px-3 text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground data-[state=open]:bg-transparent aria-[current=page]:text-accent"
+  "bg-transparent px-3 text-brand-navy-foreground/80 hover:bg-brand-navy-foreground/10 hover:text-brand-navy-foreground focus:bg-brand-navy-foreground/10 focus:text-brand-navy-foreground data-[state=open]:bg-transparent aria-[current=page]:text-accent"
 );
 
 export function SiteHeader() {
   const active = activePageFromPathname(usePathname());
 
   return (
-    <header className="bg-primary border-b border-primary-foreground/10 sticky top-0 z-40">
+    <header className="bg-brand-navy border-b border-brand-navy-foreground/10 sticky top-0 z-40">
       <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           className="inline-flex items-center gap-3 shrink-0"
@@ -38,7 +38,7 @@ export function SiteHeader() {
         >
           <ResponsiveBrandEmblem className="h-8 w-auto" />
           <span className="hidden sm:inline-flex flex-col items-start">
-            <strong className="font-brand text-sm leading-none sm:text-base text-primary-foreground">
+            <strong className="font-brand text-sm leading-none sm:text-base text-brand-navy-foreground">
               Old MacDonald Had a School
             </strong>
             <small className="text-xs font-black uppercase tracking-widest text-accent">

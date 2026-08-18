@@ -27,13 +27,13 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
   return (
     <div>
       <Sheet open={open} onOpenChange={setOpen}>
-        {/* Ghost has no default foreground; on the bg-primary header the icon would be
+        {/* Ghost has no default foreground; on the bg-brand-navy header the icon would be
             invisible, so pin it to the header's foreground token (semantic, not ad-hoc). */}
         <SheetTrigger asChild>
           <Button
             variant="ghost"
             size="icon-lg"
-            className="text-primary-foreground"
+            className="text-brand-navy-foreground"
             aria-label="Open navigation menu"
           >
             <Menu data-icon="inline-start" aria-hidden="true" />

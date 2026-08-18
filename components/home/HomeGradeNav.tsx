@@ -23,7 +23,7 @@ export function HomeGradeNav() {
       </div>
       <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5" aria-label="Grade pages">
         {HOME_GRADES.map((grade) => (
-          <Card className="grade-surface working-wall-patch relative min-w-0 gap-0 rounded-xl py-0 bg-card text-card-foreground transition-transform hover:-translate-y-0.5" data-grade={grade.key} key={grade.key}>
+          <Card className="grade-surface working-wall-patch relative min-w-0 gap-0 rounded-xl py-0 transition-transform hover:-translate-y-0.5" data-grade={grade.key} key={grade.key}>
             <Link className="relative z-1 flex min-h-20 items-center gap-3 p-4 focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px]" href={`/grade/${grade.key}`}>
               <span className="brand-asset grade-icon icon-small shrink-0" data-grade-icon={grade.key} aria-hidden="true" />
               <strong className="min-w-0 font-heading text-xl leading-none">{grade.label}</strong>

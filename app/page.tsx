@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { LayoutGrid, Search } from "lucide-react";
+import { ArrowRight, LayoutGrid, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { HomeGradeNav } from "@/components/home/HomeGradeNav";
 import { HomeSubjectNote } from "@/components/home/HomeSubjectNote";
 import { CreativeArtsSection } from "@/components/home/CreativeArtsSection";
 import { WorkingWallNote } from "@/components/working-wall/WorkingWallComponents";
-import { HomeCarousel, type HomeCarouselSlide } from "@/components/home/HomeCarousel";
 import { HOME_SUBJECTS, SUBJECT_LEARNERS, HOME_VIDEO_SONGS } from "@/components/home/home-data";
 
 const NEW_THIS_WEEK = [
@@ -15,53 +15,65 @@ const NEW_THIS_WEEK = [
   { title: "Find the Steady Beat", summary: "Feel the heartbeat of songs." },
 ];
 
-const SCENE_SLIDES: readonly HomeCarouselSlide[] = [
+const SCENE_SLIDES = [
   { assetClass: "home-scene-class-gathering", alt: "Children gathered in a circle for storytime", label: "Class gathering", href: "/about" },
   { assetClass: "home-scene-growing-together", alt: "Children learning and growing together", label: "Growing together", href: "/about" },
   { assetClass: "home-scene-music-landscape", alt: "Music instruments across the farm", label: "Music on the farm", href: "/songs" },
   { assetClass: "home-scene-schoolhouse", alt: "The old MacDonald schoolhouse", label: "The schoolhouse", href: "/about" },
-];
+] as const;
 
 export default function Home() {
   return (
     <main className="flex flex-col gap-8 py-6 lg:py-10">
-      {/* Hero — simple navy surface, gold primary CTA + ghost secondary (approved) */}
-      <section className="bg-primary text-primary-foreground rounded-xl px-6 py-10 sm:px-10">
-        <div className="mx-auto flex max-w-3xl flex-col gap-4">
-          <h1 className="font-heading text-3xl leading-tight sm:text-4xl md:text-5xl">
-            Songs teachers know.
-            <br />
-            Places children can <em className="not-italic text-accent">grow.</em>
-          </h1>
-          <p className="max-w-xl font-hand text-xl text-primary-foreground/90 sm:text-2xl">
-            Practical, playful lessons built around familiar songs so every child can
-            listen, move, hum, sing, and invent.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Button asChild size="lg" variant="accent">
-              <Link href="#grades">
-                <LayoutGrid data-icon="inline-start" aria-hidden="true" />
-                Browse by grade
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outlineForeground">
-              <Link href="/search">
-                <Search data-icon="inline-start" aria-hidden="true" />
-                Search lessons
-              </Link>
-            </Button>
+      {/* Hero — coming-soon block left, small scene carousel right (~1/4 width) */}
+      <section className="bg-brand-navy text-brand-navy-foreground rounded-xl px-6 py-10 sm:px-10">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,14rem)]">
+          <div className="flex flex-col gap-4">
+            <Badge variant="accent" className="w-fit">Coming soon</Badge>
+            <h1 className="font-heading text-3xl leading-tight sm:text-4xl md:text-5xl">
+              Songs teachers know.
+              <br />
+              Places children can <em className="not-italic text-accent">grow.</em>
+            </h1>
+            <p className="max-w-xl font-hand text-xl text-brand-navy-foreground/90 sm:text-2xl">
+              Practical, playful lessons built around familiar songs so every child can
+              listen, move, hum, sing, and invent.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg" variant="accent">
+                <Link href="#grades">
+                  <LayoutGrid data-icon="inline-start" aria-hidden="true" />
+                  Browse by grade
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outlineForeground">
+                <Link href="/search">
+                  <Search data-icon="inline-start" aria-hidden="true" />
+                  Search lessons
+                </Link>
+              </Button>
+            </div>
           </div>
+          <Carousel className="w-full" aria-label="A look around the farm">
+            <CarouselContent>
+              {SCENE_SLIDES.map((scene) => (
+                <CarouselItem key={scene.assetClass}>
+                  <div className="p-1">
+                    <Link
+                      className="relative block aspect-square w-full overflow-hidden rounded-xl border border-brand-navy-foreground/20"
+                      href={scene.href}
+                      aria-label={`${scene.label}: ${scene.alt}`}
+                    >
+                      <span className={`brand-scene ${scene.assetClass}`} aria-hidden="true" />
+                    </Link>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
-      </section>
-
-      {/* Scenes — tilted polaroid carousel of the farm */}
-      <section aria-label="A look around the farm">
-        <HomeCarousel
-          slides={SCENE_SLIDES}
-          title="A look around the farm"
-          ariaLabel="Classroom scenes"
-          pickerLabel="Choose a scene"
-        />
       </section>
 
       {/* Grades — felt grade cards pinned to a cork board */}
@@ -149,14 +161,11 @@ export default function Home() {
       </section>
 
       {/* Closing statement — pinned teacher note */}
-      <WorkingWallNote fastener="pin" heading="Plan with intention" className="bg-muted">
+      <WorkingWallNote fastener="pin" heading="Build learning around familiar songs and clear routines." className="bg-muted">
         <Badge variant="secondary" className="w-fit">
           Plan with intention
         </Badge>
-        <h2 className="mt-3 font-heading text-2xl leading-tight sm:text-3xl">
-          Build learning around familiar songs and clear routines.
-        </h2>
-        <p className="mt-2 max-w-xl text-muted-foreground">
+        <p className="mt-3 max-w-xl text-muted-foreground">
           Practical, character-driven planning for the real classroom moments that matter.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
@@ -168,7 +177,7 @@ export default function Home() {
           </Button>
           <Button asChild variant="ghost">
             <Link href="/lessons">
-              Browse all lessons <span aria-hidden="true">→</span>
+              Browse all lessons <ArrowRight data-icon="inline-end" />
             </Link>
           </Button>
         </div>

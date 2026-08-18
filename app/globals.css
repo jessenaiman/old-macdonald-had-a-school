@@ -28,6 +28,15 @@
   --navy-muted: #3a4a5a;
   --navy-soft: #4a5a6a;
 
+  /* === BRAND NAVY SURFACE (stable across themes) ===
+   * The header/footer/hero "solid navy" brand surface must stay navy in BOTH
+   * light and dark mode (design ref: solid navy header). --primary inverts in
+   * .dark so buttons/links stay legible; these tokens deliberately do NOT, so
+   * brand surfaces pin to literal navy values instead of var(--navy-deep)
+   * (which the .dark block redefines to cream). */
+  --brand-navy: #1e2a38;
+  --brand-navy-foreground: #fefce8;
+
   --wood-warm: #c4a07a;
   --wood-muted: #d4b896;
   --wood-soft: #e8d5c0;
@@ -143,18 +152,20 @@
   --subject-arts-color: #4f5fa0;
   --subject-health-color: #b5272c;
 
-  /* Material surface tokens (translated from the purged --theme-* system) */
+  /* Material surface tokens (physical materials — paper/ink/navy/wood are REAL
+   * objects and must NOT invert in .dark; per dark-mode-token-overload rule:
+   * pin to literal hex, never to a var() the .dark block redefines) */
   --brand-cork-color: #bd8f58;
-  --theme-paper: var(--paper-warm);
-  --theme-paper-muted: var(--paper-muted);
-  --theme-ink: var(--ink-primary);
-  --theme-copy: var(--ink-muted);
-  --theme-navy: var(--navy-deep);
-  --theme-white: var(--paper-cream);
-  --theme-wood: var(--wood-warm);
-  --theme-wood-light: var(--wood-soft);
-  --curriculum-yellow: var(--gold-bright);
-  --curriculum-red: var(--rose-warm);
+  --theme-paper: #fdf8e3;
+  --theme-paper-muted: #f0e6d0;
+  --theme-ink: #1a2a2e;
+  --theme-copy: #6b7a7c;
+  --theme-navy: #1e2a38;
+  --theme-white: #fefce8;
+  --theme-wood: #c4a07a;
+  --theme-wood-light: #e8d5c0;
+  --curriculum-yellow: #d4a82a;
+  --curriculum-red: #d47a8a;
   --curriculum-blue: var(--cast-mr-rusty-color);
   --curriculum-green: var(--cast-miss-maisy-color);
   --curriculum-purple: var(--cast-mr-puddles-color);
@@ -256,6 +267,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
+  /* Brand navy surface (stable — does not invert in dark mode) */
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-foreground: var(--brand-navy-foreground);
 
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
