@@ -10,13 +10,13 @@ const THEMES = [
 ] as const;
 
 export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(
     () => () => undefined,
     () => true,
     () => false
   );
-  const currentTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "light";
+  const currentTheme = mounted && resolvedTheme === "dark" ? "dark" : "light";
   const current = THEMES.find((item) => item.value === currentTheme) ?? THEMES[0];
   const next = THEMES.find((item) => item.value !== current.value) ?? THEMES[0];
 

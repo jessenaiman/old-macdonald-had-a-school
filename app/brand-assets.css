@@ -22,6 +22,18 @@
   vertical-align: middle;
 }
 
+/* Full-bleed scene/illustration rendering (hero scenes, large artwork).
+   Unlike .brand-asset (icon-sized, contain), this fills its container. */
+.brand-scene {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-image: var(--brand-asset-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 /* Repeatable material sources. Components consume these names, never raw URLs. */
 :root {
   --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.webp');

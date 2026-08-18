@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
-import { BookOpen, Search, Music, Menu as MenuIcon, HelpCircle } from "lucide-react";
+import { BookOpen, Search, Wrench, HelpCircle } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -9,58 +9,50 @@ export function SiteFooter() {
         <h2 id="footer-heading" className="sr-only">
           Site footer
         </h2>
-        
+
         {/* Main navigation links - emphasized as the primary footer content */}
         <nav className="grid grid-cols-2 md:grid-cols-5 gap-6 mb-10" aria-label="Main navigation">
           {/* Plan by topic - with icon */}
-          <Link 
-            href="/topics" 
+          <Link
+            href="/topics"
             className="flex items-center gap-2 text-sm font-medium hover:text-primary-foreground/70 transition-colors group"
             aria-label="Plan by topic"
           >
             <BookOpen className="size-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
             <span>Plan by topic</span>
           </Link>
-          
-          {/* Grades - with icon */}
-          <Link 
-            href="/grade/daycare" 
+
+          {/* Teacher toolbox - with icon */}
+          <Link
+            href="/lessons"
             className="flex items-center gap-2 text-sm font-medium hover:text-primary-foreground/70 transition-colors group"
-            aria-label="Browse by grade"
+            aria-label="Teacher toolbox"
           >
-            <MenuIcon className="size-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-            <span>Grades</span>
+            <Wrench className="size-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+            <span>Teacher toolbox</span>
           </Link>
-          
-          {/* Search */}
-          <Link 
-            href="/search" 
+
+          {/* Search lessons */}
+          <Link
+            href="/search"
             className="flex items-center gap-2 text-sm font-medium hover:text-primary-foreground/70 transition-colors group"
             aria-label="Search lessons"
           >
             <Search className="size-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
             <span>Search lessons</span>
           </Link>
-          
-          {/* Songs */}
-          <Link 
-            href="/songs" 
-            className="flex items-center gap-2 text-sm font-medium hover:text-primary-foreground/70 transition-colors group"
-            aria-label="Song library"
-          >
-            <Music className="size-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-            <span>Song library</span>
-          </Link>
-          
+
           {/* About */}
-          <Link 
-            href="/about" 
+          <Link
+            href="/about"
             className="flex items-center gap-2 text-sm font-medium hover:text-primary-foreground/70 transition-colors group"
             aria-label="About us"
           >
             <HelpCircle className="size-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
             <span>About</span>
           </Link>
+
+          {/* Contact is covered by About (see /about#contact in the legal row below) */}
         </nav>
 
         {/* Divider */}

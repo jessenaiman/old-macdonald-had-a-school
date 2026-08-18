@@ -13,9 +13,13 @@ export type HomeCarouselSlide = {
   href: string;
 };
 
+/** Slight alternating tilt so each scene reads as a photo pinned at a natural angle. */
+const TILTS = ["-rotate-1", "rotate-1", "-rotate-2", "rotate-2"] as const;
+
 /**
  * Home-page composition of the installed shadcn Carousel. It owns only the
- * home-specific slide metadata and accessible scene picker.
+ * home-specific slide metadata, the accessible scene picker, and the subtle
+ * per-slide tilt that gives the pinned-photo feel.
  */
 export function HomeCarousel({
   slides,
@@ -41,17 +45,29 @@ export function HomeCarousel({
   }, [api]);
 
   return (
-    <Carousel className="min-w-0 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-sm" opts={{ loop: true }} setApi={setApi} aria-label={ariaLabel}>
+    <Carousel
+      className="min-w-0 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-sm"
+      opts={{ loop: true }}
+      setApi={setApi}
+      aria-label={ariaLabel}
+    >
       <div className="mb-4">
         <p className="font-heading text-2xl">{title}</p>
       </div>
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-muted [&_[data-slot=carousel-content]]:h-full">
         <CarouselContent className="ml-0 h-full">
-          {slides.map((item) => (
+          {slides.map((item, index) => (
             <CarouselItem className="relative h-full pl-0" key={item.assetClass}>
-              <Link className="absolute inset-0" href={item.href} aria-label={`${item.label}: ${item.alt}`}>
-                <span className={`brand-asset ${item.assetClass} !block !size-full`} aria-hidden="true" />
-              </Link>
+              <div
+                className={cn(
+                  "absolute inset-0 m-auto h-[90%] w-[86%] overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-transform duration-300 hover:rotate-0",
+                  TILTS[index % TILTS.length]
+                )}
+              >
+                <Link className="absolute inset-0" href={item.href} aria-label={`${item.label}: ${item.alt}`}>
+                  <span className={`brand-scene ${item.assetClass}`} aria-hidden="true" />
+                </Link>
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>

@@ -6,59 +6,49 @@
 /*
  * Old MacDonald Had a School — shadcn Theme
  *
- * Design references show: warm navy anchor, gold/mustard accent, dusty rose, cream paper textures
- * Typography: serif headlines + sans-serif UI + script personality
- * Backgrounds: repeating paper/cardboard textures from brand-assets (responsive, not hero images)
- * Character colors: preserved for identity (badges, avatars) — NOT used as semantic tokens
+ * Canonical shadcn v4 scaffold (@theme inline) with the cast.mdx palette:
+ * - Foundation colors live in :root / .dark (cast.mdx is the single source of truth;
+ *   globals.css is the implementation layer and must not invent colors).
+ * - @theme inline maps semantic tokens to Tailwind utilities so component-level
+ *   CSS variable overrides (e.g. --card) cascade correctly.
+ * - Textures (cork, felt, cardboard, paper notes) come from brand-assets.css.
  */
 
 :root {
   color-scheme: light;
   --radius: 0.625rem;
 
-  /* === FOUNDATION PALETTE ===
-   * Warm, playful, educationally-focused. Compatible with character colors
-   * but not dependent on them. All semantic tokens derive from here. */
-
-  /* Cream paper base — warm, readable, not stark white */
+  /* === FOUNDATION PALETTE (cast.mdx) === */
   --paper-cream: #fefce8;
   --paper-warm: #fdf8e3;
   --paper-muted: #f0e6d0;
   --paper-rose: #fdf2f8;
 
-  /* Navy anchor — trustworthy, readable on cream */
   --navy-deep: #1e2a38;
   --navy-muted: #3a4a5a;
   --navy-soft: #4a5a6a;
 
-  /* Warm wood/earth tones for borders, secondary surfaces */
   --wood-warm: #c4a07a;
   --wood-muted: #d4b896;
   --wood-soft: #e8d5c0;
 
-  /* Ink — high contrast on cream, not pure black */
   --ink-primary: #1a2a2e;
   --ink-secondary: #3d4d50;
   --ink-muted: #6b7a7c;
 
-  /* Gold/mustard accent — warm, energetic, CTAs */
   --gold-bright: #d4a82a;
   --gold-soft: #e8c55a;
   --gold-muted: #b89020;
 
-  /* Dusty rose — playful, friendly, complementary */
   --rose-warm: #d47a8a;
   --rose-soft: #e8a5b0;
   --rose-muted: #b86578;
 
-  /* Sage/teal — calm, nature, complementary */
   --sage-warm: #6b9b8a;
   --sage-soft: #8dc8b8;
   --sage-muted: #548070;
 
-  /* === SEMANTIC SHADCN TOKENS ===
-   * These are what components consume. Derived from foundation above. */
-
+  /* === SEMANTIC SHADCN TOKENS === */
   --background: var(--paper-cream);
   --foreground: var(--ink-primary);
 
@@ -87,8 +77,24 @@
   --input: var(--wood-muted);
   --ring: var(--gold-bright);
 
-  /* === CHARACTER IDENTITY (PRESERVED FOR BADGES/AVATARS ONLY) ===
-   * These are NOT semantic tokens. Use via .cast-* classes or data-character. */
+  /* Chart palette (derived from cast palette) */
+  --chart-1: var(--gold-bright);
+  --chart-2: var(--sage-warm);
+  --chart-3: var(--rose-warm);
+  --chart-4: var(--navy-muted);
+  --chart-5: var(--cast-mr-puddles-color);
+
+  /* Sidebar (nav surfaces) */
+  --sidebar: var(--navy-deep);
+  --sidebar-foreground: var(--paper-cream);
+  --sidebar-primary: var(--gold-bright);
+  --sidebar-primary-foreground: var(--navy-deep);
+  --sidebar-accent: var(--paper-muted);
+  --sidebar-accent-foreground: var(--ink-primary);
+  --sidebar-border: var(--wood-muted);
+  --sidebar-ring: var(--gold-bright);
+
+  /* === CHARACTER IDENTITY (cast.mdx — badges/avatars only) === */
   --cast-old-macdonald-color: #8b5e34;
   --cast-old-macdonald-foreground: #fefce8;
   --cast-miss-puddles-color: #e8a227;
@@ -122,7 +128,7 @@
   --cast-rusty-color: #8b5030;
   --cast-rusty-foreground: #fefce8;
 
-  /* Grade/Subject routing (for page-level theming, not component tokens) */
+  /* Grade/Subject routing (page-level theming) */
   --grade-early-years-color: #55705a;
   --grade-daycare-color: #e8a227;
   --grade-pre-school-color: #55705a;
@@ -136,6 +142,22 @@
   --subject-music-color: #2c6c9b;
   --subject-arts-color: #4f5fa0;
   --subject-health-color: #b5272c;
+
+  /* Material surface tokens (translated from the purged --theme-* system) */
+  --brand-cork-color: #bd8f58;
+  --theme-paper: var(--paper-warm);
+  --theme-paper-muted: var(--paper-muted);
+  --theme-ink: var(--ink-primary);
+  --theme-copy: var(--ink-muted);
+  --theme-navy: var(--navy-deep);
+  --theme-white: var(--paper-cream);
+  --theme-wood: var(--wood-warm);
+  --theme-wood-light: var(--wood-soft);
+  --curriculum-yellow: var(--gold-bright);
+  --curriculum-red: var(--rose-warm);
+  --curriculum-blue: var(--cast-mr-rusty-color);
+  --curriculum-green: var(--cast-miss-maisy-color);
+  --curriculum-purple: var(--cast-mr-puddles-color);
 }
 
 .dark {
@@ -182,10 +204,25 @@
   --border: var(--wood-warm);
   --input: var(--wood-muted);
   --ring: var(--gold-bright);
+
+  --chart-1: var(--gold-soft);
+  --chart-2: var(--sage-soft);
+  --chart-3: var(--rose-soft);
+  --chart-4: var(--navy-muted);
+  --chart-5: var(--cast-puddles-color);
+
+  --sidebar: var(--navy-deep);
+  --sidebar-foreground: var(--paper-cream);
+  --sidebar-primary: var(--gold-bright);
+  --sidebar-primary-foreground: var(--navy-deep);
+  --sidebar-accent: var(--paper-muted);
+  --sidebar-accent-foreground: var(--ink-primary);
+  --sidebar-border: var(--wood-muted);
+  --sidebar-ring: var(--gold-bright);
 }
 
-/* === TAILWIND V4 THEME MAPPING === */
-@theme {
+/* === TAILWIND V4 THEME MAPPING (@theme inline per shadcn docs) === */
+@theme inline {
   --font-display: var(--font-farm-display);
   --font-heading: var(--font-farm-display);
   --font-section: var(--font-farm-section);
@@ -214,15 +251,45 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 
   /* Custom: paper texture backgrounds (repeating, responsive) */
   --color-paper-cream: var(--paper-cream);
   --color-paper-warm: var(--paper-warm);
   --color-paper-muted: var(--paper-muted);
+
+  /* Custom: wood/earth tones (grade nav shelf, borders) */
+  --color-wood-warm: var(--wood-warm);
+  --color-wood-muted: var(--wood-muted);
+  --color-wood-soft: var(--wood-soft);
+
+  /* Custom: grade identity colors (cast.mdx — character subject-coded) */
+  --color-grade-daycare: var(--grade-daycare-color);
+  --color-grade-pre-school: var(--grade-pre-school-color);
+  --color-grade-kindergarten: var(--grade-kindergarten-color);
+  --color-grade-one: var(--grade-one-color);
+  --color-grade-two: var(--grade-two-color);
 }
 
 /* === BASE LAYER === */
@@ -284,9 +351,7 @@
   }
 }
 
-/* === REPEATING BACKGROUND UTILITIES ===
- * Use these instead of hero images for responsive, shadcn-compatible backgrounds */
-
+/* === REPEATING BACKGROUND UTILITIES === */
 .bg-paper-ivory {
   background-color: var(--paper-warm);
   background-image: var(--asset-cardboard-ivory);
@@ -319,7 +384,7 @@
 }
 
 .bg-cork {
-  background-color: #bd8f58;
+  background-color: var(--brand-cork-color);
   background-image: var(--asset-cork-repeat-web);
   background-repeat: repeat;
   background-size: 300px;
@@ -339,9 +404,7 @@
   background-size: 256px;
 }
 
-/* === CARD SURFACE RECIPES ===
- * Apply to shadcn Card components for physical-material feel */
-
+/* === CARD SURFACE RECIPES === */
 .card-paper {
   @apply bg-card border-border shadow-sm;
   background-image: var(--asset-cardboard-ivory);
@@ -367,7 +430,10 @@
 
 .card-felt {
   @apply bg-card border-border shadow-sm;
-  /* Character-specific — set --character-color and --character-texture inline */
+  background-image: var(--character-texture);
+  background-repeat: repeat;
+  background-size: 180px;
+  background-blend-mode: multiply;
 }
 
 .card-construction {
@@ -377,11 +443,244 @@
   background-size: 190px;
 }
 
-/* === CHARACTER SURFACE HELPERS ===
- * For badges, avatars, small accents — NOT full page backgrounds */
+/* === MATERIAL SURFACE SYSTEM (restored from the purged theme) ===
+ * Components consume material-surface + a named material; tokens own the texture. */
+.material-surface {
+  background-color: var(--material-color);
+  background-image: var(--material-image);
+  background-position: var(--material-position, 0 0);
+  background-repeat: repeat;
+  background-size: var(--material-size, 220px);
+}
+.material-cardboard-paper {
+  --material-color: var(--theme-paper);
+  --material-image: var(--asset-cardboard-ivory);
+  --material-size: 320px;
+  color: var(--theme-ink);
+}
+.material-cardboard-kraft {
+  --material-color: var(--theme-paper-muted);
+  --material-image: var(--asset-cardboard-kraft);
+  --material-size: 320px;
+}
+.material-felt {
+  --material-color: var(--character-color);
+  --material-image: var(--character-texture);
+  --material-size: 180px;
+  color: var(--character-foreground);
+}
+.material-felt [data-slot="card-description"] {
+  color: color-mix(in srgb, currentColor 78%, transparent);
+}
+.material-woven-fabric {
+  --material-color: var(--theme-wood-light);
+  --material-image: var(--asset-woven-old-macdonald);
+  --material-size: 190px;
+  color: var(--theme-ink);
+}
+.material-woven-fabric [data-slot="card-description"],
+.material-construction-paper [data-slot="card-description"],
+.material-leather [data-slot="card-description"] {
+  color: currentColor;
+  opacity: .78;
+}
+.material-denim-indigo {
+  --material-color: var(--theme-navy);
+  --material-image: var(--asset-denim-indigo);
+  --material-size: 256px;
+  color: var(--theme-white);
+}
+.material-paper-ruled {
+  --material-color: var(--theme-paper);
+  --material-image: var(--asset-paper-ruled-repeat);
+  --material-position: 0 1.3rem;
+  --material-size: 336px;
+  color: var(--theme-ink);
+  background-blend-mode: multiply;
+}
+.material-paper-grid {
+  --material-color: var(--theme-paper);
+  --material-image: var(--asset-paper-grid-repeat);
+  --material-size: 512px;
+  color: var(--theme-ink);
+  background-blend-mode: multiply;
+}
+.material-construction-paper {
+  --material-color: var(--curriculum-green);
+  --material-image: var(--asset-construction-mr-sam);
+  --material-size: 190px;
+  color: var(--theme-navy);
+}
+.material-cork {
+  --material-color: var(--brand-cork-color);
+  --material-image: var(--brand-cork-texture);
+  --material-size: 300px;
+  color: var(--theme-ink);
+}
+.material-leather {
+  --material-color: var(--theme-wood);
+  --material-image: var(--asset-leather-old-macdonald);
+  --material-size: 240px;
+  color: var(--theme-ink);
+}
+.material-leather-blue {
+  --material-color: var(--theme-navy);
+  --material-image: var(--asset-leather-blue);
+  --material-size: 240px;
+  color: var(--theme-white);
+}
+.material-leather-indigo {
+  --material-color: var(--curriculum-purple);
+  --material-image: linear-gradient(var(--curriculum-purple), var(--curriculum-purple)), var(--asset-leather-indigo);
+  --material-size: auto, 240px;
+  color: var(--theme-white);
+  background-blend-mode: color, normal;
+}
+.material-thread-overlay::after {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: var(--asset-thread-old-macdonald);
+  background-repeat: repeat;
+  background-size: 190px;
+  content: "";
+}
 
+/* === WORKING-WALL COMPOSITION (restored) ===
+ * Recipes decorate semantic shadcn primitives; components own layout/content/state. */
+.working-wall-stage {
+  position: relative;
+  border: .18rem solid color-mix(in srgb, var(--theme-wood) 68%, var(--border));
+  border-radius: 1rem;
+  color: var(--theme-ink);
+  background-color: var(--theme-paper);
+  background-image: var(--asset-cardboard-ivory);
+  background-repeat: repeat;
+  background-size: 320px;
+  box-shadow: inset 0 0 0 .35rem color-mix(in srgb, var(--theme-paper) 72%, transparent), 0 .65rem 1.25rem color-mix(in srgb, var(--theme-ink) 18%, transparent);
+}
+.working-wall-board {
+  position: relative;
+  border: .22rem solid color-mix(in srgb, var(--theme-wood) 78%, var(--border));
+  border-radius: .9rem;
+  color: var(--theme-ink);
+  background-color: var(--brand-cork-color);
+  background-image: var(--brand-cork-texture);
+  background-repeat: repeat;
+  background-size: 300px;
+  box-shadow: inset 0 0 0 .28rem color-mix(in srgb, var(--theme-wood-light) 62%, transparent), 0 .45rem .8rem color-mix(in srgb, var(--theme-ink) 18%, transparent);
+}
+.working-wall-patch {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: .14rem solid color-mix(in srgb, currentColor 42%, transparent);
+  box-shadow: 0 .28rem 0 var(--grade-edge, color-mix(in srgb, var(--theme-ink) 36%, transparent)), 0 .55rem .8rem color-mix(in srgb, var(--theme-ink) 15%, transparent);
+}
+.working-wall-patch::after {
+  pointer-events: none;
+  position: absolute;
+  inset: .42rem;
+  z-index: 0;
+  border: .08rem dashed color-mix(in srgb, currentColor 55%, transparent);
+  border-radius: calc(var(--radius) - .1rem);
+  content: "";
+}
+.working-wall-patch > * { position: relative; z-index: 1; }
+.working-wall-note {
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --muted-foreground: var(--theme-copy);
+  --border: color-mix(in srgb, var(--theme-wood-light) 74%, var(--theme-ink));
+  background-color: var(--theme-paper);
+  background-image: var(--subject-note-paper, var(--asset-paper-note-standard));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent);
+}
+
+/* === BRAND PATCH CARD (restored) === */
+.brand-patch-card {
+  --background: var(--theme-navy);
+  --foreground: var(--theme-white);
+  --card: var(--theme-navy);
+  --card-foreground: var(--theme-white);
+  --popover: var(--theme-navy);
+  --popover-foreground: var(--theme-white);
+  --primary: var(--curriculum-yellow);
+  --primary-foreground: var(--theme-navy);
+  --secondary: color-mix(in srgb, var(--theme-white) 14%, var(--theme-navy));
+  --secondary-foreground: var(--theme-white);
+  --muted-foreground: color-mix(in srgb, var(--theme-white) 74%, transparent);
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --border: color-mix(in srgb, var(--theme-white) 58%, transparent);
+  --input: color-mix(in srgb, var(--theme-white) 58%, transparent);
+  --ring: var(--curriculum-yellow);
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  border: .125rem solid var(--border);
+  color: var(--card-foreground);
+  background-color: var(--theme-navy);
+  background-image: var(--asset-denim-indigo);
+  background-repeat: repeat;
+  background-size: 16rem;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--theme-navy) 72%, transparent), 0 1rem 1.5rem color-mix(in srgb, var(--theme-ink) 16%, transparent);
+}
+.brand-patch-card::before {
+  pointer-events: none;
+  position: absolute;
+  inset: .55rem;
+  z-index: 0;
+  border: .1rem dashed color-mix(in srgb, var(--theme-white) 62%, transparent);
+  border-radius: calc(var(--radius) - .15rem);
+  content: "";
+}
+.brand-patch-card[data-brand-card="pinned"] {
+  --background: var(--theme-paper);
+  --foreground: var(--theme-ink);
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --popover: var(--theme-paper);
+  --popover-foreground: var(--theme-ink);
+  --primary: var(--theme-navy);
+  --primary-foreground: var(--theme-white);
+  --secondary: var(--theme-paper-muted);
+  --secondary-foreground: var(--theme-navy);
+  --muted-foreground: var(--theme-copy);
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --border: var(--theme-wood-light);
+  --input: var(--theme-wood-light);
+  --ring: var(--curriculum-blue);
+  color: var(--card-foreground);
+  background-color: var(--theme-paper);
+  background-image: none;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--theme-wood) 44%, transparent), 0 1rem 1.5rem color-mix(in srgb, var(--theme-ink) 13%, transparent);
+}
+.brand-patch-card[data-brand-card="pinned"]::before {
+  inset: .45rem;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--theme-wood-light) 62%, transparent);
+}
+.brand-patch-card > :not(.brand-patch-fastener) {
+  position: relative;
+  z-index: 1;
+}
+.brand-patch-fastener {
+  pointer-events: none;
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 .15rem .15rem color-mix(in srgb, var(--theme-ink) 28%, transparent));
+}
+
+/* === CHARACTER SURFACE HELPERS === */
 .cast-surface {
-  /* Set --character-color, --character-texture, --character-foreground inline or via .cast-* */
   color: var(--character-foreground);
   background-color: var(--character-color);
   background-image: linear-gradient(var(--character-color), var(--character-color)), var(--character-texture);
@@ -390,9 +689,7 @@
   background-size: auto, 180px;
 }
 
-/* === GRADE/SUBJECT PAGE THEMING ===
- * Applied at page level via data-grade / data-subject */
-
+/* === GRADE/SUBJECT PAGE THEMING === */
 [data-grade] {
   --grade-accent: var(--grade-color);
   --grade-dark: var(--grade-edge);

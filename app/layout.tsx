@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Boogaloo, Lilita_One, Nunito, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { BRAND_IMAGE_ASSETS } from "../data/brand/image-registry";
-import { ThemeProvider } from "../components/ThemeProvider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { cn } from "@/lib/utils";
@@ -74,9 +74,8 @@ export default function RootLayout({
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          themes={["light", "dark"]}
+          defaultTheme="system"
+          enableSystem
           disableTransitionOnChange
         >
           <div className="bg-paper-ivory flex min-h-screen flex-col text-foreground">

@@ -1,52 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Search } from "lucide-react";
+import { LayoutGrid, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { HomeGradeNav } from "@/components/home/HomeGradeNav";
+import { HomeSubjectNote } from "@/components/home/HomeSubjectNote";
+import { CreativeArtsSection } from "@/components/home/CreativeArtsSection";
+import { WorkingWallNote } from "@/components/working-wall/WorkingWallComponents";
+import { HomeCarousel, type HomeCarouselSlide } from "@/components/home/HomeCarousel";
 import { HOME_SUBJECTS, SUBJECT_LEARNERS, HOME_VIDEO_SONGS } from "@/components/home/home-data";
-import { CAST } from "@/data/brand/cast-registry";
-import { BRAND_IMAGE_ASSETS } from "@/data/brand/image-registry";
-import { cn } from "@/lib/utils";
-import type { CastKey } from "@/data/brand/cast-registry";
-
-type GradeCardType = {
-  key: "daycare" | "pre-school" | "kindergarten" | "grade-one" | "grade-two";
-  label: string;
-  castKey: CastKey;
-};
-
-const GRADE_CARDS: readonly GradeCardType[] = [
-  { key: "daycare", label: "Daycare", castKey: "miss-puddles" },
-  { key: "pre-school", label: "Pre-School", castKey: "miss-maisy" },
-  { key: "kindergarten", label: "Kindergarten", castKey: "mr-rusty" },
-  { key: "grade-one", label: "Grade 1", castKey: "miss-hayley" },
-  { key: "grade-two", label: "Grade 2", castKey: "mr-maisy" },
-];
-
-type SubjectCardType = {
-  key: "language" | "math" | "science" | "music" | "arts" | "health";
-  title: string;
-  icon: string;
-  guide: CastKey;
-};
-
-const SUBJECT_CARDS: readonly SubjectCardType[] = [
-  { key: "language", title: "Language & literacy", icon: "drama-storytelling-icon", guide: "whiskers" },
-  { key: "math", title: "Math", icon: "math-building-icon", guide: "sam" },
-  { key: "science", title: "Nature & science", icon: "gardening-health-icon", guide: "scout" },
-  { key: "music", title: "Music", icon: "music-hand-drum", guide: "penny" },
-  { key: "arts", title: "Arts", icon: "painting-easel", guide: "puddles" },
-  { key: "health", title: "Health & PE", icon: "physical-education-icon", guide: "hopper" },
-];
 
 const NEW_THIS_WEEK = [
   { title: "Five Little Ducks", summary: "Counting down with fingerplay." },
@@ -54,24 +15,19 @@ const NEW_THIS_WEEK = [
   { title: "Find the Steady Beat", summary: "Feel the heartbeat of songs." },
 ];
 
-function CastAvatar({ castKey, className }: { castKey: CastKey; className?: string }) {
-  const cast = CAST[castKey];
-  const badges = BRAND_IMAGE_ASSETS.badges as Record<string, string | undefined>;
-  const src = badges[castKey];
-  return (
-    <Avatar size="sm" className={className}>
-      {src ? <AvatarImage src={src} alt={cast?.name ?? ""} /> : null}
-      <AvatarFallback>{cast?.name?.charAt(0) ?? "?"}</AvatarFallback>
-    </Avatar>
-  );
-}
+const SCENE_SLIDES: readonly HomeCarouselSlide[] = [
+  { assetClass: "home-scene-class-gathering", alt: "Children gathered in a circle for storytime", label: "Class gathering", href: "/about" },
+  { assetClass: "home-scene-growing-together", alt: "Children learning and growing together", label: "Growing together", href: "/about" },
+  { assetClass: "home-scene-music-landscape", alt: "Music instruments across the farm", label: "Music on the farm", href: "/songs" },
+  { assetClass: "home-scene-schoolhouse", alt: "The old MacDonald schoolhouse", label: "The schoolhouse", href: "/about" },
+];
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-6 py-6">
-      {/* Hero — plain section with theme primary surface */}
-      <section className="bg-primary text-primary-foreground rounded-xl px-6 py-8">
-        <div className="flex flex-col gap-4">
+    <main className="flex flex-col gap-8 py-6 lg:py-10">
+      {/* Hero — simple navy surface, gold primary CTA + ghost secondary (approved) */}
+      <section className="bg-primary text-primary-foreground rounded-xl px-6 py-10 sm:px-10">
+        <div className="mx-auto flex max-w-3xl flex-col gap-4">
           <h1 className="font-heading text-3xl leading-tight sm:text-4xl md:text-5xl">
             Songs teachers know.
             <br />
@@ -82,138 +38,128 @@ export default function Home() {
             listen, move, hum, sing, and invent.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Button asChild size="lg">
-              <Link href="#grades">Browse by grade</Link>
+            <Button asChild size="lg" variant="accent">
+              <Link href="#grades">
+                <LayoutGrid data-icon="inline-start" aria-hidden="true" />
+                Browse by grade
+              </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/search">Search lessons</Link>
+            <Button asChild size="lg" variant="outlineForeground">
+              <Link href="/search">
+                <Search data-icon="inline-start" aria-hidden="true" />
+                Search lessons
+              </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Grades — up top: teachers navigate by grade first */}
-      <section id="grades" aria-labelledby="grades-heading" className="flex flex-col gap-3">
-        <h2 id="grades-heading" className="font-heading text-xl sm:text-2xl">
-          Explore by grade
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {GRADE_CARDS.map((grade) => {
-            const teacher = CAST[grade.castKey];
-            const teacherColor = `var(--cast-${grade.castKey}-color)`;
-            return (
-              <Card key={grade.key} className="transition-colors hover:bg-accent" style={{ '--teacher-color': teacherColor } as React.CSSProperties}>
-                <CardContent className="flex items-center gap-3">
-                  <CastAvatar castKey={grade.castKey} className="size-12 shrink-0" />
-                  <Button asChild variant="ghost" size="sm" className="px-0 text-left h-auto justify-start">
-                    <Link href={`/grade/${grade.key}`} className="flex flex-col items-start gap-0.5">
-                      <span className="font-semibold">{grade.label}</span>
-                      <span className="font-hand text-sm text-[var(--teacher-color)]">with {teacher?.name}</span>
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+      {/* Scenes — tilted polaroid carousel of the farm */}
+      <section aria-label="A look around the farm">
+        <HomeCarousel
+          slides={SCENE_SLIDES}
+          title="A look around the farm"
+          ariaLabel="Classroom scenes"
+          pickerLabel="Choose a scene"
+        />
+      </section>
+
+      {/* Grades — felt grade cards pinned to a cork board */}
+      <section id="grades" className="working-wall-board p-4 sm:p-6" aria-label="Explore by grade">
+        <HomeGradeNav />
+      </section>
+
+      {/* Subjects — paper notes with fasteners, pinned to a cork board */}
+      <section
+        className="material-surface material-cork rounded-xl border border-border p-4 pt-8 sm:p-6 sm:pt-8"
+        aria-labelledby="home-subjects-title"
+      >
+        <header className="mb-6 text-center">
+          <p className="text-xs font-extrabold uppercase tracking-[.18em] text-primary">
+            Lessons for every area
+          </p>
+          <h2 className="font-heading text-3xl sm:text-4xl" id="home-subjects-title">
+            Find a lesson by subject
+          </h2>
+          <p className="mx-auto mt-2 max-w-xl text-muted-foreground">
+            Eight learning areas, each with a guide character and ready lesson topics.
+          </p>
+        </header>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {HOME_SUBJECTS.map((subject) => (
+            <HomeSubjectNote
+              key={subject.key}
+              subject={subject.key}
+              title={subject.title}
+              href={`/search?q=${encodeURIComponent(subject.searchQuery)}`}
+              iconClass={subject.iconClass}
+              teacherReason={subject.teacherReason}
+              highlights={subject.highlights}
+              fastenerClass={subject.fastenerClass}
+              guideCharacter={SUBJECT_LEARNERS[subject.key].character}
+            />
+          ))}
         </div>
       </section>
 
-      {/* Subject board */}
-      <section id="subjects" aria-labelledby="subjects-heading" className="flex flex-col gap-3">
-        <h2 id="subjects-heading" className="font-heading text-2xl sm:text-3xl">
-          Find a lesson by subject.
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {SUBJECT_CARDS.map((subject) => {
-            const guide = CAST[subject.guide];
-            const meta = HOME_SUBJECTS.find((entry) => entry.key === subject.key);
-            const subjectColor = `var(--subject-${subject.key}-color)`;
-            return (
-              <Card key={subject.key} className="h-full" data-subject={subject.key} style={{ '--subject-color': subjectColor } as React.CSSProperties}>
-                <CardHeader className="bg-[var(--subject-color)] text-white">
-                  <div className="flex items-center gap-2">
-                    <span className={`brand-asset ${subject.icon} icon-control`} aria-hidden="true" />
-                    <CardTitle className="font-heading text-lg sm:text-xl">{subject.title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-2">
-                  <p className="text-sm text-muted-foreground sm:text-base">{meta?.teacherReason}</p>
-                  <Button asChild variant="link" className="justify-start px-0">
-                    <Link href={`/search?q=${encodeURIComponent(meta?.searchQuery ?? subject.title)}`}>
-                      Explore subject <ArrowRight data-icon="inline-end" />
-                    </Link>
-                  </Button>
-                </CardContent>
-                <CardFooter className="flex items-center gap-2 bg-[var(--subject-color)]/10">
-                  <CastAvatar castKey={subject.guide} className="size-8" />
-                  <span className="text-xs sm:text-sm">
-                    <small className="block text-muted-foreground">Guided by</small>
-                    <span className="font-semibold text-[var(--subject-color)]">{guide?.name}</span>
-                  </span>
-                </CardFooter>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
+      {/* Creative arts */}
+      <CreativeArtsSection />
 
-      {/* Songs + new this week */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Songs to repeat & new this week</CardTitle>
-          <CardDescription>Classroom favourites and fresh additions.</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-6 md:grid-cols-2">
-          <div className="flex flex-col gap-2">
-            <h3 className="font-hand text-lg">♫ Songs to repeat</h3>
+      {/* Songs + new this week — paper notes */}
+      <section className="grid gap-6 md:grid-cols-2" aria-labelledby="home-songs-title">
+        <h2 className="sr-only" id="home-songs-title">Songs to repeat and new this week</h2>
+        <WorkingWallNote fastener="tape" heading="Songs to repeat" className="h-full">
+          <ul className="flex flex-col gap-2">
             {HOME_VIDEO_SONGS.slice(0, 3).map((song) => (
-              <Link
-                key={song.slug}
-                href={song.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg border p-2 hover:bg-accent"
-              >
-                <span className="text-primary">♫</span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-semibold">{song.title}</span>
-                  <span className="block truncate text-xs text-muted-foreground">{song.grade}</span>
-                </span>
-              </Link>
+              <li key={song.slug}>
+                <Link
+                  href={song.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-lg border p-2 hover:bg-accent"
+                >
+                  <span className="text-primary" aria-hidden="true">♫</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-semibold">{song.title}</span>
+                    <span className="block truncate text-xs text-muted-foreground">{song.grade}</span>
+                  </span>
+                </Link>
+              </li>
             ))}
-          </div>
-          <Separator className="md:hidden" />
-          <div className="flex flex-col gap-2">
-            <h3 className="font-hand text-lg">★ New this week</h3>
+          </ul>
+        </WorkingWallNote>
+        <WorkingWallNote fastener="clip" heading="New this week" className="h-full">
+          <ul className="flex flex-col gap-2">
             {NEW_THIS_WEEK.map((lesson) => (
-              <Link
-                key={lesson.title}
-                href={`/search?q=${encodeURIComponent(lesson.title)}`}
-                className="flex items-center gap-2 rounded-lg border p-2 hover:bg-accent"
-              >
-                <span className="text-primary">★</span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-semibold">{lesson.title}</span>
-                  <span className="block truncate text-xs text-muted-foreground">{lesson.summary}</span>
-                </span>
-              </Link>
+              <li key={lesson.title}>
+                <Link
+                  href={`/search?q=${encodeURIComponent(lesson.title)}`}
+                  className="flex items-center gap-2 rounded-lg border p-2 hover:bg-accent"
+                >
+                  <span className="text-primary" aria-hidden="true">★</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-semibold">{lesson.title}</span>
+                    <span className="block truncate text-xs text-muted-foreground">{lesson.summary}</span>
+                  </span>
+                </Link>
+              </li>
             ))}
-          </div>
-        </CardContent>
-      </Card>
+          </ul>
+        </WorkingWallNote>
+      </section>
 
-      {/* Closing statement */}
-      <Card className="bg-muted">
-        <CardHeader>
-          <Badge variant="secondary" className="w-fit">Plan with intention</Badge>
-          <CardTitle className="font-heading text-2xl leading-tight sm:text-3xl md:text-4xl">
-            Build learning around familiar songs and clear routines.
-          </CardTitle>
-          <CardDescription className="max-w-xl">
-            Practical, character-driven planning for the real classroom moments that matter.
-          </CardDescription>
-        </CardHeader>
-        <CardFooter className="flex flex-wrap gap-3">
+      {/* Closing statement — pinned teacher note */}
+      <WorkingWallNote fastener="pin" heading="Plan with intention" className="bg-muted">
+        <Badge variant="secondary" className="w-fit">
+          Plan with intention
+        </Badge>
+        <h2 className="mt-3 font-heading text-2xl leading-tight sm:text-3xl">
+          Build learning around familiar songs and clear routines.
+        </h2>
+        <p className="mt-2 max-w-xl text-muted-foreground">
+          Practical, character-driven planning for the real classroom moments that matter.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
           <Button asChild variant="outline">
             <Link href="/search">Find a lesson</Link>
           </Button>
@@ -221,10 +167,12 @@ export default function Home() {
             <Link href="/about">About the approach</Link>
           </Button>
           <Button asChild variant="ghost">
-            <Link href="/lessons">Browse all lessons <ArrowRight data-icon="inline-end" /></Link>
+            <Link href="/lessons">
+              Browse all lessons <span aria-hidden="true">→</span>
+            </Link>
           </Button>
-        </CardFooter>
-      </Card>
+        </div>
+      </WorkingWallNote>
     </main>
   );
 }
