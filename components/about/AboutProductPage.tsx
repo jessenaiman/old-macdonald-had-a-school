@@ -50,26 +50,24 @@ const summary =
 
 export function AboutProductPage({ story }: { story: ReactNode }) {
   return (
-    <div className="w-full bg-background">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-14 px-3 py-8 sm:px-6 sm:py-12">
-        {/* Hero statement */}
-        <section aria-labelledby="about-title" className="flex flex-col gap-4">
-          <p className="text-xs font-black uppercase tracking-widest text-muted-foreground">
-            {story ? "About the project and its creator" : "About"}
-          </p>
-          <h1
-            id="about-title"
-            className="max-w-3xl font-heading text-4xl leading-none text-balance sm:text-6xl"
-          >
-            I make lesson planning quick, practical, and{" "}
-            <em className="font-hand text-primary not-italic">teachable.</em>
-          </h1>
-          <p className="max-w-2xl leading-7 text-muted-foreground">
-            {summary}
-          </p>
-        </section>
+    <>
+      <section aria-labelledby="about-title" className="flex flex-col gap-4">
+        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground">
+          {story ? "About the project and its creator" : "About"}
+        </p>
+        <h1
+          id="about-title"
+          className="max-w-3xl font-heading text-4xl leading-none text-balance sm:text-6xl"
+        >
+          I make lesson planning quick, practical, and{" "}
+          <em className="font-hand text-primary not-italic">teachable.</em>
+        </h1>
+        <p className="max-w-2xl leading-7 text-muted-foreground">
+          {summary}
+        </p>
+      </section>
 
-        {/* Design proof points — 3 column */}
+      {/* Design proof points — 3 column */}
         <section aria-labelledby="proof-heading">
           <h2
             id="proof-heading"
@@ -144,7 +142,6 @@ export function AboutProductPage({ story }: { story: ReactNode }) {
             </CardContent>
           </Card>
         </section>
-      </div>
-    </div>
+    </>
   );
 }

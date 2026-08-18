@@ -100,14 +100,15 @@ export default function Home() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {GRADE_CARDS.map((grade) => {
             const teacher = CAST[grade.castKey];
+            const teacherColor = `var(--cast-${grade.castKey}-color)`;
             return (
-              <Card key={grade.key} className="transition-colors hover:bg-accent">
+              <Card key={grade.key} className="transition-colors hover:bg-accent" style={{ '--teacher-color': teacherColor } as React.CSSProperties}>
                 <CardContent className="flex items-center gap-3">
                   <CastAvatar castKey={grade.castKey} className="size-12 shrink-0" />
                   <Button asChild variant="ghost" size="sm" className="px-0 text-left h-auto justify-start">
                     <Link href={`/grade/${grade.key}`} className="flex flex-col items-start gap-0.5">
                       <span className="font-semibold">{grade.label}</span>
-                      <span className="font-hand text-sm text-muted-foreground">with {teacher?.name}</span>
+                      <span className="font-hand text-sm text-[var(--teacher-color)]">with {teacher?.name}</span>
                     </Link>
                   </Button>
                 </CardContent>
@@ -126,9 +127,10 @@ export default function Home() {
           {SUBJECT_CARDS.map((subject) => {
             const guide = CAST[subject.guide];
             const meta = HOME_SUBJECTS.find((entry) => entry.key === subject.key);
+            const subjectColor = `var(--subject-${subject.key}-color)`;
             return (
-              <Card key={subject.key} className="h-full">
-                <CardHeader>
+              <Card key={subject.key} className="h-full" data-subject={subject.key} style={{ '--subject-color': subjectColor } as React.CSSProperties}>
+                <CardHeader className="bg-[var(--subject-color)] text-white">
                   <div className="flex items-center gap-2">
                     <span className={`brand-asset ${subject.icon} icon-control`} aria-hidden="true" />
                     <CardTitle className="font-heading text-lg sm:text-xl">{subject.title}</CardTitle>
@@ -142,11 +144,11 @@ export default function Home() {
                     </Link>
                   </Button>
                 </CardContent>
-                <CardFooter className="flex items-center gap-2">
+                <CardFooter className="flex items-center gap-2 bg-[var(--subject-color)]/10">
                   <CastAvatar castKey={subject.guide} className="size-8" />
                   <span className="text-xs sm:text-sm">
                     <small className="block text-muted-foreground">Guided by</small>
-                    <span className="font-semibold">{guide?.name}</span>
+                    <span className="font-semibold text-[var(--subject-color)]">{guide?.name}</span>
                   </span>
                 </CardFooter>
               </Card>

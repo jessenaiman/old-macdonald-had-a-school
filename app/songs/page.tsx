@@ -42,8 +42,9 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
   const nextLimit = Math.min(resultLimit + 30, songs.length);
 
   return (
-    <section className="flex flex-col gap-8" aria-labelledby="songbook-heading">
-      <header>
+    <>
+      <section className="flex flex-col gap-8" aria-labelledby="songbook-heading">
+        <header>
           <p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Practical teacher songbook</p>
           <h1 className="mt-2 font-heading text-5xl leading-[0.95] text-balance sm:text-7xl" id="songbook-heading">Songs worth singing tomorrow</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed">Find a usable teaching sheet first: readable words, movement ideas, chord guidance where documented, and clear source provenance.</p>
@@ -95,6 +96,6 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
           {visibleSongs.length < songs.length && <div className="mt-8 flex justify-center"><Button asChild variant="outline"><Link href={filterHref(params, nextLimit)}>Show 30 more songs</Link></Button></div>}
         </>}
       </section>
-    </div>
+    </>
   );
 }

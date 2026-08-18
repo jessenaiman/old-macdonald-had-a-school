@@ -89,11 +89,11 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
 
   return (
     <section className="my-7 text-foreground max-sm:my-3" aria-labelledby="lessons-index-title">
-        <header className="card-paper relative overflow-hidden rounded-2xl border border-border shadow-[0_8px_0_color-mix(in_srgb,var(--border)_28%,transparent)]">
+        <header className="bg-primary text-primary-foreground rounded-2xl border border-primary-foreground/10 px-6 py-8 sm:px-10 sm:py-12 shadow-[0_8px_0_color-mix(in_srgb,var(--border)_28%,transparent)]">
           <div>
-            <p className="m-0 font-body text-xs font-black leading-tight tracking-[.12em] text-primary uppercase">Teacher planning library</p>
+            <p className="m-0 font-body text-xs font-black leading-tight tracking-[.12em] text-primary-foreground/70 uppercase">Teacher planning library</p>
             <h1 className="my-3 max-w-3xl font-heading text-3xl font-normal leading-[.9] tracking-tight text-balance sm:text-5xl lg:text-6xl" id="lessons-index-title">What do you need to teach?</h1>
-            <p className="m-0 max-w-3xl font-body text-sm font-semibold leading-relaxed text-muted-foreground">Start with a skill, song, or classroom moment. Teacher-ready lessons appear first, with planning records clearly marked for further review.</p>
+            <p className="m-0 max-w-3xl font-body text-sm font-semibold leading-relaxed text-primary-foreground/80">Start with a skill, song, or classroom moment. Teacher-ready lessons appear first, with planning records clearly marked for further review.</p>
           </div>
           <form className="mt-7 rounded-xl border border-border bg-card/70 p-4" method="get" action="/lessons" role="search">
             <FieldGroup className="items-end gap-3 md:grid-cols-[minmax(260px,1fr)_220px_auto]">

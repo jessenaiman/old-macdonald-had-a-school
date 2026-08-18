@@ -132,15 +132,16 @@ export function GradeWelcomeControl({
   onPreview?: () => void;
   headingLevel?: "h1" | "h2";
 }) {
+  const teacherColor = `var(--cast-${config.teacher}-color)`;
   return (
-    <section className="grid min-w-0 grid-cols-1 items-center gap-6 border-b pb-6 lg:grid-cols-[minmax(0,3fr)_minmax(18rem,2fr)] [&>*]:min-w-0">
+    <section className="grid min-w-0 grid-cols-1 items-center gap-6 border-b pb-6 lg:grid-cols-[minmax(0,3fr)_minmax(18rem,2fr)] [&>*]:min-w-0" style={{ '--teacher-color': teacherColor } as React.CSSProperties}>
       <div className="flex min-w-0 flex-col items-start gap-4">
         <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">
           {config.eyebrow}
         </span>
         <Heading className="max-w-3xl text-balance font-heading text-4xl leading-none sm:text-5xl lg:text-6xl">
           {config.headline}{" "}
-          <em className="block text-(--grade-color) not-italic">
+          <em className="block text-[var(--teacher-color)] not-italic">
             {config.accentHeadline}
           </em>
         </Heading>
@@ -180,10 +181,12 @@ export function TeacherNote({
   actionLabel?: string;
 }) {
   const teacher = CAST[character];
+  const teacherColor = `var(--cast-${character}-color)`;
   return (
     <aside aria-label={`A note from ${teacher.name}`}>
       <Card
         className={`cast-${character} character-surface relative overflow-hidden bg-card text-card-foreground`}
+        style={{ '--teacher-color': teacherColor } as React.CSSProperties}
       >
         <span
           className="brand-asset fastener-binder-clip icon-small absolute right-4 -top-1"
@@ -195,7 +198,7 @@ export function TeacherNote({
           </CardTitle>
         </CardHeader>
         <CardContent className="relative z-10 flex min-h-40 flex-col items-start gap-3 pl-28 sm:pl-44">
-          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl">
+          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--teacher-color)]">
             “{quote}”
           </blockquote>
           <p className="text-xs font-black uppercase tracking-widest">
