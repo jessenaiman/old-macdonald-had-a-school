@@ -185,7 +185,7 @@
 }
 
 /* === TAILWIND V4 THEME MAPPING === */
-@theme inline {
+@theme {
   --font-display: var(--font-farm-display);
   --font-heading: var(--font-farm-display);
   --font-section: var(--font-farm-section);
@@ -225,7 +225,7 @@
   --color-paper-muted: var(--paper-muted);
 }
 
-/* === BASE STYLES === */
+/* === BASE LAYER === */
 @layer base {
   * {
     @apply border-border outline-ring/50;

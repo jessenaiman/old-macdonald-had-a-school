@@ -68,7 +68,7 @@ function CastAvatar({ castKey, className }: { castKey: CastKey; className?: stri
 
 export default function Home() {
   return (
-    <main className="mx-auto flex w-full max-w-4xl flex-col gap-6 py-6 md:max-w-6xl">
+    <main className="flex flex-col gap-6 py-6">
       {/* Hero — plain section with theme primary surface */}
       <section className="bg-primary text-primary-foreground rounded-xl px-6 py-8">
         <div className="flex flex-col gap-4">

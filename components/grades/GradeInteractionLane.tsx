@@ -96,7 +96,7 @@ export function GradeWorkspace({
           </small>
         </div>
         {navigation}
-        <Card className="material-surface material-cardboard-paper relative mt-auto hidden lg:block">
+        <Card className="material-surface material-cardboard-paper relative mt-auto hidden lg:block bg-card text-card-foreground">
           <span
             className="brand-asset fastener-push-pin icon-small absolute -top-4 left-3"
             aria-hidden="true"
@@ -183,7 +183,7 @@ export function TeacherNote({
   return (
     <aside aria-label={`A note from ${teacher.name}`}>
       <Card
-        className={`cast-${character} character-surface relative overflow-hidden`}
+        className={`cast-${character} character-surface relative overflow-hidden bg-card text-card-foreground`}
       >
         <span
           className="brand-asset fastener-binder-clip icon-small absolute right-4 -top-1"

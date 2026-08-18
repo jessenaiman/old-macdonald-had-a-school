@@ -11,7 +11,11 @@ const THEMES = [
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false
+  );
   const currentTheme = mounted && THEMES.some((item) => item.value === theme) ? theme : "light";
   const current = THEMES.find((item) => item.value === currentTheme) ?? THEMES[0];
   const next = THEMES.find((item) => item.value !== current.value) ?? THEMES[0];
@@ -25,7 +29,7 @@ export function ThemeSwitcher() {
       aria-label={`Current theme: ${current.label}. Switch to ${next.label}`}
       title={`Switch to ${next.label}`}
     >
-      <span className="brand-asset theme-farm-day [--brand-asset-size:4.5rem]" aria-hidden="true" />
+      <span className={`brand-asset ${current.iconClass} [--brand-asset-size:4.5rem]`} aria-hidden="true" />
     </Button>
   );
 }

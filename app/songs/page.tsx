@@ -42,9 +42,8 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
   const nextLimit = Math.min(resultLimit + 30, songs.length);
 
   return (
-    <div className="min-h-dvh px-4 py-8 text-foreground sm:px-6 lg:px-8 lg:py-14">
-      <section className="flex flex-col gap-8" aria-labelledby="songbook-heading">
-        <header className="max-w-3xl">
+    <section className="flex flex-col gap-8" aria-labelledby="songbook-heading">
+      <header>
           <p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Practical teacher songbook</p>
           <h1 className="mt-2 font-heading text-5xl leading-[0.95] text-balance sm:text-7xl" id="songbook-heading">Songs worth singing tomorrow</h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed">Find a usable teaching sheet first: readable words, movement ideas, chord guidance where documented, and clear source provenance.</p>
@@ -58,7 +57,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
           <CardContent>
             <form action="/songs" method="get">
               <FieldGroup className="gap-5">
-                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                   <Field><FieldLabel htmlFor="song-search">Search songs</FieldLabel><Input defaultValue={filters.q} id="song-search" name="q" placeholder="Pony, greeting, counting…" type="search" /></Field>
                   <Field><FieldLabel htmlFor="song-grade">Grade</FieldLabel><NativeSelect defaultValue={filters.grade} id="song-grade" name="grade"><option value="">All grades</option>{facets.grades.map((grade) => <option key={grade.key} value={grade.key}>{grade.label}</option>)}</NativeSelect></Field>
                   <Field><FieldLabel htmlFor="song-topic">Topic</FieldLabel><NativeSelect defaultValue={filters.topic} id="song-topic" name="topic"><option value="">All topics</option>{facets.topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.label}</option>)}</NativeSelect></Field>
@@ -81,7 +80,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
       <section className="mt-10" aria-labelledby="song-results-heading">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Teaching sheets</p><h2 className="mt-1 font-heading text-4xl" id="song-results-heading">{songs.length} songs</h2></div><p className="text-sm text-muted-foreground">Showing {visibleSongs.length} of {songs.length}</p></div>
         {songs.length === 0 ? <Empty className="material-surface material-paper-ruled mt-5"><EmptyHeader><EmptyTitle>No matching songs</EmptyTitle><EmptyDescription>Try removing a filter or using a broader search phrase.</EmptyDescription></EmptyHeader><EmptyContent><Button asChild variant="outline"><Link href="/songs">View all songs</Link></Button></EmptyContent></Empty> : <>
-          <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {visibleSongs.map((song) => <Card className="min-w-0" key={song.id}>
               <CardHeader>
                 <div className="flex flex-wrap gap-2">{song.verified && <Badge>Reviewed</Badge>}{song.hasActions && <Badge variant="secondary">Actions</Badge>}{song.hasChords && <Badge variant="secondary">Chords</Badge>}</div>
