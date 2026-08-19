@@ -1,4 +1,4 @@
-import Cast from "../../../content/pages/branding/cast.mdx"
+import Cast from "../../../content/pages/branding/characters.mdx"
 
 export const metadata = {
   title: "Cast and learning roles | Brand guide",

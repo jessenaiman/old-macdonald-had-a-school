@@ -110,53 +110,53 @@
   --sidebar-ring: var(--gold-bright);
 
   /* === CHARACTER IDENTITY (cast.mdx — badges/avatars only) === */
-  --cast-old-macdonald-color: #8b5e34;
+  --cast-old-macdonald-color: #b87a4a;
   --cast-old-macdonald-foreground: #fefce8;
-  --cast-miss-puddles-color: #e8a227;
+  --cast-miss-puddles-color: #f6af32;
   --cast-miss-puddles-foreground: #1e2a38;
-  --cast-miss-maisy-color: #55705a;
+  --cast-miss-maisy-color: #6b9a7a;
   --cast-miss-maisy-foreground: #fefce8;
-  --cast-mr-rusty-color: #2c6c9b;
+  --cast-mr-rusty-color: #3589c4;
   --cast-mr-rusty-foreground: #fefce8;
-  --cast-miss-hayley-color: #c9527a;
+  --cast-miss-hayley-color: #d95c86;
   --cast-miss-hayley-foreground: #1e2a38;
-  --cast-mr-maisy-color: #b5272c;
+  --cast-mr-maisy-color: #c45d62;
   --cast-mr-maisy-foreground: #fefce8;
-  --cast-mr-sam-color: #1f6b6b;
+  --cast-mr-sam-color: #2a9a9a;
   --cast-mr-sam-foreground: #fefce8;
-  --cast-mr-puddles-color: #4f5fa0;
+  --cast-mr-puddles-color: #5367b5;
   --cast-mr-puddles-foreground: #fefce8;
-  --cast-hopper-color: #d9713c;
+  --cast-hopper-color: #e66c71;
   --cast-hopper-foreground: #fefce8;
-  --cast-whiskers-color: #7b4fa8;
+  --cast-whiskers-color: #e695b0;
   --cast-whiskers-foreground: #fefce8;
-  --cast-scout-color: #4a7a3a;
+  --cast-scout-color: #8dc4a8;
   --cast-scout-foreground: #fefce8;
-  --cast-penny-color: #c9962e;
+  --cast-penny-color: #f9cb7a;
   --cast-penny-foreground: #1e2a38;
-  --cast-maisy-color: #1f4e5f;
+  --cast-maisy-color: #e8c8a0;
   --cast-maisy-foreground: #fefce8;
-  --cast-puddles-color: #4fa0c9;
+  --cast-puddles-color: #8f9ccf;
   --cast-puddles-foreground: #fefce8;
-  --cast-sam-color: #7a9a3d;
+  --cast-sam-color: #6cb1b1;
   --cast-sam-foreground: #fefce8;
-  --cast-rusty-color: #8b5030;
+  --cast-rusty-color: #72aad2;
   --cast-rusty-foreground: #fefce8;
 
   /* Grade/Subject routing (page-level theming) */
-  --grade-early-years-color: #55705a;
-  --grade-daycare-color: #e8a227;
-  --grade-pre-school-color: #55705a;
-  --grade-kindergarten-color: #2c6c9b;
-  --grade-one-color: #c9527a;
-  --grade-two-color: #b5272c;
+  --grade-early-years-color: #6b9a7a;
+  --grade-daycare-color: #f6af32;
+  --grade-pre-school-color: #6b9a7a;
+  --grade-kindergarten-color: #3589c4;
+  --grade-one-color: #d95c86;
+  --grade-two-color: #c45d62;
 
-  --subject-language-color: #c9527a;
-  --subject-math-color: #1f6b6b;
-  --subject-science-color: #55705a;
-  --subject-music-color: #2c6c9b;
-  --subject-arts-color: #4f5fa0;
-  --subject-health-color: #b5272c;
+  --subject-language-color: #d95c86;
+  --subject-math-color: #2a9a9a;
+  --subject-science-color: #6b9a7a;
+  --subject-music-color: #3589c4;
+  --subject-arts-color: #5367b5;
+  --subject-health-color: #c45d62;
 
   /* Material surface tokens (physical materials — paper/ink/navy/wood are REAL
    * objects and must NOT invert in .dark; per dark-mode-token-overload rule:

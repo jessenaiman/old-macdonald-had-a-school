@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Play, Search } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { SubjectTeachers } from "@/components/home/SubjectTeachers";
 
 export const metadata = {
   title: "Teacher Home | Old MacDonald Had a School",
@@ -89,68 +91,6 @@ function HeroBanner() {
     </section>
   );
 }
-
-/* --- Pick your classroom (staff cards, shared artifact) --- */
-
-const TEACHER_GRADES = [
-  { key: "daycare", label: "Daycare", teacher: "Miss Puddles", face: "/characters/face-patch-transparent/miss-puddles-purple.webp" },
-  { key: "pre-school", label: "Pre-School", teacher: "Miss Maisy", face: "/characters/face-patch-transparent/miss-maisy-purple.webp" },
-  { key: "kindergarten", label: "Kindergarten", teacher: "Mr Rusty", face: "/characters/face-patch-transparent/mr-rusty-blue.webp" },
-  { key: "grade-one", label: "Grade 1", teacher: "Miss Hayley", face: "/characters/face-patch-transparent/miss-hayley-purple.webp" },
-  { key: "grade-two", label: "Grade 2", teacher: "Mr Maisy", face: "/characters/face-patch-transparent/mr-maisy-orange.webp" },
-] as const;
-
-function ClassroomPicker() {
-  return (
-    <section className="mx-auto w-full max-w-7xl">
-      <div
-        className="mt-10 rounded-3xl border-2 border-dashed border-brand-navy-foreground/35 bg-brand-navy p-6 shadow-[0_10px_30px_rgba(30,42,46,0.14)]"
-      >
-        <div className="pointer-events-none relative mx-auto -mt-2 mb-2 flex h-2 w-2 items-center justify-center">
-          <span className="block size-3.5 rounded-full bg-[var(--grade-two-color)] shadow ring-4 ring-brand-navy/0" />
-        </div>
-        <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2 text-brand-navy-foreground">
-          <h2 className="font-heading text-[22px] font-bold">Pick your classroom</h2>
-          <p className="text-sm text-brand-navy-foreground/75">
-            Each grade has its own teacher, felt colors, and lesson set.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
-          {TEACHER_GRADES.map((g, i) => (
-            <Link
-              key={g.key}
-              href={`/grade/${g.key}`}
-              data-grade={g.key}
-              className={`group relative flex flex-col overflow-hidden rounded-[18px] bg-[var(--brand-paper)] shadow-[0_4px_0_rgba(0,0,0,0.28)] transition-transform duration-150 hover:-translate-y-1 hover:shadow-[0_8px_0_rgba(0,0,0,0.28)] ${
-                i % 2 === 0 ? "rotate-[-1.2deg]" : "rotate-[1.2deg]"
-              } hover:rotate-0`}
-            >
-              <span className="absolute left-1/2 top-2 z-10 size-3.5 -translate-x-1/2 rounded-full bg-[var(--grade-two-color)] shadow" aria-hidden />
-              <div className="grade-surface relative flex h-24 items-end justify-center">
-                <Image
-                  src={g.face}
-                  alt={g.teacher}
-                  width={84}
-                  height={84}
-                  className="h-[84px] w-[84px] translate-y-[34px] rounded-full border-[3px] border-[var(--brand-paper)] object-cover shadow"
-                />
-              </div>
-              <div className="flex flex-1 flex-col items-center gap-1 px-3 pb-3.5 pt-11 text-center">
-                <h3 className="font-heading text-[17px] font-bold text-[var(--brand-paper-foreground)]">{g.label}</h3>
-                <span className="text-xs font-semibold text-[var(--brand-paper-muted)]">{g.teacher}</span>
-                <span className="mt-1.5 rounded-full bg-[var(--brand-paper-foreground)] px-4 py-1.5 text-xs font-bold text-[var(--brand-paper)] transition-colors group-hover:bg-[var(--gold-bright)]">
-                  Open grade →
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* --- What's New (songs, shared artifact) --- */
 
 const LATEST_VIDEOS = [
   {
@@ -257,8 +197,11 @@ export default function HomePage() {
   return (
     <section className="flex w-full flex-col gap-10 pb-6">
       <HeroBanner />
-      <ClassroomPicker />
+      <Separator className="mx-auto w-full max-w-7xl" />
+      <SubjectTeachers />
+      <Separator className="mx-auto w-full max-w-7xl" />
       <WhatsNew />
+      <Separator className="mx-auto w-full max-w-7xl" />
       <CurriculumPlanner />
     </section>
   );
