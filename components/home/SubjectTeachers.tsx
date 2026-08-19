@@ -84,10 +84,10 @@ export function SubjectTeachers() {
       </span>
 
       <div
-        className="rounded-3xl border-2 border-dashed border-foreground/10 bg-[#c9b896] p-6 shadow-[0_10px_30px_rgba(30,42,46,0.10)]"
+        className="rounded-3xl border-2 border-dashed border-foreground/10 bg-[var(--brand-paper)] p-6 shadow-[0_10px_30px_rgba(30,42,46,0.10)]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(201,185,150,0.90), rgba(201,185,150,0.90)), var(--asset-cork-repeat-web)",
+            "linear-gradient(color-mix(in_srgb, var(--brand-paper-muted) 24%, transparent), color-mix(in_srgb, var(--brand-paper-muted) 24%, transparent)), var(--asset-cork-repeat-web)",
         }}
       >
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
