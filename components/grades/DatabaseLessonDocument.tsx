@@ -27,30 +27,31 @@ export function DatabaseLessonDocument({
 
   return (
     <article
-      className="lesson-article"
+      className="min-w-0"
       data-source-type="database"
       data-completeness={topic.completeness}
     >
-      <header className="lesson-header flex min-w-0 flex-col gap-3 border-b pb-6">
-        <p className="lesson-eyebrow text-xs font-black uppercase tracking-widest text-muted-foreground">Curriculum lesson outline</p>
-        <p className="lesson-breadcrumb text-sm text-muted-foreground">
+      <header className="flex min-w-0 flex-col gap-3 border-b pb-6">
+        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground">
+          Curriculum lesson outline
+        </p>
+        <p className="text-sm text-muted-foreground">
           {topic.grade} · {topic.subject}
         </p>
         <h1 className="max-w-4xl text-balance font-heading text-4xl leading-none sm:text-5xl lg:text-6xl">{topic.title}</h1>
-        <p className="lesson-summary max-w-3xl text-muted-foreground">
+        <p className="max-w-3xl text-muted-foreground">
           {topic.skillStatement ||
             "This curriculum record is available as a planning starting point while its complete lesson is prepared."}
         </p>
-        <div className="lesson-primary-actions flex flex-wrap gap-3 print:hidden">
+        <div className="flex flex-wrap gap-3 print:hidden">
           <LessonPrintButton />
-          <Button asChild variant="outline"><Link
-            className="lesson-resource-link"
-            href={`/api/lessons/${topic.grade}/${topic.id}/markdown`}
-          >
-            Download Markdown
-          </Link></Button>
+          <Button asChild variant="outline">
+            <Link href={`/api/lessons/${topic.grade}/${topic.id}/markdown`}>
+              Download Markdown
+            </Link>
+          </Button>
         </div>
-        <dl className="lesson-meta grid gap-3 sm:grid-cols-2">
+        <dl className="grid gap-3 sm:grid-cols-2">
           <div className="rounded-lg border p-4">
             <dt>Subject</dt>
             <dd>{topic.subject}</dd>
@@ -74,7 +75,7 @@ export function DatabaseLessonDocument({
         </dl>
       </header>
       <div
-        className="lesson-markdown lesson-document-content prose prose-lg mt-6 max-w-none font-body leading-7 prose-headings:font-heading prose-headings:text-balance"
+        className="prose prose-lg mt-6 max-w-none font-body leading-7 prose-headings:font-heading prose-headings:text-balance"
         id="lesson-plan"
       >
         <h2>Curriculum focus</h2>

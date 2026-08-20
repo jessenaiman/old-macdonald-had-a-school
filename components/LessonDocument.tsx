@@ -30,38 +30,35 @@ export function LessonDocument({
 
   return (
     <article
-      className="lesson-article lesson-document min-w-0"
+      className="min-w-0"
       data-template={metadata.template}
       data-planning-layout={isWorksheet ? "worksheet" : undefined}
     >
-      <header className="lesson-header flex min-w-0 flex-col gap-3 border-b pb-6">
-        <p className="lesson-eyebrow text-xs font-black uppercase tracking-widest text-muted-foreground">
+      <header className="flex min-w-0 flex-col gap-3 border-b pb-6">
+        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground">
           {isWorksheet
             ? "Ready-to-use teacher activity"
             : metadata.template === "lesson"
               ? "Lesson plan"
               : `${metadata.template} lesson`}
         </p>
-        <p className="lesson-breadcrumb">
+        <p className="text-sm text-muted-foreground">
           {metadata.grade} <span aria-hidden="true">·</span> {metadata.subject}{" "}
           <span aria-hidden="true">·</span> {metadata.category}
         </p>
         <h1 className="max-w-4xl text-balance font-heading text-4xl leading-none sm:text-5xl lg:text-6xl">{metadata.title}</h1>
-        <p className="lesson-summary max-w-3xl text-muted-foreground">{metadata.summary}</p>
-        <div className="lesson-primary-actions flex flex-wrap gap-3 print:hidden">
+        <p className="max-w-3xl text-muted-foreground">{metadata.summary}</p>
+        <div className="flex flex-wrap gap-3 print:hidden">
           <LessonPrintActions />
           {externalResource ? (
-            <Button asChild variant="outline"><a
-              className="lesson-resource-link"
-              href={externalResource}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open teaching resource
-            </a></Button>
+            <Button asChild variant="outline">
+              <a href={externalResource} target="_blank" rel="noreferrer">
+                Open teaching resource
+              </a>
+            </Button>
           ) : null}
         </div>
-        <dl className="lesson-meta grid gap-3 sm:grid-cols-2">
+        <dl className="grid gap-3 sm:grid-cols-2">
           <div className="rounded-lg border p-4">
             <dt>Focus</dt>
             <dd>{metadata.focus}</dd>
@@ -74,7 +71,7 @@ export function LessonDocument({
           ) : null}
         </dl>
         {isWorksheet ? (
-          <ol className="lesson-planning-strip grid gap-3 sm:grid-cols-3" aria-label="Teaching workflow">
+          <ol className="grid gap-3 sm:grid-cols-3" aria-label="Teaching workflow">
             <li className="flex gap-3 rounded-lg border p-3">
               <span>1</span>
               <div>
@@ -100,7 +97,7 @@ export function LessonDocument({
         ) : null}
       </header>
       <div
-        className="lesson-markdown lesson-document-content prose prose-lg mt-6 max-w-none font-body leading-7 prose-headings:font-heading prose-headings:text-balance"
+        className="prose prose-lg mt-6 max-w-none font-body leading-7 prose-headings:font-heading prose-headings:text-balance"
         id="lesson-plan"
       >
         <Content />
@@ -137,10 +134,7 @@ export function LessonDocument({
         ) : null}
       </div>
       {hasProvenance ? (
-        <aside
-          className="lesson-provenance"
-          aria-label="Curriculum alignment and source notes"
-        >
+        <aside className="mt-8 border-t pt-6" aria-label="Curriculum alignment and source notes">
           <details>
             <summary>
               <span>Curriculum alignment &amp; source notes</span>

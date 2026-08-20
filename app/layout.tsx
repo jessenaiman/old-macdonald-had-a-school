@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Boogaloo, Lilita_One, Nunito, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
+import { ThemeProvider } from "next-themes";
 import { BRAND_IMAGE_ASSETS } from "../data/brand/image-registry";
-import { ThemeProvider } from "@/components/theme-provider";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { cn } from "@/lib/utils";
@@ -76,14 +76,13 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
+          enableColorScheme
           disableTransitionOnChange
         >
           <div className="bg-paper-ivory flex min-h-screen flex-col text-foreground">
             <SiteHeader />
             <main className="flex min-h-0 min-w-0 flex-1 flex-col">
-              <div className="mx-auto w-full max-w-7xl min-w-0 flex-1 flex-col px-3 py-5 sm:px-6 lg:px-8">
-                {children}
-              </div>
+              <div className="min-w-0 flex-1 flex-col">{children}</div>
             </main>
             <SiteFooter />
           </div>

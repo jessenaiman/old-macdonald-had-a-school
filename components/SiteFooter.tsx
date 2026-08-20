@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
 import { BookOpen, Search, Wrench, HelpCircle } from "lucide-react";
 
 export function SiteFooter() {
   return (
     <footer className="bg-brand-navy text-brand-navy-foreground border-t border-brand-navy-foreground/10" aria-labelledby="footer-heading">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="relative mx-auto min-w-0 w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
         <h2 id="footer-heading" className="sr-only">
           Site footer
         </h2>
@@ -56,7 +57,7 @@ export function SiteFooter() {
         </nav>
 
         {/* Divider */}
-        <hr className="border-brand-navy-foreground/10 mb-8" />
+        <Separator className="border-brand-navy-foreground/10 mb-8" />
 
         {/* Brand + legal */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

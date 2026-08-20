@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { MobileNavigation } from "./MobileNavigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
+import { Search } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -30,7 +31,7 @@ export function SiteHeader() {
 
   return (
     <header className="bg-brand-navy border-b border-brand-navy-foreground/10 sticky top-0 z-40">
-      <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="relative min-w-0 w-full min-h-16 px-4 sm:px-6 lg:px-8 flex items-center gap-4">
         <Link
           className="inline-flex items-center gap-3 shrink-0"
           href="/"
@@ -48,19 +49,17 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop/tablet navigation — shadcn NavigationMenu, grades inline (no dropdown) */}
-        <NavigationMenu
-          className="hidden flex-1 lg:flex max-w-full justify-end"
-          viewport={false}
-        >
-          <NavigationMenuList className="flex-1 justify-end gap-1">
+        <NavigationMenu className="hidden flex-1 lg:flex max-w-full" viewport={false}>
+          <NavigationMenuList className="flex-1 gap-1">
             {NAV_ITEMS.map((item) => (
               <NavigationMenuItem key={item.key}>
                 <NavigationMenuLink asChild className={HEADER_LINK_CLASS}>
                   <Link
                     href={item.href}
                     aria-current={active === item.key ? "page" : undefined}
+                    className={item.key === "search" ? "gap-1.5" : undefined}
                   >
-                    {item.label}
+                    {item.key === "search" ? <><Search className="size-4" aria-hidden="true" /><span>Search</span></> : item.label}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>

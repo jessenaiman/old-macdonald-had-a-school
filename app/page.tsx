@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Play, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 import { SubjectTeachers } from "@/components/home/SubjectTeachers";
 
 export const metadata = {
@@ -22,9 +24,11 @@ const NEW_LESSONS = [
 
 const RIBBON_WORDS = ["Sing", "Play", "Learn", "Together"];
 
+const PAGE_SHELL = "mx-auto min-w-0 w-full max-w-7xl px-3 sm:px-6";
+
 function HeroBanner() {
   return (
-    <section className="mx-auto grid w-full max-w-7xl items-center gap-8 lg:grid-cols-[1.05fr_auto_0.95fr]">
+    <section className="relative w-full grid items-center gap-8 lg:grid-cols-[1.05fr_auto_0.95fr]">
       <div className="flex flex-col gap-6">
         <h1 className="font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-bold leading-[1.05] text-brand-navy">
           Where familiar songs become{" "}
@@ -111,7 +115,10 @@ const LATEST_VIDEOS = [
 
 function WhatsNew() {
   return (
-    <section className="mx-auto w-full max-w-7xl pt-12" id="whats-new">
+    <section
+      className="relative w-full pt-12"
+      id="whats-new"
+    >
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="font-heading text-[26px] font-extrabold text-foreground">What's New</h2>
         <span className="font-hand text-[21px] text-[var(--gold-muted)]">fresh songs from the barnyard studio</span>
@@ -149,7 +156,7 @@ function WhatsNew() {
 
 function CurriculumPlanner() {
   return (
-    <section className="mx-auto w-full max-w-7xl pt-12 pb-4">
+    <section className="relative w-full pt-12 pb-4">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="font-heading text-[26px] font-extrabold text-foreground">Find a lesson, in seconds</h2>
         <span className="font-hand text-[21px] text-[var(--gold-muted)]">search all lessons · or browse by subject</span>
@@ -159,16 +166,27 @@ function CurriculumPlanner() {
           <div>
             <h3 className="font-heading text-[20px] font-extrabold text-[var(--brand-paper-foreground)]">Search lessons</h3>
             <p className="mb-4 text-sm text-[var(--brand-paper-muted)]">Type a topic, song, or skill. The full search page also shows the curriculum.</p>
-            <form className="flex items-center gap-2.5 rounded-2xl border-2 border-[var(--brand-navy)]/15 bg-background py-1.5 pl-4 pr-1.5 transition-[border-color,box-shadow] focus-within:border-[var(--gold-bright)] focus-within:shadow-[0_0_0_4px_rgba(212,168,42,0.18)]" action="/search" method="get" role="search">
+            <form
+              className="flex items-center gap-2.5 rounded-2xl border-2 border-[var(--brand-navy)]/15 bg-background py-1.5 pl-4 pr-1.5 transition-[border-color,box-shadow] focus-within:border-[var(--gold-bright)] focus-within:shadow-[0_0_0_4px_rgba(212,168,42,0.18)]"
+              action="/search"
+              method="get"
+              role="search"
+            >
               <Search className="size-[18px] text-muted-foreground" aria-hidden />
-              <input
+              <Input
                 name="q"
-                className="w-full flex-1 border-0 bg-transparent text-[16px] text-foreground outline-none"
+                className="h-11 border-0 bg-transparent px-0 text-[16px] text-foreground shadow-none focus-visible:ring-0"
                 type="search"
                 placeholder="Try “steady beat”, “shapes”, “feelings”…"
                 aria-label="Search lessons"
               />
-              <button className="rounded-xl bg-brand-navy px-5 py-2 text-sm font-bold text-brand-navy-foreground transition-colors hover:bg-[var(--gold-bright)] hover:text-brand-navy" type="submit">Search</button>
+              <Button
+                size="sm"
+                type="submit"
+                className="h-9 rounded-xl bg-brand-navy px-5 font-bold text-brand-navy-foreground hover:bg-[var(--gold-bright)] hover:text-brand-navy"
+              >
+                Search
+              </Button>
             </form>
             <div className="mt-3.5 flex flex-wrap items-center gap-2">
               <span className="text-[13px] font-bold text-[var(--brand-paper-muted)]">Popular:</span>
@@ -195,13 +213,13 @@ function CurriculumPlanner() {
 
 export default function HomePage() {
   return (
-    <section className="flex w-full flex-col gap-10 pb-6">
+    <section className={`flex w-full flex-col gap-10 pb-6 ${PAGE_SHELL}`}>
       <HeroBanner />
-      <Separator className="mx-auto w-full max-w-7xl" />
+      <Separator className="w-full" />
       <SubjectTeachers />
-      <Separator className="mx-auto w-full max-w-7xl" />
+      <Separator className="w-full" />
       <WhatsNew />
-      <Separator className="mx-auto w-full max-w-7xl" />
+      <Separator className="w-full" />
       <CurriculumPlanner />
     </section>
   );

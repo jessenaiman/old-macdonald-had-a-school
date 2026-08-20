@@ -1,35 +1,37 @@
 "use client";
 
+import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { useSyncExternalStore } from "react";
+
 import { Button } from "@/components/ui/button";
 
-const THEMES = [
-  { value: "light", label: "Farm day", iconClass: "theme-farm-day" },
-  { value: "dark", label: "Lullaby dusk", iconClass: "theme-lullaby-dusk" },
-] as const;
-
 export function ThemeSwitcher() {
+  const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(
-    () => () => undefined,
-    () => true,
-    () => false
-  );
-  const currentTheme = mounted && resolvedTheme === "dark" ? "dark" : "light";
-  const current = THEMES.find((item) => item.value === currentTheme) ?? THEMES[0];
-  const next = THEMES.find((item) => item.value !== current.value) ?? THEMES[0];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <Button type="button" variant="ghost" size="icon" aria-hidden="true" disabled />;
+  }
+
+  const isDark = resolvedTheme === "dark";
+  const nextTheme = isDark ? "light" : "dark";
 
   return (
     <Button
       type="button"
       variant="ghost"
-      className="h-12 w-20 p-0"
-      onClick={() => setTheme(next.value)}
-      aria-label={`Current theme: ${current.label}. Switch to ${next.label}`}
-      title={`Switch to ${next.label}`}
+      size="icon"
+      onClick={() => setTheme(nextTheme)}
+      aria-label={`Switch to ${nextTheme} theme`}
+      title={`Switch to ${nextTheme} theme`}
+      className="text-brand-navy-foreground"
     >
-      <span className={`brand-asset ${current.iconClass} [--brand-asset-size:4.5rem]`} aria-hidden="true" />
+      {isDark ? <Sun data-icon="inline-start" /> : <Moon data-icon="inline-start" />}
     </Button>
   );
 }

@@ -42,3 +42,5 @@ storybook-static
 open-code-review/
 .hermes/
 .claude/
+.vercel
+.env*

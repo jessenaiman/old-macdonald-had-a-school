@@ -9,7 +9,7 @@ function firstValue(value: string | string[] | undefined) {
 export default async function SearchPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;
   return (
-    <div className="min-h-0 px-3 py-6 sm:px-6">
+    <div className="relative min-w-0 w-full min-h-0 px-3 py-6 sm:px-6">
       <SearchWorkspace initialQuery={firstValue(params.q)} initialGrade={firstValue(params.grade)} />
     </div>
   );

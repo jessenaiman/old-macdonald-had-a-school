@@ -75,7 +75,10 @@ const SUBJECT_TEACHERS = [
 
 export function SubjectTeachers() {
   return (
-    <section className="mx-auto w-full max-w-7xl" aria-labelledby="st-title">
+    <section
+      className="w-full"
+      aria-labelledby="st-title"
+    >
       <span
         id="st-title"
         className="mb-6 inline-block rounded-xl border border-border bg-card px-6 py-3 font-hand text-[22px] text-card-foreground shadow-sm"

@@ -42,7 +42,7 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
         </SheetTrigger>
 
         <SheetContent
-          className="w-full overflow-y-auto sm:max-w-sm"
+          className="overflow-y-auto"
           side="right"
           showCloseButton={false}
         >
