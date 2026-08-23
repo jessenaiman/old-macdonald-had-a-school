@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "od-design-system-project/v1",
+  "id": "old-macdonald-had-a-school",
+  "name": "Old MacDonald Had a School",
+  "category": "Education / Cross-medium",
+  "description": "A character-led classroom design system built from the authoritative branding MDX pages. Foreground teaching artifacts appear physically attached to a supporting surface.",
+  "source": {
+    "type": "github",
+    "url": "https://github.com/jessenaiman/old-macdonald-had-a-school",
+    "branch": "feature-test-branch"
+  },
+  "files": {
+    "design": "DESIGN.md",
+    "tokens": "tokens.css"
+  },
+  "importMode": "normalized",
+  "craft": {
+    "applies": [
+      "color",
+      "typography",
+      "accessibility-baseline",
+      "cross-medium-composition"
+    ],
+    "suggested": [],
+    "exemptions": []
+  },
+  "sourceFiles": {
+    "evidence": "source/evidence.md"
+  }
+}

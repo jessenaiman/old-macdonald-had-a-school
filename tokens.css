@@ -1,0 +1,131 @@
+/*
+ * Old MacDonald Had a School — Open Design token contract
+ *
+ * Identity rules come only from content/pages/branding/*.mdx.
+ * Values below bind that authority to the current implementation evidence in
+ * app/globals.css. Tailwind is an output adapter, not part of this contract.
+ */
+
+:root {
+  /* Shared Open Design surface contract */
+  --bg: #fefce8;
+  --surface: #fdf8e3;
+  --surface-warm: #f0e6d0;
+  --fg: #1a2a2e;
+  --fg-2: #3d4d50;
+  --muted: #6b7a7c;
+  --meta: #6b6152;
+  --border: #c4a07a;
+  --border-soft: #e8d5c0;
+
+  --accent: #1e2a38;
+  --accent-on: #fefce8;
+  --accent-hover: #3a4a5a;
+  --accent-active: #1a242f;
+  --success: #6b9b8a;
+  --warn: #d4a82a;
+  --danger: #d47a8a;
+
+  /* Type roles from typography.mdx */
+  --font-display: "Boogaloo", "Arial Rounded MT Bold", sans-serif;
+  --font-body: "Nunito", "Avenir Next", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-section: "Lilita One", "Arial Rounded MT Bold", sans-serif;
+  --font-brand: "Playfair Display", Georgia, serif;
+  --font-hand: "Caveat", "Segoe Print", cursive;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 36px;
+  --text-4xl: 56px;
+  --leading-body: 1.7;
+  --leading-tight: 1;
+  --tracking-display: 0;
+  --tracking-eyebrow: 0.13em;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --section-y-desktop: 48px;
+  --section-y-tablet: 32px;
+  --section-y-phone: 20px;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-pill: 9999px;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 12px 24px rgb(30 42 56 / 16%);
+  --focus-ring: 0 0 0 3px rgb(212 168 42 / 45%);
+  --motion-fast: 150ms;
+  --motion-base: 240ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  --container-max: 1200px;
+  --container-gutter-desktop: 48px;
+  --container-gutter-tablet: 32px;
+  --container-gutter-phone: 20px;
+
+  /* Stable physical-material palette. These do not invert. */
+  --material-paper: #fdf8e3;
+  --material-paper-muted: #f0e6d0;
+  --material-ink: #1a2a2e;
+  --material-navy: #1e2a38;
+  --material-cork: #bd8f58;
+  --material-wood: #c4a07a;
+  --material-wood-light: #e8d5c0;
+  --curriculum-yellow: #d4a82a;
+  --curriculum-red: #d47a8a;
+  --curriculum-blue: #3589c4;
+  --curriculum-green: #6b9a7a;
+  --curriculum-purple: #5367b5;
+
+  /* Character identity. Exact approved values; never derive or recolor. */
+  --cast-old-macdonald: #b87a4a;
+  --cast-miss-puddles: #f6af32;
+  --cast-mr-rusty: #3589c4;
+  --cast-miss-hayley: #d95c86;
+  --cast-mr-sam: #2a9a9a;
+  --cast-mr-maisy: #c45d62;
+  --cast-mr-puddles: #5367b5;
+  --cast-miss-maisy: #6b9a7a;
+  --cast-hopper: #e66c71;
+  --cast-whiskers: #e695b0;
+  --cast-scout: #8dc4a8;
+  --cast-penny: #f9cb7a;
+  --cast-maisy: #e8c8a0;
+  --cast-puddles: #8f9ccf;
+  --cast-sam: #6cb1b1;
+  --cast-rusty: #72aad2;
+
+  /* Grade and subject ownership */
+  --grade-early-years: #6b9a7a;
+  --grade-daycare: #f6af32;
+  --grade-pre-school: #6b9a7a;
+  --grade-kindergarten: #3589c4;
+  --grade-one: #d95c86;
+  --grade-two: #c45d62;
+  --subject-language: #d95c86;
+  --subject-math: #2a9a9a;
+  --subject-science: #6b9a7a;
+  --subject-music: #3589c4;
+  --subject-arts: #5367b5;
+  --subject-health: #c45d62;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0.01ms;
+    --motion-base: 0.01ms;
+  }
+}

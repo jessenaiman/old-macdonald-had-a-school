@@ -12,15 +12,11 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "qa:visual": "npm run build && playwright test --config=playwright.visual.config.ts",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "db:generate": "drizzle-kit generate --config=drizzle.sqlite.config.ts",
     "db:migrate": "drizzle-kit migrate --config=drizzle.sqlite.config.ts",
     "db:push": "drizzle-kit push --config=drizzle.sqlite.config.ts",
     "db:studio": "drizzle-kit studio --config=drizzle.sqlite.config.ts",
-    "db:evaluate-search": "node scripts/data/evaluate-sqlite-retrieval.mjs data/omhas.db --summary",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "db:evaluate-search": "node scripts/data/evaluate-sqlite-retrieval.mjs data/omhas.db --summary"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -62,33 +58,30 @@
     "lightningcss-win32-x64-msvc": "^1.33.0"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "latest",
-    "@playwright/test": "^1.62.1",
-    "@storybook/addon-a11y": "^10.5.7",
-    "@storybook/addon-docs": "^10.5.7",
-    "@storybook/addon-mcp": "latest",
-    "@storybook/addon-vitest": "^10.5.7",
-    "@storybook/nextjs-vite": "^10.5.7",
     "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/typography": "^0.5.20",
     "@types/better-sqlite3": "^9.6.0",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitest/browser-playwright": "latest",
-    "@vitest/coverage-v8": "latest",
     "@xenova/transformers": "^2.17.2",
     "dotenv-cli": "^11.0.0",
     "drizzle-kit": "^0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.0",
-    "eslint-plugin-storybook": "^10.5.7",
     "playwright": "latest",
-    "storybook": "^10.5.7",
     "tailwindcss": "^4.2.1",
-    "typescript": "5.9.3",
-    "vite": "latest",
-    "vitest": "latest"
+    "typescript": "5.9.3"
   },
-  "type": "module"
+  "type": "module",
+  "allowScripts": {
+    "esbuild@0.18.20": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.2": true,
+    "sharp@0.32.6": true,
+    "sharp@0.35.3": true,
+    "better-sqlite3@13.0.3": true,
+    "protobufjs@6.11.6": true,
+    "unrs-resolver": true
+  }
 }
