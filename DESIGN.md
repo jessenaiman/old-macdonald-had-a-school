@@ -1,6 +1,6 @@
 # Old MacDonald Had a School Design System
 
-## 1. Authority and use
+## Overview
 
 This system translates the official branding pages into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.
 
@@ -13,7 +13,7 @@ When sources conflict:
 3. Use CSS only to bind those rules to current values and files.
 4. Stop for approval rather than inventing, optimizing, excluding, or silently substituting.
 
-## 2. Design thesis
+## Design thesis
 
 Create a living classroom working wall, not a generic dashboard and not a cork-themed interface.
 
@@ -29,7 +29,7 @@ The attachment relationship is the signature move:
 
 Educational meaning leads decoration. Choose curriculum, grade, character, material, and icon because each has a documented job.
 
-## 3. Experience principles
+## Experience principles
 
 ### Academic meaning first
 
@@ -51,7 +51,7 @@ Text remains live and editable. Use repeating paper surfaces behind live content
 
 Tone feels welcoming, handmade, organized, and teacher-useful. Avoid childish clutter, sterile enterprise dashboards, decorative randomness, and nostalgia without educational function.
 
-## 4. Composition grammar
+## Composition grammar
 
 Build compositions in four layers:
 
@@ -72,7 +72,7 @@ Use overlap to show construction, not to hide information. Keep text, controls, 
 - Dialogs, menus, and focus indicators remain functionally above decorative layers.
 - Do not use glossy glassmorphism, neon glow, or deep synthetic 3D effects.
 
-## 5. Materials
+## Materials
 
 ### Paper
 
@@ -100,11 +100,10 @@ Felt requires a semantic owner. Character felt uses that character's approved id
 
 Asset paths stay behind semantic names. Do not paste file URLs into components or generation prompts when a semantic asset role exists. Contact sheets and composites are references, not production surfaces. Availability does not grant permission to invent a role. No asset may be excluded, substituted, renamed, deleted, or classified as non-production without explicit approval.
 
-## 6. Color system
+## Colors
 
-Use `tokens.css` as the compiled cross-medium binding. Semantic roles come before raw color values.
+Semantic roles come before raw color values.
 
-Open Design requires operational tokens beyond the official MDX. Motion timing, easing, container geometry, responsive gutters, and generic status roles in `tokens.css` are provisional adapters for testing. They do not create brand authority and may be revised after generated-medium review.
 
 ### Foundation roles
 
@@ -162,7 +161,7 @@ Never derive, recolor, optimize, or substitute these values. Scout and Sam remai
 | Grade 1 | Miss Hayley | `#D95C86` |
 | Grade 2 | Mr Maisy | `#C45D62` |
 
-## 7. Typography
+## Typography
 
 Use type roles together inside a real composition, not as detached specimens.
 
@@ -174,7 +173,7 @@ Use type roles together inside a real composition, not as detached specimens.
 
 Uppercase eyebrows may use heavy body weight with approximately `0.13em` tracking. Do not use handwriting as decoration across an entire page.
 
-## 8. Identity and imagery
+## Identity and imagery
 
 ### Character hierarchy
 
@@ -207,7 +206,7 @@ Use dimensional felt art only at large and medium sizes. Never shrink detailed f
 
 Use the compact flat mark at 32 px, navigation mark at 44 px, card mark for grouped teacher actions, and detail mark for editorial or print-scale destinations. Use identity as part of a real composition, not a detached logo specimen.
 
-## 9. Components and patterns
+## Components
 
 ### Button
 
@@ -233,9 +232,9 @@ One production unit owns paper silhouette, live text, curriculum icon, fastener,
 
 Reuse shared accessible primitives for buttons, inputs, tabs, disclosure, navigation, cards, and dialogs. Do not create page-local visual control walls.
 
-## 10. Layout and responsive behavior
+## Layout
 
-This contract defines behavior, not a duplicate responsive framework. Open Design or the target medium selects implementation breakpoints. Tailwind v4 may be generated as a web adapter; do not encode Tailwind utilities or configuration into this source contract.
+This contract defines behavior, not a duplicate responsive framework. The target medium selects implementation breakpoints. Tailwind v4 may be generated as a web adapter; do not encode Tailwind utilities or configuration into this source contract.
 
 ### Fluid web
 
@@ -259,7 +258,7 @@ Support A4 and US Letter. Keep text and essential imagery inside printer-safe ma
 
 Preserve academic lead, semantic ownership, readable paper, and installed-object logic. Crop environments before cropping characters or curriculum signals. Do not invent new character poses, colors, or badges to fill an aspect ratio.
 
-## 11. Accessibility
+## Accessibility
 
 - Maintain readable contrast using the approved foreground paired with each semantic surface.
 - Never use character, grade, or subject color as the only carrier of meaning; include text or a semantic icon.
@@ -270,15 +269,15 @@ Preserve academic lead, semantic ownership, readable paper, and installed-object
 - Preserve logical reading order independent of visual overlap.
 - Respect reduced-motion preference. Attachment and material identity must not depend on animation.
 
-## 12. Motion
+## Motion
 
 Motion is restrained and functional: focus, disclosure, selection, carousel change, or artifact placement feedback. Do not animate texture continuously. Avoid bounce, wobble, parallax, or novelty motion that competes with teaching content. Reduced-motion mode removes nonessential movement.
 
-## 13. Content voice
+## Content voice
 
 Write for teachers and young learners with clarity, warmth, and concrete action. Use active verbs. Name what learners notice, test, make, sing, count, explain, or share. Keep headings inviting and specific. Avoid corporate product language, generic inspiration, and character-first copy that hides the academic purpose.
 
-## 14. Do and do not
+## Do's and Don'ts
 
 ### Do
 
@@ -305,7 +304,7 @@ Write for teachers and young learners with clarity, warmth, and concrete action.
 - Infer authority from other Markdown files or file availability.
 - Exclude or substitute an image without approval.
 
-## 15. Agent generation contract
+## Agent generation contract
 
 Before generating:
 

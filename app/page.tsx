@@ -32,13 +32,14 @@ function HeroBanner() {
       <div className="flex flex-col gap-6">
         <h1 className="font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-bold leading-[1.05] text-brand-navy">
           Where familiar songs become{" "}
-          <em className="not-italic text-[var(--rose-warm)]">new places</em> to learn.
+          <em className="not-italic text-[var(--rose-muted)]">new places</em> to learn.
         </h1>
-        {/* New this week list */}
-        <div className="rounded-2xl border border-[var(--brand-navy)]/10 bg-[var(--brand-paper)] p-5 shadow-sm">
+        {/* New this week list — paper note taped to the wall */}
+        <div className="relative rounded-2xl border border-[var(--brand-navy)]/10 bg-[var(--brand-paper)] p-5 shadow-[0_2px_10px_rgba(30,42,56,0.08),0_8px_24px_rgba(30,42,56,0.06)]">
+          <span aria-hidden className="absolute -top-2.5 left-1/2 h-5 w-20 -translate-x-1/2 -rotate-2 rounded-sm bg-[var(--gold-soft)]/50 shadow-sm [clip-path:polygon(3%_0,97%_6%,100%_88%,0_100%)]" />
           <div className="flex items-baseline justify-between px-1 pb-2">
-            <span className="font-hand text-xl italic text-[var(--rose-warm)]">New this week</span>
-            <span className="font-hand text-base italic text-[var(--brand-paper-foreground)]">Best for</span>
+            <span className="font-hand text-xl italic text-[var(--rose-muted)]">New this week</span>
+            <span className="font-hand text-base italic text-[var(--brand-paper-foreground)]">Grades</span>
           </div>
           <ul className="divide-y divide-[var(--brand-paper-foreground)]/10">
             {NEW_LESSONS.map((lesson) => (
@@ -50,7 +51,7 @@ function HeroBanner() {
                 </div>
                 <div className="flex shrink-0 gap-1">
                   {lesson.tags.map((tag) => (
-                    <span key={tag} className="rounded-md border border-[var(--gold-bright)] px-2 py-0.5 text-xs font-bold text-[var(--brand-paper-foreground)]">
+                    <span key={tag} className="rounded-md border border-[var(--gold-bright)] bg-[var(--gold-bright)]/15 px-2 py-0.5 text-xs font-bold text-[var(--brand-paper-foreground)]">
                       {tag}
                     </span>
                   ))}
@@ -67,21 +68,21 @@ function HeroBanner() {
       {/* Vertical ribbon (signature) */}
       <div className="hidden h-full lg:flex" aria-hidden>
         <div className="flex w-full flex-col items-center justify-center gap-2 px-1">
-          <span className="size-2 rounded-full bg-[var(--gold-bright)]" />
-          <div className="rounded-md border-2 border-dashed border-[var(--gold-bright)]/70 bg-brand-navy px-1.5 py-10 shadow-lg">
+          <span className="size-2 rounded-full bg-[var(--gold-bright)] shadow-[0_1px_2px_rgba(30,42,56,0.4)]" />
+          <div className="rotate-[-1.5deg] rounded-md border-2 border-dashed border-[var(--gold-bright)]/70 bg-brand-navy px-1.5 py-10 shadow-[0_4px_14px_rgba(30,42,56,0.25)]">
             <span className="font-hand block whitespace-nowrap text-2xl leading-none text-brand-navy-foreground [writing-mode:vertical-rl]">
               {RIBBON_WORDS.join("  •  ")}
             </span>
           </div>
-          <span className="size-2 rounded-full bg-[var(--gold-bright)]" />
+          <span className="size-2 rounded-full bg-[var(--gold-bright)] shadow-[0_1px_2px_rgba(30,42,56,0.4)]" />
         </div>
       </div>
 
       {/* Pinned illustration (Polaroid) */}
       <div className="relative mx-auto w-full max-w-sm">
-        <span className="absolute left-3 top-3 z-10 size-4 rounded-full bg-[var(--gold-bright)] shadow" aria-hidden />
-        <span className="absolute right-3 top-3 z-10 size-4 rounded-full bg-[var(--gold-bright)] shadow" aria-hidden />
-        <div className="rotate-[2.5deg] rounded-xl border-[10px] border-white bg-white p-2 pb-3 shadow-xl">
+        <span aria-hidden className="absolute left-3 top-3 z-10 size-4 rounded-full bg-[radial-gradient(circle_at_35%_30%,var(--gold-soft),var(--gold-muted))] shadow-[0_2px_3px_rgba(30,42,56,0.35)]" />
+        <span aria-hidden className="absolute right-3 top-3 z-10 size-4 rounded-full bg-[radial-gradient(circle_at_35%_30%,var(--gold-soft),var(--gold-muted))] shadow-[0_2px_3px_rgba(30,42,56,0.35)]" />
+        <figure className="rotate-[2.5deg] rounded-xl border-[10px] border-white bg-white p-2 pb-3 shadow-[0_4px_18px_rgba(30,42,56,0.18)]">
           <Image
             src={HERO_PHOTO}
             alt="Old MacDonald reading with his animal students"
@@ -90,7 +91,10 @@ function HeroBanner() {
             className="aspect-[4/3] w-full rounded-md object-cover"
             priority
           />
-        </div>
+          <figcaption className="font-hand pt-1.5 text-center text-lg italic text-[var(--ink-primary)]">
+            morning circle — week one
+          </figcaption>
+        </figure>
       </div>
     </section>
   );
@@ -121,7 +125,7 @@ function WhatsNew() {
     >
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="font-heading text-[26px] font-extrabold text-foreground">What's New</h2>
-        <span className="font-hand text-[21px] text-[var(--gold-muted)]">fresh songs from the barnyard studio</span>
+        <span className="font-hand text-[21px] text-[var(--ink-secondary)]">fresh songs from the barnyard studio</span>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {LATEST_VIDEOS.map((v) => (
@@ -146,7 +150,7 @@ function WhatsNew() {
         <Link href="https://www.youtube.com/channel/UC_THbKUe6o-K64vh7gWCPyQ/" target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-foreground px-5 py-2 text-sm font-bold text-foreground transition-colors hover:bg-foreground hover:text-background">
           <Play className="size-4" aria-hidden /> Watch the whole channel
         </Link>
-        <span className="text-[13.5px] text-muted-foreground">Videos play right here — no leaving the site.</span>
+        <span className="text-[13.5px] font-semibold text-[var(--ink-secondary)]">Videos play right here — no leaving the site.</span>
       </div>
     </section>
   );
@@ -159,7 +163,7 @@ function CurriculumPlanner() {
     <section className="relative w-full pt-12 pb-4">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="font-heading text-[26px] font-extrabold text-foreground">Find a lesson, in seconds</h2>
-        <span className="font-hand text-[21px] text-[var(--gold-muted)]">search all lessons · or browse by subject</span>
+        <span className="font-hand text-[21px] text-[var(--ink-secondary)]">search all lessons · or browse by subject</span>
       </div>
       <div className="rounded-3xl border border-[var(--brand-navy)]/10 bg-[var(--brand-paper)] p-6 sm:p-7 shadow-sm">
         <div className="grid gap-7 lg:grid-cols-2">

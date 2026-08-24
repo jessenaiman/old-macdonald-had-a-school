@@ -138,7 +138,7 @@ export function LessonDocument({
           <details>
             <summary>
               <span>Curriculum alignment &amp; source notes</span>
-              <small>Verified planning provenance</small>
+              <small className="mt-1 block">Verified planning provenance</small>
             </summary>
             <dl>
               {metadata.standards ? (
