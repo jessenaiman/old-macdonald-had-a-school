@@ -310,22 +310,22 @@ export async function GradeLessonPage({
           className="grid grid-cols-2 gap-1 sm:grid-cols-4 lg:mt-4 lg:grid-cols-1"
           aria-label={`${details.label} lesson navigation`}
         >
-          <Button asChild variant="ghost" className="justify-start">
+          <Button asChild variant="ghost" className="min-h-11 justify-start">
             <Link href="#lesson-overview">
               <span>Overview</span>
             </Link>
           </Button>
-          <Button asChild variant="ghost" className="justify-start">
+          <Button asChild variant="ghost" className="min-h-11 justify-start">
             <Link href="#lesson-plan">
               <span>Lesson plan</span>
             </Link>
           </Button>
-          <Button asChild variant="ghost" className="justify-start">
+          <Button asChild variant="ghost" className="min-h-11 justify-start">
             <Link href="#lesson-notes">
               <span>Teacher notes</span>
             </Link>
           </Button>
-          <Button asChild variant="ghost" className="justify-start">
+          <Button asChild variant="ghost" className="min-h-11 justify-start">
             <Link href={`/grade/${grade}`}>
               <span>All {details.label}</span>
             </Link>
@@ -350,7 +350,7 @@ export async function GradeLessonPage({
       </aside>
       <div className="min-w-0 p-4 sm:p-6 lg:p-8 print:p-0">
         <div className="mb-4 flex flex-wrap gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
-          <Link href={`/grade/${grade}`}>{details.label}</Link>
+          <Link className="inline-flex min-h-11 items-center underline-offset-4 hover:underline" href={`/grade/${grade}`}>{details.label}</Link>
           <span aria-hidden="true">&gt;</span>
           <span>{subject}</span>
           <span aria-hidden="true">&gt;</span>

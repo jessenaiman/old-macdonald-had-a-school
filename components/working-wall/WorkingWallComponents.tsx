@@ -46,7 +46,7 @@ export function WorkspaceTabTrigger({
     <TabsTrigger
       data-slot="workspace-tab-trigger"
       className={cn(
-        "group grow justify-start gap-2 rounded-lg border-border/70 bg-background/75 px-3 data-[state=active]:bg-[var(--grade-color)] data-[state=active]:text-[var(--grade-ink)] xl:w-full",
+        "group grow justify-start gap-2 rounded-lg border-border/70 bg-background/75 px-3 text-foreground data-[state=active]:bg-[var(--grade-color)] data-[state=active]:text-[var(--grade-ink)] xl:w-full",
         className,
       )}
       {...props}
@@ -97,7 +97,7 @@ export function WorkingWallPathCard({
       <strong className="col-start-2 font-body text-lg font-semibold leading-tight text-balance">
         {title}
       </strong>
-      <span className="col-start-2 text-sm leading-5 text-foreground/80">{description}</span>
+      <span className="material-surface material-cardboard-paper col-start-2 rounded-md px-2.5 py-1.5 text-sm leading-5 text-foreground">{description}</span>
       <span className="col-start-2 self-end text-sm font-bold underline underline-offset-4">
         View path →
       </span>

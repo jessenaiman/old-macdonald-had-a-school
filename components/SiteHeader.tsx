@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 
 const HEADER_LINK_CLASS = cn(
   navigationMenuTriggerStyle(),
-  "bg-transparent px-3 text-brand-navy-foreground/80 hover:bg-brand-navy-foreground/10 hover:text-brand-navy-foreground focus:bg-brand-navy-foreground/10 focus:text-brand-navy-foreground data-[state=open]:bg-transparent aria-[current=page]:text-accent"
+  "min-h-11 bg-transparent px-3 text-brand-navy-foreground/80 hover:bg-brand-navy-foreground/10 hover:text-brand-navy-foreground focus:bg-brand-navy-foreground/10 focus:text-brand-navy-foreground data-[state=open]:bg-transparent aria-[current=page]:text-accent"
 );
 
 export function SiteHeader() {
@@ -33,7 +33,7 @@ export function SiteHeader() {
     <header className="bg-brand-navy border-b border-brand-navy-foreground/10 sticky top-0 z-40">
       <div className="relative min-w-0 w-full min-h-16 px-4 sm:px-6 lg:px-8 flex items-center gap-4">
         <Link
-          className="inline-flex items-center gap-3 shrink-0"
+          className="inline-flex min-h-11 items-center gap-3 shrink-0"
           href="/"
           aria-label="Old MacDonald Had a School home"
         >
@@ -69,8 +69,9 @@ export function SiteHeader() {
                 <NavigationMenuLink
                   asChild
                   className={cn(
-                    "block w-full whitespace-nowrap px-4 py-1.5 text-center text-sm font-medium text-white rounded",
-                    GRADE_TAB_COLORS[grade.key]
+                    "flex w-full min-h-11 whitespace-nowrap items-center justify-center px-4 py-1.5 text-center text-sm font-medium rounded",
+                    GRADE_TAB_COLORS[grade.key].surface,
+                    GRADE_TAB_COLORS[grade.key].ink
                   )}
                 >
                   <Link

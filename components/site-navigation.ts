@@ -31,13 +31,38 @@ export type TeacherGradeKey = (typeof TEACHER_GRADE_ITEMS)[number]["key"];
 
 /** Grade tab styles for navigation, keyed by grade key — uses characters.mdx grade tokens
  *  (Daycare=Miss Puddles yellow, Pre-School=Miss Maisy sage, Kindergarten=Mr Rusty blue,
- *   Grade 1=Miss Hayley pink, Grade 2=Mr Maisy red), registered in @theme. */
-export const GRADE_TAB_COLORS: Record<TeacherGradeKey, string> = {
-  daycare: "bg-grade-daycare hover:bg-grade-daycare/90",
-  "pre-school": "bg-grade-pre-school hover:bg-grade-pre-school/90",
-  kindergarten: "bg-grade-kindergarten hover:bg-grade-kindergarten/90",
-  "grade-one": "bg-grade-one hover:bg-grade-one/90",
-  "grade-two": "bg-grade-two hover:bg-grade-two/90",
+ *   Grade 1=Miss Hayley pink, Grade 2=Mr Maisy red), registered in @theme.
+ *  `surface` darkens light hues with the system's 72%-black edge mix so the per-key
+ *  character foreground inks meet WCAG AA (>= 4.5:1) at 14px; daycare amber keeps its
+ *  raw hue because its navy ink passes there (7.7:1) and fails once darkened.
+ *  Grade 1's own character foreground is navy, which fails on its raw AND darkened
+ *  pink, so it falls back to the shared cream cast ink (--characters-maisy-foreground,
+ *  theme-stable because grade hues never flip). */
+export const GRADE_TAB_COLORS: Record<TeacherGradeKey, { surface: string; ink: string }> = {
+  daycare: {
+    surface: "bg-grade-daycare hover:bg-grade-daycare/90",
+    ink: "text-[var(--characters-miss-puddles-foreground)]",
+  },
+  "pre-school": {
+    surface:
+      "bg-[color-mix(in_srgb,var(--grade-pre-school-color)_72%,black)] hover:bg-[color-mix(in_srgb,var(--grade-pre-school-color)_64%,black)]",
+    ink: "text-[var(--characters-miss-maisy-foreground)]",
+  },
+  kindergarten: {
+    surface:
+      "bg-[color-mix(in_srgb,var(--grade-kindergarten-color)_72%,black)] hover:bg-[color-mix(in_srgb,var(--grade-kindergarten-color)_64%,black)]",
+    ink: "text-[var(--characters-mr-rusty-foreground)]",
+  },
+  "grade-one": {
+    surface:
+      "bg-[color-mix(in_srgb,var(--grade-one-color)_72%,black)] hover:bg-[color-mix(in_srgb,var(--grade-one-color)_64%,black)]",
+    ink: "text-[var(--characters-maisy-foreground)]",
+  },
+  "grade-two": {
+    surface:
+      "bg-[color-mix(in_srgb,var(--grade-two-color)_72%,black)] hover:bg-[color-mix(in_srgb,var(--grade-two-color)_64%,black)]",
+    ink: "text-[var(--characters-mr-maisy-foreground)]",
+  },
 };
 
 /**

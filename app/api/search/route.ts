@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import Database from "better-sqlite3";
+import fs from "fs";
 import path from "path";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const SEMANTIC_MODEL = "Xenova/all-MiniLM-L6-v2";
+const SEMANTIC_MODEL = "Xenova/all-MiniLM-L6-v2"; // reported in the API response
+// Local model directory under models/ holding vendored MiniLM weights + tokenizer.
+const SEMANTIC_LOCAL_MODEL_ID = "all-MiniLM-L6-v2";
+// Writable sidecar built by scripts/db/build-search-embeddings.mjs.
+const SIDECAR_DB_PATH = process.env.SEARCH_VECTORS_DB_PATH
+  ? path.resolve(process.env.SEARCH_VECTORS_DB_PATH)
+  : path.join(process.cwd(), "data", "search-vectors.db");
 
 const DB_PATH = process.env.OMHAS_DB_PATH
   ? path.resolve(process.env.OMHAS_DB_PATH)
@@ -13,28 +20,73 @@ const DB_PATH = process.env.OMHAS_DB_PATH
 
 // ── Semantic search (lazy-loaded MiniLM embedder) ──────────────────────────
 
-let embedderPromise: Promise<{ embed: (text: string) => Promise<number[]> }> | null = null;
+
+let embedderPromise: Promise<{ embed: (text: string) => Promise<Float32Array> }> | null = null;
 
 async function getEmbedder() {
   if (!embedderPromise) {
     embedderPromise = (async () => {
-      const { pipeline, env } = await import("@xenova/transformers");
-      // Allow remote download on first use; cache persists so subsequent loads are local.
-      env.allowRemoteModels = true;
+      const { pipeline, env } = await import("@xenova/transformers"); // lazy (see comment above)
+      // Lazy (not static) import: transformers.js pulls in onnxruntime and must
+      // not load — or be bundled — until a request actually needs embeddings.
+      // Weights are vendored on disk under models/all-MiniLM-L6-v2/ by
+      // scripts/db/build-search-embeddings.mjs. Remote loading is hard-disabled:
+      // transformers.js v2.17.2 resolves every file via
+      // path.join(env.localModelPath, "<model>/<file>") (src/utils/hub.js:392)
+      // and throws "`env.allowRemoteModels=false`, but attempted to load a
+      // remote file" instead of fetching when a file is missing locally
+      // (src/utils/hub.js:445-459). No HF CDN contact is possible at runtime.
+      env.localModelPath = path.join(process.cwd(), "models");
+      env.allowRemoteModels = false;
       env.allowLocalModels = true;
-      const embedder = await pipeline("feature-extraction", SEMANTIC_MODEL);
+      const embedder = await pipeline("feature-extraction", SEMANTIC_LOCAL_MODEL_ID);
       return {
-        async embed(text: string): Promise<number[]> {
+        async embed(text: string): Promise<Float32Array> {
           const output = await embedder(text, { pooling: "mean", normalize: true });
-          return Array.from(output.data) as number[];
+          return output.data as Float32Array;
         },
       };
     })();
+    embedderPromise.catch(() => {
+      embedderPromise = null; // allow retry on the next request
+    });
   }
   return embedderPromise;
 }
 
-function cosineSimilarity(a: number[], b: number[]): number {
+let vectorsPromise: Promise<Map<string, Float32Array>> | null = null;
+
+// Load the whole sidecar once (~1428 x float32[384] ≈ 2MB) into memory.
+async function getChunkVectors(): Promise<Map<string, Float32Array>> {
+  if (!vectorsPromise) {
+    vectorsPromise = (async () => {
+      const map = new Map<string, Float32Array>();
+      if (!fs.existsSync(SIDECAR_DB_PATH)) return map;
+      const sidecar = new Database(SIDECAR_DB_PATH, { readonly: true, fileMustExist: true });
+      try {
+        const rows = sidecar.prepare("SELECT chunk_id, embedding FROM embeddings").all() as Array<{
+          chunk_id: string;
+          embedding: Buffer;
+        }>;
+        for (const row of rows) {
+          map.set(
+            row.chunk_id,
+            new Float32Array(row.embedding.buffer, row.embedding.byteOffset, row.embedding.byteLength / 4),
+          );
+        }
+      } finally {
+        sidecar.close();
+      }
+      return map;
+    })();
+    vectorsPromise.catch(() => {
+      vectorsPromise = null; // allow retry on the next request
+    });
+  }
+  return vectorsPromise;
+}
+
+function cosineSimilarity(a: Float32Array, b: Float32Array): number {
   let dot = 0, normA = 0, normB = 0;
   for (let i = 0; i < a.length; i++) {
     dot += a[i] * b[i];
@@ -466,7 +518,7 @@ export async function GET(req: NextRequest) {
 
     // ── Keyword search (FTS5) ─────────────────────────────────────────────
     const keywordRows = ftsTerms.length ? db.prepare(`
-      SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta, sc.embedding,
+      SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta,
         snippet(search_chunks_fts, 4, '<mark>', '</mark>', '…', 20) AS excerpt,
         rank
       FROM search_chunks_fts
@@ -485,27 +537,31 @@ export async function GET(req: NextRequest) {
     let searchMode = "structured-keyword";
 
     try {
-      const model = await getEmbedder();
+      if (!fs.existsSync(SIDECAR_DB_PATH)) {
+        throw new Error("data/search-vectors.db sidecar missing — run scripts/db/build-search-embeddings.mjs");
+      }
       if (primary.length === 0) throw new Error("No resource-search terms after resolving grade and school-year placement.");
+      const [model, chunkVectors] = await Promise.all([getEmbedder(), getChunkVectors()]);
       const queryEmbedding = await model.embed(searchQuery);
 
-      // Fetch chunks with embeddings (broader candidate set for semantic)
-      const candidateRows = db.prepare(`
-        SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta, sc.embedding
-        FROM search_chunks sc
-        WHERE sc.embedding IS NOT NULL
+      // Candidates come from the existing FTS prefilter (widened to ~200 rows
+      // for re-ranking); scores come from the sidecar via float32 dot products.
+      const candidateRows = ftsTerms.length ? db.prepare(`
+        SELECT sc.id, sc.kind, sc.title, sc.lyrics, sc.instructions, sc.source_path, sc.url, sc.meta
+        FROM search_chunks_fts
+        JOIN search_chunks sc ON sc.rowid = search_chunks_fts.rowid
+        WHERE search_chunks_fts MATCH ?
           AND COALESCE(json_extract(sc.meta, '$.visibility'), 'public') <> 'internal'
           ${kind ? "AND sc.kind = ?" : "AND sc.kind <> 'knowledge'"}
-      `).all(...(kind ? [kind] : [])) as Array<Record<string, unknown>>;
+        ORDER BY rank
+        LIMIT 200
+      `).all(...(kind ? [makeFtsQuery(ftsTerms), kind] : [makeFtsQuery(ftsTerms)])) as Array<Record<string, unknown>> : [];
 
-      // Score each candidate by cosine similarity
       const scored = candidateRows
         .map((row) => {
-          let stored: number[] = [];
-          try { stored = JSON.parse(row.embedding as string); } catch { return null; }
-          if (!Array.isArray(stored) || stored.length !== 384 || typeof stored[0] !== "number") return null;
-          const semanticScore = cosineSimilarity(queryEmbedding, stored);
-          return { row, semanticScore };
+          const stored = chunkVectors.get(row.id as string);
+          if (!stored || stored.length !== queryEmbedding.length) return null;
+          return { row, semanticScore: cosineSimilarity(queryEmbedding, stored) };
         })
         .filter((item): item is { row: Record<string, unknown>; semanticScore: number } => item !== null)
         .filter(({ row }) => hasKeywordAnchor(row, primary))
@@ -519,7 +575,6 @@ export async function GET(req: NextRequest) {
       // Semantic search is best-effort — fall back to keyword-only
       console.warn("Semantic search unavailable:", embedError instanceof Error ? embedError.message : String(embedError));
     }
-
     // ── Merge keyword + semantic results (deduplicated, hybrid-ranked) ────
     const mergedMap = new Map<string, { row: Record<string, unknown>; keywordRank: number; semanticScore: number }>();
 
@@ -544,12 +599,12 @@ export async function GET(req: NextRequest) {
       }
     });
 
-    // Hybrid score: 0.5 keyword rank score + 0.5 semantic score
+    // Hybrid score: 0.4 keyword rank score + 0.6 semantic score
     const maxKeywordRank = anchoredKeywordRows.length || 1;
     const merged = [...mergedMap.values()]
       .map(({ row, keywordRank, semanticScore }) => {
         const keywordScore = 1 - (keywordRank / maxKeywordRank);
-        const combinedScore = 0.5 * keywordScore + 0.5 * semanticScore;
+        const combinedScore = 0.6 * semanticScore + 0.4 * keywordScore;
         return { row, combinedScore, semanticScore };
       })
       .sort((a, b) => b.combinedScore - a.combinedScore)

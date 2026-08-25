@@ -43,3 +43,4 @@ open-code-review/
 .vercel
 .env*
 design-proof/
+models/

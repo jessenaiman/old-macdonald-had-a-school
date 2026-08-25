@@ -33,7 +33,7 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
           <Button
             variant="ghost"
             size="icon-lg"
-            className="text-brand-navy-foreground"
+            className="size-11 text-brand-navy-foreground"
             aria-label="Open navigation menu"
           >
             <Menu data-icon="inline-start" aria-hidden="true" />

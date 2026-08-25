@@ -16,7 +16,8 @@
     "db:migrate": "drizzle-kit migrate --config=drizzle.sqlite.config.ts",
     "db:push": "drizzle-kit push --config=drizzle.sqlite.config.ts",
     "db:studio": "drizzle-kit studio --config=drizzle.sqlite.config.ts",
-    "db:evaluate-search": "node scripts/data/evaluate-sqlite-retrieval.mjs data/omhas.db --summary"
+    "db:evaluate-search": "node scripts/data/evaluate-sqlite-retrieval.mjs data/omhas.db --summary",
+    "db:embeddings": "node scripts/db/build-search-embeddings.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

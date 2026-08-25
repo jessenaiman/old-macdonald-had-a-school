@@ -31,7 +31,7 @@ export function ThemeSwitcher() {
       onClick={() => setTheme(nextTheme)}
       aria-label={`Switch to ${nextTheme} theme`}
       title={`Switch to ${nextTheme} theme`}
-      className="text-brand-navy-foreground"
+      className="size-11 text-brand-navy-foreground"
     >
       {isDark ? <Sun data-icon="inline-start" /> : <Moon data-icon="inline-start" />}
     </Button>

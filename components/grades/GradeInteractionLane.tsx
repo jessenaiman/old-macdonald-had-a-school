@@ -116,7 +116,7 @@ export function GradeWorkspace({
           </CardHeader>
         </Card>
       </aside>
-      <main className="min-w-0 p-2 sm:p-4 lg:p-6 print:p-0">{children}</main>
+      <div className="min-w-0 p-2 sm:p-4 lg:p-6 print:p-0">{children}</div>
     </div>
   );
 }
@@ -148,7 +148,7 @@ export function GradeWelcomeControl({
         </span>
         <Heading className="max-w-3xl text-balance font-heading text-4xl leading-none sm:text-5xl lg:text-6xl">
           {config.headline}{" "}
-          <em className="block text-[var(--teacher-color)] not-italic">
+          <em className="block text-[color-mix(in_srgb,var(--teacher-color)_72%,black)] not-italic">
             {config.accentHeadline}
           </em>
         </Heading>
@@ -328,13 +328,13 @@ export function GradeInteractionLane({
         navigation={
           <TabsList
             aria-label={`${config.grade} lesson tools`}
-            className="flex h-auto w-full flex-wrap justify-start gap-1 bg-transparent p-0 lg:flex-col lg:items-stretch"
+            className="flex h-auto min-h-11 w-full items-start gap-1 overflow-x-auto p-0 pb-2 bg-transparent lg:flex-col lg:items-stretch lg:overflow-visible lg:pb-0"
           >
             {sections.map((entry) => (
               <TabsTrigger
                 key={entry.id}
                 value={entry.id}
-                className="grow justify-start gap-2 lg:w-full"
+                className="min-h-11 shrink-0 justify-start gap-2 bg-background/75 text-foreground lg:w-full"
               >
                 <span className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[.625rem] font-black tabular-nums" aria-hidden="true">
                   {String(sections.indexOf(entry) + 1).padStart(2, "0")}
