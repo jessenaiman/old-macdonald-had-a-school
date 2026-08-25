@@ -29,7 +29,7 @@ export const TEACHER_GRADE_ITEMS = [
 
 export type TeacherGradeKey = (typeof TEACHER_GRADE_ITEMS)[number]["key"];
 
-/** Grade tab styles for navigation, keyed by grade key — uses cast.mdx grade tokens
+/** Grade tab styles for navigation, keyed by grade key — uses characters.mdx grade tokens
  *  (Daycare=Miss Puddles yellow, Pre-School=Miss Maisy sage, Kindergarten=Mr Rusty blue,
  *   Grade 1=Miss Hayley pink, Grade 2=Mr Maisy red), registered in @theme. */
 export const GRADE_TAB_COLORS: Record<TeacherGradeKey, string> = {

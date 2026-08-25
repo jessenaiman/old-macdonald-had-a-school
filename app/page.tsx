@@ -124,7 +124,7 @@ function WhatsNew() {
       id="whats-new"
     >
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="font-heading text-[26px] font-extrabold text-foreground">What's New</h2>
+        <h2 className="font-heading text-[26px] font-extrabold text-foreground">What&apos;s New</h2>
         <span className="font-hand text-[21px] text-[var(--ink-secondary)]">fresh songs from the barnyard studio</span>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
@@ -206,7 +206,7 @@ function CurriculumPlanner() {
               Open the full search + curriculum <ArrowRight className="size-4" aria-hidden />
             </Link>
             <p className="mt-4 text-[13.5px] text-[var(--brand-paper-muted)]">
-              <b className="text-[var(--brand-paper-foreground)]">Tip:</b> the subject buttons are grade-aware — a non-verbal infant doesn't learn formal math, so Daycare keeps only the subjects that fit.
+              <b className="text-[var(--brand-paper-foreground)]">Tip:</b> the subject buttons are grade-aware — a non-verbal infant doesn&apos;t learn formal math, so Daycare keeps only the subjects that fit.
             </p>
           </div>
         </div>

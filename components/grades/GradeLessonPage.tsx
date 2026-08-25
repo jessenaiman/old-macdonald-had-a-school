@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CAST, type CastKey } from "../../data/brand/cast-registry";
+import { CHARACTERS, type CharacterKey } from "../../data/brand/characters-registry";
 import { LessonDocument } from "../LessonDocument";
 import { getLesson } from "../../lib/content";
 import { getCurriculumTopic } from "../../lib/curriculum-db";
@@ -34,7 +34,7 @@ const GRADE_LESSON_DETAILS: Record<
   {
     label: string;
     age: string;
-    teacher: CastKey;
+    teacher: CharacterKey;
     teacherName: string;
   }
 > = {
@@ -333,7 +333,7 @@ export async function GradeLessonPage({
         </nav>
         <Card className="material-surface material-cardboard-paper relative mt-auto hidden overflow-hidden lg:block">
           <Image
-            src={CAST[details.teacher].portrait}
+            src={CHARACTERS[details.teacher].portrait}
             alt={details.teacherName}
             width={150}
             height={150}

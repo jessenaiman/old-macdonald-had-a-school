@@ -2,15 +2,15 @@
 
 ## Overview
 
-This system translates the official cast record into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.
+This system translates the official character record into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.
 
 It serves an educator-facing curriculum product. Its job is to make a specific learning purpose and the practical material needed to lead it easy to understand at a glance. The visual world is not children’s entertainment and not a generic dashboard: it is a welcoming, capable working environment for planning and leading real learning experiences.
 
-Only `content/pages/branding/characters.mdx` defines official branding or design. It controls cast identity. `app/globals.css` and `app/brand-assets.css` are implementation evidence. `public/` is storage, not automatic authority. Do not infer design rules from other Markdown files, route copy, filenames, code comments, contact sheets, or available-but-unregistered assets.
+Only `content/pages/branding/characters.mdx` defines official branding or design. It controls character identity. `app/globals.css` and `app/brand-assets.css` are implementation evidence. `public/` is storage, not automatic authority. Do not infer design rules from other Markdown files, route copy, filenames, code comments, contact sheets, or available-but-unregistered assets.
 
 When sources conflict:
 
-1. Preserve exact cast identity, curriculum role, color, and canonical artwork from `characters.mdx`.
+1. Preserve exact character identity, curriculum role, color, and canonical artwork from `characters.mdx`.
 2. Preserve explicit composition and usage rules documented in this file.
 3. Use CSS only to bind those rules to current values and files.
 4. Stop for approval rather than inventing, optimizing, excluding, or silently substituting.
@@ -47,7 +47,7 @@ The design must match the teaching format to the learners. Early-years resources
 
 ### One semantic owner
 
-Character color and felt belong only to that character. Grade color belongs to that grade. Subject color and icon belong to curriculum meaning. Generic navigation and controls use shared semantic UI roles, never cast texture.
+Character color and felt belong only to that character. Grade color belongs to that grade. Subject color and icon belong to curriculum meaning. Generic navigation and controls use shared semantic UI roles, never character texture.
 
 ### Readable work on paper
 
@@ -129,32 +129,32 @@ Physical-material colors remain stable across themes. A dark display mode may ch
 
 ### Character identity: validated web binding
 
-`characters.mdx` is the authority. The values below are also present unchanged as `--cast-*-color` bindings in `app/globals.css`. Every reference should present the academic lead and grade or scope before the less-prominent character name, then show the exact CSS token, value, and canonical artwork.
+`characters.mdx` is the authority. The values below are also present unchanged as `--characters-*-color` bindings in `app/globals.css`. Every reference should present the academic lead and grade or scope before the less-prominent character name, then show the exact CSS token, value, and canonical artwork.
 
 | Grade or scope | Academic lead | Character | CSS token | Color |
 | --- | --- | --- | --- | --- |
-| Kindergarten | Music · Community · Literacy | Old MacDonald | `--cast-old-macdonald-color` | `#B87A4A` |
-| Daycare | Early Learning · Movement · SEL | Miss Puddles | `--cast-miss-puddles-color` | `#F6AF32` |
-| Kindergarten | Music · Rhythm · Counting | Mr Rusty | `--cast-mr-rusty-color` | `#3589C4` |
-| Grade 1 | Literacy · Music · Drama | Miss Hayley | `--cast-miss-hayley-color` | `#D95C86` |
-| Whole school | Mathematics · Science · Engineering | Mr Sam | `--cast-mr-sam-color` | `#2A9A9A` |
-| Grade 2 | Physical Education · Health | Mr Maisy | `--cast-mr-maisy-color` | `#C45D62` |
-| Whole school | Science · Visual Arts · Communication | Mr Puddles | `--cast-mr-puddles-color` | `#5367B5` |
-| Preschool | Community · Science · Food & Health | Miss Maisy | `--cast-miss-maisy-color` | `#6B9A7A` |
-| No grade assigned | Physical Education · Health | Hopper | `--cast-hopper-color` | `#E66C71` |
-| No grade assigned | Literacy · Music · Drama | Whiskers | `--cast-whiskers-color` | `#E695B0` |
-| No grade assigned | Community · Science · Food & Health | Scout | `--cast-scout-color` | `#8DC4A8` |
-| No grade assigned | Early Learning · Movement · SEL | Penny | `--cast-penny-color` | `#F9CB7A` |
-| No grade assigned | Music · Community · Literacy | Maisy | `--cast-maisy-color` | `#E8C8A0` |
-| No grade assigned | Science · Visual Arts · Communication | Puddles | `--cast-puddles-color` | `#8F9CCF` |
-| No grade assigned | Mathematics · Science · Engineering | Sam | `--cast-sam-color` | `#6CB1B1` |
-| No grade assigned | Music · Rhythm · Counting | Rusty | `--cast-rusty-color` | `#72AAD2` |
+| Kindergarten | Music · Community · Literacy | Old MacDonald | `--characters-old-macdonald-color` | `#B87A4A` |
+| Daycare | Early Learning · Movement · SEL | Miss Puddles | `--characters-miss-puddles-color` | `#F6AF32` |
+| Kindergarten | Music · Rhythm · Counting | Mr Rusty | `--characters-mr-rusty-color` | `#3589C4` |
+| Grade 1 | Literacy · Music · Drama | Miss Hayley | `--characters-miss-hayley-color` | `#D95C86` |
+| Whole school | Mathematics · Science · Engineering | Mr Sam | `--characters-mr-sam-color` | `#2A9A9A` |
+| Grade 2 | Physical Education · Health | Mr Maisy | `--characters-mr-maisy-color` | `#C45D62` |
+| Whole school | Science · Visual Arts · Communication | Mr Puddles | `--characters-mr-puddles-color` | `#5367B5` |
+| Preschool | Community · Science · Food & Health | Miss Maisy | `--characters-miss-maisy-color` | `#6B9A7A` |
+| No grade assigned | Physical Education · Health | Hopper | `--characters-hopper-color` | `#E66C71` |
+| No grade assigned | Literacy · Music · Drama | Whiskers | `--characters-whiskers-color` | `#E695B0` |
+| No grade assigned | Community · Science · Food & Health | Scout | `--characters-scout-color` | `#8DC4A8` |
+| No grade assigned | Early Learning · Movement · SEL | Penny | `--characters-penny-color` | `#F9CB7A` |
+| No grade assigned | Music · Community · Literacy | Maisy | `--characters-maisy-color` | `#E8C8A0` |
+| No grade assigned | Science · Visual Arts · Communication | Puddles | `--characters-puddles-color` | `#8F9CCF` |
+| No grade assigned | Mathematics · Science · Engineering | Sam | `--characters-sam-color` | `#6CB1B1` |
+| No grade assigned | Music · Rhythm · Counting | Rusty | `--characters-rusty-color` | `#72AAD2` |
 
 Never derive, recolor, optimize, or substitute these values. Scout and Sam remain distinct. A learner may share an academic lead with staff but never inherits that staff member's grade.
 
-### Cast record contract (applied design guide binding)
+### Character record contract (applied design guide binding)
 
-Every cast reference is a complete record, presented in this order: academic lead and grade or scope first, then species and teaching role, then curriculum contributions, then the binding pair (`data-character` + asset-role class), the exact token, and the canonical asset paths. One approved identity supports three live shapes — circle, square, rectangle. Use the geometry the layout requires; never recolor the transparent artwork, never substitute a baked portrait background, and never sample color from portrait pixels.
+Every character reference is a complete record, presented in this order: academic lead and grade or scope first, then species and teaching role, then curriculum contributions, then the binding pair (`data-character` + asset-role class), the exact token, and the canonical asset paths. One approved identity supports three live shapes — circle, square, rectangle. Use the geometry the layout requires; never recolor the transparent artwork, never substitute a baked portrait background, and never sample color from portrait pixels.
 
 Staff curriculum contributions are part of identity and travel with the record:
 
@@ -357,3 +357,7 @@ Reject output when:
 - Web-framework syntax leaks into cross-medium source rules.
 
 When a required source is missing, stop and report the exact path. Never conceal the defect with a guessed replacement.
+
+## Provenance
+
+- Color values reconciled against `Old_MacDonalds_School_Learning_Color_Map.pdf` (inspected via PNG twin, 2026-08-25): all 16 character identity hexes and the grade ownership colors match this document and the `--characters-*`/`--grade-*` bindings in `app/globals.css` exactly. PDF is authoritative; no changes were required.

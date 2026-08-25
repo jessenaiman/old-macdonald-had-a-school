@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 
-import { CAST, type CastKey } from "../data/brand/cast-registry"
+import { CHARACTERS, type CharacterKey } from "../data/brand/characters-registry"
 import type { EarlyYearsGradeKey, EarlyYearsTopic } from "../lib/early-years"
 import { sceneAsset } from "../lib/early-years"
 import { lessonIcon } from "../lib/grade-routes"
@@ -15,11 +15,11 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle } from ".
 
 export type EarlyYearsTier = "list" | "detailed" | "bridge"
 
-export function EarlyYearsHub({ grade, title, tagline, lead, topics }: { grade: EarlyYearsGradeKey; title: string; tagline: string; lead: { patch: CastKey; name: string }; tier: EarlyYearsTier; topics: EarlyYearsTopic[] }) {
+export function EarlyYearsHub({ grade, title, tagline, lead, topics }: { grade: EarlyYearsGradeKey; title: string; tagline: string; lead: { patch: CharacterKey; name: string }; tier: EarlyYearsTier; topics: EarlyYearsTopic[] }) {
   const [active, setActive] = useState(0)
   const [preview, setPreview] = useState(false)
   const topic = topics[active]
-  const leadImage = CAST[lead.patch].portrait
+  const leadImage = CHARACTERS[lead.patch].portrait
   const topicImage = topic.image ? sceneAsset(topic.image) : undefined
   const headline = grade === "daycare" ? "Plan for little hands," : grade === "pre-school" ? "Grow confidence through" : "Turn curiosity into"
   const accentHeadline = grade === "daycare" ? "big feelings." : grade === "pre-school" ? "story and sensation." : "a day of discovery."

@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { CAST } from "../../data/brand/cast-registry";
+import { CHARACTERS } from "../../data/brand/characters-registry";
 import { GRADE_INTERACTION_CONFIGS } from "../grades/grade-config";
 import { WorkingWallBoard, WorkingWallNote } from "../working-wall/WorkingWallComponents";
 import { getCurriculumLessonBySlug } from "../../lib/curriculum-lesson";
@@ -49,7 +49,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
     .map((grade) => GRADE_OWNER_KEYS[grade.label as keyof typeof GRADE_OWNER_KEYS])
     .find((key) => Boolean(key));
   const ownerConfig = ownerKey ? GRADE_INTERACTION_CONFIGS[ownerKey] : null;
-  const ownerName = ownerConfig ? CAST[ownerConfig.teacher].name : null;
+  const ownerName = ownerConfig ? CHARACTERS[ownerConfig.teacher].name : null;
 
   return (
     <div className="material-surface material-cork min-h-screen px-3 py-6 sm:px-6 lg:px-12" data-style-scope="curriculum-lesson-page">
@@ -260,7 +260,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
 
         {ownerConfig && ownerName ? (
           <section
-            className={cn("cast-surface flex flex-wrap items-center gap-5 rounded-xl border p-5 shadow-sm", `cast-${ownerConfig.teacher}`)}
+            className={cn("characters-surface flex flex-wrap items-center gap-5 rounded-xl border p-5 shadow-sm", `characters-${ownerConfig.teacher}`)}
             aria-label={`Teaching note from ${ownerName}`}
           >
             <span className="brand-asset character-face-bust icon-control shrink-0" data-character={ownerConfig.teacher} aria-hidden="true" />

@@ -34,8 +34,6 @@ $null
 
 .vercel
 
-*storybook.log
-storybook-static
 /tmp
 
 # Local browser/shell scratch artifacts

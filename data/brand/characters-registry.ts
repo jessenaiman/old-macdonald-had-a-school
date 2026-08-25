@@ -1,6 +1,6 @@
-import { BRAND_IMAGE_ASSETS, type CastPortraitKey } from "./image-registry";
+import { BRAND_IMAGE_ASSETS, type CharacterPortraitKey } from "./image-registry";
 
-const CAST_ENTRIES = [
+const CHARACTER_ENTRIES = [
   { key: "old-macdonald", name: "Old MacDonald", group: "staff", portrait: "old-macdonald" },
   { key: "miss-puddles", name: "Miss Puddles", group: "staff", portrait: "miss-puddles" },
   { key: "mr-rusty", name: "Mr Rusty", group: "staff", portrait: "mr-rusty" },
@@ -19,14 +19,14 @@ const CAST_ENTRIES = [
   { key: "rusty", name: "Rusty", group: "students", portrait: "rusty" },
 ] as const;
 
-type CastRecord = (typeof CAST_ENTRIES)[number];
-type CastIdentity = { name: CastRecord["name"]; portrait: string };
+type CharacterRecord = (typeof CHARACTER_ENTRIES)[number];
+type CharacterIdentity = { name: CharacterRecord["name"]; portrait: string };
 
-export type CastKey = CastRecord["key"];
+export type CharacterKey = CharacterRecord["key"];
 
-export const CAST: Record<CastKey, CastIdentity> = Object.fromEntries(
-  CAST_ENTRIES.map((entry) => [entry.key, { name: entry.name, portrait: BRAND_IMAGE_ASSETS.portraits[entry.portrait as CastPortraitKey] }]),
-) as Record<CastKey, CastIdentity>;
+export const CHARACTERS: Record<CharacterKey, CharacterIdentity> = Object.fromEntries(
+  CHARACTER_ENTRIES.map((entry) => [entry.key, { name: entry.name, portrait: BRAND_IMAGE_ASSETS.portraits[entry.portrait as CharacterPortraitKey] }]),
+) as Record<CharacterKey, CharacterIdentity>;
 
-export const STAFF_KEYS = CAST_ENTRIES.filter((entry) => entry.group === "staff").map((entry) => entry.key) as readonly CastKey[];
-export const STUDENT_KEYS = CAST_ENTRIES.filter((entry) => entry.group === "students").map((entry) => entry.key) as readonly CastKey[];
+export const STAFF_KEYS = CHARACTER_ENTRIES.filter((entry) => entry.group === "staff").map((entry) => entry.key) as readonly CharacterKey[];
+export const STUDENT_KEYS = CHARACTER_ENTRIES.filter((entry) => entry.group === "students").map((entry) => entry.key) as readonly CharacterKey[];

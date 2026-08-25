@@ -38,15 +38,15 @@ A grade-first planning companion. The teacher picks the grade they teach and lan
 ## Brand Commitments
 
 - The 16-character cast (8 staff, 8 learners) with exact colors, curriculum contributions, icon pairings, and four artwork roles each — bound in `content/pages/branding/characters.mdx`, never recolored or derived in code. Academic lead and grade/scope always read before character name.
-- The applied design guide's cast record contract and color scheme (see DESIGN.md, "Cast record contract").
+- The applied design guide's character record contract and color scheme (see DESIGN.md, "Character record contract").
 - The existing logo family and the material system (paper, cork, felt, fabric, leather, denim) as selectable backgrounds — cork is a choice, not the identity.
 
 ## Evidence on Hand
 
 - `docs/early-years-music-resources/` — 228+ sources (public-library handouts, educator/performer materials, historical songbooks 1843–1929), 1,405 extracted song versions, and the synthesized findings in `knowledge/core-lessons.md` (five durable lessons with citations).
-- `content/pages/branding/characters.mdx` — cast and teaching-role authority.
+- `content/pages/branding/characters.mdx` — character and teaching-role authority.
 - `data/omhas.db` — 388 curriculum topics with standards joins, songs, resources, tags.
-- The applied design guide PDF — color scheme, cast record structure, implementation order.
+- The applied design guide PDF — color scheme, character record structure, implementation order.
 
 ## Product Principles
 

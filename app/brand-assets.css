@@ -38,22 +38,22 @@
 :root {
   --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.webp');
   --brand-cork-texture: var(--asset-cork-board);
-  --cast-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.webp');
-  --cast-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.webp');
-  --cast-mr-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp');
-  --cast-miss-hayley-texture: url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp');
-  --cast-mr-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.webp');
-  --cast-mr-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.webp');
-  --cast-mr-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.webp');
-  --cast-miss-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp');
-  --cast-hopper-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.webp');
-  --cast-whiskers-texture: url('/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.webp');
-  --cast-scout-texture: url('/design-assets/web-material-library-v1/felt/felt-11-scout-tile.webp');
-  --cast-penny-texture: url('/design-assets/web-material-library-v1/felt/felt-12-penny-tile.webp');
-  --cast-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.webp');
-  --cast-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-14-puddles-tile.webp');
-  --cast-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-15-sam-tile.webp');
-  --cast-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.webp');
+  --characters-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.webp');
+  --characters-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.webp');
+  --characters-mr-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp');
+  --characters-miss-hayley-texture: url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp');
+  --characters-mr-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.webp');
+  --characters-mr-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.webp');
+  --characters-mr-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.webp');
+  --characters-miss-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp');
+  --characters-hopper-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.webp');
+  --characters-whiskers-texture: url('/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.webp');
+  --characters-scout-texture: url('/design-assets/web-material-library-v1/felt/felt-11-scout-tile.webp');
+  --characters-penny-texture: url('/design-assets/web-material-library-v1/felt/felt-12-penny-tile.webp');
+  --characters-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.webp');
+  --characters-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-14-puddles-tile.webp');
+  --characters-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-15-sam-tile.webp');
+  --characters-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.webp');
   --asset-cardboard-kraft: url('/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.webp');
   --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.webp');
   --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.webp');
@@ -124,7 +124,7 @@
 [data-subject='sel'] { --subject-note-paper: var(--subject-sel-paper); }
 [data-subject='fine-motor'] { --subject-note-paper: var(--subject-fine-motor-paper); }
 
-/* Compact cast artwork. Character keys select assets; consumers never carry URLs. */
+/* Compact character artwork. Character keys select assets; consumers never carry URLs. */
 [data-character='old-macdonald'] { --character-face-patch:url('/characters/face-patch-transparent/old-macdonald-yellow.webp'); --character-face-bust:url('/characters/face-patches-background-circle/old-macdonald-yellow.webp'); }
 [data-character='miss-puddles'] { --character-face-patch:url('/characters/face-patch-transparent/miss-puddles-purple.webp'); --character-face-bust:url('/characters/face-patches-background-circle/miss-puddles-purple.webp'); }
 [data-character='mr-rusty'] { --character-face-patch:url('/characters/face-patch-transparent/mr-rusty-blue.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-rusty-blue.webp'); }
@@ -185,7 +185,7 @@
 [data-grade='pre-school'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp'); }
 [data-grade='kindergarten'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp'); }
 [data-grade='grade-one'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp'); }
-[data-grade='grade-two'] { --grade-texture:var(--cast-mr-maisy-texture); }
+[data-grade='grade-two'] { --grade-texture:var(--characters-mr-maisy-texture); }
 
 /* Grade signals: asset selection is separate from grade colour. */
 .grade-icon[data-grade-icon='daycare'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-daycare.webp'); }

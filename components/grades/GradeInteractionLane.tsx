@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CAST, type CastKey } from "@/data/brand/cast-registry";
+import { CHARACTERS, type CharacterKey } from "@/data/brand/characters-registry";
 import { type GradeKey } from "@/lib/grade-routes";
 import {
   GradeCurriculumPanel,
@@ -27,7 +27,7 @@ export type GradeInteractionConfig = {
   eyebrow: string;
   headline: string;
   accentHeadline: string;
-  teacher: CastKey;
+  teacher: CharacterKey;
   leadQuote: string;
   variant?: "standard" | "daycare";
 };
@@ -65,7 +65,7 @@ export function GradeWorkspace({
   grade: GradeKey;
   gradeLabel: string;
   age: string;
-  teacher: CastKey;
+  teacher: CharacterKey;
   reminder: string;
   variant?: "standard" | "daycare";
   navigation: React.ReactNode;
@@ -139,7 +139,7 @@ export function GradeWelcomeControl({
   onPreview?: () => void;
   headingLevel?: "h1" | "h2";
 }) {
-  const teacherColor = `var(--cast-${config.teacher}-color)`;
+  const teacherColor = `var(--characters-${config.teacher}-color)`;
   return (
     <section className="grid min-w-0 grid-cols-1 items-center gap-6 border-b pb-6 lg:grid-cols-[minmax(0,3fr)_minmax(18rem,2fr)] [&>*]:min-w-0" style={{ '--teacher-color': teacherColor } as React.CSSProperties}>
       <div className="flex min-w-0 flex-col items-start gap-4">
@@ -187,17 +187,17 @@ export function TeacherNote({
   actionHref,
   actionLabel = "Open lesson workspace",
 }: {
-  character: CastKey;
+  character: CharacterKey;
   quote: string;
   actionHref?: string;
   actionLabel?: string;
 }) {
-  const teacher = CAST[character];
-  const teacherColor = `var(--cast-${character}-color)`;
+  const teacher = CHARACTERS[character];
+  const teacherColor = `var(--characters-${character}-color)`;
   return (
     <aside aria-label={`A note from ${teacher.name}`}>
       <Card
-        className={`cast-${character} character-surface material-surface material-felt relative overflow-hidden bg-card text-card-foreground`}
+        className={`characters-${character} character-surface material-surface material-felt relative overflow-hidden bg-card text-card-foreground`}
         style={{ '--teacher-color': teacherColor } as React.CSSProperties}
       >
         <span
@@ -210,7 +210,7 @@ export function TeacherNote({
           </CardTitle>
         </CardHeader>
         <CardContent className="relative z-10 flex min-h-40 flex-col items-start gap-3 pl-28 sm:pl-44">
-          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--cast-${character}-foreground)]">
+          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--characters-${character}-foreground)]">
             “{quote}”
           </blockquote>
           <p className="text-xs font-black uppercase tracking-widest">

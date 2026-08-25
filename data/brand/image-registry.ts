@@ -5,8 +5,8 @@
  * component URLs here prevents individual components from inventing public
  * paths while preserving the existing optimized WebP/PNG assets.
  *
- * This registry exposes available files. Cast meaning, color meaning, grade
- * routing, and subject routing remain defined by content/pages/branding/cast.mdx
+ * This registry exposes available files. Character meaning, color meaning, grade
+ * routing, and subject routing remain defined by content/pages/branding/characters.mdx
  * and implemented through app/globals.css plus app/brand-assets.css.
  */
 export const BRAND_IMAGE_ASSETS = {
@@ -96,7 +96,7 @@ export const BRAND_IMAGE_ASSETS = {
   },
 } as const;
 
-export type CastPortraitKey = keyof typeof BRAND_IMAGE_ASSETS.portraits;
-export type CastFacePatchKey = keyof typeof BRAND_IMAGE_ASSETS.facePatches;
-export type CastFaceBustKey = keyof typeof BRAND_IMAGE_ASSETS.faceBusts;
+export type CharacterPortraitKey = keyof typeof BRAND_IMAGE_ASSETS.portraits;
+export type CharacterFacePatchKey = keyof typeof BRAND_IMAGE_ASSETS.facePatches;
+export type CharacterFaceBustKey = keyof typeof BRAND_IMAGE_ASSETS.faceBusts;
 export type SceneAssetKey = keyof typeof BRAND_IMAGE_ASSETS.scenes;

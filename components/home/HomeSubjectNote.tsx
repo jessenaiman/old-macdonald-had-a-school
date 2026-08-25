@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import type { CastKey } from "@/data/brand/cast-registry";
+import type { CharacterKey } from "@/data/brand/characters-registry";
 import type { HomeSubject } from "./home-data";
 
 type HomeSubjectNoteProps = Pick<HomeSubject, "title" | "iconClass" | "teacherReason" | "fastenerClass" | "highlights"> & {
   href: string;
   subject: HomeSubject["key"];
-  guideCharacter: CastKey;
+  guideCharacter: CharacterKey;
 };
 
 /**
@@ -15,7 +15,7 @@ type HomeSubjectNoteProps = Pick<HomeSubject, "title" | "iconClass" | "teacherRe
  */
 export function HomeSubjectNote({ title, href, iconClass, teacherReason, highlights, subject, guideCharacter, fastenerClass }: HomeSubjectNoteProps) {
   return (
-    <Card className={`cast-${guideCharacter} material-surface material-cardboard-paper relative h-full min-w-0 gap-0 overflow-visible border-border py-0 transition-transform hover:-translate-y-0.5`} data-subject={subject}>
+    <Card className={`characters-${guideCharacter} material-surface material-cardboard-paper relative h-full min-w-0 gap-0 overflow-visible border-border py-0 transition-transform hover:-translate-y-0.5`} data-subject={subject}>
       <span className={`brand-asset ${fastenerClass} icon-small pointer-events-none absolute -top-4 left-1/2 z-10 -translate-x-1/2`} aria-hidden="true" />
       <CardHeader className="flex min-h-28 flex-row items-center gap-3 border-b border-border p-5">
         <span className={`brand-asset ${iconClass} icon-medium shrink-0`} aria-hidden="true" />

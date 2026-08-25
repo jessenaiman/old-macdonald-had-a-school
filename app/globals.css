@@ -6,8 +6,8 @@
 /*
  * Old MacDonald Had a School — shadcn Theme
  *
- * Canonical shadcn v4 scaffold (@theme inline) with the cast.mdx palette:
- * - Foundation colors live in :root / .dark (cast.mdx is the single source of truth;
+ * Canonical shadcn v4 scaffold (@theme inline) with the characters.mdx palette:
+ * - Foundation colors live in :root / .dark (characters.mdx is the single source of truth;
  *   globals.css is the implementation layer and must not invent colors).
  * - @theme inline maps semantic tokens to Tailwind utilities so component-level
  *   CSS variable overrides (e.g. --card) cascade correctly.
@@ -19,7 +19,7 @@
   --brand-repeat-default: repeat;
   --radius: 0.625rem;
 
-  /* === FOUNDATION PALETTE (cast.mdx) === */
+  /* === FOUNDATION PALETTE (characters.mdx) === */
   --paper-cream: #fefce8;
   --paper-warm: #fdf8e3;
   --paper-muted: #f0e6d0;
@@ -92,12 +92,12 @@
   --input: var(--wood-muted);
   --ring: var(--gold-bright);
 
-  /* Chart palette (derived from cast palette) */
+  /* Chart palette (derived from character palette) */
   --chart-1: var(--gold-bright);
   --chart-2: var(--sage-warm);
   --chart-3: var(--rose-warm);
   --chart-4: var(--navy-muted);
-  --chart-5: var(--cast-mr-puddles-color);
+  --chart-5: var(--characters-mr-puddles-color);
 
   /* Sidebar (nav surfaces) */
   --sidebar: var(--navy-deep);
@@ -109,39 +109,39 @@
   --sidebar-border: var(--wood-muted);
   --sidebar-ring: var(--gold-bright);
 
-  /* === CHARACTER IDENTITY (cast.mdx — badges/avatars only) === */
-  --cast-old-macdonald-color: #b87a4a;
-  --cast-old-macdonald-foreground: #fefce8;
-  --cast-miss-puddles-color: #f6af32;
-  --cast-miss-puddles-foreground: #1e2a38;
-  --cast-miss-maisy-color: #6b9a7a;
-  --cast-miss-maisy-foreground: #fefce8;
-  --cast-mr-rusty-color: #3589c4;
-  --cast-mr-rusty-foreground: #fefce8;
-  --cast-miss-hayley-color: #d95c86;
-  --cast-miss-hayley-foreground: #1e2a38;
-  --cast-mr-maisy-color: #c45d62;
-  --cast-mr-maisy-foreground: #fefce8;
-  --cast-mr-sam-color: #2a9a9a;
-  --cast-mr-sam-foreground: #fefce8;
-  --cast-mr-puddles-color: #5367b5;
-  --cast-mr-puddles-foreground: #fefce8;
-  --cast-hopper-color: #e66c71;
-  --cast-hopper-foreground: #fefce8;
-  --cast-whiskers-color: #e695b0;
-  --cast-whiskers-foreground: #fefce8;
-  --cast-scout-color: #8dc4a8;
-  --cast-scout-foreground: #fefce8;
-  --cast-penny-color: #f9cb7a;
-  --cast-penny-foreground: #1e2a38;
-  --cast-maisy-color: #e8c8a0;
-  --cast-maisy-foreground: #fefce8;
-  --cast-puddles-color: #8f9ccf;
-  --cast-puddles-foreground: #fefce8;
-  --cast-sam-color: #6cb1b1;
-  --cast-sam-foreground: #fefce8;
-  --cast-rusty-color: #72aad2;
-  --cast-rusty-foreground: #fefce8;
+  /* === CHARACTER IDENTITY (characters.mdx — badges/avatars only) === */
+  --characters-old-macdonald-color: #b87a4a;
+  --characters-old-macdonald-foreground: #fefce8;
+  --characters-miss-puddles-color: #f6af32;
+  --characters-miss-puddles-foreground: #1e2a38;
+  --characters-miss-maisy-color: #6b9a7a;
+  --characters-miss-maisy-foreground: #fefce8;
+  --characters-mr-rusty-color: #3589c4;
+  --characters-mr-rusty-foreground: #fefce8;
+  --characters-miss-hayley-color: #d95c86;
+  --characters-miss-hayley-foreground: #1e2a38;
+  --characters-mr-maisy-color: #c45d62;
+  --characters-mr-maisy-foreground: #fefce8;
+  --characters-mr-sam-color: #2a9a9a;
+  --characters-mr-sam-foreground: #fefce8;
+  --characters-mr-puddles-color: #5367b5;
+  --characters-mr-puddles-foreground: #fefce8;
+  --characters-hopper-color: #e66c71;
+  --characters-hopper-foreground: #fefce8;
+  --characters-whiskers-color: #e695b0;
+  --characters-whiskers-foreground: #fefce8;
+  --characters-scout-color: #8dc4a8;
+  --characters-scout-foreground: #fefce8;
+  --characters-penny-color: #f9cb7a;
+  --characters-penny-foreground: #1e2a38;
+  --characters-maisy-color: #e8c8a0;
+  --characters-maisy-foreground: #fefce8;
+  --characters-puddles-color: #8f9ccf;
+  --characters-puddles-foreground: #fefce8;
+  --characters-sam-color: #6cb1b1;
+  --characters-sam-foreground: #fefce8;
+  --characters-rusty-color: #72aad2;
+  --characters-rusty-foreground: #fefce8;
 
   /* Grade/Subject routing (page-level theming) */
   --grade-early-years-color: #6b9a7a;
@@ -172,9 +172,9 @@
   --theme-wood-light: #e8d5c0;
   --curriculum-yellow: #d4a82a;
   --curriculum-red: #d47a8a;
-  --curriculum-blue: var(--cast-mr-rusty-color);
-  --curriculum-green: var(--cast-miss-maisy-color);
-  --curriculum-purple: var(--cast-mr-puddles-color);
+  --curriculum-blue: var(--characters-mr-rusty-color);
+  --curriculum-green: var(--characters-miss-maisy-color);
+  --curriculum-purple: var(--characters-mr-puddles-color);
 }
 
 .dark {
@@ -226,7 +226,7 @@
   --chart-2: var(--sage-soft);
   --chart-3: var(--rose-soft);
   --chart-4: var(--navy-muted);
-  --chart-5: var(--cast-puddles-color);
+  --chart-5: var(--characters-puddles-color);
 
   --sidebar: var(--navy-deep);
   --sidebar-foreground: var(--paper-cream);
@@ -305,7 +305,7 @@
   --color-wood-muted: var(--wood-muted);
   --color-wood-soft: var(--wood-soft);
 
-  /* Custom: grade identity colors (cast.mdx — character subject-coded) */
+  /* Custom: grade identity colors (characters.mdx — character subject-coded) */
   --color-grade-daycare: var(--grade-daycare-color);
   --color-grade-pre-school: var(--grade-pre-school-color);
   --color-grade-kindergarten: var(--grade-kindergarten-color);
@@ -716,7 +716,7 @@
 
 /* === CHARACTER SURFACE HELPERS === */
 .character-surface,
-.cast-surface {
+.characters-surface {
   color: var(--character-foreground);
   background-color: var(--character-color);
   background-image: linear-gradient(var(--character-color), var(--character-color)), var(--character-texture);
@@ -726,23 +726,23 @@
   background-size: auto, 180px;
 }
 
-/* Cast class -> character-surface variable bridge. Colors: cast.mdx via :root tokens above; felt tiles: brand-assets.css --cast-<key>-texture. */
-.cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-foreground: var(--cast-old-macdonald-foreground); --character-texture: var(--cast-old-macdonald-texture); }
-.cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-foreground: var(--cast-miss-puddles-foreground); --character-texture: var(--cast-miss-puddles-texture); }
-.cast-mr-rusty { --character-color: var(--cast-mr-rusty-color); --character-foreground: var(--cast-mr-rusty-foreground); --character-texture: var(--cast-mr-rusty-texture); }
-.cast-miss-hayley { --character-color: var(--cast-miss-hayley-color); --character-foreground: var(--cast-miss-hayley-foreground); --character-texture: var(--cast-miss-hayley-texture); }
-.cast-mr-sam { --character-color: var(--cast-mr-sam-color); --character-foreground: var(--cast-mr-sam-foreground); --character-texture: var(--cast-mr-sam-texture); }
-.cast-mr-maisy { --character-color: var(--cast-mr-maisy-color); --character-foreground: var(--cast-mr-maisy-foreground); --character-texture: var(--cast-mr-maisy-texture); }
-.cast-mr-puddles { --character-color: var(--cast-mr-puddles-color); --character-foreground: var(--cast-mr-puddles-foreground); --character-texture: var(--cast-mr-puddles-texture); }
-.cast-miss-maisy { --character-color: var(--cast-miss-maisy-color); --character-foreground: var(--cast-miss-maisy-foreground); --character-texture: var(--cast-miss-maisy-texture); }
-.cast-hopper { --character-color: var(--cast-hopper-color); --character-foreground: var(--cast-hopper-foreground); --character-texture: var(--cast-hopper-texture); }
-.cast-whiskers { --character-color: var(--cast-whiskers-color); --character-foreground: var(--cast-whiskers-foreground); --character-texture: var(--cast-whiskers-texture); }
-.cast-scout { --character-color: var(--cast-scout-color); --character-foreground: var(--cast-scout-foreground); --character-texture: var(--cast-scout-texture); }
-.cast-penny { --character-color: var(--cast-penny-color); --character-foreground: var(--cast-penny-foreground); --character-texture: var(--cast-penny-texture); }
-.cast-maisy { --character-color: var(--cast-maisy-color); --character-foreground: var(--cast-maisy-foreground); --character-texture: var(--cast-maisy-texture); }
-.cast-puddles { --character-color: var(--cast-puddles-color); --character-foreground: var(--cast-puddles-foreground); --character-texture: var(--cast-puddles-texture); }
-.cast-sam { --character-color: var(--cast-sam-color); --character-foreground: var(--cast-sam-foreground); --character-texture: var(--cast-sam-texture); }
-.cast-rusty { --character-color: var(--cast-rusty-color); --character-foreground: var(--cast-rusty-foreground); --character-texture: var(--cast-rusty-texture); }
+/* Characters class -> character-surface variable bridge. Colors: characters.mdx via :root tokens above; felt tiles: brand-assets.css --characters-<key>-texture. */
+.characters-old-macdonald { --character-color: var(--characters-old-macdonald-color); --character-foreground: var(--characters-old-macdonald-foreground); --character-texture: var(--characters-old-macdonald-texture); }
+.characters-miss-puddles { --character-color: var(--characters-miss-puddles-color); --character-foreground: var(--characters-miss-puddles-foreground); --character-texture: var(--characters-miss-puddles-texture); }
+.characters-mr-rusty { --character-color: var(--characters-mr-rusty-color); --character-foreground: var(--characters-mr-rusty-foreground); --character-texture: var(--characters-mr-rusty-texture); }
+.characters-miss-hayley { --character-color: var(--characters-miss-hayley-color); --character-foreground: var(--characters-miss-hayley-foreground); --character-texture: var(--characters-miss-hayley-texture); }
+.characters-mr-sam { --character-color: var(--characters-mr-sam-color); --character-foreground: var(--characters-mr-sam-foreground); --character-texture: var(--characters-mr-sam-texture); }
+.characters-mr-maisy { --character-color: var(--characters-mr-maisy-color); --character-foreground: var(--characters-mr-maisy-foreground); --character-texture: var(--characters-mr-maisy-texture); }
+.characters-mr-puddles { --character-color: var(--characters-mr-puddles-color); --character-foreground: var(--characters-mr-puddles-foreground); --character-texture: var(--characters-mr-puddles-texture); }
+.characters-miss-maisy { --character-color: var(--characters-miss-maisy-color); --character-foreground: var(--characters-miss-maisy-foreground); --character-texture: var(--characters-miss-maisy-texture); }
+.characters-hopper { --character-color: var(--characters-hopper-color); --character-foreground: var(--characters-hopper-foreground); --character-texture: var(--characters-hopper-texture); }
+.characters-whiskers { --character-color: var(--characters-whiskers-color); --character-foreground: var(--characters-whiskers-foreground); --character-texture: var(--characters-whiskers-texture); }
+.characters-scout { --character-color: var(--characters-scout-color); --character-foreground: var(--characters-scout-foreground); --character-texture: var(--characters-scout-texture); }
+.characters-penny { --character-color: var(--characters-penny-color); --character-foreground: var(--characters-penny-foreground); --character-texture: var(--characters-penny-texture); }
+.characters-maisy { --character-color: var(--characters-maisy-color); --character-foreground: var(--characters-maisy-foreground); --character-texture: var(--characters-maisy-texture); }
+.characters-puddles { --character-color: var(--characters-puddles-color); --character-foreground: var(--characters-puddles-foreground); --character-texture: var(--characters-puddles-texture); }
+.characters-sam { --character-color: var(--characters-sam-color); --character-foreground: var(--characters-sam-foreground); --character-texture: var(--characters-sam-texture); }
+.characters-rusty { --character-color: var(--characters-rusty-color); --character-foreground: var(--characters-rusty-foreground); --character-texture: var(--characters-rusty-texture); }
 
 /* === GRADE/SUBJECT PAGE THEMING === */
 [data-grade] {
@@ -750,12 +750,12 @@
   --grade-dark: var(--grade-edge);
 }
 
-[data-grade-group='early-years'] { --grade-color: var(--grade-early-years-color); --grade-edge: color-mix(in srgb, var(--grade-early-years-color) 72%, black); --grade-ink: var(--cast-mr-sam-foreground); }
-[data-grade='daycare'] { --grade-color: var(--grade-daycare-color); --grade-edge: color-mix(in srgb, var(--grade-daycare-color) 72%, black); --grade-ink: var(--cast-miss-puddles-foreground); }
-[data-grade='pre-school'] { --grade-color: var(--grade-pre-school-color); --grade-edge: color-mix(in srgb, var(--grade-pre-school-color) 72%, black); --grade-ink: var(--cast-miss-maisy-foreground); }
-[data-grade='kindergarten'] { --grade-color: var(--grade-kindergarten-color); --grade-edge: color-mix(in srgb, var(--grade-kindergarten-color) 72%, black); --grade-ink: var(--cast-mr-rusty-foreground); }
-[data-grade='grade-one'] { --grade-color: var(--grade-one-color); --grade-edge: color-mix(in srgb, var(--grade-one-color) 72%, black); --grade-ink: var(--cast-miss-hayley-foreground); }
-[data-grade='grade-two'] { --grade-color: var(--grade-two-color); --grade-edge: color-mix(in srgb, var(--grade-two-color) 72%, black); --grade-ink: var(--cast-mr-maisy-foreground); }
+[data-grade-group='early-years'] { --grade-color: var(--grade-early-years-color); --grade-edge: color-mix(in srgb, var(--grade-early-years-color) 72%, black); --grade-ink: var(--characters-mr-sam-foreground); }
+[data-grade='daycare'] { --grade-color: var(--grade-daycare-color); --grade-edge: color-mix(in srgb, var(--grade-daycare-color) 72%, black); --grade-ink: var(--characters-miss-puddles-foreground); }
+[data-grade='pre-school'] { --grade-color: var(--grade-pre-school-color); --grade-edge: color-mix(in srgb, var(--grade-pre-school-color) 72%, black); --grade-ink: var(--characters-miss-maisy-foreground); }
+[data-grade='kindergarten'] { --grade-color: var(--grade-kindergarten-color); --grade-edge: color-mix(in srgb, var(--grade-kindergarten-color) 72%, black); --grade-ink: var(--characters-mr-rusty-foreground); }
+[data-grade='grade-one'] { --grade-color: var(--grade-one-color); --grade-edge: color-mix(in srgb, var(--grade-one-color) 72%, black); --grade-ink: var(--characters-miss-hayley-foreground); }
+[data-grade='grade-two'] { --grade-color: var(--grade-two-color); --grade-edge: color-mix(in srgb, var(--grade-two-color) 72%, black); --grade-ink: var(--characters-mr-maisy-foreground); }
 
 [data-subject='language'] { --subject-color: var(--subject-language-color); }
 [data-subject='math'] { --subject-color: var(--subject-math-color); }
