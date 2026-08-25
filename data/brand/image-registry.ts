@@ -90,102 +90,13 @@ export const BRAND_IMAGE_ASSETS = {
     sam: "/characters/face-patches-background-circle/sam-red.webp",
     rusty: "/characters/face-patches-background-circle/rusty-blue.webp",
   },
-  feltPatches: {
-    "old-macdonald": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.webp",
-    },
-    "miss-puddles": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-square.webp",
-    },
-    "mr-rusty": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/03-mr-rusty-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/03-mr-rusty-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/03-mr-rusty-square.webp",
-    },
-    "miss-hayley": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/04-miss-hayley-square.webp",
-    },
-    "mr-sam": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/05-mr-sam-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/05-mr-sam-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/05-mr-sam-square.webp",
-    },
-    "mr-maisy": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/06-mr-maisy-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/06-mr-maisy-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/06-mr-maisy-square.webp",
-    },
-    "mr-puddles": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/07-mr-puddles-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/07-mr-puddles-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/07-mr-puddles-square.webp",
-    },
-    "miss-maisy": {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/08-miss-maisy-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/08-miss-maisy-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/08-miss-maisy-square.webp",
-    },
-    hopper: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/09-hopper-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/09-hopper-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/09-hopper-square.webp",
-    },
-    whiskers: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/10-whiskers-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/10-whiskers-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/10-whiskers-square.webp",
-    },
-    scout: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/11-scout-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/11-scout-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/11-scout-square.webp",
-    },
-    penny: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/12-penny-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/12-penny-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/12-penny-square.webp",
-    },
-    maisy: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/13-maisy-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/13-maisy-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/13-maisy-square.webp",
-    },
-    puddles: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/14-puddles-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/14-puddles-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/14-puddles-square.webp",
-    },
-    sam: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/15-sam-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/15-sam-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/15-sam-square.webp",
-    },
-    rusty: {
-      circle: "/design-assets/blank-felt-patches-v1/individual-patches/16-rusty-circle.webp",
-      rectangle: "/design-assets/blank-felt-patches-v1/individual-patches/16-rusty-rectangle.webp",
-      square: "/design-assets/blank-felt-patches-v1/individual-patches/16-rusty-square.webp",
-    },
-  },
   scenes: {
-    "follow-the-duckling": "/scenes/follow-the-duckling.webp",
     "old-macs-open-circle-gathering": "/hero/old-macs-open-circle-gathering.webp",
-    "singing-together-on-old-macs-farm": "/scenes/singing-together-on-old-macs-farm.webp",
     "clap-your-hands-2": "/worksheets/clap-your-hands-2.webp",
-    "plant-your-seeds-with-care": "/scenes/plant-your-seeds-with-care.webp",
-    "seven-jumps-2": "/scenes/seven-jumps-2.webp",
-    "early-years-worksheet-example": "/scenes/early-years-worksheet-example.webp",
   },
 } as const;
 
 export type CastPortraitKey = keyof typeof BRAND_IMAGE_ASSETS.portraits;
 export type CastFacePatchKey = keyof typeof BRAND_IMAGE_ASSETS.facePatches;
 export type CastFaceBustKey = keyof typeof BRAND_IMAGE_ASSETS.faceBusts;
-export type CastFeltPatchKey = keyof typeof BRAND_IMAGE_ASSETS.feltPatches;
-export type CastFeltPatchShape = keyof (typeof BRAND_IMAGE_ASSETS.feltPatches)[CastFeltPatchKey];
 export type SceneAssetKey = keyof typeof BRAND_IMAGE_ASSETS.scenes;

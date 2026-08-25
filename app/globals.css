@@ -721,10 +721,28 @@
   background-color: var(--character-color);
   background-image: linear-gradient(var(--character-color), var(--character-color)), var(--character-texture);
   background-blend-mode: color, normal;
-  --character-repeat: no-repeat;
+  --character-repeat: repeat;
   background-repeat: var(--character-repeat, var(--brand-repeat-default));
   background-size: auto, 180px;
 }
+
+/* Cast class -> character-surface variable bridge. Colors: cast.mdx via :root tokens above; felt tiles: brand-assets.css --cast-<key>-texture. */
+.cast-old-macdonald { --character-color: var(--cast-old-macdonald-color); --character-foreground: var(--cast-old-macdonald-foreground); --character-texture: var(--cast-old-macdonald-texture); }
+.cast-miss-puddles { --character-color: var(--cast-miss-puddles-color); --character-foreground: var(--cast-miss-puddles-foreground); --character-texture: var(--cast-miss-puddles-texture); }
+.cast-mr-rusty { --character-color: var(--cast-mr-rusty-color); --character-foreground: var(--cast-mr-rusty-foreground); --character-texture: var(--cast-mr-rusty-texture); }
+.cast-miss-hayley { --character-color: var(--cast-miss-hayley-color); --character-foreground: var(--cast-miss-hayley-foreground); --character-texture: var(--cast-miss-hayley-texture); }
+.cast-mr-sam { --character-color: var(--cast-mr-sam-color); --character-foreground: var(--cast-mr-sam-foreground); --character-texture: var(--cast-mr-sam-texture); }
+.cast-mr-maisy { --character-color: var(--cast-mr-maisy-color); --character-foreground: var(--cast-mr-maisy-foreground); --character-texture: var(--cast-mr-maisy-texture); }
+.cast-mr-puddles { --character-color: var(--cast-mr-puddles-color); --character-foreground: var(--cast-mr-puddles-foreground); --character-texture: var(--cast-mr-puddles-texture); }
+.cast-miss-maisy { --character-color: var(--cast-miss-maisy-color); --character-foreground: var(--cast-miss-maisy-foreground); --character-texture: var(--cast-miss-maisy-texture); }
+.cast-hopper { --character-color: var(--cast-hopper-color); --character-foreground: var(--cast-hopper-foreground); --character-texture: var(--cast-hopper-texture); }
+.cast-whiskers { --character-color: var(--cast-whiskers-color); --character-foreground: var(--cast-whiskers-foreground); --character-texture: var(--cast-whiskers-texture); }
+.cast-scout { --character-color: var(--cast-scout-color); --character-foreground: var(--cast-scout-foreground); --character-texture: var(--cast-scout-texture); }
+.cast-penny { --character-color: var(--cast-penny-color); --character-foreground: var(--cast-penny-foreground); --character-texture: var(--cast-penny-texture); }
+.cast-maisy { --character-color: var(--cast-maisy-color); --character-foreground: var(--cast-maisy-foreground); --character-texture: var(--cast-maisy-texture); }
+.cast-puddles { --character-color: var(--cast-puddles-color); --character-foreground: var(--cast-puddles-foreground); --character-texture: var(--cast-puddles-texture); }
+.cast-sam { --character-color: var(--cast-sam-color); --character-foreground: var(--cast-sam-foreground); --character-texture: var(--cast-sam-texture); }
+.cast-rusty { --character-color: var(--cast-rusty-color); --character-foreground: var(--cast-rusty-foreground); --character-texture: var(--cast-rusty-texture); }
 
 /* === GRADE/SUBJECT PAGE THEMING === */
 [data-grade] {

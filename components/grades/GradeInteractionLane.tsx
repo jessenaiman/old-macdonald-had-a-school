@@ -57,6 +57,7 @@ export function GradeWorkspace({
   grade,
   gradeLabel,
   age,
+  teacher,
   reminder,
   navigation,
   children,
@@ -64,6 +65,7 @@ export function GradeWorkspace({
   grade: GradeKey;
   gradeLabel: string;
   age: string;
+  teacher: CastKey;
   reminder: string;
   variant?: "standard" | "daycare";
   navigation: React.ReactNode;
@@ -80,13 +82,18 @@ export function GradeWorkspace({
         className="grade-surface flex min-w-0 flex-col gap-3 p-3 lg:p-5 print:hidden"
         aria-label={`${gradeLabel} lesson workspace`}
       >
-        <div className="grade-surface relative flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg p-3 lg:grid">
+        <div className="grade-surface relative grid justify-items-start gap-x-3 gap-y-1 rounded-lg p-3">
           <span
             className="brand-asset fastener-sewing-button icon-micro absolute right-2 -top-1"
             aria-hidden="true"
           />
+          <span
+            data-character={teacher}
+            className="brand-asset character-face-bust icon-small"
+            aria-hidden="true"
+          />
           <span className="text-xs font-black uppercase tracking-widest">
-            Lesson workspace
+            Farm School
           </span>
           <strong className="font-hand text-2xl leading-none">
             {gradeLabel}
@@ -161,7 +168,12 @@ export function GradeWelcomeControl({
           </Button>
         </div>
       </div>
-      <TeacherNote character={config.teacher} quote={config.leadQuote} />
+      <TeacherNote
+        character={config.teacher}
+        quote={config.leadQuote}
+        actionHref={primaryHref ?? `/grade/${config.gradeKey}`}
+        actionLabel="Open teacher note"
+      />
     </section>
   );
 }
@@ -185,7 +197,7 @@ export function TeacherNote({
   return (
     <aside aria-label={`A note from ${teacher.name}`}>
       <Card
-        className={`cast-${character} character-surface relative overflow-hidden bg-card text-card-foreground`}
+        className={`cast-${character} character-surface material-surface material-felt relative overflow-hidden bg-card text-card-foreground`}
         style={{ '--teacher-color': teacherColor } as React.CSSProperties}
       >
         <span
@@ -198,7 +210,7 @@ export function TeacherNote({
           </CardTitle>
         </CardHeader>
         <CardContent className="relative z-10 flex min-h-40 flex-col items-start gap-3 pl-28 sm:pl-44">
-          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--teacher-color)]">
+          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--cast-${character}-foreground)]">
             “{quote}”
           </blockquote>
           <p className="text-xs font-black uppercase tracking-widest">
@@ -310,6 +322,7 @@ export function GradeInteractionLane({
         grade={config.gradeKey}
         gradeLabel={config.grade}
         age={config.age}
+        teacher={config.teacher}
         reminder={config.reminder}
         variant={config.variant}
         navigation={
