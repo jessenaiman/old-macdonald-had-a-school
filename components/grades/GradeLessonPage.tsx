@@ -3,9 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CAST, type CastKey } from "../../data/brand/cast-registry";
 import { LessonDocument } from "../LessonDocument";
-import { getLesson, getLessonByTitleAndGrade } from "../../lib/content";
+import { getLesson } from "../../lib/content";
 import { getCurriculumTopic } from "../../lib/curriculum-db";
-import { getCurriculumLessonByTitleAndGrade } from "../../lib/curriculum-lesson";
+import { getCurriculumLessonByTitleAndGrade, getCurriculumLessonStandIn } from "../../lib/curriculum-lesson";
 import { gradeKeysForLabel, type GradeKey } from "../../lib/grade-routes";
 import { DatabaseLessonDocument } from "./DatabaseLessonDocument";
 import { Button } from "@/components/ui/button";
@@ -254,30 +254,30 @@ export async function GradeLessonPage({
   const lesson = await getLesson(slug);
   if (lesson && !gradeKeysForLabel(lesson.metadata.grade).includes(grade))
     notFound();
-  const databaseTopic = lesson ? undefined : getCurriculumTopic(slug, grade);
-  if (!lesson && !databaseTopic) notFound();
-  const authoredLesson =
-    lesson ??
-    (databaseTopic
-      ? await getLessonByTitleAndGrade(databaseTopic.title, grade)
-      : undefined);
-  const details = GRADE_LESSON_DETAILS[grade];
-  const curriculumGradeLabel =
-    grade === "pre-school" ? "Preschool" : details.label;
-  const curriculumLesson = databaseTopic
-    ? getCurriculumLessonByTitleAndGrade(
-        databaseTopic.title,
-        curriculumGradeLabel,
-      )
-    : null;
-  const subject =
-    authoredLesson?.metadata.subject ?? databaseTopic?.subject ?? "Curriculum";
-  const title =
-    authoredLesson?.metadata.title ?? databaseTopic?.title ?? "Lesson";
+  const databaseTopic = getCurriculumTopic(slug, grade);
   const earlyYearsGrade = EARLY_YEARS_BY_GRADE[grade];
   const earlyYearsTopic = earlyYearsGrade
     ? EARLY_YEARS[earlyYearsGrade].find((topic) => topic.slug === slug)
     : undefined;
+  if (!lesson && !databaseTopic && !earlyYearsTopic) notFound();
+  // Markdown files are examples until validated; the database and registry lead.
+  const authoredLesson = lesson?.validated ? lesson : undefined;
+  const details = GRADE_LESSON_DETAILS[grade];
+  const curriculumGradeLabel =
+    grade === "pre-school" ? "Preschool" : details.label;
+  const curriculumLesson = getCurriculumLessonByTitleAndGrade(
+    databaseTopic?.title ?? lesson?.metadata.title ?? "",
+    curriculumGradeLabel,
+  ) ?? (lesson ? getCurriculumLessonStandIn(lesson.metadata.title, curriculumGradeLabel) : null);
+  const subject =
+    databaseTopic?.subject ??
+    lesson?.metadata.subject ??
+    "Curriculum";
+  const title =
+    databaseTopic?.title ??
+    earlyYearsTopic?.title ??
+    lesson?.metadata.title ??
+    "Lesson";
 
   return (
     <div
@@ -363,12 +363,12 @@ export async function GradeLessonPage({
               metadata={authoredLesson.metadata}
               curriculumLesson={curriculumLesson}
             />
-          ) : (
+          ) : databaseTopic || curriculumLesson ? (
             <DatabaseLessonDocument
-              topic={databaseTopic!}
+              topic={databaseTopic}
               curriculumLesson={curriculumLesson}
             />
-          )}
+          ) : null}
         </div>
         {earlyYearsTopic ? <EarlyYearsLessonStructure topic={earlyYearsTopic} /> : null}
         <section

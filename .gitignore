@@ -44,3 +44,4 @@ open-code-review/
 .claude/
 .vercel
 .env*
+design-proof/

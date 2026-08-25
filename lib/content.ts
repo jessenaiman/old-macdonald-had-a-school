@@ -26,6 +26,7 @@ export type Lesson = {
   Content: ComponentType;
   metadata: LessonMetadata;
   sourcePath: string;
+  validated: boolean;
 };
 
 type LessonFile = {
@@ -116,9 +117,11 @@ export async function getLesson(slug: string): Promise<Lesson | undefined> {
   const file = lessonFiles.find((entry) => entry.slug === slug);
   if (!file) return undefined;
   const lessonModule = await importLesson(file.relativePath);
+  const rawMetadata = { ...lessonModule.frontmatter, ...lessonModule.metadata };
   return {
     Content: lessonModule.default,
-    metadata: normalizeMetadata(file, { ...lessonModule.frontmatter, ...lessonModule.metadata }),
+    metadata: normalizeMetadata(file, rawMetadata),
+    validated: rawMetadata.validated === true,
     sourcePath: file.sourcePath,
   };
 }

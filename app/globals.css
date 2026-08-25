@@ -16,7 +16,7 @@
 
 :root {
   color-scheme: light;
-  --brand-repeat-default: no-repeat;
+  --brand-repeat-default: repeat;
   --radius: 0.625rem;
 
   /* === FOUNDATION PALETTE (cast.mdx) === */
