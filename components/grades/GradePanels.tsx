@@ -112,7 +112,7 @@ export function GradeTodayPanel({
           </Button>
         </div>
         <div className="grid min-w-0 gap-4 md:grid-cols-2">
-          {items.slice(0, 4).map((item, index) => (
+          {items.map((item, index) => (
             <WorkingWallPathCard
               key={`${item.title}-${index}`}
               title={item.title}
