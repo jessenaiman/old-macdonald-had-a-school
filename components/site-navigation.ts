@@ -1,5 +1,5 @@
 export type ActivePage =
-  | "home" | "topics" | "lessons" | "songs" | "about" | "search" | "cast-guide"
+  | "home" | "topics" | "lessons" | "songs" | "about" | "search"
   | "early-years" | "daycare" | "pre-school" | "kindergarten" | "grade-one" | "grade-two";
 
 export type GradeNavigationItem = {
@@ -62,7 +62,6 @@ export function activePageFromPathname(pathname: string): ActivePage {
   if (pathname.startsWith("/songs")) return "songs";
   if (pathname.startsWith("/topics")) return "topics";
   if (pathname.startsWith("/search")) return "search";
-  if (pathname.startsWith("/branding") || pathname.startsWith("/cast")) return "cast-guide";
   if (pathname.startsWith("/about")) return "about";
   return "home";
 }

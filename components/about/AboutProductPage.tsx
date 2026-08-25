@@ -124,9 +124,6 @@ export function AboutProductPage({ story }: { story: ReactNode }) {
           <Button asChild>
             <Link href="/#browse-by-subject">Explore the product</Link>
           </Button>
-          <Button asChild variant="outline">
-            <Link href="/branding">See the brand system</Link>
-          </Button>
         </div>
 
         <Separator />

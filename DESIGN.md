@@ -2,16 +2,16 @@
 
 ## Overview
 
-This system translates the official branding pages into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.
+This system translates the official cast record into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.
 
 It serves an educator-facing curriculum product. Its job is to make a specific learning purpose and the practical material needed to lead it easy to understand at a glance. The visual world is not children’s entertainment and not a generic dashboard: it is a welcoming, capable working environment for planning and leading real learning experiences.
 
-Only `content/pages/branding/*.mdx` defines official branding or design. `characters.mdx` controls cast identity. `app/globals.css` and `app/brand-assets.css` are implementation evidence. `public/` is storage, not automatic authority. Do not infer design rules from other Markdown files, route copy, filenames, code comments, contact sheets, or available-but-unregistered assets.
+Only `content/pages/branding/characters.mdx` defines official branding or design. It controls cast identity. `app/globals.css` and `app/brand-assets.css` are implementation evidence. `public/` is storage, not automatic authority. Do not infer design rules from other Markdown files, route copy, filenames, code comments, contact sheets, or available-but-unregistered assets.
 
 When sources conflict:
 
 1. Preserve exact cast identity, curriculum role, color, and canonical artwork from `characters.mdx`.
-2. Preserve explicit composition and usage rules from the other branding MDX pages.
+2. Preserve explicit composition and usage rules documented in this file.
 3. Use CSS only to bind those rules to current values and files.
 4. Stop for approval rather than inventing, optimizing, excluding, or silently substituting.
 
