@@ -4,6 +4,8 @@
 
 This system translates the official branding pages into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.
 
+It serves an educator-facing curriculum product. Its job is to make a specific learning purpose and the practical material needed to lead it easy to understand at a glance. The visual world is not children’s entertainment and not a generic dashboard: it is a welcoming, capable working environment for planning and leading real learning experiences.
+
 Only `content/pages/branding/*.mdx` defines official branding or design. `characters.mdx` controls cast identity. `app/globals.css` and `app/brand-assets.css` are implementation evidence. `public/` is storage, not automatic authority. Do not infer design rules from other Markdown files, route copy, filenames, code comments, contact sheets, or available-but-unregistered assets.
 
 When sources conflict:
@@ -16,6 +18,8 @@ When sources conflict:
 ## Design thesis
 
 Create a living classroom working wall, not a generic dashboard and not a cork-themed interface.
+
+The working wall supports preparation. A teacher should be able to find the lesson purpose, the next useful action, and the material they need before noticing decorative detail. Character art and mixed-media texture make the work inviting and memorable, but they never displace instructional clarity or turn an age-appropriate activity into a worksheet-shaped page.
 
 Foreground information behaves like a real teaching artifact: paper, note, badge, portrait, textile patch, or clipped workspace. It sits on a supporting surface and looks installed there. Cork is one valid support. Dark leather, denim, paper, card, and other approved materials can also support a composition when their documented role fits.
 
@@ -34,6 +38,12 @@ Educational meaning leads decoration. Choose curriculum, grade, character, mater
 ### Academic meaning first
 
 Lead with academic field or learning action before character name. Character identity supports the learning context; it does not replace it.
+
+Lead a teaching resource with its lesson purpose and learner group as well. A song, story, video, activity, or printable must look connected to the learning it serves, rather than presented as free-floating content.
+
+### Developmentally appropriate material
+
+The design must match the teaching format to the learners. Early-years resources prioritize instructor-led songs, stories, sensory play, movement, visual cues, and observation. Daycare and Preschool materials remain highly visual and group-oriented. Worksheets, written responses, and formal-looking practice are reserved for a specific Kindergarten-to-Grade-2 learning purpose; they are never the default visual language for younger children.
 
 ### One semantic owner
 
@@ -141,6 +151,27 @@ Physical-material colors remain stable across themes. A dark display mode may ch
 | No grade assigned | Music · Rhythm · Counting | Rusty | `--cast-rusty-color` | `#72AAD2` |
 
 Never derive, recolor, optimize, or substitute these values. Scout and Sam remain distinct. A learner may share an academic lead with staff but never inherits that staff member's grade.
+
+### Cast record contract (applied design guide binding)
+
+Every cast reference is a complete record, presented in this order: academic lead and grade or scope first, then species and teaching role, then curriculum contributions, then the binding pair (`data-character` + asset-role class), the exact token, and the canonical asset paths. One approved identity supports three live shapes — circle, square, rectangle. Use the geometry the layout requires; never recolor the transparent artwork, never substitute a baked portrait background, and never sample color from portrait pixels.
+
+Staff curriculum contributions are part of identity and travel with the record:
+
+| Character | Curriculum contributions | Bound icon |
+| --- | --- | --- |
+| Old MacDonald | Community: gatherings, processions, assembly. Literacy: storytime. Music: whole-school singing, banjo and guitar. | `music-icon` |
+| Miss Puddles | Early learning: circle time and fingerplay songs. Visual arts: art table. Physical development: movement games and swimming. SEL: sharing and turn-taking. | `early-learning-icon` |
+| Mr Rusty | Music: fiddle, steady beat and rhythm games. Early numeracy: counting the beat. Dance: barn-dance circle and transitions. | `music-fiddle` |
+| Miss Hayley | Literacy: storytime. Music: songs and singing. Drama: imagination games and class adventures. Creative movement. | `drama-storytelling-icon` |
+| Mr Sam | Mathematics: counting, measuring, sorting, patterns. Science and engineering: investigation and building. | `math-building-icon` |
+| Mr Maisy | Physical education: outdoor games, movement warm-ups, gross-motor play. Health: healthy eating and body positivity. | `physical-education-icon` |
+| Mr Puddles | Science and nature: bird studies. Visual arts: painting and photography. Communication: exhibitions and sharing work. | `art-photography-icon` |
+| Miss Maisy | Community: family welcome and office support. Science and nature: gardening and seasonal displays. Food and health: preparation and healthy habits. | `gardening-health-icon` |
+
+Learners (Hopper, Whiskers, Scout, Penny, Maisy, Puddles, Sam, Rusty) carry the same record shape with learning actions and personality instead of a role, pair to the same icon as their subject lead, and never take a staff grade label. Each of the 16 records owns four canonical artwork roles: full-body portrait, transparent face patch, background-backed face bust, and embroidered badge — paths live in `characters.mdx` and resolve through `app/brand-assets.css`.
+
+Change authority runs in one order: update the approved record in `characters.mdx`, bind the exact color in `app/globals.css`, bind artwork roles in `app/brand-assets.css`, store unchanged artwork in the approved folder, consume `data-character` plus the asset-role class, then verify subject, grade or scope, role, paths, token, contrast, and crop.
 
 ### Academic-label clarity
 
