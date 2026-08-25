@@ -1,0 +1,3 @@
+modelRoles:
+  curator: "openrouter/stealth/ox-alpha"
+  builder: "openrouter/stealth/ox-alpha"
