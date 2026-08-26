@@ -21,11 +21,18 @@ removed `hasKeywordAnchor` filter in `app/api/search/route.ts`. Recover with
 `git stash pop`; discard permanently with `git stash drop` once confirmed unwanted.
 Working tree resumed clean at `1a07422`.
 
-Live-site design audit (2026-08-25, delegated design-auditor): P1 = home mobile overflow
-(404px vs 375px), home subject-card contrast (axe serious ×10), missing skip-link;
-P2 = sub-44px targets site-wide vs DESIGN.md contract, missing H1s on song detail + search,
-daycare age contradiction, default Next 404; P3 = duplicate generic titles, g1/g2 title
-pattern. Fixes await user authorization.
+Design implementation (2026-08-26, two delegated builders + main-thread fixes, commit `9d40290`):
+working-wall grammar live on grade workspace (denim hard-board support per owner correction,
+paper-ruled artifacts with fasteners crossing edges, sticky-note rail, academic-lead-first,
+full brand name "Old MacDonald Had a School" — no "Farm School"); P1/P2 a11y fixes sitewide
+(skip link, 44px targets, H1s, branded 404, contrast zero-axe, reflow 1265<=1280). Gates:
+lint 0 errors, typecheck clean, browser-verified at 1280+375 via tool-operator Chrome recipe.
+Design detector hook enabled (`.impeccable/config.json`). Mock (`public/grades-design.png`)
+is directional only — standard Tailwind breakpoints, no invented ones. Reference set:
+`output/pdf/omhas-character-curriculum-style-guide-applied-design.pdf` (+ sibling guide PDF,
+`output/powerpoint/omhas-character-curriculum-style-guide-ponytail.pptx`); root Color_Map
+pdf/png deleted by owner (superseded). Branch `autoresearch/session-20260826` pushed; PR
+into `origin/main` (24 commits, fast-forwardable) pending owner merge.
 
 ## Rules for future sessions
 
