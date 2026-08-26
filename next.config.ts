@@ -19,7 +19,9 @@ const nextConfig: NextConfig = {
   },
   // Hide the dev-only on-screen route indicator that otherwise appears in every
   // visual QA capture (bottom-left by default). Errors still surface normally.
-  devIndicators: false,
+  // Next.js dev blocks static chunks for non-allowlisted origins; allow the
+  // loopback IP form so hydration doesn't silently break for 127.0.0.1 loads.
+  allowedDevOrigins: ["127.0.0.1"],
 };
 
 const withMDX = createMDX({

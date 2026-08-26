@@ -271,6 +271,52 @@ export function getCurriculumLessonByTitleAndGrade(topicTitle: string, gradeLabe
   return topic ? getCurriculumLesson(topic.id) : null;
 }
 
+const STAND_IN_STOP_WORDS: Record<string, true> = {
+  and: true, or: true, the: true, a: true, an: true, to: true,
+  of: true, in: true, for: true, with: true, within: true,
+};
+
+/** Stand-in renderer matcher for example lessons: same grade, decisive title-token
+ *  overlap only. Ambiguous or weak matches return null — the page then renders
+ *  shell + registry structure without a database body.
+ *  ponytail: token overlap + uniqueness guard; curate an authored lesson->topic
+ *  map if stand-in selection ever needs to be exact. */
+export function getCurriculumLessonStandIn(lessonTitle: string, gradeLabel: string): CurriculumLesson | null {
+  const wantedWords = lessonTitle
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((word) => word.length > 2 && !STAND_IN_STOP_WORDS[word]);
+  if (wantedWords.length === 0) return null;
+  const db = getDb();
+  const candidates = db.prepare(`
+    SELECT t.id, t.topic
+    FROM topics t
+    JOIN topic_grades tg ON tg.topic_id = t.id
+    JOIN grades g ON g.id = tg.grade_id
+    WHERE t.merged_into IS NULL AND g.label = ?
+  `).all(gradeLabel) as Array<{ id: number; topic: string }>;
+  const scored = candidates
+    .map((candidate) => {
+      const haveWords = candidate.topic
+        .toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter((word) => word.length > 2 && !STAND_IN_STOP_WORDS[word]);
+      let overlap = 0;
+      for (const word of wantedWords) {
+        if (haveWords.includes(word)) overlap += 1;
+      }
+      return { id: candidate.id, overlap, share: haveWords.length > 0 ? overlap / haveWords.length : 0 };
+    })
+    .filter((entry) => entry.overlap > 0)
+    .sort((a, b) => b.overlap - a.overlap || b.share - a.share);
+  const best = scored[0];
+  const runnerUp = scored[1];
+  if (!best) return null;
+  if (runnerUp && runnerUp.overlap === best.overlap && runnerUp.share === best.share) return null;
+  if (best.share < 0.5) return null;
+  return getCurriculumLesson(best.id);
+}
+
 export function appendCurriculumMaterialsToMarkdown(markdown: string, lesson: CurriculumLesson | null): string {
   if (!lesson || lesson.materials.length === 0) return markdown;
 

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CAST, type CastKey } from "@/data/brand/cast-registry";
+import { CHARACTERS, type CharacterKey } from "@/data/brand/characters-registry";
 import { type GradeKey } from "@/lib/grade-routes";
 import {
   GradeCurriculumPanel,
@@ -22,12 +22,13 @@ export type GradeInteractionSection =
 export type GradeInteractionConfig = {
   gradeKey: GradeKey;
   grade: string;
+  academicLead: string;
   age: string;
   reminder: string;
   eyebrow: string;
   headline: string;
   accentHeadline: string;
-  teacher: CastKey;
+  teacher: CharacterKey;
   leadQuote: string;
   variant?: "standard" | "daycare";
 };
@@ -56,14 +57,18 @@ const sections: Array<{ id: GradeInteractionSection; label: string }> = [
 export function GradeWorkspace({
   grade,
   gradeLabel,
+  academicLead,
   age,
+  teacher,
   reminder,
   navigation,
   children,
 }: {
   grade: GradeKey;
   gradeLabel: string;
+  academicLead: string;
   age: string;
+  teacher: CharacterKey;
   reminder: string;
   variant?: "standard" | "daycare";
   navigation: React.ReactNode;
@@ -71,7 +76,7 @@ export function GradeWorkspace({
 }) {
   return (
     <div
-      className="working-wall-stage grid min-h-[calc(100dvh-5rem)] min-w-0 grid-cols-1 overflow-hidden text-foreground lg:grid-cols-[14rem_minmax(0,1fr)] print:block"
+      className="grade-workspace-stage working-wall-stage grid min-h-[calc(100dvh-5rem)] min-w-0 grid-cols-1 overflow-hidden text-foreground lg:grid-cols-[14rem_minmax(0,1fr)] print:block"
       data-grade={grade}
       data-grade-template={grade}
       data-style-scope="grade-workspace"
@@ -80,20 +85,28 @@ export function GradeWorkspace({
         className="grade-surface flex min-w-0 flex-col gap-3 p-3 lg:p-5 print:hidden"
         aria-label={`${gradeLabel} lesson workspace`}
       >
-        <div className="grade-surface relative flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg p-3 lg:grid">
+        <div className="grade-workspace-rail-header grade-surface relative grid justify-items-start gap-x-3 gap-y-1 rounded-lg p-3">
           <span
             className="brand-asset fastener-sewing-button icon-micro absolute right-2 -top-1"
             aria-hidden="true"
           />
+          <span
+            data-character={teacher}
+            className="brand-asset character-face-bust icon-small"
+            aria-hidden="true"
+          />
           <span className="text-xs font-black uppercase tracking-widest">
-            Lesson workspace
+            Old MacDonald Had a School
           </span>
+          <small className="max-w-[10rem] text-xs font-bold leading-tight">{academicLead}</small>
+
           <strong className="font-hand text-2xl leading-none">
             {gradeLabel}
           </strong>
           <small className="text-xs font-bold uppercase tracking-widest">
             {age}
           </small>
+          <small className="text-xs font-semibold">{CHARACTERS[teacher].name}</small>
         </div>
         {navigation}
         <Card className="material-surface material-cardboard-paper relative mt-auto hidden lg:block bg-card text-card-foreground">
@@ -109,7 +122,7 @@ export function GradeWorkspace({
           </CardHeader>
         </Card>
       </aside>
-      <main className="min-w-0 p-2 sm:p-4 lg:p-6 print:p-0">{children}</main>
+      <div className="min-w-0 p-2 sm:p-4 lg:p-6 print:p-0">{children}</div>
     </div>
   );
 }
@@ -132,7 +145,7 @@ export function GradeWelcomeControl({
   onPreview?: () => void;
   headingLevel?: "h1" | "h2";
 }) {
-  const teacherColor = `var(--cast-${config.teacher}-color)`;
+  const teacherColor = `var(--characters-${config.teacher}-color)`;
   return (
     <section className="grid min-w-0 grid-cols-1 items-center gap-6 border-b pb-6 lg:grid-cols-[minmax(0,3fr)_minmax(18rem,2fr)] [&>*]:min-w-0" style={{ '--teacher-color': teacherColor } as React.CSSProperties}>
       <div className="flex min-w-0 flex-col items-start gap-4">
@@ -141,7 +154,7 @@ export function GradeWelcomeControl({
         </span>
         <Heading className="max-w-3xl text-balance font-heading text-4xl leading-none sm:text-5xl lg:text-6xl">
           {config.headline}{" "}
-          <em className="block text-[var(--teacher-color)] not-italic">
+          <em className="block text-[color-mix(in_srgb,var(--teacher-color)_72%,black)] not-italic">
             {config.accentHeadline}
           </em>
         </Heading>
@@ -161,7 +174,12 @@ export function GradeWelcomeControl({
           </Button>
         </div>
       </div>
-      <TeacherNote character={config.teacher} quote={config.leadQuote} />
+      <TeacherNote
+        character={config.teacher}
+        quote={config.leadQuote}
+        actionHref={primaryHref ?? `/grade/${config.gradeKey}`}
+        actionLabel="Open teacher note"
+      />
     </section>
   );
 }
@@ -175,17 +193,17 @@ export function TeacherNote({
   actionHref,
   actionLabel = "Open lesson workspace",
 }: {
-  character: CastKey;
+  character: CharacterKey;
   quote: string;
   actionHref?: string;
   actionLabel?: string;
 }) {
-  const teacher = CAST[character];
-  const teacherColor = `var(--cast-${character}-color)`;
+  const teacher = CHARACTERS[character];
+  const teacherColor = `var(--characters-${character}-color)`;
   return (
     <aside aria-label={`A note from ${teacher.name}`}>
       <Card
-        className={`cast-${character} character-surface relative overflow-hidden bg-card text-card-foreground`}
+        className={`characters-${character} character-surface material-surface material-felt relative overflow-hidden bg-card text-card-foreground`}
         style={{ '--teacher-color': teacherColor } as React.CSSProperties}
       >
         <span
@@ -198,7 +216,7 @@ export function TeacherNote({
           </CardTitle>
         </CardHeader>
         <CardContent className="relative z-10 flex min-h-40 flex-col items-start gap-3 pl-28 sm:pl-44">
-          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--teacher-color)]">
+          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--characters-${character}-foreground)]">
             “{quote}”
           </blockquote>
           <p className="text-xs font-black uppercase tracking-widest">
@@ -309,19 +327,21 @@ export function GradeInteractionLane({
       <GradeWorkspace
         grade={config.gradeKey}
         gradeLabel={config.grade}
+        academicLead={config.academicLead}
         age={config.age}
+        teacher={config.teacher}
         reminder={config.reminder}
         variant={config.variant}
         navigation={
           <TabsList
             aria-label={`${config.grade} lesson tools`}
-            className="flex h-auto w-full flex-wrap justify-start gap-1 bg-transparent p-0 lg:flex-col lg:items-stretch"
+            className="flex h-auto min-h-11 w-full items-start gap-1 overflow-x-auto p-0 pb-2 bg-transparent lg:flex-col lg:items-stretch lg:overflow-visible lg:pb-0"
           >
             {sections.map((entry) => (
               <TabsTrigger
                 key={entry.id}
                 value={entry.id}
-                className="grow justify-start gap-2 lg:w-full"
+                className="min-h-11 shrink-0 justify-start gap-2 bg-background/75 text-foreground lg:w-full"
               >
                 <span className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[.625rem] font-black tabular-nums" aria-hidden="true">
                   {String(sections.indexOf(entry) + 1).padStart(2, "0")}

@@ -28,11 +28,6 @@
 - [ ] **Components grid skips** — `FolkArtsSection`, `HomepageBrandPatterns`, `FabricReference` (`md→xl` without `lg`).
 - [ ] **`text-[clamp(2.5rem,6vw,…)]` headings** — lessons/topics/BrandSystemExamples/FabricReference → responsive utilities.
 
-## Phase 2 — Storybook
-
-- [ ] Audit & fix all `*.stories.tsx` to match real component APIs (HomeCarousel already needs its `slides`/`title` args).
-- [ ] Confirm `build-storybook` passes.
-
 ## Phase 3 — Launch gate
 
 - [x] `npm run typecheck` passes on `main`.

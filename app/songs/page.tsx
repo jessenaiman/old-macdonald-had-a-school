@@ -43,7 +43,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
 
   return (
     <>
-      <section className="flex flex-col gap-8" aria-labelledby="songbook-heading">
+      <section className="flex flex-col gap-8 px-3 py-6 sm:px-6" aria-labelledby="songbook-heading">
         <header>
           <p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Practical teacher songbook</p>
           <h1 className="mt-2 font-heading text-5xl leading-[0.95] text-balance sm:text-7xl" id="songbook-heading">Songs worth singing tomorrow</h1>
@@ -78,14 +78,14 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
         </Card>
       </section>
 
-      <section className="mt-10" aria-labelledby="song-results-heading">
+      <section className="mt-10 px-3 sm:px-6" aria-labelledby="song-results-heading">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Teaching sheets</p><h2 className="mt-1 font-heading text-4xl" id="song-results-heading">{songs.length} songs</h2></div><p className="text-sm text-muted-foreground">Showing {visibleSongs.length} of {songs.length}</p></div>
         {songs.length === 0 ? <Empty className="material-surface material-paper-ruled mt-5"><EmptyHeader><EmptyTitle>No matching songs</EmptyTitle><EmptyDescription>Try removing a filter or using a broader search phrase.</EmptyDescription></EmptyHeader><EmptyContent><Button asChild variant="outline"><Link href="/songs">View all songs</Link></Button></EmptyContent></Empty> : <>
           <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {visibleSongs.map((song) => <Card className="min-w-0" key={song.id}>
               <CardHeader>
                 <div className="flex flex-wrap gap-2">{song.verified && <Badge>Reviewed</Badge>}{song.hasActions && <Badge variant="secondary">Actions</Badge>}{song.hasChords && <Badge variant="secondary">Chords</Badge>}</div>
-                <CardTitle><Link className="underline-offset-4 hover:underline" data-song-navigation href={`/songs/${song.id}`}>{song.title}</Link></CardTitle>
+                <CardTitle><Link className="inline-flex min-h-[44px] items-center underline-offset-4 hover:underline" data-song-navigation href={`/songs/${song.id}`}>{song.title}</Link></CardTitle>
                 {song.artist && <CardDescription>{song.artist}</CardDescription>}{song.sourceTitle && <CardDescription>Source citation: {song.sourceTitle}</CardDescription>}
                 <CardAction className="min-w-0 max-w-full">{song.type && <Badge className="max-w-full whitespace-normal text-right" variant="outline">{song.type}</Badge>}</CardAction>
               </CardHeader>

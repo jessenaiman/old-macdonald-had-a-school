@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Boogaloo, Lilita_One, Nunito, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
+import { ThemeProvider } from "next-themes";
 import { BRAND_IMAGE_ASSETS } from "../data/brand/image-registry";
-import { ThemeProvider } from "../components/ThemeProvider";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { cn } from "@/lib/utils";
@@ -39,8 +39,8 @@ const brandFont = Playfair_Display({
 
 const handFont = localFont({
   src: [
-    { path: "../public/background-textures/Caveat-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../public/background-textures/Caveat-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/design-assets/background-textures/Caveat-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/design-assets/background-textures/Caveat-Bold.ttf", weight: "700", style: "normal" },
   ],
   variable: "--font-farm-hand",
   display: "swap",
@@ -76,15 +76,14 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
-          themes={["light", "dark"]}
+          enableColorScheme
           disableTransitionOnChange
         >
           <div className="bg-paper-ivory flex min-h-screen flex-col text-foreground">
-            <SiteHeader />
-            <main className="flex min-h-0 min-w-0 flex-1 flex-col">
-              <div className="mx-auto w-full min-w-0 flex-1 flex-col px-3 py-5 sm:px-6 lg:px-8">
-                {children}
-              </div>
+                        <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] rounded-md bg-brand-navy px-4 py-3 font-bold text-brand-navy-foreground shadow-[0_4px_12px_rgba(30,42,56,0.25)] focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-brand-paper focus:ring-offset-2 focus:ring-offset-brand-navy">Skip to lesson content</a>
+                        <SiteHeader />
+            <main id="main-content" className="flex min-h-0 min-w-0 flex-1 flex-col">
+              <div className="min-w-0 flex-1 flex-col">{children}</div>
             </main>
             <SiteFooter />
           </div>

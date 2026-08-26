@@ -112,7 +112,7 @@ export function GradeTodayPanel({
           </Button>
         </div>
         <div className="grid min-w-0 gap-4 md:grid-cols-2">
-          {items.slice(0, 4).map((item, index) => (
+          {items.map((item, index) => (
             <WorkingWallPathCard
               key={`${item.title}-${index}`}
               title={item.title}
@@ -168,7 +168,7 @@ export function GradeCurriculumPanel({
         summary="Start with the grade goal, follow the teaching sequence, then open the path that fits your learners."
       />
       <div className="min-w-0">
-        <Card className="material-surface material-cardboard-paper relative gap-3 overflow-hidden py-4 bg-card text-card-foreground">
+        <Card className="material-surface material-cardboard-paper relative gap-3 overflow-hidden py-4">
           <span className="brand-asset fastener-masking-tape icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
           <CardHeader className="px-4 pt-7">
             <Badge variant="secondary">Featured learning goal</Badge>
@@ -191,7 +191,7 @@ export function GradeCurriculumPanel({
         </header>
         <div className="flex min-w-0 flex-col gap-3">
           {items.map((item, index) => (
-            <Card className="material-surface material-cardboard-paper relative gap-0 py-3 bg-card text-card-foreground" key={`${item.title}-${index}`}>
+            <Card className="material-surface material-cardboard-paper relative gap-0 py-3" key={`${item.title}-${index}`}>
               <CardHeader className="gap-0 px-4 has-data-[slot=card-action]:grid-cols-1 sm:has-data-[slot=card-action]:grid-cols-[1fr_auto]">
                 <div className="flex min-w-0 items-center gap-3">
                   <Badge className="size-7 shrink-0 justify-center rounded-full p-0" variant="secondary" aria-label={`Path ${index + 1}`}>{index + 1}</Badge>
@@ -244,7 +244,7 @@ export function GradePlannerPanel({
         title="Prepare one helpful next step"
         summary={`A quiet place to gather what ${config.grade} learners need before the lesson begins.`}
       />
-      <Card className="material-surface material-cardboard-paper relative bg-card text-card-foreground">
+      <Card className="material-surface material-cardboard-paper relative">
         <span className="brand-asset fastener-paperclip icon-small absolute -top-4 right-5" aria-hidden="true" />
         <CardHeader>
           <Badge variant="secondary">Current planning focus</Badge>
@@ -273,7 +273,7 @@ export function GradePlannerPanel({
         <FieldGroup className="grid gap-4 lg:grid-cols-3">
           {notes.map(([id, title, prompt], index) => (
             <Field key={id}>
-              <Card className="material-surface material-cardboard-paper relative w-full bg-card text-card-foreground">
+              <Card className="material-surface material-cardboard-paper relative w-full">
                 <span
                   className={`brand-asset ${["fastener-paperclip", "fastener-masking-tape", "fastener-push-pin"][index]} icon-small absolute -top-4 left-1/2 -translate-x-1/2`}
                   aria-hidden="true"
@@ -291,7 +291,7 @@ export function GradePlannerPanel({
           ))}
         </FieldGroup>
         <Field className="mt-5">
-          <Card className="material-surface material-paper-ruled w-full bg-card text-card-foreground">
+          <Card className="material-surface material-paper-ruled w-full">
             <CardHeader>
               <FieldLabel htmlFor="planner-teacher-notes">Notes for this lesson</FieldLabel>
             </CardHeader>

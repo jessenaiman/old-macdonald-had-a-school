@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old MacDonald Had a School — Teacher Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #16283c;
+    --navy-ink: #fdf8e3;
+    --amber: #f2b63d;
+    --paper: #f7f1e3;
+    --ink: #1e2a2e;
+    --muted: #6b6152;
+    --cream: #fdf8e3;
+    --card: #fffdf4;
+    --border: #e4dcc6;
+    --daycare: #e8a227;   --daycare-ink: #1e2a38;
+    --pre: #55705a;       --pre-ink: #fefce8;
+    --kindy: #2c6c9b;     --kindy-ink: #fefce8;
+    --one: #c9527a;       --one-ink: #1e2a38;
+    --two: #b5272c;       --two-ink: #fefce8;
+    --shadow: 0 10px 30px rgba(30, 42, 46, .14);
+    --radius: 18px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Instrument Sans',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; text-decoration:none; }
+  button { font:inherit; cursor:pointer; }
+
+  /* ---------- header ---------- */
+  .site-header {
+    position:sticky; top:0; z-index:50;
+    background:var(--navy);
+    border-bottom:1px solid rgba(253,248,227,.12);
+  }
+  .header-inner {
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; gap:18px;
+    padding:10px 20px; min-height:64px;
+  }
+  .brand { display:flex; align-items:center; gap:10px; }
+  .brand img { height:40px; width:auto; }
+  .brand-name { color:var(--navy-ink); font-weight:700; font-size:15px; line-height:1.1; }
+  .brand-name small { display:block; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); font-weight:700; }
+  .grade-tabs { display:flex; gap:6px; margin-left:auto; }
+  .grade-tab {
+    border:none; border-radius:999px; padding:8px 14px;
+    font-weight:700; font-size:13px; color:#fff;
+    box-shadow:0 2px 0 rgba(0,0,0,.25);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .grade-tab:hover { transform:translateY(-1px); box-shadow:0 3px 0 rgba(0,0,0,.3); }
+  .gt-daycare { background:var(--daycare); color:var(--daycare-ink); }
+  .gt-pre     { background:var(--pre); color:var(--pre-ink); }
+  .gt-kindy   { background:var(--kindy); color:var(--kindy-ink); }
+  .gt-one     { background:var(--one); color:var(--one-ink); }
+  .gt-two     { background:var(--two); color:var(--two-ink); }
+  .header-links { display:flex; align-items:center; gap:4px; }
+  .header-link {
+    color:var(--navy-ink); padding:8px 12px; border-radius:10px;
+    font-weight:600; font-size:14px;
+  }
+  .header-link:hover { background:rgba(253,248,227,.1); }
+  .header-link.active { color:var(--amber); box-shadow:inset 0 -2px 0 var(--amber); }
+
+  /* ---------- hero ---------- */
+  .hero { max-width:1200px; margin:0 auto; padding:54px 20px 30px; }
+  .hero-eyebrow {
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Caveat',cursive; font-size:22px; color:#8a6a2f;
+  }
+  .hero h1 {
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:clamp(34px, 5vw, 52px); font-weight:800; letter-spacing:-.02em;
+    margin:8px 0 10px; color:var(--ink);
+  }
+  .hero h1 em { font-style:normal; color:#b5272c; }
+  .hero-sub { max-width:640px; color:var(--muted); font-size:17px; }
+
+  /* grade board — hero thesis */
+  .grade-board {
+    margin-top:34px; padding:26px;
+    background:
+      linear-gradient(rgba(22,40,60,.96), rgba(22,40,60,.96)),
+      url('http://127.0.0.1:8900/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.webp');
+    background-size:auto, 180px; background-blend-mode:multiply;
+    border-radius:24px; box-shadow:var(--shadow);
+  }
+  .grade-board-head {
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+    color:var(--navy-ink); margin-bottom:18px;
+  }
+  .grade-board-head h2 { font-family:'Bricolage Grotesque'; font-size:22px; font-weight:700; }
+  .grade-board-head p { font-size:14px; color:rgba(253,248,227,.75); }
+  .grade-cards { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .grade-card {
+    position:relative; border-radius:var(--radius); overflow:hidden;
+    background:#fff; box-shadow:0 4px 0 rgba(0,0,0,.28);
+    transition:transform .14s ease, box-shadow .14s ease;
+    display:flex; flex-direction:column;
+  }
+  .grade-card:hover { transform:translateY(-4px); box-shadow:0 8px 0 rgba(0,0,0,.28); }
+  .grade-card-top {
+    height:96px; position:relative; display:flex; align-items:flex-end; justify-content:center;
+    background-repeat:repeat; background-size:180px;
+  }
+  .gc-daycare .grade-card-top { background-color:var(--daycare); background-image:linear-gradient(var(--daycare),var(--daycare)), url('http://127.0.0.1:8900/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.webp'); background-blend-mode:color,normal; }
+  .gc-pre .grade-card-top { background-color:var(--pre); background-image:linear-gradient(var(--pre),var(--pre)), url('http://127.0.0.1:8900/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp'); background-blend-mode:color,normal; }
+  .gc-kindy .grade-card-top { background-color:var(--kindy); background-image:linear-gradient(var(--kindy),var(--kindy)), url('http://127.0.0.1:8900/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp'); background-blend-mode:color,normal; }
+  .gc-one .grade-card-top { background-color:var(--one); background-image:linear-gradient(var(--one),var(--one)), url('http://127.0.0.1:8900/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp'); background-blend-mode:color,normal; }
+  .gc-two .grade-card-top { background-color:var(--two); background-image:linear-gradient(var(--two),var(--two)), url('http://127.0.0.1:8900/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.webp'); background-blend-mode:color,normal; }
+  .grade-face { width:84px; height:84px; border-radius:50%; border:3px solid #fff; transform:translateY(34px); box-shadow:0 4px 10px rgba(0,0,0,.3); object-fit:cover; }
+  .grade-card-body { padding:46px 12px 14px; text-align:center; flex:1; display:flex; flex-direction:column; gap:6px; }
+  .grade-card-body h3 { font-family:'Bricolage Grotesque'; font-size:17px; font-weight:700; }
+  .grade-card-body .teacher { font-size:12.5px; color:var(--muted); font-weight:600; }
+  .grade-card-body .go {
+    margin-top:auto; align-self:center; margin-top:10px;
+    background:var(--ink); color:#fff; border:none; border-radius:999px;
+    padding:7px 18px; font-size:12.5px; font-weight:700;
+    transition:background .12s ease, transform .12s ease;
+  }
+  .grade-card:hover .go { background:#b5272c; }
+  .grade-card .go:hover { transform:scale(1.05); }
+
+  /* ---------- what's new ---------- */
+  .section { max-width:1200px; margin:0 auto; padding:46px 20px 8px; }
+  .section-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:20px; }
+  .section-head h2 { font-family:'Bricolage Grotesque'; font-size:26px; font-weight:800; letter-spacing:-.01em; }
+  .section-head .note { font-family:'Caveat'; font-size:21px; color:#8a6a2f; }
+  .video-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .video-card {
+    display:flex; gap:16px; align-items:stretch;
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:12px; transition:transform .14s ease, box-shadow .14s ease;
+  }
+  .video-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+  .video-thumb {
+    position:relative; width:220px; min-height:124px; border-radius:12px; overflow:hidden; flex-shrink:0;
+    background:#222;
+  }
+  .video-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .video-thumb .play {
+    position:absolute; inset:0; margin:auto; width:54px; height:54px; border-radius:50%;
+    background:rgba(22,40,60,.88); border:none; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; transition:background .12s ease, transform .12s ease;
+  }
+  .video-thumb:hover .play { background:#b5272c; transform:scale(1.08); }
+  .video-card-body { display:flex; flex-direction:column; justify-content:center; gap:6px; }
+  .video-card-body .tag { font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#b5272c; }
+  .video-card-body h3 { font-family:'Bricolage Grotesque'; font-size:18px; font-weight:700; line-height:1.2; }
+  .video-card-body p { font-size:14px; color:var(--muted); }
+  .video-card-body .when { font-size:12.5px; color:var(--muted); }
+  .outline-btn {
+    display:inline-flex; align-items:center; gap:8px;
+    border:1.5px solid var(--ink); border-radius:999px; padding:8px 18px;
+    font-weight:700; font-size:14px; transition:background .12s ease, color .12s ease;
+  }
+  .outline-btn:hover { background:var(--ink); color:#fff; }
+
+  /* ---------- subjects + search (reusable middle component) ---------- */
+  .planner {
+    margin-top:14px; padding:28px;
+    background:var(--card); border:1px solid var(--border); border-radius:24px;
+    box-shadow:0 6px 24px rgba(30,42,46,.07);
+  }
+  .planner-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:28px; }
+  .planner h3 { font-family:'Bricolage Grotesque'; font-size:20px; font-weight:800; margin-bottom:4px; }
+  .planner .sub { color:var(--muted); font-size:14px; margin-bottom:16px; }
+  .search-bar {
+    display:flex; align-items:center; gap:10px;
+    background:#fff; border:2px solid var(--border); border-radius:14px; padding:6px 8px 6px 16px;
+    transition:border-color .12s ease, box-shadow .12s ease;
+  }
+  .search-bar:focus-within { border-color:var(--ink); box-shadow:0 0 0 4px rgba(22,40,60,.08); }
+  .search-bar input { flex:1; border:none; outline:none; font:inherit; font-size:16px; background:transparent; color:var(--ink); }
+  .search-bar .mag { font-size:18px; color:var(--muted); }
+  .search-cta {
+    background:var(--navy); color:#fff; border:none; border-radius:10px;
+    padding:9px 18px; font-weight:700; font-size:14px;
+    transition:background .12s ease;
+  }
+  .search-cta:hover { background:#b5272c; }
+  .quick-links { margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .quick-links .lbl { font-size:13px; font-weight:700; color:var(--muted); }
+  .chip {
+    border:1.5px solid var(--border); background:#fff; border-radius:999px;
+    padding:6px 14px; font-size:13px; font-weight:600; color:var(--ink);
+    transition:all .12s ease;
+  }
+  .chip:hover { border-color:var(--ink); transform:translateY(-1px); }
+
+  /* grade-aware subjects (the control) */
+  .subject-control { border-top:1.5px dashed var(--border); margin-top:22px; padding-top:22px; }
+  .subject-control .sub-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+  .subject-control .sub-head h4 { font-family:'Bricolage Grotesque'; font-size:16px; font-weight:700; }
+  .grade-pick { display:flex; gap:6px; flex-wrap:wrap; }
+  .gpick {
+    border:1.5px solid var(--border); background:#fff; border-radius:999px;
+    padding:5px 13px; font-size:12.5px; font-weight:700; color:var(--ink);
+    transition:all .12s ease;
+  }
+  .gpick[data-on="1"] { background:var(--ink); border-color:var(--ink); color:#fff; }
+  .subject-row { display:flex; flex-wrap:wrap; gap:8px; }
+  .subj {
+    border-radius:12px; padding:9px 15px; font-size:13.5px; font-weight:700;
+    color:#fff; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .12s ease, opacity .12s ease;
+  }
+  .subj:hover { transform:translateY(-2px); }
+  .subj .ico { font-size:15px; }
+  .subj[data-locked="1"] { opacity:.28; filter:grayscale(.9); cursor:not-allowed; }
+  .subj[data-locked="1"]:hover { transform:none; }
+  .subj-s-Language { background:#c9527a; } .subj-s-Math { background:#2c6c9b; }
+  .subj-s-Science { background:#55705a; } .subj-s-Health { background:#e8a227; color:#1e2a38; }
+  .subj-s-SEL { background:#7b4fa8; } .subj-s-FineMotor { background:#d9713c; }
+  .subj-s-Music { background:#b5272c; } .subj-s-Arts { background:#1f6b6b; }
+  .subj-lock-note { margin-top:10px; font-size:13px; color:var(--muted); }
+  .subj-lock-note b { color:#b5272c; }
+
+  /* ---------- spotify placeholder ---------- */
+  .music-placeholder {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  }
+  .m-card {
+    border:2px dashed var(--border); border-radius:var(--radius);
+    padding:22px 18px; text-align:center; background:rgba(255,253,244,.55);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .m-card .badge {
+    width:46px; height:46px; border-radius:14px; background:#1db954; color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:22px;
+    box-shadow:0 4px 0 rgba(0,0,0,.2);
+  }
+  .m-card h4 { font-family:'Bricolage Grotesque'; font-size:16px; font-weight:700; }
+  .m-card p { font-size:13px; color:var(--muted); }
+  .m-card .soon {
+    font-family:'Caveat'; font-size:19px; color:#8a6a2f; margin-top:2px;
+  }
+
+  /* ---------- footer ---------- */
+  .site-footer { margin-top:54px; background:var(--navy); color:var(--navy-ink); }
+  .footer-inner {
+    max-width:1200px; margin:0 auto; padding:30px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    font-size:13.5px; color:rgba(253,248,227,.8);
+  }
+  .footer-inner a { color:var(--navy-ink); font-weight:600; }
+  .footer-inner a:hover { color:var(--amber); }
+  .footer-brand { display:flex; align-items:center; gap:10px; }
+  .footer-brand img { height:34px; }
+
+  /* ---------- modal ---------- */
+  .modal {
+    position:fixed; inset:0; z-index:100;
+    background:rgba(15,24,34,.78); backdrop-filter:blur(4px);
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  .modal[data-open="1"] { display:flex; }
+  .modal-box {
+    width:min(880px, 100%); background:#0f0f0f; border-radius:20px; overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.5); position:relative;
+  }
+  .modal-top {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px; background:#181818; color:#eee;
+  }
+  .modal-top h3 { font-size:15px; font-weight:700; }
+  .modal-close {
+    background:rgba(255,255,255,.14); color:#fff; border:none; border-radius:8px;
+    width:32px; height:32px; font-size:15px; transition:background .12s ease;
+  }
+  .modal-close:hover { background:#b5272c; }
+  .modal-frame { position:relative; padding-top:56.25%; }
+  .modal-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+  @media (max-width: 980px) {
+    .grade-cards { grid-template-columns:repeat(2,1fr); }
+    .gc-last { display:none; }
+    .planner-grid { grid-template-columns:1fr; }
+    .video-grid { grid-template-columns:1fr; }
+    .video-thumb { width:100%; min-height:150px; }
+    .music-placeholder { grid-template-columns:1fr; }
+    .grade-tabs { display:none; }
+    .header-links { margin-left:auto; }
+  }
+  @media (max-width: 600px) {
+    .brand-name { display:none; }
+    .grade-cards { grid-template-columns:1fr; }
+    .gc-last { display:block; }
+    .hero { padding-top:36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#">
+      <img src="http://127.0.0.1:8900/design-assets/logo/individual-marks/brand-emblem-nav-44.png" alt="Old MacDonald Had a School emblem">
+      <span class="brand-name">Old MacDonald Had a School<small>Teacher Lesson Resources</small></span>
+    </a>
+    <nav class="grade-tabs" aria-label="Your grade">
+      <a class="grade-tab gt-daycare" href="/grade/daycare">Daycare</a>
+      <a class="grade-tab gt-pre" href="/grade/pre-school">Pre-School</a>
+      <a class="grade-tab gt-kindy" href="/grade/kindergarten">Kindergarten</a>
+      <a class="grade-tab gt-one" href="/grade/grade-one">Grade 1</a>
+      <a class="grade-tab gt-two" href="/grade/grade-two">Grade 2</a>
+    </nav>
+    <div class="header-links">
+      <a class="header-link" href="/search">Search lessons</a>
+      <a class="header-link" href="/about">About</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- hero: grade-first thesis -->
+  <section class="hero">
+    <span class="hero-eyebrow">✏️ Good morning, teacher —</span>
+    <h1>Your classroom is ready. <em>Find your grade.</em></h1>
+    <p class="hero-sub">Lesson plans, songs, and resources for every early-years teacher. Start with your grade — everything else follows.</p>
+
+    <div class="grade-board">
+      <div class="grade-board-head">
+        <h2>Pick your classroom</h2>
+        <p>Each grade has its own teacher, felt colors, and lesson set.</p>
+      </div>
+      <div class="grade-cards">
+        <a class="grade-card gc-daycare" href="/grade/daycare">
+          <div class="grade-card-top"><img class="grade-face" src="http://127.0.0.1:8900/characters/face-patch-transparent/miss-puddles-purple.webp" alt="Miss Puddles"></div>
+          <div class="grade-card-body">
+            <h3>Daycare</h3>
+            <span class="teacher">Miss Puddles</span>
+            <span class="go">Open grade →</span>
+          </div>
+        </a>
+        <a class="grade-card gc-pre" href="/grade/pre-school">
+          <div class="grade-card-top"><img class="grade-face" src="http://127.0.0.1:8900/characters/face-patch-transparent/miss-maisy-purple.webp" alt="Miss Maisy"></div>
+          <div class="grade-card-body">
+            <h3>Pre-School</h3>
+            <span class="teacher">Miss Maisy</span>
+            <span class="go">Open grade →</span>
+          </div>
+        </a>
+        <a class="grade-card gc-kindy" href="/grade/kindergarten">
+          <div class="grade-card-top"><img class="grade-face" src="http://127.0.0.1:8900/characters/face-patch-transparent/mr-rusty-blue.webp" alt="Mr Rusty"></div>
+          <div class="grade-card-body">
+            <h3>Kindergarten</h3>
+            <span class="teacher">Mr Rusty</span>
+            <span class="go">Open grade →</span>
+          </div>
+        </a>
+        <a class="grade-card gc-one" href="/grade/grade-one">
+          <div class="grade-card-top"><img class="grade-face" src="http://127.0.0.1:8900/characters/face-patch-transparent/miss-hayley-purple.webp" alt="Miss Hayley"></div>
+          <div class="grade-card-body">
+            <h3>Grade 1</h3>
+            <span class="teacher">Miss Hayley</span>
+            <span class="go">Open grade →</span>
+          </div>
+        </a>
+        <a class="grade-card gc-two" href="/grade/grade-two">
+          <div class="grade-card-top"><img class="grade-face" src="http://127.0.0.1:8900/characters/face-patch-transparent/mr-maisy-orange.webp" alt="Mr Maisy"></div>
+          <div class="grade-card-body">
+            <h3>Grade 2</h3>
+            <span class="teacher">Mr Maisy</span>
+            <span class="go">Open grade →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- what's new: latest videos, modal iframe -->
+  <section class="section" id="whats-new">
+    <div class="section-head">
+      <h2>What's New</h2>
+      <span class="note">fresh songs from the barnyard studio</span>
+    </div>
+    <div class="video-grid">
+      <article class="video-card">
+        <button class="video-thumb" data-video="HIPiJHj6wKw" aria-label="Play: Barnyard song">
+          <img src="https://i.ytimg.com/vi/HIPiJHj6wKw/hqdefault.jpg" alt="Barnyard video thumbnail">
+          <span class="play">▶</span>
+        </button>
+        <div class="video-card-body">
+          <span class="tag">Just released</span>
+          <h3>The Barnyard Song</h3>
+          <p>Sing along with Old MacDonald and the whole barnyard crew.</p>
+          <span class="when">New on YouTube</span>
+        </div>
+      </article>
+      <article class="video-card">
+        <button class="video-thumb" data-video="IpuswcYQiG8" aria-label="Play: Fishing song">
+          <img src="https://i.ytimg.com/vi/IpuswcYQiG8/hqdefault.jpg" alt="Fishing song video thumbnail">
+          <span class="play">▶</span>
+        </button>
+        <div class="video-card-body">
+          <span class="tag">Latest video</span>
+          <h3>Down by the Fishing Hole</h3>
+          <p>Rhythm, rhyme, and a wiggly worm — perfect for movement time.</p>
+          <span class="when">New on YouTube</span>
+        </div>
+      </article>
+    </div>
+    <div style="margin-top:18px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <a class="outline-btn" href="https://www.youtube.com/channel/UC_THbKUe6o-K64vh7gWCPyQ/" target="_blank" rel="noopener">▶ Watch the whole channel</a>
+      <span style="font-size:13.5px; color:var(--muted);">Videos play right here — no leaving the site.</span>
+    </div>
+  </section>
+
+  <!-- subjects + search: reusable middle component -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Find a lesson, in seconds</h2>
+      <span class="note">search all lessons · or browse by subject</span>
+    </div>
+    <div class="planner">
+      <div class="planner-grid">
+        <div>
+          <h3>Search lessons</h3>
+          <p class="sub">Type a topic, song, or skill. The full search page also shows the curriculum.</p>
+          <form class="search-bar" action="/search" method="get" role="search">
+            <span class="mag">🔍</span>
+            <input type="search" name="q" placeholder="Try “steady beat”, “shapes”, “feelings”…" aria-label="Search lessons">
+            <button class="search-cta" type="submit">Search</button>
+          </form>
+          <div class="quick-links">
+            <span class="lbl">Popular:</span>
+            <a class="chip" href="/search?q=steady%20beat">Steady beat</a>
+            <a class="chip" href="/search?q=shapes">Shapes</a>
+            <a class="chip" href="/search?q=feelings">Feelings</a>
+            <a class="chip" href="/search?q=phonics">Phonics</a>
+          </div>
+        </div>
+        <div>
+          <h3>Browse the curriculum</h3>
+          <p class="sub">Lessons are organised by subject — and subjects change by grade.</p>
+          <a class="outline-btn" href="/search">Open the full search + curriculum →</a>
+          <div style="margin-top:14px; font-size:13.5px; color:var(--muted);">
+            <b style="color:var(--ink);">Tip:</b> the subject buttons below are grade-aware — a non-verbal infant doesn't learn formal math, so Daycare keeps only the subjects that fit.
+          </div>
+        </div>
+      </div>
+
+      <div class="subject-control" id="subject-control">
+        <div class="sub-head">
+          <h4>Subjects for your grade</h4>
+          <div class="grade-pick" id="grade-pick" role="group" aria-label="Choose a grade to filter subjects">
+            <button class="gpick" data-grade="daycare" data-on="1">Daycare</button>
+            <button class="gpick" data-grade="pre-school">Pre-School</button>
+            <button class="gpick" data-grade="kindergarten">Kindergarten</button>
+            <button class="gpick" data-grade="grade-one">Grade 1</button>
+            <button class="gpick" data-grade="grade-two">Grade 2</button>
+          </div>
+        </div>
+        <div class="subject-row" id="subject-row">
+          <a class="subj subj-s-Language" data-subj="Language" href="/search?q=language%20literacy"><span class="ico">📖</span>Language &amp; literacy</a>
+          <a class="subj subj-s-Math" data-subj="Math" href="/search?q=math%20numeracy"><span class="ico">🔢</span>Math</a>
+          <a class="subj subj-s-Science" data-subj="Science" href="/search?q=science%20nature"><span class="ico">🌱</span>Nature &amp; science</a>
+          <a class="subj subj-s-Health" data-subj="Health" href="/search?q=physical%20health"><span class="ico">🤸</span>Health &amp; movement</a>
+          <a class="subj subj-s-SEL" data-subj="SEL" href="/search?q=social%20emotional"><span class="ico">💛</span>Feelings &amp; friendship</a>
+          <a class="subj subj-s-FineMotor" data-subj="FineMotor" href="/search?q=fine%20motor"><span class="ico">✂️</span>Fine motor</a>
+          <a class="subj subj-s-Music" data-subj="Music" href="/search?q=music%20rhythm"><span class="ico">🥁</span>Music</a>
+          <a class="subj subj-s-Arts" data-subj="Arts" href="/search?q=art%20creative"><span class="ico">🎨</span>Arts</a>
+        </div>
+        <p class="subj-lock-note" id="subj-note">Subjects fade when they don't fit the grade — <b>you don't teach formal math to a non-verbal infant.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- spotify placeholder (final step) -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Songs &amp; playlists</h2>
+      <span class="note">streaming links land here</span>
+    </div>
+    <div class="music-placeholder">
+      <div class="m-card">
+        <span class="badge">🎧</span>
+        <h4>Morning Circle Playlist</h4>
+        <p>Greetings, weather, and a steady beat to start the day.</p>
+        <span class="soon">Spotify links coming soon</span>
+      </div>
+      <div class="m-card">
+        <span class="badge">🎧</span>
+        <h4>Movement &amp; Dance</h4>
+        <p>Action songs that get little bodies wiggling.</p>
+        <span class="soon">Spotify links coming soon</span>
+      </div>
+      <div class="m-card">
+        <span class="badge">🎧</span>
+        <h4>Calm Down Corner</h4>
+        <p>Slow songs for rest, quiet time, and winding down.</p>
+        <span class="soon">Spotify links coming soon</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="http://127.0.0.1:8900/design-assets/logo/individual-marks/brand-emblem-nav-44.png" alt="emblem">
+      <span>© 2026 Old MacDonald Had a School</span>
+    </div>
+    <nav style="display:flex; gap:16px; flex-wrap:wrap;">
+      <a href="/grade/daycare">Daycare</a>
+      <a href="/grade/pre-school">Pre-School</a>
+      <a href="/grade/kindergarten">Kindergarten</a>
+      <a href="/grade/grade-one">Grade 1</a>
+      <a href="/grade/grade-two">Grade 2</a>
+      <a href="/search">Search lessons</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- video modal -->
+<div class="modal" id="video-modal" data-open="0" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h3 id="modal-title">Old MacDonald Had a School</h3>
+      <button class="modal-close" id="modal-close" aria-label="Close video">✕</button>
+    </div>
+    <div class="modal-frame">
+      <iframe id="modal-frame" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Grade-aware subject control (the reusable component's behaviour)
+  var SUBJECTS_BY_GRADE = {
+    'daycare':      ['Language','Science','Health','SEL','FineMotor','Music','Arts'],   // no formal Math
+    'pre-school':   ['Language','Math','Science','Health','SEL','FineMotor','Music','Arts'],
+    'kindergarten': ['Language','Math','Science','Health','SEL','FineMotor','Music','Arts'],
+    'grade-one':    ['Language','Math','Science','Health','SEL','FineMotor','Music','Arts'],
+    'grade-two':    ['Language','Math','Science','Health','SEL','FineMotor','Music','Arts'],
+  };
+  var picks = document.querySelectorAll('#grade-pick .gpick');
+  var subjects = document.querySelectorAll('#subject-row .subj');
+  var note = document.getElementById('subj-note');
+  var GRADE_LABELS = { 'daycare':'Daycare','pre-school':'Pre-School','kindergarten':'Kindergarten','grade-one':'Grade 1','grade-two':'Grade 2' };
+
+  subjects.forEach(function(s) { s.dataset.href = s.getAttribute('href'); });
+
+  function applyGrade(grade) {
+    var allowed = SUBJECTS_BY_GRADE[grade] || [];
+    subjects.forEach(function(s) {
+      var locked = allowed.indexOf(s.dataset.subj) === -1;
+      s.dataset.locked = locked ? '1' : '0';
+      s.setAttribute('aria-disabled', locked ? 'true' : 'false');
+      if (locked) s.removeAttribute('href'); else s.setAttribute('href', s.dataset.href);
+    });
+    picks.forEach(function(p) { p.dataset.on = p.dataset.grade === grade ? '1' : '0'; });
+    if (grade === 'daycare') {
+      note.innerHTML = 'Daycare keeps only the subjects that fit — <b>no formal math for non-verbal infants.</b> Switch grades above to see the full set.';
+    } else {
+      note.innerHTML = 'All eight subjects are available for <b>' + (GRADE_LABELS[grade] || grade) + '</b>.';
+    }
+  }
+  picks.forEach(function(p) {
+    p.addEventListener('click', function() { applyGrade(p.dataset.grade); });
+  });
+  applyGrade('daycare');
+
+  // Video modal
+  var modal = document.getElementById('video-modal');
+  var mframe = document.getElementById('modal-frame');
+  var mtitle = document.getElementById('modal-title');
+  var titles = { 'HIPiJHj6wKw': 'The Barnyard Song', 'IpuswcYQiG8': 'Down by the Fishing Hole' };
+
+  document.querySelectorAll('.video-thumb').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = btn.dataset.video;
+      mtitle.textContent = titles[id] || 'Old MacDonald Had a School';
+      mframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      modal.dataset.open = '1';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeModal() {
+    modal.dataset.open = '0';
+    mframe.src = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

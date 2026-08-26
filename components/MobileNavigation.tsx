@@ -13,12 +13,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { TEACHER_GRADE_ITEMS, type ActivePage } from "./site-navigation";
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
+import { NAV_ITEMS, TEACHER_GRADE_ITEMS, type ActivePage } from "./site-navigation";
 
 /**
  * Responsive navigation composition using the installed shadcn Sheet.
- * Navigation order: Grades → Subjects → Search → About (matching header)
+ * Desktop/tablet header stays minimal (Home, Search, About); the mobile
+ * sheet adds the grade links since there's no sidebar on small screens.
  */
 export function MobileNavigation({ active }: { active?: ActivePage }) {
   const [open, setOpen] = useState(false);
@@ -26,10 +27,13 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
   return (
     <div>
       <Sheet open={open} onOpenChange={setOpen}>
+        {/* Ghost has no default foreground; on the bg-brand-navy header the icon would be
+            invisible, so pin it to the header's foreground token (semantic, not ad-hoc). */}
         <SheetTrigger asChild>
           <Button
             variant="ghost"
             size="icon-lg"
+            className="size-11 text-brand-navy-foreground"
             aria-label="Open navigation menu"
           >
             <Menu data-icon="inline-start" aria-hidden="true" />
@@ -38,7 +42,7 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
         </SheetTrigger>
 
         <SheetContent
-          className="w-full overflow-y-auto sm:max-w-sm"
+          className="overflow-y-auto"
           side="right"
           showCloseButton={false}
         >
@@ -62,40 +66,24 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
           </SheetHeader>
 
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
-            {/* Grades - first */}
-            <div className="border-b pb-3">
-              <p className="px-4 pb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">Grades</p>
-              <div className="flex flex-col gap-1">
-                {TEACHER_GRADE_ITEMS.map((grade) => (
-                  <Button asChild variant="ghost" className="w-full justify-start" key={grade.key}>
-                    <Link href={grade.href} aria-current={active === grade.key ? "page" : undefined} onClick={() => setOpen(false)}>
-                      {grade.label}
-                    </Link>
-                  </Button>
-                ))}
-              </div>
-            </div>
+            {NAV_ITEMS.map((item) => (
+              <Button asChild variant="ghost" className="w-full justify-start" key={item.key}>
+                <Link href={item.href} aria-current={active === item.key ? "page" : undefined} onClick={() => setOpen(false)}>
+                  {item.label}
+                </Link>
+              </Button>
+            ))}
 
-            {/* Subjects */}
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link href="/#browse-by-subject" aria-current={active === "topics" ? "page" : undefined} onClick={() => setOpen(false)}>
-                Subjects
-              </Link>
-            </Button>
-
-            {/* Search */}
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link href="/search" aria-current={active === "search" ? "page" : undefined} onClick={() => setOpen(false)}>
-                Search lessons
-              </Link>
-            </Button>
-
-            {/* About */}
-            <Button asChild variant="ghost" className="w-full justify-start">
-              <Link href="/about" aria-current={active === "about" ? "page" : undefined} onClick={() => setOpen(false)}>
-                About
-              </Link>
-            </Button>
+            <p className="px-3 pt-2 text-xs font-black uppercase tracking-widest text-muted-foreground">
+              Grades
+            </p>
+            {TEACHER_GRADE_ITEMS.map((grade) => (
+              <Button asChild variant="ghost" className="w-full justify-start" key={grade.key}>
+                <Link href={grade.href} aria-current={active === grade.key ? "page" : undefined} onClick={() => setOpen(false)}>
+                  {grade.label}
+                </Link>
+              </Button>
+            ))}
           </nav>
         </SheetContent>
       </Sheet>

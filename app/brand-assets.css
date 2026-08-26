@@ -7,7 +7,7 @@
  * Usage:
  * <span class="brand-asset music-fiddle icon-small" role="img" aria-label="Fiddle"></span>
  *
- * Source and status notes: /branding#assets
+ * Source and status notes: DESIGN.md and content/pages/branding/characters.mdx
  */
 
 .brand-asset {
@@ -22,33 +22,44 @@
   vertical-align: middle;
 }
 
+/* Full-bleed scene/illustration rendering (hero scenes, large artwork).
+   Unlike .brand-asset (icon-sized, contain), this fills its container. */
+.brand-scene {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-image: var(--brand-asset-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 /* Repeatable material sources. Components consume these names, never raw URLs. */
 :root {
   --home-cork-board: url('/design-assets/cork-board-kit-v2/medium-board.webp');
   --brand-cork-texture: var(--asset-cork-board);
-  --cast-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.webp');
-  --cast-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.webp');
-  --cast-mr-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp');
-  --cast-miss-hayley-texture: url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp');
-  --cast-mr-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.webp');
-  --cast-mr-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.webp');
-  --cast-mr-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.webp');
-  --cast-miss-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp');
-  --cast-hopper-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.webp');
-  --cast-whiskers-texture: url('/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.webp');
-  --cast-scout-texture: url('/design-assets/web-material-library-v1/felt/felt-11-scout-tile.webp');
-  --cast-penny-texture: url('/design-assets/web-material-library-v1/felt/felt-12-penny-tile.webp');
-  --cast-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.webp');
-  --cast-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-14-puddles-tile.webp');
-  --cast-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-15-sam-tile.webp');
-  --cast-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.webp');
+  --characters-old-macdonald-texture: url('/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.webp');
+  --characters-miss-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-02-miss-puddles-tile.webp');
+  --characters-mr-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp');
+  --characters-miss-hayley-texture: url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp');
+  --characters-mr-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-05-mr-sam-tile.webp');
+  --characters-mr-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-06-mr-maisy-tile.webp');
+  --characters-mr-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-07-mr-puddles-tile.webp');
+  --characters-miss-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp');
+  --characters-hopper-texture: url('/design-assets/web-material-library-v1/felt/felt-09-hopper-tile.webp');
+  --characters-whiskers-texture: url('/design-assets/web-material-library-v1/felt/felt-10-whiskers-tile.webp');
+  --characters-scout-texture: url('/design-assets/web-material-library-v1/felt/felt-11-scout-tile.webp');
+  --characters-penny-texture: url('/design-assets/web-material-library-v1/felt/felt-12-penny-tile.webp');
+  --characters-maisy-texture: url('/design-assets/web-material-library-v1/felt/felt-13-maisy-tile.webp');
+  --characters-puddles-texture: url('/design-assets/web-material-library-v1/felt/felt-14-puddles-tile.webp');
+  --characters-sam-texture: url('/design-assets/web-material-library-v1/felt/felt-15-sam-tile.webp');
+  --characters-rusty-texture: url('/design-assets/web-material-library-v1/felt/felt-16-rusty-tile.webp');
   --asset-cardboard-kraft: url('/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.webp');
   --asset-cardboard-ivory: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.webp');
   --asset-cork-muted: url('/design-assets/cork-board-kit-v2/muted-natural-cork-tile-v01.webp');
   --asset-woven-old-macdonald: url('/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.webp');
   --asset-denim-indigo: url('/design-assets/web-material-library-v1/denim/denim-dark-indigo-tile-v01.webp');
   --asset-construction-mr-sam: url('/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.webp');
-  --asset-thread-old-macdonald: url('/design-assets/web-material-library-v1/thread-overlays/thread-overlay-01-old-macdonald-tile.webp');
   --asset-leather-old-macdonald: url('/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.webp');
   --asset-leather-blue: url('/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.webp');
   --asset-leather-indigo: url('/design-assets/web-material-library-v1/leather/individual-tiles/07-mr-puddles-leather-tile-v01.webp');
@@ -60,16 +71,16 @@
   --asset-cork-board-portrait: url('/design-assets/cork-board-kit-v2/vertical-board.webp');
   --asset-cork-planning-strip: url('/design-assets/cork-board-kit-v2/wide-planning-strip.webp');
   --asset-brand-emblem-review: url('/design-assets/brand-emblem-v1-review/brand-emblem-family-contact-sheet.webp');
-  --asset-brand-emblem-flat-micro: url('/design-assets/brand-emblem-v1/candidate-flat-marks/brand-emblem-flat-32.png');
-  --asset-brand-emblem-screen-nav: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-nav-44.png');
-  --asset-brand-emblem-screen-card: url('/design-assets/brand-emblem-v1/individual-marks/brand-emblem-card-128.webp');
-  --asset-brand-emblem-detail-media: url('/design-assets/brand-emblem-v1/candidate-detail-marks/brand-emblem-detail-512.webp');
-  --asset-home-scene-class-gathering: url('/scenes/hero/old-macs-open-circle-gathering.webp');
-  --asset-home-scene-growing-together: url('/scenes/hero/home-journey-reflect-v1.webp');
-  --asset-home-scene-music-landscape: url('/scenes/hero/old-mac-branding-where-did-the-folder-go.webp');
-  --asset-home-scene-schoolhouse: url('/scenes/hero/oldmac-school.webp');
-  --asset-about-classroom-hero: url('/scenes/home-schoolhouse-classroom-hero-v1.webp');
-  --asset-about-miss-hayley-profile: url('/staff_and_students/miss-hayley-transparent-circle.webp');
+  --asset-brand-emblem-flat-micro: url('/design-assets/logo/candidate-flat-marks/brand-emblem-flat-32.png');
+  --asset-brand-emblem-screen-nav: url('/design-assets/logo/individual-marks/brand-emblem-nav-44.png');
+  --asset-brand-emblem-screen-card: url('/design-assets/logo/individual-marks/brand-emblem-card-128.webp');
+  --asset-brand-emblem-detail-media: url('/design-assets/logo/candidate-detail-marks/brand-emblem-detail-512.webp');
+  --asset-home-scene-class-gathering: url('/hero/old-macs-open-circle-gathering.webp');
+  --asset-home-scene-growing-together: url('/hero/home-journey-reflect-v1.webp');
+  --asset-home-scene-music-landscape: url('/hero/old-mac-branding-where-did-the-folder-go.webp');
+  --asset-home-scene-schoolhouse: url('/hero/oldmac-school.webp');
+  --asset-about-classroom-hero: url('/worksheets/home-schoolhouse-classroom-hero-v1.webp');
+  --asset-about-miss-hayley-profile: url('/characters/full-body-transparent/miss-hayley-transparent-circle.webp');
   --subject-language-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/01-torn-notebook-note.webp');
   --subject-math-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/02-blue-grid-note.webp');
   --subject-science-paper: url('/design-assets/classroom-paper-notes-v1/individual-notes/03-sage-deckled-note.webp');
@@ -113,40 +124,40 @@
 [data-subject='sel'] { --subject-note-paper: var(--subject-sel-paper); }
 [data-subject='fine-motor'] { --subject-note-paper: var(--subject-fine-motor-paper); }
 
-/* Compact cast artwork. Character keys select assets; consumers never carry URLs. */
-[data-character='old-macdonald'] { --character-face-patch:url('/icons/early-years/face-patches/old-macdonald-yellow.webp'); --character-face-bust:url('/icons/early-years/face-busts/old-macdonald-yellow.webp'); }
-[data-character='miss-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/miss-puddles-purple.webp'); --character-face-bust:url('/icons/early-years/face-busts/miss-puddles-purple.webp'); }
-[data-character='mr-rusty'] { --character-face-patch:url('/icons/early-years/face-patches/mr-rusty-blue.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-rusty-blue.webp'); }
-[data-character='miss-hayley'] { --character-face-patch:url('/icons/early-years/face-patches/miss-hayley-purple.webp'); --character-face-bust:url('/icons/early-years/face-busts/miss-hayley-purple.webp'); }
-[data-character='mr-sam'] { --character-face-patch:url('/icons/early-years/face-patches/mr-sam-clean-v2.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-sam-clean-v2.webp'); }
-[data-character='mr-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/mr-maisy-orange.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-maisy-orange.webp'); }
-[data-character='mr-puddles'] { --character-face-patch:url('/icons/early-years/face-patches/mr-puddles-green.webp'); --character-face-bust:url('/icons/early-years/face-busts/mr-puddles-green.webp'); }
-[data-character='miss-maisy'] { --character-face-patch:url('/icons/early-years/face-patches/miss-maisy-purple.webp'); --character-face-bust:url('/icons/early-years/face-busts/miss-maisy-purple.webp'); }
-[data-character='hopper'] { --character-face-patch:url('/icons/early-years/face-patches/hopper-red.webp'); --character-face-bust:url('/icons/early-years/face-busts/hopper-red.webp'); }
-[data-character='whiskers'] { --character-face-patch:url('/icons/early-years/face-patches/whiskers-orange.webp'); --character-face-bust:url('/icons/early-years/face-busts/whiskers-orange.webp'); }
-[data-character='scout'] { --character-face-patch:url('/icons/early-years/face-patches/scout-green.webp'); --character-face-bust:url('/icons/early-years/face-busts/scout-green.webp'); }
-[data-character='penny'] { --character-face-patch:url('/icons/early-years/face-patches/penny-orange.webp'); --character-face-bust:url('/icons/early-years/face-busts/penny-orange.webp'); }
-[data-character='maisy'] { --character-face-patch:url('/icons/early-years/face-patches/maisy-yellow.webp'); --character-face-bust:url('/icons/early-years/face-busts/maisy-yellow.webp'); }
-[data-character='puddles'] { --character-face-patch:url('/icons/early-years/face-patches/puddles-blue.webp'); --character-face-bust:url('/icons/early-years/face-busts/puddles-blue.webp'); }
-[data-character='sam'] { --character-face-patch:url('/icons/early-years/face-patches/sam-red.webp'); --character-face-bust:url('/icons/early-years/face-busts/sam-red.webp'); }
-[data-character='rusty'] { --character-face-patch:url('/icons/early-years/face-patches/rusty-blue.webp'); --character-face-bust:url('/icons/early-years/face-busts/rusty-blue.webp'); }
+/* Compact character artwork. Character keys select assets; consumers never carry URLs. */
+[data-character='old-macdonald'] { --character-face-patch:url('/characters/face-patch-transparent/old-macdonald-yellow.webp'); --character-face-bust:url('/characters/face-patches-background-circle/old-macdonald-yellow.webp'); }
+[data-character='miss-puddles'] { --character-face-patch:url('/characters/face-patch-transparent/miss-puddles-purple.webp'); --character-face-bust:url('/characters/face-patches-background-circle/miss-puddles-purple.webp'); }
+[data-character='mr-rusty'] { --character-face-patch:url('/characters/face-patch-transparent/mr-rusty-blue.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-rusty-blue.webp'); }
+[data-character='miss-hayley'] { --character-face-patch:url('/characters/face-patch-transparent/miss-hayley-purple.webp'); --character-face-bust:url('/characters/face-patches-background-circle/miss-hayley-purple.webp'); }
+[data-character='mr-sam'] { --character-face-patch:url('/characters/face-patch-transparent/mr-sam-clean-v2.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-sam-clean-v2.webp'); }
+[data-character='mr-maisy'] { --character-face-patch:url('/characters/face-patch-transparent/mr-maisy-orange.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-maisy-orange.webp'); }
+[data-character='mr-puddles'] { --character-face-patch:url('/characters/face-patch-transparent/mr-puddles-green.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-puddles-green.webp'); }
+[data-character='miss-maisy'] { --character-face-patch:url('/characters/face-patch-transparent/miss-maisy-purple.webp'); --character-face-bust:url('/characters/face-patches-background-circle/miss-maisy-purple.webp'); }
+[data-character='hopper'] { --character-face-patch:url('/characters/face-patch-transparent/hopper-red.webp'); --character-face-bust:url('/characters/face-patches-background-circle/hopper-red.webp'); }
+[data-character='whiskers'] { --character-face-patch:url('/characters/face-patch-transparent/whiskers-orange.webp'); --character-face-bust:url('/characters/face-patches-background-circle/whiskers-orange.webp'); }
+[data-character='scout'] { --character-face-patch:url('/characters/face-patch-transparent/scout-green.webp'); --character-face-bust:url('/characters/face-patches-background-circle/scout-green.webp'); }
+[data-character='penny'] { --character-face-patch:url('/characters/face-patch-transparent/penny-orange.webp'); --character-face-bust:url('/characters/face-patches-background-circle/penny-orange.webp'); }
+[data-character='maisy'] { --character-face-patch:url('/characters/face-patch-transparent/maisy-yellow.webp'); --character-face-bust:url('/characters/face-patches-background-circle/maisy-yellow.webp'); }
+[data-character='puddles'] { --character-face-patch:url('/characters/face-patch-transparent/puddles-blue.webp'); --character-face-bust:url('/characters/face-patches-background-circle/puddles-blue.webp'); }
+[data-character='sam'] { --character-face-patch:url('/characters/face-patch-transparent/sam-red.webp'); --character-face-bust:url('/characters/face-patches-background-circle/sam-red.webp'); }
+[data-character='rusty'] { --character-face-patch:url('/characters/face-patch-transparent/rusty-blue.webp'); --character-face-bust:url('/characters/face-patches-background-circle/rusty-blue.webp'); }
 
-[data-character='old-macdonald'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/01-old-macdonald-badge.webp'); }
-[data-character='miss-puddles'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/02-miss-puddles-badge.webp'); }
-[data-character='mr-rusty'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/03-mr-rusty-badge.webp'); }
-[data-character='miss-hayley'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/04-miss-hayley-badge.webp'); }
-[data-character='mr-sam'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/05-mr-sam-badge.webp'); }
-[data-character='mr-maisy'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/06-mr-maisy-badge.webp'); }
-[data-character='mr-puddles'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/07-mr-puddles-badge.webp'); }
-[data-character='miss-maisy'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/08-miss-maisy-badge.webp'); }
-[data-character='hopper'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/09-hopper-badge.webp'); }
-[data-character='whiskers'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/10-whiskers-badge.webp'); }
-[data-character='scout'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/11-scout-badge.webp'); }
-[data-character='penny'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/12-penny-badge.webp'); }
-[data-character='maisy'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/13-maisy-badge.webp'); }
-[data-character='puddles'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/14-puddles-badge.webp'); }
-[data-character='sam'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/15-sam-badge.webp'); }
-[data-character='rusty'] { --character-embroidered-badge:url('/design-assets/cast-badges-v1/individual-badges/16-rusty-badge.webp'); }
+[data-character='old-macdonald'] { --character-embroidered-badge:url('/characters/high-res-cloth/01-old-macdonald-badge.webp'); }
+[data-character='miss-puddles'] { --character-embroidered-badge:url('/characters/high-res-cloth/02-miss-puddles-badge.webp'); }
+[data-character='mr-rusty'] { --character-embroidered-badge:url('/characters/high-res-cloth/03-mr-rusty-badge.webp'); }
+[data-character='miss-hayley'] { --character-embroidered-badge:url('/characters/high-res-cloth/04-miss-hayley-badge.webp'); }
+[data-character='mr-sam'] { --character-embroidered-badge:url('/characters/high-res-cloth/05-mr-sam-badge.webp'); }
+[data-character='mr-maisy'] { --character-embroidered-badge:url('/characters/high-res-cloth/06-mr-maisy-badge.webp'); }
+[data-character='mr-puddles'] { --character-embroidered-badge:url('/characters/high-res-cloth/07-mr-puddles-badge.webp'); }
+[data-character='miss-maisy'] { --character-embroidered-badge:url('/characters/high-res-cloth/08-miss-maisy-badge.webp'); }
+[data-character='hopper'] { --character-embroidered-badge:url('/characters/high-res-cloth/09-hopper-badge.webp'); }
+[data-character='whiskers'] { --character-embroidered-badge:url('/characters/high-res-cloth/10-whiskers-badge.webp'); }
+[data-character='scout'] { --character-embroidered-badge:url('/characters/high-res-cloth/11-scout-badge.webp'); }
+[data-character='penny'] { --character-embroidered-badge:url('/characters/high-res-cloth/12-penny-badge.webp'); }
+[data-character='maisy'] { --character-embroidered-badge:url('/characters/high-res-cloth/13-maisy-badge.webp'); }
+[data-character='puddles'] { --character-embroidered-badge:url('/characters/high-res-cloth/14-puddles-badge.webp'); }
+[data-character='sam'] { --character-embroidered-badge:url('/characters/high-res-cloth/15-sam-badge.webp'); }
+[data-character='rusty'] { --character-embroidered-badge:url('/characters/high-res-cloth/16-rusty-badge.webp'); }
 
 .character-face-patch { --brand-asset-image:var(--character-face-patch); }
 .character-face-bust { --brand-asset-image:var(--character-face-bust); }
@@ -174,7 +185,7 @@
 [data-grade='pre-school'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-08-miss-maisy-tile.webp'); }
 [data-grade='kindergarten'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp'); }
 [data-grade='grade-one'] { --grade-texture:url('/design-assets/web-material-library-v1/felt/felt-04-miss-hayley-tile.webp'); }
-[data-grade='grade-two'] { --grade-texture:var(--cast-mr-maisy-texture); }
+[data-grade='grade-two'] { --grade-texture:var(--characters-mr-maisy-texture); }
 
 /* Grade signals: asset selection is separate from grade colour. */
 .grade-icon[data-grade-icon='daycare'] { --brand-asset-image:url('/brand-kit-icon-sheets/individual-icons/grade-daycare.webp'); }
@@ -272,8 +283,4 @@
 .fastener-kraft-pocket { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/11-kraft-corner-pocket.webp'); }
 .fastener-quilted-tab { --brand-asset-image: url('/design-assets/classroom-fasteners-v2/individual-icons/14-quilted-corner-tab.webp'); }
 .fastener-washi-tape { --brand-asset-image: url('/design-assets/classroom-fasteners-v1/individual-icons/06-washi-tape.webp'); }
-
-/* Authored patch layers. These are decorative layers, never interaction targets. */
-.patch-old-macdonald-square { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/01-old-macdonald-square.webp'); }
-.patch-miss-puddles-circle { --brand-asset-image: url('/design-assets/blank-felt-patches-v1/individual-patches/02-miss-puddles-circle.webp'); }
 

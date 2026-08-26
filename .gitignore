@@ -34,8 +34,13 @@ $null
 
 .vercel
 
-*storybook.log
-storybook-static
 /tmp
 
 # Local browser/shell scratch artifacts
+open-code-review/
+.hermes/
+.claude/
+.vercel
+.env*
+design-proof/
+models/

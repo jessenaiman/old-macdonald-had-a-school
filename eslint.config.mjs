@@ -1,5 +1,3 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
 
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
@@ -16,7 +14,7 @@ const eslintConfig = defineConfig([
     ".agents/**",
     ".figma/**",
     "data/**",
-    "docker/**",
+    "design-proof/**",
     "docs/**",
     "out/**",
     "build/**",
@@ -25,13 +23,11 @@ const eslintConfig = defineConfig([
     "public/**",
     "qa/**",
     "scripts/**",
-    "storybook-static/**",
     "test-results/**",
     "texture-assets/**",
     "vite.config.ts",
     "next-env.d.ts",
   ]),
-  ...storybook.configs["flat/recommended"]
 ]);
 
 export default eslintConfig;

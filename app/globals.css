@@ -6,59 +6,64 @@
 /*
  * Old MacDonald Had a School — shadcn Theme
  *
- * Design references show: warm navy anchor, gold/mustard accent, dusty rose, cream paper textures
- * Typography: serif headlines + sans-serif UI + script personality
- * Backgrounds: repeating paper/cardboard textures from brand-assets (responsive, not hero images)
- * Character colors: preserved for identity (badges, avatars) — NOT used as semantic tokens
+ * Canonical shadcn v4 scaffold (@theme inline) with the characters.mdx palette:
+ * - Foundation colors live in :root / .dark (characters.mdx is the single source of truth;
+ *   globals.css is the implementation layer and must not invent colors).
+ * - @theme inline maps semantic tokens to Tailwind utilities so component-level
+ *   CSS variable overrides (e.g. --card) cascade correctly.
+ * - Textures (cork, felt, cardboard, paper notes) come from brand-assets.css.
  */
 
 :root {
   color-scheme: light;
+  --brand-repeat-default: repeat;
   --radius: 0.625rem;
 
-  /* === FOUNDATION PALETTE ===
-   * Warm, playful, educationally-focused. Compatible with character colors
-   * but not dependent on them. All semantic tokens derive from here. */
-
-  /* Cream paper base — warm, readable, not stark white */
+  /* === FOUNDATION PALETTE (characters.mdx) === */
   --paper-cream: #fefce8;
   --paper-warm: #fdf8e3;
   --paper-muted: #f0e6d0;
   --paper-rose: #fdf2f8;
 
-  /* Navy anchor — trustworthy, readable on cream */
   --navy-deep: #1e2a38;
   --navy-muted: #3a4a5a;
   --navy-soft: #4a5a6a;
 
-  /* Warm wood/earth tones for borders, secondary surfaces */
+  /* === BRAND NAVY SURFACE (stable across themes) ===
+   * The header/footer/hero "solid navy" brand surface must stay navy in BOTH
+   * light and dark mode (design ref: solid navy header). --primary inverts in
+   * .dark so buttons/links stay legible; these tokens deliberately do NOT, so
+   * brand surfaces pin to literal navy values instead of var(--navy-deep)
+   * (which the .dark block redefines to cream). */
+  --brand-navy: #1e2a38;
+  --brand-navy-foreground: #fefce8;
+  /* pinned light paper surface — deliberate sibling of --brand-navy: does NOT
+     invert in .dark, so the hero "New this week" card stays cream in both themes */
+  --brand-paper: #fdf8e3;
+  --brand-paper-foreground: #1e2a2e;
+  --brand-paper-muted: #6b6152;
+
   --wood-warm: #c4a07a;
   --wood-muted: #d4b896;
   --wood-soft: #e8d5c0;
 
-  /* Ink — high contrast on cream, not pure black */
   --ink-primary: #1a2a2e;
   --ink-secondary: #3d4d50;
-  --ink-muted: #6b7a7c;
+  --ink-muted: #5b6a6c;
 
-  /* Gold/mustard accent — warm, energetic, CTAs */
   --gold-bright: #d4a82a;
   --gold-soft: #e8c55a;
   --gold-muted: #b89020;
 
-  /* Dusty rose — playful, friendly, complementary */
   --rose-warm: #d47a8a;
   --rose-soft: #e8a5b0;
   --rose-muted: #b86578;
 
-  /* Sage/teal — calm, nature, complementary */
   --sage-warm: #6b9b8a;
   --sage-soft: #8dc8b8;
   --sage-muted: #548070;
 
-  /* === SEMANTIC SHADCN TOKENS ===
-   * These are what components consume. Derived from foundation above. */
-
+  /* === SEMANTIC SHADCN TOKENS === */
   --background: var(--paper-cream);
   --foreground: var(--ink-primary);
 
@@ -87,55 +92,89 @@
   --input: var(--wood-muted);
   --ring: var(--gold-bright);
 
-  /* === CHARACTER IDENTITY (PRESERVED FOR BADGES/AVATARS ONLY) ===
-   * These are NOT semantic tokens. Use via .cast-* classes or data-character. */
-  --cast-old-macdonald-color: #8b5e34;
-  --cast-old-macdonald-foreground: #fefce8;
-  --cast-miss-puddles-color: #e8a227;
-  --cast-miss-puddles-foreground: #1e2a38;
-  --cast-miss-maisy-color: #55705a;
-  --cast-miss-maisy-foreground: #fefce8;
-  --cast-mr-rusty-color: #2c6c9b;
-  --cast-mr-rusty-foreground: #fefce8;
-  --cast-miss-hayley-color: #c9527a;
-  --cast-miss-hayley-foreground: #1e2a38;
-  --cast-mr-maisy-color: #b5272c;
-  --cast-mr-maisy-foreground: #fefce8;
-  --cast-mr-sam-color: #1f6b6b;
-  --cast-mr-sam-foreground: #fefce8;
-  --cast-mr-puddles-color: #4f5fa0;
-  --cast-mr-puddles-foreground: #fefce8;
-  --cast-hopper-color: #d9713c;
-  --cast-hopper-foreground: #fefce8;
-  --cast-whiskers-color: #7b4fa8;
-  --cast-whiskers-foreground: #fefce8;
-  --cast-scout-color: #4a7a3a;
-  --cast-scout-foreground: #fefce8;
-  --cast-penny-color: #c9962e;
-  --cast-penny-foreground: #1e2a38;
-  --cast-maisy-color: #1f4e5f;
-  --cast-maisy-foreground: #fefce8;
-  --cast-puddles-color: #4fa0c9;
-  --cast-puddles-foreground: #fefce8;
-  --cast-sam-color: #7a9a3d;
-  --cast-sam-foreground: #fefce8;
-  --cast-rusty-color: #8b5030;
-  --cast-rusty-foreground: #fefce8;
+  /* Chart palette (derived from character palette) */
+  --chart-1: var(--gold-bright);
+  --chart-2: var(--sage-warm);
+  --chart-3: var(--rose-warm);
+  --chart-4: var(--navy-muted);
+  --chart-5: var(--characters-mr-puddles-color);
 
-  /* Grade/Subject routing (for page-level theming, not component tokens) */
-  --grade-early-years-color: #55705a;
-  --grade-daycare-color: #e8a227;
-  --grade-pre-school-color: #55705a;
-  --grade-kindergarten-color: #2c6c9b;
-  --grade-one-color: #c9527a;
-  --grade-two-color: #b5272c;
+  /* Sidebar (nav surfaces) */
+  --sidebar: var(--navy-deep);
+  --sidebar-foreground: var(--paper-cream);
+  --sidebar-primary: var(--gold-bright);
+  --sidebar-primary-foreground: var(--navy-deep);
+  --sidebar-accent: var(--paper-muted);
+  --sidebar-accent-foreground: var(--ink-primary);
+  --sidebar-border: var(--wood-muted);
+  --sidebar-ring: var(--gold-bright);
 
-  --subject-language-color: #c9527a;
-  --subject-math-color: #1f6b6b;
-  --subject-science-color: #55705a;
-  --subject-music-color: #2c6c9b;
-  --subject-arts-color: #4f5fa0;
-  --subject-health-color: #b5272c;
+  /* === CHARACTER IDENTITY (characters.mdx — badges/avatars only) === */
+  --characters-old-macdonald-color: #b87a4a;
+  --characters-old-macdonald-foreground: #fefce8;
+  --characters-miss-puddles-color: #f6af32;
+  --characters-miss-puddles-foreground: #1e2a38;
+  --characters-miss-maisy-color: #6b9a7a;
+  --characters-miss-maisy-foreground: #fefce8;
+  --characters-mr-rusty-color: #3589c4;
+  --characters-mr-rusty-foreground: #fefce8;
+  --characters-miss-hayley-color: #d95c86;
+  --characters-miss-hayley-foreground: #1e2a38;
+  --characters-mr-maisy-color: #c45d62;
+  --characters-mr-maisy-foreground: #fefce8;
+  --characters-mr-sam-color: #2a9a9a;
+  --characters-mr-sam-foreground: #fefce8;
+  --characters-mr-puddles-color: #5367b5;
+  --characters-mr-puddles-foreground: #fefce8;
+  --characters-hopper-color: #e66c71;
+  --characters-hopper-foreground: #fefce8;
+  --characters-whiskers-color: #e695b0;
+  --characters-whiskers-foreground: #fefce8;
+  --characters-scout-color: #8dc4a8;
+  --characters-scout-foreground: #fefce8;
+  --characters-penny-color: #f9cb7a;
+  --characters-penny-foreground: #1e2a38;
+  --characters-maisy-color: #e8c8a0;
+  --characters-maisy-foreground: #fefce8;
+  --characters-puddles-color: #8f9ccf;
+  --characters-puddles-foreground: #fefce8;
+  --characters-sam-color: #6cb1b1;
+  --characters-sam-foreground: #fefce8;
+  --characters-rusty-color: #72aad2;
+  --characters-rusty-foreground: #fefce8;
+
+  /* Grade/Subject routing (page-level theming) */
+  --grade-early-years-color: #6b9a7a;
+  --grade-daycare-color: #f6af32;
+  --grade-pre-school-color: #6b9a7a;
+  --grade-kindergarten-color: #3589c4;
+  --grade-one-color: #d95c86;
+  --grade-two-color: #c45d62;
+
+  --subject-language-color: #d95c86;
+  --subject-math-color: #2a9a9a;
+  --subject-science-color: #6b9a7a;
+  --subject-music-color: #3589c4;
+  --subject-arts-color: #5367b5;
+  --subject-health-color: #c45d62;
+
+  /* Material surface tokens (physical materials — paper/ink/navy/wood are REAL
+   * objects and must NOT invert in .dark; per dark-mode-token-overload rule:
+   * pin to literal hex, never to a var() the .dark block redefines) */
+  --brand-cork-color: #bd8f58;
+  --theme-paper: #fdf8e3;
+  --theme-paper-muted: #f0e6d0;
+  --theme-ink: #1a2a2e;
+  --theme-copy: #6b7a7c;
+  --theme-navy: #1e2a38;
+  --theme-white: #fefce8;
+  --theme-wood: #c4a07a;
+  --theme-wood-light: #e8d5c0;
+  --curriculum-yellow: #d4a82a;
+  --curriculum-red: #d47a8a;
+  --curriculum-blue: var(--characters-mr-rusty-color);
+  --curriculum-green: var(--characters-miss-maisy-color);
+  --curriculum-purple: var(--characters-mr-puddles-color);
 }
 
 .dark {
@@ -182,10 +221,25 @@
   --border: var(--wood-warm);
   --input: var(--wood-muted);
   --ring: var(--gold-bright);
+
+  --chart-1: var(--gold-soft);
+  --chart-2: var(--sage-soft);
+  --chart-3: var(--rose-soft);
+  --chart-4: var(--navy-muted);
+  --chart-5: var(--characters-puddles-color);
+
+  --sidebar: var(--navy-deep);
+  --sidebar-foreground: var(--paper-cream);
+  --sidebar-primary: var(--gold-bright);
+  --sidebar-primary-foreground: var(--navy-deep);
+  --sidebar-accent: var(--paper-muted);
+  --sidebar-accent-foreground: var(--ink-primary);
+  --sidebar-border: var(--wood-muted);
+  --sidebar-ring: var(--gold-bright);
 }
 
-/* === TAILWIND V4 THEME MAPPING === */
-@theme {
+/* === TAILWIND V4 THEME MAPPING (@theme inline per shadcn docs) === */
+@theme inline {
   --font-display: var(--font-farm-display);
   --font-heading: var(--font-farm-display);
   --font-section: var(--font-farm-section);
@@ -214,15 +268,49 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Brand navy surface (stable — does not invert in dark mode) */
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-foreground: var(--brand-navy-foreground);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 
   /* Custom: paper texture backgrounds (repeating, responsive) */
   --color-paper-cream: var(--paper-cream);
   --color-paper-warm: var(--paper-warm);
   --color-paper-muted: var(--paper-muted);
+
+  /* Custom: wood/earth tones (grade nav shelf, borders) */
+  --color-wood-warm: var(--wood-warm);
+  --color-wood-muted: var(--wood-muted);
+  --color-wood-soft: var(--wood-soft);
+
+  /* Custom: grade identity colors (characters.mdx — character subject-coded) */
+  --color-grade-daycare: var(--grade-daycare-color);
+  --color-grade-pre-school: var(--grade-pre-school-color);
+  --color-grade-kindergarten: var(--grade-kindergarten-color);
+  --color-grade-one: var(--grade-one-color);
+  --color-grade-two: var(--grade-two-color);
 }
 
 /* === BASE LAYER === */
@@ -284,9 +372,7 @@
   }
 }
 
-/* === REPEATING BACKGROUND UTILITIES ===
- * Use these instead of hero images for responsive, shadcn-compatible backgrounds */
-
+/* === REPEATING BACKGROUND UTILITIES === */
 .bg-paper-ivory {
   background-color: var(--paper-warm);
   background-image: var(--asset-cardboard-ivory);
@@ -319,7 +405,7 @@
 }
 
 .bg-cork {
-  background-color: #bd8f58;
+  background-color: var(--brand-cork-color);
   background-image: var(--asset-cork-repeat-web);
   background-repeat: repeat;
   background-size: 300px;
@@ -339,20 +425,18 @@
   background-size: 256px;
 }
 
-/* === CARD SURFACE RECIPES ===
- * Apply to shadcn Card components for physical-material feel */
-
+/* === CARD SURFACE RECIPES === */
 .card-paper {
   @apply bg-card border-border shadow-sm;
   background-image: var(--asset-cardboard-ivory);
-  background-repeat: repeat;
+  background-repeat: var(--card-repeat, var(--brand-repeat-default));
   background-size: 320px;
 }
 
 .card-paper-ruled {
   @apply bg-card border-border shadow-sm;
   background-image: var(--asset-paper-ruled-repeat);
-  background-repeat: repeat;
+  background-repeat: var(--card-repeat, var(--brand-repeat-default));
   background-size: 336px;
   background-position: 0 1.3rem;
   background-blend-mode: multiply;
@@ -361,49 +445,317 @@
 .card-cork {
   @apply bg-card border-border shadow-sm text-foreground;
   background-image: var(--asset-cork-repeat-web);
-  background-repeat: repeat;
+  background-repeat: var(--card-repeat, var(--brand-repeat-default));
   background-size: 300px;
 }
 
 .card-felt {
   @apply bg-card border-border shadow-sm;
-  /* Character-specific — set --character-color and --character-texture inline */
+  background-image: var(--character-texture);
+  background-repeat: var(--card-repeat, var(--brand-repeat-default));
+  background-size: 180px;
+  background-blend-mode: multiply;
 }
 
 .card-construction {
   @apply bg-card border-border shadow-sm;
   background-image: var(--asset-construction-mr-sam);
-  background-repeat: repeat;
+  background-repeat: var(--card-repeat, var(--brand-repeat-default));
   background-size: 190px;
 }
 
-/* === CHARACTER SURFACE HELPERS ===
- * For badges, avatars, small accents — NOT full page backgrounds */
+/* === MATERIAL SURFACE SYSTEM (restored from the purged theme) ===
+ * Components consume material-surface + a named material; tokens own the texture. */
+.material-surface {
+  background-color: var(--material-color);
+  background-image: var(--material-image);
+  background-position: var(--material-position, 0 0);
+  background-repeat: var(--material-repeat, var(--brand-repeat-default));
+  background-size: var(--material-size, 220px);
+}
+.material-cardboard-paper {
+  --material-repeat: repeat;
+  --material-color: var(--theme-paper);
+  --material-image: var(--asset-cardboard-ivory);
+  --material-size: 320px;
+  color: var(--theme-ink);
+}
+.material-cardboard-kraft {
+  --material-repeat: repeat;
+  --material-color: var(--theme-paper-muted);
+  --material-image: var(--asset-cardboard-kraft);
+  --material-size: 320px;
+}
+.material-felt {
+  --material-repeat: repeat;
+  --material-color: var(--character-color);
+  --material-image: var(--character-texture);
+  --material-size: 180px;
+  color: var(--character-foreground);
+}
+.material-felt [data-slot="card-description"] {
+  color: color-mix(in srgb, currentColor 78%, transparent);
+}
+.material-woven-fabric {
+  --material-repeat: repeat;
+  --material-color: var(--theme-wood-light);
+  --material-image: var(--asset-woven-old-macdonald);
+  --material-size: 190px;
+  color: var(--theme-ink);
+}
+.material-woven-fabric [data-slot="card-description"],
+.material-construction-paper [data-slot="card-description"],
+.material-leather [data-slot="card-description"] {
+  color: currentColor;
+  opacity: .78;
+}
+.material-denim-indigo {
+  --material-repeat: repeat;
+  --material-color: var(--theme-navy);
+  --material-image: var(--asset-denim-indigo);
+  --material-size: 256px;
+  color: var(--theme-white);
+}
+.material-paper-ruled {
+  --material-repeat: repeat;
+  --material-color: var(--theme-paper);
+  --material-image: var(--asset-paper-ruled-repeat);
+  --material-position: 0 1.3rem;
+  --material-size: 336px;
+  color: var(--theme-ink);
+  background-blend-mode: multiply;
+}
+.material-paper-grid {
+  --material-repeat: repeat;
+  --material-color: var(--theme-paper);
+  --material-image: var(--asset-paper-grid-repeat);
+  --material-size: 512px;
+  color: var(--theme-ink);
+  background-blend-mode: multiply;
+}
+.material-construction-paper {
+  --material-repeat: repeat;
+  --material-color: var(--curriculum-green);
+  --material-image: var(--asset-construction-mr-sam);
+  --material-size: 190px;
+  color: var(--theme-navy);
+}
+.material-cork {
+  --material-repeat: repeat;
+  --material-color: var(--brand-cork-color);
+  --material-image: var(--brand-cork-texture);
+  --material-size: 300px;
+  color: var(--theme-ink);
+}
+.material-leather {
+  --material-repeat: repeat;
+  --material-color: var(--theme-wood);
+  --material-image: var(--asset-leather-old-macdonald);
+  --material-size: 240px;
+  color: var(--theme-ink);
+}
+.material-leather-blue {
+  --material-repeat: repeat;
+  --material-color: var(--theme-navy);
+  --material-image: var(--asset-leather-blue);
+  --material-size: 240px;
+  color: var(--theme-white);
+}
+.material-leather-indigo {
+  --material-repeat: repeat;
+  --material-color: var(--curriculum-purple);
+  --material-image: linear-gradient(var(--curriculum-purple), var(--curriculum-purple)), var(--asset-leather-indigo);
+  --material-size: auto, 240px;
+  color: var(--theme-white);
+  background-blend-mode: color, normal;
+}
+.material-thread-overlay::after {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: var(--asset-thread-old-macdonald);
+  background-repeat: repeat;
+  background-size: 190px;
+  content: "";
+}
 
-.cast-surface {
-  /* Set --character-color, --character-texture, --character-foreground inline or via .cast-* */
+/* === WORKING-WALL COMPOSITION (restored) ===
+ * Recipes decorate semantic shadcn primitives; components own layout/content/state. */
+.working-wall-stage {
+  position: relative;
+  border: .18rem solid color-mix(in srgb, var(--theme-wood) 68%, var(--border));
+  border-radius: 1rem;
+  color: var(--theme-ink);
+  background-color: var(--theme-paper);
+  background-image: var(--asset-cardboard-ivory);
+  --wall-repeat: repeat;
+  background-repeat: var(--wall-repeat, var(--brand-repeat-default));
+  background-size: 320px;
+  box-shadow: inset 0 0 0 .35rem color-mix(in srgb, var(--theme-paper) 72%, transparent), 0 .65rem 1.25rem color-mix(in srgb, var(--theme-ink) 18%, transparent);
+}
+.working-wall-board {
+  position: relative;
+  border: .22rem solid color-mix(in srgb, var(--theme-wood) 78%, var(--border));
+  border-radius: .9rem;
+  color: var(--theme-ink);
+  background-color: var(--brand-cork-color);
+  background-image: var(--brand-cork-texture);
+  --wall-repeat: repeat;
+  background-repeat: var(--wall-repeat, var(--brand-repeat-default));
+  background-size: 300px;
+  box-shadow: inset 0 0 0 .28rem color-mix(in srgb, var(--theme-wood-light) 62%, transparent), 0 .45rem .8rem color-mix(in srgb, var(--theme-ink) 18%, transparent);
+}
+.working-wall-patch {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: .14rem solid color-mix(in srgb, currentColor 42%, transparent);
+  box-shadow: 0 .28rem 0 var(--grade-edge, color-mix(in srgb, var(--theme-ink) 36%, transparent)), 0 .55rem .8rem color-mix(in srgb, var(--theme-ink) 15%, transparent);
+}
+.working-wall-patch::after {
+  pointer-events: none;
+  position: absolute;
+  inset: .42rem;
+  z-index: 0;
+  border: .08rem dashed color-mix(in srgb, currentColor 55%, transparent);
+  border-radius: calc(var(--radius) - .1rem);
+  content: "";
+}
+.working-wall-patch > * { position: relative; z-index: 1; }
+.working-wall-note {
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --muted-foreground: var(--theme-copy);
+  --border: color-mix(in srgb, var(--theme-wood-light) 74%, var(--theme-ink));
+  background-color: var(--theme-paper);
+  background-image: var(--subject-note-paper, var(--asset-paper-note-standard));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent);
+}
+
+/* === BRAND PATCH CARD (restored) === */
+.brand-patch-card {
+  --background: var(--theme-navy);
+  --foreground: var(--theme-white);
+  --card: var(--theme-navy);
+  --card-foreground: var(--theme-white);
+  --popover: var(--theme-navy);
+  --popover-foreground: var(--theme-white);
+  --primary: var(--curriculum-yellow);
+  --primary-foreground: var(--theme-navy);
+  --secondary: color-mix(in srgb, var(--theme-white) 14%, var(--theme-navy));
+  --secondary-foreground: var(--theme-white);
+  --muted-foreground: color-mix(in srgb, var(--theme-white) 74%, transparent);
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --border: color-mix(in srgb, var(--theme-white) 58%, transparent);
+  --input: color-mix(in srgb, var(--theme-white) 58%, transparent);
+  --ring: var(--curriculum-yellow);
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  border: .125rem solid var(--border);
+  color: var(--card-foreground);
+  background-color: var(--theme-navy);
+  background-image: var(--asset-denim-indigo);
+  background-repeat: var(--card-repeat, var(--brand-repeat-default));
+  background-size: 16rem;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--theme-navy) 72%, transparent), 0 1rem 1.5rem color-mix(in srgb, var(--theme-ink) 16%, transparent);
+}
+.brand-patch-card::before {
+  pointer-events: none;
+  position: absolute;
+  inset: .55rem;
+  z-index: 0;
+  border: .1rem dashed color-mix(in srgb, var(--theme-white) 62%, transparent);
+  border-radius: calc(var(--radius) - .15rem);
+  content: "";
+}
+.brand-patch-card[data-brand-card="pinned"] {
+  --background: var(--theme-paper);
+  --foreground: var(--theme-ink);
+  --card: var(--theme-paper);
+  --card-foreground: var(--theme-ink);
+  --popover: var(--theme-paper);
+  --popover-foreground: var(--theme-ink);
+  --primary: var(--theme-navy);
+  --primary-foreground: var(--theme-white);
+  --secondary: var(--theme-paper-muted);
+  --secondary-foreground: var(--theme-navy);
+  --muted-foreground: var(--theme-copy);
+  --accent: var(--curriculum-yellow);
+  --accent-foreground: var(--theme-navy);
+  --border: var(--theme-wood-light);
+  --input: var(--theme-wood-light);
+  --ring: var(--curriculum-blue);
+  color: var(--card-foreground);
+  background-color: var(--theme-paper);
+  background-image: none;
+  box-shadow: 0 .35rem 0 color-mix(in srgb, var(--theme-wood) 44%, transparent), 0 1rem 1.5rem color-mix(in srgb, var(--theme-ink) 13%, transparent);
+}
+.brand-patch-card[data-brand-card="pinned"]::before {
+  inset: .45rem;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--theme-wood-light) 62%, transparent);
+}
+.brand-patch-card > :not(.brand-patch-fastener) {
+  position: relative;
+  z-index: 1;
+}
+.brand-patch-fastener {
+  pointer-events: none;
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 .15rem .15rem color-mix(in srgb, var(--theme-ink) 28%, transparent));
+}
+
+/* === CHARACTER SURFACE HELPERS === */
+.character-surface,
+.characters-surface {
   color: var(--character-foreground);
   background-color: var(--character-color);
   background-image: linear-gradient(var(--character-color), var(--character-color)), var(--character-texture);
   background-blend-mode: color, normal;
-  background-repeat: repeat;
+  --character-repeat: repeat;
+  background-repeat: var(--character-repeat, var(--brand-repeat-default));
   background-size: auto, 180px;
 }
 
-/* === GRADE/SUBJECT PAGE THEMING ===
- * Applied at page level via data-grade / data-subject */
+/* Characters class -> character-surface variable bridge. Colors: characters.mdx via :root tokens above; felt tiles: brand-assets.css --characters-<key>-texture. */
+.characters-old-macdonald { --character-color: var(--characters-old-macdonald-color); --character-foreground: var(--characters-old-macdonald-foreground); --character-texture: var(--characters-old-macdonald-texture); }
+.characters-miss-puddles { --character-color: var(--characters-miss-puddles-color); --character-foreground: var(--characters-miss-puddles-foreground); --character-texture: var(--characters-miss-puddles-texture); }
+.characters-mr-rusty { --character-color: var(--characters-mr-rusty-color); --character-foreground: var(--characters-mr-rusty-foreground); --character-texture: var(--characters-mr-rusty-texture); }
+.characters-miss-hayley { --character-color: var(--characters-miss-hayley-color); --character-foreground: var(--characters-miss-hayley-foreground); --character-texture: var(--characters-miss-hayley-texture); }
+.characters-mr-sam { --character-color: var(--characters-mr-sam-color); --character-foreground: var(--characters-mr-sam-foreground); --character-texture: var(--characters-mr-sam-texture); }
+.characters-mr-maisy { --character-color: var(--characters-mr-maisy-color); --character-foreground: var(--characters-mr-maisy-foreground); --character-texture: var(--characters-mr-maisy-texture); }
+.characters-mr-puddles { --character-color: var(--characters-mr-puddles-color); --character-foreground: var(--characters-mr-puddles-foreground); --character-texture: var(--characters-mr-puddles-texture); }
+.characters-miss-maisy { --character-color: var(--characters-miss-maisy-color); --character-foreground: var(--characters-miss-maisy-foreground); --character-texture: var(--characters-miss-maisy-texture); }
+.characters-hopper { --character-color: var(--characters-hopper-color); --character-foreground: var(--characters-hopper-foreground); --character-texture: var(--characters-hopper-texture); }
+.characters-whiskers { --character-color: var(--characters-whiskers-color); --character-foreground: var(--characters-whiskers-foreground); --character-texture: var(--characters-whiskers-texture); }
+.characters-scout { --character-color: var(--characters-scout-color); --character-foreground: var(--characters-scout-foreground); --character-texture: var(--characters-scout-texture); }
+.characters-penny { --character-color: var(--characters-penny-color); --character-foreground: var(--characters-penny-foreground); --character-texture: var(--characters-penny-texture); }
+.characters-maisy { --character-color: var(--characters-maisy-color); --character-foreground: var(--characters-maisy-foreground); --character-texture: var(--characters-maisy-texture); }
+.characters-puddles { --character-color: var(--characters-puddles-color); --character-foreground: var(--characters-puddles-foreground); --character-texture: var(--characters-puddles-texture); }
+.characters-sam { --character-color: var(--characters-sam-color); --character-foreground: var(--characters-sam-foreground); --character-texture: var(--characters-sam-texture); }
+.characters-rusty { --character-color: var(--characters-rusty-color); --character-foreground: var(--characters-rusty-foreground); --character-texture: var(--characters-rusty-texture); }
 
+/* === GRADE/SUBJECT PAGE THEMING === */
 [data-grade] {
   --grade-accent: var(--grade-color);
   --grade-dark: var(--grade-edge);
 }
 
-[data-grade-group='early-years'] { --grade-color: var(--grade-early-years-color); --grade-edge: color-mix(in srgb, var(--grade-early-years-color) 72%, black); --grade-ink: var(--cast-mr-sam-foreground); }
-[data-grade='daycare'] { --grade-color: var(--grade-daycare-color); --grade-edge: color-mix(in srgb, var(--grade-daycare-color) 72%, black); --grade-ink: var(--cast-miss-puddles-foreground); }
-[data-grade='pre-school'] { --grade-color: var(--grade-pre-school-color); --grade-edge: color-mix(in srgb, var(--grade-pre-school-color) 72%, black); --grade-ink: var(--cast-miss-maisy-foreground); }
-[data-grade='kindergarten'] { --grade-color: var(--grade-kindergarten-color); --grade-edge: color-mix(in srgb, var(--grade-kindergarten-color) 72%, black); --grade-ink: var(--cast-mr-rusty-foreground); }
-[data-grade='grade-one'] { --grade-color: var(--grade-one-color); --grade-edge: color-mix(in srgb, var(--grade-one-color) 72%, black); --grade-ink: var(--cast-miss-hayley-foreground); }
-[data-grade='grade-two'] { --grade-color: var(--grade-two-color); --grade-edge: color-mix(in srgb, var(--grade-two-color) 72%, black); --grade-ink: var(--cast-mr-maisy-foreground); }
+[data-grade-group='early-years'] { --grade-color: var(--grade-early-years-color); --grade-edge: color-mix(in srgb, var(--grade-early-years-color) 72%, black); --grade-ink: var(--characters-mr-sam-foreground); }
+[data-grade='daycare'] { --grade-color: var(--grade-daycare-color); --grade-edge: color-mix(in srgb, var(--grade-daycare-color) 72%, black); --grade-ink: var(--characters-miss-puddles-foreground); }
+[data-grade='pre-school'] { --grade-color: var(--grade-pre-school-color); --grade-edge: color-mix(in srgb, var(--grade-pre-school-color) 72%, black); --grade-ink: var(--characters-miss-maisy-foreground); }
+[data-grade='kindergarten'] { --grade-color: var(--grade-kindergarten-color); --grade-edge: color-mix(in srgb, var(--grade-kindergarten-color) 72%, black); --grade-ink: var(--characters-mr-rusty-foreground); }
+[data-grade='grade-one'] { --grade-color: var(--grade-one-color); --grade-edge: color-mix(in srgb, var(--grade-one-color) 72%, black); --grade-ink: var(--characters-miss-hayley-foreground); }
+[data-grade='grade-two'] { --grade-color: var(--grade-two-color); --grade-edge: color-mix(in srgb, var(--grade-two-color) 72%, black); --grade-ink: var(--characters-mr-maisy-foreground); }
 
 [data-subject='language'] { --subject-color: var(--subject-language-color); }
 [data-subject='math'] { --subject-color: var(--subject-math-color); }
@@ -418,7 +770,150 @@
   background-color: var(--grade-color);
   background-image: linear-gradient(var(--grade-color), var(--grade-color)), var(--grade-texture);
   background-blend-mode: color, normal;
-  background-repeat: repeat;
+  --grade-repeat: repeat;
+  background-repeat: var(--grade-repeat, var(--brand-repeat-default));
   background-size: auto, 180px;
   box-shadow: 0 0.25rem 0 var(--grade-edge);
+}
+
+
+/* === GRADE WORKSPACE: physical paper/sticky-note grammar === */
+.grade-workspace-stage {
+  color: var(--theme-ink);
+  background-color: var(--theme-navy);
+  background-image: var(--asset-denim-indigo);
+  background-repeat: repeat;
+  background-size: 16rem;
+}
+
+.grade-workspace-stage .grade-surface { color: var(--grade-ink); }
+.grade-workspace-stage .working-wall-board { background-color: var(--theme-navy); background-image: var(--asset-denim-indigo); background-repeat: repeat; background-size: 16rem; color: var(--theme-white); }
+.grade-workspace-stage .working-wall-note { background-color: var(--theme-paper); background-image: var(--asset-paper-ruled-repeat); background-repeat: repeat; background-size: 336px; color: var(--theme-ink); }
+.grade-workspace-stage .text-muted-foreground { color: color-mix(in srgb, var(--theme-white) 78%, var(--grade-color)); }
+
+.grade-workspace-stage [role="tab"],
+.grade-workspace-stage nav a {
+  min-height: 2.75rem;
+  color: var(--grade-ink);
+  background-color: var(--theme-paper);
+  background-image: var(--asset-paper-ruled-repeat);
+  background-repeat: repeat;
+  background-size: 336px;
+  border: 1px solid color-mix(in srgb, var(--grade-color) 55%, var(--theme-wood-light));
+  border-inline-start: .35rem solid var(--grade-color);
+  border-radius: .75rem;
+  box-shadow: 0 .2rem .35rem color-mix(in srgb, var(--theme-ink) 14%, transparent);
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out;
+}
+
+.grade-workspace-stage [role="tab"]:hover,
+.grade-workspace-stage [role="tab"]:focus-visible,
+.grade-workspace-stage nav a:hover,
+.grade-workspace-stage nav a:focus-visible {
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent);
+}
+
+.grade-workspace-stage [role="tab"][data-state="active"],
+.grade-workspace-stage nav a[aria-current="page"] {
+  background-color: color-mix(in srgb, var(--theme-paper) 88%, var(--grade-color));
+  box-shadow: inset 0 -.2rem 0 var(--grade-color), 0 .2rem .35rem color-mix(in srgb, var(--theme-ink) 16%, transparent);
+  transform: rotate(1deg);
+}
+
+.grade-workspace-metadata { margin-top: 1.25rem; }
+.grade-workspace-artifact {
+  position: relative;
+  min-height: 5.5rem;
+  color: var(--theme-ink);
+  background-color: var(--theme-paper);
+  background-image: var(--asset-paper-ruled-repeat);
+  background-repeat: repeat;
+  background-size: 336px;
+  border-color: color-mix(in srgb, var(--grade-color) 42%, var(--theme-wood-light));
+  box-shadow: .22rem .28rem 0 color-mix(in srgb, var(--grade-color) 22%, transparent), .35rem .65rem .9rem color-mix(in srgb, var(--theme-ink) 14%, transparent);
+  transform: rotate(var(--artifact-rotation, -.8deg));
+}
+.grade-workspace-artifact:nth-child(2n) { --artifact-rotation: .8deg; }
+.grade-workspace-artifact:nth-child(3n) { --artifact-rotation: -.4deg; }
+.grade-workspace-artifact dt {
+  color: color-mix(in srgb, var(--grade-color) 64%, var(--theme-ink));
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.grade-workspace-artifact dd { margin-top: .3rem; color: var(--theme-ink); font-weight: 700; }
+.grade-workspace-fastener {
+  pointer-events: none;
+  position: absolute;
+  top: -1.1rem;
+  left: 50%;
+  z-index: 2;
+  width: 2.35rem;
+  height: 2.35rem;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 .15rem .15rem color-mix(in srgb, var(--theme-ink) 28%, transparent));
+}
+.grade-workspace-rail-header { min-height: 8rem; }
+.grade-workspace-rail-header [data-character] { align-self: start; width: 3.5rem; height: 3.5rem; }
+.grade-workspace-guide {
+  color: var(--theme-ink);
+  border-color: color-mix(in srgb, var(--grade-color) 45%, var(--theme-wood-light));
+  transform: rotate(-.8deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grade-workspace-stage [role="tab"], .grade-workspace-stage nav a { transition: none; }
+}
+
+
+/* Paper artifacts keep ink-toned secondary copy against their light surface. */
+.grade-workspace-stage .material-cardboard-paper .text-muted-foreground,
+.grade-workspace-stage .grade-workspace-artifact .text-muted-foreground,
+.grade-workspace-stage .working-wall-note .text-muted-foreground {
+  color: color-mix(in srgb, var(--theme-ink) 72%, var(--grade-color));
+}
+
+.grade-workspace-rail-character {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* Denim support needs light ink; paper chips and artifacts keep dark ink. */
+.grade-workspace-stage nav a,
+.grade-workspace-stage [role="tab"] {
+  color: var(--theme-ink);
+}
+.grade-workspace-stage-content {
+  color: var(--theme-white);
+}
+.grade-workspace-stage-content .material-cardboard-paper,
+.grade-workspace-stage-content .grade-workspace-artifact,
+.grade-workspace-stage-content .working-wall-note {
+  color: var(--theme-ink);
+}
+.grade-workspace-stage-content > article > header button,
+.grade-workspace-stage-content > article > header a {
+  color: var(--theme-white);
+}
+
+.grade-workspace-stage-content {
+  --tw-prose-body: var(--theme-white);
+  --tw-prose-headings: var(--theme-white);
+  --tw-prose-links: var(--gold-soft);
+  --tw-prose-bold: var(--theme-white);
+  --tw-prose-counters: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
+}
+
+.grade-workspace-stage-content .prose {
+  --tw-prose-body: var(--theme-white);
+  --tw-prose-headings: var(--theme-white);
+  --tw-prose-lead: var(--theme-white);
+  --tw-prose-links: var(--gold-soft);
+  --tw-prose-bold: var(--theme-white);
+  --tw-prose-counters: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
+  --tw-prose-bullets: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
 }

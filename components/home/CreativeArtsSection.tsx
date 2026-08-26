@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const CREATIVE_AREAS = [
-  { title: "Music", description: "Sing, listen, play, and find the beat.", href: "/search?q=music", icon: "music-hand-drum", material: "cast-mr-rusty" },
-  { title: "Art", description: "Make marks, mix colour, and create.", href: "/search?q=art", icon: "painting-easel", material: "cast-miss-puddles" },
-  { title: "Drama", description: "Pretend, tell stories, and perform.", href: "/search?q=drama", icon: "acting-theatre-masks", material: "cast-miss-hayley" },
-  { title: "Dancing", description: "Move, turn, travel, and dance together.", href: "/search?q=dance", icon: "dance-spiralling-scarves", material: "cast-penny" },
+  { title: "Music", description: "Sing, listen, play, and find the beat.", href: "/search?q=music", icon: "music-hand-drum", material: "characters-mr-rusty" },
+  { title: "Art", description: "Make marks, mix colour, and create.", href: "/search?q=art", icon: "painting-easel", material: "characters-miss-puddles" },
+  { title: "Drama", description: "Pretend, tell stories, and perform.", href: "/search?q=drama", icon: "acting-theatre-masks", material: "characters-miss-hayley" },
+  { title: "Dancing", description: "Move, turn, travel, and dance together.", href: "/search?q=dance", icon: "dance-spiralling-scarves", material: "characters-penny" },
 ] as const;
 
 export function CreativeArtsSection() {

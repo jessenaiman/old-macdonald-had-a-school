@@ -5,14 +5,16 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { TEACHER_GRADE_ITEMS } from "@/components/site-navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { NativeSelect } from "@/components/ui/native-select";
-import { Search } from "lucide-react";
+import { ExternalLink, Search } from "lucide-react";
 import { GRADE_SEARCH_VALUES, lessonHref, type GradeKey } from "@/lib/grade-routes";
+import { cn } from "@/lib/utils";
+import { WorkingWallBoard, WorkingWallNote } from "@/components/working-wall/WorkingWallComponents";
 
 type SearchResult = { id: string; kind: string; title: string; excerpt: string | null; lyrics: string | null; instructions: string | null; meta: Record<string, string>; href: string | null };
 type CurriculumResult = { id: string; grade_key: string; grade: string; subject: string; lesson_topic: string; skill_statement: string | null; teacher_title?: string | null; teacher_summary?: string | null; why_match?: string };
@@ -30,8 +32,10 @@ function topicSummary(topic: CurriculumResult) { return topic.teacher_summary ||
 function resourcePreview(result: SearchResult) { return result.excerpt || result.instructions || result.lyrics || "A resource preview is available."; }
 
 /**
- * Search-domain workspace. It composes the installed shadcn Field, Button,
- * Card, Badge, and Empty primitives; the custom logic coordinates this site's API and URL state.
+ * Search-domain workspace. The query sheet is a clipped paper work stage; the
+ * answer is a working wall: curriculum topics pinned as numbered paper rows on
+ * cork, lesson drafts clipped to a secondary sheet, linked resources listed on
+ * a compact related-resources panel. Logic coordinates this site's API and URL state.
  */
 export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGrade, gradeLabel, onBack }: SearchWorkspaceProps) {
   const lockedGradeValue = lockedGrade ? GRADE_SEARCH_VALUES[lockedGrade] : "";
@@ -109,16 +113,131 @@ export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGr
               </Field>
               {lockedGrade ? null : <Field><FieldLabel htmlFor="search-grade">Grade</FieldLabel><NativeSelect id="search-grade" name="grade" value={grade} onChange={(event) => setGrade(event.target.value)}>{GRADE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</NativeSelect></Field>}
               <Field><FieldLabel htmlFor={lockedGrade ? `kind-${lockedGrade}` : "search-kind"}>Resource type</FieldLabel><NativeSelect id={lockedGrade ? `kind-${lockedGrade}` : "search-kind"} name="kind" value={kind} onChange={(event) => setKind(event.target.value)}><option value="">All resources</option><option value="song">Songs</option><option value="knowledge">Knowledge</option></NativeSelect></Field>
-              <Field className="lg:w-auto"><Button type="submit" disabled={loading}>{loading ? "Searching…" : "Search"}</Button></Field>
+              <Field className="lg:w-auto"><Button className="min-h-[44px]" type="submit" disabled={loading}>{loading ? "Searching…" : "Search"}</Button></Field>
             </FieldGroup>
           </form>
         </CardContent>
       </Card>
-      {!searched ? <Empty className="card-paper border"><EmptyHeader><EmptyTitle>Start with what you want to teach.</EmptyTitle><EmptyDescription>{lockedGrade ? `Try a classroom word, song, activity, or learning goal for ${gradeLabel}.` : "Try ponies, fingerplay, steady beat, or a learning goal."}</EmptyDescription></EmptyHeader></Empty> : loading ? <Card className="card-paper"><CardHeader><CardTitle>Searching the curriculum collection…</CardTitle><CardDescription role="status">Finding curriculum topics, lesson drafts, and linked resources.</CardDescription></CardHeader></Card> : error ? <Empty className="card-paper border" role="alert"><EmptyHeader><EmptyTitle>The search could not be completed.</EmptyTitle><EmptyDescription>{error}</EmptyDescription></EmptyHeader><Button type="button" onClick={() => void search()}>Try again</Button></Empty> : resultCount === 0 ? <Empty className="card-paper border"><EmptyHeader><EmptyTitle>No matching curriculum or resources were found.</EmptyTitle><EmptyDescription>Try a shorter phrase or a broader teaching goal.</EmptyDescription></EmptyHeader></Empty> : <section className="flex min-w-0 flex-col gap-4" aria-live="polite"><header className="flex flex-wrap items-baseline justify-between gap-2"><div><Badge variant="outline">{searchMode === "hybrid-keyword-semantic" ? "Keyword + meaning search" : "Keyword search"}</Badge><h2 className="mt-2 font-heading text-3xl">{resultCount} matches</h2></div>{lockedGrade ? <p className="text-sm text-muted-foreground">Filtered to {gradeLabel}</p> : null}</header><div className="grid min-w-0 gap-4 lg:grid-cols-2">
-        {curriculum.map((topic) => <Card className="card-paper relative overflow-visible" key={`topic:${topic.id}:${topic.grade_key}`}><span className="brand-asset fastener-push-pin icon-small pointer-events-none absolute -top-3 right-6" aria-hidden="true" /><CardHeader><Badge className="w-fit" variant="outline">Curriculum topic</Badge><CardTitle>{topicTitle(topic)}</CardTitle><CardDescription>{topicSummary(topic)}</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge variant="secondary">{topic.grade}</Badge><Badge variant="secondary">{topic.subject}</Badge>{topic.why_match ? <p className="w-full text-sm text-muted-foreground">{topic.why_match}</p> : null}</CardContent><CardFooter><Button asChild variant="outline"><Link href={topicHref(topic)}>Open topic</Link></Button></CardFooter></Card>)}
-        {lessons.map((lesson) => <Card className="card-paper" key={`lesson:${lesson.id}`}><CardHeader><Badge className="w-fit" variant="outline">Lesson draft</Badge><CardTitle>{lesson.title}</CardTitle><CardDescription>{lesson.summary || lesson.purpose || "No lesson summary is available."}</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge variant="secondary">{lesson.grade_band}</Badge><Badge variant="secondary">{lesson.subject}</Badge></CardContent><CardFooter><Button asChild variant="outline"><Link href={lessonHref({ slug: lesson.slug, grade: lesson.grade_band || "" })}>Open lesson</Link></Button></CardFooter></Card>)}
-        {results.map((result) => <Card className="card-paper" key={`resource:${result.kind}:${result.id}`}><CardHeader><Badge className="w-fit" variant="outline">{result.kind}</Badge><CardTitle>{result.title}</CardTitle><CardDescription>{resourcePreview(result)}</CardDescription></CardHeader>{result.href ? <CardFooter><Button asChild variant="outline"><a href={result.href} target="_blank" rel="noreferrer">Open resource</a></Button></CardFooter> : null}</Card>)}
-      </div></section>}
+      {!searched ? (
+        <Empty className="card-paper relative border">
+          <span className="brand-asset fastener-push-pin icon-small pointer-events-none absolute -top-4 left-1/2 -translate-x-1/2" aria-hidden="true" />
+          <EmptyHeader>
+            <EmptyTitle>Start with what you want to teach.</EmptyTitle>
+            <EmptyDescription>{lockedGrade ? `Try a classroom word, song, activity, or learning goal for ${gradeLabel}.` : "Try ponies, fingerplay, steady beat, or a learning goal."}</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
+      ) : loading ? (
+        <WorkingWallBoard aria-label="Search in progress">
+          <WorkingWallNote fastener="pin" heading="Searching the curriculum collection…" role="status">
+            <p className="leading-6">Finding curriculum topics, lesson drafts, and linked resources.</p>
+          </WorkingWallNote>
+        </WorkingWallBoard>
+      ) : error ? (
+        <Card className="card-paper relative overflow-visible" role="alert">
+          <span className="brand-asset fastener-push-pin icon-small pointer-events-none absolute -top-3 right-6" aria-hidden="true" />
+          <span className="pointer-events-none absolute inset-y-4 left-0 w-1 rounded-r-full bg-destructive" aria-hidden="true" />
+          <CardHeader className="pt-8">
+            <CardTitle className="font-heading text-2xl leading-tight text-[var(--rose-muted)]">The search could not be completed.</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm font-bold leading-6">{error}</p>
+          </CardContent>
+        </Card>
+      ) : resultCount === 0 ? (
+        <Card className="card-paper relative overflow-visible" role="status">
+          <span className="brand-asset fastener-push-pin icon-small pointer-events-none absolute -top-3 right-6" aria-hidden="true" />
+          <CardHeader className="pt-8">
+            <CardTitle className="font-heading text-2xl leading-tight">Nothing matched that search yet.</CardTitle>
+            <CardDescription>{lockedGrade ? `Try a different ${gradeLabel} classroom word or song title.` : "Try a shorter phrase or a different classroom word."}</CardDescription>
+          </CardHeader>
+        </Card>
+      ) : (
+        <section className="flex min-w-0 flex-col gap-5" aria-label="Search results">
+          <header className="flex min-w-0 flex-col gap-1">
+            <h2 className="text-2xl sm:text-3xl">{resultCount} {resultCount === 1 ? "result" : "results"}</h2>
+            {searchMode === "hybrid-keyword-semantic" ? <p className="max-w-2xl text-sm leading-6 text-foreground/70">Semantic search widened this list beyond your exact words, so skim the topics board even where wording differs.</p> : null}
+          </header>
+          {curriculum.length > 0 ? (
+            <WorkingWallBoard aria-label="Matching curriculum topics">
+              <h3 className="font-section text-lg leading-none sm:text-xl">Curriculum topics</h3>
+              <ol className="grid gap-4">
+                {curriculum.map((topic, index) => (
+                  <li key={`topic:${topic.id}:${topic.grade_key}`}>
+                    <Card className="material-surface material-cardboard-paper relative gap-3 px-4 py-4">
+                      <span className="brand-asset fastener-push-pin icon-micro pointer-events-none absolute -top-2.5 left-6" aria-hidden="true" />
+                      <div className="flex flex-wrap items-start gap-3">
+                        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary text-sm font-black text-primary-foreground" aria-hidden="true">{index + 1}</span>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs font-black uppercase tracking-widest text-foreground/70">Curriculum topic · {topic.grade} · {topic.subject}</p>
+                          <p className="font-heading text-xl leading-snug">{topicTitle(topic)}</p>
+                        </div>
+                        <Button asChild className="min-h-[44px]" variant="outline" size="sm"><Link href={topicHref(topic)}>Open topic</Link></Button>
+                      </div>
+                      <p className="text-sm leading-6 text-foreground/70">{topicSummary(topic)}</p>
+                      {topic.why_match ? <p className="text-sm font-bold leading-6">{topic.why_match}</p> : null}
+                    </Card>
+                  </li>
+                ))}
+              </ol>
+            </WorkingWallBoard>
+          ) : null}
+          {lessons.length > 0 || results.length > 0 ? (
+            <div className={cn("grid min-w-0 gap-5", lessons.length > 0 && results.length > 0 && "lg:grid-cols-[minmax(0,1fr)_20rem]")}>
+              {lessons.length > 0 ? (
+                <section aria-label="Matching lesson drafts" className="min-w-0">
+                  <Card className="card-paper relative h-full rounded-xl shadow-[5px_7px_0_color-mix(in_srgb,var(--border)_75%,transparent)]">
+                    <span className="brand-asset fastener-binder-clip icon-small pointer-events-none absolute -top-4 left-6" aria-hidden="true" />
+                    <CardHeader className="pt-9">
+                      <h3 className="font-section text-lg leading-none sm:text-xl">Lesson drafts</h3>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="grid gap-4">
+                        {lessons.map((lesson) => (
+                          <li key={`lesson:${lesson.id}`} className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2 border-t border-border pt-4 first:border-t-0 first:pt-0">
+                            <div className="min-w-0 flex-1">
+                              <p className="text-xs font-black uppercase tracking-widest text-foreground/70">Lesson draft · {lesson.grade_band} · {lesson.subject}</p>
+                              <p className="font-heading text-lg leading-snug">{lesson.title}</p>
+                              <p className="text-sm leading-6 text-foreground/70">{lesson.summary || lesson.purpose || "No lesson summary is available."}</p>
+                            </div>
+                            <Button asChild className="min-h-[44px]" variant="outline" size="sm"><Link href={lessonHref({ slug: lesson.slug, grade: lesson.grade_band || "" })}>Open lesson</Link></Button>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </section>
+              ) : null}
+              {results.length > 0 ? (
+                <Card className="card-paper h-fit" aria-label="Matching external resources">
+                  <CardHeader>
+                    <h3 className="font-section text-lg leading-none sm:text-xl">Linked resources</h3>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="grid gap-3">
+                      {results.map((result) => (
+                        <li key={`resource:${result.kind}:${result.id}`} className="flex items-start gap-2">
+                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden="true" />
+                          <div className="min-w-0">
+                            <p className="text-xs font-black uppercase tracking-widest text-foreground/70">{result.kind}</p>
+                            {result.href ? (
+                              <a className="min-w-0 text-sm font-bold underline-offset-4 hover:underline" href={result.href} target="_blank" rel="noreferrer">
+                                {result.title}<ExternalLink className="ml-1 inline size-3.5" aria-hidden="true" />
+                              </a>
+                            ) : (
+                              <span className="min-w-0 text-sm font-bold">{result.title}</span>
+                            )}
+                            <p className="text-sm leading-6 text-foreground/70">{resourcePreview(result)}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ) : null}
+            </div>
+          ) : null}
+        </section>
+      )}
       {onBack ? <Button type="button" variant="link" onClick={onBack}>← Back to today</Button> : null}
     </div>
   );
