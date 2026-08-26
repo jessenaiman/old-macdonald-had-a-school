@@ -80,12 +80,14 @@ export function DatabaseLessonDocument({
             </Button>
           ) : null}
         </div>
-        <dl className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border p-4">
+        <dl className="grade-workspace-metadata grid gap-3 sm:grid-cols-2">
+          <div className="grade-workspace-artifact rounded-lg border p-4">
+            <span className="brand-asset fastener-push-pin icon-small grade-workspace-fastener" aria-hidden="true" />
             <dt>Subject</dt>
             <dd>{subject}</dd>
           </div>
-          <div className="rounded-lg border p-4">
+          <div className="grade-workspace-artifact rounded-lg border p-4">
+            <span className="brand-asset fastener-masking-tape icon-small grade-workspace-fastener" aria-hidden="true" />
             <dt>Status</dt>
             <dd>
               {completeness === "complete"
@@ -93,11 +95,13 @@ export function DatabaseLessonDocument({
                 : "Database-led outline"}
             </dd>
           </div>
-          <div className="rounded-lg border p-4">
+          <div className="grade-workspace-artifact rounded-lg border p-4">
+            <span className="brand-asset fastener-paperclip icon-small grade-workspace-fastener" aria-hidden="true" />
             <dt>Category</dt>
             <dd>{available(category)}</dd>
           </div>
-          <div className="rounded-lg border p-4">
+          <div className="grade-workspace-artifact rounded-lg border p-4">
+            <span className="brand-asset fastener-push-pin icon-small grade-workspace-fastener" aria-hidden="true" />
             <dt>Standards</dt>
             <dd>{available(standardsText)}</dd>
           </div>

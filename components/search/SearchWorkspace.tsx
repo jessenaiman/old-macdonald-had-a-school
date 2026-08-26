@@ -113,7 +113,7 @@ export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGr
               </Field>
               {lockedGrade ? null : <Field><FieldLabel htmlFor="search-grade">Grade</FieldLabel><NativeSelect id="search-grade" name="grade" value={grade} onChange={(event) => setGrade(event.target.value)}>{GRADE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</NativeSelect></Field>}
               <Field><FieldLabel htmlFor={lockedGrade ? `kind-${lockedGrade}` : "search-kind"}>Resource type</FieldLabel><NativeSelect id={lockedGrade ? `kind-${lockedGrade}` : "search-kind"} name="kind" value={kind} onChange={(event) => setKind(event.target.value)}><option value="">All resources</option><option value="song">Songs</option><option value="knowledge">Knowledge</option></NativeSelect></Field>
-              <Field className="lg:w-auto"><Button type="submit" disabled={loading}>{loading ? "Searching…" : "Search"}</Button></Field>
+              <Field className="lg:w-auto"><Button className="min-h-[44px]" type="submit" disabled={loading}>{loading ? "Searching…" : "Search"}</Button></Field>
             </FieldGroup>
           </form>
         </CardContent>
@@ -171,7 +171,7 @@ export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGr
                           <p className="text-xs font-black uppercase tracking-widest text-foreground/70">Curriculum topic · {topic.grade} · {topic.subject}</p>
                           <p className="font-heading text-xl leading-snug">{topicTitle(topic)}</p>
                         </div>
-                        <Button asChild variant="outline" size="sm"><Link href={topicHref(topic)}>Open topic</Link></Button>
+                        <Button asChild className="min-h-[44px]" variant="outline" size="sm"><Link href={topicHref(topic)}>Open topic</Link></Button>
                       </div>
                       <p className="text-sm leading-6 text-foreground/70">{topicSummary(topic)}</p>
                       {topic.why_match ? <p className="text-sm font-bold leading-6">{topic.why_match}</p> : null}
@@ -199,7 +199,7 @@ export function SearchWorkspace({ initialQuery = "", initialGrade = "", lockedGr
                               <p className="font-heading text-lg leading-snug">{lesson.title}</p>
                               <p className="text-sm leading-6 text-foreground/70">{lesson.summary || lesson.purpose || "No lesson summary is available."}</p>
                             </div>
-                            <Button asChild variant="outline" size="sm"><Link href={lessonHref({ slug: lesson.slug, grade: lesson.grade_band || "" })}>Open lesson</Link></Button>
+                            <Button asChild className="min-h-[44px]" variant="outline" size="sm"><Link href={lessonHref({ slug: lesson.slug, grade: lesson.grade_band || "" })}>Open lesson</Link></Button>
                           </li>
                         ))}
                       </ul>

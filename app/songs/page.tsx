@@ -85,7 +85,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
             {visibleSongs.map((song) => <Card className="min-w-0" key={song.id}>
               <CardHeader>
                 <div className="flex flex-wrap gap-2">{song.verified && <Badge>Reviewed</Badge>}{song.hasActions && <Badge variant="secondary">Actions</Badge>}{song.hasChords && <Badge variant="secondary">Chords</Badge>}</div>
-                <CardTitle><Link className="underline-offset-4 hover:underline" data-song-navigation href={`/songs/${song.id}`}>{song.title}</Link></CardTitle>
+                <CardTitle><Link className="inline-flex min-h-[44px] items-center underline-offset-4 hover:underline" data-song-navigation href={`/songs/${song.id}`}>{song.title}</Link></CardTitle>
                 {song.artist && <CardDescription>{song.artist}</CardDescription>}{song.sourceTitle && <CardDescription>Source citation: {song.sourceTitle}</CardDescription>}
                 <CardAction className="min-w-0 max-w-full">{song.type && <Badge className="max-w-full whitespace-normal text-right" variant="outline">{song.type}</Badge>}</CardAction>
               </CardHeader>

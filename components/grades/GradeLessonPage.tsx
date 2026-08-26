@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CHARACTERS, type CharacterKey } from "../../data/brand/characters-registry";
+import type { CharacterKey } from "../../data/brand/characters-registry";
 import { LessonDocument } from "../LessonDocument";
 import { getLesson } from "../../lib/content";
 import { getCurriculumTopic } from "../../lib/curriculum-db";
@@ -35,6 +34,7 @@ const GRADE_LESSON_DETAILS: Record<
     label: string;
     age: string;
     teacher: CharacterKey;
+    academicLead: string;
     teacherName: string;
   }
 > = {
@@ -42,30 +42,35 @@ const GRADE_LESSON_DETAILS: Record<
     label: "Daycare",
     age: "Ages 2-3",
     teacher: "miss-puddles",
+    academicLead: "Early Learning · Movement · SEL",
     teacherName: "Miss Puddles",
   },
   "pre-school": {
-    label: "Pre-School",
+    label: "Preschool",
     age: "Ages 3-4",
     teacher: "miss-maisy",
+    academicLead: "Community · Science · Food & Health",
     teacherName: "Miss Maisy",
   },
   kindergarten: {
     label: "Kindergarten",
     age: "Ages 4-6",
     teacher: "mr-rusty",
+    academicLead: "Music · Rhythm · Counting",
     teacherName: "Mr Rusty",
   },
   "grade-one": {
     label: "Grade 1",
     age: "5-6 yrs",
     teacher: "miss-hayley",
+    academicLead: "Literacy · Music · Drama",
     teacherName: "Miss Hayley",
   },
   "grade-two": {
     label: "Grade 2",
     age: "6-7 yrs",
     teacher: "mr-maisy",
+    academicLead: "Physical Education · Health",
     teacherName: "Mr Maisy",
   },
 };
@@ -281,29 +286,34 @@ export async function GradeLessonPage({
 
   return (
     <div
-      className="material-surface material-cardboard-paper my-4 grid w-full grid-cols-1 overflow-hidden rounded-2xl border shadow-sm lg:my-8 lg:grid-cols-[14rem_minmax(0,1fr)] print:block print:w-full print:border-0 print:shadow-none"
+      className="grade-workspace-stage working-wall-stage my-4 grid w-full grid-cols-1 overflow-hidden rounded-2xl border shadow-sm lg:my-8 lg:grid-cols-[14rem_minmax(0,1fr)] print:block print:w-full print:border-0 print:shadow-none"
       data-grade={grade}
       data-grade-template={grade}
+      data-style-scope="grade-workspace"
       data-lesson-template={lesson?.metadata.template ?? "database-draft"}
     >
       <aside
         className="grade-surface flex min-w-0 flex-col gap-4 p-4 lg:min-h-[60rem] print:hidden"
         aria-label={`${details.label} lesson sections`}
       >
-        <div className="grid grid-cols-[3.5rem_minmax(0,1fr)] items-center gap-3">
+        <div className="grade-workspace-rail-header relative flex flex-col items-start gap-1">
+          <span data-character={details.teacher} className="brand-asset character-face-bust icon-medium grade-workspace-rail-character" role="img" aria-label={details.teacherName} />
           <span
             className="brand-asset grade-icon icon-medium"
             data-grade-icon={grade}
             aria-hidden="true"
           />
-          <div className="flex min-w-0 flex-col">
+          <div className="grade-workspace-rail-copy flex min-w-0 max-w-full flex-col pe-13 text-[0.68rem] leading-tight tracking-tight lg:pe-14">
             <span className="text-xs font-black uppercase tracking-widest">
-              Farm School
+              Old MacDonald Had a School
             </span>
+            <small className="max-w-[10rem] text-xs font-bold leading-tight">{details.academicLead}</small>
+
             <strong className="font-heading text-xl leading-none">
               {details.label}
             </strong>
             <small className="text-xs font-bold">{details.age}</small>
+            <small className="text-xs font-semibold">{details.teacherName}</small>
           </div>
         </div>
         <nav
@@ -311,7 +321,7 @@ export async function GradeLessonPage({
           aria-label={`${details.label} lesson navigation`}
         >
           <Button asChild variant="ghost" className="min-h-11 justify-start">
-            <Link href="#lesson-overview">
+            <Link href="#lesson-overview" aria-current="page">
               <span>Overview</span>
             </Link>
           </Button>
@@ -331,13 +341,7 @@ export async function GradeLessonPage({
             </Link>
           </Button>
         </nav>
-        <Card className="material-surface material-cardboard-paper relative mt-auto hidden overflow-hidden lg:block">
-          <Image
-            src={CHARACTERS[details.teacher].portrait}
-            alt={details.teacherName}
-            width={150}
-            height={150}
-          />
+        <Card className="grade-workspace-guide material-surface material-cardboard-paper relative mt-auto hidden overflow-visible lg:block">
           <CardHeader>
             <span className="text-xs font-black uppercase tracking-widest">
               Your {details.label} guide
@@ -348,7 +352,7 @@ export async function GradeLessonPage({
           </CardHeader>
         </Card>
       </aside>
-      <div className="min-w-0 p-4 sm:p-6 lg:p-8 print:p-0">
+      <div className="grade-workspace-stage-content min-w-0 p-4 sm:p-6 lg:p-8 print:p-0">
         <div className="mb-4 flex flex-wrap gap-2 text-xs font-black uppercase tracking-wider text-muted-foreground">
           <Link className="inline-flex min-h-11 items-center underline-offset-4 hover:underline" href={`/grade/${grade}`}>{details.label}</Link>
           <span aria-hidden="true">&gt;</span>

@@ -110,8 +110,7 @@ export function SubjectTeachers() {
                     <BrandIcon icon={s.icon} size="small" className="icon-small" />
                   </span>
                   <CardTitle
-                    className="mt-2.5 text-[15px] font-bold leading-tight font-heading"
-                    style={{ color: s.accentColor }}
+                    className="mt-2.5 text-[15px] font-bold leading-tight font-heading text-[var(--ink-primary)]"
                   >
                     {s.label}
                   </CardTitle>
@@ -122,10 +121,7 @@ export function SubjectTeachers() {
                   <span className="mt-1 text-[11px] font-semibold text-muted-foreground">
                     {s.count}
                   </span>
-                  <span
-                    className="mt-2 text-xs font-semibold transition-colors group-hover:text-[var(--gold-bright)]"
-                    style={{ color: s.accentColor }}
-                  >
+                  <span className="mt-2 text-xs font-semibold text-[var(--ink-primary)] transition-colors group-hover:text-[var(--gold-bright)]">
                     Explore <span aria-hidden>→</span>
                   </span>
                 </CardContent>

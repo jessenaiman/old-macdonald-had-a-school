@@ -22,6 +22,7 @@ export type GradeInteractionSection =
 export type GradeInteractionConfig = {
   gradeKey: GradeKey;
   grade: string;
+  academicLead: string;
   age: string;
   reminder: string;
   eyebrow: string;
@@ -56,6 +57,7 @@ const sections: Array<{ id: GradeInteractionSection; label: string }> = [
 export function GradeWorkspace({
   grade,
   gradeLabel,
+  academicLead,
   age,
   teacher,
   reminder,
@@ -64,6 +66,7 @@ export function GradeWorkspace({
 }: {
   grade: GradeKey;
   gradeLabel: string;
+  academicLead: string;
   age: string;
   teacher: CharacterKey;
   reminder: string;
@@ -73,7 +76,7 @@ export function GradeWorkspace({
 }) {
   return (
     <div
-      className="working-wall-stage grid min-h-[calc(100dvh-5rem)] min-w-0 grid-cols-1 overflow-hidden text-foreground lg:grid-cols-[14rem_minmax(0,1fr)] print:block"
+      className="grade-workspace-stage working-wall-stage grid min-h-[calc(100dvh-5rem)] min-w-0 grid-cols-1 overflow-hidden text-foreground lg:grid-cols-[14rem_minmax(0,1fr)] print:block"
       data-grade={grade}
       data-grade-template={grade}
       data-style-scope="grade-workspace"
@@ -82,7 +85,7 @@ export function GradeWorkspace({
         className="grade-surface flex min-w-0 flex-col gap-3 p-3 lg:p-5 print:hidden"
         aria-label={`${gradeLabel} lesson workspace`}
       >
-        <div className="grade-surface relative grid justify-items-start gap-x-3 gap-y-1 rounded-lg p-3">
+        <div className="grade-workspace-rail-header grade-surface relative grid justify-items-start gap-x-3 gap-y-1 rounded-lg p-3">
           <span
             className="brand-asset fastener-sewing-button icon-micro absolute right-2 -top-1"
             aria-hidden="true"
@@ -93,14 +96,17 @@ export function GradeWorkspace({
             aria-hidden="true"
           />
           <span className="text-xs font-black uppercase tracking-widest">
-            Farm School
+            Old MacDonald Had a School
           </span>
+          <small className="max-w-[10rem] text-xs font-bold leading-tight">{academicLead}</small>
+
           <strong className="font-hand text-2xl leading-none">
             {gradeLabel}
           </strong>
           <small className="text-xs font-bold uppercase tracking-widest">
             {age}
           </small>
+          <small className="text-xs font-semibold">{CHARACTERS[teacher].name}</small>
         </div>
         {navigation}
         <Card className="material-surface material-cardboard-paper relative mt-auto hidden lg:block bg-card text-card-foreground">
@@ -321,6 +327,7 @@ export function GradeInteractionLane({
       <GradeWorkspace
         grade={config.gradeKey}
         gradeLabel={config.grade}
+        academicLead={config.academicLead}
         age={config.age}
         teacher={config.teacher}
         reminder={config.reminder}

@@ -28,28 +28,28 @@ const PAGE_SHELL = "mx-auto min-w-0 w-full max-w-7xl px-3 sm:px-6";
 
 function HeroBanner() {
   return (
-    <section className="relative w-full grid items-center gap-8 lg:grid-cols-[1.05fr_auto_0.95fr]">
-      <div className="flex flex-col gap-6">
-        <h1 className="font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-bold leading-[1.05] text-brand-navy">
+    <section className="relative min-w-0 w-full grid items-center gap-8 lg:grid-cols-[1.05fr_auto_0.95fr]">
+      <div className="flex min-w-0 flex-col gap-6">
+        <h1 className="break-words font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-bold leading-[1.05] text-brand-navy">
           Where familiar songs become{" "}
           <em className="not-italic text-[var(--rose-muted)]">new places</em> to learn.
         </h1>
         {/* New this week list — paper note taped to the wall */}
-        <div className="relative rounded-2xl border border-[var(--brand-navy)]/10 bg-[var(--brand-paper)] p-5 shadow-[0_2px_10px_rgba(30,42,56,0.08),0_8px_24px_rgba(30,42,56,0.06)]">
+        <div className="relative min-w-0 w-full max-w-full rounded-2xl border border-[var(--brand-navy)]/10 bg-[var(--brand-paper)] p-5 shadow-[0_2px_10px_rgba(30,42,56,0.08),0_8px_24px_rgba(30,42,56,0.06)]">
           <span aria-hidden className="absolute -top-2.5 left-1/2 h-5 w-20 -translate-x-1/2 -rotate-2 rounded-sm bg-[var(--gold-soft)]/50 shadow-sm [clip-path:polygon(3%_0,97%_6%,100%_88%,0_100%)]" />
           <div className="flex items-baseline justify-between px-1 pb-2">
-            <span className="font-hand text-xl italic text-[var(--rose-muted)]">New this week</span>
+            <span className="font-hand text-xl italic text-[var(--ink-primary)]">New this week</span>
             <span className="font-hand text-base italic text-[var(--brand-paper-foreground)]">Grades</span>
           </div>
           <ul className="divide-y divide-[var(--brand-paper-foreground)]/10">
             {NEW_LESSONS.map((lesson) => (
-              <li key={lesson.title} className="flex items-center gap-3 py-3">
+              <li key={lesson.title} className="flex min-w-0 items-center gap-3 py-3">
                 <span className="size-2 shrink-0 rounded-full bg-[var(--rose-warm)]" aria-hidden />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-bold text-[var(--brand-paper-foreground)]">{lesson.title}</p>
                   <p className="truncate text-xs text-[var(--brand-paper-muted)]">{lesson.desc}</p>
                 </div>
-                <div className="flex shrink-0 gap-1">
+                <div className="flex min-w-0 shrink-0 gap-1">
                   {lesson.tags.map((tag) => (
                     <span key={tag} className="rounded-md border border-[var(--gold-bright)] bg-[var(--gold-bright)]/15 px-2 py-0.5 text-xs font-bold text-[var(--brand-paper-foreground)]">
                       {tag}
@@ -138,7 +138,7 @@ function WhatsNew() {
               </span>
             </div>
             <div className="flex flex-col justify-center gap-1.5">
-              <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[var(--gold-bright)]">{v.tag}</span>
+              <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-[var(--ink-primary)]">{v.tag}</span>
               <h3 className="font-heading text-[18px] font-bold leading-tight text-[var(--brand-paper-foreground)]">{v.title}</h3>
               <p className="text-sm text-[var(--brand-paper-muted)]">{v.summary}</p>
               <span className="text-xs text-[var(--brand-paper-muted)]">New on YouTube</span>

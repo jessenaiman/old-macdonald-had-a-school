@@ -775,3 +775,145 @@
   background-size: auto, 180px;
   box-shadow: 0 0.25rem 0 var(--grade-edge);
 }
+
+
+/* === GRADE WORKSPACE: physical paper/sticky-note grammar === */
+.grade-workspace-stage {
+  color: var(--theme-ink);
+  background-color: var(--theme-navy);
+  background-image: var(--asset-denim-indigo);
+  background-repeat: repeat;
+  background-size: 16rem;
+}
+
+.grade-workspace-stage .grade-surface { color: var(--grade-ink); }
+.grade-workspace-stage .working-wall-board { background-color: var(--theme-navy); background-image: var(--asset-denim-indigo); background-repeat: repeat; background-size: 16rem; color: var(--theme-white); }
+.grade-workspace-stage .working-wall-note { background-color: var(--theme-paper); background-image: var(--asset-paper-ruled-repeat); background-repeat: repeat; background-size: 336px; color: var(--theme-ink); }
+.grade-workspace-stage .text-muted-foreground { color: color-mix(in srgb, var(--theme-white) 78%, var(--grade-color)); }
+
+.grade-workspace-stage [role="tab"],
+.grade-workspace-stage nav a {
+  min-height: 2.75rem;
+  color: var(--grade-ink);
+  background-color: var(--theme-paper);
+  background-image: var(--asset-paper-ruled-repeat);
+  background-repeat: repeat;
+  background-size: 336px;
+  border: 1px solid color-mix(in srgb, var(--grade-color) 55%, var(--theme-wood-light));
+  border-inline-start: .35rem solid var(--grade-color);
+  border-radius: .75rem;
+  box-shadow: 0 .2rem .35rem color-mix(in srgb, var(--theme-ink) 14%, transparent);
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out;
+}
+
+.grade-workspace-stage [role="tab"]:hover,
+.grade-workspace-stage [role="tab"]:focus-visible,
+.grade-workspace-stage nav a:hover,
+.grade-workspace-stage nav a:focus-visible {
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent);
+}
+
+.grade-workspace-stage [role="tab"][data-state="active"],
+.grade-workspace-stage nav a[aria-current="page"] {
+  background-color: color-mix(in srgb, var(--theme-paper) 88%, var(--grade-color));
+  box-shadow: inset 0 -.2rem 0 var(--grade-color), 0 .2rem .35rem color-mix(in srgb, var(--theme-ink) 16%, transparent);
+  transform: rotate(1deg);
+}
+
+.grade-workspace-metadata { margin-top: 1.25rem; }
+.grade-workspace-artifact {
+  position: relative;
+  min-height: 5.5rem;
+  color: var(--theme-ink);
+  background-color: var(--theme-paper);
+  background-image: var(--asset-paper-ruled-repeat);
+  background-repeat: repeat;
+  background-size: 336px;
+  border-color: color-mix(in srgb, var(--grade-color) 42%, var(--theme-wood-light));
+  box-shadow: .22rem .28rem 0 color-mix(in srgb, var(--grade-color) 22%, transparent), .35rem .65rem .9rem color-mix(in srgb, var(--theme-ink) 14%, transparent);
+  transform: rotate(var(--artifact-rotation, -.8deg));
+}
+.grade-workspace-artifact:nth-child(2n) { --artifact-rotation: .8deg; }
+.grade-workspace-artifact:nth-child(3n) { --artifact-rotation: -.4deg; }
+.grade-workspace-artifact dt {
+  color: color-mix(in srgb, var(--grade-color) 64%, var(--theme-ink));
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.grade-workspace-artifact dd { margin-top: .3rem; color: var(--theme-ink); font-weight: 700; }
+.grade-workspace-fastener {
+  pointer-events: none;
+  position: absolute;
+  top: -1.1rem;
+  left: 50%;
+  z-index: 2;
+  width: 2.35rem;
+  height: 2.35rem;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 .15rem .15rem color-mix(in srgb, var(--theme-ink) 28%, transparent));
+}
+.grade-workspace-rail-header { min-height: 8rem; }
+.grade-workspace-rail-header [data-character] { align-self: start; width: 3.5rem; height: 3.5rem; }
+.grade-workspace-guide {
+  color: var(--theme-ink);
+  border-color: color-mix(in srgb, var(--grade-color) 45%, var(--theme-wood-light));
+  transform: rotate(-.8deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grade-workspace-stage [role="tab"], .grade-workspace-stage nav a { transition: none; }
+}
+
+
+/* Paper artifacts keep ink-toned secondary copy against their light surface. */
+.grade-workspace-stage .material-cardboard-paper .text-muted-foreground,
+.grade-workspace-stage .grade-workspace-artifact .text-muted-foreground,
+.grade-workspace-stage .working-wall-note .text-muted-foreground {
+  color: color-mix(in srgb, var(--theme-ink) 72%, var(--grade-color));
+}
+
+.grade-workspace-rail-character {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* Denim support needs light ink; paper chips and artifacts keep dark ink. */
+.grade-workspace-stage nav a,
+.grade-workspace-stage [role="tab"] {
+  color: var(--theme-ink);
+}
+.grade-workspace-stage-content {
+  color: var(--theme-white);
+}
+.grade-workspace-stage-content .material-cardboard-paper,
+.grade-workspace-stage-content .grade-workspace-artifact,
+.grade-workspace-stage-content .working-wall-note {
+  color: var(--theme-ink);
+}
+.grade-workspace-stage-content > article > header button,
+.grade-workspace-stage-content > article > header a {
+  color: var(--theme-white);
+}
+
+.grade-workspace-stage-content {
+  --tw-prose-body: var(--theme-white);
+  --tw-prose-headings: var(--theme-white);
+  --tw-prose-links: var(--gold-soft);
+  --tw-prose-bold: var(--theme-white);
+  --tw-prose-counters: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
+}
+
+.grade-workspace-stage-content .prose {
+  --tw-prose-body: var(--theme-white);
+  --tw-prose-headings: var(--theme-white);
+  --tw-prose-lead: var(--theme-white);
+  --tw-prose-links: var(--gold-soft);
+  --tw-prose-bold: var(--theme-white);
+  --tw-prose-counters: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
+  --tw-prose-bullets: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
+}
