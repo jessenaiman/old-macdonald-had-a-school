@@ -20,3 +20,7 @@ You evaluate, you never edit. One batched inspection round (desktop + mobile tog
 ## Output
 
 Per route: heuristic scores + defect list (severity P1-P3, element, observed evidence, minimal fix that stays inside DESIGN.md, exact component file:line to change). Save screenshots under `tmp/design-audit/`.
+
+## Tool failures
+
+Before ANY workaround for a failing tool (browser, hub, MCP), consult the tool-operator agent with the exact error. The sanctioned browser fallback (spawn real Chrome via app.path) and image-viewing recipe live in its definition. Never silently substitute a lower-quality verification path.

@@ -34,3 +34,7 @@ Next.js 16 App Router frontend specialist for Old MacDonald Had a School (`open-
 - `app/grade/*` hubs — daycare, pre-school, kindergarten, grade-one, grade-two grade-scoped landing pages.
 - `components/grades/` — hub controls and grade-page components.
 - `components/search/SearchWorkspace.tsx` — search UI consuming `/api/search` JSON response.
+
+## Tool failures
+
+Before ANY workaround for a failing tool (browser, hub, MCP), consult the tool-operator agent with the exact error. The sanctioned browser fallback (spawn real Chrome via app.path) and image-viewing recipe live in its definition. Never silently substitute a lower-quality verification path.
