@@ -12,16 +12,20 @@ durable plan of record; update item status here instead of leaving state only in
 - [ ] **Lesson approval & validation** — flip `validated:false → true` for approved lessons via db-curator flow; this was the next planned step
 - [ ] Search working-wall redesign follow-ups (WIP thread from `68846ca`)
 
-## Uncommitted debris pending user decision (as of 2026-08-25)
+## Debris resolution (2026-08-25)
 
-| Change | Verdict |
-|---|---|
-| `.omp/agents/omp-operator.md` (untracked) | Malformed single-line file; frontmatter cannot parse. Recommend delete. |
-| "OMP consultation required" sections in all 5 `.omp/agents/*.md` | Gate every subagent on an advisor that cannot register. Recommend revert. |
-| `.omp/config.yml` model-role additions | Revert with the above unless roles are wanted. |
-| `app/api/search/route.ts:567` removed `hasKeywordAnchor` filter | Silent search-recall behavior change; function still used at line 534. Restore unless intentionally experimenting. |
+All seven derailed-session files were swept into
+`stash@{0}: derailed-session-debris-2025-08-25` (name predates the date fix): the malformed
+agent definitions with injected consultation blocks, the config.yml role additions, and the
+removed `hasKeywordAnchor` filter in `app/api/search/route.ts`. Recover with
+`git stash pop`; discard permanently with `git stash drop` once confirmed unwanted.
+Working tree resumed clean at `1a07422`.
 
-Use `git stash -u` before cleanup if ownership is uncertain. If all four changes are confirmed unwanted, restore the stash only if needed, then remove them deliberately.
+Live-site design audit (2026-08-25, delegated design-auditor): P1 = home mobile overflow
+(404px vs 375px), home subject-card contrast (axe serious ×10), missing skip-link;
+P2 = sub-44px targets site-wide vs DESIGN.md contract, missing H1s on song detail + search,
+daycare age contradiction, default Next 404; P3 = duplicate generic titles, g1/g2 title
+pattern. Fixes await user authorization.
 
 ## Rules for future sessions
 
