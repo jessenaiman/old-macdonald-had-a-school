@@ -1,6 +1,7 @@
 modelRoles:
   curator: "openai-codex/gpt-5.3-codex-spark"
   builder: "openai-codex/gpt-5.6-terra"
+  vision: "alibaba-token-plan/qwen3.8-max"
 bash:
   patterns:
     - match: "*db:push*"
