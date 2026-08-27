@@ -376,7 +376,7 @@ export async function GradeLessonPage({
         </div>
         {earlyYearsTopic ? <EarlyYearsLessonStructure topic={earlyYearsTopic} /> : null}
         <section
-          className="material-surface material-cork-board mt-8 rounded-xl border p-4 print:break-before-page"
+          className="material-surface material-cork mt-8 rounded-xl border p-4 print:break-before-page"
           id="lesson-notes"
           aria-label="Teacher planning notes"
         >

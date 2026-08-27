@@ -68,6 +68,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(bodyFont.variable, displayFont.variable, sectionFont.variable, brandFont.variable, handFont.variable)}
+      data-brand="omhas"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
@@ -79,9 +80,14 @@ export default function RootLayout({
           enableColorScheme
           disableTransitionOnChange
         >
-          <div className="bg-paper-ivory flex min-h-screen flex-col text-foreground">
-                        <a href="#main-content" className="sr-only fixed left-4 top-4 z-[100] rounded-md bg-brand-navy px-4 py-3 font-bold text-brand-navy-foreground shadow-[0_4px_12px_rgba(30,42,56,0.25)] focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-brand-paper focus:ring-offset-2 focus:ring-offset-brand-navy">Skip to lesson content</a>
-                        <SiteHeader />
+          <div className="flex min-h-screen flex-col text-foreground">
+            <a
+              href="#main-content"
+              className="sr-only fixed left-4 top-4 z-50 rounded-md bg-brand-navy px-4 py-3 font-bold text-brand-navy-foreground shadow-lg focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-brand-paper focus:ring-offset-2 focus:ring-offset-brand-navy"
+            >
+              Skip to lesson content
+            </a>
+            <SiteHeader />
             <main id="main-content" className="flex min-h-0 min-w-0 flex-1 flex-col">
               <div className="min-w-0 flex-1 flex-col">{children}</div>
             </main>

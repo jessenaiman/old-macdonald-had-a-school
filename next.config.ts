@@ -16,6 +16,13 @@ const nextConfig: NextConfig = {
     // for browsers that support each. The optimizer still serves the original
     // format if neither matches.
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
+    ],
   },
   // Hide the dev-only on-screen route indicator that otherwise appears in every
   // visual QA capture (bottom-left by default). Errors still surface normally.

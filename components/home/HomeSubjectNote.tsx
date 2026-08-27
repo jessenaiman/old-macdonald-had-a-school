@@ -13,7 +13,7 @@ type HomeSubjectNoteProps = Pick<HomeSubject, "title" | "iconClass" | "teacherRe
  * Subject-specific card content for the home page. The custom data maps a
  * subject to approved farm-school assets while the surface uses shadcn Card parts.
  */
-export function HomeSubjectNote({ title, href, iconClass, teacherReason, highlights, subject, guideCharacter, fastenerClass }: HomeSubjectNoteProps) {
+export function HomeSubjectNote({ title, href, iconClass, teacherReason, highlights, guideCharacter, fastenerClass }: HomeSubjectNoteProps) {
   return (
     <Card className={`characters-${guideCharacter} material-surface material-cardboard-paper relative h-full min-w-0 gap-0 overflow-visible border-border py-0 text-[var(--ink-primary)] transition-transform hover:-translate-y-0.5`}>
       <span className={`brand-asset ${fastenerClass} icon-small pointer-events-none absolute -top-4 left-1/2 z-10 -translate-x-1/2`} aria-hidden="true" />

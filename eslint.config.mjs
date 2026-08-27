@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     ".codex-tmp/**",
     ".agents/**",
     ".figma/**",
+    ".github/skills/**",
     "data/**",
     "design-proof/**",
     "docs/**",

@@ -321,7 +321,7 @@ export function GradeResourcesPanel({
         title="Gather what helps"
         summary="Open an existing lesson to find its starting point and supporting materials."
       />
-      <section className="material-surface material-cork-board rounded-xl border p-4">
+      <section className="material-surface material-cork rounded-xl border p-4">
         <div className="grid min-w-0 gap-4 md:grid-cols-2">
           {items.map((item, index) => (
             <WorkingWallPathCard

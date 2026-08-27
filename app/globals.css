@@ -1,7 +1,11 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
 @import "./brand-assets.css";
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:is(.dark *));
+@source "../app";
+@source "../components";
+@source "../content";
+@source "../mdx-components.tsx";
 
 /*
  * Old MacDonald Had a School — shadcn Theme
@@ -110,19 +114,19 @@
   --sidebar-ring: var(--gold-bright);
 
   /* === CHARACTER IDENTITY (characters.mdx — badges/avatars only) === */
-  --characters-old-macdonald-color: #b87a4a;
+  --characters-old-macdonald-color: #a66a32;
   --characters-old-macdonald-foreground: #fefce8;
   --characters-miss-puddles-color: #f6af32;
   --characters-miss-puddles-foreground: #1e2a38;
-  --characters-miss-maisy-color: #6b9a7a;
+  --characters-miss-maisy-color: #5d8164;
   --characters-miss-maisy-foreground: #fefce8;
-  --characters-mr-rusty-color: #3589c4;
+  --characters-mr-rusty-color: #267cba;
   --characters-mr-rusty-foreground: #fefce8;
   --characters-miss-hayley-color: #d95c86;
   --characters-miss-hayley-foreground: #1e2a38;
-  --characters-mr-maisy-color: #c45d62;
+  --characters-mr-maisy-color: #d81d24;
   --characters-mr-maisy-foreground: #fefce8;
-  --characters-mr-sam-color: #2a9a9a;
+  --characters-mr-sam-color: #1d8787;
   --characters-mr-sam-foreground: #fefce8;
   --characters-mr-puddles-color: #5367b5;
   --characters-mr-puddles-foreground: #fefce8;
@@ -130,12 +134,12 @@
   --characters-hopper-foreground: #fefce8;
   --characters-whiskers-color: #e695b0;
   --characters-whiskers-foreground: #fefce8;
-  --characters-scout-color: #8dc4a8;
-  --characters-scout-foreground: #fefce8;
+  --characters-scout-color: #c59e7a;
+  --characters-scout-foreground: #1e2a38;
   --characters-penny-color: #f9cb7a;
   --characters-penny-foreground: #1e2a38;
-  --characters-maisy-color: #e8c8a0;
-  --characters-maisy-foreground: #fefce8;
+  --characters-maisy-color: #96ad9a;
+  --characters-maisy-foreground: #1e2a38;
   --characters-puddles-color: #8f9ccf;
   --characters-puddles-foreground: #fefce8;
   --characters-sam-color: #6cb1b1;
@@ -144,19 +148,19 @@
   --characters-rusty-foreground: #fefce8;
 
   /* Grade/Subject routing (page-level theming) */
-  --grade-early-years-color: #6b9a7a;
+  --grade-early-years-color: var(--grade-pre-school-color);
   --grade-daycare-color: #f6af32;
-  --grade-pre-school-color: #6b9a7a;
-  --grade-kindergarten-color: #3589c4;
+  --grade-pre-school-color: #5d8164;
+  --grade-kindergarten-color: #267cba;
   --grade-one-color: #d95c86;
-  --grade-two-color: #c45d62;
+  --grade-two-color: #d81d24;
 
   --subject-language-color: #d95c86;
-  --subject-math-color: #2a9a9a;
-  --subject-science-color: #6b9a7a;
-  --subject-music-color: #3589c4;
+  --subject-math-color: #1d8787;
+  --subject-science-color: #5d8164;
+  --subject-music-color: #267cba;
   --subject-arts-color: #5367b5;
-  --subject-health-color: #c45d62;
+  --subject-health-color: #d81d24;
 
   /* Material surface tokens (physical materials — paper/ink/navy/wood are REAL
    * objects and must NOT invert in .dark; per dark-mode-token-overload rule:
@@ -277,6 +281,16 @@
   /* Brand navy surface (stable — does not invert in dark mode) */
   --color-brand-navy: var(--brand-navy);
   --color-brand-navy-foreground: var(--brand-navy-foreground);
+  --color-brand-paper: var(--brand-paper);
+  --color-brand-paper-foreground: var(--brand-paper-foreground);
+  --color-brand-paper-muted: var(--brand-paper-muted);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-muted: var(--gold-muted);
+  --color-rose-warm: var(--rose-warm);
+  --color-rose-muted: var(--rose-muted);
+  --color-ink-primary: var(--ink-primary);
+  --color-ink-secondary: var(--ink-secondary);
 
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -372,6 +386,7 @@
   }
 }
 
+@layer components {
 /* === REPEATING BACKGROUND UTILITIES === */
 .bg-paper-ivory {
   background-color: var(--paper-warm);
@@ -427,14 +442,18 @@
 
 /* === CARD SURFACE RECIPES === */
 .card-paper {
-  @apply bg-card border-border shadow-sm;
+  @apply border-border shadow-sm;
+  background-color: var(--brand-paper);
+  color: var(--brand-paper-foreground);
   background-image: var(--asset-cardboard-ivory);
   background-repeat: var(--card-repeat, var(--brand-repeat-default));
   background-size: 320px;
 }
 
 .card-paper-ruled {
-  @apply bg-card border-border shadow-sm;
+  @apply border-border shadow-sm;
+  background-color: var(--brand-paper);
+  color: var(--brand-paper-foreground);
   background-image: var(--asset-paper-ruled-repeat);
   background-repeat: var(--card-repeat, var(--brand-repeat-default));
   background-size: 336px;
@@ -916,4 +935,5 @@
   --tw-prose-bold: var(--theme-white);
   --tw-prose-counters: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
   --tw-prose-bullets: color-mix(in srgb, var(--theme-white) 82%, var(--grade-color));
+}
 }

@@ -16,7 +16,7 @@
 
 ## Platform
 
-nextjs, tailwindcss4, shadcn, sqlite
+web
 
 ## Users
 
