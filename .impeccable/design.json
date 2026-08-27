@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-27T21:23:01.891Z",
+  "generatedAt": "2026-08-27T21:48:50.785Z",
   "title": "Design System: Old MacDonald Had a School",
   "extensions": {
     "colorMeta": {
@@ -149,7 +149,56 @@
         "purpose": "Removes nonessential animation when reduced motion is requested."
       }
     ],
-    "breakpoints": []
+    "breakpoints": [],
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "fontSize": "clamp(1.9rem, 4vw, 2.75rem)"
+      },
+      "section": {
+        "displayName": "Section",
+        "fontSize": "26px"
+      },
+      "heading": {
+        "displayName": "Heading",
+        "fontSize": "20px"
+      },
+      "title": {
+        "displayName": "Title",
+        "fontSize": "18px"
+      },
+      "card-title": {
+        "displayName": "Card Title",
+        "fontSize": "15px"
+      },
+      "body": {
+        "displayName": "Body",
+        "fontSize": "16px"
+      },
+      "small": {
+        "displayName": "Small",
+        "fontSize": "13px"
+      },
+      "label": {
+        "displayName": "Label",
+        "fontSize": "12px"
+      },
+      "caption": {
+        "displayName": "Caption",
+        "fontSize": "11px"
+      },
+      "hand": {
+        "displayName": "Hand",
+        "fontSize": "21px"
+      },
+      "hand-note": {
+        "displayName": "Hand Note",
+        "fontSize": "22px"
+      },
+      "brand": {
+        "displayName": "Brand"
+      }
+    }
   },
   "components": [
     {

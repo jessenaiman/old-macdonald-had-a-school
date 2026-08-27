@@ -41,17 +41,47 @@ colors:
 typography:
   display:
     fontFamily: "Boogaloo, sans-serif"
+    fontSize: "clamp(1.9rem, 4vw, 2.75rem)"
     fontWeight: 400
   section:
     fontFamily: "Lilita One, sans-serif"
+    fontSize: "26px"
     fontWeight: 400
+  heading:
+    fontFamily: "Boogaloo, sans-serif"
+    fontSize: "20px"
+    fontWeight: 700
+  title:
+    fontFamily: "Boogaloo, sans-serif"
+    fontSize: "18px"
+    fontWeight: 700
+  card-title:
+    fontFamily: "Boogaloo, sans-serif"
+    fontSize: "15px"
+    fontWeight: 700
   body:
     fontFamily: "Nunito, sans-serif"
-    fontSize: "1rem"
+    fontSize: "16px"
     fontWeight: 400
     lineHeight: 1.7
+  small:
+    fontFamily: "Nunito, sans-serif"
+    fontSize: "13px"
+    fontWeight: 400
+  label:
+    fontFamily: "Nunito, sans-serif"
+    fontSize: "12px"
+    fontWeight: 600
+  caption:
+    fontFamily: "Nunito, sans-serif"
+    fontSize: "11px"
+    fontWeight: 700
   hand:
     fontFamily: "Caveat, cursive"
+    fontSize: "21px"
+  hand-note:
+    fontFamily: "Caveat, cursive"
+    fontSize: "22px"
   brand:
     fontFamily: "Playfair Display, serif"
     fontWeight: 700
@@ -357,6 +387,10 @@ Use type roles together inside a real composition, not as detached specimens.
 - **Brand/editorial accent — Playfair Display bold italic.** Reserve for approved identity or editorial moments; never replace readable body copy.
 
 Uppercase eyebrows may use heavy body weight with approximately `0.13em` tracking. Do not use handwriting as decoration across an entire page.
+
+### Type ramp (observed and now normative)
+
+Body/interface steps: 11, 12, 13, 14, 15 (card titles), 16, 18, 20 px. Section and heading steps: 21, 22, 26 px. Display headings use `clamp(1.9rem, 4vw, 2.75rem)`. Nothing renders below 11 px. Off-ramp legacy values (13.5 px captions, 11.5 px captions) are queued for the next scoped `/impeccable typeset` pass; they are not additions to the ramp.
 
 ## Layout
 

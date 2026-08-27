@@ -128,7 +128,7 @@ export function SubjectTeachers() {
                 <CardFooter className="flex items-center justify-center gap-2 px-4 pb-3 pt-0">
                   <Avatar className="size-8">
                     <AvatarImage src={s.face} alt={s.teacher} />
-                    <AvatarFallback className="text-[10px]">{s.teacher.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="text-[11px]">{s.teacher.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <span className="text-[11.5px] leading-tight text-muted-foreground">
                     Guided by{" "}
