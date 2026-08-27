@@ -344,7 +344,7 @@
     @apply font-section font-medium text-balance text-xl sm:text-2xl;
   }
 
-  :where(p, li, span, div) {
+  :where(p, li) {
     @apply font-body leading-relaxed;
   }
 

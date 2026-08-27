@@ -1,3 +1,17 @@
 modelRoles:
   curator: "openai-codex/gpt-5.3-codex-spark"
-  builder: "openai-codex/gpt-5.6-luna"
+  builder: "openai-codex/gpt-5.6-terra"
+bash:
+  patterns:
+    - match: "*db:push*"
+      approval: deny
+    - match: "*drizzle-kit push*"
+      approval: deny
+    - match: "*INSERT INTO*"
+      approval: deny
+    - match: "*DELETE FROM*"
+      approval: deny
+    - match: "*DROP TABLE*"
+      approval: deny
+    - match: "*ALTER TABLE*"
+      approval: deny

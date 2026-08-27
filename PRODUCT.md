@@ -2,9 +2,21 @@
 
 <!-- impeccable:product-schema 1 -->
 
+## Product Principles
+
+1. Education and Music are an important combination when applied to the appropriate academic lessons
+2. Students in each grade learn differently at these ages (infants up to grade 2)
+3. Songs have lessons within them that are documented by qualified instructors. Your role is never to create new lesson plans.
+4. Teachers are exhuasted and lesson planning often does not have time for sourcing quality musical content to match curriculum requirements. This website links resources only, it does not create it's own lesson plans, and it does not write the markdown lesson content
+5. Early Years applies to (daycare and preschool)
+6. There are 5 grades: Daycare, Preschool, Kindergarten, Grade 1, and Grade 2  
+7. Education principles must only be sourced from the academic sources, not from LLM generated markdown
+8. Save the teacher time: grade-first mindset, find curriculum, songs, videos, resource printout in seconds, print-and-go. 
+9. No added functionality on the website for users, llm integration, printing. The site makes sure to not load the teacher with more buttons and context to remember, putting the focus on getting their lesson planning done quickly so they can spend the extra time polishing it by listening to the songs or videos
+
 ## Platform
 
-web
+nextjs, tailwindcss4, shadcn, sqlite
 
 ## Users
 
@@ -48,14 +60,7 @@ A grade-first planning companion. The teacher picks the grade they teach and lan
 - `data/omhas.db` — 388 curriculum topics with standards joins, songs, resources, tags.
 - The applied design guide PDF — color scheme, character record structure, implementation order.
 
-## Product Principles
 
-1. Repetition is the feature: small repertoires, deeply repeated, ritualized.
-2. The body is the first instrument: every song carries its action; the lap and hands are equipment.
-3. Songs are versions: invite swapping names, letters, sizes, and purposes.
-4. Teach through children to adults: print the why beside the what.
-5. Every child participates: graduated entry points — humming counts, moving counts, watching counts.
-6. Save the teacher time: grade-first mindset, find-it-in-seconds, print-and-go.
 
 ## Accessibility & Inclusion
 

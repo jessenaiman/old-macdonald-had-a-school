@@ -204,7 +204,7 @@ export function TeacherNote({
     <aside aria-label={`A note from ${teacher.name}`}>
       <Card
         className={`characters-${character} character-surface material-surface material-felt relative overflow-hidden bg-card text-card-foreground`}
-        style={{ '--teacher-color': teacherColor } as React.CSSProperties}
+        style={{ '--teacher-color': teacherColor, '--teacher-foreground': `var(--characters-${character}-foreground)` } as React.CSSProperties}
       >
         <span
           className="brand-asset fastener-binder-clip icon-small absolute right-4 -top-1"
@@ -216,7 +216,7 @@ export function TeacherNote({
           </CardTitle>
         </CardHeader>
         <CardContent className="relative z-10 flex min-h-40 flex-col items-start gap-3 pl-28 sm:pl-44">
-          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--characters-${character}-foreground)]">
+          <blockquote className="font-hand text-2xl font-bold leading-tight sm:text-3xl text-[var(--teacher-foreground)]">
             “{quote}”
           </blockquote>
           <p className="text-xs font-black uppercase tracking-widest">
