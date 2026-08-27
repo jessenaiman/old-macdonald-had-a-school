@@ -10,8 +10,8 @@
 /*
  * Old MacDonald Had a School — shadcn Theme
  *
- * Canonical shadcn v4 scaffold (@theme inline) with the characters.mdx palette:
- * - Foundation colors live in :root / .dark (characters.mdx is the single source of truth;
+ * Canonical shadcn v4 scaffold (@theme inline) with the DESIGN.md palette:
+ * - Foundation colors live in :root / .dark (DESIGN.md is the design source of truth;
  *   globals.css is the implementation layer and must not invent colors).
  * - @theme inline maps semantic tokens to Tailwind utilities so component-level
  *   CSS variable overrides (e.g. --card) cascade correctly.
@@ -23,7 +23,7 @@
   --brand-repeat-default: repeat;
   --radius: 0.625rem;
 
-  /* === FOUNDATION PALETTE (characters.mdx) === */
+  /* === FOUNDATION PALETTE (DESIGN.md) === */
   --paper-cream: #fefce8;
   --paper-warm: #fdf8e3;
   --paper-muted: #f0e6d0;
@@ -113,7 +113,7 @@
   --sidebar-border: var(--wood-muted);
   --sidebar-ring: var(--gold-bright);
 
-  /* === CHARACTER IDENTITY (characters.mdx — badges/avatars only) === */
+  /* === CHARACTER IDENTITY (DESIGN.md — badges/avatars only) === */
   --characters-old-macdonald-color: #a66a32;
   --characters-old-macdonald-foreground: #fefce8;
   --characters-miss-puddles-color: #f6af32;
@@ -319,7 +319,7 @@
   --color-wood-muted: var(--wood-muted);
   --color-wood-soft: var(--wood-soft);
 
-  /* Custom: grade identity colors (characters.mdx — character subject-coded) */
+  /* Custom: grade identity colors (DESIGN.md — character subject-coded) */
   --color-grade-daycare: var(--grade-daycare-color);
   --color-grade-pre-school: var(--grade-pre-school-color);
   --color-grade-kindergarten: var(--grade-kindergarten-color);
@@ -745,7 +745,7 @@
   background-size: auto, 180px;
 }
 
-/* Characters class -> character-surface variable bridge. Colors: characters.mdx via :root tokens above; felt tiles: brand-assets.css --characters-<key>-texture. */
+/* Characters class -> character-surface variable bridge. Colors: DESIGN.md via :root tokens above; felt tiles: brand-assets.css --characters-<key>-texture. */
 .characters-old-macdonald { --character-color: var(--characters-old-macdonald-color); --character-foreground: var(--characters-old-macdonald-foreground); --character-texture: var(--characters-old-macdonald-texture); }
 .characters-miss-puddles { --character-color: var(--characters-miss-puddles-color); --character-foreground: var(--characters-miss-puddles-foreground); --character-texture: var(--characters-miss-puddles-texture); }
 .characters-mr-rusty { --character-color: var(--characters-mr-rusty-color); --character-foreground: var(--characters-mr-rusty-foreground); --character-texture: var(--characters-mr-rusty-texture); }

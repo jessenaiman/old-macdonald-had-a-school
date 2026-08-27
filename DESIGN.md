@@ -1,12 +1,110 @@
+---
+name: Old MacDonald Had a School
+description: A living classroom working wall for educator-facing curriculum planning and real learning experiences.
+colors:
+  canvas-cream: "#fefce8"
+  readable-paper: "#fdf8e3"
+  primary-ink: "#1a2a2e"
+  structural-navy: "#1e2a38"
+  joinery-wood: "#c4a07a"
+  focus-gold: "#d4a82a"
+  destructive-rose: "#d47a8a"
+  identity-old-macdonald: "#A66A32"
+  identity-miss-puddles: "#F6AF32"
+  identity-mr-rusty: "#267CBA"
+  identity-miss-hayley: "#D95C86"
+  identity-mr-sam: "#1D8787"
+  identity-mr-maisy: "#D81D24"
+  identity-mr-puddles: "#5367B5"
+  identity-miss-maisy: "#5D8164"
+  identity-hopper: "#E66C71"
+  identity-whiskers: "#E695B0"
+  identity-scout: "#C59E7A"
+  identity-penny: "#F9CB7A"
+  identity-maisy: "#96AD9A"
+  identity-puddles: "#8F9CCF"
+  identity-sam: "#6CB1B1"
+  identity-rusty: "#72AAD2"
+  grade-early-years-routing: "#5D8164"
+  grade-daycare-routing: "#F6AF32"
+  grade-preschool-routing: "#5D8164"
+  grade-kindergarten-routing: "#267CBA"
+  grade-one-routing: "#D95C86"
+  grade-two-routing: "#D81D24"
+  subject-music-routing: "#267CBA"
+  subject-math-routing: "#1D8787"
+  subject-science-routing: "#5D8164"
+  subject-language-routing: "#D95C86"
+  subject-arts-routing: "#5367B5"
+  subject-health-routing: "#D81D24"
+  subject-early-learning-routing: "#F6AF32"
+typography:
+  display:
+    fontFamily: "Boogaloo, sans-serif"
+    fontWeight: 400
+  section:
+    fontFamily: "Lilita One, sans-serif"
+    fontWeight: 400
+  body:
+    fontFamily: "Nunito, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.7
+  hand:
+    fontFamily: "Caveat, cursive"
+  brand:
+    fontFamily: "Playfair Display, serif"
+    fontWeight: 700
+rounded:
+  sm: "calc(0.625rem * 0.6)"
+  md: "calc(0.625rem * 0.8)"
+  lg: "0.625rem"
+  xl: "calc(0.625rem * 1.4)"
+  2xl: "calc(0.625rem * 1.8)"
+  3xl: "calc(0.625rem * 2.2)"
+  4xl: "calc(0.625rem * 2.6)"
+components:
+  button-primary:
+    backgroundColor: "{colors.structural-navy}"
+    textColor: "{colors.canvas-cream}"
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
+    height: "44px"
+  paper-card:
+    backgroundColor: "{colors.readable-paper}"
+    textColor: "{colors.primary-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.lg}"
+  grade-surface-chip-daycare:
+    backgroundColor: "{colors.grade-daycare-routing}"
+    textColor: "{colors.structural-navy}"
+    typography: "{typography.body}"
+    rounded: "{rounded.xl}"
+    height: "44px"
+  search-input:
+    backgroundColor: "{colors.readable-paper}"
+    textColor: "{colors.primary-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
+    height: "44px"
+  character-badge-mr-rusty:
+    backgroundColor: "{colors.identity-mr-rusty}"
+    textColor: "{colors.canvas-cream}"
+    rounded: "{rounded.4xl}"
+    size: "44px"
+---
+
 # Old MacDonald Had a School Design System
 
 ## Overview
+
+**Creative North Star: "Living Classroom Working Wall"**
 
 This system translates the official character record into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.
 
 It serves an educator-facing curriculum product. Its job is to make a specific learning purpose and the practical material needed to lead it easy to understand at a glance. The visual world is not children’s entertainment and not a generic dashboard: it is a welcoming, capable working environment for planning and leading real learning experiences.
 
-**This file is the design source of truth.** It carries the complete character, grade, and subject design records — colors, foregrounds, curriculum relationships, icon bindings, and canonical artwork paths. `content/pages/branding/characters.mdx` is a rendered brand page that consumes this record and must never redefine it. `app/globals.css` and `app/brand-assets.css` are the implementation bindings. `public/` is storage, not authority. Do not infer design rules from route copy, filenames, code comments, contact sheets, or available-but-unregistered assets.
+**DESIGN.md and PRODUCT.md are the only design sources of truth.** This file carries the complete character, grade, and subject design records — colors, foregrounds, curriculum relationships, icon bindings, and canonical artwork paths. `content/pages/branding/characters.mdx` is retired and pending owner deletion; do not consume or update it. `app/globals.css` and `app/brand-assets.css` are implementation bindings. `public/` is storage, not authority. Do not infer design rules from route copy, filenames, code comments, contact sheets, or available-but-unregistered assets.
 
 When sources conflict:
 
@@ -14,7 +112,15 @@ When sources conflict:
 2. Use CSS only to bind those rules to current values and files.
 3. Stop for approval rather than inventing, optimizing, excluding, or silently substituting.
 
-## Identity relationship contract
+**Key Characteristics:**
+- Academic meaning first.
+- Developmentally appropriate material.
+- One semantic owner.
+- Readable work on paper.
+- Real artifacts, live content.
+- Warm, capable, specific.
+
+### Identity relationship contract
 
 This diagram defines the design relationship; the tables below carry the exact values.
 
@@ -41,7 +147,7 @@ flowchart TD
 - Shared controls use OMHAS semantic tokens.
 - Missing or conflicting relationships stop for approval.
 
-## Design thesis
+### Design thesis
 
 Create a living classroom working wall, not a generic dashboard and not a cork-themed interface.
 
@@ -59,82 +165,33 @@ The attachment relationship is the signature move:
 
 Educational meaning leads decoration. Choose curriculum, grade, character, material, and icon because each has a documented job.
 
-## Experience principles
+### Experience principles
 
-### Academic meaning first
+#### Academic meaning first
 
 Lead with academic field or learning action before character name. Character identity supports the learning context; it does not replace it.
 
 Lead a teaching resource with its lesson purpose and learner group as well. A song, story, video, activity, or printable must look connected to the learning it serves, rather than presented as free-floating content.
 
-### Developmentally appropriate material
+#### Developmentally appropriate material
 
 The design must match the teaching format to the learners. Early-years resources prioritize instructor-led songs, stories, sensory play, movement, visual cues, and observation. Daycare and Preschool materials remain highly visual and group-oriented. Worksheets, written responses, and formal-looking practice are reserved for a specific Kindergarten-to-Grade-2 learning purpose; they are never the default visual language for younger children.
 
-### One semantic owner
+#### One semantic owner
 
 Character color and felt belong only to that character. Grade color belongs to that grade. Subject color and icon belong to curriculum meaning. Generic navigation and controls use shared semantic UI roles, never character texture.
 
-### Readable work on paper
+#### Readable work on paper
 
 Paragraphs, instructions, form labels, tables, learner work, and dense teacher information use paper. Fabric is an attached identity specimen or owned object, never the default reading surface.
 
-### Real artifacts, live content
+#### Real artifacts, live content
 
 Text remains live and editable. Use repeating paper surfaces behind live content. Never bake an entire responsive card, paragraph, or control into a raster image.
 
-### Warm, capable, specific
+#### Warm, capable, specific
 
 Tone feels welcoming, handmade, organized, and teacher-useful. Avoid childish clutter, sterile enterprise dashboards, decorative randomness, and nostalgia without educational function.
-
-## Composition grammar
-
-Build compositions in four layers:
-
-1. **Environment** — page, slide, or sheet canvas.
-2. **Support** — leather, denim, cork, paper, card, or another approved structural surface.
-3. **Artifact** — readable paper, character-owned patch, badge, curriculum card, photograph, or illustration.
-4. **Attachment** — paperclip, masking tape, binder clip, push pin, or another approved fastener crossing artifact and support.
-
-At least one composition in a branded artifact should demonstrate the support–artifact relationship. Do not cover every surface with texture. Give readable artifacts calm space.
-
-Use overlap to show construction, not to hide information. Keep text, controls, faces, icons, and focus indicators clear of fasteners. Small rotations may suggest a placed object; they must never reduce alignment, legibility, or apparent quality.
-
-### Depth
-
-- Support surfaces sit at the lowest content plane.
-- Paper and textile artifacts lift one plane with border and restrained shadow.
-- Fasteners sit above the artifact edge.
-- Dialogs, menus, and focus indicators remain functionally above decorative layers.
-- Do not use glossy glassmorphism, neon glow, or deep synthetic 3D effects.
-
-## Materials
-
-### Paper
-
-Default readable surface. Cardboard paper supports cards and work stages. Ruled paper supports prose aligned to its repeating rule. Grid paper supports diagrams, number work, and planning. Repeats extend as content grows.
-
-For ruled paper on web, current implementation evidence uses a 28 px mobile rule interval and 32 px from the existing small-screen layout threshold. Other media should preserve line-to-text alignment rather than copy those pixel values blindly.
-
-### Cork
-
-Working board holding attached paper, fabric, and fasteners. Use semantic repeating texture for responsive surfaces. Fixed-composition board exports are review references, not stretchable page backgrounds.
-
-### Leather
-
-Dark structural surface for shared header, footer, attached edge treatments, and the homepage base. Paper headings and lesson lists may be clipped or taped to it.
-
-### Denim
-
-Presentation-board textile behind installed workspaces. It is a support, not a generic content card.
-
-### Felt and woven cloth
-
-Felt requires a semantic owner. Character felt uses that character's approved identity. Grade patches use the documented grade mapping. Neutral woven cloth is an attached textile object, never the wall behind pinned notes. Never use a character texture for unrelated subjects, navigation, or generic controls.
-
-### Asset boundaries
-
-Asset paths stay behind semantic names. Do not paste file URLs into components or generation prompts when a semantic asset role exists. Contact sheets and composites are references, not production surfaces. Availability does not grant permission to invent a role. No asset may be excluded, substituted, renamed, deleted, or classified as non-production without explicit approval.
 
 ## Colors
 
@@ -261,6 +318,7 @@ Subject color and icon represent curriculum meaning. The color is the academic l
 | Subject area | Academic lead | Color token | Color | Icon class | Icon asset |
 | --- | --- | --- | --- | --- | --- |
 | Music · Rhythm · Counting | Mr Rusty | `--subject-music-color` | `#267CBA` | `music-icon` (flat) / `music-fiddle` (felt) | `/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/08-music-notes-paired-beam.webp` / `01-instrument-fiddle-bow.webp` |
+| Music · Community · Literacy (whole-school singing) | Old MacDonald | identity routing (`--characters-old-macdonald-color`) | `#A66A32` | `music-hand-drum` (felt) / `music-icon` | `/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/06-instrument-hand-drum.webp` |
 | Mathematics · Science · Engineering | Mr Sam | `--subject-math-color` | `#1D8787` | `math-building-icon` | `/brand-kit-icon-sheets/individual-icons/subject-math-building.webp` |
 | Community · Science · Food & Health | Miss Maisy | `--subject-science-color` | `#5D8164` | `gardening-health-icon` | `/brand-kit-icon-sheets/individual-icons/subject-gardening-health.webp` |
 | Literacy · Music · Drama | Miss Hayley | `--subject-language-color` | `#D95C86` | `drama-storytelling-icon` | `/brand-kit-icon-sheets/individual-icons/subject-drama-storytelling.webp` |
@@ -268,6 +326,8 @@ Subject color and icon represent curriculum meaning. The color is the academic l
 | Physical Education · Health | Mr Maisy | `--subject-health-color` | `#D81D24` | `physical-education-icon` | `/brand-kit-icon-sheets/individual-icons/subject-physical-education.webp` |
 | Early Learning · Movement · SEL | Miss Puddles | (grade-daycare routing) | `#F6AF32` | `early-learning-icon` | `/brand-kit-icon-sheets/individual-icons/subject-early-learning.webp` |
 
+
+Two music strands coexist and must not be merged: Mr Rusty owns rhythm, counting, and fiddle (`--subject-music-color`); Old MacDonald owns whole-school singing, gatherings, and song-led community (his identity color). A surface may show either strand, but each keeps its own owner, color, and icon.
 Select icons by subject, activity, or learning relationship. Never rotate icons by list position. Large: subject introductions, feature cards, empty states. Medium: lesson cards, grade pathways, curriculum panels. Small: navigation, compact metadata, filters — use the governed flat export (`-flat` suffix mandatory until approved). Use dimensional felt art only at large and medium sizes; never shrink detailed felt art into compact UI.
 
 ### Fastener and material assets
@@ -298,9 +358,88 @@ Use type roles together inside a real composition, not as detached specimens.
 
 Uppercase eyebrows may use heavy body weight with approximately `0.13em` tracking. Do not use handwriting as decoration across an entire page.
 
-## Identity and imagery
+## Layout
 
-### Character hierarchy
+This contract defines behavior, not a duplicate responsive framework. The target medium selects implementation breakpoints. Tailwind v4 may be generated as a web adapter; do not encode Tailwind utilities or configuration into this source contract.
+
+### Fluid web
+
+- Start with one readable column.
+- Add columns only when each artifact preserves useful width and visible attachment logic.
+- Stack grade rail above work stage when side-by-side geometry becomes cramped.
+- Preserve content order when visual layers collapse.
+- Keep fasteners clear of text and touch targets at every width.
+- Use live repeating textures; never stretch fixed board art.
+- Keep navigation marks at their approved compact or navigation roles.
+
+### Presentation profile
+
+Use a 16:9 canvas. One learning idea per slide. Preserve environment, support, artifact, and attachment hierarchy. Use large/medium curriculum art, short live text, high-resolution character badge or portrait, and generous safe margins. Avoid shrinking a web page into a slide.
+
+### Print profile
+
+Support A4 and US Letter. Keep text and essential imagery inside printer-safe margins. Repeat paper or material textures without visible seams. Fasteners may cross an artifact edge but never cross trim or obscure content. Use canonical high-resolution artwork. Ensure the result remains understandable in grayscale and when printed without background graphics.
+
+### Editorial and social profiles
+
+Preserve academic lead, semantic ownership, readable paper, and installed-object logic. Crop environments before cropping characters or curriculum signals. Do not invent new character poses, colors, or badges to fill an aspect ratio.
+
+### Composition grammar
+
+Build compositions in four layers:
+
+1. **Environment** — page, slide, or sheet canvas.
+2. **Support** — leather, denim, cork, paper, card, or another approved structural surface.
+3. **Artifact** — readable paper, character-owned patch, badge, curriculum card, photograph, or illustration.
+4. **Attachment** — paperclip, masking tape, binder clip, push pin, or another approved fastener crossing artifact and support.
+
+At least one composition in a branded artifact should demonstrate the support–artifact relationship. Do not cover every surface with texture. Give readable artifacts calm space.
+
+Use overlap to show construction, not to hide information. Keep text, controls, faces, icons, and focus indicators clear of fasteners. Small rotations may suggest a placed object; they must never reduce alignment, legibility, or apparent quality.
+
+## Elevation & Depth
+
+### Depth
+
+- Support surfaces sit at the lowest content plane.
+- Paper and textile artifacts lift one plane with border and restrained shadow.
+- Fasteners sit above the artifact edge.
+- Dialogs, menus, and focus indicators remain functionally above decorative layers.
+- Do not use glossy glassmorphism, neon glow, or deep synthetic 3D effects.
+
+### Materials
+
+#### Paper
+
+Default readable surface. Cardboard paper supports cards and work stages. Ruled paper supports prose aligned to its repeating rule. Grid paper supports diagrams, number work, and planning. Repeats extend as content grows.
+
+For ruled paper on web, current implementation evidence uses a 28 px mobile rule interval and 32 px from the existing small-screen layout threshold. Other media should preserve line-to-text alignment rather than copy those pixel values blindly.
+
+#### Cork
+
+Working board holding attached paper, fabric, and fasteners. Use semantic repeating texture for responsive surfaces. Fixed-composition board exports are review references, not stretchable page backgrounds.
+
+#### Leather
+
+Dark structural surface for shared header, footer, attached edge treatments, and the homepage base. Paper headings and lesson lists may be clipped or taped to it.
+
+#### Denim
+
+Presentation-board textile behind installed workspaces. It is a support, not a generic content card.
+
+#### Felt and woven cloth
+
+Felt requires a semantic owner. Character felt uses that character's approved identity. Grade patches use the documented grade mapping. Neutral woven cloth is an attached textile object, never the wall behind pinned notes. Never use a character texture for unrelated subjects, navigation, or generic controls.
+
+#### Asset boundaries
+
+Asset paths stay behind semantic names. Do not paste file URLs into components or generation prompts when a semantic asset role exists. Contact sheets and composites are references, not production surfaces. Availability does not grant permission to invent a role. No asset may be excluded, substituted, renamed, deleted, or classified as non-production without explicit approval.
+
+## Shapes
+
+### Identity and imagery
+
+#### Character hierarchy
 
 Academic field appears first. Character name and personality follow. Keep readable text outside portrait silhouettes.
 
@@ -313,7 +452,7 @@ Canonical character forms:
 3. Background-backed face bust where that canonical artwork is required.
 4. High-resolution embroidered badge for large screen or print artwork.
 
-### Logo family
+#### Logo family
 
 Use the compact flat mark at 32 px, navigation mark at 44 px, card mark for grouped teacher actions, and detail mark for editorial or print-scale destinations. Use identity as part of a real composition, not a detached logo specimen.
 
@@ -343,33 +482,9 @@ One production unit owns paper silhouette, live text, curriculum icon, fastener,
 
 Reuse shared accessible primitives for buttons, inputs, tabs, disclosure, navigation, cards, and dialogs. Do not create page-local visual control walls.
 
-## Layout
+## Do's and Don'ts
 
-This contract defines behavior, not a duplicate responsive framework. The target medium selects implementation breakpoints. Tailwind v4 may be generated as a web adapter; do not encode Tailwind utilities or configuration into this source contract.
-
-### Fluid web
-
-- Start with one readable column.
-- Add columns only when each artifact preserves useful width and visible attachment logic.
-- Stack grade rail above work stage when side-by-side geometry becomes cramped.
-- Preserve content order when visual layers collapse.
-- Keep fasteners clear of text and touch targets at every width.
-- Use live repeating textures; never stretch fixed board art.
-- Keep navigation marks at their approved compact or navigation roles.
-
-### Presentation profile
-
-Use a 16:9 canvas. One learning idea per slide. Preserve environment, support, artifact, and attachment hierarchy. Use large/medium curriculum art, short live text, high-resolution character badge or portrait, and generous safe margins. Avoid shrinking a web page into a slide.
-
-### Print profile
-
-Support A4 and US Letter. Keep text and essential imagery inside printer-safe margins. Repeat paper or material textures without visible seams. Fasteners may cross an artifact edge but never cross trim or obscure content. Use canonical high-resolution artwork. Ensure the result remains understandable in grayscale and when printed without background graphics.
-
-### Editorial and social profiles
-
-Preserve academic lead, semantic ownership, readable paper, and installed-object logic. Crop environments before cropping characters or curriculum signals. Do not invent new character poses, colors, or badges to fill an aspect ratio.
-
-## Accessibility
+### Accessibility
 
 - Maintain readable contrast using the approved foreground paired with each semantic surface. Light learner hues (Penny `#F9CB7A`, Scout `#C59E7A`, Maisy `#96AD9A`) pair with dark ink `#1E2A38`, never cream.
 - Never use character, grade, or subject color as the only carrier of meaning; include text or a semantic icon.
@@ -380,44 +495,48 @@ Preserve academic lead, semantic ownership, readable paper, and installed-object
 - Preserve logical reading order independent of visual overlap.
 - Respect reduced-motion preference. Attachment and material identity must not depend on animation.
 
-## Motion
+### Motion
 
 Motion is restrained and functional: focus, disclosure, selection, carousel change, or artifact placement feedback. Do not animate texture continuously. Avoid bounce, wobble, parallax, or novelty motion that competes with teaching content. Reduced-motion mode removes nonessential movement.
 
-## Content voice
+### Content voice
 
 Write for teachers and young learners with clarity, warmth, and concrete action. Use active verbs. Name what learners notice, test, make, sing, count, explain, or share. Keep headings inviting and specific. Avoid corporate product language, generic inspiration, and character-first copy that hides the academic purpose.
 
-## Do's and Don'ts
+### Named rules
+
+**The One Semantic Owner Rule.** Character color and felt belong only to that character. Grade color belongs to that grade. Subject color and icon belong to curriculum meaning. Generic navigation and controls use shared semantic UI roles, never character texture.
+
+**The Credible Attachment Rule.** A fastener must cross artifact and support.
 
 ### Do
 
-- Start from curriculum meaning.
-- Use exact approved identity colors and canonical art from this file.
-- Put readable information on paper.
-- Make attachment physically legible.
-- Use semantic asset roles.
-- Keep content live across media.
-- Preserve all assets pending explicit classification.
-- Keep the complete character record in this file only; pages render it, they do not redefine it.
+- Do start from curriculum meaning.
+- Do use exact approved identity colors and canonical art from this file.
+- Do put readable information on paper.
+- Do make attachment physically legible.
+- Do use semantic asset roles.
+- Do keep content live across media.
+- Do preserve all assets pending explicit classification.
+- Do keep the complete character record in this file only; pages render it, they do not redefine it.
 
-### Do not
+### Don't
 
-- Treat cork as the whole design concept.
-- Use a floating decorative fastener.
-- Put paragraphs or controls on fabric.
-- Assign character felt to generic navigation or subjects.
-- Recolor character artwork.
-- Choose icons randomly.
-- Shrink dimensional art into compact UI.
-- Bake responsive text into images.
-- Stretch fixed-composition board exports.
-- Duplicate Tailwind's responsive system.
-- Infer authority from other Markdown files or file availability.
-- Exclude or substitute an image without approval.
-- Maintain character, grade, or subject color data in any file other than this one and its two CSS bindings.
+- Don't treat cork as the whole design concept.
+- Don't use a floating decorative fastener.
+- Don't put paragraphs or controls on fabric.
+- Don't assign character felt to generic navigation or subjects.
+- Don't recolor character artwork.
+- Don't choose icons randomly.
+- Don't shrink dimensional art into compact UI.
+- Don't bake responsive text into images.
+- Don't stretch fixed-composition board exports.
+- Don't duplicate Tailwind's responsive system.
+- Don't infer authority from other Markdown files or file availability.
+- Don't exclude or substitute an image without approval.
+- Don't maintain character, grade, or subject color data in any file other than this one and its two CSS bindings.
 
-## Agent generation contract
+### Agent generation contract
 
 Before generating:
 
@@ -440,7 +559,7 @@ Reject output when:
 
 When a required source is missing, stop and report the exact path. Never conceal the defect with a guessed replacement.
 
-## Provenance
+### Provenance
 
 - 2026-08-25: colors reconciled against `Old_MacDonalds_School_Learning_Color_Map.pdf` (inspected via PNG twin); nine unchanged identity values still match that document.
 - 2026-08-27: owner-approved revision board (Register 02, formerly `docs/design-explorations/character-colour-register/character-colour-register-02-reimagined.png`, deleted by the owner after transcription) supersedes the PDF for seven values: Old MacDonald `#A66A32`, Mr Rusty `#267CBA`, Mr Sam `#1D8787`, Mr Maisy `#D81D24`, Miss Maisy `#5D8164`, Scout `#C59E7A`, Maisy `#96AD9A`. The board's teacher/learner pairing is a hue-family visual marker only; subject + grade + color + character is the system.

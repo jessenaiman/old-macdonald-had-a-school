@@ -6,7 +6,7 @@
  * paths while preserving the existing optimized WebP/PNG assets.
  *
  * This registry exposes available files. Character meaning, color meaning, grade
- * routing, and subject routing remain defined by content/pages/branding/characters.mdx
+ * routing, and subject routing remain defined by DESIGN.md
  * and implemented through app/globals.css plus app/brand-assets.css.
  */
 export const BRAND_IMAGE_ASSETS = {
