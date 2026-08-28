@@ -53,7 +53,7 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - [x] Repair subject cards: valid `color-mix(...)`, canonical subject owners/colors, canonical face assets through `BRAND_IMAGE_ASSETS`, and token-derived shadows.
 - [x] Replace raw YouTube `<img>` with `next/image`; allow only `https://i.ytimg.com/vi/**` through `images.remotePatterns`.
 - [x] Remove duplicate root paper texture wrapper; body remains single owner of repeating canvas texture.
-- [ ] [Issue #12](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/12): compare `native-select` and `combobox` with current shadcn registry source, then reinstall each named component when source differs instead of hand-refactoring vendored primitives. Migrate callers to installed APIs. Keep accessible structure/behavior in shadcn source, OMHAS design in semantic CSS, and page layout in Tailwind composition classes.
+- [x] [Issue #12](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/12): closed 2026-08-27 — upstream comparison done, six-file diff applied, z-50 layering adopted where upstream required it.
 - [ ] Consolidate legacy `.bg-*` / `.card-*` recipes with `.material-*`; remove only recipes proven to have zero consumers after route verification.
 - [ ] Remove duplicated subject/grade color derivation from component data; CSS semantic owner must supply grade and subject colors.
 - [ ] Replace JavaScript `matchMedia("(min-width: 64rem)")` ownership with one documented responsive owner or a responsive component API.
@@ -64,10 +64,10 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 ## Owner decisions carried forward (unresolved)
 
 - [x] `app/page.tsx` YouTube thumbnails now use `next/image`; `next.config.ts` restricts the remote source to `https://i.ytimg.com/vi/**`.
-- [ ] Deploy contract: `next.config.ts` `outputFileTracingIncludes` traces `data/omhas.db` only; `data/search-vectors.db` sidecar and `models/` are NOT traced (`models/` gitignored and absent locally). Decide (A) vendor weights + sidecar into deploy (check Vercel size limits for ~55MB) or (B) keyword-only fallback on serverless (`app/api/search/route.ts` already degrades cleanly) and make README say so. README ↔ `next.config.ts` ↔ `.vercelignore` must tell one story.
+- [ ] **Deploy contract — deferred to Issue #19.** `next.config.ts` `outputFileTracingIncludes` traces `data/omhas.db` only; `data/search-vectors.db` sidecar and `models/` are NOT traced (`models/` gitignored and absent locally). Architecture review complete (see 2026-08-28 section below); owner will implement flat-file export or hosted database as the next plan. Remaining unrefactored: no `output: "export"` in `next.config.ts`, no build-export script, `/songs` and `/lessons` still query SQLite, `lib/curriculum-db.ts`/`lib/curriculum-lesson.ts`/`lib/songbook.ts` still open `better-sqlite3`, `/api/search` and both Markdown API routes remain Node handlers, no generated JSON/search/Markdown artifacts or static-link replacement exists.
 - [ ] `npx shadcn@latest mcp init` — interactive client picker (Claude Code/Cursor/VS Code/Codex/OpenCode). Owner runs; assistant cannot answer the prompt.
 - [ ] `modelRoles.vision` = `alibaba-token-plan/qwen3.8-flash` rejects image input (verified error this session). Pixel-level screenshot review impossible until owner sets a vision-capable model. Standing rule: assistant requests, owner changes settings.
-- [ ] Database/embedding migration — owner handling separately; excluded here.
+- [x] Database/embedding migration — **deferred to [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19).** Architecture review complete; flat-file release recommended as lowest-cost option; owner implements hosting/database as next plan.
 - [ ] Security flag: `src/db/migrate-to-sqlite.ts:7` contains a live Neon connection string, present in 2 commits of git history on `main`. Rotate credential at Neon; history scrub is a separate destructive call.
 
 ## Verification gates (all must pass before any "done" claim)
@@ -80,6 +80,7 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - [ ] Pixel-level screenshot review remains blocked because configured vision model rejects image input. Do not label screenshots visually verified.
 - [x] axe-core reports zero WCAG A/AA violations on homepage and Grade 1 route; textured backgrounds leave contrast checks incomplete for manual review.
 - [ ] Final diff review, commit, push, and clean working tree.
+- [x] [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19) database/hosting architecture review complete; implementation deferred to owner.
 
 ## Rules for future sessions
 
@@ -127,3 +128,12 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - Commits: `eabf5f1` (batch), `604c67b` (subject-note), pushed; gates typecheck/lint/build exit 0.
 - **Owner-decision open**: DESIGN.md binds navy foreground `#1E2A38` to mid hues (e.g. Miss Hayley `#D95C86`) ≈ 2.3–3.8:1 at body size on grade rails — fails WCAG AA; locked identity colors mean the fix (cream ink on darkened surfaces, header precedent) needs a DESIGN.md amendment the owner approves.
 - **Not mine, left uncommitted**: 23 `public/characters/*` deletions appeared in the working tree during the wait (owner-side, matches the 7fde4e3 pattern). Un-restored, un-committed; owner commits or delegates.
+
+## 2026-08-28 — database/hosting architecture review (Issue #19, deferred)
+
+- [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19) created as the single parking lot for the database/hosting/API decision. The issue explicitly defers migration and remediation until the owner re-opens it.
+- Architecture review completed: verified `better-sqlite3` consumers (`lib/curriculum-db.ts`, `lib/curriculum-lesson.ts`, `lib/songbook.ts`, `app/api/search/route.ts`), `data/omhas.db` tracing in `next.config.ts`, missing `models/` directory, vector sidecar, and both Markdown export routes (`app/api/lessons/[grade]/[id]/markdown/route.ts`, `app/api/songs/[id]/markdown/route.ts`).
+- Recommended release architecture: static flat-file export from SQLite (pre-generate lesson/topic/song pages, search index, and Markdown files), deployed to Vercel or Cloudflare Pages.
+- Hosting options documented: Vercel static, Cloudflare Pages static, Vercel + Turso/libSQL (best live SQLite-compatible option, smallest migration), Vercel + Neon Postgres (largest migration but best conventional API path).
+- Nothing has been refactored yet. Implementation deferred to owner as the next plan.
+- Markdown download routes (`components/grades/DatabaseLessonDocument.tsx:77–78` → `/api/lessons/.../markdown`, `/api/songs/.../markdown`) cannot remain as Node handlers on pure static hosting; pre-generate `.md` files as the replacement.
