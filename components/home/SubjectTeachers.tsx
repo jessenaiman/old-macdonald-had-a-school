@@ -107,18 +107,18 @@ export function SubjectTeachers() {
                     <BrandIcon icon={s.icon} size="small" className="icon-small" />
                   </span>
                   <CardTitle
-                    className="mt-2.5 font-heading text-[15px] font-bold leading-tight text-ink-primary"
+                    className="mt-2.5 font-heading text-[15px] font-bold leading-tight text-brand-paper-foreground"
                   >
                     {s.label}
                   </CardTitle>
                 </CardHeader>
 
                 <CardContent className="flex flex-col items-center gap-0 px-4 pb-0 pt-2 text-center">
-                  <p className="text-xs text-muted-foreground">{s.verbs}</p>
-                  <span className="mt-1 text-[11px] font-semibold text-muted-foreground">
+                  <p className="text-xs text-brand-paper-muted">{s.verbs}</p>
+                  <span className="mt-1 text-[11px] font-semibold text-brand-paper-muted">
                     {s.count}
                   </span>
-                  <span className="mt-2 text-xs font-semibold text-ink-primary transition-colors group-hover:text-gold-bright">
+                  <span className="mt-2 text-xs font-semibold text-brand-paper-foreground transition-colors group-hover:text-gold-bright">
                     Explore <span aria-hidden>→</span>
                   </span>
                 </CardContent>
@@ -130,9 +130,9 @@ export function SubjectTeachers() {
                     <AvatarImage src={s.face} alt={s.teacher} />
                     <AvatarFallback className="text-[11px]">{s.teacher.charAt(0)}</AvatarFallback>
                   </Avatar>
-                  <span className="text-[11.5px] leading-tight text-muted-foreground">
+                  <span className="text-[11.5px] leading-tight text-brand-paper-muted">
                     Guided by{" "}
-                    <strong className="text-foreground">{s.teacher}</strong>
+                    <strong className="text-brand-paper-foreground">{s.teacher}</strong>
                   </span>
                 </CardFooter>
               </Card>

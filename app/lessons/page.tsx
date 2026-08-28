@@ -116,7 +116,7 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
               <Field>
                 <FieldLabel htmlFor="lesson-grade">Teaching group</FieldLabel>
               <NativeSelect id="lesson-grade" name="grade" defaultValue={grade ?? ""}>
-                <option value="">All supported grades</option><option value="daycare">Daycare</option><option value="pre-school">Pre-School</option><option value="kindergarten">Kindergarten</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option>
+                <option value="">All supported grades</option><option value="daycare">Daycare</option><option value="pre-school">Preschool</option><option value="kindergarten">Kindergarten</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option>
               </NativeSelect>
               </Field>
               <Button type="submit">Search lessons</Button>

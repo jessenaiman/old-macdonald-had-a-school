@@ -19,9 +19,9 @@ export const metadata = {
 const HERO_PHOTO = BRAND_IMAGE_ASSETS.scenes["old-macs-open-circle-gathering"];
 
 const NEW_LESSONS = [
-  { title: "Find the Steady Beat", desc: "Feel and clap the heartbeat of songs.", tags: ["K", "1", "2"] },
-  { title: "Animal Action March", desc: "Move like the animals in the song.", tags: ["K", "1", "2"] },
-  { title: "Old MacDonald Orchestra", desc: "Explore classroom instruments and sounds.", tags: ["K", "1", "2"] },
+  { title: "Find the Steady Beat", desc: "Feel and clap the heartbeat of songs." },
+  { title: "Animal Action March", desc: "Move like the animals in the song." },
+  { title: "Old MacDonald Orchestra", desc: "Explore classroom instruments and sounds." },
 ] as const;
 
 const RIBBON_WORDS = ["Sing", "Play", "Learn", "Together"];
@@ -32,7 +32,7 @@ function HeroBanner() {
   return (
     <section className="relative min-w-0 w-full grid items-center gap-8 lg:grid-cols-[1.05fr_auto_0.95fr]">
       <div className="flex min-w-0 flex-col gap-6">
-        <h1 className="break-words font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-bold leading-[1.05] text-brand-navy">
+        <h1 className="break-words font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-bold leading-[1.05] text-foreground">
           Where familiar songs become{" "}
           <em className="not-italic text-rose-muted">new places</em> to learn.
         </h1>
@@ -40,8 +40,8 @@ function HeroBanner() {
         <div className="card-paper relative min-w-0 w-full max-w-full rounded-2xl border-brand-navy/10 p-5 shadow-lg">
           <span aria-hidden className="absolute -top-2.5 left-1/2 h-5 w-20 -translate-x-1/2 -rotate-2 rounded-sm bg-gold-soft/50 shadow-sm [clip-path:polygon(3%_0,97%_6%,100%_88%,0_100%)]" />
           <div className="flex items-baseline justify-between px-1 pb-2">
-            <span className="font-hand text-xl italic text-ink-primary">New this week</span>
-            <span className="font-hand text-base italic text-brand-paper-foreground">Grades</span>
+            <span className="font-hand text-xl italic text-brand-paper-foreground">New this week</span>
+            <span className="font-hand text-base italic text-brand-paper-muted">Kindergarten–Grade 2</span>
           </div>
           <ul className="divide-y divide-brand-paper-foreground/10">
             {NEW_LESSONS.map((lesson) => (
@@ -51,13 +51,7 @@ function HeroBanner() {
                   <p className="truncate text-sm font-bold text-brand-paper-foreground">{lesson.title}</p>
                   <p className="truncate text-xs text-brand-paper-muted">{lesson.desc}</p>
                 </div>
-                <div className="flex min-w-0 shrink-0 gap-1">
-                  {lesson.tags.map((tag) => (
-                    <span key={tag} className="rounded-md border border-gold-bright bg-gold-bright/15 px-2 py-0.5 text-xs font-bold text-brand-paper-foreground">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <span className="min-w-0 shrink-0 text-xs font-bold uppercase tracking-wide text-brand-paper-muted">K–2</span>
               </li>
             ))}
           </ul>
@@ -93,7 +87,7 @@ function HeroBanner() {
             className="aspect-[4/3] w-full rounded-md object-cover"
             priority
           />
-          <figcaption className="font-hand pt-1.5 text-center text-lg italic text-ink-primary">
+          <figcaption className="font-hand pt-1.5 text-center text-lg italic text-brand-paper-foreground">
             morning circle — week one
           </figcaption>
         </figure>
@@ -152,7 +146,7 @@ function WhatsNew() {
                 </span>
               </div>
               <div className="flex flex-col justify-center gap-1.5">
-                <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-ink-primary">{v.tag}</span>
+                <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-brand-paper-foreground">{v.tag}</span>
                 <h3 className="font-heading text-[18px] font-bold leading-tight text-brand-paper-foreground">{v.title}</h3>
                 <p className="text-sm text-brand-paper-muted">{v.summary}</p>
                 <span className="text-xs text-brand-paper-muted">New on YouTube</span>
@@ -186,7 +180,7 @@ function CurriculumPlanner() {
             <h3 className="font-heading text-[20px] font-extrabold text-brand-paper-foreground">Search lessons</h3>
             <p className="mb-4 text-sm text-brand-paper-muted">Type a topic, song, or skill. The full search page also shows the curriculum.</p>
             <form
-              className="flex items-center gap-2.5 rounded-2xl border-2 border-brand-navy/15 bg-background py-1.5 pl-4 pr-1.5 transition-[border-color,box-shadow] focus-within:border-gold-bright focus-within:ring-4 focus-within:ring-gold-bright/20"
+              className="flex items-center gap-2.5 rounded-2xl border-2 border-brand-navy/15 bg-brand-paper py-1.5 pl-4 pr-1.5 transition-[border-color,box-shadow] focus-within:border-gold-bright focus-within:ring-4 focus-within:ring-gold-bright/20"
               action="/search"
               method="get"
               role="search"
@@ -194,7 +188,7 @@ function CurriculumPlanner() {
               <Search className="size-[18px] text-muted-foreground" aria-hidden />
               <Input
                 name="q"
-                className="h-11 border-0 bg-transparent px-0 text-[16px] text-foreground shadow-none focus-visible:ring-0"
+                className="h-11 border-0 bg-transparent px-0 text-[16px] text-brand-paper-foreground shadow-none focus-visible:ring-0"
                 type="search"
                 placeholder="Try “steady beat”, “shapes”, “feelings”…"
                 aria-label="Search lessons"
@@ -210,7 +204,7 @@ function CurriculumPlanner() {
             <div className="mt-3.5 flex flex-wrap items-center gap-2">
               <span className="text-[13px] font-bold text-brand-paper-muted">Popular:</span>
               {["Steady beat", "Shapes", "Feelings", "Phonics"].map((t) => (
-                <Link key={t} href={`/search?q=${encodeURIComponent(t)}`} className="inline-flex min-h-11 items-center rounded-full border-[1.5px] border-brand-navy/15 bg-background px-3.5 py-1.5 text-[13px] font-semibold text-brand-paper-foreground transition-[transform,border-color] hover:-translate-y-px hover:border-gold-bright focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px]">{t}</Link>
+                <Link key={t} href={`/search?q=${encodeURIComponent(t)}`} className="inline-flex min-h-11 items-center rounded-full border-[1.5px] border-brand-navy/15 bg-transparent px-3.5 py-1.5 text-[13px] font-semibold text-brand-paper-foreground transition-[transform,border-color] hover:-translate-y-px hover:border-gold-bright focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px]">{t}</Link>
               ))}
             </div>
           </div>
@@ -230,11 +224,39 @@ function CurriculumPlanner() {
   );
 }
 
+function MobileQuickSearch() {
+  return (
+    <form
+      className="flex items-center gap-2 rounded-2xl border-2 border-brand-navy/15 bg-background py-1.5 pl-4 pr-1.5 transition-[border-color,box-shadow] focus-within:border-gold-bright focus-within:ring-4 focus-within:ring-gold-bright/20 lg:hidden"
+      action="/search"
+      method="get"
+      role="search"
+      aria-label="Quick lesson search"
+    >
+      <Search className="size-[18px] shrink-0 text-muted-foreground" aria-hidden />
+      <Input
+        name="q"
+        className="h-11 min-w-0 border-0 bg-transparent px-0 text-[16px] text-foreground shadow-none focus-visible:ring-0"
+        type="search"
+        placeholder="Try “steady beat” or “shapes”…"
+        aria-label="Search lessons by topic, song, or skill"
+      />
+      <Button
+        size="sm"
+        type="submit"
+        className="h-11 shrink-0 rounded-xl bg-brand-navy px-4 font-bold text-brand-navy-foreground hover:bg-gold-bright hover:text-brand-navy"
+      >
+        Search
+      </Button>
+    </form>
+  );
+}
+
 export default function HomePage() {
   return (
     <section className={`flex w-full flex-col gap-10 pb-6 ${PAGE_SHELL}`}>
       <HomeGradeNav />
-      <Separator className="w-full" />
+      <MobileQuickSearch />
       <HeroBanner />
       <Separator className="w-full" />
       <SubjectTeachers />

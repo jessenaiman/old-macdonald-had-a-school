@@ -13,12 +13,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {
-  activePageFromPathname,
-  GRADE_TAB_COLORS,
-  NAV_ITEMS,
-  TEACHER_GRADE_ITEMS,
-} from "./site-navigation";
+import { activePageFromPathname, NAV_ITEMS } from "./site-navigation";
 import { cn } from "@/lib/utils";
 
 const HEADER_LINK_CLASS = cn(
@@ -48,7 +43,9 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        {/* Desktop/tablet navigation — shadcn NavigationMenu, grades inline (no dropdown) */}
+        {/* Desktop/tablet navigation — shadcn NavigationMenu. Grades live on the
+            homepage grade rail and the grade-page rail; the header carries only
+            cross-site destinations (see NAV_ITEMS). */}
         <NavigationMenu className="hidden flex-1 lg:flex max-w-full" viewport={false}>
           <NavigationMenuList className="flex-1 gap-1">
             {NAV_ITEMS.map((item) => (
@@ -60,25 +57,6 @@ export function SiteHeader() {
                     className={item.key === "search" ? "gap-1.5" : undefined}
                   >
                     {item.key === "search" ? <><Search className="size-4" aria-hidden="true" /><span>Search</span></> : item.label}
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            ))}
-            {TEACHER_GRADE_ITEMS.map((grade) => (
-              <NavigationMenuItem key={grade.key} className="flex-1">
-                <NavigationMenuLink
-                  asChild
-                  className={cn(
-                    "flex w-full min-h-11 whitespace-nowrap items-center justify-center px-4 py-1.5 text-center text-sm font-medium rounded",
-                    GRADE_TAB_COLORS[grade.key].surface,
-                    GRADE_TAB_COLORS[grade.key].ink
-                  )}
-                >
-                  <Link
-                    href={grade.href}
-                    aria-current={active === grade.key ? "page" : undefined}
-                  >
-                    {grade.label}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
