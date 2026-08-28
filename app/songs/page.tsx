@@ -45,14 +45,14 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
     <>
       <section className="flex flex-col gap-8 px-3 py-6 sm:px-6" aria-labelledby="songbook-heading">
         <header>
-          <h1 className="mt-2 font-heading text-5xl leading-[1.05] text-balance sm:text-7xl" id="songbook-heading">Songs worth singing tomorrow</h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed">A practical teacher songbook. Find a usable teaching sheet first: readable words, movement ideas, chord guidance where documented, and clear source provenance.</p>
+          <h1 className="mt-2 font-heading text-[clamp(1.9rem,4vw,2.75rem)] leading-[1.05] text-balance" id="songbook-heading">Songs worth singing tomorrow</h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed">A practical teacher songbook. Find a usable teaching sheet first: readable words, movement ideas, chord guidance where documented, and clear source provenance.</p>
         </header>
 
         <Card className="material-surface material-paper-ruled">
           <CardHeader>
             <CardTitle>Find a song for the next useful moment</CardTitle>
-            <CardDescription>Filter the collection by classroom context. Source records stay as citations; every teaching-sheet action stays on this site.</CardDescription>
+            <CardDescription className="max-w-[70ch]">Filter the collection by classroom context. Source records stay as citations; every teaching-sheet action stays on this site.</CardDescription>
           </CardHeader>
           <CardContent>
             <form action="/songs" method="get">

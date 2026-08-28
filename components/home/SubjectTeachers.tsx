@@ -80,12 +80,10 @@ export function SubjectTeachers() {
       className="w-full"
       aria-labelledby="st-title"
     >
-      <span
-        id="st-title"
-        className="mb-6 inline-block rounded-xl border border-border bg-card px-6 py-3 font-hand text-[22px] text-card-foreground shadow-sm"
-      >
-        Find a lesson by subject.
-      </span>
+      <div className="mb-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <h2 id="st-title" className="font-section text-[26px] text-foreground">Find a lesson by subject</h2>
+        <span className="font-hand text-[21px] text-ink-secondary">pick a subject to start</span>
+      </div>
 
       <div
         className="material-surface material-cork rounded-3xl border-2 border-dashed border-foreground/10 p-6 shadow-lg"
@@ -118,7 +116,7 @@ export function SubjectTeachers() {
                   <span className="mt-1 text-[11px] font-semibold text-brand-paper-muted">
                     {s.count}
                   </span>
-                  <span className="mt-2 text-xs font-semibold text-brand-paper-foreground transition-colors group-hover:text-gold-bright">
+                  <span className="mt-2 text-xs font-semibold text-brand-paper-foreground transition-colors group-hover:text-[color-mix(in_oklab,var(--gold-bright)_55%,var(--ink-primary))]">
                     Explore <span aria-hidden>→</span>
                   </span>
                 </CardContent>
@@ -130,7 +128,7 @@ export function SubjectTeachers() {
                     <AvatarImage src={s.face} alt={s.teacher} />
                     <AvatarFallback className="text-[11px]">{s.teacher.charAt(0)}</AvatarFallback>
                   </Avatar>
-                  <span className="text-[11.5px] leading-tight text-brand-paper-muted">
+                  <span className="text-xs leading-tight text-brand-paper-muted">
                     Guided by{" "}
                     <strong className="text-brand-paper-foreground">{s.teacher}</strong>
                   </span>

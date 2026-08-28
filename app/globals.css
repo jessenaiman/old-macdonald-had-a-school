@@ -50,6 +50,8 @@
   --wood-warm: #c4a07a;
   --wood-muted: #d4b896;
   --wood-soft: #e8d5c0;
+  /* Dark enough for 3:1 control/border contrast on paper surfaces. */
+  --wood-border: #8b6a45;
 
   --ink-primary: #1a2a2e;
   --ink-secondary: #3d4d50;
@@ -84,17 +86,17 @@
   --secondary-foreground: var(--ink-primary);
 
   --muted: var(--paper-muted);
-  --muted-foreground: var(--ink-muted);
+  --muted-foreground: var(--ink-secondary);
 
   --accent: var(--gold-bright);
   --accent-foreground: var(--navy-deep);
 
   --destructive: var(--rose-warm);
-  --destructive-foreground: var(--paper-cream);
+  --destructive-foreground: var(--ink-primary);
 
-  --border: var(--wood-warm);
-  --input: var(--wood-muted);
-  --ring: var(--gold-bright);
+  --border: var(--wood-border);
+  --input: #a7794f;
+  --ring: var(--navy-deep);
 
   /* Chart palette (derived from character palette) */
   --chart-1: var(--gold-bright);
@@ -104,13 +106,13 @@
   --chart-5: var(--characters-mr-puddles-color);
 
   /* Sidebar (nav surfaces) */
-  --sidebar: var(--navy-deep);
-  --sidebar-foreground: var(--paper-cream);
+  --sidebar: var(--brand-navy);
+  --sidebar-foreground: var(--brand-navy-foreground);
   --sidebar-primary: var(--gold-bright);
-  --sidebar-primary-foreground: var(--navy-deep);
-  --sidebar-accent: var(--paper-muted);
+  --sidebar-primary-foreground: var(--brand-navy);
+  --sidebar-accent: #e7dcc8;
   --sidebar-accent-foreground: var(--ink-primary);
-  --sidebar-border: var(--wood-muted);
+  --sidebar-border: var(--wood-border);
   --sidebar-ring: var(--gold-bright);
 
   /* === CHARACTER IDENTITY (DESIGN.md — badges/avatars only) === */
@@ -206,25 +208,27 @@
   --sage-soft: #a8e0d0;
   --sage-muted: #70b0a0;
 
-  --background: var(--paper-cream);
-  --foreground: var(--ink-primary);
-  --card: var(--paper-warm);
-  --card-foreground: var(--ink-primary);
-  --popover: var(--paper-warm);
-  --popover-foreground: var(--ink-primary);
-  --primary: var(--navy-deep);
-  --primary-foreground: var(--paper-cream);
-  --secondary: var(--paper-muted);
-  --secondary-foreground: var(--ink-primary);
-  --muted: var(--paper-muted);
-  --muted-foreground: var(--ink-muted);
-  --accent: var(--gold-bright);
-  --accent-foreground: var(--paper-cream);
-  --destructive: var(--rose-warm);
-  --destructive-foreground: var(--paper-cream);
-  --border: var(--wood-warm);
-  --input: var(--wood-muted);
-  --ring: var(--gold-bright);
+  /* Explicit dark semantic palette: navy anchors actions instead of
+   * mechanically inverting to cream, while paper/ink retain warmth. */
+  --background: #1a1f24;
+  --foreground: #fefce8;
+  --card: #1f262d;
+  --card-foreground: #fefce8;
+  --popover: #1f262d;
+  --popover-foreground: #fefce8;
+  --primary: #e8c55a;
+  --primary-foreground: #1e2a38;
+  --secondary: #2a3138;
+  --secondary-foreground: #fefce8;
+  --muted: #2a3138;
+  --muted-foreground: #e8dcc8;
+  --accent: #e8c55a;
+  --accent-foreground: #1e2a38;
+  --destructive: #e8a5b0;
+  --destructive-foreground: #1e2a38;
+  --border: #80694f;
+  --input: #a7794f;
+  --ring: #e8c55a;
 
   --chart-1: var(--gold-soft);
   --chart-2: var(--sage-soft);
@@ -232,16 +236,23 @@
   --chart-4: var(--navy-muted);
   --chart-5: var(--characters-puddles-color);
 
-  --sidebar: var(--navy-deep);
-  --sidebar-foreground: var(--paper-cream);
-  --sidebar-primary: var(--gold-bright);
-  --sidebar-primary-foreground: var(--navy-deep);
-  --sidebar-accent: var(--paper-muted);
-  --sidebar-accent-foreground: var(--ink-primary);
-  --sidebar-border: var(--wood-muted);
-  --sidebar-ring: var(--gold-bright);
+  --sidebar: #1e2a38;
+  --sidebar-foreground: #fefce8;
+  --sidebar-primary: #e8c55a;
+  --sidebar-primary-foreground: #1e2a38;
+  --sidebar-accent: #34414a;
+  --sidebar-accent-foreground: #fefce8;
+  --sidebar-border: #80694f;
+  --sidebar-ring: #e8c55a;
 }
-
+/* Pinned materials keep physical ink text in dark mode: paper does not
+ * invert, so dark-mode muted/primary roles must not ride along. */
+.dark :is(.material-paper, .material-paper-ruled, .material-cardboard-paper, .card-paper) .text-muted-foreground {
+  color: var(--brand-paper-muted) !important;
+}
+.dark :is(.material-paper, .material-paper-ruled, .material-cardboard-paper, .card-paper) .text-primary {
+  color: var(--brand-paper-foreground) !important;
+}
 /* === TAILWIND V4 THEME MAPPING (@theme inline per shadcn docs) === */
 @theme inline {
   --font-display: var(--font-farm-display);
@@ -331,6 +342,10 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    /* Browser surfaces inherit the same classroom palette. */
+    caret-color: var(--primary);
+    scrollbar-color: var(--border) var(--background);
+    scrollbar-width: thin;
   }
 
   body {
@@ -339,6 +354,11 @@
     background-image: var(--asset-cardboard-ivory);
     background-repeat: repeat;
     background-size: 320px;
+  }
+
+  /* Keep the dark canvas dark; paper textures remain on paper materials. */
+  .dark body {
+    background-image: none;
   }
 
   /* Typography hierarchy per design references */
@@ -498,6 +518,20 @@
   --material-image: var(--asset-cardboard-ivory);
   --material-size: 320px;
   color: var(--theme-ink);
+}
+
+/* Paper materials stay ink-on-paper when component utilities set text color. */
+.material-surface.material-cardboard-paper,
+.material-surface.material-paper-ruled,
+.material-surface.material-paper-grid {
+  color: var(--theme-ink);
+}
+
+/* Dark pinned-paper surfaces need ink variables even when a utility sets text. */
+.dark .material-surface.material-cardboard-paper:not(.bg-card),
+.dark .material-surface.material-paper-ruled:not(.bg-card),
+.dark .material-surface.material-paper-grid:not(.bg-card) {
+  --foreground: var(--theme-ink);
 }
 .material-cardboard-kraft {
   --material-repeat: repeat;

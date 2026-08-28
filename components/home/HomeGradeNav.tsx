@@ -18,7 +18,7 @@ export function HomeGradeNav() {
   return (
     <section className="grid gap-5" aria-labelledby="home-grades-title">
       <div>
-        <h2 className="font-heading text-4xl leading-none" id="home-grades-title">Find your grade</h2>
+        <h2 className="font-section text-[26px]" id="home-grades-title">Find your grade</h2>
         <p className="mt-1 max-w-sm text-sm leading-6 text-muted-foreground">Open curriculum, planning, and grade search.</p>
       </div>
       <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5" aria-label="Grade pages">

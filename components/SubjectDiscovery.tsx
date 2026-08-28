@@ -65,7 +65,7 @@ export function SubjectDiscovery({ lessons }: { lessons: SlimLesson[] }) {
                         <span className="block text-sm font-medium">{l.title}</span>
                         <span className="mt-1 flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-muted-foreground">
                           <span>{l.grade}</span>
-                          <span className="text-[10px] font-black">Ready</span>
+                          <span className="text-[11px] font-black">Ready</span>
                         </span>
                       </span>
                     </Link>

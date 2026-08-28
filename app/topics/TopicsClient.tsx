@@ -27,8 +27,8 @@ export default function TopicsClient({ lessons }: { lessons: LessonMetadata[] })
     <div className="py-8 pb-16 sm:py-12">
       <header className="card-paper relative mb-8 rounded-xl border border-border text-center shadow-[5px_7px_0_color-mix(in_srgb,var(--border)_75%,transparent)]">
         <span className="brand-asset fastener-push-pin icon-medium absolute -top-5 left-1/2 -translate-x-1/2" aria-hidden="true" />
-        <div className="font-body text-[.68rem] font-black leading-none tracking-[.12em] text-primary uppercase">Curriculum-organized starting points</div>
-        <h1 className="my-3 font-heading text-3xl font-normal leading-[.95] text-balance text-foreground sm:text-5xl lg:text-6xl">Browse lesson topics</h1>
+        <div className="font-body text-[11px] font-black leading-none tracking-[.12em] text-primary uppercase">Curriculum-organized starting points</div>
+        <h1 className="my-3 font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-normal leading-[1.05] text-balance text-foreground">Browse lesson topics</h1>
         <p className="mx-auto mt-3 max-w-2xl leading-relaxed text-muted-foreground">Each page gives you a complete teaching sequence, one curated starting resource, and targeted searches when you need a different option.</p>
         {(grade || clusterInfo) && (
           <p className="mt-3 border-t border-border pt-3 text-sm text-muted-foreground">

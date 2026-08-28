@@ -52,7 +52,7 @@ export function WorkspaceTabTrigger({
       {...props}
     >
       <span
-        className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[.625rem] font-black tabular-nums"
+        className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[11px] font-black tabular-nums"
         aria-hidden="true"
       >
         {String(index).padStart(2, "0")}

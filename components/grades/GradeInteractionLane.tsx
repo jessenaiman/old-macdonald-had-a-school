@@ -122,7 +122,7 @@ export function GradeWorkspace({
           </CardHeader>
         </Card>
       </aside>
-      <div className="min-w-0 p-2 sm:p-4 lg:p-6 print:p-0">{children}</div>
+      <div className="grade-workspace-stage-content min-w-0 p-2 sm:p-4 lg:p-6 print:p-0">{children}</div>
     </div>
   );
 }
@@ -343,7 +343,7 @@ export function GradeInteractionLane({
                 value={entry.id}
                 className="min-h-11 shrink-0 justify-start gap-2 bg-background/75 text-foreground lg:w-full"
               >
-                <span className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[.625rem] font-black tabular-nums" aria-hidden="true">
+                <span className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[11px] font-black tabular-nums" aria-hidden="true">
                   {String(sections.indexOf(entry) + 1).padStart(2, "0")}
                 </span>
                 <span>{entry.label}</span>

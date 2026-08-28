@@ -303,7 +303,7 @@ export async function GradeLessonPage({
             data-grade-icon={grade}
             aria-hidden="true"
           />
-          <div className="grade-workspace-rail-copy flex min-w-0 max-w-full flex-col pe-13 text-[0.68rem] leading-tight tracking-tight lg:pe-14">
+          <div className="grade-workspace-rail-copy flex min-w-0 max-w-full flex-col pe-13 text-[11px] leading-tight tracking-tight lg:pe-14">
             <span className="text-xs font-black uppercase tracking-widest">
               Old MacDonald Had a School
             </span>

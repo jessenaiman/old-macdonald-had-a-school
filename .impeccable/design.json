@@ -1,123 +1,583 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-27T21:48:50.785Z",
+  "generatedAt": "2026-08-28T09:12:05.709Z",
   "title": "Design System: Old MacDonald Had a School",
   "extensions": {
     "colorMeta": {
       "canvas-cream": {
         "displayName": "Warm Canvas Cream",
         "role": "canvas",
-        "canonical": "#fefce8"
+        "canonical": "#fefce8",
+        "tonalRamp": [
+          "#fffffc",
+          "#fffef8",
+          "#fefdf3",
+          "#fefdee",
+          "#fefce8",
+          "#c6c5b5",
+          "#89887d",
+          "#4c4c46"
+        ]
       },
       "readable-paper": {
         "displayName": "Warm Readable Paper",
         "role": "readable surface",
-        "canonical": "#fdf8e3"
+        "canonical": "#fdf8e3",
+        "tonalRamp": [
+          "#fffefc",
+          "#fefdf6",
+          "#fefbf0",
+          "#fdfaea",
+          "#fdf8e3",
+          "#c5c1b1",
+          "#89867b",
+          "#4c4a44"
+        ]
       },
       "primary-ink": {
         "displayName": "Primary Ink",
         "role": "foreground",
-        "canonical": "#1a2a2e"
+        "canonical": "#1a2a2e",
+        "tonalRamp": [
+          "#e4e5e6",
+          "#b6bbbc",
+          "#889092",
+          "#515d60",
+          "#1a2a2e",
+          "#142124",
+          "#0e1719",
+          "#080d0e"
+        ]
       },
       "structural-navy": {
         "displayName": "Structural Navy",
         "role": "structure",
-        "canonical": "#1e2a38"
+        "canonical": "#1e2a38",
+        "tonalRamp": [
+          "#e4e5e7",
+          "#b7bbbf",
+          "#8a9098",
+          "#545d68",
+          "#1e2a38",
+          "#17212c",
+          "#10171e",
+          "#090d11"
+        ]
       },
       "joinery-wood": {
         "displayName": "Warm Joinery Wood",
-        "role": "border and joinery",
-        "canonical": "#c4a07a"
+        "role": "wood",
+        "canonical": "#c4a07a",
+        "tonalRamp": [
+          "#f8f4ef",
+          "#ece1d4",
+          "#e0ceba",
+          "#d2b79a",
+          "#c4a07a",
+          "#997d5f",
+          "#6a5642",
+          "#3b3025"
+        ]
       },
       "focus-gold": {
         "displayName": "Curriculum Focus Gold",
-        "role": "focus and highlight",
-        "canonical": "#d4a82a"
+        "role": "focus",
+        "canonical": "#d4a82a",
+        "tonalRamp": [
+          "#faf5e5",
+          "#f1e3bb",
+          "#e9d290",
+          "#debd5d",
+          "#d4a82a",
+          "#a58321",
+          "#725b17",
+          "#40320d"
+        ]
       },
       "destructive-rose": {
         "displayName": "Warm Destructive Rose",
-        "role": "destructive state",
-        "canonical": "#d47a8a"
+        "role": "destructive",
+        "canonical": "#d47a8a",
+        "tonalRamp": [
+          "#faeff1",
+          "#f1d4da",
+          "#e9bac2",
+          "#de9aa6",
+          "#d47a8a",
+          "#a55f6c",
+          "#72424b",
+          "#402529"
+        ]
       },
       "identity-old-macdonald": {
         "displayName": "Old MacDonald",
-        "role": "staff identity",
-        "canonical": "#A66A32"
+        "role": "identity",
+        "canonical": "#A66A32",
+        "tonalRamp": [
+          "#f4ede6",
+          "#e3cfbd",
+          "#d1b294",
+          "#bb8e63",
+          "#A66A32",
+          "#815327",
+          "#5a391b",
+          "#32200f"
+        ]
       },
       "identity-miss-puddles": {
         "displayName": "Miss Puddles",
-        "role": "staff identity",
-        "canonical": "#F6AF32"
+        "role": "identity",
+        "canonical": "#F6AF32",
+        "tonalRamp": [
+          "#fef5e6",
+          "#fce5bd",
+          "#fad594",
+          "#f8c263",
+          "#F6AF32",
+          "#c08927",
+          "#855f1b",
+          "#4a350f"
+        ]
       },
       "identity-mr-rusty": {
         "displayName": "Mr Rusty",
-        "role": "staff identity",
-        "canonical": "#267CBA"
+        "role": "identity",
+        "canonical": "#267CBA",
+        "tonalRamp": [
+          "#e5eff7",
+          "#bad5e9",
+          "#8ebbdb",
+          "#5a9bcb",
+          "#267CBA",
+          "#1e6191",
+          "#154364",
+          "#0b2538"
+        ]
       },
       "identity-miss-hayley": {
         "displayName": "Miss Hayley",
-        "role": "staff identity",
-        "canonical": "#D95C86"
+        "role": "identity",
+        "canonical": "#D95C86",
+        "tonalRamp": [
+          "#faebf0",
+          "#f3cbd8",
+          "#ebaac0",
+          "#e283a3",
+          "#D95C86",
+          "#a94869",
+          "#753248",
+          "#411c28"
+        ]
       },
       "identity-mr-sam": {
         "displayName": "Mr Sam",
-        "role": "staff identity",
-        "canonical": "#1D8787"
+        "role": "identity",
+        "canonical": "#1D8787",
+        "tonalRamp": [
+          "#e4f1f1",
+          "#b7d9d9",
+          "#89c1c1",
+          "#53a4a4",
+          "#1D8787",
+          "#176969",
+          "#104949",
+          "#092929"
+        ]
       },
       "identity-mr-maisy": {
         "displayName": "Mr Maisy",
-        "role": "staff identity",
-        "canonical": "#D81D24"
+        "role": "identity",
+        "canonical": "#D81D24",
+        "tonalRamp": [
+          "#fae4e5",
+          "#f3b7b9",
+          "#eb898d",
+          "#e15359",
+          "#D81D24",
+          "#a8171c",
+          "#751013",
+          "#41090b"
+        ]
       },
       "identity-mr-puddles": {
         "displayName": "Mr Puddles",
-        "role": "staff identity",
-        "canonical": "#5367B5"
+        "role": "identity",
+        "canonical": "#5367B5",
+        "tonalRamp": [
+          "#eaedf6",
+          "#c8cee7",
+          "#a6b0d9",
+          "#7c8bc7",
+          "#5367B5",
+          "#41508d",
+          "#2d3862",
+          "#191f36"
+        ]
       },
       "identity-miss-maisy": {
         "displayName": "Miss Maisy",
-        "role": "staff identity",
-        "canonical": "#5D8164"
+        "role": "identity",
+        "canonical": "#5D8164",
+        "tonalRamp": [
+          "#ecf0ec",
+          "#cbd7cd",
+          "#abbdae",
+          "#849f89",
+          "#5D8164",
+          "#49654e",
+          "#324636",
+          "#1c271e"
+        ]
       },
       "identity-hopper": {
         "displayName": "Hopper",
-        "role": "learner identity",
-        "canonical": "#E66C71"
+        "role": "identity",
+        "canonical": "#E66C71",
+        "tonalRamp": [
+          "#fcedee",
+          "#f7d0d2",
+          "#f2b3b5",
+          "#ec8f93",
+          "#E66C71",
+          "#b35458",
+          "#7c3a3d",
+          "#452022"
+        ]
       },
       "identity-whiskers": {
         "displayName": "Whiskers",
-        "role": "learner identity",
-        "canonical": "#E695B0"
+        "role": "identity",
+        "canonical": "#E695B0",
+        "tonalRamp": [
+          "#fcf2f6",
+          "#f7dde6",
+          "#f2c8d6",
+          "#ecaec3",
+          "#E695B0",
+          "#b37489",
+          "#7c505f",
+          "#452d35"
+        ]
       },
       "identity-scout": {
         "displayName": "Scout",
-        "role": "learner identity",
-        "canonical": "#C59E7A"
+        "role": "identity",
+        "canonical": "#C59E7A",
+        "tonalRamp": [
+          "#f8f3ef",
+          "#ece0d4",
+          "#e1cdba",
+          "#d3b59a",
+          "#C59E7A",
+          "#9a7b5f",
+          "#6a5542",
+          "#3b2f25"
+        ]
       },
       "identity-penny": {
         "displayName": "Penny",
-        "role": "learner identity",
-        "canonical": "#F9CB7A"
+        "role": "identity",
+        "canonical": "#F9CB7A",
+        "tonalRamp": [
+          "#fef9ef",
+          "#fdeed4",
+          "#fce4ba",
+          "#fad79a",
+          "#F9CB7A",
+          "#c29e5f",
+          "#866e42",
+          "#4b3d25"
+        ]
       },
       "identity-maisy": {
         "displayName": "Maisy",
-        "role": "learner identity",
-        "canonical": "#96AD9A"
+        "role": "identity",
+        "canonical": "#96AD9A",
+        "tonalRamp": [
+          "#f2f5f3",
+          "#dde5df",
+          "#c8d4ca",
+          "#afc1b2",
+          "#96AD9A",
+          "#758778",
+          "#515d53",
+          "#2d342e"
+        ]
       },
       "identity-puddles": {
         "displayName": "Puddles",
-        "role": "learner identity",
-        "canonical": "#8F9CCF"
+        "role": "identity",
+        "canonical": "#8F9CCF",
+        "tonalRamp": [
+          "#f2f3f9",
+          "#dbdff0",
+          "#c5cce6",
+          "#aab4db",
+          "#8F9CCF",
+          "#707aa1",
+          "#4d5470",
+          "#2b2f3e"
+        ]
       },
       "identity-sam": {
         "displayName": "Sam",
-        "role": "learner identity",
-        "canonical": "#6CB1B1"
+        "role": "identity",
+        "canonical": "#6CB1B1",
+        "tonalRamp": [
+          "#edf6f6",
+          "#d0e6e6",
+          "#b3d6d6",
+          "#8fc4c4",
+          "#6CB1B1",
+          "#548a8a",
+          "#3a6060",
+          "#203535"
+        ]
       },
       "identity-rusty": {
         "displayName": "Rusty",
-        "role": "learner identity",
-        "canonical": "#72AAD2"
+        "role": "identity",
+        "canonical": "#72AAD2",
+        "tonalRamp": [
+          "#eef5fa",
+          "#d2e4f1",
+          "#b6d3e8",
+          "#94bedd",
+          "#72AAD2",
+          "#5985a4",
+          "#3e5c71",
+          "#22333f"
+        ]
+      },
+      "grade-daycare-routing": {
+        "displayName": "Daycare routing",
+        "role": "grade routing",
+        "canonical": "#F6AF32",
+        "tonalRamp": [
+          "#fef5e6",
+          "#fce5bd",
+          "#fad594",
+          "#f8c263",
+          "#F6AF32",
+          "#c08927",
+          "#855f1b",
+          "#4a350f"
+        ]
+      },
+      "grade-preschool-routing": {
+        "displayName": "Preschool routing",
+        "role": "grade routing",
+        "canonical": "#5D8164",
+        "tonalRamp": [
+          "#ecf0ec",
+          "#cbd7cd",
+          "#abbdae",
+          "#849f89",
+          "#5D8164",
+          "#49654e",
+          "#324636",
+          "#1c271e"
+        ]
+      },
+      "grade-kindergarten-routing": {
+        "displayName": "Kindergarten routing",
+        "role": "grade routing",
+        "canonical": "#267CBA",
+        "tonalRamp": [
+          "#e5eff7",
+          "#bad5e9",
+          "#8ebbdb",
+          "#5a9bcb",
+          "#267CBA",
+          "#1e6191",
+          "#154364",
+          "#0b2538"
+        ]
+      },
+      "grade-one-routing": {
+        "displayName": "Grade 1 routing",
+        "role": "grade routing",
+        "canonical": "#D95C86",
+        "tonalRamp": [
+          "#faebf0",
+          "#f3cbd8",
+          "#ebaac0",
+          "#e283a3",
+          "#D95C86",
+          "#a94869",
+          "#753248",
+          "#411c28"
+        ]
+      },
+      "grade-two-routing": {
+        "displayName": "Grade 2 routing",
+        "role": "grade routing",
+        "canonical": "#D81D24",
+        "tonalRamp": [
+          "#fae4e5",
+          "#f3b7b9",
+          "#eb898d",
+          "#e15359",
+          "#D81D24",
+          "#a8171c",
+          "#751013",
+          "#41090b"
+        ]
+      },
+      "subject-music-routing": {
+        "displayName": "Music routing",
+        "role": "subject routing",
+        "canonical": "#267CBA",
+        "tonalRamp": [
+          "#e5eff7",
+          "#bad5e9",
+          "#8ebbdb",
+          "#5a9bcb",
+          "#267CBA",
+          "#1e6191",
+          "#154364",
+          "#0b2538"
+        ]
+      },
+      "subject-math-routing": {
+        "displayName": "Math routing",
+        "role": "subject routing",
+        "canonical": "#1D8787",
+        "tonalRamp": [
+          "#e4f1f1",
+          "#b7d9d9",
+          "#89c1c1",
+          "#53a4a4",
+          "#1D8787",
+          "#176969",
+          "#104949",
+          "#092929"
+        ]
+      },
+      "subject-science-routing": {
+        "displayName": "Science routing",
+        "role": "subject routing",
+        "canonical": "#5D8164",
+        "tonalRamp": [
+          "#ecf0ec",
+          "#cbd7cd",
+          "#abbdae",
+          "#849f89",
+          "#5D8164",
+          "#49654e",
+          "#324636",
+          "#1c271e"
+        ]
+      },
+      "subject-language-routing": {
+        "displayName": "Language routing",
+        "role": "subject routing",
+        "canonical": "#D95C86",
+        "tonalRamp": [
+          "#faebf0",
+          "#f3cbd8",
+          "#ebaac0",
+          "#e283a3",
+          "#D95C86",
+          "#a94869",
+          "#753248",
+          "#411c28"
+        ]
+      },
+      "subject-arts-routing": {
+        "displayName": "Arts routing",
+        "role": "subject routing",
+        "canonical": "#5367B5",
+        "tonalRamp": [
+          "#eaedf6",
+          "#c8cee7",
+          "#a6b0d9",
+          "#7c8bc7",
+          "#5367B5",
+          "#41508d",
+          "#2d3862",
+          "#191f36"
+        ]
+      },
+      "subject-health-routing": {
+        "displayName": "Health routing",
+        "role": "subject routing",
+        "canonical": "#D81D24",
+        "tonalRamp": [
+          "#fae4e5",
+          "#f3b7b9",
+          "#eb898d",
+          "#e15359",
+          "#D81D24",
+          "#a8171c",
+          "#751013",
+          "#41090b"
+        ]
+      },
+      "subject-early-learning-routing": {
+        "displayName": "Early Learning routing",
+        "role": "subject routing",
+        "canonical": "#F6AF32",
+        "tonalRamp": [
+          "#fef5e6",
+          "#fce5bd",
+          "#fad594",
+          "#f8c263",
+          "#F6AF32",
+          "#c08927",
+          "#855f1b",
+          "#4a350f"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Responsive page and hero headings."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Section labels and supporting headings."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "Heading-level learning and page content."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Titles for teacher-facing content."
+      },
+      "card-title": {
+        "displayName": "Card Title",
+        "purpose": "Compact card and artifact titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable paragraphs, instructions, labels, and controls."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Secondary supporting copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form and interface labels."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Compact metadata and captions."
+      },
+      "hand": {
+        "displayName": "Hand",
+        "purpose": "Short teacher cue, quote, or reminder."
+      },
+      "hand-note": {
+        "displayName": "Hand Note",
+        "purpose": "Handwritten note accents on artifacts."
+      },
+      "brand": {
+        "displayName": "Brand",
+        "purpose": "Approved identity or editorial moments."
       }
     },
     "shadows": [
@@ -127,9 +587,14 @@
         "purpose": "Separates an installed working-wall support from its environment."
       },
       {
-        "name": "paper-artifact",
+        "name": "paper-lift",
         "value": "0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent)",
         "purpose": "Lifts readable paper one plane above its support."
+      },
+      {
+        "name": "focus-ring",
+        "value": "3px solid var(--ring); outline-offset: 3px",
+        "purpose": "Keeps keyboard focus visible above decorative layers."
       },
       {
         "name": "grade-tab-hover",
@@ -139,9 +604,9 @@
     ],
     "motion": [
       {
-        "name": "grade-workspace-state",
+        "name": "state-transition",
         "value": "180ms ease-out",
-        "purpose": "Controls transform, shadow, and background feedback on grade workspace tabs."
+        "purpose": "Controls transform, shadow, and background feedback on interactive surfaces."
       },
       {
         "name": "reduced-motion-duration",
@@ -149,56 +614,7 @@
         "purpose": "Removes nonessential animation when reduced motion is requested."
       }
     ],
-    "breakpoints": [],
-    "typographyMeta": {
-      "display": {
-        "displayName": "Display",
-        "fontSize": "clamp(1.9rem, 4vw, 2.75rem)"
-      },
-      "section": {
-        "displayName": "Section",
-        "fontSize": "26px"
-      },
-      "heading": {
-        "displayName": "Heading",
-        "fontSize": "20px"
-      },
-      "title": {
-        "displayName": "Title",
-        "fontSize": "18px"
-      },
-      "card-title": {
-        "displayName": "Card Title",
-        "fontSize": "15px"
-      },
-      "body": {
-        "displayName": "Body",
-        "fontSize": "16px"
-      },
-      "small": {
-        "displayName": "Small",
-        "fontSize": "13px"
-      },
-      "label": {
-        "displayName": "Label",
-        "fontSize": "12px"
-      },
-      "caption": {
-        "displayName": "Caption",
-        "fontSize": "11px"
-      },
-      "hand": {
-        "displayName": "Hand",
-        "fontSize": "21px"
-      },
-      "hand-note": {
-        "displayName": "Hand Note",
-        "fontSize": "22px"
-      },
-      "brand": {
-        "displayName": "Brand"
-      }
-    }
+    "breakpoints": []
   },
   "components": [
     {
@@ -206,24 +622,24 @@
       "kind": "button",
       "refersTo": "button-primary",
       "description": "Shared default action with a readable 44 px touch height and semantic focus treatment.",
-      "html": "<button class=\"ds-btn-primary\" type=\"button\">Open lesson</button>",
-      "css": ".ds-btn-primary { min-height: 44px; padding: .5rem 1rem; border: .14rem solid var(--primary); border-radius: .5rem; background: var(--primary); color: var(--primary-foreground); font: 800 1rem/1.7 var(--font-farm-body); transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-btn-primary:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; } .ds-btn-primary:active { transform: translateY(0); }"
+      "html": "<button class=\"ds-button-primary\" type=\"button\">Open lesson</button>",
+      "css": ".ds-button-primary { min-height: 44px; padding: .5rem 1rem; border: .14rem solid var(--primary); border-radius: var(--radius-md); background: var(--primary); color: var(--primary-foreground); font: 800 1rem/1.7 var(--font-farm-body, Nunito, sans-serif); transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out; } .ds-button-primary:hover { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-button-primary:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; } .ds-button-primary:active { transform: translateY(0); }"
     },
     {
       "name": "Paper Card",
       "kind": "card",
       "refersTo": "paper-card",
       "description": "Readable live content lifted one plane above its supporting surface.",
-      "html": "<article class=\"ds-paper-card\" tabindex=\"0\"><strong>Learning purpose</strong><p>Notice, test, make, explain, and share.</p></article>",
-      "css": ".ds-paper-card { padding: 1rem; border: .14rem solid var(--border); border-radius: .625rem; background: var(--card); color: var(--card-foreground); box-shadow: 0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent); font: 400 1rem/1.7 var(--font-farm-body); transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-paper-card:hover { transform: translateY(-2px); } .ds-paper-card:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; }"
+      "html": "<article class=\"ds-paper-card\"><strong>Learning purpose</strong><p>Notice, test, make, explain, and share.</p></article>",
+      "css": ".ds-paper-card { padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background-color: var(--brand-paper, var(--card)); color: var(--brand-paper-foreground, var(--card-foreground)); background-image: var(--asset-cardboard-ivory); background-repeat: repeat; background-size: 320px; box-shadow: 0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent); transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-paper-card:hover { transform: translateY(-2px); } .ds-paper-card:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
     },
     {
       "name": "Daycare Grade Surface Chip",
       "kind": "chip",
-      "refersTo": "grade-surface-chip-daycare",
+      "refersTo": "grade-surface-chip",
       "description": "Grade-owned Daycare routing surface using Miss Puddles' exact identity color and approved dark foreground.",
-      "html": "<button class=\"ds-grade-chip-daycare\" type=\"button\">Daycare</button>",
-      "css": ".ds-grade-chip-daycare { min-height: 44px; padding: .5rem 1rem; border: .14rem solid color-mix(in srgb, var(--grade-daycare-color) 42%, var(--theme-wood-light)); border-radius: .75rem; background: var(--grade-daycare-color); color: #1E2A38; font: 800 1rem/1.7 var(--font-farm-body); transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out; } .ds-grade-chip-daycare:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-grade-chip-daycare:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; } .ds-grade-chip-daycare:active { transform: rotate(1deg); }"
+      "html": "<button class=\"ds-grade-surface-chip\" data-grade=\"daycare\" type=\"button\">Daycare</button>",
+      "css": ".ds-grade-surface-chip[data-grade=\"daycare\"] { --grade-color: var(--grade-daycare-color, #F6AF32); --grade-ink: #1E2A38; min-height: 44px; padding: .5rem 1rem; border: 1px solid color-mix(in srgb, var(--grade-color) 55%, var(--theme-wood-light)); border-inline-start: .35rem solid var(--grade-color); border-radius: var(--radius-xl); background-color: var(--grade-color); background-image: linear-gradient(var(--grade-color), var(--grade-color)), var(--grade-texture); background-blend-mode: color, normal; color: var(--grade-ink); box-shadow: 0 .25rem 0 color-mix(in srgb, var(--grade-color) 72%, black); transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out; } .ds-grade-surface-chip:hover, .ds-grade-surface-chip:focus-visible { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-grade-surface-chip:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
     },
     {
       "name": "Search Input",
@@ -231,15 +647,15 @@
       "refersTo": "search-input",
       "description": "Shared readable paper field for teacher-facing search.",
       "html": "<label>Search lessons <input class=\"ds-search-input\" type=\"search\" placeholder=\"Search lessons\"></label>",
-      "css": ".ds-search-input { min-height: 44px; width: 100%; padding: .5rem 1rem; border: .14rem solid var(--input); border-radius: .5rem; background: var(--card); color: var(--card-foreground); font: 400 1rem/1.7 var(--font-farm-body); transition: border-color 180ms ease-out, box-shadow 180ms ease-out; } .ds-search-input:hover { border-color: var(--border); } .ds-search-input:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; }"
+      "css": ".ds-search-input { min-height: 44px; width: 100%; padding: .5rem 1rem; border: .14rem solid var(--input); border-radius: var(--radius-md); background: var(--card); color: var(--card-foreground); font: 400 1rem/1.7 var(--font-farm-body, Nunito, sans-serif); transition: border-color 180ms ease-out, box-shadow 180ms ease-out; } .ds-search-input:hover { border-color: var(--border); } .ds-search-input:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
     },
     {
       "name": "Mr Rusty Character Badge",
       "kind": "custom",
-      "refersTo": "character-badge-mr-rusty",
+      "refersTo": "character-badge",
       "description": "Unchanged canonical face patch on Mr Rusty's exact identity surface.",
-      "html": "<span class=\"ds-character-badge\" tabindex=\"0\" role=\"img\" aria-label=\"Mr Rusty, Music, Rhythm and Counting\"><img src=\"/characters/face-patch-transparent/mr-rusty-blue.webp\" alt=\"\"></span>",
-      "css": ".ds-character-badge { display: inline-grid; place-items: center; inline-size: 44px; block-size: 44px; overflow: hidden; border: .14rem solid color-mix(in srgb, #267CBA 42%, transparent); border-radius: 50%; background: #267CBA; transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-character-badge img { inline-size: 100%; block-size: 100%; object-fit: cover; } .ds-character-badge:hover { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-character-badge:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; }"
+      "html": "<span class=\"ds-character-badge characters-mr-rusty character-surface\" tabindex=\"0\" role=\"img\" aria-label=\"Mr Rusty, Music, Rhythm and Counting\"><img src=\"/characters/face-patch-transparent/mr-rusty-blue.webp\" alt=\"\"></span>",
+      "css": ".ds-character-badge.characters-mr-rusty { display: inline-grid; place-items: center; inline-size: 44px; block-size: 44px; overflow: hidden; border: .14rem solid color-mix(in srgb, var(--characters-mr-rusty-color, #267CBA) 42%, transparent); border-radius: 50%; background-color: var(--characters-mr-rusty-color, #267CBA); background-image: linear-gradient(var(--characters-mr-rusty-color, #267CBA), var(--characters-mr-rusty-color, #267CBA)), var(--characters-mr-rusty-texture); background-blend-mode: color, normal; color: var(--characters-mr-rusty-foreground, #FEFCE8); transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-character-badge img { inline-size: 100%; block-size: 100%; object-fit: cover; } .ds-character-badge:hover { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-character-badge:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
     }
   ],
   "narrative": {
