@@ -1,12 +1,12 @@
 # Launch Plan — Old MacDonald Had a School
 
-**Project identity (for every future session and agent):** Next.js 16.3 App Router + Tailwind CSS v4 + shadcn/ui (`style: new-york`, vendored `components/ui/`, semantic-token architecture). Advanced or customized components are built on shadcn primitives + Tailwind v4 tokens, never on hand-rolled CSS systems. Fonts via `next/font` with CSS variables. Content via `@next/mdx` + `remark-mdx-frontmatter`. Dark mode via `next-themes` (class strategy).
+**Project identity (for every future session and agent):** Next.js 16.3 App Router + Tailwind CSS v4 + shadcn/ui (vendored `components/ui/`, semantic-token architecture). `new-york` is shadcn component-style metadata, not the site theme. `omhas` is the canonical brand theme (`data-brand="omhas"`); light/dark are display variants of its token set. Advanced or customized controls compose shadcn primitives + Tailwind v4 tokens, never parallel hand-rolled control systems. Fonts use `next/font` CSS variables. Content uses `@next/mdx` + `remark-mdx-frontmatter`. Dark mode uses `next-themes` class strategy.
 
 ## How the theme actually works (verified 2026-08-27)
 
 The single documented chain — one place changes the entire site:
 
-1. `app/globals.css` `:root` / `.dark` define semantic tokens (`--background`, `--primary`, …) plus the OMHAS brand tokens (paper, wood, navy, ink, gold, `--characters-*`, `--grade-*`). `content/pages/branding/characters.mdx` is the owner's documented palette authority; `globals.css` is the token implementation layer.
+1. `app/globals.css` `:root` / `.dark` define semantic tokens (`--background`, `--primary`, …) plus the OMHAS brand tokens (paper, wood, navy, ink, gold, `--characters-*`, `--grade-*`). **Since 2026-08-27 `DESIGN.md` is the design source of truth** (complete character/grade/subject records); `content/pages/branding/characters.mdx` was the historical palette authority and is retired, pending owner deletion; `globals.css` is the token implementation layer.
 2. `@theme inline` (globals.css:242) maps every token to Tailwind theme variables (`--color-*`, `--font-*`, `--radius-*`) per Tailwind v4 docs and the shadcn customization doc.
 3. Tailwind v4 generates utilities (`bg-background`, `text-muted-foreground`, `font-hand`, `rounded-lg`).
 4. Vendored shadcn components consume only utilities derived from tokens; app chrome does too.
@@ -20,12 +20,12 @@ Verified consequences: changing a `:root`/`.dark` value re-themes every componen
 - [x] `package.json`: playwright pinned `1.62.1` (was `latest`)
 - [x] **Bug fix verified in browser (375 + 1280):** `components/grades/GradeInteractionLane.tsx` — template-literal className (line 219 old) generated no CSS; replaced with the file's own `--teacher-foreground` style pattern. Computed quote color now resolves `rgb(30, 42, 56)` = `--characters-miss-hayley-foreground`.
 - [x] **Fix verified in browser:** `app/globals.css` `:where(p, li, span, div)` → `:where(p, li)`. `p` lineHeight 19.5px (relaxed), `span` 24px (unforced).
-- [x] REFUTED (keep on record): "`slate` is no longer a supported `baseColor`" — `components.json` docs state `tailwind.baseColor` "cannot be changed after initialization" and only fed token generation at init. `baseColor: "slate"` is inert metadata. Do not edit it; a full `shadcn init` re-run is the only way to change it (owner decision, not planned).
+- [x] `components.json` legacy `baseColor: "slate"` replaced with documented supported compatibility metadata `baseColor: "neutral"`. `style: "new-york"` remains valid component-style metadata; neither field owns runtime OMHAS colors. No `shadcn init`, preset apply, reinstall, or component overwrite was run.
 
 ## Required refactor items (white/black utility inventory, verified lines)
 
 ### R1 — raw rgba shadows duplicate `--navy-deep`
-`app/page.tsx` — `rgba(30,42,56,…)` (= `--navy-deep`) raw shadows at lines 38, 71, 72, 77, 83, 84, 85, plus line 174 `rgba(212,168,42,…)` duplicating `--gold-*`. Replace with token-derived shadow (`color-mix` from `var(--navy-deep)` / `var(--gold-bright)`, or `--shadow-*` tokens). Verify visually at 375/1280.
+- [x] `app/page.tsx` raw navy/gold `rgba(...)` shadows replaced with Tailwind shadow/ring utilities. Brand CSS variables used through `@theme inline` mappings instead of arbitrary `var(...)` color utilities. Computed-style and screenshot verification still required at 375×812 and 1280×900.
 
 ### R2 — vendored shadcn drift check
 `npx shadcn@latest info` + `npx shadcn@latest add <component> --dry-run`/`--diff` across `components/ui/*`. Current upstream-shaped patterns found: `bg-black/50` overlays (`dialog.tsx:42`, `sheet.tsx:39`, `alert-dialog.tsx:39`), `text-white` on destructive (`badge.tsx:16`, `button.tsx:18` — shadcn's upstream choice; local theme already has `--destructive-foreground`), `bg-white` slider thumb (`slider.tsx:56`). Apply upstream where sensible; never `--overwrite` without owner approval.
@@ -35,24 +35,52 @@ Verified consequences: changing a `:root`/`.dark` value re-themes every componen
 - `app/page.tsx:137` `bg-black/40 text-white` — video play overlay.
 - `app/songs/[id]/page.tsx:32–54` `print:bg-white print:text-black print:shadow-none` (×6) — print contract: PRODUCT.md "teachers print sheets nearly as-is"; physical paper is white. Add one explanatory comment at the first occurrence.
 
-### R4 — content/pages/branding/characters.mdx raw-palette inventory (owner call: refactor vs documented exception)
-`content/` is outside the compliance sweep scope. This page — the brand source-of-truth, so an owner who greps it lands here first — carries numeric palette utilities and inline hex: `border-amber-200/80`, `shadow-amber-900/8` (line 20), `bg-white/65` (lines 20, 43, 101), `text-stone-700` (24), `text-stone-600` (27), `border-stone-200` (29–32), `bg-[#B87A4A]/20` etc. (29–32), and `style={{"--characters-card-color":"#…"}}` on every character Card. `dark:` is zero here (verified). Owner decides: refactor these to tokens, or accept as a documented brand-page exception and note it.
+### R4 — content/pages/branding/characters.mdx (HISTORICAL — page retired 2026-08-27)
+Superseded: the page's design records now live completely in `DESIGN.md`; its raw-palette inventory is moot because the page is pending owner deletion. Runtime consumers (`CharacterPortrait`, `data/brand/characters-registry.ts`, `image-registry.ts`) remain and read tokens/assets, not the page.
+
+## Frontend standards audit and refactor (active branch)
+
+Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-started/css), [`next/font`](https://nextjs.org/docs/app/api-reference/components/font), [Tailwind theme variables](https://tailwindcss.com/docs/theme), [Tailwind custom styles](https://tailwindcss.com/docs/adding-custom-styles), [Tailwind dark mode](https://tailwindcss.com/docs/dark-mode), [shadcn theming](https://ui.shadcn.com/docs/theming), [shadcn Create](https://ui.shadcn.com/create), [`components.json`](https://ui.shadcn.com/docs/components-json), and [`registry:theme`](https://ui.shadcn.com/docs/registry/registry-item-json).
+- Tracking: [Issue #11 — OMHAS frontend standards integration](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/11), [Issue #10 — clean frontend lint](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/10), [Issue #12 — reinstall drifted shadcn controls](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/12), [Issue #13 — homepage Impeccable findings](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/13).
+- Impeccable hook readiness verified: shared config enabled; Codex PostToolUse + Stop manifests installed; Copilot postToolUse manifest installed; no ignored rules, files, or values. `DESIGN.md` front-loads locked identity requirements through a Mermaid relationship diagram before theme guidance.
+
+- [x] Name runtime design system: `app/layout.tsx` now declares `data-brand="omhas"` while `next-themes` remains responsible only for light/dark classes.
+- [x] Map OMHAS paper, ink, gold, and rose roles through Tailwind v4 `@theme inline`; homepage no longer repeats arbitrary CSS-variable color utilities for these roles.
+- [x] Restrict Tailwind v4 source detection to `app/`, `components/`, `content/`, and root `mdx-components.tsx` using documented `source(none)` + `@source`; skills, plans, and audit text no longer generate malformed or unused CSS utilities.
+- [x] Put custom material, working-wall, character, and grade recipes inside `@layer components`; utilities can now override component recipes through documented cascade order.
+- [x] Replace undefined `material-cork-board` consumers with registered `material-cork` in grade lesson and resource panels.
+- [x] Use repeating `card-paper` and `material-cork` textures on homepage artifacts instead of flat paper-color copies and inline background-image composition.
+- [x] Repair subject cards: valid `color-mix(...)`, canonical subject owners/colors, canonical face assets through `BRAND_IMAGE_ASSETS`, and token-derived shadows.
+- [x] Replace raw YouTube `<img>` with `next/image`; allow only `https://i.ytimg.com/vi/**` through `images.remotePatterns`.
+- [x] Remove duplicate root paper texture wrapper; body remains single owner of repeating canvas texture.
+- [x] [Issue #12](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/12): closed 2026-08-27 — upstream comparison done, six-file diff applied, z-50 layering adopted where upstream required it.
+- [ ] Consolidate legacy `.bg-*` / `.card-*` recipes with `.material-*`; remove only recipes proven to have zero consumers after route verification.
+- [ ] Remove duplicated subject/grade color derivation from component data; CSS semantic owner must supply grade and subject colors.
+- [ ] Replace JavaScript `matchMedia("(min-width: 64rem)")` ownership with one documented responsive owner or a responsive component API.
+- [ ] Audit remaining arbitrary typography/geometry values; promote repeated design decisions to Tailwind theme tokens, retain true one-off composition values.
+- [ ] Verify shadcn animation utilities in compiled CSS before adding any dependency; no dependency may be installed from inference alone.
+- [ ] Browser-check homepage and representative grade routes in OMHAS light/dark at 375×812 and 1280×900. Pixel judgment remains blocked until a vision-capable role is configured; computed values and screenshots are still required.
 
 ## Owner decisions carried forward (unresolved)
 
-- [ ] `app/page.tsx:135` raw `<img>` for YouTube thumbnails (eslint-disabled). Either `next/image` + `images.remotePatterns` for `i.ytimg.com`, or a documented deliberate-exception comment. Owner picks.
-- [ ] Deploy contract: `next.config.ts` `outputFileTracingIncludes` traces `data/omhas.db` only; `data/search-vectors.db` sidecar and `models/` are NOT traced (`models/` gitignored and absent locally). Decide (A) vendor weights + sidecar into deploy (check Vercel size limits for ~55MB) or (B) keyword-only fallback on serverless (`app/api/search/route.ts` already degrades cleanly) and make README say so. README ↔ `next.config.ts` ↔ `.vercelignore` must tell one story.
+- [x] `app/page.tsx` YouTube thumbnails now use `next/image`; `next.config.ts` restricts the remote source to `https://i.ytimg.com/vi/**`.
+- [ ] **Deploy contract — deferred to Issue #19.** `next.config.ts` `outputFileTracingIncludes` traces `data/omhas.db` only; `data/search-vectors.db` sidecar and `models/` are NOT traced (`models/` gitignored and absent locally). Architecture review complete (see 2026-08-28 section below); owner will implement flat-file export or hosted database as the next plan. Remaining unrefactored: no `output: "export"` in `next.config.ts`, no build-export script, `/songs` and `/lessons` still query SQLite, `lib/curriculum-db.ts`/`lib/curriculum-lesson.ts`/`lib/songbook.ts` still open `better-sqlite3`, `/api/search` and both Markdown API routes remain Node handlers, no generated JSON/search/Markdown artifacts or static-link replacement exists.
 - [ ] `npx shadcn@latest mcp init` — interactive client picker (Claude Code/Cursor/VS Code/Codex/OpenCode). Owner runs; assistant cannot answer the prompt.
 - [ ] `modelRoles.vision` = `alibaba-token-plan/qwen3.8-flash` rejects image input (verified error this session). Pixel-level screenshot review impossible until owner sets a vision-capable model. Standing rule: assistant requests, owner changes settings.
-- [ ] Database/embedding migration — owner handling separately; excluded here.
+- [x] Database/embedding migration — **deferred to [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19).** Architecture review complete; flat-file release recommended as lowest-cost option; owner implements hosting/database as next plan.
 - [ ] Security flag: `src/db/migrate-to-sqlite.ts:7` contains a live Neon connection string, present in 2 commits of git history on `main`. Rotate credential at Neon; history scrub is a separate destructive call.
 
 ## Verification gates (all must pass before any "done" claim)
 
-1. `npm run typecheck` && `npm run lint` && `npm run build` clean.
-2. next-devtools MCP `get_errors` / `get_compilation_issues` empty; `compile_route` green for touched routes (zero-arg MCP calls; the parameterized bridge path is known-broken — use no `args`).
-3. Browser proof per `next-dev-loop` skill: 375×812 and 1280×900 — computed styles AND screenshots. Screenshots go to `tmp/visual-audit/` for owner eyeball; vision-model review only when owner enables a vision-capable role. Computed-style evidence is automated evidence, never labeled "visually verified".
-4. Diff reviewed and committed before file removal; `git status` clean or intentional.
+- [x] `npm run typecheck` passes.
+- [x] `npm run lint` exits 0 with zero warnings after [Issue #10](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/10): vendored `.github/skills/**` excluded from application lint and three application warnings fixed at source.
+- [x] `npm run build` passes: Next.js 16.3.0 production build compiled and generated 490 static pages.
+- [x] next-devtools MCP `get_errors` and `get_compilation_issues` return empty arrays after refactor.
+- [x] Browser computed-style proof at 375×812 and 1280×900: `data-brand="omhas"`, one `main`, zero horizontal overflow, body cardboard texture, homepage paper/cork textures, grade felt/denim textures, and light/dark token changes all resolve. Screenshots saved under `tmp/visual-audit/` for owner review.
+- [ ] Pixel-level screenshot review remains blocked because configured vision model rejects image input. Do not label screenshots visually verified.
+- [x] axe-core reports zero WCAG A/AA violations on homepage and Grade 1 route; textured backgrounds leave contrast checks incomplete for manual review.
+- [ ] Final diff review, commit, push, and clean working tree.
+- [x] [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19) database/hosting architecture review complete; implementation deferred to owner.
 
 ## Rules for future sessions
 
@@ -62,3 +90,50 @@ Verified consequences: changing a `:root`/`.dark` value re-themes every componen
 4. Keep this file current; it is the anti-drift contract.
 5. Settings installs and changes (model roles, skills installs, MCP client choices) are owner actions; the assistant proposes them in chat, never applies silently.
 6. Docs are the contract: bundled `node_modules/next/dist/docs/`, `https://ui.shadcn.com/docs` (fetch with `.md` suffix), `https://tailwindcss.com/docs`, `.agents/skills/shadcn/`. Anything contradicting them is a defect to report, not a style choice.
+
+## 2026-08-27 evening — Impeccable setup + design authority cutover (verified)
+
+- `context.mjs` run (platform web); hooks enabled with zero ignores; `doctor.mjs` zero findings before and after; `.impeccable/design.json` generated (schemaVersion 2: 23 colorMeta, 3 shadows, 2 motion, 5 ds- component snippets, narrative).
+- DESIGN.md rewritten as the design source of truth: YAML frontmatter + eight canonical sections; complete 16-character records (academic lead, grade/scope, species, role, curriculum contributions/learning actions, personality, exact color + foreground, bound icon), 64 artwork paths, grade ownership + grade icons, subject ownership + icons (two documented music strands: Mr Rusty rhythm vs Old MacDonald whole-school singing), fastener assets, Mermaid identity diagram, provenance (2026-08-25 PDF + 2026-08-27 Register 02 revision).
+- Revised identity colors applied atomically: Old MacDonald `#A66A32`, Mr Rusty `#267CBA`, Mr Sam `#1D8787`, Mr Maisy `#D81D24`, Miss Maisy `#5D8164`, Scout `#C59E7A`, Maisy `#96AD9A`; grades/subjects inherit owners; `--grade-early-years-color` aliases preschool; Scout/Maisy/Penny foregrounds dark ink. Stale hex grep across app/components/lib/data: zero.
+- `content/pages/branding/characters.mdx` retired (header + historical banner); no route renders it; runtime consumers (`CharacterPortrait`, `data/brand/characters-registry.ts`, `image-registry.ts`) read tokens/assets, not the page. Owner deletion pending.
+- `docs/design-explorations/character-colour-register/` deleted by owner after transcription into DESIGN.md provenance.
+- Gates: `npm run typecheck` clean; `npm run lint` clean (combobox unused `children` removed); `npm run build` 490 pages; browser evidence at 1280×900 light+dark and 375×812 light+dark: one `main`, revised grade colors live, fasteners cross the polaroid border, no overflow.
+- `modelRoles.vision` set to `alibaba-token-plan/qwen3.8-max` (flash role lacked image input).
+- Issues closed this pass: #12 (shadcn controls), #13 (homepage critique), #17 (color reconciliation), #18 (consolidated into #17). #15 remains open for the separate design-advisor harness configuration.
+- `npx impeccable detect app/page.tsx components/home/SubjectTeachers.tsx components/home/HomeGradeNav.tsx`: 16 `design-system-font-size` findings → resolved by documenting the observed type ramp in DESIGN.md frontmatter (12 roles); final run exit 0. 10px avatar fallback raised to 11px (a11y floor). Sidecar refreshed via the document workflow; `doctor.mjs` final: zero findings.
+- Stale-hex sweep scope (2026-08-27): active source paths (`app/`, `components/`, `lib/`, `data/`, `content/`, `DESIGN.md`, `PRODUCT.md`) = zero retired literals. Repo-wide, retired literals remain ONLY in intentionally untouched historical/generated artifacts: `archive/color-concept-prompts.md` (pre-revision design exploration, kept as history) and `dogfood-output/bundle.html` (generated bundle; regenerate or delete when that tooling runs next). `scripts/resources/song_import_evidence_run*.jsonl` hits are false positives (`2a9a9a` inside SHA-256 checksums). `docs/` verified clean.
+- Issue #12 upstream comparison: shadcn dry runs for alert-dialog, badge, button, dialog, sheet, slider, native-select, combobox, input, textarea, and input-group. z-50 layering was adopted where upstream required it. OMHAS semantic destructive foregrounds, local button variants, and slider bg-background were intentionally preserved over upstream text-white/bg-white because DESIGN.md owns the theme and local variants are used by the app. Six-file diff is whitespace-clean.
+- Live review setup: live.mjs resolved the Next.js App Router, live helper is on port 8400, configDrift is null, and live-poll is active with one connected browser client. The injected localhost script is deliberately not committed; live config remains local for this review session to keep production free of a localhost dependency.
+- Issue #12 commit: 05df9f9 pushed after official shadcn dry-run review; GitHub issue #12 is closed with the per-component decisions and green gates recorded in its comment.
+- Live config is intentionally local while under review: .impeccable/live/config.json targets app/layout.tsx; the localhost script is injected only for the active review session and must be removed with live-server.mjs stop before production commits.
+
+## 2026-08-27 night — dependency hygiene, content retirement, doc-aligned dark mode (verified)
+
+- Direct `lightningcss` removed from `package.json` (Tailwind v4 owns it transitively: `npm ls` shows `@tailwindcss/postcss → @tailwindcss/node → lightningcss@1.31.1`; Next bundles Turbopack itself — neither is ever a direct install). Committed by owner in 7fde4e3 with the content retirement.
+- Owner retired brand-page/staff content in 7fde4e3: `content/pages/branding/characters.mdx` + 8 `content/staff/*.md` deleted (zero code references, grep-verified). DESIGN.md is now the sole character authority. AGENTS.md working rules + shadcn-ui skill added in the same commit.
+- Dark mode aligned verbatim to documentation (commit 885bd3a, pushed): `ThemeProvider defaultTheme="system" enableSystem` per ui.shadcn.com/docs/dark-mode/next (was undocumented `defaultTheme="light" enableSystem={false}`); `@custom-variant dark (&:where(.dark, .dark *))` per tailwindcss.com/docs/dark-mode (was `:is(.dark *)` hand-roll). `enableColorScheme`/`disableTransitionOnChange` retained per same docs.
+- Verified via next-devtools MCP + agent-browser (next-dev-loop skill preflight passed: Next 16.3 Turbopack, `get_compilation_issues` [], `get_errors` []): fresh browser with no stored theme follows OS dark (`stored:null → htmlDark:true`); real header toggle round-trips light/dark with tokens flipping (`--background` #1a1f24 dark) and identity colors constant (`#a66a32`/`#267cba`); one `main`, zero overflow at 1280×900 and 375×812.
+- Impeccable live-review localhost script stripped from `app/layout.tsx` (it had been committed in owner's 7fde4e3; removed in 885bd3a); live helper on :8400 stopped via `live-server.mjs stop`. Gates on final tree: typecheck ✓, lint ✓, build ✓ 490 pages. Working tree clean, branch pushed.
+- Harness side (separate plan `local://omp-harness-team-plan.md`): db `bash.patterns` deny list live and proof-denied (`*db:push*` blocked); `next-dev-loop` + `web-design-guidelines` skills installed to `.agents/skills/` (resolve after session restart — omp discovers skills at startup); `ohm-doc` agent disabled in settings pending owner `/agents` enable; `omhas-db` skill written.
+
+## 2026-08-28 — homepage critique batch (dual-agent, fixes verified)
+
+- `$impeccable critique` run as two isolated sub-agents (A: design review with vision; B: `detect.mjs` + live overlay on `/`, `/grade/grade-one`, `/songs`), synthesized + parent-verified. Snapshot: `.impeccable/critique/2026-08-28T02-45-53Z__app-page-tsx.md` (28/36, P0×1, P1×2).
+- Owner decisions (ask): dark mode = **true low-light environment**; scope = all issues; first priority = nav dedupe.
+- **P0 fixed without breaking the material contract** (DESIGN.md "paper remains paper"): hero h1 and every theme-flipping `--ink-*`/`--muted-foreground` consumer inside pinned paper surfaces switched to stable `brand-paper-*`/`--theme-ink` tokens; environment text uses `text-foreground`. Contrast sweep (solid surfaces, AA thresholds): **0 failures at 375 and 1280 in light and dark**. `HomeSubjectNote` (only consumed by dead `HomepageBrandPatterns`) pinned to `--theme-ink`/`--brand-paper-muted` in 604c67b.
+- **P2**: header now Home/Search/About only (3 links measured); grade rail + grade-page rail own grade entry; dead `GRADE_TAB_COLORS`/`GRADE_NAV_ITEMS` deleted.
+- **P1**: compact quick-search form under the grade rail on mobile (`lg:hidden`), short placeholder.
+- **P3**: "Preschool" display labels (keys unchanged); kickers above headings removed (craft-floor ban); `/songs` h1 leading 0.95→1.05; New-this-week rows labeled static K–2 (no dead-end affordance; titles verified absent from DB/content so not linked).
+- Commits: `eabf5f1` (batch), `604c67b` (subject-note), pushed; gates typecheck/lint/build exit 0.
+- **Owner-decision open**: DESIGN.md binds navy foreground `#1E2A38` to mid hues (e.g. Miss Hayley `#D95C86`) ≈ 2.3–3.8:1 at body size on grade rails — fails WCAG AA; locked identity colors mean the fix (cream ink on darkened surfaces, header precedent) needs a DESIGN.md amendment the owner approves.
+- **Not mine, left uncommitted**: 23 `public/characters/*` deletions appeared in the working tree during the wait (owner-side, matches the 7fde4e3 pattern). Un-restored, un-committed; owner commits or delegates.
+
+## 2026-08-28 — database/hosting architecture review (Issue #19, deferred)
+
+- [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19) created as the single parking lot for the database/hosting/API decision. The issue explicitly defers migration and remediation until the owner re-opens it.
+- Architecture review completed: verified `better-sqlite3` consumers (`lib/curriculum-db.ts`, `lib/curriculum-lesson.ts`, `lib/songbook.ts`, `app/api/search/route.ts`), `data/omhas.db` tracing in `next.config.ts`, missing `models/` directory, vector sidecar, and both Markdown export routes (`app/api/lessons/[grade]/[id]/markdown/route.ts`, `app/api/songs/[id]/markdown/route.ts`).
+- Recommended release architecture: static flat-file export from SQLite (pre-generate lesson/topic/song pages, search index, and Markdown files), deployed to Vercel or Cloudflare Pages.
+- Hosting options documented: Vercel static, Cloudflare Pages static, Vercel + Turso/libSQL (best live SQLite-compatible option, smallest migration), Vercel + Neon Postgres (largest migration but best conventional API path).
+- Nothing has been refactored yet. Implementation deferred to owner as the next plan.
+- Markdown download routes (`components/grades/DatabaseLessonDocument.tsx:77–78` → `/api/lessons/.../markdown`, `/api/songs/.../markdown`) cannot remain as Node handlers on pure static hosting; pre-generate `.md` files as the replacement.

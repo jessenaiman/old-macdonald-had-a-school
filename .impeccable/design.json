@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-27T21:48:50.785Z",
+  "title": "Design System: Old MacDonald Had a School",
+  "extensions": {
+    "colorMeta": {
+      "canvas-cream": {
+        "displayName": "Warm Canvas Cream",
+        "role": "canvas",
+        "canonical": "#fefce8"
+      },
+      "readable-paper": {
+        "displayName": "Warm Readable Paper",
+        "role": "readable surface",
+        "canonical": "#fdf8e3"
+      },
+      "primary-ink": {
+        "displayName": "Primary Ink",
+        "role": "foreground",
+        "canonical": "#1a2a2e"
+      },
+      "structural-navy": {
+        "displayName": "Structural Navy",
+        "role": "structure",
+        "canonical": "#1e2a38"
+      },
+      "joinery-wood": {
+        "displayName": "Warm Joinery Wood",
+        "role": "border and joinery",
+        "canonical": "#c4a07a"
+      },
+      "focus-gold": {
+        "displayName": "Curriculum Focus Gold",
+        "role": "focus and highlight",
+        "canonical": "#d4a82a"
+      },
+      "destructive-rose": {
+        "displayName": "Warm Destructive Rose",
+        "role": "destructive state",
+        "canonical": "#d47a8a"
+      },
+      "identity-old-macdonald": {
+        "displayName": "Old MacDonald",
+        "role": "staff identity",
+        "canonical": "#A66A32"
+      },
+      "identity-miss-puddles": {
+        "displayName": "Miss Puddles",
+        "role": "staff identity",
+        "canonical": "#F6AF32"
+      },
+      "identity-mr-rusty": {
+        "displayName": "Mr Rusty",
+        "role": "staff identity",
+        "canonical": "#267CBA"
+      },
+      "identity-miss-hayley": {
+        "displayName": "Miss Hayley",
+        "role": "staff identity",
+        "canonical": "#D95C86"
+      },
+      "identity-mr-sam": {
+        "displayName": "Mr Sam",
+        "role": "staff identity",
+        "canonical": "#1D8787"
+      },
+      "identity-mr-maisy": {
+        "displayName": "Mr Maisy",
+        "role": "staff identity",
+        "canonical": "#D81D24"
+      },
+      "identity-mr-puddles": {
+        "displayName": "Mr Puddles",
+        "role": "staff identity",
+        "canonical": "#5367B5"
+      },
+      "identity-miss-maisy": {
+        "displayName": "Miss Maisy",
+        "role": "staff identity",
+        "canonical": "#5D8164"
+      },
+      "identity-hopper": {
+        "displayName": "Hopper",
+        "role": "learner identity",
+        "canonical": "#E66C71"
+      },
+      "identity-whiskers": {
+        "displayName": "Whiskers",
+        "role": "learner identity",
+        "canonical": "#E695B0"
+      },
+      "identity-scout": {
+        "displayName": "Scout",
+        "role": "learner identity",
+        "canonical": "#C59E7A"
+      },
+      "identity-penny": {
+        "displayName": "Penny",
+        "role": "learner identity",
+        "canonical": "#F9CB7A"
+      },
+      "identity-maisy": {
+        "displayName": "Maisy",
+        "role": "learner identity",
+        "canonical": "#96AD9A"
+      },
+      "identity-puddles": {
+        "displayName": "Puddles",
+        "role": "learner identity",
+        "canonical": "#8F9CCF"
+      },
+      "identity-sam": {
+        "displayName": "Sam",
+        "role": "learner identity",
+        "canonical": "#6CB1B1"
+      },
+      "identity-rusty": {
+        "displayName": "Rusty",
+        "role": "learner identity",
+        "canonical": "#72AAD2"
+      }
+    },
+    "shadows": [
+      {
+        "name": "working-wall-support",
+        "value": "inset 0 0 0 .35rem color-mix(in srgb, var(--theme-paper) 72%, transparent), 0 .65rem 1.25rem color-mix(in srgb, var(--theme-ink) 18%, transparent)",
+        "purpose": "Separates an installed working-wall support from its environment."
+      },
+      {
+        "name": "paper-artifact",
+        "value": "0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent)",
+        "purpose": "Lifts readable paper one plane above its support."
+      },
+      {
+        "name": "grade-tab-hover",
+        "value": "0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent)",
+        "purpose": "Signals hover on a grade-owned surface."
+      }
+    ],
+    "motion": [
+      {
+        "name": "grade-workspace-state",
+        "value": "180ms ease-out",
+        "purpose": "Controls transform, shadow, and background feedback on grade workspace tabs."
+      },
+      {
+        "name": "reduced-motion-duration",
+        "value": ".01ms",
+        "purpose": "Removes nonessential animation when reduced motion is requested."
+      }
+    ],
+    "breakpoints": [],
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "fontSize": "clamp(1.9rem, 4vw, 2.75rem)"
+      },
+      "section": {
+        "displayName": "Section",
+        "fontSize": "26px"
+      },
+      "heading": {
+        "displayName": "Heading",
+        "fontSize": "20px"
+      },
+      "title": {
+        "displayName": "Title",
+        "fontSize": "18px"
+      },
+      "card-title": {
+        "displayName": "Card Title",
+        "fontSize": "15px"
+      },
+      "body": {
+        "displayName": "Body",
+        "fontSize": "16px"
+      },
+      "small": {
+        "displayName": "Small",
+        "fontSize": "13px"
+      },
+      "label": {
+        "displayName": "Label",
+        "fontSize": "12px"
+      },
+      "caption": {
+        "displayName": "Caption",
+        "fontSize": "11px"
+      },
+      "hand": {
+        "displayName": "Hand",
+        "fontSize": "21px"
+      },
+      "hand-note": {
+        "displayName": "Hand Note",
+        "fontSize": "22px"
+      },
+      "brand": {
+        "displayName": "Brand"
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared default action with a readable 44 px touch height and semantic focus treatment.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Open lesson</button>",
+      "css": ".ds-btn-primary { min-height: 44px; padding: .5rem 1rem; border: .14rem solid var(--primary); border-radius: .5rem; background: var(--primary); color: var(--primary-foreground); font: 800 1rem/1.7 var(--font-farm-body); transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-btn-primary:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; } .ds-btn-primary:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Paper Card",
+      "kind": "card",
+      "refersTo": "paper-card",
+      "description": "Readable live content lifted one plane above its supporting surface.",
+      "html": "<article class=\"ds-paper-card\" tabindex=\"0\"><strong>Learning purpose</strong><p>Notice, test, make, explain, and share.</p></article>",
+      "css": ".ds-paper-card { padding: 1rem; border: .14rem solid var(--border); border-radius: .625rem; background: var(--card); color: var(--card-foreground); box-shadow: 0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent); font: 400 1rem/1.7 var(--font-farm-body); transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-paper-card:hover { transform: translateY(-2px); } .ds-paper-card:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; }"
+    },
+    {
+      "name": "Daycare Grade Surface Chip",
+      "kind": "chip",
+      "refersTo": "grade-surface-chip-daycare",
+      "description": "Grade-owned Daycare routing surface using Miss Puddles' exact identity color and approved dark foreground.",
+      "html": "<button class=\"ds-grade-chip-daycare\" type=\"button\">Daycare</button>",
+      "css": ".ds-grade-chip-daycare { min-height: 44px; padding: .5rem 1rem; border: .14rem solid color-mix(in srgb, var(--grade-daycare-color) 42%, var(--theme-wood-light)); border-radius: .75rem; background: var(--grade-daycare-color); color: #1E2A38; font: 800 1rem/1.7 var(--font-farm-body); transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out; } .ds-grade-chip-daycare:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-grade-chip-daycare:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; } .ds-grade-chip-daycare:active { transform: rotate(1deg); }"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "search-input",
+      "description": "Shared readable paper field for teacher-facing search.",
+      "html": "<label>Search lessons <input class=\"ds-search-input\" type=\"search\" placeholder=\"Search lessons\"></label>",
+      "css": ".ds-search-input { min-height: 44px; width: 100%; padding: .5rem 1rem; border: .14rem solid var(--input); border-radius: .5rem; background: var(--card); color: var(--card-foreground); font: 400 1rem/1.7 var(--font-farm-body); transition: border-color 180ms ease-out, box-shadow 180ms ease-out; } .ds-search-input:hover { border-color: var(--border); } .ds-search-input:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; }"
+    },
+    {
+      "name": "Mr Rusty Character Badge",
+      "kind": "custom",
+      "refersTo": "character-badge-mr-rusty",
+      "description": "Unchanged canonical face patch on Mr Rusty's exact identity surface.",
+      "html": "<span class=\"ds-character-badge\" tabindex=\"0\" role=\"img\" aria-label=\"Mr Rusty, Music, Rhythm and Counting\"><img src=\"/characters/face-patch-transparent/mr-rusty-blue.webp\" alt=\"\"></span>",
+      "css": ".ds-character-badge { display: inline-grid; place-items: center; inline-size: 44px; block-size: 44px; overflow: hidden; border: .14rem solid color-mix(in srgb, #267CBA 42%, transparent); border-radius: 50%; background: #267CBA; transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-character-badge img { inline-size: 100%; block-size: 100%; object-fit: cover; } .ds-character-badge:hover { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-character-badge:focus-visible { outline: .14rem solid var(--ring); outline-offset: .14rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Living Classroom Working Wall",
+    "overview": "This system translates the official character record into a framework-neutral contract for websites, presentations, printable resources, editorial pages, and other generated artifacts.\n\nIt serves an educator-facing curriculum product. Its job is to make a specific learning purpose and the practical material needed to lead it easy to understand at a glance. The visual world is not children’s entertainment and not a generic dashboard: it is a welcoming, capable working environment for planning and leading real learning experiences.",
+    "keyCharacteristics": [
+      "Academic meaning first.",
+      "Developmentally appropriate material.",
+      "One semantic owner.",
+      "Readable work on paper.",
+      "Real artifacts, live content.",
+      "Warm, capable, specific."
+    ],
+    "rules": [
+      {
+        "name": "The One Semantic Owner Rule",
+        "body": "Character color and felt belong only to that character. Grade color belongs to that grade. Subject color and icon belong to curriculum meaning. Generic navigation and controls use shared semantic UI roles, never character texture.",
+        "section": "colors"
+      },
+      {
+        "name": "The Credible Attachment Rule",
+        "body": "A fastener must cross artifact and support.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do start from curriculum meaning.",
+      "Do use exact approved identity colors and canonical art from this file.",
+      "Do put readable information on paper.",
+      "Do make attachment physically legible.",
+      "Do use semantic asset roles.",
+      "Do keep content live across media.",
+      "Do preserve all assets pending explicit classification.",
+      "Do keep the complete character record in this file only; pages render it, they do not redefine it."
+    ],
+    "donts": [
+      "Don't treat cork as the whole design concept.",
+      "Don't use a floating decorative fastener.",
+      "Don't put paragraphs or controls on fabric.",
+      "Don't assign character felt to generic navigation or subjects.",
+      "Don't recolor character artwork.",
+      "Don't choose icons randomly.",
+      "Don't shrink dimensional art into compact UI.",
+      "Don't bake responsive text into images.",
+      "Don't stretch fixed-composition board exports.",
+      "Don't duplicate Tailwind's responsive system.",
+      "Don't infer authority from other Markdown files or file availability.",
+      "Don't exclude or substitute an image without approval.",
+      "Don't maintain character, grade, or subject color data in any file other than this one and its two CSS bindings."
+    ]
+  }
+}

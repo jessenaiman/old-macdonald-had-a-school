@@ -45,9 +45,8 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
     <>
       <section className="flex flex-col gap-8 px-3 py-6 sm:px-6" aria-labelledby="songbook-heading">
         <header>
-          <p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Practical teacher songbook</p>
-          <h1 className="mt-2 font-heading text-5xl leading-[0.95] text-balance sm:text-7xl" id="songbook-heading">Songs worth singing tomorrow</h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed">Find a usable teaching sheet first: readable words, movement ideas, chord guidance where documented, and clear source provenance.</p>
+          <h1 className="mt-2 font-heading text-5xl leading-[1.05] text-balance sm:text-7xl" id="songbook-heading">Songs worth singing tomorrow</h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed">A practical teacher songbook. Find a usable teaching sheet first: readable words, movement ideas, chord guidance where documented, and clear source provenance.</p>
         </header>
 
         <Card className="material-surface material-paper-ruled">
@@ -79,7 +78,7 @@ export default async function SongsPage({ searchParams }: { searchParams: Promis
       </section>
 
       <section className="mt-10 px-3 sm:px-6" aria-labelledby="song-results-heading">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-black uppercase tracking-[0.12em] text-primary">Teaching sheets</p><h2 className="mt-1 font-heading text-4xl" id="song-results-heading">{songs.length} songs</h2></div><p className="text-sm text-muted-foreground">Showing {visibleSongs.length} of {songs.length}</p></div>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><h2 className="font-heading text-4xl" id="song-results-heading">{songs.length} teaching-sheet songs</h2><p className="text-sm text-muted-foreground">Showing {visibleSongs.length} of {songs.length}</p></div>
         {songs.length === 0 ? <Empty className="material-surface material-paper-ruled mt-5"><EmptyHeader><EmptyTitle>No matching songs</EmptyTitle><EmptyDescription>Try removing a filter or using a broader search phrase.</EmptyDescription></EmptyHeader><EmptyContent><Button asChild variant="outline"><Link href="/songs">View all songs</Link></Button></EmptyContent></Empty> : <>
           <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {visibleSongs.map((song) => <Card className="min-w-0" key={song.id}>

@@ -4,7 +4,7 @@ import type { GradeKey } from "@/lib/grade-routes";
 
 const HOME_GRADES: readonly { key: GradeKey; label: string }[] = [
   { key: "daycare", label: "Daycare" },
-  { key: "pre-school", label: "Pre-School" },
+  { key: "pre-school", label: "Preschool" },
   { key: "kindergarten", label: "Kindergarten" },
   { key: "grade-one", label: "Grade 1" },
   { key: "grade-two", label: "Grade 2" },
@@ -17,9 +17,9 @@ const HOME_GRADES: readonly { key: GradeKey; label: string }[] = [
 export function HomeGradeNav() {
   return (
     <section className="grid gap-5" aria-labelledby="home-grades-title">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <div><p className="text-xs font-extrabold uppercase tracking-[.18em] text-primary">Start with your group</p><h2 className="mt-1 font-heading text-4xl leading-none" id="home-grades-title">Find your grade</h2></div>
-        <p className="max-w-sm text-sm leading-6 text-muted-foreground">Open curriculum, planning, and grade search.</p>
+      <div>
+        <h2 className="font-heading text-4xl leading-none" id="home-grades-title">Find your grade</h2>
+        <p className="mt-1 max-w-sm text-sm leading-6 text-muted-foreground">Open curriculum, planning, and grade search.</p>
       </div>
       <nav className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5" aria-label="Grade pages">
         {HOME_GRADES.map((grade) => (

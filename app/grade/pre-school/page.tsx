@@ -2,7 +2,7 @@ import { GradeHub } from "../../../components/grades/GradeHub";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pre-School Lesson Plans (Ages 3–4) | Old MacDonald Had a School",
+  title: "Preschool Lesson Plans (Ages 3–4) | Old MacDonald Had a School",
   description:
     "The same songs Daycare uses, with more choice and a little more to notice — pick one, walk through the four steps together.",
 };

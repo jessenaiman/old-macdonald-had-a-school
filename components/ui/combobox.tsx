@@ -110,7 +110,7 @@ function ComboboxContent({
         align={align}
         alignOffset={alignOffset}
         anchor={anchor}
-        className="isolate"
+        className="isolate z-50"
       >
         <ComboboxPrimitive.Popup
           data-slot="combobox-content"
@@ -274,9 +274,8 @@ function ComboboxChip({
 
 function ComboboxChipsInput({
   className,
-  children,
   ...props
-}: ComboboxPrimitive.Input.Props) {
+}: Omit<ComboboxPrimitive.Input.Props, "children">) {
   return (
     <ComboboxPrimitive.Input
       data-slot="combobox-chip-input"
