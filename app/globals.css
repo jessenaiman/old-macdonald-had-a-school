@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 @import "./brand-assets.css";
 @plugin "@tailwindcss/typography";
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 @source "../app";
 @source "../components";
 @source "../content";

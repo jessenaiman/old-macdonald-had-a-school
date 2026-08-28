@@ -75,8 +75,8 @@ export default function RootLayout({
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
+          defaultTheme="system"
+          enableSystem
           enableColorScheme
           disableTransitionOnChange
         >
@@ -94,9 +94,6 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </ThemeProvider>
-{/* impeccable-live-start */}
-<script src="http://localhost:8400/live.js?token=c0b5480b-0b43-48f8-9109-fb1e3a493bec"></script>
-{/* impeccable-live-end */}
 </body>
     </html>
   );
