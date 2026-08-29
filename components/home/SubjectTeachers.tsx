@@ -82,7 +82,6 @@ export function SubjectTeachers() {
     >
       <div className="mb-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <h2 id="st-title" className="font-section text-[26px] text-foreground">Find a lesson by subject</h2>
-        <span className="font-hand text-[21px] text-ink-secondary">pick a subject to start</span>
       </div>
 
       <div

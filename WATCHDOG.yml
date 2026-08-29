@@ -1,3 +1,5 @@
 advisors:
   - name: default
-    model: openai-codex/gpt-5.6-luna:high
+    model: openrouter/z-ai/glm-5.3-flash
+  - name: Advisor 2
+    model: openrouter/z-ai/glm-5.3-flash

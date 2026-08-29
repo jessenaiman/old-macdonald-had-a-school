@@ -137,3 +137,42 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - Hosting options documented: Vercel static, Cloudflare Pages static, Vercel + Turso/libSQL (best live SQLite-compatible option, smallest migration), Vercel + Neon Postgres (largest migration but best conventional API path).
 - Nothing has been refactored yet. Implementation deferred to owner as the next plan.
 - Markdown download routes (`components/grades/DatabaseLessonDocument.tsx:77–78` → `/api/lessons/.../markdown`, `/api/songs/.../markdown`) cannot remain as Node handlers on pure static hosting; pre-generate `.md` files as the replacement.
+## 2026-08-28 — home reference implementation (plan of record, owner-approved)
+
+Durable copy of approved plan `local://home-reference-implementation-plan.md`. Goal: recompose `/` to the supplied reference direction (navy/blue-leather structural chrome, warm paper artifacts, working-wall grammar) with zero route or behavior change. Context: prior critique snapshot `.impeccable/critique/2026-08-28T02-45-53Z__app-page-tsx.md` (28/36) already fixed in `eabf5f1`/`604c67b`; this is the reference-composition pass.
+
+### Frozen contract
+
+- Preserve `app/page.tsx` metadata, `components/site-navigation.ts` `NAV_ITEMS`/`TEACHER_GRADE_ITEMS`/`activePageFromPathname`, every current home link (five `/grade/*`, six subject search queries, `/songs`, two YouTube externals, `/search`, popular queries, `/grade/daycare` tip link), `MobileQuickSearch` form, and `SiteFooter` destinations. No new pages, controls, sign-in, filters, or content claims. Home order stays: hero, grade nav, mobile quick search, character wall, subject teachers, what's new, curriculum planner.
+- External asset dir `C:\Users\jesse\OneDrive\Documents\Endless Measures\AI Generated Images\generated_images` inventoried read-only: UUID folders + `exec-*.png` carry no approved semantic role in DESIGN.md or `data/brand/image-registry.ts`, so all stay unused. Hero remains `HERO_PHOTO = BRAND_IMAGE_ASSETS.scenes["old-macs-open-circle-gathering"]` → `/hero/old-macs-open-circle-gathering.webp`. No copied files, direct external paths, or new registry keys.
+- `app/layout.tsx` keeps zero `localhost:8400/live.js` injection through commit.
+
+### Steps
+
+1. `DESIGN.md`: insert `### Homepage presentation` after `### Composition grammar`. Binding rules: structural chrome + hero support use navy with existing `material-leather-blue` recipe; readable content on warm paper; wood joinery; gold focus/highlight; rose/sage/teal/blue/red/amber/purple stay semantic grade/subject/character accents; 16 character tokens verbatim; responsive intent (wide split hero, tablet reduced split, mobile stacked + compact menu); subject board = one support + attached paper; song/recent = one calm ruled-paper area; no nested card maze, no duplicated CTA to one destination.
+2. `HeroBanner` (`app/page.tsx:61`): support `material-leather` → `material-leather-blue`; keep title, `NEW_LESSONS`, `RIBBON_WORDS`, taped paper, `/songs` link, `HERO_PHOTO` alt/caption/1536×1024, polaroid `border-white bg-white` (R3 exception). Wide 3-track grid retained; tablet tightened; mobile stacked, zero overflow.
+3. `SubjectTeachers` (`components/home/SubjectTeachers.tsx`): all six entries verbatim; cork `material-cork` single support, one attached paper artifact per subject.
+4. `CharacterPerspectiveWall` (`app/page.tsx:34`): keep `CHARACTER_KEYS` order staff-then-learner, all 16 visible at every breakpoint; paper/working-board support; keep `data-character` + `characters-surface` + `fastener-push-pin` + `character-face-patch`; stop truncating identity names.
+5. `WhatsNew` + `CurriculumPlanner` (`app/page.tsx:150`): one ruled-paper support each (`material-paper-ruled`/`working-wall-note`); preserve every link, external target, aria-label.
+6. Navigation untouched unless verification exposes a homepage-specific a11y defect.
+7. CSS additions only in `app/globals.css` where utilities cannot express shared material behavior; no new tokens/deps.
+
+### Verification
+
+1. `npm run typecheck`, `npm run lint`, `npm run build` (490 pages baseline) exit 0.
+2. Dev on :3100; `/` DOM: title, zero `live.js`, zero `impeccable-live-*`, 16 character keys in registry order, all current links unchanged.
+3. Screenshots 1440/768/390 stored for owner review — never labeled visually verified (vision role block, line 80).
+4. Computed styles: hero `material-leather-blue`, exact `--characters-*-color` bridges ×16, AA contrast on changed surfaces light+dark.
+5. Navigate `/search`, `/about`, `/songs`, `/topics`, `/lessons`, all five `/grade/*`; routes unchanged; mobile Sheet + `aria-current` intact.
+6. `npx impeccable detect app/page.tsx components/home/SubjectTeachers.tsx components/home/HomeGradeNav.tsx` exit 0; fresh critique snapshot after changes.
+
+### Execution evidence (2026-08-28, verified)
+
+- Gates: `npm run typecheck` ✓, `npm run lint` ✓, `npm run build` ✓ (all pages generated). Confirm round: `detect.mjs --json` exit 0, `tsc --noEmit` exit 0, `eslint` exit 0.
+- DESIGN.md: `### Homepage presentation` inserted after `### Composition grammar` (line 434).
+- app/page.tsx: hero support `material-leather-blue` (computed rgb(30,42,56) + leather-blue texture), h1 cream `brand-navy-foreground` (~14:1 on navy), tablet gap tightened (`gap-6 lg:gap-8`); character wall support `working-wall-stage` (paper, wood border), kicker above the wall heading deleted (craft-floor ban), name `truncate` removed; WhatsNew videos grouped in one `card-paper-ruled` support (articles demoted to bare artifacts, no nested cards); CurriculumPlanner support `card-paper-ruled`.
+- **Defect found & fixed**: home character cards never applied the `characters-${key}` bridge class (grade pages did) — all 16 surfaces were transparent. Added the class; computed verification: all 16 resolve exact DESIGN.md tokens (Old MacDonald #A66A32, Mr Rusty #267CBA, Mr Sam #1D8787, Mr Maisy #D81D24, Miss Maisy #5D8164, Scout #C59E7A, Penny #F9CB7A, Maisy #96AD9A, …) with correct foreground pairing (dark ink on Miss Puddles/Miss Hayley/Scout/Penny/Maisy; cream on the rest).
+- Browser DOM (1440/768/390): one `main`, zero duplicate ids, zero `localhost:8400/live.js`, zero `impeccable-live-*`, 16 `data-character` keys in registry order, 5 grade tiles + daycare tip link, `/songs`, `/search`, 3 YouTube links, mobile quick-search present, zero horizontal overflow at all three widths. Duplicate `h2#character-perspective-title` introduced mid-edit was caught by advisor and removed before gates.
+- Screenshots captured 1440/768/390 (full-page, owner temp dir) — stored for owner review, NOT visually verified (vision-role block, line 80).
+- Impeccable suite ledger: `$impeccable critique` ran **DEGRADED** (two isolated subagents exceeded the time-box after a finalize directive; cancelled; parent assessments inline, anchored-run caveat recorded in the snapshot). Snapshot: `.impeccable/critique/2026-08-28T23-25-44Z__app-page-tsx.md` — 23/28 (n/a: 7,9,10), P0×0 P1×0 P2×2 P3×2. Trend: 28/36 → 28/36 → 23/28 (mixed denominators, not like-for-like). `$impeccable layout` finding (video affordance) + `$impeccable typeset` finding (monotone header rhythm) fixed in one batch: thumbnail group-hover ring/lift restored on video artifacts; redundant "pick a subject to start" aside removed. Confirm round: detector 0, tsc 0, eslint 0, DOM verified. `$impeccable colorize` skipped — page already carries the full semantic palette; no monochrome surface. `$impeccable animate` skipped — DESIGN.md motion contract is restrained functional motion; hover transitions exist, no findings. `$impeccable live` requires the owner's eyes for variant selection (vision-role block) — available on request; the "off but unnameable" item (transparent character ghosts) was found and fixed via computed evidence instead.
+- Not mine, untouched: `WATCHDOG.yml` advisor reconfiguration (owner-side), `next-env.d.ts` build churn, `output/menu-regression-*.png` + `output/daycare-current.png`.

@@ -431,6 +431,15 @@ At least one composition in a branded artifact should demonstrate the support–
 
 Use overlap to show construction, not to hide information. Keep text, controls, faces, icons, and focus indicators clear of fasteners. Small rotations may suggest a placed object; they must never reduce alignment, legibility, or apparent quality.
 
+### Homepage presentation
+
+The home page is the working wall's front display, composed with the grammar above. Binding rules:
+
+- Structural chrome (page header, footer, hero support) uses the deep navy family; the hero support uses the existing `material-leather-blue` recipe. Readable information sits on warm paper artifacts; joinery uses the existing wood treatment; gold marks focus and highlight only.
+- Rose, sage, teal, blue, red, amber, and purple remain semantic grade, subject, and character accents. They never become generic decoration.
+- All sixteen character identity colors remain visible on the home character wall at every breakpoint, in staff-then-learner order, each with its exact token and approved foreground.
+- Subject discovery is one cork support with attached paper artifacts; song/recent material is one calm ruled-paper area. No nested card maze; no duplicated call-to-action pointing at one destination.
+- Responsive intent: wide viewports split the hero into text, lesson artifact, and photograph tracks; tablets reduce the split; mobile stacks the hero and uses the compact menu. No identity may disappear at any breakpoint.
 ## Elevation & Depth
 
 ### Depth
