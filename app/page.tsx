@@ -259,6 +259,7 @@ function MobileQuickSearch() {
 export default function HomePage() {
   return (
     <section className="flex w-full flex-col gap-10 px-3 pb-6 sm:px-6">
+      <HeroBanner />
       <HomeGradeNav />
       <MobileQuickSearch />
       <CharacterPerspectiveWall />
