@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -257,18 +257,6 @@ export function GradeInteractionLane({
 }: GradeInteractionLaneProps) {
   const [section, setSection] = useState<GradeInteractionSection>("today");
   const [selectedIndex, setSelectedIndex] = useState(activeIndex);
-  const [tabsOrientation, setTabsOrientation] =
-    useState<"horizontal" | "vertical">("horizontal");
-
-  useEffect(() => {
-    const desktopTabs = window.matchMedia("(min-width: 64rem)");
-    const updateOrientation = () =>
-      setTabsOrientation(desktopTabs.matches ? "vertical" : "horizontal");
-
-    updateOrientation();
-    desktopTabs.addEventListener("change", updateOrientation);
-    return () => desktopTabs.removeEventListener("change", updateOrientation);
-  }, []);
 
   const chooseItem = (index: number) => {
     setSelectedIndex(index);
@@ -322,7 +310,7 @@ export function GradeInteractionLane({
     <Tabs
       value={section}
       onValueChange={(value) => setSection(value as GradeInteractionSection)}
-      orientation={tabsOrientation}
+      className="@container"
     >
       <GradeWorkspace
         grade={config.gradeKey}
@@ -335,13 +323,13 @@ export function GradeInteractionLane({
         navigation={
           <TabsList
             aria-label={`${config.grade} lesson tools`}
-            className="flex h-auto min-h-11 w-full items-start gap-1 overflow-x-auto p-0 pb-2 bg-transparent lg:flex-col lg:items-stretch lg:overflow-visible lg:pb-0"
+            className="flex h-auto min-h-11 w-full items-start gap-1 overflow-x-auto p-0 pb-2 bg-transparent @5xl:flex-col @5xl:items-stretch @5xl:overflow-visible @5xl:pb-0"
           >
             {sections.map((entry) => (
               <TabsTrigger
                 key={entry.id}
                 value={entry.id}
-                className="min-h-11 shrink-0 justify-start gap-2 bg-background/75 text-foreground lg:w-full"
+                className="min-h-11 shrink-0 justify-start gap-2 bg-background/75 text-foreground @5xl:w-full"
               >
                 <span className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[11px] font-black tabular-nums" aria-hidden="true">
                   {String(sections.indexOf(entry) + 1).padStart(2, "0")}
