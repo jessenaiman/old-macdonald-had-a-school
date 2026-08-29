@@ -6,7 +6,7 @@ import { BookOpen, Search, Wrench, HelpCircle } from "lucide-react";
 export function SiteFooter() {
   return (
     <footer className="bg-brand-navy text-brand-navy-foreground border-t border-brand-navy-foreground/10" aria-labelledby="footer-heading">
-      <div className="relative mx-auto min-w-0 w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="relative px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <h2 id="footer-heading" className="sr-only">Site footer</h2>
         <nav className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10" aria-label="Main navigation">
           <Link href="/topics" className="flex min-h-[44px] items-center gap-2 text-sm font-medium hover:text-brand-navy-foreground/70 transition-colors group" aria-label="Plan by topic">

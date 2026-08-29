@@ -55,7 +55,6 @@ function CharacterPerspectiveWall() {
     </section>
   );
 }
-const PAGE_SHELL = "mx-auto min-w-0 w-full max-w-7xl px-3 sm:px-6";
 
 function HeroBanner() {
   return (
@@ -259,8 +258,7 @@ function MobileQuickSearch() {
 
 export default function HomePage() {
   return (
-    <section className={`flex w-full flex-col gap-10 pb-6 ${PAGE_SHELL}`}>
-      <HeroBanner />
+    <section className="flex w-full flex-col gap-10 px-3 pb-6 sm:px-6">
       <HomeGradeNav />
       <MobileQuickSearch />
       <CharacterPerspectiveWall />
