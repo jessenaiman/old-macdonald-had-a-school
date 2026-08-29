@@ -92,7 +92,7 @@ export function GradeWorkspace({
           />
           <span
             data-character={teacher}
-            className="brand-asset character-face-bust icon-small"
+            className="brand-asset character-face-patch icon-small"
             aria-hidden="true"
           />
           <span className="text-xs font-black uppercase tracking-widest">

@@ -263,7 +263,7 @@ export async function CurriculumLessonPage({ slug }: Props) {
             className={cn("characters-surface flex flex-wrap items-center gap-5 rounded-xl border p-5 shadow-sm", `characters-${ownerConfig.teacher}`)}
             aria-label={`Teaching note from ${ownerName}`}
           >
-            <span className="brand-asset character-face-bust icon-control shrink-0" data-character={ownerConfig.teacher} aria-hidden="true" />
+            <span className="brand-asset character-face-patch icon-control shrink-0" data-character={ownerConfig.teacher} aria-hidden="true" />
             <div className="flex min-w-0 flex-col gap-1">
               <p className="text-xs font-black uppercase tracking-widest">From {ownerName}</p>
               <p className="font-hand text-2xl leading-snug">{ownerConfig.leadQuote}</p>

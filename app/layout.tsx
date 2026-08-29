@@ -94,9 +94,6 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </ThemeProvider>
-{/* impeccable-live-start */}
-<script src="http://localhost:8400/live.js?token=d950f49a-c686-48bb-9497-36a92c41c7f4"></script>
-{/* impeccable-live-end */}
 </body>
     </html>
   );

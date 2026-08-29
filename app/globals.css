@@ -150,19 +150,19 @@
   --characters-rusty-foreground: #fefce8;
 
   /* Grade/Subject routing (page-level theming) */
-  --grade-early-years-color: var(--grade-pre-school-color);
-  --grade-daycare-color: #f6af32;
-  --grade-pre-school-color: #5d8164;
-  --grade-kindergarten-color: #267cba;
-  --grade-one-color: #d95c86;
-  --grade-two-color: #d81d24;
+  --grade-early-years-color: var(--characters-miss-maisy-color);
+  --grade-daycare-color: var(--characters-miss-puddles-color);
+  --grade-pre-school-color: var(--characters-miss-maisy-color);
+  --grade-kindergarten-color: var(--characters-mr-rusty-color);
+  --grade-one-color: var(--characters-miss-hayley-color);
+  --grade-two-color: var(--characters-mr-maisy-color);
 
-  --subject-language-color: #d95c86;
-  --subject-math-color: #1d8787;
-  --subject-science-color: #5d8164;
-  --subject-music-color: #267cba;
-  --subject-arts-color: #5367b5;
-  --subject-health-color: #d81d24;
+  --subject-language-color: var(--characters-miss-hayley-color);
+  --subject-math-color: var(--characters-mr-sam-color);
+  --subject-science-color: var(--characters-miss-maisy-color);
+  --subject-music-color: var(--characters-mr-rusty-color);
+  --subject-arts-color: var(--characters-mr-puddles-color);
+  --subject-health-color: var(--characters-mr-maisy-color);
 
   /* Material surface tokens (physical materials — paper/ink/navy/wood are REAL
    * objects and must NOT invert in .dark; per dark-mode-token-overload rule:

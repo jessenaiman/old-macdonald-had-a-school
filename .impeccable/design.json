@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-28T09:12:05.709Z",
+  "generatedAt": "2026-08-29T03:05:33.626Z",
   "title": "Design System: Old MacDonald Had a School",
   "extensions": {
     "colorMeta": {
@@ -634,12 +634,12 @@
       "css": ".ds-paper-card { padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background-color: var(--brand-paper, var(--card)); color: var(--brand-paper-foreground, var(--card-foreground)); background-image: var(--asset-cardboard-ivory); background-repeat: repeat; background-size: 320px; box-shadow: 0 .3rem 0 color-mix(in srgb, var(--theme-wood) 32%, transparent), 0 .65rem 1rem color-mix(in srgb, var(--theme-ink) 13%, transparent); transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-paper-card:hover { transform: translateY(-2px); } .ds-paper-card:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
     },
     {
-      "name": "Daycare Grade Surface Chip",
+      "name": "Five Grade Surface Chips",
       "kind": "chip",
       "refersTo": "grade-surface-chip",
-      "description": "Grade-owned Daycare routing surface using Miss Puddles' exact identity color and approved dark foreground.",
-      "html": "<button class=\"ds-grade-surface-chip\" data-grade=\"daycare\" type=\"button\">Daycare</button>",
-      "css": ".ds-grade-surface-chip[data-grade=\"daycare\"] { --grade-color: var(--grade-daycare-color, #F6AF32); --grade-ink: #1E2A38; min-height: 44px; padding: .5rem 1rem; border: 1px solid color-mix(in srgb, var(--grade-color) 55%, var(--theme-wood-light)); border-inline-start: .35rem solid var(--grade-color); border-radius: var(--radius-xl); background-color: var(--grade-color); background-image: linear-gradient(var(--grade-color), var(--grade-color)), var(--grade-texture); background-blend-mode: color, normal; color: var(--grade-ink); box-shadow: 0 .25rem 0 color-mix(in srgb, var(--grade-color) 72%, black); transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out; } .ds-grade-surface-chip:hover, .ds-grade-surface-chip:focus-visible { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-grade-surface-chip:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
+      "description": "All five grade-owned routing surfaces shown together with canonical signal art.",
+      "html": "<nav class=\"ds-grade-rail\" aria-label=\"Grade examples\"><button data-grade=\"daycare\"><img src=\"/brand-kit-icon-sheets/individual-icons/grade-daycare.webp\" alt=\"\">Daycare</button><button data-grade=\"pre-school\"><img src=\"/brand-kit-icon-sheets/grade-variations-v2/individual-icons/02-preschool-apron-crayon-leaf.webp\" alt=\"\">Preschool</button><button data-grade=\"kindergarten\"><img src=\"/brand-kit-icon-sheets/individual-icons/grade-kindergarten.webp\" alt=\"\">Kindergarten</button><button data-grade=\"grade-one\"><img src=\"/brand-kit-icon-sheets/individual-icons/grade-1.webp\" alt=\"\">Grade 1</button><button data-grade=\"grade-two\"><img src=\"/brand-kit-icon-sheets/individual-icons/grade-2.webp\" alt=\"\">Grade 2</button></nav>",
+      "css": ".ds-grade-rail { display:flex; flex-wrap:wrap; gap:.65rem; padding:1rem; background:#1E2A38; border-radius:1rem; } .ds-grade-rail button { --g:#F6AF32; display:inline-flex; align-items:center; gap:.45rem; min-height:44px; padding:.45rem .8rem; border:2px solid color-mix(in srgb, var(--g) 70%, #1E2A38); border-radius:.8rem; background:var(--g); color:#1E2A38; font:800 .9rem/1.2 Nunito,sans-serif; box-shadow:0 .22rem 0 color-mix(in srgb,var(--g) 65%,black); } .ds-grade-rail button[data-grade=\"pre-school\"] { --g:#5D8164; color:#FEFCE8; } .ds-grade-rail button[data-grade=\"kindergarten\"] { --g:#267CBA; color:#FEFCE8; } .ds-grade-rail button[data-grade=\"grade-one\"] { --g:#D95C86; } .ds-grade-rail button[data-grade=\"grade-two\"] { --g:#D81D24; color:#FEFCE8; } .ds-grade-rail img { width:2rem; height:2rem; object-fit:contain; } .ds-grade-rail button:focus-visible { outline:3px solid #D4A82A; outline-offset:3px; }"
     },
     {
       "name": "Search Input",
@@ -647,15 +647,47 @@
       "refersTo": "search-input",
       "description": "Shared readable paper field for teacher-facing search.",
       "html": "<label>Search lessons <input class=\"ds-search-input\" type=\"search\" placeholder=\"Search lessons\"></label>",
-      "css": ".ds-search-input { min-height: 44px; width: 100%; padding: .5rem 1rem; border: .14rem solid var(--input); border-radius: var(--radius-md); background: var(--card); color: var(--card-foreground); font: 400 1rem/1.7 var(--font-farm-body, Nunito, sans-serif); transition: border-color 180ms ease-out, box-shadow 180ms ease-out; } .ds-search-input:hover { border-color: var(--border); } .ds-search-input:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
+      "css": ".ds-search-input { min-height: 44px; width: 100%; padding: .5rem 1rem; border: .14rem solid #C4A07A; border-radius: .375rem; background-color: #FDF8E3; background-image: url('/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.webp'); background-repeat: repeat; background-size: 320px; color: #1A2A2E; font: 400 1rem/1.7 Nunito, sans-serif; transition: border-color 180ms ease-out, box-shadow 180ms ease-out; } .ds-search-input::placeholder { color: #5C635F; opacity: 1; } .ds-search-input:hover { border-color: #A66A32; } .ds-search-input:focus-visible { outline: 3px solid #D4A82A; outline-offset: 3px; }"
     },
     {
-      "name": "Mr Rusty Character Badge",
+      "name": "Character Artwork Roles",
       "kind": "custom",
-      "refersTo": "character-badge",
-      "description": "Unchanged canonical face patch on Mr Rusty's exact identity surface.",
-      "html": "<span class=\"ds-character-badge characters-mr-rusty character-surface\" tabindex=\"0\" role=\"img\" aria-label=\"Mr Rusty, Music, Rhythm and Counting\"><img src=\"/characters/face-patch-transparent/mr-rusty-blue.webp\" alt=\"\"></span>",
-      "css": ".ds-character-badge.characters-mr-rusty { display: inline-grid; place-items: center; inline-size: 44px; block-size: 44px; overflow: hidden; border: .14rem solid color-mix(in srgb, var(--characters-mr-rusty-color, #267CBA) 42%, transparent); border-radius: 50%; background-color: var(--characters-mr-rusty-color, #267CBA); background-image: linear-gradient(var(--characters-mr-rusty-color, #267CBA), var(--characters-mr-rusty-color, #267CBA)), var(--characters-mr-rusty-texture); background-blend-mode: color, normal; color: var(--characters-mr-rusty-foreground, #FEFCE8); transition: transform 180ms ease-out, box-shadow 180ms ease-out; } .ds-character-badge img { inline-size: 100%; block-size: 100%; object-fit: cover; } .ds-character-badge:hover { transform: translateY(-2px); box-shadow: 0 .35rem .55rem color-mix(in srgb, var(--theme-ink) 20%, transparent); } .ds-character-badge:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }"
+      "refersTo": "character-artwork-roles",
+      "description": "Old MacDonald shown as full-body portrait, transparent face patch, and embroidered badge.",
+      "html": "<figure class=\"ds-character-roles\"><div><img src=\"/characters/full-body-transparent/old-macdonald-fullbody.webp\" alt=\"Old MacDonald full-body portrait\"><span>Full body</span></div><div class=\"ds-owned\"><img src=\"/characters/face-patch-transparent/old-macdonald.webp\" alt=\"Old MacDonald face patch\"><span>Face patch</span></div><div><img src=\"/characters/high-res-cloth/01-old-macdonald-badge.webp\" alt=\"Old MacDonald embroidered badge\"><span>Badge</span></div></figure>",
+      "css": ".ds-character-roles { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin:0; padding:1rem; border-radius:1rem; background:#FDF8E3; color:#1A2A2E; } .ds-character-roles div { display:grid; place-items:center; gap:.4rem; min-height:10rem; padding:.65rem; border:2px solid color-mix(in srgb,#A66A32 45%,transparent); border-radius:.85rem; background:#FEFCE8; font:800 .8rem/1.2 Nunito,sans-serif; } .ds-character-roles .ds-owned { background-color:#A66A32; background-image:linear-gradient(#A66A32,#A66A32),url(\"/design-assets/web-material-library-v1/felt/felt-01-old-macdonald-tile.webp\"); background-blend-mode:color,normal; color:#FEFCE8; } .ds-character-roles img { display:block; max-width:100%; width:7rem; height:8rem; object-fit:contain; }"
+    },
+    {
+      "name": "Subject Signal Tray",
+      "kind": "custom",
+      "refersTo": "subject-signals",
+      "description": "Production subject art remains semantic: music, mathematics, visual arts, and physical education.",
+      "html": "<section class=\"ds-subject-tray\" aria-label=\"Subject icon examples\"><figure><img src=\"/brand-kit-icon-sheets/music-arts-felt-v2/individual-icons/06-instrument-hand-drum.webp\" alt=\"\"><figcaption>Music</figcaption></figure><figure><img src=\"/brand-kit-icon-sheets/individual-icons/subject-math-building.webp\" alt=\"\"><figcaption>Math</figcaption></figure><figure><img src=\"/brand-kit-icon-sheets/subject-variations-v2/individual-icons/16-art-camera-brush.webp\" alt=\"\"><figcaption>Arts</figcaption></figure><figure><img src=\"/brand-kit-icon-sheets/individual-icons/subject-physical-education.webp\" alt=\"\"><figcaption>Physical education</figcaption></figure></section>",
+      "css": ".ds-subject-tray { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.75rem; padding:1rem; border:3px solid #C4A07A; border-radius:1rem; background:#FDF8E3; } .ds-subject-tray figure { display:grid; place-items:center; gap:.35rem; margin:0; min-height:7rem; padding:.6rem; border-radius:.75rem; background:#FEFCE8; color:#1A2A2E; font:800 .75rem/1.2 Nunito,sans-serif; text-align:center; } .ds-subject-tray img { width:4rem; height:4rem; object-fit:contain; }"
+    },
+    {
+      "name": "Material Library",
+      "kind": "custom",
+      "refersTo": "material-surfaces",
+      "description": "Real construction paper, felt, cardboard, denim, woven fabric, and leather—not flat color chips.",
+      "html": "<section class=\"ds-materials\"><span class=\"construction\">Construction paper</span><span class=\"felt\">Felt</span><span class=\"cardboard\">Cardboard</span><span class=\"denim\">Denim</span><span class=\"woven\">Woven</span><span class=\"leather\">Leather</span></section>",
+      "css": ".ds-materials { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.75rem; padding:1rem; background:#FDF8E3; border-radius:1rem; } .ds-materials span { display:grid; place-items:end start; min-height:6rem; padding:.6rem; border:2px solid rgba(30,42,56,.22); border-radius:.75rem; background-size:190px; color:#1E2A38; font:900 .78rem/1.2 Nunito,sans-serif; text-shadow:0 1px #FEFCE8; } .ds-materials .construction { background-image:url(\"/design-assets/web-material-library-v1/construction-paper/construction-paper-05-mr-sam-tile.webp\"); } .ds-materials .felt { background-image:url(\"/design-assets/web-material-library-v1/felt/felt-03-mr-rusty-tile.webp\"); color:#FEFCE8; text-shadow:0 1px #1E2A38; } .ds-materials .cardboard { background-image:url(\"/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.webp\"); } .ds-materials .denim { background-image:url(\"/design-assets/web-material-library-v1/denim/denim-dark-indigo-tile-v01.webp\"); color:#FEFCE8; text-shadow:0 1px #1E2A38; } .ds-materials .woven { background-image:url(\"/design-assets/web-material-library-v1/woven-fabric/woven-fabric-01-old-macdonald-tile.webp\"); color:#FEFCE8; text-shadow:0 1px #1E2A38; } .ds-materials .leather { background-image:url(\"/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.webp\"); color:#FEFCE8; text-shadow:0 1px #1E2A38; }"
+    },
+    {
+      "name": "Credibly Attached Note",
+      "kind": "card",
+      "refersTo": "attached-note",
+      "description": "Pins and tape are the working wall signature; each fastener crosses the paper and its support.",
+      "html": "<section class=\"ds-board\"><article class=\"ds-note\"><img class=\"ds-pin\" src=\"/design-assets/classroom-fasteners-v1/individual-icons/01-push-pin-rounded.webp\" alt=\"\"><strong>Teacher note</strong><p>Sing it twice, then invite the children to lead.</p><img class=\"ds-tape\" src=\"/design-assets/classroom-fasteners-v2/individual-icons/04-gingham-fabric-tape.webp\" alt=\"\"></article></section>",
+      "css": ".ds-board { padding:2rem; border:4px solid #C4A07A; border-radius:1rem; background-color:#1E2A38; background-image:url(\"/design-assets/web-material-library-v1/denim/denim-dark-indigo-tile-v01.webp\"); } .ds-note { position:relative; padding:1.5rem 1.25rem; border-radius:.35rem; background:#FDF8E3; color:#1A2A2E; box-shadow:0 .5rem 1rem rgba(0,0,0,.24); font:400 1rem/1.6 Nunito,sans-serif; } .ds-note strong { font-family:Boogaloo,sans-serif; font-size:1.35rem; } .ds-pin { position:absolute; width:2.1rem; height:2.1rem; object-fit:contain; top:-1.05rem; left:50%; transform:translateX(-50%); } .ds-tape { position:absolute; width:4.5rem; height:2.2rem; object-fit:contain; right:-1rem; bottom:-.8rem; transform:rotate(-7deg); }"
+    },
+    {
+      "name": "Brand and Classroom Scene",
+      "kind": "custom",
+      "refersTo": "brand-scene",
+      "description": "The compact emblem and real classroom hero establish Old MacDonald before prose.",
+      "html": "<figure class=\"ds-brand-scene\"><img class=\"ds-emblem\" src=\"/design-assets/logo/individual-marks/brand-emblem-card-128.webp\" alt=\"Old MacDonald Had a School emblem\"><img class=\"ds-scene\" src=\"/hero/old-macs-open-circle-gathering.webp\" alt=\"Old MacDonald leading a classroom gathering\"></figure>",
+      "css": ".ds-brand-scene { position:relative; margin:0; overflow:hidden; min-height:14rem; border:4px solid #C4A07A; border-radius:1rem; background:#1E2A38; } .ds-brand-scene .ds-scene { display:block; width:100%; height:18rem; object-fit:cover; } .ds-brand-scene .ds-emblem { position:absolute; z-index:1; width:5rem; height:5rem; object-fit:contain; top:.8rem; left:.8rem; padding:.4rem; border-radius:50%; background:#FDF8E3; box-shadow:0 .4rem .8rem rgba(0,0,0,.28); }"
     }
   ],
   "narrative": {
@@ -686,6 +718,7 @@
       "Do use exact approved identity colors and canonical art from this file.",
       "Do put readable information on paper.",
       "Do make attachment physically legible.",
+      "Do treat pins, tape, clips, and fasteners as the signature attachment language of the working wall; every pinned artifact visibly crosses artifact and support.",
       "Do use semantic asset roles.",
       "Do keep content live across media.",
       "Do preserve all assets pending explicit classification.",

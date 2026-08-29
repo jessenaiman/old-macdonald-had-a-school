@@ -297,7 +297,7 @@ export async function GradeLessonPage({
         aria-label={`${details.label} lesson sections`}
       >
         <div className="grade-workspace-rail-header relative flex flex-col items-start gap-1">
-          <span data-character={details.teacher} className="brand-asset character-face-bust icon-medium grade-workspace-rail-character" role="img" aria-label={details.teacherName} />
+          <span data-character={details.teacher} className="brand-asset character-face-patch icon-medium grade-workspace-rail-character" role="img" aria-label={details.teacherName} />
           <span
             className="brand-asset grade-icon icon-medium"
             data-grade-icon={grade}

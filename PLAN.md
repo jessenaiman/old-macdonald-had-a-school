@@ -59,14 +59,14 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - [ ] Replace JavaScript `matchMedia("(min-width: 64rem)")` ownership with one documented responsive owner or a responsive component API.
 - [ ] Audit remaining arbitrary typography/geometry values; promote repeated design decisions to Tailwind theme tokens, retain true one-off composition values.
 - [ ] Verify shadcn animation utilities in compiled CSS before adding any dependency; no dependency may be installed from inference alone.
-- [ ] Browser-check homepage and representative grade routes in OMHAS light/dark at 375×812 and 1280×900. Pixel judgment remains blocked until a vision-capable role is configured; computed values and screenshots are still required.
+- [ ] Browser-check homepage and representative grade routes in OMHAS light/dark at 375×812 and 1280×900. Under the binding `omhas-harness` contract, this session may capture screenshots and verify DOM/computed values but may not perform model-based pixel judgment.
 
 ## Owner decisions carried forward (unresolved)
 
 - [x] `app/page.tsx` YouTube thumbnails now use `next/image`; `next.config.ts` restricts the remote source to `https://i.ytimg.com/vi/**`.
 - [ ] **Deploy contract — deferred to Issue #19.** `next.config.ts` `outputFileTracingIncludes` traces `data/omhas.db` only; `data/search-vectors.db` sidecar and `models/` are NOT traced (`models/` gitignored and absent locally). Architecture review complete (see 2026-08-28 section below); owner will implement flat-file export or hosted database as the next plan. Remaining unrefactored: no `output: "export"` in `next.config.ts`, no build-export script, `/songs` and `/lessons` still query SQLite, `lib/curriculum-db.ts`/`lib/curriculum-lesson.ts`/`lib/songbook.ts` still open `better-sqlite3`, `/api/search` and both Markdown API routes remain Node handlers, no generated JSON/search/Markdown artifacts or static-link replacement exists.
 - [ ] `npx shadcn@latest mcp init` — interactive client picker (Claude Code/Cursor/VS Code/Codex/OpenCode). Owner runs; assistant cannot answer the prompt.
-- [ ] `modelRoles.vision` = `alibaba-token-plan/qwen3.8-flash` rejects image input (verified error this session). Pixel-level screenshot review impossible until owner sets a vision-capable model. Standing rule: assistant requests, owner changes settings.
+- [ ] The earlier delegated `modelRoles.vision` check used `alibaba-token-plan/qwen3.8-flash` and rejected image input; the role was later changed to `alibaba-token-plan/qwen3.8-max` (line 103). Independently, the binding `omhas-harness` contract disables `inspect_image` and limits this session to screenshot metadata plus browser DOM checks, so changing the model alone does not authorize model-based pixel review.
 - [x] Database/embedding migration — **deferred to [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19).** Architecture review complete; flat-file release recommended as lowest-cost option; owner implements hosting/database as next plan.
 - [ ] Security flag: `src/db/migrate-to-sqlite.ts:7` contains a live Neon connection string, present in 2 commits of git history on `main`. Rotate credential at Neon; history scrub is a separate destructive call.
 
@@ -77,7 +77,8 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - [x] `npm run build` passes: Next.js 16.3.0 production build compiled and generated 490 static pages.
 - [x] next-devtools MCP `get_errors` and `get_compilation_issues` return empty arrays after refactor.
 - [x] Browser computed-style proof at 375×812 and 1280×900: `data-brand="omhas"`, one `main`, zero horizontal overflow, body cardboard texture, homepage paper/cork textures, grade felt/denim textures, and light/dark token changes all resolve. Screenshots saved under `tmp/visual-audit/` for owner review.
-- [ ] Pixel-level screenshot review remains blocked because configured vision model rejects image input. Do not label screenshots visually verified.
+- [x] Impeccable live-panel rendering and DOM/metadata verification completed 2026-08-28 for Primary Button, Paper Card, all five grade chips, Search Input, three character artwork roles, subject signals, six material swatches, attached pin/tape, emblem, and classroom hero. Search Input sidecar CSS was changed from the dark card surface to warm textured paper.
+- [ ] Pixel-level visual review of the Impeccable component set remains pending under the binding `omhas-harness` operating contract.
 - [x] axe-core reports zero WCAG A/AA violations on homepage and Grade 1 route; textured backgrounds leave contrast checks incomplete for manual review.
 - [ ] Final diff review, commit, push, and clean working tree.
 - [x] [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19) database/hosting architecture review complete; implementation deferred to owner.
@@ -161,7 +162,7 @@ Durable copy of approved plan `local://home-reference-implementation-plan.md`. G
 
 1. `npm run typecheck`, `npm run lint`, `npm run build` (490 pages baseline) exit 0.
 2. Dev on :3100; `/` DOM: title, zero `live.js`, zero `impeccable-live-*`, 16 character keys in registry order, all current links unchanged.
-3. Screenshots 1440/768/390 stored for owner review — never labeled visually verified (vision role block, line 80).
+3. Screenshots 1440/768/390 stored for owner review — never labeled model-visually verified under the binding `omhas-harness` contract (line 81).
 4. Computed styles: hero `material-leather-blue`, exact `--characters-*-color` bridges ×16, AA contrast on changed surfaces light+dark.
 5. Navigate `/search`, `/about`, `/songs`, `/topics`, `/lessons`, all five `/grade/*`; routes unchanged; mobile Sheet + `aria-current` intact.
 6. `npx impeccable detect app/page.tsx components/home/SubjectTeachers.tsx components/home/HomeGradeNav.tsx` exit 0; fresh critique snapshot after changes.
@@ -176,3 +177,9 @@ Durable copy of approved plan `local://home-reference-implementation-plan.md`. G
 - Screenshots captured 1440/768/390 (full-page, owner temp dir) — stored for owner review, NOT visually verified (vision-role block, line 80).
 - Impeccable suite ledger: `$impeccable critique` ran **DEGRADED** (two isolated subagents exceeded the time-box after a finalize directive; cancelled; parent assessments inline, anchored-run caveat recorded in the snapshot). Snapshot: `.impeccable/critique/2026-08-28T23-25-44Z__app-page-tsx.md` — 23/28 (n/a: 7,9,10), P0×0 P1×0 P2×2 P3×2. Trend: 28/36 → 28/36 → 23/28 (mixed denominators, not like-for-like). `$impeccable layout` finding (video affordance) + `$impeccable typeset` finding (monotone header rhythm) fixed in one batch: thumbnail group-hover ring/lift restored on video artifacts; redundant "pick a subject to start" aside removed. Confirm round: detector 0, tsc 0, eslint 0, DOM verified. `$impeccable colorize` skipped — page already carries the full semantic palette; no monochrome surface. `$impeccable animate` skipped — DESIGN.md motion contract is restrained functional motion; hover transitions exist, no findings. `$impeccable live` requires the owner's eyes for variant selection (vision-role block) — available on request; the "off but unnameable" item (transparent character ghosts) was found and fixed via computed evidence instead.
 - Not mine, untouched: `WATCHDOG.yml` advisor reconfiguration (owner-side), `next-env.d.ts` build churn, `output/menu-regression-*.png` + `output/daycare-current.png`.
+
+## 2026-08-28 — navigation and search owner decisions
+
+- About and Contact are one destination and use the same route/link.
+- Teacher toolbox routes to the subject/topic discovery surface: `/subjects` and `/topics` are equivalent product concepts; do not create two competing destinations.
+- Search is semantic/fuzzy discovery, not exact-string-only lookup.
