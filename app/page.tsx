@@ -33,26 +33,34 @@ const CHARACTER_KEYS = [...STAFF_KEYS, ...STUDENT_KEYS] as CharacterKey[];
 
 function CharacterPerspectiveWall() {
   return (
-    <section className="working-wall-stage relative overflow-visible p-5 sm:p-8" aria-labelledby="character-perspective-title">
-      <header className="mb-6 max-w-2xl">
-        <h2 className="font-section text-[26px] text-brand-paper-foreground" id="character-perspective-title">Sixteen ways to enter the same song</h2>
-        <p className="mt-3 text-base leading-[1.7] text-brand-paper-foreground">A classroom is not one point of view. Keep the adult guide, the child who watches, and the child who joins in the room together.</p>
-      </header>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
-        {CHARACTER_KEYS.map((key, index) => {
-          const character = CHARACTERS[key];
-          const group = index < STAFF_KEYS.length ? "Staff" : "Learner";
-          return (
-            <article className={`characters-surface characters-${key} relative min-w-0 rounded-xl border border-current/35 p-3 shadow-md ${CHARACTER_NOTE_ROTATIONS[index % CHARACTER_NOTE_ROTATIONS.length]}`} data-character={key} key={key}>
-              <span className="brand-asset fastener-push-pin icon-micro absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true" />
-              <span className="brand-asset character-face-patch icon-micro mx-auto block" data-character={key} aria-hidden="true" />
-              <p className="mt-2 text-center text-sm font-bold text-current">{character.name}</p>
-              <span className="mt-1 block text-center text-[11px] font-semibold uppercase tracking-wide text-current opacity-85">{group}</span>
-            </article>
-          );
-        })}
+    <div data-impeccable-variants="32f33cf9" data-impeccable-variant-count="3" style={{ display: "contents" }}>
+      {/* impeccable-variants-start 32f33cf9 */}
+      {/* Original */}
+      <div data-impeccable-variant="original">
+        <section className="working-wall-stage relative overflow-visible p-5 sm:p-8" aria-labelledby="character-perspective-title">
+          <header className="mb-6 max-w-2xl">
+            <h2 className="font-section text-[26px] text-brand-paper-foreground" id="character-perspective-title">Sixteen ways to enter the same song</h2>
+            <p className="mt-3 text-base leading-[1.7] text-brand-paper-foreground">A classroom is not one point of view. Keep the adult guide, the child who watches, and the child who joins in the room together.</p>
+          </header>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+            {CHARACTER_KEYS.map((key, index) => {
+              const character = CHARACTERS[key];
+              const group = index < STAFF_KEYS.length ? "Staff" : "Learner";
+              return (
+                <article className={`characters-surface characters-${key} relative min-w-0 rounded-xl border border-current/35 p-3 shadow-md ${CHARACTER_NOTE_ROTATIONS[index % CHARACTER_NOTE_ROTATIONS.length]}`} data-character={key} key={key}>
+                  <span className="brand-asset fastener-push-pin icon-micro absolute -top-2 left-1/2 -translate-x-1/2" aria-hidden="true" />
+                  <span className="brand-asset character-face-patch icon-micro mx-auto block" data-character={key} aria-hidden="true" />
+                  <p className="mt-2 text-center text-sm font-bold text-current">{character.name}</p>
+                  <span className="mt-1 block text-center text-[11px] font-semibold uppercase tracking-wide text-current opacity-85">{group}</span>
+                </article>
+              );
+            })}
+          </div>
+        </section>
       </div>
-    </section>
+      {/* Variants: insert below this line */}
+      {/* impeccable-variants-end 32f33cf9 */}
+    </div>
   );
 }
 

@@ -125,22 +125,22 @@
 [data-subject='fine-motor'] { --subject-note-paper: var(--subject-fine-motor-paper); }
 
 /* Compact character artwork. Character keys select assets; consumers never carry URLs. */
-[data-character='old-macdonald'] { --character-face-patch:url('/characters/face-patch-transparent/old-macdonald-yellow.webp'); --character-face-bust:url('/characters/face-patches-background-circle/old-macdonald-yellow.webp'); }
-[data-character='miss-puddles'] { --character-face-patch:url('/characters/face-patch-transparent/miss-puddles-purple.webp'); --character-face-bust:url('/characters/face-patches-background-circle/miss-puddles-purple.webp'); }
-[data-character='mr-rusty'] { --character-face-patch:url('/characters/face-patch-transparent/mr-rusty-blue.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-rusty-blue.webp'); }
-[data-character='miss-hayley'] { --character-face-patch:url('/characters/face-patch-transparent/miss-hayley-purple.webp'); --character-face-bust:url('/characters/face-patches-background-circle/miss-hayley-purple.webp'); }
-[data-character='mr-sam'] { --character-face-patch:url('/characters/face-patch-transparent/mr-sam-clean-v2.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-sam-clean-v2.webp'); }
-[data-character='mr-maisy'] { --character-face-patch:url('/characters/face-patch-transparent/mr-maisy-orange.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-maisy-orange.webp'); }
-[data-character='mr-puddles'] { --character-face-patch:url('/characters/face-patch-transparent/mr-puddles-green.webp'); --character-face-bust:url('/characters/face-patches-background-circle/mr-puddles-green.webp'); }
-[data-character='miss-maisy'] { --character-face-patch:url('/characters/face-patch-transparent/miss-maisy-purple.webp'); --character-face-bust:url('/characters/face-patches-background-circle/miss-maisy-purple.webp'); }
-[data-character='hopper'] { --character-face-patch:url('/characters/face-patch-transparent/hopper-red.webp'); --character-face-bust:url('/characters/face-patches-background-circle/hopper-red.webp'); }
-[data-character='whiskers'] { --character-face-patch:url('/characters/face-patch-transparent/whiskers-orange.webp'); --character-face-bust:url('/characters/face-patches-background-circle/whiskers-orange.webp'); }
-[data-character='scout'] { --character-face-patch:url('/characters/face-patch-transparent/scout-green.webp'); --character-face-bust:url('/characters/face-patches-background-circle/scout-green.webp'); }
-[data-character='penny'] { --character-face-patch:url('/characters/face-patch-transparent/penny-orange.webp'); --character-face-bust:url('/characters/face-patches-background-circle/penny-orange.webp'); }
-[data-character='maisy'] { --character-face-patch:url('/characters/face-patch-transparent/maisy-yellow.webp'); --character-face-bust:url('/characters/face-patches-background-circle/maisy-yellow.webp'); }
-[data-character='puddles'] { --character-face-patch:url('/characters/face-patch-transparent/puddles-blue.webp'); --character-face-bust:url('/characters/face-patches-background-circle/puddles-blue.webp'); }
-[data-character='sam'] { --character-face-patch:url('/characters/face-patch-transparent/sam-red.webp'); --character-face-bust:url('/characters/face-patches-background-circle/sam-red.webp'); }
-[data-character='rusty'] { --character-face-patch:url('/characters/face-patch-transparent/rusty-blue.webp'); --character-face-bust:url('/characters/face-patches-background-circle/rusty-blue.webp'); }
+[data-character='old-macdonald'] { --character-face-patch:url('/characters/face-patch-transparent/old-macdonald.webp'); --character-face-bust:url('/characters/face-patch-transparent/old-macdonald.webp'); }
+[data-character='miss-puddles'] { --character-face-patch:url('/characters/face-patch-transparent/miss-puddles.webp'); --character-face-bust:url('/characters/face-patch-transparent/miss-puddles.webp'); }
+[data-character='mr-rusty'] { --character-face-patch:url('/characters/face-patch-transparent/mr-rusty.webp'); --character-face-bust:url('/characters/face-patch-transparent/mr-rusty.webp'); }
+[data-character='miss-hayley'] { --character-face-patch:url('/characters/face-patch-transparent/miss-hayley.webp'); --character-face-bust:url('/characters/face-patch-transparent/miss-hayley.webp'); }
+[data-character='mr-sam'] { --character-face-patch:url('/characters/face-patch-transparent/mr-sam.webp'); --character-face-bust:url('/characters/face-patch-transparent/mr-sam.webp'); }
+[data-character='mr-maisy'] { --character-face-patch:url('/characters/face-patch-transparent/mr-maisy.webp'); --character-face-bust:url('/characters/face-patch-transparent/mr-maisy.webp'); }
+[data-character='mr-puddles'] { --character-face-patch:url('/characters/face-patch-transparent/mr-puddles.webp'); --character-face-bust:url('/characters/face-patch-transparent/mr-puddles.webp'); }
+[data-character='miss-maisy'] { --character-face-patch:url('/characters/face-patch-transparent/miss-maisy.webp'); --character-face-bust:url('/characters/face-patch-transparent/miss-maisy.webp'); }
+[data-character='hopper'] { --character-face-patch:url('/characters/face-patch-transparent/hopper.webp'); --character-face-bust:url('/characters/face-patch-transparent/hopper.webp'); }
+[data-character='whiskers'] { --character-face-patch:url('/characters/face-patch-transparent/whiskers.webp'); --character-face-bust:url('/characters/face-patch-transparent/whiskers.webp'); }
+[data-character='scout'] { --character-face-patch:url('/characters/face-patch-transparent/scout.webp'); --character-face-bust:url('/characters/face-patch-transparent/scout.webp'); }
+[data-character='penny'] { --character-face-patch:url('/characters/face-patch-transparent/penny.webp'); --character-face-bust:url('/characters/face-patch-transparent/penny.webp'); }
+[data-character='maisy'] { --character-face-patch:url('/characters/face-patch-transparent/maisy.webp'); --character-face-bust:url('/characters/face-patch-transparent/maisy.webp'); }
+[data-character='puddles'] { --character-face-patch:url('/characters/face-patch-transparent/puddles.webp'); --character-face-bust:url('/characters/face-patch-transparent/puddles.webp'); }
+[data-character='sam'] { --character-face-patch:url('/characters/face-patch-transparent/sam.webp'); --character-face-bust:url('/characters/face-patch-transparent/sam.webp'); }
+[data-character='rusty'] { --character-face-patch:url('/characters/face-patch-transparent/rusty.webp'); --character-face-bust:url('/characters/face-patch-transparent/rusty.webp'); }
 
 [data-character='old-macdonald'] { --character-embroidered-badge:url('/characters/high-res-cloth/01-old-macdonald-badge.webp'); }
 [data-character='miss-puddles'] { --character-embroidered-badge:url('/characters/high-res-cloth/02-miss-puddles-badge.webp'); }
