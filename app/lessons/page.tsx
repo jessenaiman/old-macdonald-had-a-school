@@ -89,77 +89,78 @@ export default async function LessonsIndexPage({ searchParams }: { searchParams:
 
   return (
     <section className="my-7 text-foreground max-sm:my-3" aria-labelledby="lessons-index-title">
-        <header className="bg-brand-navy text-brand-navy-foreground rounded-2xl border border-brand-navy-foreground/10 px-6 py-8 sm:px-10 sm:py-12 shadow-[0_8px_0_color-mix(in_srgb,var(--border)_28%,transparent)]">
-          <div>
-            <p className="m-0 font-body text-xs font-black leading-[1.4] tracking-[.12em] text-brand-navy-foreground/85 uppercase">Teacher planning library</p>
-            <h1 className="my-3 max-w-3xl font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-normal leading-[1.05] tracking-tight text-balance" id="lessons-index-title">What do you need to teach?</h1>
-            <p className="m-0 max-w-3xl font-body text-sm font-semibold leading-relaxed text-brand-navy-foreground/90">Start with a skill, song, or classroom moment. Teacher-ready lessons appear first, with planning records clearly marked for further review.</p>
-          </div>
-          <form className="mt-7 rounded-xl border border-border bg-card/70 p-4" method="get" action="/lessons" role="search">
-            <FieldGroup className="items-end gap-3 md:grid-cols-[minmax(260px,1fr)_220px_auto]">
-              <Field>
-                <FieldLabel htmlFor="lesson-search">What are you planning?</FieldLabel>
-                <InputGroup>
-                  <InputGroupAddon>
-                    <Search className="size-4 text-muted-foreground" aria-hidden="true" />
-                  </InputGroupAddon>
-                  <InputGroupInput
-                    id="lesson-search"
-                    name="q"
-                    type="search"
-                    autoComplete="off"
-                    defaultValue={query}
-                    placeholder="Try steady beat, rhyming, plants, or calming songs..."
-                  />
-                </InputGroup>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="lesson-grade">Teaching group</FieldLabel>
-              <NativeSelect id="lesson-grade" name="grade" defaultValue={grade ?? ""}>
+      <header className="bg-brand-navy text-brand-navy-foreground rounded-2xl border border-brand-navy-foreground/10 px-6 py-8 sm:px-10 sm:py-12 shadow-[0_8px_0_color-mix(in_srgb,var(--border)_28%,transparent)]">
+        <div>
+          <p className="m-0 font-body text-xs font-black leading-[1.4] tracking-[.12em] text-brand-navy-foreground/85 uppercase">Teacher planning library</p>
+          <h1 className="my-3 max-w-3xl font-heading text-[clamp(1.9rem,4vw,2.75rem)] font-normal leading-[1.05] tracking-tight text-balance" id="lessons-index-title">What do you need to teach?</h1>
+          <p className="m-0 max-w-3xl font-body text-sm font-semibold leading-relaxed text-brand-navy-foreground/90">Start with a skill, song, or classroom moment. Teacher-ready lessons appear first, with planning records clearly marked for further review.</p>
+        </div>
+        <form className="mt-7 rounded-xl border border-border bg-card/70 p-4" method="get" action="/lessons" role="search">
+          <FieldGroup className="items-end gap-3 md:grid-cols-[minmax(260px,1fr)_220px_auto]">
+            <Field>
+              <FieldLabel htmlFor="lesson-search">What are you planning?</FieldLabel>
+              <InputGroup>
+                <InputGroupAddon>
+                  <Search className="size-4 text-muted-foreground" aria-hidden="true" />
+                </InputGroupAddon>
+                <InputGroupInput
+                  id="lesson-search"
+                  name="q"
+                  className="min-h-11"
+                  type="search"
+                  autoComplete="off"
+                  defaultValue={query}
+                  placeholder="Try steady beat, rhyming, plants, or calming songs..."
+                />
+              </InputGroup>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="lesson-grade">Teaching group</FieldLabel>
+              <NativeSelect id="lesson-grade" name="grade" className="min-h-11" defaultValue={grade ?? ""}>
                 <option value="">All supported grades</option><option value="daycare">Daycare</option><option value="pre-school">Preschool</option><option value="kindergarten">Kindergarten</option><option value="grade-one">Grade 1</option><option value="grade-two">Grade 2</option>
               </NativeSelect>
-              </Field>
-              <Button type="submit">Search lessons</Button>
-            </FieldGroup>
-          </form>
-        </header>
+            </Field>
+            <Button type="submit" className="min-h-11">Search lessons</Button>
+          </FieldGroup>
+        </form>
+      </header>
 
-        <div className="mx-2 mb-4 mt-8 flex items-end justify-between gap-5 max-sm:mt-6 max-sm:flex-col max-sm:items-start max-sm:gap-2" aria-live="polite">
-          <div><span>{query ? "Search results" : "Ready for your week"}</span>{query ? <p>{resultCount} result{resultCount === 1 ? "" : "s"} for &quot;{query}&quot;</p> : <p>{markdownLessons.length} finished lessons ready to browse</p>}</div>
-          <p className="max-w-sm text-right text-sm font-bold text-muted-foreground max-sm:text-left">Clear goals, classroom steps, and source notes stay together.</p>
-          {databaseUnavailable ? <p className="font-extrabold text-destructive">The curriculum database is unavailable; finished Markdown lessons are still shown.</p> : null}
+      <div className="mx-2 mb-4 mt-8 flex items-end justify-between gap-5 max-sm:mt-6 max-sm:flex-col max-sm:items-start max-sm:gap-2" aria-live="polite">
+        <div><span>{query ? "Search results" : "Ready for your week"}</span>{query ? <p>{resultCount} result{resultCount === 1 ? "" : "s"} for &quot;{query}&quot;</p> : <p>{markdownLessons.length} finished lessons ready to browse</p>}</div>
+        <p className="max-w-sm text-right text-sm font-bold text-muted-foreground max-sm:text-left">Clear goals, classroom steps, and source notes stay together.</p>
+        {databaseUnavailable ? <p className="font-extrabold text-destructive">The curriculum database is unavailable; finished Markdown lessons are still shown.</p> : null}
+      </div>
+
+      <nav className="card-paper grid gap-4 rounded-xl border border-border p-5 shadow-sm" aria-label="Browse lessons by classroom activity">
+        <div><h2 className="m-0 font-section text-[26px] text-balance">Browse by classroom activity</h2><p className="mb-0 mt-2 font-body text-base font-semibold leading-[1.7]">Each approved classroom icon opens the matching lesson-library search.</p></div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {activityFilters.map(([label, icon, cue]) => <Button asChild className="justify-start" key={icon} variant="outline">
+            <Link href={`/lessons?q=${encodeURIComponent(cue)}`}><BrandIcon icon={icon} size="small" /><span>{label}</span></Link>
+          </Button>)}
         </div>
+      </nav>
 
-        <nav className="card-paper grid gap-4 rounded-xl border border-border p-5 shadow-sm" aria-label="Browse lessons by classroom activity">
-          <div><h2 className="m-0 font-section text-[26px] text-balance">Browse by classroom activity</h2><p className="mb-0 mt-2 font-body text-base font-semibold leading-[1.7]">Each approved classroom icon opens the matching lesson-library search.</p></div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {activityFilters.map(([label, icon, cue]) => <Button asChild className="justify-start" key={icon} variant="outline">
-              <Link href={`/lessons?q=${encodeURIComponent(cue)}`}><BrandIcon icon={icon} size="small" /><span>{label}</span></Link>
-            </Button>)}
-          </div>
-        </nav>
-
-        <section className="grid gap-5 md:grid-cols-2" aria-label="Available lessons">
-          {markdownLessons.map(({ lesson }) => (
-            <Card className="card-paper grid grid-cols-1 sm:grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 border-t-[var(--curriculum-green)] p-0" key={lesson.metadata.slug}>
-              <div className="material-surface material-woven-fabric grid items-start justify-items-center place-items-center p-3 sm:p-5"><span className={`brand-asset ${lessonIcon(lesson.metadata.title, lesson.metadata.subject, lesson.metadata.category, lesson.metadata.focus, lesson.metadata.summary, lesson.metadata.grade)} icon-medium`} aria-hidden="true" /></div>
-              <div className="grid min-w-0 gap-3 p-5"><CardHeader className="p-0"><div className="flex justify-between gap-3 text-xs font-black tracking-wider text-muted-foreground uppercase"><span>Teacher-ready lesson</span><strong>{lesson.metadata.grade}</strong></div><CardTitle className=""><Link href={lessonHref(lesson.metadata)}>{lesson.metadata.title}</Link></CardTitle></CardHeader><CardContent className="p-0 text-sm font-semibold leading-6 text-muted-foreground">{lesson.metadata.summary}</CardContent><CardFooter className="flex justify-between gap-3 border-t border-dashed border-border p-0 pt-3 text-xs font-black uppercase"><span>{lesson.metadata.subject}</span><Link className="text-primary" href={lessonHref(lesson.metadata)}>Open lesson →</Link></CardFooter></div>
-            </Card>
-          ))}
-          {databaseResults.map(({ topic, href, markdownLesson }) => (
-            <Card
-              className={cn(
-                "material-surface material-cardboard-paper grid grid-cols-1 sm:grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 p-0",
-                markdownLesson ? "border-t-[var(--curriculum-green)]" : "border-t-accent"
-              )}
-              key={topic.id}
-            >
-              <div className="material-surface material-woven-fabric grid items-start justify-items-center place-items-center p-3 sm:p-5"><span className={`brand-asset ${lessonIcon(markdownLesson?.metadata.title ?? topic.title, markdownLesson?.metadata.subject ?? topic.subject, markdownLesson?.metadata.category ?? topic.category ?? "", markdownLesson?.metadata.focus ?? topic.skillStatement ?? "", topic.grade)} icon-medium`} aria-hidden="true" /></div>
-              <div className="grid min-w-0 gap-3 p-5"><CardHeader className="p-0"><div className="flex justify-between gap-3 text-xs font-black tracking-wider text-muted-foreground uppercase"><span>{markdownLesson ? "Teacher-ready lesson" : "Planning record"}</span><strong>{topic.grade}</strong></div><CardTitle className=""><Link href={href}>{markdownLesson?.metadata.title ?? topic.title}</Link></CardTitle></CardHeader><CardContent className="p-0 text-sm font-semibold leading-6 text-muted-foreground">{markdownLesson?.metadata.summary ?? topic.skillStatement ?? "Open the grade-scoped curriculum record and review what is available."}</CardContent><CardFooter className="flex justify-between gap-3 border-t border-dashed border-border p-0 pt-3 text-xs font-black uppercase"><span>{markdownLesson?.metadata.subject ?? topic.subject}</span><Link className="text-primary" href={href}>{markdownLesson ? "Open lesson" : "Review record"} →</Link></CardFooter></div>
-            </Card>
-          ))}
-          {resultCount === 0 ? <Empty className="col-span-full border"><EmptyHeader><EmptyTitle>No matching lesson</EmptyTitle><EmptyDescription>Try a shorter teaching goal or another grade.</EmptyDescription></EmptyHeader></Empty> : null}
-        </section>
+      <section className="grid gap-5 md:grid-cols-2" aria-label="Available lessons">
+        {markdownLessons.map(({ lesson }) => (
+          <Card className="card-paper grid grid-cols-1 sm:grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 border-t-[var(--curriculum-green)] p-0" key={lesson.metadata.slug}>
+            <div className="material-surface material-woven-fabric grid items-start justify-items-center place-items-center p-3 sm:p-5"><span className={`brand-asset ${lessonIcon(lesson.metadata.title, lesson.metadata.subject, lesson.metadata.category, lesson.metadata.focus, lesson.metadata.summary, lesson.metadata.grade)} icon-medium`} aria-hidden="true" /></div>
+            <div className="grid min-w-0 gap-3 p-5"><CardHeader className="p-0"><div className="flex justify-between gap-3 text-xs font-black tracking-wider text-muted-foreground uppercase"><span>Teacher-ready lesson</span><strong>{lesson.metadata.grade}</strong></div><CardTitle className=""><Link href={lessonHref(lesson.metadata)}>{lesson.metadata.title}</Link></CardTitle></CardHeader><CardContent className="p-0 text-sm font-semibold leading-6 text-muted-foreground">{lesson.metadata.summary}</CardContent><CardFooter className="flex justify-between gap-3 border-t border-dashed border-border p-0 pt-3 text-xs font-black uppercase"><span>{lesson.metadata.subject}</span><Link className="text-primary" href={lessonHref(lesson.metadata)}>Open lesson →</Link></CardFooter></div>
+          </Card>
+        ))}
+        {databaseResults.map(({ topic, href, markdownLesson }) => (
+          <Card
+            className={cn(
+              "material-surface material-cardboard-paper grid grid-cols-1 sm:grid-cols-[92px_minmax(0,1fr)] gap-0 overflow-hidden border-t-4 p-0",
+              markdownLesson ? "border-t-[var(--curriculum-green)]" : "border-t-accent"
+            )}
+            key={topic.id}
+          >
+            <div className="material-surface material-woven-fabric grid items-start justify-items-center place-items-center p-3 sm:p-5"><span className={`brand-asset ${lessonIcon(markdownLesson?.metadata.title ?? topic.title, markdownLesson?.metadata.subject ?? topic.subject, markdownLesson?.metadata.category ?? topic.category ?? "", markdownLesson?.metadata.focus ?? topic.skillStatement ?? "", topic.grade)} icon-medium`} aria-hidden="true" /></div>
+            <div className="grid min-w-0 gap-3 p-5"><CardHeader className="p-0"><div className="flex justify-between gap-3 text-xs font-black tracking-wider text-muted-foreground uppercase"><span>{markdownLesson ? "Teacher-ready lesson" : "Planning record"}</span><strong>{topic.grade}</strong></div><CardTitle className=""><Link href={href}>{markdownLesson?.metadata.title ?? topic.title}</Link></CardTitle></CardHeader><CardContent className="p-0 text-sm font-semibold leading-6 text-muted-foreground">{markdownLesson?.metadata.summary ?? topic.skillStatement ?? "Open the grade-scoped curriculum record and review what is available."}</CardContent><CardFooter className="flex justify-between gap-3 border-t border-dashed border-border p-0 pt-3 text-xs font-black uppercase"><span>{markdownLesson?.metadata.subject ?? topic.subject}</span><Link className="text-primary" href={href}>{markdownLesson ? "Open lesson" : "Review record"} →</Link></CardFooter></div>
+          </Card>
+        ))}
+        {resultCount === 0 ? <Empty className="col-span-full border"><EmptyHeader><EmptyTitle>No matching lesson</EmptyTitle><EmptyDescription>Try a shorter teaching goal or another grade.</EmptyDescription></EmptyHeader></Empty> : null}
+      </section>
     </section>
   );
 }

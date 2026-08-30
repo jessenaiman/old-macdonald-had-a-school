@@ -2,7 +2,7 @@
 
 **Project identity (for every future session and agent):** Next.js 16.3 App Router + Tailwind CSS v4 + shadcn/ui (vendored `components/ui/`, semantic-token architecture). `new-york` is shadcn component-style metadata, not the site theme. `omhas` is the canonical brand theme (`data-brand="omhas"`); light/dark are display variants of its token set. Advanced or customized controls compose shadcn primitives + Tailwind v4 tokens, never parallel hand-rolled control systems. Fonts use `next/font` CSS variables. Content uses `@next/mdx` + `remark-mdx-frontmatter`. Dark mode uses `next-themes` class strategy.
 
-## How the theme actually works (verified 2026-08-27)
+Full-site design audit completed across all 9 route families (60 screenshots, 4 states each). Audit score: 16/20 (Good). The song side-tabs finding is resolved; the remaining owner decisions are lessons IA (P2) and radii (P3). The 44px control fixes already applied and verified. MiniLM semantic search remains a separate P1 blocker.
 
 The single documented chain — one place changes the entire site:
 
@@ -68,7 +68,12 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - [ ] `npx shadcn@latest mcp init` — interactive client picker (Claude Code/Cursor/VS Code/Codex/OpenCode). Owner runs; assistant cannot answer the prompt.
 - [ ] The earlier delegated `modelRoles.vision` check used `alibaba-token-plan/qwen3.8-flash` and rejected image input; the role was later changed to `alibaba-token-plan/qwen3.8-max` (line 103). Independently, the binding `omhas-harness` contract disables `inspect_image` and limits this session to screenshot metadata plus browser DOM checks, so changing the model alone does not authorize model-based pixel review.
 - [x] Database/embedding migration — **deferred to [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19).** Architecture review complete; flat-file release recommended as lowest-cost option; owner implements hosting/database as next plan.
-- [ ] Security flag: `src/db/migrate-to-sqlite.ts:7` contains a live Neon connection string, present in 2 commits of git history on `main`. Rotate credential at Neon; history scrub is a separate destructive call.
+- [x] **Song side-tabs (audit P3, `app/songs/[id]/page.tsx:47,49`) — resolved.** Action and song-level cards use the existing `card-paper` semantic surface; the former `border-l-4 border-l-primary` treatment is gone.
+- [ ] **Lessons IA (audit P2, `app/lessons/page.tsx:98-140`) — owner decision pending.** First viewport presents competing search and activity-browse paths. Owner must choose: (a) visually subordinate activity routes until after grade/query action, or (b) make relationship to search explicit. No restructuring without approval.
+- [ ] **Radii (audit P3, `app/globals.css:644,656,678,730,861`) — owner decision pending.** Off-scale border-radius values (`1rem`, `.9rem`, `.1rem`, `.15rem`, `.75rem`). Owner must approve changing to DESIGN.md rounded-scale values.
+- [x] **44px control heights — verified.** `min-h-11` applied at `SearchWorkspace.tsx:101,114-116`, `lessons/page.tsx:109,119,123`, `songs/[id]/page.tsx:33` (44px fallback). No further action.
+- [ ] **MiniLM semantic search (P1 blocker) — owner decision pending.** `all-MiniLM-L6-v2` missing locally; search degrades to string match. Owner must choose: (a) place files at `models/all-MiniLM-L6-v2/`, (b) allow remote download, or (c) remove semantic-search dependency.
+- [x] **Tailwind v4 docs sync (prerequisite) — verified.** Python sync completed with `--accept-docs-license`; `.agents/skills/tailwind-4-docs/references/docs/` contains generated Tailwind v4 reference pages. Tailwind-dependent implementation is no longer blocked by missing docs.
 
 ## Verification gates (all must pass before any "done" claim)
 

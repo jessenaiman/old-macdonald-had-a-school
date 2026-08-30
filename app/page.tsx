@@ -66,63 +66,63 @@ function HeroBanner() {
               Where familiar songs become{" "}
               <em className="not-italic text-[color-mix(in_oklab,var(--rose-soft)_55%,var(--brand-navy-foreground))]">new places</em> to learn.
             </h1>
-        {/* New this week list — paper note taped to the wall */}
-        <div className="card-paper relative min-w-0 w-full max-w-full rounded-2xl border-brand-navy/10 p-5 shadow-lg">
-          <span aria-hidden className="absolute -top-2.5 left-1/2 h-5 w-20 -translate-x-1/2 -rotate-2 rounded-sm bg-gold-soft/50 shadow-sm [clip-path:polygon(3%_0,97%_6%,100%_88%,0_100%)]" />
-          <div className="flex items-baseline justify-between px-1 pb-2">
-            <span className="font-hand text-xl italic text-brand-paper-foreground">New this week</span>
-            <span className="font-hand text-base italic text-brand-paper-muted">Kindergarten–Grade 2</span>
+            {/* New this week list — paper note taped to the wall */}
+            <div className="card-paper relative min-w-0 w-full max-w-full rounded-2xl border-brand-navy/10 p-5 shadow-lg">
+              <span aria-hidden className="absolute -top-2.5 left-1/2 h-5 w-20 -translate-x-1/2 -rotate-2 rounded-sm bg-gold-soft/50 shadow-sm [clip-path:polygon(3%_0,97%_6%,100%_88%,0_100%)]" />
+              <div className="flex items-baseline justify-between px-1 pb-2">
+                <span className="font-hand text-xl italic text-brand-paper-foreground">New this week</span>
+                <span className="font-hand text-base italic text-brand-paper-muted">Kindergarten–Grade 2</span>
+              </div>
+              <ul className="divide-y divide-brand-paper-foreground/10">
+                {NEW_LESSONS.map((lesson) => (
+                  <li key={lesson.title} className="flex min-w-0 items-center gap-3 py-3">
+                    <span className="size-2 shrink-0 rounded-full bg-rose-warm" aria-hidden />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-bold text-brand-paper-foreground">{lesson.title}</p>
+                      <p className="truncate text-xs text-brand-paper-muted">{lesson.desc}</p>
+                    </div>
+                    <span className="min-w-0 shrink-0 text-xs font-bold uppercase tracking-wide text-brand-paper-muted">K–2</span>
+                  </li>
+                ))}
+              </ul>
+              <Link className="mt-2 flex min-h-11 items-center justify-center gap-1 rounded-md text-sm font-semibold text-brand-navy hover:text-[color-mix(in_oklab,var(--rose-warm)_60%,var(--ink-primary))] focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px]" href="/songs">
+                See all new lessons <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </div>
           </div>
-          <ul className="divide-y divide-brand-paper-foreground/10">
-            {NEW_LESSONS.map((lesson) => (
-              <li key={lesson.title} className="flex min-w-0 items-center gap-3 py-3">
-                <span className="size-2 shrink-0 rounded-full bg-rose-warm" aria-hidden />
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-bold text-brand-paper-foreground">{lesson.title}</p>
-                  <p className="truncate text-xs text-brand-paper-muted">{lesson.desc}</p>
-                </div>
-                <span className="min-w-0 shrink-0 text-xs font-bold uppercase tracking-wide text-brand-paper-muted">K–2</span>
-              </li>
-            ))}
-          </ul>
-          <Link className="mt-2 flex min-h-11 items-center justify-center gap-1 rounded-md text-sm font-semibold text-brand-navy hover:text-[color-mix(in_oklab,var(--rose-warm)_60%,var(--ink-primary))] focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px]" href="/songs">
-            See all new lessons <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </div>
-      </div>
 
-      {/* Vertical ribbon (signature) */}
-      <div className="hidden h-full lg:flex" aria-hidden>
-        <div className="flex w-full flex-col items-center justify-center gap-2 px-1">
-          <span className="size-2 rounded-full bg-gold-bright shadow-sm" />
-          <div className="rotate-[-1.5deg] rounded-md border-2 border-dashed border-gold-bright/70 bg-brand-paper px-1.5 py-10 shadow-lg">
-            <span className="font-hand block whitespace-nowrap text-2xl leading-none text-brand-paper-foreground [writing-mode:vertical-rl]">
-              {RIBBON_WORDS.join("  •  ")}
-            </span>
+          {/* Vertical ribbon (signature) */}
+          <div className="hidden h-full lg:flex" aria-hidden>
+            <div className="flex w-full flex-col items-center justify-center gap-2 px-1">
+              <span className="size-2 rounded-full bg-gold-bright shadow-sm" />
+              <div className="rotate-[-1.5deg] rounded-md border-2 border-dashed border-gold-bright/70 bg-brand-paper px-1.5 py-10 shadow-lg">
+                <span className="font-hand block whitespace-nowrap text-2xl leading-none text-brand-paper-foreground [writing-mode:vertical-rl]">
+                  {RIBBON_WORDS.join("  •  ")}
+                </span>
+              </div>
+              <span className="size-2 rounded-full bg-gold-bright shadow-sm" />
+            </div>
           </div>
-          <span className="size-2 rounded-full bg-gold-bright shadow-sm" />
-        </div>
-      </div>
 
-      {/* Pinned illustration (Polaroid) */}
-      <div className="mx-auto w-full max-w-sm">
-        <figure className="relative rotate-[2.5deg] rounded-xl border-[10px] border-white bg-white p-2 pb-3 shadow-lg">
-          <span aria-hidden className="absolute left-3 -top-[5px] z-10 size-4 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_35%_30%,var(--gold-soft),var(--gold-muted))] shadow-sm" />
-          <span aria-hidden className="absolute right-3 -top-[5px] z-10 size-4 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_35%_30%,var(--gold-soft),var(--gold-muted))] shadow-sm" />
-          <Image
-            src={HERO_PHOTO}
-            alt="Old MacDonald reading with his animal students"
-            width={1536}
-            height={1024}
-            className="aspect-[4/3] w-full rounded-md object-cover"
-            priority
-          />
-          <figcaption className="font-hand pt-1.5 text-center text-lg italic text-brand-paper-foreground">
-            morning circle — week one
-          </figcaption>
-        </figure>
-      </div>
-      </div>
+          {/* Pinned illustration (Polaroid) */}
+          <div className="mx-auto w-full max-w-sm">
+            <figure className="relative rotate-[2.5deg] rounded-xl border-[10px] border-white bg-white p-2 pb-3 shadow-lg">
+              <span aria-hidden className="absolute left-3 -top-[5px] z-10 size-4 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_35%_30%,var(--gold-soft),var(--gold-muted))] shadow-sm" />
+              <span aria-hidden className="absolute right-3 -top-[5px] z-10 size-4 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_35%_30%,var(--gold-soft),var(--gold-muted))] shadow-sm" />
+              <Image
+                src={HERO_PHOTO}
+                alt="Old MacDonald reading with his animal students"
+                width={1536}
+                height={1024}
+                className="aspect-[4/3] w-full rounded-md object-cover"
+                priority
+              />
+              <figcaption className="font-hand pt-1.5 text-center text-lg italic text-brand-paper-foreground">
+                morning circle — week one
+              </figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -156,38 +156,38 @@ function WhatsNew() {
         <span className="font-hand text-[21px] text-ink-secondary">fresh songs from the barnyard studio</span>
       </div>
       <div className="card-paper-ruled rounded-3xl p-5 shadow-sm sm:p-6">
-      <div className="grid gap-4 md:grid-cols-2">
-        {LATEST_VIDEOS.map((v) => (
-          <article key={v.id} className="group relative min-w-0">
-            <a
-              href={`https://www.youtube.com/watch?v=${v.id}`}
-              target="_blank"
-              rel="noopener"
-              aria-label={`${v.title} — watch on YouTube`}
-              className="flex flex-col gap-4 rounded-[18px] p-3 focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px] sm:flex-row"
-            >
-              <div className="relative h-36 w-full flex-shrink-0 overflow-hidden rounded-xl bg-muted shadow-md ring-0 ring-gold-bright/0 transition-[transform,box-shadow,ring-color] duration-150 group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-gold-bright/60 sm:w-[220px]">
-                <Image
-                  src={v.thumb}
-                  alt={`${v.title} video thumbnail`}
-                  fill
-                  sizes="(min-width: 640px) 220px, 100vw"
-                  className="object-cover"
-                />
-                <span className="absolute inset-0 flex items-center justify-center" aria-hidden>
-                  <span className="flex size-11 items-center justify-center rounded-full bg-black/40 text-white"><Play className="size-5" /></span>
-                </span>
-              </div>
-              <div className="flex flex-col justify-center gap-1.5">
-                <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-brand-paper-foreground">{v.tag}</span>
-                <h3 className="font-heading text-[18px] leading-tight text-brand-paper-foreground">{v.title}</h3>
-                <p className="text-sm text-brand-paper-muted">{v.summary}</p>
-                <span className="text-xs text-brand-paper-muted">New on YouTube</span>
-              </div>
-            </a>
-          </article>
-        ))}
-      </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {LATEST_VIDEOS.map((v) => (
+            <article key={v.id} className="group relative min-w-0">
+              <a
+                href={`https://www.youtube.com/watch?v=${v.id}`}
+                target="_blank"
+                rel="noopener"
+                aria-label={`${v.title} — watch on YouTube`}
+                className="flex flex-col gap-4 rounded-[18px] p-3 focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px] sm:flex-row"
+              >
+                <div className="relative h-36 w-full flex-shrink-0 overflow-hidden rounded-xl bg-muted shadow-md ring-0 ring-gold-bright/0 transition-[transform,box-shadow,ring-color] duration-150 group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:ring-2 group-hover:ring-gold-bright/60 sm:w-[220px]">
+                  <Image
+                    src={v.thumb}
+                    alt={`${v.title} video thumbnail`}
+                    fill
+                    sizes="(min-width: 640px) 220px, 100vw"
+                    className="object-cover"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center" aria-hidden>
+                    <span className="flex size-11 items-center justify-center rounded-full bg-black/40 text-white"><Play className="size-5" /></span>
+                  </span>
+                </div>
+                <div className="flex flex-col justify-center gap-1.5">
+                  <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-brand-paper-foreground">{v.tag}</span>
+                  <h3 className="font-heading text-[18px] leading-tight text-brand-paper-foreground">{v.title}</h3>
+                  <p className="text-sm text-brand-paper-muted">{v.summary}</p>
+                  <span className="text-xs text-brand-paper-muted">New on YouTube</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
       </div>
       <div className="mt-5 flex flex-wrap items-center gap-3">
         <Link href="https://www.youtube.com/channel/UC_THbKUe6o-K64vh7gWCPyQ/" target="_blank" rel="noopener" className="inline-flex min-h-11 items-center gap-2 rounded-full border-[1.5px] border-foreground px-5 py-2 text-sm font-bold text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px]">
@@ -220,7 +220,7 @@ function CurriculumPlanner() {
         <Link href="/search" className="inline-flex min-h-11 items-center gap-2 rounded-full border-[1.5px] border-brand-paper-foreground px-5 py-2 text-sm font-bold text-brand-paper-foreground transition-colors hover:bg-brand-paper-foreground hover:text-brand-paper focus-visible:outline-3 focus-visible:outline-ring focus-visible:outline-offset-[-3px]">
           Open the full search + curriculum <ArrowRight className="size-4" aria-hidden />
         </Link>
-        <Link href="/grade/daycare" className="mt-4 flex text-[13px] font-semibold text-brand-paper-foreground underline underline-offset-4 hover:text-[color-mix(in_oklab,var(--gold-bright)_55%,var(--ink-primary))]">
+        <Link href="/grade/daycare" className="mt-4 flex min-h-11 items-center text-[13px] font-semibold text-brand-paper-foreground underline underline-offset-4 hover:text-[color-mix(in_oklab,var(--gold-bright)_55%,var(--ink-primary))]">
           Tip: the subject buttons are grade-aware — see how they change by grade <ArrowRight className="size-4 shrink-0" aria-hidden />
         </Link>
       </div>

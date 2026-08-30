@@ -13,7 +13,8 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { activePageFromPathname, NAV_ITEMS } from "./site-navigation";
+import { Button } from "@/components/ui/button";
+import { activePageFromPathname, NAV_ITEMS, TEACHER_GRADE_ITEMS } from "./site-navigation";
 import { cn } from "@/lib/utils";
 
 const HEADER_LINK_CLASS = cn(
@@ -43,9 +44,8 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        {/* Desktop/tablet navigation — shadcn NavigationMenu. Grades live on the
-            homepage grade rail and the grade-page rail; the header carries only
-            cross-site destinations (see NAV_ITEMS). */}
+        {/* Desktop/tablet navigation — shadcn NavigationMenu with grade-first
+            pathways kept alongside the cross-site destinations. */}
         <NavigationMenu className="hidden flex-1 lg:flex max-w-full" viewport={false}>
           <NavigationMenuList className="flex-1 gap-1">
             {NAV_ITEMS.map((item) => (
@@ -59,6 +59,24 @@ export function SiteHeader() {
                     {item.key === "search" ? <><Search className="size-4" aria-hidden="true" /><span>Search</span></> : item.label}
                   </Link>
                 </NavigationMenuLink>
+              </NavigationMenuItem>
+            ))}
+            {TEACHER_GRADE_ITEMS.map((grade) => (
+              <NavigationMenuItem key={grade.key}>
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="grade-navigation-button min-h-11 px-2 bg-(--grade-color)! text-(--grade-ink)!"
+                  data-grade={grade.key}
+                >
+                  <Link
+                    href={grade.href}
+                    aria-current={active === grade.key ? "page" : undefined}
+                  >
+                    {grade.label}
+                  </Link>
+                </Button>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>

@@ -39,8 +39,8 @@ export default function TopicsClient({ lessons }: { lessons: LessonMetadata[] })
       </header>
       <section className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 max-sm:gap-3" aria-label="Lesson topics">
         {filtered.map((lesson) => (
-          <Card className="card-paper min-h-60 gap-0 p-0 shadow-[4px_6px_0_color-mix(in_srgb,var(--border)_75%,transparent)] [contain-intrinsic-size:auto_240px] [content-visibility:auto] print:[contain-intrinsic-size:none] print:[content-visibility:visible] max-sm:min-h-0" key={lesson.slug}>
-            <Link className="flex min-h-full flex-1 flex-col p-6 max-sm:p-5" href={lessonHref(lesson)}>
+          <Card className="card-paper min-w-0 min-h-60 gap-0 p-0 shadow-[4px_6px_0_color-mix(in_srgb,var(--border)_75%,transparent)] [contain-intrinsic-size:auto_240px] [content-visibility:auto] print:[contain-intrinsic-size:none] print:[content-visibility:visible] max-sm:min-h-0" key={lesson.slug}>
+            <Link className="flex min-h-full min-w-0 flex-1 flex-col p-6 max-sm:p-5" href={lessonHref(lesson)}>
               <CardHeader className="p-0">
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm text-muted-foreground"><span>{lesson.subject}</span><strong>{lesson.category}</strong></div>
                 <CardTitle className="font-heading text-3xl font-normal leading-none text-balance">{lesson.title}</CardTitle>

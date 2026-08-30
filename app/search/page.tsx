@@ -16,7 +16,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
   const params = await searchParams;
   return (
     <div className="relative min-w-0 w-full min-h-0 px-3 py-6 sm:px-6">
-      <h1 className="mb-6 font-heading text-5xl leading-none text-brand-navy sm:text-7xl">Search lessons</h1>
+      <h1 className="mb-6 font-heading text-5xl leading-none text-foreground sm:text-7xl">Search lessons</h1>
       <SearchWorkspace initialQuery={firstValue(params.q)} initialGrade={firstValue(params.grade)} />
     </div>
   );

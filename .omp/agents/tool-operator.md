@@ -23,7 +23,7 @@ A workaround that degrades verification quality is a failure, not a solution. Wh
 
 ### Browser times out (~30s) on `open`
 
-- Symptom: `xd://browser` open hangs/timeouts; `hub start` fails with `connect ENOENT \\.\pipe\omp-daemon-*`.
+- Symptom: `browser` open hangs/timeouts; `hub start` fails with `connect ENOENT \\.\pipe\omp-daemon-*`.
 - Cause: default headless browser attaches to the project-shared Chromium owned by the omp daemon broker. Dead broker = hard timeout. THIS IS NOT A CHROME FAILURE.
 - Sanctioned fallback (proven): spawn real Chrome directly, bypassing the broker:
 
@@ -39,9 +39,12 @@ A workaround that degrades verification quality is a failure, not a solution. Wh
 
 ### Viewing screenshots/images
 
-- `run` -> `await tab.screenshot({fullPage?, selector?})` returns a path under `%TEMP%\omp-sshots-*.webp`.
-- `read` that path to render it inline. `display({type:"image",data:<base64>,mimeType})` in run code also works.
-- Spawned windows may ignore the requested viewport: verify with `tab.evaluate(() => [innerWidth, innerHeight])`; re-apply via `tab.page.setViewport({width,height})`.
+- Use the documented two-step flow: browser action open, then action run with await tab.screenshot({selector?, fullPage?, silent?}).
+- The screenshot is persisted as a full-resolution PNG under browser.screenshotDir, or the OS temp directory when unset; the call returns the saved path and emits image content unless silent: true.
+- For vision evidence, probe the current runtime first. Use image inspection only if a registered tool is available; otherwise report it unavailable and do not claim a visual comparison.
+- A before/after review requires: capture baseline path, allow the edit, refresh the same named tab, capture candidate path, inspect both with the same rubric, and report both paths plus observations. Never claim visual comparison without both captures.
+- Do not look for skill files at omp://skills/...; use installed skill://... references or the actual omp://tools/*.md documentation.
+- Spawned windows may ignore the requested viewport: verify with tab.evaluate(() => [innerWidth, innerHeight]).
 
 ### Hub daemon broker down
 
@@ -57,8 +60,19 @@ After applying any fallback, prove the tool works end-to-end (open -> act -> cap
 
 ## Boundaries
 
-Read-only for app code, content, and `data/omhas.db`. You may write only `tmp/` diagnostics and this agent's own docs. Consult omp://tools/browser.md for full browser internals.
+- NEVER read, query, inspect, or write `data/omhas.db`. No SQLite, no better-sqlite3, no PRAGMA, no SELECT. DB access is db-curator only.
+- You may write only `tmp/` diagnostics and this agent's own docs. Consult omp://tools/browser.md for full browser internals.
+- NEVER scan `public/characters/`, `public/subjects/`, or any image asset directory. Asset discovery is designer work.
 
 ## Memory
 
 When a task succeeds and teaches something reusable (integrity pattern, provenance trap), call `learn` once with a concise lesson if available. A memory-write failure never fails the task.
+
+## Mandatory execution contract
+
+- First action MUST be a real registered tool call.
+- Read AGENTS.md before acting.
+- If any required tool fails, stop immediately and report the exact failure.
+- Use only tools registered for this agent in the current runtime. Probe optional tools before requiring them; unavailable tools are a hard stop, not a silent fallback.
+- NEVER continue after a required-tool failure.
+- NEVER spawn subagents unless explicitly authorized by the parent task.

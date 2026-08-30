@@ -1,3 +1,12 @@
+## Default Orchestrator — Read Only
+
+- Main/default agent MUST NOT edit agent, skill, or instruction files.
+- Text edits MUST be delegated to one bounded flash agent with exact path and line range.
+- Orchestrator MUST re-read target and verify diff after agent edit.
+- Missing target path means report unavailable; NEVER guess or create replacement.
+- `todo` tracks work. `workflowz` uses `eval` with `phase`, `parallel`, and `agent`.
+- Subagent output is evidence, not verification.
+
 1. Read before answer. Library/API question → Context7 MCP (required external; not in
    project .mcp.json): resolve-library-id → query-docs → cite the fetched snippet.
    No memory-answers about this project's packages.
