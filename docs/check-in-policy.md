@@ -27,6 +27,22 @@ The audit is the last line of the body. The `commit-msg` husky hook **enforces**
 this and aborts the commit otherwise. Bypass with `git commit --no-verify` and
 explain the bypass in the commit body.
 
+## Linking commits to issues
+
+When a commit is a workaround, a partial fix, or the first step in a multi-PR
+refactor, reference the tracking issue from the commit body:
+
+```
+Refs: #N
+```
+
+`git log` then carries the link forward. Anyone reading the commit can jump
+straight to the issue for the full context. The check-in documents what
+changed; the issue documents what still needs to change.
+
+Skip the `Refs:` line when the commit is self-contained — finished work
+does not need a tracking issue, the commit message is the artifact.
+
 ## Per-branch rule
 
 - Each branch checks in to its own branch first. Do not push to `main` directly.
