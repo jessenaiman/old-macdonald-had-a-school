@@ -41,11 +41,11 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
     </SheetTrigger>
 
     <SheetContent
-     className="overflow-y-auto"
+     className="overflow-y-auto bg-brand-paper text-brand-paper-foreground"
      side="right"
      showCloseButton={false}
     >
-     <SheetHeader className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b pb-4">
+     <SheetHeader className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b p-4 sm:p-6">
       <ResponsiveBrandEmblem />
       <div className="min-w-0 text-left">
        <SheetTitle>Old MacDonald Had a School</SheetTitle>
@@ -56,7 +56,8 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
       <SheetClose asChild>
        <Button
         variant="ghost"
-        size="icon"
+        size="icon-lg"
+        className="size-11"
         aria-label="Close navigation menu"
        >
         <X data-icon="inline-start" aria-hidden="true" />
@@ -64,7 +65,7 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
       </SheetClose>
      </SheetHeader>
 
-     <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+     <nav className="flex flex-col gap-1 p-4 sm:p-6" aria-label="Mobile navigation">
       {NAV_ITEMS.map((item) => (
        <Button asChild variant="ghost" className="min-h-11 w-full justify-start" key={item.key}>
         <Link href={item.href} aria-current={active === item.key ? "page" : undefined} onClick={() => setOpen(false)}>

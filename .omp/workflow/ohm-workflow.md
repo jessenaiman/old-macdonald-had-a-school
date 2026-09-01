@@ -1,4 +1,12 @@
 
+ # Workflow Loop Audit
+
+Each loop we refine the entire process, looking for leaner and more /caveman ultra truth. Facts and docs need to be in first few lines.
+
+**LOOP 1**
+
+### LLM Audit
+
  The product change landed correctly, but the execution process was inefficient and the completion signal was too optimistic.
 
  The live tracker says 25/25 complete, yet:
@@ -91,4 +99,38 @@
  Recommended next change: improve the orchestration contract before starting another audit—clean baseline, isolated builder worktrees, one browser probe harness, and separate “verification passed” from
  “verification executed.”
 
- 
+### Human Audit
+
+1. Audit too many tokens. Need chart and list of FAIL, or PASS, or NO CHECK
+2. This answer bad, no link to shadcn docs, it not worth checking:  
+
+```
+Code-level improvement opportunity
+
+ The final CSS works, but [role="dialog"] .grade-navigation-button is a broad semantic selector. A dedicated class on SheetContent would reduce future collision risk:
+
+ ```tsx
+<SheetContent className="mobile-navigation-surface overflow-y-auto">
+ ```
+
+ Then scope the override to .mobile-navigation-surface instead of every dialog.
+ ```
+
+3. Mobile nav broke because docs not understood. Must improve agent instructions before next loop. 
+
+
+#### Next Steps:
+1. What should the assistant be really checking? They review, but they could be much more effective with shared...
+2. I think, and I need online research that I should use a skill as a shared omhas-rules
+3. I need to review how the instructions are written in each agent, one at a time and have the llm ask me questions I think there's a /grill me skill or tool that will make each agent revision a plan. 
+4. I never learned how workflowz or the orchestrator built into `oh my pi` works, so I gave vague instructions. 
+5. Teach me by suggesting small fixes to the menu
+6. Most of the changes are dangerous because I have no checkin and audit process. I can guarantee that the code I just checked in is completely wrong outside of one visual improvement; we call this lying, and it needs to be flagged to the user because the agent will continue unless I modify something
+
+
+#### IMPORTANT RULES:
+
+**LYING**
+- pretending to use tools because you got a result leads to failure
+- a visual test that didn't use the `/impeccable live` or `agent-browser` tool (codex cli is installed and it works for chatgpt locally, on this machine) is a fail unless in chat links to the documentation can prove that you found a better tool
+- using a tool without linking the internal doc file is lying because it hides information from the user. caveman ultra style: `used agent-browser [file link] : [command run], [tool result]
