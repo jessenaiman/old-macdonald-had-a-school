@@ -1,0 +1,40 @@
+#!/usr/bin/env sh
+# Enforce the check-in policy audit line on every commit body.
+# See docs/check-in-policy.md for the rule.
+#
+# Required last line of the body:
+#   audit: ponytail <verdict> <separator> impeccable <verdict>
+# (separator: middle dot, hyphen, or pipe)
+#
+# Bypass with: git commit --no-verify
+
+msg_file="$1"
+
+# Skip merge / revert / fixup / squash commits.
+first_line=$(head -n 1 "$msg_file")
+case "$first_line" in
+  "Merge "*|"Revert "*) exit 0 ;;
+esac
+
+# Check the last non-empty line of the body (everything after the subject).
+last_line=$(awk 'NR>1 && NF { last=$0 } END { print last }' "$msg_file")
+
+if printf '%s' "$last_line" | grep -qE '^audit: ponytail .+ . impeccable .+$'; then
+  exit 0
+fi
+
+echo ""
+echo "✗ Missing check-in audit line."
+echo ""
+echo "  Every commit body must end with:"
+echo "    audit: ponytail <verdict> <separator> impeccable <verdict>"
+echo "  (separator: middle dot, hyphen, or pipe)"
+echo ""
+echo "  Examples:"
+echo "    audit: ponytail clean · impeccable clean"
+echo "    audit: ponytail yagni found | impeccable 1 anti-pattern"
+echo "    audit: ponytail not run - impeccable not run"
+echo ""
+echo "  See docs/check-in-policy.md."
+echo ""
+exit 1
