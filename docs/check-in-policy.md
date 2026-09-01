@@ -10,16 +10,22 @@
 Every commit body MUST contain a one-line check-in audit in this exact shape:
 
 ```
-audit: ponytail <verdict> · impeccable <verdict>
+audit: ponytail <verdict> <separator> impeccable <verdict>
 ```
 
-Where `<verdict>` is 2-3 words. Examples:
+`<verdict>` is 2-3 words. `<separator>` is middle dot `·`, hyphen `-`, or pipe `|`.
+Multiple separators are accepted because the middle dot is fragile inside Windows
+MSYS grep char classes; pick whichever you typed fastest.
+
+Examples:
 
 - `audit: ponytail clean · impeccable clean`
-- `audit: ponytail yagni found · impeccable 1 anti-pattern`
-- `audit: ponytail not run · impeccable not run`
+- `audit: ponytail yagni found | impeccable 1 anti-pattern`
+- `audit: ponytail not run - impeccable not run`
 
-The audit is the last line of the body. CI (see below) does not enforce it yet — that is a future iteration.
+The audit is the last line of the body. The `commit-msg` husky hook **enforces**
+this and aborts the commit otherwise. Bypass with `git commit --no-verify` and
+explain the bypass in the commit body.
 
 ## Per-branch rule
 
