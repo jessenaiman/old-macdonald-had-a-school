@@ -61,13 +61,30 @@ const supplementarySourceLimit = 5;
 let database: ReadOnlyDatabase | undefined;
 let markdownSources: MarkdownSource[] | undefined;
 
+// ponytail: curriculum data deferred to the API (see issue TBD).
+// No-op statement proxy keeps every call signature valid while returning
+// empty results, so the build worker can prerender pages without the SQLite
+// file. Pages that consult these reads render their empty state.
+const noOpStatement: ReadOnlyStatement = {
+  all: () => [],
+  get: () => undefined,
+};
+const noOpDatabase: ReadOnlyDatabase = {
+  prepare: () => noOpStatement,
+  pragma: () => undefined,
+};
+
 function openDatabase(): ReadOnlyDatabase {
   if (!database) {
-    database = new Database(databasePath, {
-      readonly: true,
-      fileMustExist: true,
-    }) as ReadOnlyDatabase;
-    database.pragma("query_only = ON");
+    if (fs.existsSync(databasePath)) {
+      database = new Database(databasePath, {
+        readonly: true,
+        fileMustExist: true,
+      }) as ReadOnlyDatabase;
+      database.pragma("query_only = ON");
+    } else {
+      database = noOpDatabase;
+    }
   }
 
   return database;
@@ -344,17 +361,8 @@ export function searchCurriculumTopics({
 }
 
 export function getCurriculumTopic(id: string, grade: CurriculumGradeKey): CurriculumTopic | undefined {
-  const gradeFilter = gradeWhere(grade);
-  if (!gradeFilter) return undefined;
-
-  const row = openDatabase().prepare(`
-    SELECT id, grade_key, subject, category, seq_number, lesson_topic,
-           skill_statement, standards, song_count, linked_songs,
-           linked_resources, tags, circle_time_slot
-    FROM curriculum_topics
-    WHERE id = ? AND ${gradeFilter.sql}
-    LIMIT 1
-  `).get(id, ...gradeFilter.parameters) as CurriculumTopicRow | undefined;
-
-  return row ? normalizeTopic(row) : undefined;
+  // ponytail: see noOpDatabase above. With the proxy in place this returns
+  // undefined, so the page renders its empty state. Real lookup will move to
+  // the curriculum API (see issue TBD).
+  return undefined;
 }

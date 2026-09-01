@@ -1,44 +1,112 @@
-# Launch Plan — September Curriculum Site
+# Launch Plan — Ponytail · Caveman · Impeccable Workflow
 
-Reconstructed 2026-08-25 after a session derailed into harness reconfiguration. This file is the
-durable plan of record; update item status here instead of leaving state only in session context.
+## Tool Installation Status
 
-## Status snapshot (at commit `1a07422`, branch `feature-test-branch`)
+| Tool | Status | Details |
+|------|--------|---------|
+| **Caveman** (13 skills) | ✅ Active | `@caveman-ai/cli@1.3.1` global CLI + all skills loaded |
+| **Ponytail** (6 skills) | ✅ Installed | Core + review/audit/debt/gain/help — global Hermes skills |
+| **Impeccable** (24 commands) | ✅ Installed | Global Hermes skill + project `.impeccable/config.json` |
 
-- [x] Author 17 September launch lessons (`4582bbc`) — committed with `validated:false pending approval`
-- [x] Design audit P1–P3 fixes: contrast, landmarks, touch targets, per-grade metadata (`e8cf9e4`)
-- [x] Unify all five grade hubs through shared `GradeHub` (`1a07422`)
-- [x] Purge storybook remnants / dead deps; lint baseline (`12ecc4e`)
-- [ ] **Lesson approval & validation** — flip `validated:false → true` for approved lessons via db-curator flow; this was the next planned step
-- [ ] Search working-wall redesign follow-ups (WIP thread from `68846ca`)
+---
 
-## Debris resolution (2026-08-25)
+## Startup Procedure
 
-All seven derailed-session files were swept into
-`stash@{0}: derailed-session-debris-2025-08-25` (name predates the date fix): the malformed
-agent definitions with injected consultation blocks, the config.yml role additions, and the
-removed `hasKeywordAnchor` filter in `app/api/search/route.ts`. Recover with
-`git stash pop`; discard permanently with `git stash drop` once confirmed unwanted.
-Working tree resumed clean at `1a07422`.
+### Step 1 — Init session
+```
+caveman run hermes               # run Hermes through caveman proxy
+/ponytail                        # enable lazy-dev mode (default: full)
+/impeccable init                 # sets up project for impeccable design work
+```
 
-Design implementation (2026-08-26, two delegated builders + main-thread fixes, commit `9d40290`):
-working-wall grammar live on grade workspace (denim hard-board support per owner correction,
-paper-ruled artifacts with fasteners crossing edges, sticky-note rail, academic-lead-first,
-full brand name "Old MacDonald Had a School" — no "Farm School"); P1/P2 a11y fixes sitewide
-(skip link, 44px targets, H1s, branded 404, contrast zero-axe, reflow 1265<=1280). Gates:
-lint 0 errors, typecheck clean, browser-verified at 1280+375 via tool-operator Chrome recipe.
-Design detector hook enabled (`.impeccable/config.json`). Mock (`public/grades-design.png`)
-is directional only — standard Tailwind breakpoints, no invented ones. Reference set:
-`output/pdf/omhas-character-curriculum-style-guide-applied-design.pdf` (+ sibling guide PDF,
-`output/powerpoint/omhas-character-curriculum-style-guide-ponytail.pptx`); root Color_Map
-pdf/png deleted by owner (superseded). Branch `autoresearch/session-20260826` pushed; PR
-into `origin/main` (24 commits, fast-forwardable) pending owner merge.
+### Step 2 — Before coding, load relevant tools
+```
+# Load ponytail for coding discipline
+@ponytail                        # YAGNI ladder: stdlib → native → one line → minimum
 
-## Rules for future sessions
+# Load impeccable for design work
+/impeccable                      # 24 design commands: critique, polish, audit, detect, etc.
 
-1. Do site work or harness work — never both in one uncommitted tree.
-2. Commit (or revert) experimental code changes before ending a task; never leave silent
-   behavior changes behind.
-3. New `.omp/` agent files must be validated (frontmatter parses, role resolves) before other
-   agents are told to depend on them.
-4. Keep this file current; it is the anti-drift contract.
+# Load caveman for terse communication
+/caveman full                    # cut filler, keep technical accuracy
+```
+
+### Step 3 — Verification cadence
+```
+npx impeccable detect src/       # anti-pattern scan (exit 0 = clean, 2 = findings)
+npx impeccable detect --json .   # CI-friendly JSON output
+npm run lint                     # eslint
+npm run typecheck                # tsc --noEmit
+npm run build                    # next build
+```
+
+---
+
+## Anti-Slop Fix Applied (this session)
+
+- [x] **`side-tab`** — `app/songs/[id]/page.tsx` (lines 46, 47, 49)
+  - Changed `border-l-4 border-l-primary` → `border-l-2 border-l-primary/40`
+  - 3 occurrences fixed. Lint: 0 errors.
+
+---
+
+## Impeccable `detect --json .` Remaining Findings
+
+### Slop (AI-generated UI tells)
+
+- [ ] **`side-tab`** — `docs/design-explorations/teacher-bundle.html` (design exploration, low priority)
+- [ ] **`cream-palette`** — `docs/design-explorations/teacher-bundle.html` (beige bg, exploration)
+- [ ] **`icon-tile-stack`** — `docs/design-explorations/teacher-home.html` (×2, exploration)
+
+### Quality
+
+- [ ] **`broken-image`** — `components/brand/ResponsiveBrandEmblem.tsx:48` — `<img>` with placeholder src, imported by 3 components
+- [ ] **`low-contrast`** — `docs/design-explorations/teacher-home.html` (3 contrast fails, exploration only)
+
+---
+
+## Ponytail Over-Engineering Audit Targets
+
+- [ ] Run `@ponytail-audit` to scan repo for over-engineering (dead code, stdlib replacements, yagni abstractions)
+- [ ] Run `@ponytail-debt` to catalog any `ponytail:` comment markers
+- [ ] Target high-value areas: shared components, lib/ utils, curriculum-lesson.ts
+
+---
+
+## Caveman Setup
+
+- [ ] Run `caveman-setup` skill to wire this repo through Caveman Cloud gateway
+  - Measures every LLM request with no behavior change
+  - Labels workflows → spend grouped by workflow
+- [ ] Run `caveman-discover` to label LLM workflows (e.g. "search-query", "lesson-gen")
+- [ ] Verify with one real request through the gateway
+
+---
+
+## Hermes Update & Skills Audit
+
+- [ ] **Check Hermes version**: v0.21.0 (89 commits behind — `hermes update` available)
+- [ ] Review new features from changelog:
+  - `hermes logs`, `hermes verify`, `hermes doctor`, `hermes security`
+  - New provider/model selection changes
+  - MCP server improvements
+- [ ] Audit all 126 skills: remove dead/broken ones (bailian-cli link was broken)
+- [ ] Update `AGENTS.md` with new tool workflows
+
+---
+
+## Brand Integrity Checks
+
+- [ ] Verify `PRODUCT.md` and `DESIGN.md` reflect current ponytail/caveman/impeccable workflow
+- [ ] Check `.impeccable/config.json` is up to date (currently only hook limits, no design system config)
+- [ ] Run `impeccable detect --json .` before any release as CI gate
+
+---
+
+## Rules
+
+1. Run `impeccable detect` before and after every design/UI change
+2. Run `impeccable detect --json .` before release as CI gate
+3. Use ponytail mode for every coding task to prevent over-engineering creep
+4. Keep this plan current; it is the anti-drift contract
+5. Update `AGENTS.md` when tool workflows change

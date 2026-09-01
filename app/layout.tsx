@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Boogaloo, Lilita_One, Nunito, Playfair_Display } from "next/font/google";
-import localFont from "next/font/local";
+import { Boogaloo, Caveat, Lilita_One, Nunito, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { BRAND_IMAGE_ASSETS } from "../data/brand/image-registry";
 import { SiteFooter } from "../components/SiteFooter";
@@ -37,11 +36,9 @@ const brandFont = Playfair_Display({
   display: "swap",
 });
 
-const handFont = localFont({
-  src: [
-    { path: "../public/design-assets/background-textures/Caveat-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../public/design-assets/background-textures/Caveat-Bold.ttf", weight: "700", style: "normal" },
-  ],
+const handFont = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-farm-hand",
   display: "swap",
 });
