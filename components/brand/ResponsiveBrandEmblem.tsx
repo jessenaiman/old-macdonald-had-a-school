@@ -1,4 +1,4 @@
-import Image, { getImageProps } from "next/image";
+import Image from "next/image";
 import { BRAND_IMAGE_ASSETS } from "../../data/brand/image-registry";
 
 type ResponsiveBrandEmblemProps = {
@@ -12,20 +12,6 @@ export function ResponsiveBrandEmblem({
   alt = "",
   variant = "responsive",
 }: ResponsiveBrandEmblemProps) {
-  const common = { alt, sizes: "(max-width: 639px) 32px, 44px" };
-  const { props: { srcSet: navigation } } = getImageProps({
-    ...common,
-    src: BRAND_IMAGE_ASSETS.emblem.navigation,
-    width: 44,
-    height: 44,
-  });
-  const { props: { srcSet: compact, ...image } } = getImageProps({
-    ...common,
-    src: BRAND_IMAGE_ASSETS.emblem.flat,
-    width: 32,
-    height: 32,
-  });
-
   if (variant !== "responsive") {
     return (
       <Image
@@ -43,9 +29,13 @@ export function ResponsiveBrandEmblem({
 
   return (
     <picture className={className}>
-      <source media="(min-width: 640px)" srcSet={navigation} />
-      <source srcSet={compact} />
-      <img {...image} alt={alt} className="size-8 object-contain sm:size-11" />
+      <source media="(min-width: 640px)" srcSet={BRAND_IMAGE_ASSETS.emblem.navigation} />
+      <source srcSet={BRAND_IMAGE_ASSETS.emblem.flat} />
+      <img
+        src={BRAND_IMAGE_ASSETS.emblem.flat}
+        alt={alt}
+        className="size-8 object-contain sm:size-11"
+      />
     </picture>
   );
 }
