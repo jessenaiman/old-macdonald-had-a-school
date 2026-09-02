@@ -1,0 +1,4 @@
+interface:
+  display_name: "Check-in Workflow"
+  short_description: "Run the repo's branch, CI, PR, and branch-protection workflow with numbered command and doc-backed steps."
+  default_prompt: "Use $check-in-workflow for check-in sequence execution and audit logging."

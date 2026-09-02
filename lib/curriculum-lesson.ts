@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'node:fs';
 
 const DB_PATH = process.env.OMHAS_DB_PATH
   ? path.resolve(process.env.OMHAS_DB_PATH)
@@ -42,7 +43,7 @@ let db: Database.Database | null = null;
 
 function getDb(): Database.Database {
   if (!db) {
-    if (DB_PATH && require('node:fs').existsSync(DB_PATH)) {
+    if (DB_PATH && fs.existsSync(DB_PATH)) {
       db = new Database(DB_PATH, { readonly: true, fileMustExist: true });
     } else {
       db = noOpDb;
