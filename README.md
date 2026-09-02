@@ -13,6 +13,7 @@ Serverless deploys must include `data/*.db` plus the `models/` weight directory 
 - Run PR flow on a clean branch; don't stack merge-only branch history.
 - Open PR against `main` only when local gates pass and the body is complete.
 - Merge only after GitHub checks and Vercel are green in the PR.
+- If a loop fails, fix root cause only; never remove/disable features or checks to pass gates. After 3 loops, hand off with logged evidence.
 
 3-loop recovery rule:
 1) Reproduce failure in a clean worktree (`git worktree add --detach`) with `npm ci` and `npm run build`.
