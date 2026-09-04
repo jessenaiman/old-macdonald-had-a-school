@@ -45,7 +45,7 @@
      invert in .dark, so the hero "New this week" card stays cream in both themes */
   --brand-paper: #fdf8e3;
   --brand-paper-foreground: #1e2a2e;
-  --brand-paper-muted: #6b6152;
+  --brand-paper-muted: #5b5144;
 
   --wood-warm: #c4a07a;
   --wood-muted: #d4b896;
@@ -116,38 +116,41 @@
   --sidebar-ring: var(--gold-bright);
 
   /* === CHARACTER IDENTITY (DESIGN.md — badges/avatars only) === */
+  --character-foreground-light: #fefce8;
+  --character-foreground-dark: #1e2a38;
+  --character-foreground-maximum: #000000;
   --characters-old-macdonald-color: #a66a32;
-  --characters-old-macdonald-foreground: #fefce8;
+  --characters-old-macdonald-foreground: var(--character-foreground-maximum);
   --characters-miss-puddles-color: #f6af32;
-  --characters-miss-puddles-foreground: #1e2a38;
+  --characters-miss-puddles-foreground: var(--character-foreground-dark);
   --characters-miss-maisy-color: #5d8164;
-  --characters-miss-maisy-foreground: #fefce8;
+  --characters-miss-maisy-foreground: var(--character-foreground-maximum);
   --characters-mr-rusty-color: #267cba;
-  --characters-mr-rusty-foreground: #fefce8;
+  --characters-mr-rusty-foreground: var(--character-foreground-maximum);
   --characters-miss-hayley-color: #d95c86;
-  --characters-miss-hayley-foreground: #1e2a38;
+  --characters-miss-hayley-foreground: var(--character-foreground-maximum);
   --characters-mr-maisy-color: #d81d24;
-  --characters-mr-maisy-foreground: #fefce8;
+  --characters-mr-maisy-foreground: var(--character-foreground-light);
   --characters-mr-sam-color: #1d8787;
-  --characters-mr-sam-foreground: #fefce8;
+  --characters-mr-sam-foreground: var(--character-foreground-maximum);
   --characters-mr-puddles-color: #5367b5;
-  --characters-mr-puddles-foreground: #fefce8;
+  --characters-mr-puddles-foreground: var(--character-foreground-light);
   --characters-hopper-color: #e66c71;
-  --characters-hopper-foreground: #fefce8;
+  --characters-hopper-foreground: var(--character-foreground-dark);
   --characters-whiskers-color: #e695b0;
-  --characters-whiskers-foreground: #fefce8;
+  --characters-whiskers-foreground: var(--character-foreground-dark);
   --characters-scout-color: #c59e7a;
-  --characters-scout-foreground: #1e2a38;
+  --characters-scout-foreground: var(--character-foreground-dark);
   --characters-penny-color: #f9cb7a;
-  --characters-penny-foreground: #1e2a38;
+  --characters-penny-foreground: var(--character-foreground-dark);
   --characters-maisy-color: #96ad9a;
-  --characters-maisy-foreground: #1e2a38;
+  --characters-maisy-foreground: var(--character-foreground-dark);
   --characters-puddles-color: #8f9ccf;
-  --characters-puddles-foreground: #fefce8;
+  --characters-puddles-foreground: var(--character-foreground-dark);
   --characters-sam-color: #6cb1b1;
-  --characters-sam-foreground: #fefce8;
+  --characters-sam-foreground: var(--character-foreground-dark);
   --characters-rusty-color: #72aad2;
-  --characters-rusty-foreground: #fefce8;
+  --characters-rusty-foreground: var(--character-foreground-dark);
 
   /* Grade/Subject routing (page-level theming) */
   --grade-early-years-color: var(--characters-miss-maisy-color);
@@ -171,7 +174,7 @@
   --theme-paper: #fdf8e3;
   --theme-paper-muted: #f0e6d0;
   --theme-ink: #1a2a2e;
-  --theme-copy: #6b7a7c;
+  --theme-copy: var(--brand-paper-muted);
   --theme-navy: #1e2a38;
   --theme-white: #fefce8;
   --theme-wood: #c4a07a;
@@ -608,11 +611,24 @@
   color: var(--theme-ink);
 }
 .material-leather-blue {
-  --material-repeat: repeat;
+  --material-repeat: no-repeat, repeat;
   --material-color: var(--theme-navy);
-  --material-image: var(--asset-leather-blue);
-  --material-size: 240px;
+  --material-leather-contrast-wash: color-mix(
+    in srgb,
+    var(--theme-navy) 72%,
+    transparent
+  );
+  --material-image: linear-gradient(
+      var(--material-leather-contrast-wash),
+      var(--material-leather-contrast-wash)
+    ),
+    var(--asset-leather-blue);
+  --material-size: auto, 240px;
+  --material-accent-foreground: var(--theme-white);
   color: var(--theme-white);
+}
+.material-leather-blue em {
+  color: var(--material-accent-foreground) !important;
 }
 .material-leather-indigo {
   --material-repeat: repeat;
@@ -770,13 +786,25 @@
 /* === CHARACTER SURFACE HELPERS === */
 .character-surface,
 .characters-surface {
+  --card: var(--character-color);
+  --card-foreground: var(--character-foreground);
+  --muted-foreground: var(--character-foreground);
   color: var(--character-foreground);
   background-color: var(--character-color);
   background-image: linear-gradient(var(--character-color), var(--character-color)), var(--character-texture);
   background-blend-mode: color, normal;
   --character-repeat: repeat;
+  --character-contrast-halo: var(--character-color);
+  --character-secondary-text-opacity: 1;
   background-repeat: var(--character-repeat, var(--brand-repeat-default));
   background-size: auto, 180px;
+  text-shadow: 0 0 0.04em var(--character-contrast-halo);
+}
+.characters-surface .opacity-85 {
+  opacity: var(--character-secondary-text-opacity) !important;
+}
+.character-surface [data-slot="button"] {
+  text-shadow: none;
 }
 
 /* Characters class -> character-surface variable bridge. Colors: DESIGN.md via :root tokens above; felt tiles: brand-assets.css --characters-<key>-texture. */
@@ -819,7 +847,7 @@
 
 /* Grade surface for page sections */
 .grade-surface {
-  color: var(--grade-ink);
+  color: var(--grade-ink) !important;
   background-color: var(--grade-color);
   background-image: linear-gradient(var(--grade-color), var(--grade-color)), var(--grade-texture);
   background-blend-mode: color, normal;
