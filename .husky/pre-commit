@@ -1,4 +1,17 @@
+if ! git diff --quiet --ignore-submodules --; then
+  echo "Commit blocked: unstaged tracked changes exist. Use a clean task worktree." >&2
+  exit 1
+fi
+
+untracked="$(git ls-files --others --exclude-standard)"
+if [ -n "$untracked" ]; then
+  echo "Commit blocked: untracked files exist. Stage them, ignore them, or use a clean task worktree." >&2
+  printf '%s\n' "$untracked" >&2
+  exit 1
+fi
+
 npx lint-staged
+npx next typegen
 npm run typecheck
 npm run lint
 npm run build

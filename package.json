@@ -18,7 +18,7 @@
     "db:studio": "drizzle-kit studio --config=drizzle.sqlite.config.ts",
     "db:evaluate-search": "node scripts/data/evaluate-sqlite-retrieval.mjs data/omhas.db --summary",
     "db:embeddings": "node scripts/db/build-search-embeddings.mjs",
-    "prepare": "husky"
+    "prepare": "node .husky/install.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

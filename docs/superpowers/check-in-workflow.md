@@ -8,11 +8,11 @@ Make each change small, reviewable, locally proven, and recoverable before it co
 
 1. **Start from project truth.** Read `skills-lock.json`, invoke `using-superpowers`, then invoke `omhas-harness` for browser, dev-server, MCP, or skill work. Read the active plan and todo state before resuming work.
 2. **Define one task.** A task is one independently reviewable change. Split larger work into multiple tasks when one reviewer could reasonably approve one part and reject another.
-3. **Isolate before mutation.** Create a short-lived branch and, when practical, an ignored worktree before editing. Preserve unrelated working-tree changes.
+3. **Isolate before mutation.** Fetch the remote, update `main`, then create a short-lived branch and ignored worktree from current `main` before editing. Preserve unrelated working-tree changes. Never stack a task branch on an unmerged task unless the owner explicitly approves that dependency.
 4. **Design before implementation.** Classify the task, gather evidence, present the intended change, and obtain owner approval. For UI work, use Impeccable context and the applicable playbook before editing.
 5. **Prove the failure first.** Bug fixes and behavior changes require a failing regression check before production edits. Configuration changes require an executable verification of the configured behavior.
 6. **Implement the minimum approved change.** Keep commits focused and include related tests or checks in the same change.
-7. **Verify locally.** The pre-commit hook runs formatting of staged files, typecheck, lint, and production build. Task-specific tests, runtime checks, and UI screenshots run before commit. A failed gate blocks commit; fix the root cause rather than weakening the gate.
+7. **Verify locally.** Format before task verification. Task-specific tests, runtime checks, and UI screenshots run against the final files before commit. The pre-commit hook rejects unstaged or untracked non-ignored files, checks staged formatting without rewriting it, generates Next.js types, then runs typecheck, lint, and production build. A failed gate blocks commit; fix the root cause rather than weakening the gate.
 8. **Review before push.** Run the applicable review skill and resolve findings. Re-run affected checks after changes.
 9. **Push only green work.** Push only after the local commit succeeds with every required gate. GitHub CI confirms the same state; it is not the first place routine failures should be discovered.
 10. **Open a PR against `main`.** Include scope, rationale, test evidence, screenshots for UI changes, known warnings, and rollback notes. Never merge without owner approval and green required checks.
@@ -23,13 +23,18 @@ Make each change small, reviewable, locally proven, and recoverable before it co
 `.husky/pre-commit` runs, in order:
 
 ```sh
+# Reject mixed working trees first.
+git diff --quiet --ignore-submodules --
+test -z "$(git ls-files --others --exclude-standard)"
+
 npx lint-staged
+npx next typegen
 npm run typecheck
 npm run lint
 npm run build
 ```
 
-The repository has no `test` script. Task-specific tests must therefore run explicitly before commit until a canonical test script exists. `next-env.d.ts` remains untracked because Next.js regenerates different references during development and production builds.
+The repository has no `test` script. Task-specific tests must therefore run explicitly before commit until a canonical test script exists. `next-env.d.ts` remains untracked because Next.js regenerates it; `next typegen` creates the required declarations before typecheck. Husky installation is skipped when `NODE_ENV=production`, `CI=true`, or `HUSKY=0`, following the [official Husky CI/Docker guidance](https://typicode.github.io/husky/how-to.html#ci-server-and-docker).
 
 ## Port ownership
 

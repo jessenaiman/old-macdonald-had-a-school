@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- Every coding task uses one short-lived branch and pull request.
+- Every coding task uses one short-lived branch and pull request based on updated `main`; stacked task branches require explicit owner approval.
 - A push occurs only after local typecheck, lint, build, and task-specific checks pass.
 - Existing unrelated working-tree changes are preserved and excluded.
 - Merging requires green GitHub checks and explicit owner approval.
@@ -25,7 +25,9 @@
 
 - Modify: `package.json`
 - Modify: `package-lock.json`
+- Modify: `.gitattributes`
 - Create: `.husky/pre-commit`
+- Create: `.husky/install.mjs`
 - Create: `.lintstagedrc`
 - Create: `.prettierrc`
 
@@ -46,7 +48,20 @@ npx husky init
 `.husky/pre-commit`:
 
 ```sh
+if ! git diff --quiet --ignore-submodules --; then
+  echo "Commit blocked: unstaged tracked changes exist. Use a clean task worktree." >&2
+  exit 1
+fi
+
+untracked="$(git ls-files --others --exclude-standard)"
+if [ -n "$untracked" ]; then
+  echo "Commit blocked: untracked files exist. Stage them, ignore them, or use a clean task worktree." >&2
+  printf '%s\n' "$untracked" >&2
+  exit 1
+fi
+
 npx lint-staged
+npx next typegen
 npm run typecheck
 npm run lint
 npm run build
@@ -56,14 +71,17 @@ npm run build
 
 ```json
 {
-  "*": "prettier --ignore-unknown --write"
+  "*": "prettier --ignore-unknown --check"
 }
 ```
+
+Set `.husky/* text eol=lf` in `.gitattributes`. Route `prepare` through `.husky/install.mjs`, which exits cleanly for production, CI, or `HUSKY=0` before importing Husky.
 
 - [ ] **Step 3: Verify configuration**
 
 ```powershell
-npx lint-staged
+npx prettier --check .gitattributes .husky/pre-commit .husky/install.mjs .lintstagedrc .prettierrc package.json docs/superpowers/check-in-workflow.md
+npx next typegen
 npm run typecheck
 npm run lint
 npm run build
@@ -121,7 +139,7 @@ Expected: exit 0 with no whitespace errors.
 - [ ] **Step 1: Stage only workflow-task files**
 
 ```powershell
-git add .gitignore .husky/pre-commit .lintstagedrc .prettierrc package.json package-lock.json AGENTS.md README.md docs/superpowers/check-in-workflow.md docs/superpowers/research/check-in-workflow-evidence.md docs/superpowers/plans/2026-09-04-check-in-workflow.md
+git add .gitattributes .gitignore .husky/pre-commit .husky/install.mjs .lintstagedrc .prettierrc package.json package-lock.json AGENTS.md README.md docs/superpowers/check-in-workflow.md docs/superpowers/research/check-in-workflow-evidence.md docs/superpowers/plans/2026-09-04-check-in-workflow.md
 ```
 
 - [ ] **Step 2: Commit and observe the hook**
@@ -136,7 +154,7 @@ Expected: lint-staged, typecheck, lint, and build all run and exit 0 before Git 
 
 ```powershell
 git show --stat --oneline HEAD
-git push -u origin workflow/check-in-rules-demo
+git push -u origin workflow/check-in-rules-final
 ```
 
 Expected: only workflow-task files are present; push succeeds after local proof.
@@ -156,7 +174,7 @@ Expected: only workflow-task files are present; push succeeds after local proof.
 - `npm run lint`: passed with documented pre-existing warnings
 - `npm run build`: passed
 "@ | Set-Content .tmp-pr-body.md
-gh pr create --base main --head workflow/check-in-rules-demo --title "chore: enforce local check-in gates" --body-file .tmp-pr-body.md
+gh pr create --base main --head workflow/check-in-rules-final --title "chore: enforce local check-in gates" --body-file .tmp-pr-body.md
 Remove-Item .tmp-pr-body.md
 ```
 
