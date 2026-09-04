@@ -17,7 +17,8 @@
     "db:push": "drizzle-kit push --config=drizzle.sqlite.config.ts",
     "db:studio": "drizzle-kit studio --config=drizzle.sqlite.config.ts",
     "db:evaluate-search": "node scripts/data/evaluate-sqlite-retrieval.mjs data/omhas.db --summary",
-    "db:embeddings": "node scripts/db/build-search-embeddings.mjs"
+    "db:embeddings": "node scripts/db/build-search-embeddings.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -61,7 +62,10 @@
     "drizzle-kit": "^0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.4.1",
     "playwright": "1.62.1",
+    "prettier": "^3.9.6",
     "tailwindcss": "^4.2.1",
     "typescript": "5.9.3",
     "typescript-language-server": "^6.0.0"

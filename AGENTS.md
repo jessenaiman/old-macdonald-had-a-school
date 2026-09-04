@@ -11,13 +11,13 @@
    project, never rerun), load the reference/*.md playbook for the sub-command asked
    (critique, audit, polish, harden, clarify, live); for drift use the documented
    `$impeccable doctor` after reading reference/doctor.md.
-   Relevant here: shadcn, building-components, impeccable, next-dev-loop, shadcn-ui,
-   verify-and-stop, ponytail-audit, agent-browser. 
-    1. Skill = markdown instruction file, not a command. Discovery lists name+description in prompt at startup.
-    2. Use it: read skill://<name> → obey what it says → run its named commands via real tools (bash node .../context.mjs, read skill://impeccable/reference/critique.md, browser, etc.). Sub-paths resolve inside
-    the skill dir: skill://<name>/<file>.
-    3. Matching: request matches description = trigger → read skill before acting. That's the MUST.
-    4. User-side: /skill:<name> (e.g. /caveman ultra) injects the body; skills persist until "off".
+   Relevant here: building-components, impeccable, next-dev-loop, verify-and-stop,
+   ponytail-audit, agent-browser.
+   1. Skill = markdown instruction file, not a command. Discovery lists name+description in prompt at startup.
+   2. Use it: read skill://<name> → obey what it says → run its named commands via real tools (bash node .../context.mjs, read skill://impeccable/reference/critique.md, browser, etc.). Sub-paths resolve inside
+      the skill dir: skill://<name>/<file>.
+   3. Matching: request matches description = trigger → read skill before acting. That's the MUST.
+   4. User-side: /skill:<name> (e.g. /caveman ultra) injects the body; skills persist until "off".
 4. UI claims need pixels. Browser tool (skill://agent-browser for the workflow): open
    the route, screenshot desktop 1280 + mobile 375, light + dark. "Verified" names the
    screenshot path.
@@ -28,7 +28,8 @@
    resume; execute to completion; never yield mid-plan.
 8. Gates before commits: npm run typecheck && npm run lint && npm run build → exit 0.
    Failures verbatim.
-9. Chat: caveman terse, no essays, no inventory recitals. Files/commits: normal prose.
+9. Coding/check-in: before any coding task, read `docs/superpowers/check-in-workflow.md`; use one short-lived branch/PR, push only after the local commit gate and task checks pass, and never merge without owner approval. At integration, resolve/read `skill://finishing-a-development-branch` and follow it exactly.
+10. Chat: caveman terse, no essays, no inventory recitals. Files/commits: normal prose.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
