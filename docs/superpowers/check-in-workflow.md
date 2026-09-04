@@ -29,7 +29,7 @@ npm run lint
 npm run build
 ```
 
-The repository has no `test` script. Task-specific tests must therefore run explicitly before commit until a canonical test script exists.
+The repository has no `test` script. Task-specific tests must therefore run explicitly before commit until a canonical test script exists. `next-env.d.ts` remains untracked because Next.js regenerates different references during development and production builds.
 
 ## Port ownership
 

@@ -76,6 +76,7 @@ Expected: every command exits 0; npm audit warnings are reported without unrelat
 **Files:**
 
 - Modify: `.gitignore`
+- Remove from Git tracking: `next-env.d.ts` (Next.js regenerates it locally)
 - Modify: `AGENTS.md`
 - Modify: `README.md`
 - Create: `docs/superpowers/check-in-workflow.md`
@@ -86,9 +87,13 @@ Expected: every command exits 0; npm audit warnings are reported without unrelat
 - Consumes: primary-source evidence from GitHub, Google Engineering Practices, and DORA.
 - Produces: one canonical workflow reached by concise pointers in agent and human entry points.
 
-- [ ] **Step 1: Ignore task worktrees**
+- [ ] **Step 1: Ignore generated workspace state**
 
-Add `.worktrees/` to `.gitignore` so isolated worktrees cannot be staged.
+Add `.worktrees/` and `next-env.d.ts` to `.gitignore`, then remove the generated declaration file from Git tracking without deleting the local file:
+
+```powershell
+git rm --cached next-env.d.ts
+```
 
 - [ ] **Step 2: Add concise context pointers**
 
@@ -139,7 +144,20 @@ Expected: only workflow-task files are present; push succeeds after local proof.
 - [ ] **Step 4: Open the PR without merging**
 
 ```powershell
-gh pr create --base main --head workflow/check-in-rules-demo --title "chore: enforce local check-in gates" --body-file <prepared-pr-body>
+@"
+## Summary
+- enforce local formatting, typecheck, lint, and build before commit
+- document the branch-and-PR workflow and its primary-source evidence
+- ignore Next.js-generated `next-env.d.ts` so gates leave the tree clean
+
+## Local verification
+- pre-commit hook: passed
+- `npm run typecheck`: passed
+- `npm run lint`: passed with documented pre-existing warnings
+- `npm run build`: passed
+"@ | Set-Content .tmp-pr-body.md
+gh pr create --base main --head workflow/check-in-rules-demo --title "chore: enforce local check-in gates" --body-file .tmp-pr-body.md
+Remove-Item .tmp-pr-body.md
 ```
 
 Expected: PR URL returned; merge remains pending owner approval and required GitHub checks.
