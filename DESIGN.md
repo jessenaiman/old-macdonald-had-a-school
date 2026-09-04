@@ -270,7 +270,7 @@ The approved asset-size roles are `.icon-micro` = 1rem, `.icon-small` = 2rem, `.
 | Grade 1 | `[data-grade='grade-one']` | `.grade-icon[data-grade-icon='grade-one']` |
 | Grade 2 | `[data-grade='grade-two']` | `.grade-icon[data-grade-icon='grade-two']` |
 
-All five render on the homepage grade rail. `[data-grade-group='early-years']` is the Daycare + Preschool grouping available elsewhere; it is not a sixth grade.
+All five render in the shared site navigation, and homepage lesson rows may carry compact grade tags. The homepage does not repeat them in a separate grade rail. `[data-grade-group='early-years']` is the Daycare + Preschool grouping available elsewhere; it is not a sixth grade.
 
 Subject paper binds through `[data-subject='<key>']`—for example `[data-subject='math']`—to `--subject-note-paper`. Current keys are `language`, `math`, `science`, `music`, `arts`, `health`, `sel`, and `fine-motor`. A fastener uses `class="brand-asset fastener-<name> <size-role>"` inside the artifact it visibly attaches.
 
@@ -448,7 +448,7 @@ Woven tiles are character-owned textile specimens, not reading surfaces. `materi
 
 #### Leather (8)
 
-Leather is structural support for staff-owned or dark navigation compositions. Use `material-surface material-leather`, `material-leather-blue`, or `material-leather-indigo` only with their existing tokens. Blue leather carries a translucent structural-navy wash over the approved texture so bright grain cannot break display-text contrast; the leather remains visible and live text stays unoutlined. Display accents on this dark material use the same warm-cream foreground as surrounding display text rather than a lower-contrast color mix.
+Leather is structural support for staff-owned or dark navigation compositions. Use `material-surface material-leather`, `material-leather-blue`, or `material-leather-indigo` only with their existing tokens. Live text on dark leather inherits the surface's warm-cream foreground; descendants do not override that role or add text outlines.
 
 ![](/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.webp)
 ![](/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.webp)
@@ -644,24 +644,24 @@ Use overlap to show construction, not to hide information. Keep text, controls, 
 
 The home page is the working wall's front display, composed with the grammar above. Binding rules:
 
-- Structural chrome (page header, footer, hero support) uses the deep navy family; the hero support uses the existing `material-leather-blue` recipe. Readable information sits on warm paper artifacts; joinery uses the existing wood treatment; gold marks focus and highlight only.
+- Structural chrome (page header and footer) uses the deep navy family. The homepage hero is an open composition on the shared paper canvas: readable lesson information sits on a warm paper artifact, joinery uses the existing wood treatment, and gold marks focus and highlight only.
 - Rose, sage, teal, blue, red, amber, and purple remain semantic grade, subject, and character accents. They never become generic decoration.
-- All sixteen character identity colors remain visible on the home character wall at every breakpoint, in staff-then-learner order, each with its exact token and approved foreground.
-- Subject discovery is one cork support with attached paper artifacts; song/recent material is one calm ruled-paper area. No nested card maze; no duplicated call-to-action pointing at one destination.
-- Responsive intent: wide viewports split the hero into text, lesson artifact, and photograph tracks; tablets reduce the split; mobile stacks the hero and uses the compact menu. No identity may disappear at any breakpoint.
+- Grade navigation stays in the shared header and compact menu. Homepage lesson rows carry their relevant grade tags; the page does not add a second grade rail.
+- Subject discovery is one support with attached paper artifacts; song/recent material is one calm ruled-paper area. No nested card maze; no duplicated call-to-action pointing at one destination.
+- Responsive intent: wide viewports split the hero into text, lesson artifact, and photograph tracks; tablets reduce the split; mobile stacks the hero and uses the compact menu.
 
 #### Surface recipes
 
 | Role | Required class recipe | Rule |
 | --- | --- | --- |
 | Working-wall support | `working-wall-stage` | Owns joinery, border, and structural depth; not content typography |
-| Dark hero/support | `material-surface material-leather-blue` | Structural support only; readable copy remains on paper where dense |
+| Dark structural support | `material-surface material-leather-blue` | Optional structural support only; never required around the homepage hero |
 | Readable paper card | `card-paper` | Default dense information surface |
 | Ruled paper card | `card-paper-ruled` | Notes, recent work, and teacher-write-in rhythm |
 | Grade-owned surface | `grade-surface` + `data-grade='<key>'` | Uses grade color, approved grade ink, and felt texture; grade ink outranks generic card foreground utilities |
 | Character-owned surface | `characters-surface characters-<key>` | Uses exact character color, foreground, and texture |
 
-The homepage grade rail renders five separate chips—Daycare, Preschool, Kindergarten, Grade 1, and Grade 2—using the five selectors in the Colors binding table. It never collapses them into Early Years.
+The shared navigation renders five separate grade destinations—Daycare, Preschool, Kindergarten, Grade 1, and Grade 2—using the five selectors in the Colors binding table. It never collapses them into Early Years or repeats them as a homepage rail.
 
 `output/daycare-current.png` and `output/style-guide/omhas-character-curriculum-map.png` are directional screenshots, not pixel contracts. The semantic classes and responsive rules in this file remain normative.
 

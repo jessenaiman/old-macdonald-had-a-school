@@ -16,11 +16,7 @@ import {
 import { ResponsiveBrandEmblem } from "./brand/ResponsiveBrandEmblem";
 import { NAV_ITEMS, TEACHER_GRADE_ITEMS, type ActivePage } from "./site-navigation";
 
-/**
- * Responsive navigation composition using the installed shadcn Sheet.
- * Desktop/tablet header stays minimal (Home, Search, About); the mobile
- * sheet adds the grade links since there's no sidebar on small screens.
- */
+/** Compact counterpart to the full desktop navigation, using the shadcn Sheet. */
 export function MobileNavigation({ active }: { active?: ActivePage }) {
   const [open, setOpen] = useState(false);
 
@@ -78,7 +74,13 @@ export function MobileNavigation({ active }: { active?: ActivePage }) {
               Grades
             </p>
             {TEACHER_GRADE_ITEMS.map((grade) => (
-              <Button asChild variant="ghost" className="w-full justify-start" key={grade.key}>
+              <Button
+                asChild
+                variant="ghost"
+                className="w-full justify-start bg-grade text-grade-foreground hover:bg-grade/90 hover:text-grade-foreground"
+                data-grade={grade.key}
+                key={grade.key}
+              >
                 <Link href={grade.href} aria-current={active === grade.key ? "page" : undefined} onClick={() => setOpen(false)}>
                   {grade.label}
                 </Link>

@@ -21,10 +21,20 @@ const characters = {
   rusty: { name: "Rusty", background: "#72aad2" },
 };
 
-const [design, css, homePage] = await Promise.all([
+const [
+  design,
+  css,
+  homePage,
+  rootLayout,
+  siteHeader,
+  mobileNavigation,
+] = await Promise.all([
   readFile("DESIGN.md", "utf8"),
   readFile("app/globals.css", "utf8"),
   readFile("app/page.tsx", "utf8"),
+  readFile("app/layout.tsx", "utf8"),
+  readFile("components/SiteHeader.tsx", "utf8"),
+  readFile("components/MobileNavigation.tsx", "utf8"),
 ]);
 
 const cssVariables = new Map();
@@ -107,6 +117,56 @@ function designRecord(key) {
 
 const failures = [];
 const results = [];
+
+for (const obsoleteHomePattern of [
+  'from "@/components/home/HomeGradeNav"',
+  "function CharacterPerspectiveWall()",
+  "function MobileQuickSearch()",
+  "material-leather-blue",
+]) {
+  if (homePage.includes(obsoleteHomePattern)) {
+    failures.push(`Homepage still contains reverted structure: ${obsoleteHomePattern}`);
+  }
+}
+if (!homePage.includes("tags: [\"K\", \"1\", \"2\"]")) {
+  failures.push("Homepage lesson rows must restore their grade tags");
+}
+if (!/TEACHER_GRADE_ITEMS\.map\(\(grade\)/.test(siteHeader)) {
+  failures.push("Desktop navigation must expose the shared grade destinations");
+}
+if (!siteHeader.includes('data-grade={grade.key}')) {
+  failures.push("Desktop grade navigation must use the shared data-grade theme contract");
+}
+if (!/TEACHER_GRADE_ITEMS\.map\(\(grade\)/.test(mobileNavigation)) {
+  failures.push("Mobile navigation must expose the shared grade destinations");
+}
+if (!mobileNavigation.includes('data-grade={grade.key}')) {
+  failures.push("Mobile grade navigation must use the shared data-grade theme contract");
+}
+if (siteHeader.includes("NavigationMenu")) {
+  failures.push("Flat desktop links must use native navigation instead of a menu abstraction");
+}
+for (const gradeUtility of ["bg-grade", "text-grade-foreground"]) {
+  if (!siteHeader.includes(gradeUtility)) {
+    failures.push(`Desktop grade navigation must use semantic ${gradeUtility} utilities`);
+  }
+}
+for (const gradeToken of [
+  "--color-grade: var(--grade-color);",
+  "--color-grade-foreground: var(--grade-ink);",
+]) {
+  if (!css.includes(gradeToken)) {
+    failures.push(`Tailwind theme must map ${gradeToken}`);
+  }
+}
+if (
+  !rootLayout.includes('attribute="class"') ||
+  !rootLayout.includes('defaultTheme="system"') ||
+  !/\benableSystem\b/.test(rootLayout) ||
+  !rootLayout.includes("suppressHydrationWarning")
+) {
+  failures.push("Root theme provider must retain the documented next-themes class/system contract");
+}
 const sharedForegroundPattern =
   /^var\(--character-foreground-(?:light|dark|maximum)\)$/;
 const lockedTokenNames = [
@@ -212,23 +272,6 @@ if (!characterControlBlock?.includes("text-shadow: none;")) {
   );
 }
 
-const characterTextUsesReducedOpacity = /characters-surface[\s\S]*opacity-85/.test(
-  homePage,
-);
-const characterOpacityOverride = css.match(
-  /\.characters-surface\s+\.opacity-85\s*\{([\s\S]*?)\n\}/,
-)?.[1];
-if (
-  characterTextUsesReducedOpacity &&
-  !characterOpacityOverride?.includes(
-    "opacity: var(--character-secondary-text-opacity) !important;",
-  )
-) {
-  failures.push(
-    "Character secondary text uses reduced opacity without a theme-owned full-opacity override",
-  );
-}
-
 const paperBackground = resolveCssColor("var(--brand-paper)");
 const paperMuted = resolveCssColor("var(--brand-paper-muted)");
 if (
@@ -252,38 +295,39 @@ if (
 }
 
 const gradeSurfaceBlock = css.match(/\.grade-surface\s*\{([\s\S]*?)\n\}/)?.[1];
-if (!gradeSurfaceBlock?.includes("color: var(--grade-ink) !important;")) {
-  failures.push(
-    "Grade surfaces must keep grade ink above generic card foreground utilities",
-  );
+for (const binding of [
+  "--card: var(--grade-color);",
+  "--card-foreground: var(--grade-ink);",
+  "--foreground: var(--grade-ink);",
+  "--muted-foreground: var(--grade-ink);",
+]) {
+  if (!gradeSurfaceBlock?.includes(binding)) {
+    failures.push(`Grade surfaces must bind ${binding}`);
+  }
+}
+if (gradeSurfaceBlock?.includes("!important")) {
+  failures.push("Grade surfaces must not override shadcn utilities with !important");
 }
 
-const leatherBlueBlock = css.match(
-  /\.material-leather-blue\s*\{([\s\S]*?)\n\}/,
+const paperThemeBlock = css.match(
+  /\.card-paper,\s*\.card-paper-ruled,\s*\.material-surface\.material-cardboard-paper,\s*\.material-surface\.material-paper-ruled,\s*\.material-surface\.material-paper-grid\s*\{([\s\S]*?)\n\}/,
 )?.[1];
-if (
-  !leatherBlueBlock?.includes("var(--material-leather-contrast-wash)") ||
-  !leatherBlueBlock?.includes("var(--asset-leather-blue)") ||
-  !leatherBlueBlock?.includes("--material-repeat: no-repeat, repeat;")
-) {
-  failures.push(
-    "Blue leather needs a theme-owned navy wash over its approved texture",
-  );
+for (const binding of [
+  "--background: var(--theme-paper);",
+  "--foreground: var(--theme-ink);",
+  "--card: var(--theme-paper);",
+  "--card-foreground: var(--theme-ink);",
+  "--muted-foreground: var(--theme-copy);",
+]) {
+  if (!paperThemeBlock?.includes(binding)) {
+    failures.push(`Pinned paper surfaces must bind ${binding}`);
+  }
 }
-const leatherAccentBlock = css.match(
-  /\.material-leather-blue\s+em\s*\{([\s\S]*?)\n\}/,
-)?.[1];
-if (
-  !leatherBlueBlock?.includes(
-    "--material-accent-foreground: var(--theme-white);",
-  ) ||
-  !leatherAccentBlock?.includes(
-    "color: var(--material-accent-foreground) !important;",
-  )
-) {
-  failures.push(
-    "Blue leather display accents must use the shared warm-cream foreground",
-  );
+if (/\.dark\s+:is\([^}]*text-(?:muted-foreground|primary)/.test(cssWithoutComments)) {
+  failures.push("Pinned paper must use local semantic tokens instead of dark descendant patches");
+}
+if (/\.material-leather-blue\s+em\s*\{[\s\S]*?!important/.test(cssWithoutComments)) {
+  failures.push("Material accents must not override element utilities with !important");
 }
 
 for (const result of results) {
