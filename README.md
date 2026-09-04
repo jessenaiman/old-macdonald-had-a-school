@@ -5,16 +5,8 @@
 
 Serverless deploys must include `data/*.db` plus the `models/` weight directory (~55MB total); semantic search loads MiniLM from disk and never fetches remote models.
 
-## Check-in / merge workflow (concise)
+## Check-in / merge workflow
 
-- Branch from `main`, scope to one issue, and avoid unrelated local edits.
-- Keep CI check before push: `npm run lint && npm run typecheck && npm run build`.
-- If UI changes touch branding/media, add: `npx impeccable detect --json app components`.
-- Run PR flow on a clean branch; don't stack merge-only branch history.
-- Open PR against `main` only when local gates pass and the body is complete.
-- Merge only after GitHub checks and Vercel are green in the PR.
+Every coding task uses its own short-lived branch and pull request. The commit must pass local formatting, typecheck, lint, build, and task-specific verification before push; GitHub CI confirms an already-green change. Merging requires green required checks and explicit owner approval.
 
-3-loop recovery rule:
-1) Reproduce failure in a clean worktree (`git worktree add --detach`) with `npm ci` and `npm run build`.
-2) Implement the minimal fix and rerun full local gates.
-3) Rebase cleanly onto `main`, run gates again, push, and only then merge.
+The canonical sequence, recovery rules, evidence, and emergency path are documented in [`docs/superpowers/check-in-workflow.md`](docs/superpowers/check-in-workflow.md).

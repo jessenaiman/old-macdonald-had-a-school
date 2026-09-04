@@ -8,6 +8,7 @@ build/
 .vite/
 vite.config.*.timestamp-*
 *.tsbuildinfo
+next-env.d.ts
 *-debug.log*
 logs/
 *.log
@@ -44,3 +45,6 @@ open-code-review/
 .env*
 design-proof/
 models/
+
+# Isolated task worktrees
+.worktrees/
