@@ -4,8 +4,12 @@ description: A living classroom working wall for educator-facing curriculum plan
 colors:
   canvas-cream: "#fefce8"
   readable-paper: "#fdf8e3"
+  readable-paper-muted: "#5B5144"
   primary-ink: "#1a2a2e"
   structural-navy: "#1e2a38"
+  character-foreground-light: "#FEFCE8"
+  character-foreground-dark: "#1E2A38"
+  character-foreground-maximum: "#000000"
   joinery-wood: "#c4a07a"
   focus-gold: "#d4a82a"
   destructive-rose: "#d47a8a"
@@ -119,7 +123,7 @@ components:
     height: "44px"
   character-badge-mr-rusty:
     backgroundColor: "{colors.identity-mr-rusty}"
-    textColor: "{colors.canvas-cream}"
+    textColor: "{colors.character-foreground-maximum}"
     rounded: "{rounded.4xl}"
     size: "44px"
 ---
@@ -266,7 +270,7 @@ The approved asset-size roles are `.icon-micro` = 1rem, `.icon-small` = 2rem, `.
 | Grade 1 | `[data-grade='grade-one']` | `.grade-icon[data-grade-icon='grade-one']` |
 | Grade 2 | `[data-grade='grade-two']` | `.grade-icon[data-grade-icon='grade-two']` |
 
-All five render on the homepage grade rail. `[data-grade-group='early-years']` is the Daycare + Preschool grouping available elsewhere; it is not a sixth grade.
+All five render in the shared site navigation, and homepage lesson rows may carry compact grade tags. The homepage does not repeat them in a separate grade rail. `[data-grade-group='early-years']` is the Daycare + Preschool grouping available elsewhere; it is not a sixth grade.
 
 Subject paper binds through `[data-subject='<key>']`—for example `[data-subject='math']`—to `--subject-note-paper`. Current keys are `language`, `math`, `science`, `music`, `arts`, `health`, `sel`, and `fine-motor`. A fastener uses `class="brand-asset fastener-<name> <size-role>"` inside the artifact it visibly attaches.
 
@@ -282,6 +286,8 @@ Light learner surfaces always pair with structural navy `#1E2A38`:
 | --- | --- | --- | --- |
 | <span aria-label="Penny swatch F9CB7A" style="display:inline-block;width:4rem;height:1.5rem;background:#F9CB7A;border:1px solid #1E2A38"></span> `#F9CB7A` | <span aria-label="Scout swatch C59E7A" style="display:inline-block;width:4rem;height:1.5rem;background:#C59E7A;border:1px solid #1E2A38"></span> `#C59E7A` | <span aria-label="Maisy swatch 96AD9A" style="display:inline-block;width:4rem;height:1.5rem;background:#96AD9A;border:1px solid #1E2A38"></span> `#96AD9A` | <span aria-label="Structural navy swatch 1E2A38" style="display:inline-block;width:4rem;height:1.5rem;background:#1E2A38;border:1px solid #1E2A38"></span> `#1E2A38` |
 
+Character-surface foregrounds use only three shared roles: warm cream `#FEFCE8`, structural navy `#1E2A38`, or maximum-contrast black `#000000`. Choose the least severe role that reaches WCAG AA `4.5:1` against the character's locked background; use maximum black only where neither branded foreground reaches AA. Shared character surfaces bind card, card-foreground, and muted-foreground roles to the character tokens so generic component utilities cannot replace the approved pair. All normal character-surface text stays at full opacity so small role labels retain the approved foreground ratio. Textured character surfaces add a thin halo matching the locked character background immediately around live glyphs, shading local texture variation without recoloring the surface or creating a component-level exception. Opaque nested controls reset that inherited halo because their own surface supplies contrast.
+
 ### Character identity: complete record
 
 Sixteen identities: eight staff, eight learners. Every reference presents the academic lead and grade or scope before the less-prominent character name, then the exact token, value, and canonical artwork. Never derive, recolor, optimize, or substitute these values. Scout and Sam remain distinct. A learner may share an academic lead with staff but never inherits that staff member's grade.
@@ -290,14 +296,14 @@ Sixteen identities: eight staff, eight learners. Every reference presents the ac
 
 | Character | Species · role | Grade or scope | Academic lead | Color token | Color | Foreground | Bound subject icon |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Old MacDonald | Human · Principal and music teacher | Kindergarten | Music · Community · Literacy | `--characters-old-macdonald-color` | `#A66A32` | `#FEFCE8` | `music-icon` |
+| Old MacDonald | Human · Principal and music teacher | Kindergarten | Music · Community · Literacy | `--characters-old-macdonald-color` | `#A66A32` | `#000000` | `music-icon` |
 | Miss Puddles | Duck · Daycare teacher and swim instructor | Daycare | Early Learning · Movement · SEL | `--characters-miss-puddles-color` | `#F6AF32` | `#1E2A38` | `early-learning-icon` |
-| Mr Rusty | Horse · Dance teacher | Kindergarten | Music · Rhythm · Counting | `--characters-mr-rusty-color` | `#267CBA` | `#FEFCE8` | `music-fiddle` |
-| Miss Hayley | Human · Music, singing and drama teacher | Grade 1 | Literacy · Music · Drama | `--characters-miss-hayley-color` | `#D95C86` | `#1E2A38` | `drama-storytelling-icon` |
-| Mr Sam | Pig · Math, science and building teacher | Whole school | Mathematics · Science · Engineering | `--characters-mr-sam-color` | `#1D8787` | `#FEFCE8` | `math-building-icon` |
+| Mr Rusty | Horse · Dance teacher | Kindergarten | Music · Rhythm · Counting | `--characters-mr-rusty-color` | `#267CBA` | `#000000` | `music-fiddle` |
+| Miss Hayley | Human · Music, singing and drama teacher | Grade 1 | Literacy · Music · Drama | `--characters-miss-hayley-color` | `#D95C86` | `#000000` | `drama-storytelling-icon` |
+| Mr Sam | Pig · Math, science and building teacher | Whole school | Mathematics · Science · Engineering | `--characters-mr-sam-color` | `#1D8787` | `#000000` | `math-building-icon` |
 | Mr Maisy | Cow · Physical education and health teacher | Grade 2 | Physical Education · Health | `--characters-mr-maisy-color` | `#D81D24` | `#FEFCE8` | `physical-education-icon` |
 | Mr Puddles | Duck · Art and photography teacher | Whole school | Science · Visual Arts · Communication | `--characters-mr-puddles-color` | `#5367B5` | `#FEFCE8` | `art-photography-icon` |
-| Miss Maisy | Cow · School secretary, gardening lead and cooking teacher | Preschool | Community · Science · Food & Health | `--characters-miss-maisy-color` | `#5D8164` | `#FEFCE8` | `gardening-health-icon` |
+| Miss Maisy | Cow · School secretary, gardening lead and cooking teacher | Preschool | Community · Science · Food & Health | `--characters-miss-maisy-color` | `#5D8164` | `#000000` | `gardening-health-icon` |
 
 Staff curriculum contributions are part of identity and travel with the record:
 
@@ -318,14 +324,14 @@ Learners carry learning actions and personality instead of a teaching role, pair
 
 | Character | Species | Academic lead | Color token | Color | Foreground | Bound subject icon |
 | --- | --- | --- | --- | --- | --- | --- |
-| Hopper | Rabbit | Physical Education · Health | `--characters-hopper-color` | `#E66C71` | `#FEFCE8` | `physical-education-icon` |
-| Whiskers | Cat | Literacy · Music · Drama | `--characters-whiskers-color` | `#E695B0` | `#FEFCE8` | `drama-storytelling-icon` |
+| Hopper | Rabbit | Physical Education · Health | `--characters-hopper-color` | `#E66C71` | `#1E2A38` | `physical-education-icon` |
+| Whiskers | Cat | Literacy · Music · Drama | `--characters-whiskers-color` | `#E695B0` | `#1E2A38` | `drama-storytelling-icon` |
 | Scout | Dog | Community · Science · Food & Health | `--characters-scout-color` | `#C59E7A` | `#1E2A38` | `gardening-health-icon` |
 | Penny | Chick | Early Learning · Movement · SEL | `--characters-penny-color` | `#F9CB7A` | `#1E2A38` | `early-learning-icon` |
 | Maisy | Cow | Music · Community · Literacy | `--characters-maisy-color` | `#96AD9A` | `#1E2A38` | `music-icon` |
-| Puddles | Duck | Science · Visual Arts · Communication | `--characters-puddles-color` | `#8F9CCF` | `#FEFCE8` | `art-photography-icon` |
-| Sam | Pig | Mathematics · Science · Engineering | `--characters-sam-color` | `#6CB1B1` | `#FEFCE8` | `math-building-icon` |
-| Rusty | Horse | Music · Rhythm · Counting | `--characters-rusty-color` | `#72AAD2` | `#FEFCE8` | `music-fiddle` |
+| Puddles | Duck | Science · Visual Arts · Communication | `--characters-puddles-color` | `#8F9CCF` | `#1E2A38` | `art-photography-icon` |
+| Sam | Pig | Mathematics · Science · Engineering | `--characters-sam-color` | `#6CB1B1` | `#1E2A38` | `math-building-icon` |
+| Rusty | Horse | Music · Rhythm · Counting | `--characters-rusty-color` | `#72AAD2` | `#1E2A38` | `music-fiddle` |
 
 | Character | Learning actions | Personality |
 | --- | --- | --- |
@@ -420,7 +426,7 @@ Felt is the primary character and grade identity material. Use `material-surface
 
 #### Cardboard (4)
 
-Cardboard supplies readable ivory paper and kraft support. Use `material-surface material-cardboard-paper` or `material-surface material-cardboard-kraft`; dark-kraft and recycled variants remain library assets until a recipe names them.
+Cardboard supplies readable ivory paper and kraft support. Use `material-surface material-cardboard-paper` or `material-surface material-cardboard-kraft`; dark-kraft and recycled variants remain library assets until a recipe names them. Muted copy on readable paper, including the shared material `theme-copy` role, uses `#5B5144`, providing a `7.29:1` solid-color reserve so the visible paper grain still clears WCAG AA.
 
 ![](/design-assets/web-material-library-v1/cardboard/cardboard-ivory-tile.webp)
 ![](/design-assets/web-material-library-v1/cardboard/cardboard-warm-kraft-tile.webp)
@@ -442,7 +448,7 @@ Woven tiles are character-owned textile specimens, not reading surfaces. `materi
 
 #### Leather (8)
 
-Leather is structural support for staff-owned or dark navigation compositions. Use `material-surface material-leather`, `material-leather-blue`, or `material-leather-indigo` only with their existing tokens.
+Leather is structural support for staff-owned or dark navigation compositions. Use `material-surface material-leather`, `material-leather-blue`, or `material-leather-indigo` only with their existing tokens. Live text on dark leather inherits the surface's warm-cream foreground; descendants do not override that role or add text outlines.
 
 ![](/design-assets/web-material-library-v1/leather/individual-tiles/01-old-macdonald-leather-tile-v01.webp)
 ![](/design-assets/web-material-library-v1/leather/individual-tiles/03-mr-rusty-leather-tile-v01.webp)
@@ -638,24 +644,24 @@ Use overlap to show construction, not to hide information. Keep text, controls, 
 
 The home page is the working wall's front display, composed with the grammar above. Binding rules:
 
-- Structural chrome (page header, footer, hero support) uses the deep navy family; the hero support uses the existing `material-leather-blue` recipe. Readable information sits on warm paper artifacts; joinery uses the existing wood treatment; gold marks focus and highlight only.
+- Structural chrome (page header and footer) uses the deep navy family. The homepage hero is an open composition on the shared paper canvas: readable lesson information sits on a warm paper artifact, joinery uses the existing wood treatment, and gold marks focus and highlight only.
 - Rose, sage, teal, blue, red, amber, and purple remain semantic grade, subject, and character accents. They never become generic decoration.
-- All sixteen character identity colors remain visible on the home character wall at every breakpoint, in staff-then-learner order, each with its exact token and approved foreground.
-- Subject discovery is one cork support with attached paper artifacts; song/recent material is one calm ruled-paper area. No nested card maze; no duplicated call-to-action pointing at one destination.
-- Responsive intent: wide viewports split the hero into text, lesson artifact, and photograph tracks; tablets reduce the split; mobile stacks the hero and uses the compact menu. No identity may disappear at any breakpoint.
+- Grade navigation stays in the shared header and compact menu. Homepage lesson rows carry their relevant grade tags; the page does not add a second grade rail.
+- Subject discovery is one support with attached paper artifacts; song/recent material is one calm ruled-paper area. No nested card maze; no duplicated call-to-action pointing at one destination.
+- Responsive intent: wide viewports split the hero into text, lesson artifact, and photograph tracks; tablets reduce the split; mobile stacks the hero and uses the compact menu.
 
 #### Surface recipes
 
 | Role | Required class recipe | Rule |
 | --- | --- | --- |
 | Working-wall support | `working-wall-stage` | Owns joinery, border, and structural depth; not content typography |
-| Dark hero/support | `material-surface material-leather-blue` | Structural support only; readable copy remains on paper where dense |
+| Dark structural support | `material-surface material-leather-blue` | Optional structural support only; never required around the homepage hero |
 | Readable paper card | `card-paper` | Default dense information surface |
 | Ruled paper card | `card-paper-ruled` | Notes, recent work, and teacher-write-in rhythm |
-| Grade-owned surface | `grade-surface` + `data-grade='<key>'` | Uses grade color, ink, and felt texture |
+| Grade-owned surface | `grade-surface` + `data-grade='<key>'` | Uses grade color, approved grade ink, and felt texture; grade ink outranks generic card foreground utilities |
 | Character-owned surface | `characters-surface characters-<key>` | Uses exact character color, foreground, and texture |
 
-The homepage grade rail renders five separate chips—Daycare, Preschool, Kindergarten, Grade 1, and Grade 2—using the five selectors in the Colors binding table. It never collapses them into Early Years.
+The shared navigation renders five separate grade destinations—Daycare, Preschool, Kindergarten, Grade 1, and Grade 2—using the five selectors in the Colors binding table. It never collapses them into Early Years or repeats them as a homepage rail.
 
 `output/daycare-current.png` and `output/style-guide/omhas-character-curriculum-map.png` are directional screenshots, not pixel contracts. The semantic classes and responsive rules in this file remain normative.
 
@@ -747,7 +753,7 @@ Reuse shared accessible primitives for buttons, inputs, tabs, disclosure, naviga
 
 ### Accessibility
 
-- Maintain readable contrast using the approved foreground paired with each semantic surface. Light learner hues (Penny `#F9CB7A`, Scout `#C59E7A`, Maisy `#96AD9A`) pair with dark ink `#1E2A38`, never cream.
+- Maintain at least WCAG AA `4.5:1` contrast for normal text using each semantic surface's approved foreground. Character surfaces use the shared foreground roles recorded above; never substitute cream where the table requires structural navy or maximum black. Textured character surfaces retain a thin character-color halo around live text so local texture variation cannot erase glyph edges.
 - Never use character, grade, or subject color as the only carrier of meaning; include text or a semantic icon.
 - Keep body text live, selectable, and resizable.
 - Provide text alternatives for meaningful portraits, scenes, and curriculum images. Hide purely decorative fasteners from assistive technology.
