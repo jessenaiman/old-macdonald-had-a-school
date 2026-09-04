@@ -1,0 +1,18 @@
+min_version: 2.1.12
+
+pre-commit:
+  piped: true
+  commands:
+    01-clean-worktree:
+      run: node scripts/check-clean-worktree.mjs
+    02-format:
+      files: git diff --cached --name-only --diff-filter=ACMR
+      run: npx prettier --ignore-unknown --check {files}
+    03-next-types:
+      run: npx next typegen
+    04-typecheck:
+      run: npm run typecheck
+    05-lint:
+      run: npm run lint
+    06-build:
+      run: npm run build
