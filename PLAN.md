@@ -12,6 +12,7 @@ The single documented chain — one place changes the entire site:
 4. Vendored shadcn components consume only utilities derived from tokens; app chrome does too.
 
 Verified consequences: changing a `:root`/`.dark` value re-themes every component that references the token. Compliance line (grep-verified, scoped to `app/` `components/` `lib/` `data/`): numeric palette utilities (`red-500` shape) — zero; raw hex literals — zero outside `globals.css`; manual `dark:` color overrides — zero outside vendored `components/ui/`; white/black utilities — present only at the lines under R2 (vendored) and R3 (app chrome), each with a disposition. `content/` was NOT covered by this sweep — see R4. Typography scale is centralized in `globals.css @layer base` (`:where(h1)`–`:where(h4, h5, h6)`, `p, li`); components do not define their own heading system.
+
 ## Done (verified this session 2026-08-27)
 
 - [x] `.mcp.json` root file with `next-devtools` entry — written exactly per bundled `node_modules/next/dist/docs/01-app/02-guides/mcp.md`
@@ -25,22 +26,27 @@ Verified consequences: changing a `:root`/`.dark` value re-themes every componen
 ## Required refactor items (white/black utility inventory, verified lines)
 
 ### R1 — raw rgba shadows duplicate `--navy-deep`
+
 - [x] `app/page.tsx` raw navy/gold `rgba(...)` shadows replaced with Tailwind shadow/ring utilities. Brand CSS variables used through `@theme inline` mappings instead of arbitrary `var(...)` color utilities. Computed-style and screenshot verification still required at 375×812 and 1280×900.
 
 ### R2 — vendored shadcn drift check
+
 `npx shadcn@latest info` + `npx shadcn@latest add <component> --dry-run`/`--diff` across `components/ui/*`. Current upstream-shaped patterns found: `bg-black/50` overlays (`dialog.tsx:42`, `sheet.tsx:39`, `alert-dialog.tsx:39`), `text-white` on destructive (`badge.tsx:16`, `button.tsx:18` — shadcn's upstream choice; local theme already has `--destructive-foreground`), `bg-white` slider thumb (`slider.tsx:56`). Apply upstream where sensible; never `--overwrite` without owner approval.
 
 ### R3 — documented intentional exceptions (no code change; comment in source)
+
 - `app/page.tsx:85` `border-white bg-white` — polaroid photo frame, DESIGN.md art direction (literal photo paper).
 - `app/page.tsx:137` `bg-black/40 text-white` — video play overlay.
 - `app/songs/[id]/page.tsx:32–54` `print:bg-white print:text-black print:shadow-none` (×6) — print contract: PRODUCT.md "teachers print sheets nearly as-is"; physical paper is white. Add one explanatory comment at the first occurrence.
 
 ### R4 — content/pages/branding/characters.mdx (HISTORICAL — page retired 2026-08-27)
+
 Superseded: the page's design records now live completely in `DESIGN.md`; its raw-palette inventory is moot because the page is pending owner deletion. Runtime consumers (`CharacterPortrait`, `data/brand/characters-registry.ts`, `image-registry.ts`) remain and read tokens/assets, not the page.
 
 ## Frontend standards audit and refactor (active branch)
 
 Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-started/css), [`next/font`](https://nextjs.org/docs/app/api-reference/components/font), [Tailwind theme variables](https://tailwindcss.com/docs/theme), [Tailwind custom styles](https://tailwindcss.com/docs/adding-custom-styles), [Tailwind dark mode](https://tailwindcss.com/docs/dark-mode), [shadcn theming](https://ui.shadcn.com/docs/theming), [shadcn Create](https://ui.shadcn.com/create), [`components.json`](https://ui.shadcn.com/docs/components-json), and [`registry:theme`](https://ui.shadcn.com/docs/registry/registry-item-json).
+
 - Tracking: [Issue #11 — OMHAS frontend standards integration](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/11), [Issue #10 — clean frontend lint](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/10), [Issue #12 — reinstall drifted shadcn controls](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/12), [Issue #13 — homepage Impeccable findings](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/13).
 - Impeccable hook readiness verified: shared config enabled; Codex PostToolUse + Stop manifests installed; Copilot postToolUse manifest installed; no ignored rules, files, or values. `DESIGN.md` front-loads locked identity requirements through a Mermaid relationship diagram before theme guidance.
 
@@ -59,14 +65,14 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - [ ] Replace JavaScript `matchMedia("(min-width: 64rem)")` ownership with one documented responsive owner or a responsive component API.
 - [ ] Audit remaining arbitrary typography/geometry values; promote repeated design decisions to Tailwind theme tokens, retain true one-off composition values.
 - [ ] Verify shadcn animation utilities in compiled CSS before adding any dependency; no dependency may be installed from inference alone.
-- [ ] Browser-check homepage and representative grade routes in OMHAS light/dark at 375×812 and 1280×900. Under the binding `omhas-harness` contract, this session may capture screenshots and verify DOM/computed values but may not perform model-based pixel judgment.
+- [ ] Browser-check homepage and representative grade routes in OMHAS light/dark at 375×812 and 1280×900. Capture screenshots and DOM/computed-value evidence for analysis by a vision-capable reviewer. Owner retains DESIGN sign-off and MERGE authority.
 
 ## Owner decisions carried forward (unresolved)
 
 - [x] `app/page.tsx` YouTube thumbnails now use `next/image`; `next.config.ts` restricts the remote source to `https://i.ytimg.com/vi/**`.
 - [ ] **Deploy contract — deferred to Issue #19.** `next.config.ts` `outputFileTracingIncludes` traces `data/omhas.db` only; `data/search-vectors.db` sidecar and `models/` are NOT traced (`models/` gitignored and absent locally). Architecture review complete (see 2026-08-28 section below); owner will implement flat-file export or hosted database as the next plan. Remaining unrefactored: no `output: "export"` in `next.config.ts`, no build-export script, `/songs` and `/lessons` still query SQLite, `lib/curriculum-db.ts`/`lib/curriculum-lesson.ts`/`lib/songbook.ts` still open `better-sqlite3`, `/api/search` and both Markdown API routes remain Node handlers, no generated JSON/search/Markdown artifacts or static-link replacement exists.
 - [ ] `npx shadcn@latest mcp init` — interactive client picker (Claude Code/Cursor/VS Code/Codex/OpenCode). Owner runs; assistant cannot answer the prompt.
-- [ ] The earlier delegated `modelRoles.vision` check used `alibaba-token-plan/qwen3.8-flash` and rejected image input; the role was later changed to `alibaba-token-plan/qwen3.8-max` (line 103). Independently, the binding `omhas-harness` contract disables `inspect_image` and limits this session to screenshot metadata plus browser DOM checks, so changing the model alone does not authorize model-based pixel review.
+- [ ] The earlier delegated `modelRoles.vision` check used `alibaba-token-plan/qwen3.8-flash` and rejected image input; the role was later changed to `alibaba-token-plan/qwen3.8-max` (line 103). Final pixel-level visual review requires a vision-capable reviewer (agent or owner) against DESIGN.md — screenshots and DOM evidence are captured by the agent for that analysis. Owner retains DESIGN sign-off and MERGE authority.
 - [x] Database/embedding migration — **deferred to [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19).** Architecture review complete; flat-file release recommended as lowest-cost option; owner implements hosting/database as next plan.
 - [ ] Security flag: `src/db/migrate-to-sqlite.ts:7` contains a live Neon connection string, present in 2 commits of git history on `main`. Rotate credential at Neon; history scrub is a separate destructive call.
 
@@ -78,7 +84,7 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - [x] next-devtools MCP `get_errors` and `get_compilation_issues` return empty arrays after refactor.
 - [x] Browser computed-style proof at 375×812 and 1280×900: `data-brand="omhas"`, one `main`, zero horizontal overflow, body cardboard texture, homepage paper/cork textures, grade felt/denim textures, and light/dark token changes all resolve. Screenshots saved under `tmp/visual-audit/` for owner review.
 - [x] Impeccable live-panel rendering and DOM/metadata verification completed 2026-08-28 for Primary Button, Paper Card, all five grade chips, Search Input, three character artwork roles, subject signals, six material swatches, attached pin/tape, emblem, and classroom hero. Search Input sidecar CSS was changed from the dark card surface to warm textured paper.
-- [ ] Pixel-level visual review of the Impeccable component set remains pending under the binding `omhas-harness` operating contract.
+- [ ] Pixel-level visual review of the Impeccable component set remains pending — vision-capable reviewer (agent or owner) analysis against DESIGN.md required. Owner retains DESIGN sign-off and MERGE authority.
 - [x] axe-core reports zero WCAG A/AA violations on homepage and Grade 1 route; textured backgrounds leave contrast checks incomplete for manual review.
 - [ ] Final diff review, commit, push, and clean working tree.
 - [x] [Issue #19](https://github.com/jessenaiman/old-macdonald-had-a-school/issues/19) database/hosting architecture review complete; implementation deferred to owner.
@@ -138,6 +144,7 @@ Documentation contract: [Next.js CSS](https://nextjs.org/docs/app/getting-starte
 - Hosting options documented: Vercel static, Cloudflare Pages static, Vercel + Turso/libSQL (best live SQLite-compatible option, smallest migration), Vercel + Neon Postgres (largest migration but best conventional API path).
 - Nothing has been refactored yet. Implementation deferred to owner as the next plan.
 - Markdown download routes (`components/grades/DatabaseLessonDocument.tsx:77–78` → `/api/lessons/.../markdown`, `/api/songs/.../markdown`) cannot remain as Node handlers on pure static hosting; pre-generate `.md` files as the replacement.
+
 ## 2026-08-28 — home reference implementation (plan of record, owner-approved)
 
 Durable copy of approved plan `local://home-reference-implementation-plan.md`. Goal: recompose `/` to the supplied reference direction (navy/blue-leather structural chrome, warm paper artifacts, working-wall grammar) with zero route or behavior change. Context: prior critique snapshot `.impeccable/critique/2026-08-28T02-45-53Z__app-page-tsx.md` (28/36) already fixed in `eabf5f1`/`604c67b`; this is the reference-composition pass.
@@ -162,7 +169,7 @@ Durable copy of approved plan `local://home-reference-implementation-plan.md`. G
 
 1. `npm run typecheck`, `npm run lint`, `npm run build` (490 pages baseline) exit 0.
 2. Dev on :3100; `/` DOM: title, zero `live.js`, zero `impeccable-live-*`, 16 character keys in registry order, all current links unchanged.
-3. Screenshots 1440/768/390 stored for owner review — never labeled model-visually verified under the binding `omhas-harness` contract (line 81).
+3. Screenshots 1440/768/390 captured for vision-capable reviewer analysis against DESIGN.md.
 4. Computed styles: hero `material-leather-blue`, exact `--characters-*-color` bridges ×16, AA contrast on changed surfaces light+dark.
 5. Navigate `/search`, `/about`, `/songs`, `/topics`, `/lessons`, all five `/grade/*`; routes unchanged; mobile Sheet + `aria-current` intact.
 6. `npx impeccable detect app/page.tsx components/home/SubjectTeachers.tsx components/home/HomeGradeNav.tsx` exit 0; fresh critique snapshot after changes.

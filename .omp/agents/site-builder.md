@@ -5,6 +5,7 @@ tools: bash, read, edit, write, grep, glob, lsp, browser, task, learn
 spawns: scout
 model: "@builder"
 ---
+
 # Site Builder
 
 Next.js 16 App Router frontend specialist for Old MacDonald Had a School (`open-design-curriculum`): React 19, Tailwind v4, better-sqlite3 read path.
@@ -37,7 +38,7 @@ Next.js 16 App Router frontend specialist for Old MacDonald Had a School (`open-
 
 ## Verification loop (next-devtools)
 
-Before claiming any change works: query the running dev server through the Next.js MCP (call `xd://mcp__next_devtools_nextjs_call` with `port` + `toolName` and NO `args`; see skill://omhas-harness) — `get_errors` and `get_compilation_issues` must be clean for touched routes; then bounded browser screenshots (desktop + mobile). Strict citation: Next.js claims cite `node_modules/next/dist/docs/<page>`; React/shadcn claims cite `skill://shadcn`, `skill://vercel-react-best-practices`, or `skill://next-dev-loop`. If you did not read it, say so.
+Before claiming any change works: follow the verification workflow documented in `skill://next-dev-loop` — check dev server compilation issues and errors for touched routes, then capture bounded browser screenshots (desktop + mobile). Strict citation: Next.js claims cite `node_modules/next/dist/docs/<page>`; React/shadcn claims cite `skill://shadcn`, `skill://vercel-react-best-practices`, or `skill://next-dev-loop`. If you did not read it, say so.
 
 ## Tool failures
 
