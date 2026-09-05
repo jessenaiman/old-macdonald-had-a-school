@@ -6,9 +6,9 @@ Make each change small, reviewable, locally proven, and recoverable before it co
 
 ## Required sequence
 
-1. **Start from project truth.** Read `skills-lock.json`, invoke `using-superpowers`, then invoke each applicable current skill. Verify live browser, dev-server, and MCP behavior instead of treating `omhas-harness` as authority. Read the active plan and todo state before resuming work.
+1. **Start from project truth.** Read `skills-lock.json`, invoke `using-superpowers`, then invoke each applicable current skill. Verify live browser, dev-server, and MCP behavior. Read the active plan and todo state before resuming work.
 2. **Define one task.** A task is one independently reviewable change. Split larger work into multiple tasks when one reviewer could reasonably approve one part and reject another.
-3. **Launch from Task Board.** Create one card per new coding task in the DSH Task Board, pin the intended workspace, and run it to launch the task session. Enable **Settings → Task Board → Announce task board to agents** for automatic reminders. The board owns intake and execution state only; Git and GitHub own branch, review, and merge state.
+3. **Launch from Task Board.** Create one card per new coding task on the active board, pin the intended workspace, and run it to launch the task session. The board owns intake and execution state only; Git and GitHub own branch, review, and merge state.
 4. **Isolate before mutation.** Fetch the remote, update `main`, then create a short-lived branch and ignored worktree from current `main` before editing. Preserve unrelated working-tree changes. Never stack a task branch on an unmerged task unless the owner explicitly approves that dependency.
 5. **Design before implementation.** Classify the task, gather evidence, present the intended change, and obtain owner approval. For UI work, use Impeccable context and the applicable playbook before editing.
 6. **Prove the failure first.** Bug fixes and behavior changes require a failing regression check before production edits. Configuration changes require an executable verification of the configured behavior.
