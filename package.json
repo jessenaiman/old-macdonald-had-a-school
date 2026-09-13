@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:theme-contrast": "node scripts/verify-theme-contrast.mjs",
+    "validate:github-pr-review-webhook": "node scripts/validate-github-pr-review-webhook-config.mjs",
     "db:generate": "drizzle-kit generate --config=drizzle.sqlite.config.ts",
     "db:migrate": "drizzle-kit migrate --config=drizzle.sqlite.config.ts",
     "db:push": "drizzle-kit push --config=drizzle.sqlite.config.ts",
