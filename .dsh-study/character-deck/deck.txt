@@ -1,0 +1,889 @@
+   OLD MACDONALD HAD A SCHOOL
+
+
+
+Character color & curriculum register
+Eight staff-led pathways · sixteen governed identities · current production palette                                                                                                                Source: live main CSS + grade configuration · 28 Aug 2026
+
+
+
+
+    Old MacDonald → Maisy                                                                                    WHOLE SCHOOL   Miss Puddles → Penny                                                                                           DAYCARE
+
+         #A66A32               #96AD9A                                                                                           #F6AF32               #F9CB7A
+
+    Music · Community · Literacy                                                                                            Early Learning · Movement · SEL
+    Interests: Songs, stories, belonging; patterns, shapes, counting, leadership and encouragement.                         Interests: Songs, fingerplays, art and sensory play; ABCs, phonics, counting to 10 and courage.
+
+
+
+
+    Mr Rusty → Rusty                                                                                         KINDERGARTEN   Miss Hayley → Whiskers                                                                                          GRADE 1
+
+         #267CBA               #72AAD2                                                                                           #D95C86               #E695B0
+
+    Music · Rhythm · Counting                                                                                               Literacy · Music · Drama
+    Interests: Fiddle, singing, steady beat and dance; patience, turn-taking and ordered steps.                             Interests: Stories, singing, movement and pretend play; observation, sorting, senses and nature.
+
+
+
+
+    Mr Sam → Sam                                                                                             WHOLE SCHOOL   Mr Maisy → Hopper                                                                                               GRADE 2
+
+         #1D8787               #6CB1B1                                                                                           #D81D24               #E66C71
+
+    Mathematics · Science · Engineering                                                                                     Physical Education · Health
+    Interests: Counting, measuring and plan-build-test; sorting, problem-solving, engineering and reading.                  Interests: Movement, games and teamwork; skip-counting, calendar routines and gross-motor play.
+
+
+
+
+    Mr Puddles → Puddles                                                                                     WHOLE SCHOOL   Miss Maisy → Scout                                                                                          PRESCHOOL
+
+         #5367B5               #8F9CCF                                                                                           #5D8164               #C59E7A
+
+    Science · Visual Arts · Communication                                                                                   Community · Science · Food & Health
+    Interests: Bird study, painting and photography; vocabulary, show-and-tell, stories, music and rhythm.                  Interests: Gardening, cooking and healthy routines; directions, phonics, teamwork and community helpers.
+
+
+
+
+  CANONICAL USE         Staff own grade/subject pathways · learners remain ungraded · identity colors stay exact
+                OLD MACDONALD                                                                                                                                                            #A66A32
+Old MacDonald
+ Had a School   OLD     MACDONALD
+                FOUNDER, HEADMASTER & BAND LEADER
+                                                                                                                                                                                         --characters-old-macdonald-color
+
+
+
+
+                FOUNDER,
+                 WHOLE-SCHOOLHEADMASTER
+                             LEAD          & BAND LEADER
+                                  Music | Community | Literacy
+                HUMAN ADULT · WHOLE SCHOOL
+                INTERESTS Music, stories, learning, songs, farm tales, gatherings, community and family welcome.
+
+                   WELCOMING                 ATTENTIVE                PLAYFUL
+                   WELCOMING               ATTENTIVE                 PLAYFUL
+
+
+                     1 PERSONALITY & STRENGTHS                                                                            2 IDENTITY LOCK
+
+                 ❤   Warm, kind and welcoming                                                                           ▪ Elderly male, white hair, beard & moustache
+                 ★   Encouraging and patient                                                                            ▪ Straw hat with dark band
+                 ♪   Loves music, stories and learning                                                                  ▪ Red plaid shirt
+                 ✦   Connects people and animals                                                                        ▪ Blue denim overalls, brown boots
+                 ✔   Builds community and togetherness                                                                  ▪ Banjo on shoulder with strap
+                 ◆   Leads with heart and experience                                                                    ▪ Friendly, smiling expression
+
+
+
+                     3 FRIENDS                                                                                            4 ON-SCREEN USE                                                                             ▶
+
+                  ▪ Miss Hayley — classroom & activities                                                                ▪ Leads songs and music-making
+                  ▪ Miss Puddles — music & drama                                                                        ▪ Reads stories, shares farm tales
+                  ▪ Mr Rusty — farm & outdoor projects                                                                  ▪ Hosts gatherings & celebrations
+                  ▪ Mr Sam — math & building                                                                            ▪ Welcomes students and families
+                                                                                                                        ▪ Appears in full-cast scenes
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Straw hat • Red plaid shirt • Blue denim overalls • Brown boots                         Props: Banjo with strap • School storybook • Optional guitar • Farm School sign
+
+
+
+
+                  PRODUCTION REFERENCE Elderly male puppet, white hair & beard, straw hat, red plaid shirt, blue denim overalls, brown boots, banjo on shoulder. Felt texture, visible stitching, warm welcoming
+                  posture.
+
+
+
+                                                                                                                                                                                                               PAGE 02 / 17
+                MISS PUDDLES                                                                                                                                                          #F6AF32
+Old MacDonald
+ Had a School   MISS     PUDDLES
+                DAYCARE TEACHER
+                                                                                                                                                                                      --characters-miss-puddles-color
+
+
+
+
+                DAYCARE
+                  DAYCARE TEACHER
+                             Early Learning | Movement | SEL
+                YELLOW DUCK ADULT · DAYCARE
+                INTERESTS Songs, fingerplays, art, crafts, sensory play, sharing, teamwork and gentle movement.
+
+                   NURTURING                PATIENT               PRACTICAL
+                   NURTURING                PATIENT                PRACTICAL
+
+
+                     1 PERSONALITY & STRENGTHS                                                                           2 IDENTITY LOCK
+
+                 ❤   Nurturing and patient                                                                             ▪ Yellow duck, cheerful open beak
+                 ★   Calm and dependable                                                                               ▪ Blue-and-white gingham dress
+                 ♪   Loves songs and fingerplays                                                                       ▪ Blue polka-dot bandana bow
+                 ✦   Practical and organized                                                                           ▪ Silver whistle on a cord
+                 ✔   Enjoys art and crafts                                                                             ▪ Carries a rolled blue blanket
+                 ◆   Clear, gentle communicator                                                                        ▪ Low, child-level posture
+
+
+
+                     3 FRIENDS                                                                                           4 ON-SCREEN USE                                                                            ▶
+
+                  ▪ Old MacDonald — morning gathering                                                                  ▪ Leads circle time & fingerplays
+                  ▪ Miss Hayley — human teacher                                                                        ▪ Guides early art & sensory play
+                  ▪ Mr Rusty — music & dance                                                                           ▪ Encourages sharing & teamwork
+                  ▪ Mr Sam — daycare art props                                                                         ▪ Gentle movement, patient pacing
+                                                                                                                       ▪ Stays at child eye-level
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Gingham dress • Polka-dot bandana • Silver whistle on cord                             Props: Rolled blue blanket • Paintbrush • Storybook • Yarn basket
+
+
+
+
+                  PRODUCTION REFERENCE Yellow duck puppet, soft curly felt texture, orange beak, gingham dress, polka-dot bandana bow, silver whistle, rolled blue blanket. Low posture, daycare-teacher warmth.
+
+
+
+
+                                                                                                                                                                                                            PAGE 03 / 17
+                MR RUSTY                                                                                                                                                              #267CBA
+Old MacDonald
+ Had a School   MR     RUSTY
+                MUSIC & DANCE TEACHER
+                                                                                                                                                                                      --characters-mr-rusty-color
+
+
+
+
+                MUSIC   & DANCE
+                 KINDERGARTEN   TEACHER
+                              Music | Rhythm | Counting
+                BROWN HORSE ADULT · KINDERGARTEN–GRADE 1/2
+                INTERESTS Fiddle, singing, steady beat, barn-dance steps, rhythm cues and inclusive movement.
+
+                  WARM             RHYTHMIC               ENCOURAGING
+                      WARM                 RHYTHMIC               ENCOURAGING
+
+
+                     1 PERSONALITY & STRENGTHS                                                                          2 IDENTITY LOCK
+
+                 ❤   Warm and encouraging                                                                             ▪ Brown horse, dark mane & tail
+                 ★   Rhythmic and steady                                                                              ▪ Blue bandana at neck
+                 ♪   Loves music and singing                                                                          ▪ Dark vest, cream shirt, brown pants
+                 ✦   Keeps a steady beat                                                                              ▪ Always seen with fiddle & bow
+                 ✔   Leads barn-dance steps                                                                           ▪ Warm, encouraging expression
+                 ◆   Helps everyone join in                                                                           ▪ Felt/fabric, stitched details
+
+
+
+                     3 FRIENDS                                                                                          4 ON-SCREEN USE                                                                             ▶
+
+                  ▪ Old MacDonald — morning gathering                                                                 ▪ Plays fiddle while stepping
+                  ▪ Miss Puddles — music & drama                                                                      ▪ Leads barn-dance: side, step, turn, clap
+                  ▪ Miss Hayley — class plays & movement                                                              ▪ Cues rhythm with claps
+                  ▪ Mr Sam — daycare art props                                                                        ▪ Encourages singing with eye contact
+                                                                                                                      ▪ Keeps energy warm & inclusive
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Blue bandana • Dark brown vest • Cream shirt • Brown pants                            Props: Fiddle and bow • Rhythm stick • Tambourine • Horseshoes
+
+
+
+
+                  PRODUCTION REFERENCE Brown horse puppet, dark yarn mane & tail, blue bandana, vest & cream shirt, fiddle and bow sized for puppet hands. Dance-step pose, stitched felt texture.
+
+
+
+
+                                                                                                                                                                                                             PAGE 04 / 17
+                MISS HAYLEY                                                                                                                                                        #D95C86
+Old MacDonald
+ Had a School   MISS    HAYLEY
+                GRADE 1/2 CLASSROOM & DRAMA TEACHER
+                CLASSROOM & DRAMA TEACHER
+                                                                                                                                                                                   --characters-miss-hayley-color
+
+
+
+
+                GRADE
+                  GRADE 1/2
+                        1   CLASSROOM       &| DRAMA
+                             Literacy | Music  Drama TEACHER
+                HUMAN ADULT · STORYTELLING · MOVEMENT · MUSIC
+                INTERESTS Storytelling, singing, movement, circle discussion, pretend play and class performance.
+
+                     EXPRESSIVE              ENCOURAGING                 IMAGINATIVE
+                   EXPRESSIVE            ENCOURAGING               IMAGINATIVE
+
+
+                     1 PERSONALITY & STRENGTHS                                                                        2 IDENTITY LOCK
+
+                 ❤    Warm, enthusiastic and welcoming                                                              ▪ Female human adult puppet
+                 ★    Creative storyteller and singer                                                               ▪ Brown cowboy hat, dark band
+                 ♪    Encourages movement and expression                                                            ▪ Medium-brown wavy hair
+                 ✦    Builds confidence in every child                                                              ▪ Red plaid shirt
+                 ✔    Patient, kind and inspiring                                                                   ▪ Blue denim overalls, front pocket
+                 ◆    Makes learning fun and memorable                                                              ▪ Brown lace-up boots, rolled cuffs
+
+
+
+                     3 FRIENDS                                                                                        4 ON-SCREEN USE                                                                               ▶
+
+                  ▪ Old MacDonald — founder & fellow teacher                                                        ▪ Singing songs with students
+                  ▪ Miss Puddles — music & drama                                                                    ▪ Telling stories and reading aloud
+                  ▪ Mr Rusty — music & dance                                                                        ▪ Leading circle time & discussions
+                  ▪ Mr Sam — math & building                                                                        ▪ Guiding pretend play & imagination
+                                                                                                                    ▪ Supporting class performances
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Brown cowboy hat • Red plaid shirt • Blue denim overalls • Brown lace-up            Props: Storybook • Puppet theater • Ukulele or guitar • Maracas
+                  boots
+
+
+
+                  PRODUCTION REFERENCE Female human adult, friendly face, big eyes, warm smile, medium-brown wavy hair under a brown cowboy hat. Red plaid shirt, blue denim overalls, brown lace-up boots.
+                  Felt texture, visible stitching throughout.
+
+
+
+                                                                                                                                                                                                          PAGE 05 / 17
+                MR SAM                                                                                                                                                                   #1D8787
+Old MacDonald
+ Had a School   MR     SAM
+                MATH & BUILDING TEACHER
+                                                                                                                                                                                         --characters-mr-sam-color
+
+
+
+
+                MATH   & BUILDING
+                 WHOLE-SCHOOL LEAD  TEACHER | Science | Engineering
+                                   Mathematics
+                PINK PIG ADULT · GRADE 1/2
+                INTERESTS Counting, measuring, plan-build-test-improve, tools, models, problem-solving and teamwork.
+
+                     INVENTIVE               PATIENT              HANDS-ON
+                     INVENTIVE               PATIENT                HANDS-ON
+
+
+                     1 PERSONALITY & STRENGTHS                                                                            2 IDENTITY LOCK
+
+                 ❤    Inventive and patient                                                                              ▪ Pink pig, round snout, soft ears
+                 ★    Calm thinker and problem-solver                                                                    ▪ Round black glasses
+                 ♪    Hands-on and practical                                                                             ▪ Red polka-dot bow tie
+                 ✦    Loves counting and measuring                                                                       ▪ Green quilted vest, gold buttons
+                 ✔    Explains steps clearly                                                                             ▪ Cream shirt, brown trousers
+                 ◆    Encourages teamwork                                                                                ▪ Gentle, thoughtful expression
+
+
+
+                     3 FRIENDS                                                                                            4 ON-SCREEN USE                                                                            ▶
+
+                  ▪ Old MacDonald — morning gathering                                                                    ▪ Calm thinking pose, hand to chin
+                  ▪ Miss Puddles — music & drama                                                                         ▪ Shows plan–build–test–improve
+                  ▪ Miss Hayley — classroom leader                                                                       ▪ Counts and measures out loud
+                  ▪ Mr Rusty — build projects                                                                            ▪ Demonstrates with tools & models
+                                                                                                                         ▪ Celebrates solutions and effort
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Round black glasses • Polka-dot bow tie • Green quilted vest • Brown trousers           Props: Blue book • Ruler • Blocks • Hammer & tape measure
+
+
+
+
+                  PRODUCTION REFERENCE Pink felt pig, round snout, black glasses, red bow tie, green quilted vest with pocket watch, brown trousers. Thoughtful pose, hand to chin, building & learning props.
+
+
+
+
+                                                                                                                                                                                                               PAGE 06 / 17
+                MR MAISY                                                                                                                                                             #D81D24
+Old MacDonald
+ Had a School   MR     MAISY
+                PHYSICAL EDUCATION TEACHER | MAISY'S DAD
+                                                                                                                                                                                     --characters-mr-maisy-color
+
+
+
+
+                PHYSICAL
+                  GRADE 2 EDUCATION    TEACHER
+                            Physical Education     · MAISY'S DAD
+                                               | Health
+                COW ADULT · WHOLE SCHOOL
+                INTERESTS Movement, games, relays, stretches, obstacle courses, outdoor activity and teamwork.
+
+                    ENERGETIC              ENCOURAGING                  DEPENDABLE
+                   ENERGETIC             ENCOURAGING                DEPENDABLE
+
+
+                    1 PERSONALITY & STRENGTHS                                                                           2 IDENTITY LOCK
+
+                 ❤ Energetic, encouraging and dependable                                                              ▪ Black-and-white cow, cream forelock
+                 ★ Leads movement, games, outdoor activity                                                            ▪ Short horns, large pink muzzle
+                  ♪ Builds confidence through action & teamwork                                                       ▪ Red bandana
+                                                                                                                      ▪ Red plaid shirt
+                                                                                                                      ▪ Blue denim overalls, brown boots
+                                                                                                                      ▪ Friendly, expressive eyes
+
+
+
+                    3 FRIENDS                                                                                           4 ON-SCREEN USE                                                                            ▶
+
+                  ▪ Old MacDonald — assemblies & games                                                                ▪ Leads relays, stretches, obstacle courses
+                  ▪ Mr Rusty — dance warm-ups & rhythm                                                                ▪ Demonstrates actions before students try
+                  ▪ Miss Hayley — class plays & movement                                                              ▪ Uses cones, beanbags, hoops, gear
+                                                                                                                      ▪ Best outdoors or open barn spaces
+
+
+
+
+                    5      WARDROBE & PROPS
+                  Clothing: Red plaid shirt • Blue denim overalls • Red bandana • Brown boots                     Props: Whistle • Cones • Beanbags • Jump rope & ball
+
+
+
+
+                  PRODUCTION REFERENCE Black-and-white cow puppet, cream forelock, short horns, pink muzzle, red bandana, plaid shirt, denim overalls, brown boots. Energetic PE-teacher posture.
+
+
+
+
+                                                                                                                                                                                                           PAGE 07 / 17
+                MR PUDDLES                                                                                                                                                            #5367B5
+Old MacDonald
+ Had a School   MR     PUDDLES
+                ART & PHOTOGRAPHY TEACHER
+                                                                                                                                                                                      --characters-mr-puddles-color
+
+
+
+
+                ART & PHOTOGRAPHY
+                 WHOLE-SCHOOL LEAD      TEACHER
+                                   Science | Visual Arts | Communication
+                PALE-YELLOW DUCK ADULT · WHOLE SCHOOL
+                INTERESTS Birdwatching, painting, photography, nature finds, sketching, exhibitions and art-table lessons.
+
+                   CURIOUS              GENTLE              OBSERVANT
+                    CURIOUS                 GENTLE                OBSERVANT
+
+
+                    1 PERSONALITY & STRENGTHS                                                                           2 IDENTITY LOCK
+
+                 ❤ Curious, gentle and observant                                                                      ▪ Pale-yellow duck, orange bill & feet
+                 ★ Bird watcher, painter, photographer                                                                ▪ Brown checkered cap
+                  ♪ His art keeps turning into bird studies                                                           ▪ Blue vest
+                                                                                                                      ▪ Friendly eyes
+                                                                                                                      ▪ Compact adult proportions
+                                                                                                                      ▪ Felt/fabric, stitched details
+
+
+
+                    3 FRIENDS                                                                                           4 ON-SCREEN USE                                                                               ▶
+
+                  ▪ Miss Puddles — family & daycare visits                                                            ▪ Photographs school events & nature finds
+                  ▪ Old MacDonald — school events                                                                     ▪ Paints bird pictures, sketches nests
+                  ▪ Miss Maisy — bulletin boards & displays                                                           ▪ Carries camera, sketchbook, paint kit
+                                                                                                                      ▪ Fits quiet observation & art-table lessons
+
+
+
+
+                    5      WARDROBE & PROPS
+                  Clothing: Checkered cap • Blue vest                                                             Props: Camera • Binoculars • Sketchbook • Watercolor palette
+
+
+
+
+                  PRODUCTION REFERENCE Pale-yellow duck puppet, orange bill & feet, checkered cap, blue vest. Warm, curious expression, camera and nature-art props, cozy handcrafted style.
+
+
+
+
+                                                                                                                                                                                                            PAGE 08 / 17
+                MISS MAISY                                                                                                                                                           #5D8164
+Old MacDonald
+ Had a School   MISS MAISY
+                SCHOOL SECRETARY | GARDENING, COOKING & HEALTH | MAISY'S MOM
+                                                                                                                                                                                     --characters-miss-maisy-color
+
+
+
+
+                SCHOOL   SECRETARY
+                 PRESCHOOL         · GARDENING,
+                             Community | Science | FoodCOOKING
+                                                        & Health & HEALTH · MAISY'S MOM
+                COW ADULT · FRONT OFFICE & GARDEN
+                INTERESTS Family welcome, office support, gardening, seasonal displays, cooking and healthy routines.
+
+                  WARM             ORGANIZED               WELCOMING
+                      WARM                ORGANIZED               WELCOMING
+
+
+                    1 PERSONALITY & STRENGTHS                                                                           2 IDENTITY LOCK
+
+                 ❤ Warm, organized and welcoming                                                                      ▪ Black-and-white cow, large pink muzzle
+                 ★ Keeps the school running smoothly                                                                  ▪ Cream forelock & short horns
+                  ♪ Helps lead gardening & seasonal displays                                                          ▪ Friendly expressive eyes
+                                                                                                                      ▪ Blue dress
+                                                                                                                      ▪ Cream floral apron
+                                                                                                                      ▪ Red neck scarf
+
+
+
+                    3 FRIENDS                                                                                           4 ON-SCREEN USE                                                                              ▶
+
+                  ▪ Old MacDonald — front office & welcome                                                            ▪ Greets families and visitors
+                  ▪ Mr Puddles — displays & notices                                                                   ▪ Arranges notices and displays
+                  ▪ Miss Puddles — family check-ins                                                                   ▪ Leads planting & watering lessons
+                                                                                                                      ▪ Supports cooking & healthy-routine activities
+
+
+
+
+                    5      WARDROBE & PROPS
+                  Clothing: Blue dress • Floral apron • Red neck scarf                                            Props: Clipboard & keys • Seed packets • Watering can • Healthy-food basket
+
+
+
+
+                  PRODUCTION REFERENCE Black-and-white cow puppet, pink muzzle, cream forelock, blue dress, floral apron, red scarf. Warm office-and-garden presence, handmade felt style.
+
+
+
+
+                                                                                                                                                                                                           PAGE 09 / 17
+                HOPPER                                                                                                                                                                  #E66C71
+Old MacDonald
+ Had a School   HOPPER
+                EAGER MOVER
+                                                                                                                                                                                        --characters-hopper-color
+
+
+
+
+                EAGER
+                 LEARNERMOVER
+                        - UNGRADED                 Physical Education | Health
+                RABBIT STUDENT · ORANGE/CORAL
+                INTERESTS Skip-counting, calendar routines, gross-motor play, races, hopping and cheering classmates.
+
+                     ENERGETIC               OPTIMISTIC                 READY TO JOIN
+                   ENERGETIC               OPTIMISTIC             READY TO JOIN
+
+
+                     1 PERSONALITY & STRENGTHS                                                                           2 IDENTITY LOCK
+
+                 ❤    Energetic and endlessly optimistic                                                               ▪ Cream rabbit, tall upright ears
+                 ★    Always first through the door                                                                    ▪ Bright, open-mouthed smile
+                 ♪    Turns errands into races                                                                         ▪ Orange felt vest over cream shirt
+                 ✦    Cheers loudest for his classmates                                                                ▪ Olive-green canvas backpack
+                 ✔    Never sits still for long                                                                        ▪ Rolled blue denim shorts
+                 ◆    Counts everything by hopping                                                                     ▪ Blue lace-up sneakers
+
+
+
+                     3 FRIENDS                                                                                           4 LEARNS THROUGH                                                                           ▶
+
+                  ▪ Scout — eager discovery                                                                             ▪ Skip-counting and movement
+                  ▪ Maisy — numbers and patterns                                                                        ▪ Calendar routines
+                  ▪ Puddles — energetic rhythm                                                                          ▪ Gross-motor play
+                  ▪ Rusty — contrasting speeds
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Orange felt vest • Cream shirt • Blue denim shorts • Blue sneakers                     Props: Olive-green backpack
+
+
+
+
+                  PRODUCTION REFERENCE Cream rabbit puppet, tall felt ears, orange vest, olive-green backpack, blue denim shorts, blue sneakers. Mid-hop pose, one fist raised, bright open-mouthed smile.
+
+
+
+
+                                                                                                                                                                                                               PAGE 10 / 17
+                WHISKERS                                                                                                                                                                #E695B0
+Old MacDonald
+ Had a School   WHISKERS
+                CURIOUS OBSERVER
+                                                                                                                                                                                        --characters-whiskers-color
+
+
+
+
+                CURIOUS      OBSERVER
+                 LEARNER - UNGRADED Literacy | Music | Drama
+                CAT STUDENT · PURPLE
+                INTERESTS Five senses, observation, sorting, classifying, weather, nature, circle questions and treasures.
+
+                   CURIOUS              GENTLE              THOUGHTFUL
+                     CURIOUS                 GENTLE               THOUGHTFUL
+
+
+                     1 PERSONALITY & STRENGTHS                                                                            2 IDENTITY LOCK
+
+                 ❤    Curious and endlessly observant                                                                   ▪ Grey tabby kitten, striped markings
+                 ★    Gentle, thoughtful and quiet                                                                      ▪ Bright green eyes
+                 ♪    Notices what others miss                                                                          ▪ Lavender knit scarf
+                 ✦    Asks the best questions at circle time                                                            ▪ Teal felt satchel with embroidered flowers
+                 ✔    Prefers watching before joining in                                                                ▪ Soft, rounded kitten proportions
+                 ◆    Collects small treasures to share                                                                 ▪ Felt/fabric, stitched details
+
+
+
+                     3 FRIENDS                                                                                            4 LEARNS THROUGH                                                                            ▶
+
+                  ▪ Sam — quiet problem-solving                                                                         ▪ The five senses and observation
+                  ▪ Scout — outdoor discovery                                                                           ▪ Sorting and classifying
+                  ▪ Penny — careful first attempts                                                                      ▪ Weather and nature study
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Lavender knit scarf                                                                     Props: Teal floral satchel
+
+
+
+
+                  PRODUCTION REFERENCE Grey tabby kitten puppet, striped felt markings, green eyes, lavender scarf, teal satchel with embroidered flowers. Quiet, watchful pose, soft rounded proportions.
+
+
+
+
+                                                                                                                                                                                                               PAGE 11 / 17
+                SCOUT                                                                                                                                                              #C59E7A
+Old MacDonald
+ Had a School   SCOUT
+                HELPFUL EXPLORER
+                                                                                                                                                                                   --characters-scout-color
+
+
+
+
+                HELPFUL     EXPLORERCommunity | Science | Food & Health
+                 LEARNER - UNGRADED
+
+                DOG STUDENT · GREEN
+                INTERESTS Directions, positional words, phonics, teamwork, community helpers, maps, badges and expeditions.
+
+                   ADVENTUROUS                OBSERVANT                DEPENDABLE
+                  ADVENTUROUS               OBSERVANT              DEPENDABLE
+
+
+                     1 PERSONALITY & STRENGTHS                                                                        2 IDENTITY LOCK
+
+                 ❤   Adventurous and endlessly helpful                                                               ▪ Beagle puppy, brown-and-white markings
+                 ★   Always first to offer a hand                                                                    ▪ Olive explorer hat, blue band
+                 ♪   Maps out the day before it starts                                                               ▪ Blue neckerchief
+                 ✦   Proud of every badge he earns                                                                   ▪ Tan vest with pockets
+                 ✔   Steady and dependable in a group                                                                ▪ Brown backpack, brass compass charm
+                 ◆   Turns chores into expeditions                                                                   ▪ Olive cargo shorts
+
+
+
+                     3 FRIENDS                                                                                        4 LEARNS THROUGH                                                                         ▶
+
+                  ▪ Hopper — trying something new                                                                    ▪ Directions and positional words
+                  ▪ Whiskers — outdoor discovery                                                                     ▪ Phonics as a trail to follow
+                  ▪ Rusty — dependable teamwork                                                                      ▪ Teamwork and community helpers
+                  ▪ Sam — figuring things out
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Explorer hat • Blue neckerchief • Tan vest • Olive shorts • Brown boots              Props: Backpack with compass charm
+
+
+
+
+                  PRODUCTION REFERENCE Beagle puppy puppet, brown-and-white markings, olive explorer hat, blue neckerchief, tan vest, brown backpack with compass charm. Ready-to-explore stance, floppy ears.
+
+
+
+
+                                                                                                                                                                                                          PAGE 12 / 17
+                PENNY                                                                                                                                                           #F9CB7A
+Old MacDonald
+ Had a School   PENNY
+                BRAVE BEGINNER
+                                                                                                                                                                                --characters-penny-color
+
+
+
+
+                BRAVE
+                 LEARNERBEGINNER
+                        - UNGRADED Early Learning | Movement | SEL
+                CHICK STUDENT · GOLD/AMBER
+                INTERESTS ABCs, earliest phonics, counting to 10, courage, letters, sounds and celebrating small wins.
+
+                   YOUNG             EARNEST               GROWING BRAVER
+                     YOUNG                  EARNEST               GROWING BRAVER
+
+
+                     1 PERSONALITY & STRENGTHS                                                                          2 IDENTITY LOCK
+
+                 ❤   Small, earnest, and growing braver every day                                                     ▪ Yellow chick, downy feathers
+                 ★   Practices her letters under her breath                                                           ▪ Tuft of feathers on top of head
+                 ♪   Lights up at every small win                                                                     ▪ Pink felt bow
+                 ✦   Looks to Maisy for courage                                                                       ▪ Blue polka-dot wing-straps/backpack
+                 ✔   Shy at first, warm once settled                                                                  ▪ Orange felt beak and feet
+                 ◆   Proud of every new sound she learns                                                              ▪ Small, rounded hatchling proportions
+
+
+
+                     3 FRIENDS                                                                                          4 LEARNS THROUGH                                                                   ▶
+
+                  ▪ Whiskers — gentle discovery                                                                       ▪ ABCs and earliest phonics
+                  ▪ Maisy — confidence & encouragement                                                                ▪ Counting to 10
+                  ▪ Puddles — speaking up                                                                             ▪ Courage and trying new things
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Pink felt bow                                                                         Props: Blue polka-dot backpack
+
+
+
+
+                  PRODUCTION REFERENCE Yellow chick puppet, downy felt texture, pink bow, blue polka-dot backpack, orange beak and feet. Small, hopeful pose, big round eyes.
+
+
+
+
+                                                                                                                                                                                                      PAGE 13 / 17
+                MAISY                                                                                                                                                                #96AD9A
+Old MacDonald
+ Had a School   MAISY
+                CONFIDENT PARTICIPANT
+                                                                                                                                                                                     --characters-maisy-color
+
+
+
+
+                CONFIDENT      PARTICIPANT
+                 LEARNER - UNGRADED  Music | Community | Literacy
+                COW STUDENT · DARK TEAL/NAVY
+                INTERESTS Patterns, shapes, sorting, counting, simple addition, leadership and encouragement.
+
+                  WARM             CONFIDENT                ENCOURAGING
+                      WARM                 CONFIDENT             ENCOURAGING
+
+
+                     1 PERSONALITY & STRENGTHS                                                                         2 IDENTITY LOCK
+
+                 ❤   Warm, confident, and always encouraging                                                          ▪ Black-and-white calf, cream muzzle
+                 ★   Leads the line without being asked                                                               ▪ Small curved horns, curly forelock
+                 ♪   Cheers loudest for a nervous friend                                                              ▪ Blue bandana at the neck
+                 ✦   Masters new patterns quickly                                                                     ▪ Mustard-yellow backpack, sunflower patch
+                 ✔   Shares credit with her classmates                                                                ▪ Bright, expressive eyes
+                 ◆   Makes everyone feel included                                                                     ▪ Sturdy calf proportions
+
+
+
+                     3 FRIENDS                                                                                         4 LEARNS THROUGH                                                                          ▶
+
+                  ▪ Hopper — numbers and patterns                                                                     ▪ Patterns and shapes
+                  ▪ Penny — encouragement                                                                             ▪ Sorting, counting and simple addition
+                  ▪ Sam — problem-solving                                                                             ▪ Leadership and encouragement
+                  ▪ Puddles — leading fun
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Blue bandana                                                                          Props: Mustard-yellow backpack, sunflower patch
+
+
+
+
+                  PRODUCTION REFERENCE Black-and-white calf puppet, cream muzzle, curly forelock, blue bandana, mustard-yellow backpack with sunflower patch. Confident, open stance, bright expressive eyes.
+
+
+
+
+                                                                                                                                                                                                            PAGE 14 / 17
+                PUDDLES                                                                                                                                                              #8F9CCF
+Old MacDonald
+ Had a School   PUDDLES
+                ENTHUSIASTIC SHARER
+                                                                                                                                                                                     --characters-puddles-color
+
+
+
+
+                ENTHUSIASTIC
+                 LEARNER - UNGRADEDSHARER
+                                      Science | Visual Arts | Communication
+                DUCK STUDENT · LIGHT BLUE
+                INTERESTS Vocabulary, show-and-tell, oral storytelling, music, rhythm, singing and collecting new words.
+
+                     EXPRESSIVE               SOCIABLE                ENTHUSIASTIC
+                   EXPRESSIVE               SOCIABLE              ENTHUSIASTIC
+
+
+                     1 PERSONALITY & STRENGTHS                                                                          2 IDENTITY LOCK
+
+                 ❤    Expressive, sociable, and always sharing                                                        ▪ Yellow duckling, round felt body
+                 ★    Turns every show-and-tell into a story                                                          ▪ Blue knit cap
+                 ♪    Gets the whole class singing along                                                              ▪ Blue canvas backpack
+                 ✦    Picks up new words like treasures                                                               ▪ Orange felt beak and webbed feet
+                 ✔    Points out something new every day                                                              ▪ One wing raised mid-gesture
+                 ◆    Loves an audience, big or small                                                                 ▪ Soft, rounded hatchling proportions
+
+
+
+                     3 FRIENDS                                                                                          4 LEARNS THROUGH                                                                          ▶
+
+                  ▪ Hopper — energetic play                                                                           ▪ Vocabulary building
+                  ▪ Penny — speaking up                                                                               ▪ Show-and-tell and oral storytelling
+                  ▪ Maisy — leading fun                                                                               ▪ Music and rhythm
+                  ▪ Rusty — singing and rhythm
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Blue knit cap                                                                         Props: Blue backpack
+
+
+
+
+                  PRODUCTION REFERENCE Yellow duckling puppet, round felt body, blue knit cap, blue backpack, orange beak and feet. Mid-gesture pose, one wing raised, cheerful open beak.
+
+
+
+
+                                                                                                                                                                                                            PAGE 15 / 17
+                SAM                                                                                                                                                                    #6CB1B1
+Old MacDonald
+ Had a School   SAM
+                THOUGHTFUL PROBLEM-SOLVER
+                                                                                                                                                                                       --characters-sam-color
+
+
+
+
+                THOUGHTFUL        PROBLEM-SOLVER
+                 LEARNER - UNGRADED  Mathematics | Science | Engineering
+                PIG STUDENT · GREEN
+                INTERESTS Counting, sorting, problem-solving, engineering, reading comprehension, building and pencils.
+
+                   THOUGHTFUL                 INVENTIVE                CHEERFUL
+                  THOUGHTFUL                INVENTIVE               CHEERFUL
+
+
+                     1 PERSONALITY & STRENGTHS                                                                           2 IDENTITY LOCK
+
+                 ❤   Thoughtful, inventive, and quietly cheerful                                                       ▪ Pink piglet, round snout
+                 ★   Takes apart problems piece by piece                                                               ▪ Round wire-frame glasses
+                 ♪   Never without a pencil in hand                                                                    ▪ Green felt bow tie
+                 ✦   Prefers building to being told how                                                                ▪ Cream shirt
+                 ✔   Finishes what he starts                                                                           ▪ Blue denim overalls, colored pencils in pocket
+                 ◆   Content working things out alone or together                                                      ▪ Green backpack
+
+
+
+                     3 FRIENDS                                                                                           4 LEARNS THROUGH                                                                            ▶
+
+                  ▪ Whiskers — quiet focus                                                                             ▪ Counting, sorting and problem-solving
+                  ▪ Scout — hands-on discovery                                                                         ▪ Building and simple engineering
+                  ▪ Maisy — numbers and patterns                                                                       ▪ Reading comprehension
+                  ▪ Rusty — calm persistence
+
+
+
+
+                     5     WARDROBE & PROPS
+                  Clothing: Round glasses • Green bow tie • Blue denim overalls                                    Props: Green backpack • Colored pencils
+
+
+
+
+                  PRODUCTION REFERENCE Pink piglet puppet, round snout, wire-frame glasses, green bow tie, denim overalls with colored pencils in pocket, green backpack. Curious, thoughtful expression.
+
+
+
+
+                                                                                                                                                                                                                PAGE 16 / 17
+                RUSTY                                                                                                                                                        #72AAD2
+Old MacDonald
+ Had a School   RUSTY
+                STEADY TEAMMATE
+                                                                                                                                                                             --characters-rusty-color
+
+
+
+
+                STEADY
+                 LEARNER - TEAMMATE
+                           UNGRADED Music | Rhythm | Counting
+                HORSE STUDENT · BROWN/RUST
+                INTERESTS Rhythm, steady beat, patience, turn-taking, ordered steps, teamwork and persistence.
+
+                  CALM             RELIABLE             COURAGEOUS
+                         CALM             RELIABLE              COURAGEOUS
+
+
+                     1 PERSONALITY & STRENGTHS                                                                      2 IDENTITY LOCK
+
+                 ❤   Calm, reliable, and quietly courageous                                                        ▪ Brown foal, dark brown mane
+                 ★   Keeps the beat so others can follow                                                           ▪ Cream sweater under a green vest
+                 ♪   Finishes what he starts, every time                                                           ▪ Red bandana at the neck
+                 ✦   Steps in when a friend needs help                                                             ▪ Brown corduroy pants, rolled cuffs
+                 ✔   Never rushes, never gives up                                                                  ▪ Dark brown hoof mitts
+                 ◆   Grounding presence in any group                                                               ▪ Red felt backpack
+
+
+
+                     3 FRIENDS                                                                                      4 LEARNS THROUGH                                                                         ▶
+
+                  ▪ Hopper — contrasting speeds                                                                    ▪ Rhythm and steady beat
+                  ▪ Scout — dependable teamwork                                                                    ▪ Patience and taking turns
+                  ▪ Puddles — singing & rhythm                                                                     ▪ Following steps in order
+                  ▪ Sam — calm focus
+
+
+
+
+                     5      WARDROBE & PROPS
+                  Clothing: Green vest • Cream sweater • Red bandana • Brown corduroy pants                    Props: Red backpack
+
+
+
+
+                  PRODUCTION REFERENCE Brown foal puppet, dark brown yarn mane, green vest over cream sweater, red bandana, red backpack. Calm, steady stance, warm smile.
+
+
+
+
+                                                                                                                                                                                                        PAGE 17 / 17
+

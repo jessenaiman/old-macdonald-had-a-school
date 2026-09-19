@@ -48,3 +48,6 @@ models/
 
 # Isolated task worktrees
 .worktrees/
+
+# npx cache redirected into the workspace (sandbox cannot write the user npm cache)
+.npm-cache/
