@@ -7,9 +7,9 @@ Husky pre-commit hook set up, verified, and the work made committable and pushab
 ## State
 
 - Branch: `docs/hindsight-refresh-diagnostics`
-- Tip: `a9f6a09 feat: two-file home, design rules, commit gate`
-- Tree clean. `origin/main` = 0 behind, 1 ahead.
-- Push target: `origin/docs/hindsight-refresh-diagnostics` only. Not main.
+- Tip: `cb7a69f chore(workflow): align pre-commit hook with skill, add status docs`
+- Tree clean. Pushed. `origin/main` = 0 behind, 2 ahead.
+- Pushed to `origin/docs/hindsight-refresh-diagnostics` only. Main untouched.
 
 ## What exists
 
@@ -29,7 +29,7 @@ Husky pre-commit hook set up, verified, and the work made committable and pushab
 
 ## Next step
 
-`git push -u origin docs/hindsight-refresh-diagnostics`
+Branch small feature or fix work off main. Return by PR into main.
 
 ## Notes
 

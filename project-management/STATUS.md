@@ -6,17 +6,18 @@ Handoff: project-management/Handoffs/docs-hindsight-refresh-diagnostics.md
 
 ## Now
 
-Pre-commit hook live. Work committed, branch unpushed.
+Pre-commit hook live and proven. Branch pushed. Ready to branch feature work off central main.
 
 ## Last result
 
 - `eslint .` = 79 files, 0 problems, 0 from node_modules.
 - `npm run typecheck` = pass.
-- Tree clean. Tip `a9f6a09`. `origin/main` = 0 behind, 1 ahead.
+- Hook proof: probe file `const  x   =    1` rewritten to `const x = 1;` by lint-staged, typecheck passed, exit 0.
+- Pushed `cb7a69f` to `origin/docs/hindsight-refresh-diagnostics`. `origin/main` = 0 behind, 2 ahead.
 
 ## Next step
 
-Push `docs/hindsight-refresh-diagnostics`. Then branch small feature or fix work off central main so the PR returns to main.
+Branch a small feature or fix off central main. Return by PR into main.
 
 ## Gates
 

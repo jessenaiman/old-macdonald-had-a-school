@@ -7,12 +7,12 @@ Labels: `docs/agents/triage-labels.md`.
 
 | Task | Branch | Handoff | State |
 | --- | --- | --- | --- |
-| Pre-commit hook, verified and pushable | `docs/hindsight-refresh-diagnostics` | `Handoffs/docs-hindsight-refresh-diagnostics.md` | Verify done. Push pending. |
+| Pre-commit hook, verified | `docs/hindsight-refresh-diagnostics` | `Handoffs/docs-hindsight-refresh-diagnostics.md` | Done. Pushed as `cb7a69f`. |
 
 ## Next
 
-- Push branch, then fast-forward or PR into central main.
-- Branch small feature or fix work off main, return by PR.
+- Branch small feature or fix work off central main, return by PR.
+- Merge `docs/hindsight-refresh-diagnostics` into main when ready.
 
 ## Done
 
