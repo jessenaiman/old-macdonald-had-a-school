@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 const SEMANTIC_MODEL = "Xenova/all-MiniLM-L6-v2"; // reported in the API response
 // Local model directory under models/ holding vendored MiniLM weights + tokenizer.
 const SEMANTIC_LOCAL_MODEL_ID = "all-MiniLM-L6-v2";
-// Writable sidecar built by scripts/db/build-search-embeddings.mjs.
+// Committed sidecar (data/search-vectors.db); built upstream, not here.
 const SIDECAR_DB_PATH = process.env.SEARCH_VECTORS_DB_PATH
   ? path.resolve(process.env.SEARCH_VECTORS_DB_PATH)
   : path.join(process.cwd(), "data", "search-vectors.db");
@@ -29,8 +29,7 @@ async function getEmbedder() {
       const { pipeline, env } = await import("@xenova/transformers"); // lazy (see comment above)
       // Lazy (not static) import: transformers.js pulls in onnxruntime and must
       // not load — or be bundled — until a request actually needs embeddings.
-      // Weights are vendored on disk under models/all-MiniLM-L6-v2/ by
-      // scripts/db/build-search-embeddings.mjs. Remote loading is hard-disabled:
+      // Weights are vendored on disk under models/all-MiniLM-L6-v2/. Remote loading is hard-disabled:
       // transformers.js v2.17.2 resolves every file via
       // path.join(env.localModelPath, "<model>/<file>") (src/utils/hub.js:392)
       // and throws "`env.allowRemoteModels=false`, but attempted to load a
@@ -538,7 +537,7 @@ export async function GET(req: NextRequest) {
 
     try {
       if (!fs.existsSync(SIDECAR_DB_PATH)) {
-        throw new Error("data/search-vectors.db sidecar missing — run scripts/db/build-search-embeddings.mjs");
+        throw new Error("data/search-vectors.db sidecar missing");
       }
       if (primary.length === 0) throw new Error("No resource-search terms after resolving grade and school-year placement.");
       const [model, chunkVectors] = await Promise.all([getEmbedder(), getChunkVectors()]);

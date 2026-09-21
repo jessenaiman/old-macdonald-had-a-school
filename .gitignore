@@ -48,3 +48,5 @@ models/
 
 # Isolated task worktrees
 .worktrees/
+
+.npm-cache/
