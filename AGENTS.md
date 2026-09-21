@@ -1,42 +1,44 @@
-1. Read before answer. Library/API question → Context7 MCP (required external; not in
-   project .mcp.json): resolve-library-id → query-docs → cite the fetched snippet.
-   No memory-answers about this project's packages.
-2. Next.js authority = installed version. Use the project-registered next-devtools MCP:
-   nextjs_docs first (it answers use_bundled_docs + docsPath), then read/grep
-   node_modules/next/dist/docs/. Live-server checks (nextjs_index / nextjs_call) only
-   after `npm run dev` is actually up.
-3. Skills are files, not commands. Before acting under a skill, read its
-   .agents/skills/<name>/SKILL.md and follow exactly what it specifies — e.g.
-   impeccable: run its scripts/context.mjs once per session (`--target <path>`, cwd at
-   project, never rerun), load the reference/*.md playbook for the sub-command asked
-   (critique, audit, polish, harden, clarify, live); for drift use the documented
-   `$impeccable doctor` after reading reference/doctor.md.
-   Relevant here: building-components, impeccable, next-dev-loop, verify-and-stop,
-   ponytail-audit, agent-browser.
-   1. Skill = markdown instruction file, not a command. Discovery lists name+description in prompt at startup.
-   2. Use it: read skill://<name> → obey what it says → run its named commands via real tools (bash node .../context.mjs, read skill://impeccable/reference/critique.md, browser, etc.). Sub-paths resolve inside
-      the skill dir: skill://<name>/<file>.
-   3. Matching: request matches description = trigger → read skill before acting. That's the MUST.
-   4. User-side: /skill:<name> (e.g. /caveman ultra) injects the body; skills persist until "off".
-4. UI claims need pixels. Browser tool (skill://agent-browser for the workflow): open
-   the route, screenshot desktop 1280 + mobile 375, light + dark. "Verified" names the
-   screenshot path.
-5. User deletions stay deleted. NEVER git checkout/restore on uncommitted files unless
-   the user names those paths. Commit deletions when asked; never "repair" them.
-6. User-pasted URL → read it first, quote it, then verdict. Unread = no opinion.
-7. Plan is mandatory state: read the active plan file and check the todo list at every
-   resume; execute to completion; never yield mid-plan.
-8. Gates before commits: npm run typecheck && npm run lint && npm run build → exit 0.
-   Failures verbatim.
-9. Coding/check-in: before any coding task, read `docs/superpowers/check-in-workflow.md`; use one short-lived branch/PR, push only after the local commit gate and task checks pass, and never merge without owner approval. At integration, resolve/read `skill://finishing-a-development-branch` and follow it exactly.
-10. Chat: caveman terse, no essays, no inventory recitals. Files/commits: normal prose.
+# Role
 
-<!-- BEGIN:nextjs-agent-rules -->
+This repo is the Old MacDonald Had a School **website** — improving it is the whole job. No database, schema, migration, embedding, or API-connection work happens here, ever.
 
-# This is NOT the Next.js you know
+The API and its Postgres database are a separate project: `jessenaiman/curriculum-api` (a different repo with its own AGENTS.md). If a task is about the API or database rather than the website UI/content, say so and stop — do not build it here.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+## Workflow (keep it simple)
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+- All real work happens on `main`. This is a small website repo — one branch at a time.
+- The old kanban/handoff machinery is dead: ignore `project-management/STATUS.md` and `project-management/Handoffs/`. Do not scan branches, worktrees, or "identify the current task" — there is no mapped task.
+- Make edits directly on `main`, or on a single short-lived `<type>/<slug>` branch off `main` when the work needs a PR. Open PRs into `main` only when the user asks; never push `main` directly.
+- All feature branches exist on `origin` (the archive). If you need history from a deleted local branch, check it out from `origin/<branch>`.
 
-<!-- END:nextjs-agent-rules -->
+## Commands & verification
+
+- Verify with `npm run lint` (eslint) then `npm run typecheck` (`tsc --noEmit`). `npm run build` runs the full Next build and requires `data/omhas.db` on disk.
+- There is no `test` script. The only check is `npm run test:theme-contrast`.
+- `.husky/pre-commit` runs `npx lint-staged` (Prettier on staged files) then `npm run typecheck`; it runs no tests. `.prettierignore` excludes `**/*.md` and `**/*.mdx`, so prose is never auto-formatted.
+- Node 24 is pinned via `package.json` engines and `.mise.toml`.
+
+## Runtime data (read-only, do not manage)
+
+- `data/omhas.db` (committed, ~30 MB SQLite) is the curriculum source of truth, traced into the build by `next.config.ts` and opened read-only from server code (`lib/curriculum-db.ts`: `readonly: true`, `query_only ON`, `fileMustExist: true`). Never delete or edit it; runtime and build both fail without it.
+- `app/api/search/route.ts` also reads `data/search-vectors.db` (committed embeddings sidecar; throws if missing). Never edit or rebuild prompts from it.
+- These files ship with the repo and are only read at runtime. There is no write tooling in this repo — schema/data changes happen in `curriculum-api` or upstream, not here.
+
+## Stack notes
+
+- Next.js 16 App Router + Tailwind v4 (`app/globals.css`, `DESIGN.md`, shadcn via `components.json`). MDX is enabled (`pageExtensions` includes `md`/`mdx`) via `@next/mdx`; MDX prose lives in `content/{lessons,pages,templates}`. `content/lessons` is also read at runtime by `lib/` for markdown-match hints, so keep lesson slugs/titles stable.
+- After changing app code, verify against a running `npm run dev` using the `next-dev-loop` skill (it uses the `next-devtools` MCP declared in `.mcp.json`).
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues on `jessenaiman/old-macdonald-had-a-school`, driven by the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Five canonical roles, each label string equal to its role name. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.

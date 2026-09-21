@@ -5,8 +5,8 @@
 
 Serverless deploys must include `data/*.db` plus the `models/` weight directory (~55MB total); semantic search loads MiniLM from disk and never fetches remote models.
 
-## Check-in / merge workflow
+## Check-in
 
-Every coding task uses its own short-lived branch and pull request. The commit must pass local formatting, typecheck, lint, build, and task-specific verification before push; GitHub CI confirms an already-green change. Merging requires green required checks and explicit owner approval.
+Work directly on `main`. The pre-commit hook (`.husky/pre-commit`) runs Prettier on staged files then `npm run typecheck` — that is the whole local gate. Open a PR into `main` only when asked. There is no CI; there is no `test` script.
 
-The canonical sequence, recovery rules, evidence, and emergency path are documented in [`docs/superpowers/check-in-workflow.md`](docs/superpowers/check-in-workflow.md).
+Details in [`docs/superpowers/check-in-workflow.md`](docs/superpowers/check-in-workflow.md).
