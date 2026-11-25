@@ -1,12 +1,29 @@
 # Old MacDonald Had a School
 
-- Read the @shadcn rules before even suggesting or thinking about helping
-- Read the user instructions before considering your response to the user
+Curriculum-organized early-years and primary teacher resource website (Daycare through Grade 2), built around familiar songs, clear teaching sequences, and practical classroom activities.
 
-Serverless deploys must include `data/*.db` plus the `models/` weight directory (~55MB total); semantic search loads MiniLM from disk and never fetches remote models.
+## Stack
 
-## Check-in
+- **Framework:** Next.js 16 (App Router) + React 19
+- **Styling:** Tailwind CSS v4 + shadcn/ui
+- **Content:** MDX (`content/`) + read-only SQLite (`data/omhas.db`)
 
-Work directly on `main`. The pre-commit hook (`.husky/pre-commit`) runs Prettier on staged files then `npm run typecheck` — that is the whole local gate. Open a PR into `main` only when asked. There is no CI; there is no `test` script.
+## Local Development
 
-Details in [`docs/superpowers/check-in-workflow.md`](docs/superpowers/check-in-workflow.md).
+```bash
+npm install
+npm run dev
+```
+
+## Verification
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
+
+## Attribution
+
+- **Music:** Kathy Reid-Naiman / Merriweather Records
+- **Creative Direction, Video & Web:** Jesse Naiman

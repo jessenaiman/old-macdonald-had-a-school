@@ -14,39 +14,15 @@ logs/
 *.log
 data/*.db-shm
 data/*.db-wal
-playwright-report/
-test-results/
-qa/
-.codex-tmp/
 __pycache__/
 *.py[cod]
-sqlite_mcp_server.db
-.claude-replay.*
 .tmp-*
-.codex-notes/
-.codex-remote-attachments/
-
-# Local research corpus; agents curate selected publishable assets into public/.
-src/assets/early-years-music-resources/
+.spill.json
 
 # Windows reserved device names that appear as phantom untracked files
 NUL
 $null
 
 .vercel
-
 /tmp
-
-# Local browser/shell scratch artifacts
-open-code-review/
-.hermes/
-.claude/
-.vercel
-.env*
-design-proof/
-models/
-
-# Isolated task worktrees
-.worktrees/
-
 .npm-cache/

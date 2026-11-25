@@ -8,8 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 
 const FASTENERS = {
@@ -19,48 +17,6 @@ const FASTENERS = {
 } as const
 
 export type WorkingWallFastener = keyof typeof FASTENERS
-
-export function WorkspaceTabsList({
-  className,
-  ...props
-}: ComponentProps<typeof TabsList>) {
-  return (
-    <TabsList
-      data-slot="workspace-tabs-list"
-      className={cn(
-        "flex h-auto w-full flex-wrap justify-start gap-1 bg-transparent p-0 xl:flex-col xl:items-stretch",
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-export function WorkspaceTabTrigger({
-  index,
-  className,
-  children,
-  ...props
-}: ComponentProps<typeof TabsTrigger> & { index: number }) {
-  return (
-    <TabsTrigger
-      data-slot="workspace-tab-trigger"
-      className={cn(
-        "group grow justify-start gap-2 rounded-lg border-border/70 bg-background/75 px-3 text-foreground data-[state=active]:bg-[var(--grade-color)] data-[state=active]:text-[var(--grade-ink)] xl:w-full",
-        className,
-      )}
-      {...props}
-    >
-      <span
-        className="grid size-6 shrink-0 place-items-center rounded-full border border-current text-[11px] font-black tabular-nums"
-        aria-hidden="true"
-      >
-        {String(index).padStart(2, "0")}
-      </span>
-      <span>{children}</span>
-    </TabsTrigger>
-  )
-}
 
 export type WorkingWallPathCardProps = {
   active?: boolean
@@ -166,53 +122,5 @@ export function WorkingWallBoard({
       className={cn("working-wall-board flex min-w-0 flex-col gap-5 p-4", className)}
       {...props}
     />
-  )
-}
-
-export function WorkingWallSeparator({
-  treatment = "dashed",
-  className,
-  ...props
-}: ComponentProps<typeof Separator> & {
-  treatment?: "dashed" | "paper" | "space" | "board"
-}) {
-  return (
-    <Separator
-      data-slot="working-wall-separator"
-      data-treatment={treatment}
-      className={cn(
-        treatment === "dashed" && "h-0 border-t border-dashed bg-transparent",
-        treatment === "paper" &&
-          "h-3 bg-transparent bg-[image:var(--asset-paper-note-mobile)] bg-[length:100%_100%] bg-center bg-no-repeat",
-        treatment === "space" && "h-8 bg-transparent",
-        treatment === "board" && "h-2 rounded-full bg-[var(--theme-wood)]",
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-export function MaterialSwatch({
-  label,
-  materialClass,
-  className,
-  ...props
-}: ComponentProps<"figure"> & {
-  label: string
-  materialClass: string
-}) {
-  return (
-    <figure
-      data-slot="material-swatch"
-      className={cn("grid gap-2", className)}
-      {...props}
-    >
-      <div
-        className={cn("min-h-24 rounded-lg border border-border", materialClass)}
-        aria-hidden="true"
-      />
-      <figcaption className="text-sm font-bold">{label}</figcaption>
-    </figure>
   )
 }
